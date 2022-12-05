@@ -1,1 +1,209 @@
- a
+ 
+
+
+
+
+
+
+
+
+
+
+ --> VEREMOS TANTO O 'MYSQL' quanto o 'POSTGRES'...
+
+
+
+
+
+
+
+
+
+ --> TEREMOS CONHECIMENTO QUE PODERÁ SER APLICADO EM QUALQUER PROJETO...
+
+
+
+
+
+
+
+
+ -- >VAMOS APRENDER SQL 
+
+ DO INÍCIO...
+
+
+
+
+
+
+
+ -- >VAMOS VER A CORE SYNTAX...
+
+
+
+
+
+
+
+
+
+
+ --> VEREMOS COMO PODEMOS INSTALAR UMA 
+
+ SOLUTION 
+
+
+ COMO 
+
+ 'MYSQL'
+
+
+
+ E 'POSTGRES'..
+
+
+
+
+
+
+
+
+
+
+ --> VEREMOS A CORE SYNTAX
+
+
+ E CORE COMMANDS QUE NOS AJUDARÃO
+
+ COM A CRIAÇÃO 
+
+
+ E
+  
+
+
+  ESTRUTURAÇÃO DE TABLES...
+
+
+
+
+
+
+
+
+
+
+  TAMBÉM. ---> INSERT, UPDATE E DELETE DE DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> MUITO IMPORTANTE,
+
+
+  E 
+
+
+  SUPER FOCO DESSE CURSO --> VEREMOS 
+
+
+
+  '''QUERIES''' --> TE DEIXAM FETCHEAR DATA,
+
+
+  STRUCTURE DATA,
+
+  FILTER DATA,
+
+  AGGREGATE DATA,
+
+
+  E MT MT MAIS...
+
+
+
+
+
+
+
+  ----> TAMBÉM TEMOS O MANUEL..
+  
+
+
+
+
+
+
+
+
+
+  --> É UM CURSO BEM 
+
+  COMPREENSIVO,
+
+  E 
+
+  MOSTRA 
+
+
+
+  BEM COMO ESCREVER SQL...
+
+
+
+
+
+
+
+
+
+
+
+  -----> VAMOS SEGUIR MÓDULO POR MÓDULO...
+
+
+
+
+
+
+
+
+
+  -----> NESSE MÓDULO, VEREMOS A BASE..
+
+
+
+
+
+
+  --> VAMOS VER COMO PODEMOS 
+
+
+  PEGAR O MÁXIMO DESSE CURSO...
+
+
+
+
+
+
+
+  --> A PERGUNTA MAIS IMPORTANTE:
+
+
+
+
+  ' O QUE É SQL?'
+
+  
