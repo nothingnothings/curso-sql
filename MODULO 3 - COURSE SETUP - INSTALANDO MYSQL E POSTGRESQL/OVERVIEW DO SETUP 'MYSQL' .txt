@@ -1,0 +1,118 @@
+
+
+
+
+
+
+
+
+
+
+-> vamos ver como INSTALAR DATABASES,
+
+
+
+CLIENTS, ETC...
+
+
+
+
+
+
+
+--> VAMOS INSTALAR O MYSQL NA NOSSA MÁQUINA...
+
+
+
+
+--> baixei o 'MySQL community server'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+
+
+-> eu não fiquei com o instalador, por alguma razão...
+
+
+
+
+
+
+
+
+
+
+
+
+--> preciso do mysql workbench 
+
+
+
+
+
+
+--> instalei...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRECISO TAMBEḾ SELECIONAR UM PASSWORD PARA O 'ROOT SERVER'
+
+
+
+
+
+
+
+
+
+
+-->_ mas não tive de fazer isso para a minha database, por alguma razão...
+
+
+
+
+
+
+
+
+
+
+-----_> GANHEI 1 ERROR:
+
+
+
+
+
+
+
+
+
+
+Access denied....
