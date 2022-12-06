@@ -1,0 +1,61 @@
+
+
+
+
+NESSE MÓDULO,
+
+
+
+
+FAREMOS NOSSAS PRIMEIRAS  COURSE STEPS 
+
+
+
+NA DIREÇÃO DA MASTERY DO SQL...
+
+
+
+
+
+
+ESTUDAREMOS:
+
+
+
+
+1) A SINTAXE BÁSICA, e algumas important rules...
+
+
+
+2) OUTROS CONCEITOS IMPORTANTES...
+
+
+
+
+
+
+
+3) 'DATA DEFINITION VS DATA MANIPULATION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE MÓDULO SERVE PARA 
+
+NOS DEIXAR MAIS FAMILIARIZADOS COM A LANGUAGE...
