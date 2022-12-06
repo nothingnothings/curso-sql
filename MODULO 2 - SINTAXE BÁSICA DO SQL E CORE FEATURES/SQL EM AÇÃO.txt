@@ -9,4 +9,590 @@
 
 
 
---> 
+--> CERTO...
+
+
+
+
+
+
+
+
+
+
+--> MAS COMO UM COMANDO SQL SE PARECE, EM AÇÃO?
+
+
+
+
+
+--> BEM, DEVEMOS CRIAR UM ARQUIVO '.sql',
+
+
+tipo 
+
+
+
+
+'select.sql'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo... VAMOS COMEÇAR COM A SINTAXE..
+
+
+
+
+
+
+
+
+
+---->  NÃO SE PREOCUPE COM A DATABASE 
+
+
+POR TRÁS DESSA LÓGICA..
+
+
+
+
+
+
+
+
+
+
+
+
+---> O PROFESSOR QUER 
+
+
+QUE 
+
+
+PRESTEMOS ATENÇÃO à SINTAXE,
+
+
+E A MANEIRA PELA QUAL É 
+
+
+APLICADA NA PRÁTICA...
+
+
+
+
+
+
+
+
+
+---> OK...
+
+
+
+
+
+
+
+NESSE PROJETO PREPARADO PELO PROFESSOR,
+
+
+TEMOS 
+
+
+UMA 'UNDERLYING TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+--> essa table é chamada de 'customers',
+
+
+e ela 
+
+contém 
+
+
+info 
+
+
+SOBRE OS 
+
+CUSTOMERS 
+
+
+NA NOSSA ONLINE SHOp...
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE VOCÊ QUER TER OS 'EMAILS' de todos OS 
+
+
+CUSTOMERS 
+
+
+
+
+QUE TEMOS 
+
+
+NESSA TABLE DE CUSTOMERS..
+
+
+
+
+
+
+
+
+
+
+acho que o comando certo é 
+
+
+
+
+
+'SELECT * FROM customers'...
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS:
+
+
+
+
+
+
+1) SELECIONAR INFO (armazenada em COLUMNS ESPECÍFICAS)  
+
+
+
+
+2) SELECIONAR INFO _ DE __ 1 TABLE ESPECÍFICA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SELECT * FROM customers..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS DIGAMOS QUE AGORA QUEREMOS OBTER APENAS OS 'EMAILS' de 
+
+cada 
+
+1 desses 
+
+customers,
+
+dessa table de 'customers'....
+
+
+
+
+
+
+
+
+
+
+bem, para isso,
+
+
+
+
+eu precisaria escrever 
+
+
+
+
+
+
+
+
+
+SELECT 'email' from CUSTOMERS.... (talvez assim)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÃO  VAMOS USAR A KEYWORD DE 'WHERE',
+pq 
+
+ela é um pouco mais avançada...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->> começamos 
+
+com SELECT...
+
+
+
+
+
+
+
+
+
+
+--> 'SELECT' --> SIGNIFICA QUE QUEREMOS 'READ'
+
+ALGO DE NOSSA DATABASE..
+
+
+
+
+
+
+
+
+
+--> DEPOIS DO 'SELECT',
+
+especificamos 
+
+
+
+'''QUAIS INPUTS QUEREMOS LER'''..
+
+
+
+
+
+
+
+
+
+NO CASO DO PROFESSOR,
+
+ISSO SERÁ 
+O 
+
+'EMAIL',
+
+
+
+
+é por isso que  
+
+escrevemos:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok...
+
+
+
+SEMPRE QUE VOCÊ ACABAR COM UM STATEMENT SQL,
+
+
+
+COLOQUE UM ';' (semicolon)...
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+SELECT email FROM customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+COMO TEMOS APENAS 1 ÚNICO STATEMENT,
+
+PODERÍAMOS OMITIR O ';' 
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+GERALMENTE ADICIONAMOS ';' 
+
+DEPOIS 
+
+DE CADA 
+
+
+STATEMENT 
+QUE 
+
+
+EXECUTAMOS NO SQL...
+
+
+
+
+
+
+
+-> SE EXECUTAMOS 
+ESSE COMANDO,
+
+
+
+VAMOS RECEBER:
+
+
+
+
+
+--> UMA COLUMN __ LISTANDO _ TODOS OS EMAILS 
+
+DE NOSSOS CUSTOMERS NA NOSSA ONLINE SHOP...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA É A CORE LOGIC POR TRÁS DA SINTAXE 
+
+
+SQL...
+
+
+
+
+
+
+
+
+--> MAS HÁ ALGUMAS COISAS QUE 
+
+DEVEMOS 
+TER EM MENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR MENCIONOU O ';' ... 
+
+
+
+
+
+
+
+
+
+
+--> EM CASOS EM QUE VOCÊ TEM APENAS 1 ÚNICO STATEMENT,
+
+
+VOCÊ 
+
+PODE OMITIR o ';'...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS EM CASOS COM MÚLTIPLOS STATEMENTS,
+
+VOCÊ 
+
+É OBRIGADO A ADICIONAR O ';'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TAMBÉM TEMOS ESSAS KEYWORDS (reserved  words),
+
+
+
+
+
+que são 
+
+
+'SELECT'
+
+
+e 
+
+'FROM',
+
+
+também 
+
+'INSERT',
+
+
+'UPDATE',
+
+'DELETE',
+
+etc...
