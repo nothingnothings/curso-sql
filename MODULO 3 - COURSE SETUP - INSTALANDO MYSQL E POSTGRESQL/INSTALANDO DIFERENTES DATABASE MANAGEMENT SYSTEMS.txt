@@ -1,0 +1,241 @@
+
+
+
+
+
+
+
+
+
+
+
+RDBMS POPULARES... -----> 
+
+
+
+
+
+
+
+
+
+OS MAIS POPULARES 
+
+
+SÃO 
+
+POSTGRESQL 
+
+
+e
+ 
+
+ MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+ -_> VAMOS APRENDER SQL GERAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> SQL PARA SER USADO EM QUALQUER DATABASE,
+
+ OU QUALQUER 
+
+
+
+ 'DATA SCIENCE ANALYTICS FRAMEWORK'... --> 
+
+
+
+
+
+ AINDA ASSIM,
+
+ PARA NOS MOSTRAR 
+
+
+ EXEMPLOS,
+
+ PRECISAMOS 
+
+ DE UMA 
+
+ DATABASE 
+
+
+ PARA TERMOS ALGO TANGÍVEL --> 
+
+
+
+ NÃO VAMOS VER APENAS 
+
+ TEORIA 
+
+ CHATA,
+
+
+ e sim 
+
+ VEREMOS 
+
+
+ COMO OS COMANDOS SQL FUNCIONAM 
+
+
+ 
+
+ NO MUNDO REAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> VAMOS USAR MYSQL E POSTGRESQL...
+
+
+
+
+
+
+
+
+
+ --> SÃO OS 2 SISTEMAS DE DATABASE MAIS COMUNS...
+
+
+
+
+
+
+
+
+
+
+
+ --> A SINTAXE DE SQL 
+
+
+
+ _ MOSTRADA AQUI __ VAI PROVAVELMENTE FUNCIONAR COM OUTROS SISTEMAS  
+
+ E USE-CASES (como oracle database, microsoft sql server, microsoft access, sqlite)...
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS EXISTIRÃO CENÁRIOS EM QUE 
+
+
+
+
+ __ A SINTAXE NÃO SERÁ EXATAMENTE A MESMA (quando executamos certo comando)...
+
+
+
+
+
+
+
+ --> O PROFESSOR SE ESFORÇARÁ 
+
+ PARA DEIXAR ISSO BEM CLARO...
+
+
+
+
+
+
+
+ --> DEVEMOS TER A DOCUMENTAÇÃO 
+
+
+ DA DATABASE/FRAMEWORK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> CERTO...
+
+
+
+
+
+
+
+
+
+
+ OK... VAMOS INSTALAR ESSES SISTEMAS...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ESSAS DATABASE ENGINES 
+ FUNCIONAM EM QUALQUER OS...
+
+
+
+
+
+
+
+
+ --->
