@@ -1,0 +1,347 @@
+
+
+
+
+
+
+
+
+
+
+-- VAMOS COMEÇAR COM O COURSE OUTLINE:
+
+
+
+
+
+
+
+
+1) GETTING STARTED 
+
+
+
+
+2) CORE SYNTAX (como escrever SQL)... --> É UM 
+
+MÓDULO MAIS PRÁTICO....
+
+
+
+
+
+
+
+3) SETUP ------> VEREMOS COMO PODEMOS SETTAR NOSSO DEVELOPMENT ENVIRONMENT PARA RODAR 
+
+SQL QUERIES NA NOSSA MÁQUINA...
+
+
+VEREMOS CONCEITOS QUE 
+
+TAMBÉM SERÃO APLICÁVEIS AOS NOSSOS PROJETOS,
+
+MAIS TARDE...
+
+
+
+
+
+
+
+
+
+
+
+ESSES 3 MÓDULOS SÃO OS 'BASICS' DO SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+TEMOS TÓPICOS MAIS AVANÇADOS,
+QUE USAREMOS 
+PARA MASTERIZAR O SQL..
+
+
+
+
+
+
+
+
+
+4) CRUD --> CREATE, READ, UPDATE E DELETE --> É ALL ABOUT 
+O INSERT 
+
+E MANIPULATE DA DATA 
+
+
+
+NA NOSSA DATABASE...
+
+
+
+
+
+
+
+-> PRECISAMOS APRENDER ISSO...
+
+
+
+
+-> SÃO CORE COMMANDS NECESSÁRIOS PARA TRABLAHAR COM O SQL...
+
+
+
+
+
+
+
+
+
+
+5) VEREMOS 'DATA RELATIONS' e 'JOINS' --> ISSO PQ, TIPICAMENTE,
+
+
+DATA 
+
+EM DATABASES 
+NÃO 
+
+
+É 
+
+ARMAZENADA 
+
+EM 1 ÚNICA SINGLE TABLE,
+
+
+E 
+
+SIM 
+
+
+EM MÚLTIPLAS 'RELATED TABLES',
+
+
+
+
+
+E __ 
+
+
+2 OU MAIS TABLES SÃO RELATED ENTRE SI...
+
+
+
+
+
+
+
+--> VEREMOS COMO PODEMOS 'ESTABELECER' RELATIONSHIPS (Data relations )
+
+ENTRE TABLES,
+
+
+E _ COMO _ PODEMOS USAR 
+
+
+
+'JOINS'    
+
+PARA 
+
+ACESSAR 
+
+
+INFORMATION 
+
+
+DESSAS 'RELATED TABLES'...
+
+
+
+
+
+
+
+
+6) DEPOIS, VEREMOS 'AGGREGATE FUNCTIONS' --> 
+
+
+
+
+
+ESSAS SÃO FUNCTIONS QUE REALIZAM 
+
+'MATHEMATICAL CALCULATIONS' (
+
+
+    calculam coisas como a 'SUM' e o 'AVERAGE' 
+
+
+    de nossas tables...  
+)
+
+
+
+
+
+
+7) DEPOIS, VEREMOS 'BUILT-IN' (utility) FUNCTIONS, oferecidas 
+
+PELO SQL.. 
+
+
+
+--> ESSAS FUNCTIONS SÃO MT ÚTEIS QUANDO TRABALHAMOS COM 'TEXT',
+
+'NUMBERS'
+
+E 'DATES'..
+
+
+
+
+--> E ESSAS FUNCTIONS NOS AJUDAM A FAZER COISAS COMO 'ROUND DATA'
+
+QUANDO TRABALHAMOS COM DECIMALS...
+
+
+
+
+
+
+
+8) DEPOIS, VEREMOS 'TRANSACTIONS' --> É UM CONCEITO UM POUCO MAIS AVANÇADO, 
+
+
+E QUE 
+NOS DEIXA 
+ 
+
+
+ '''BUNDLE MULTIPLE STEPS''' 
+
+ em apenas 1 única operação .... ------> NÃO É MT ÚTIL AGORA,
+
+ MAS DPS 
+
+ SE TORNA MT ÚTIL....
+
+
+
+
+
+
+
+
+
+ 9) DEPOIS TERMINAREMOOS A PARTE 'CORE' do curso,
+
+
+
+ POR 
+
+
+
+ MEIO 
+
+
+ DO ESTUDO DE 'INDEXES' -->  COM INDEXES,
+
+
+
+
+
+
+ É ALL ABOUT 
+
+
+ 'PERFORMANCE IMPROVEMENT' --> veremos 
+
+
+ COMO PODEMOS 
+
+
+ TORNAR 
+
+ O RETRIEVE 
+
+
+ DE 
+
+
+INFO 
+
+
+ DO SQL 
+
+ MAIS RÁPIDO E FÁCIL...( 
+
+    o sql acessa info 
+
+    mais rápido...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+ --> COM O MÓDULO DE 'INDEXES',
+
+
+ A PARTE 
+
+ AVANÇADA 
+
+ DO CURSO ESTARÁ ACABADA..
+
+
+
+
+
+
+
+
+
+ --> COM ISSO,
+
+ ESTAREMOS 
+
+ PRONTOS PARA 
+
+
+
+ TRABALHAR COM O SQL..
+
+
+
+
+
+
+ --> 

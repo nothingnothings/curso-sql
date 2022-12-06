@@ -1,0 +1,1074 @@
+
+
+
+
+
+
+
+CONTINUANDO...
+
+
+
+
+
+
+AGORA SABEMOS O QUE É O SQL,
+
+
+
+
+E 
+
+QUE 
+
+TIPICAMENTE O UTILIZAMOS QUANDO TRABALHAMOS 
+COM SISTEMAS 
+
+
+RMDBS...
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR DESTACA QUE 'SQL'
+
+NÃO É LIMITADO A ESSES SISTEMAS 'RDBMS' (RELATIONAL DATABASE MANAGEMENT SYSTEMS)...
+
+
+
+
+
+
+--> O USE-CASE MAIS 
+
+
+PROEMINENTE DO 
+
+SQL 
+
+
+É REALMENTE 'RDBMS',
+
+
+
+MAS VOCê 
+
+PODE O UTILIZAR COM OUTROS SOFTWARES --> 
+
+
+
+
+
+EXISTEM OUTRAS FERRAMENTAS,
+
+COMO 
+
+algumas 
+
+
+'DATA SCIENCE 
+
+FRAMEWORKS',
+
+
+que 
+
+
+
+
+usam essa linguagem, por trás das cenas...
+
+
+
+
+
+-->  MAS é realmente 
+
+
+mais  utilizado com esses sistemas 'rdbms'..
+
+
+
+
+
+
+
+
+
+
+--> MAS ISSO NÃO IMPORTA MT,
+
+PQ 
+
+O 
+
+SQL É 
+
+'STANDARDIZED' -->  ELE É PADRONIZADO...
+
+
+
+
+
+
+
+
+
+
+--> É 'GERALMENTE PADRONIZADO',
+
+
+PQ 
+
+
+ESSAS DIFERENTES SOLUÇÕES DE DATABASE MANAGEMENT 
+
+__ SEMPRE POSSUEM ALGUMAS PEQUENAS VARIAÇÕES..
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS O SQL É __'GERALMENTE'
+
+
+STANDARDIZED...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS VAMOS APRENDER O SQL GERAL,
+
+E AÍ 
+
+PODEREMOS 
+
+APLICAR NOSSO CONHECIMENTO EM QUALQUER 
+
+AMBIENTE..
+
+
+
+
+
+
+
+
+
+
+--> VAMOS FOCAR EM:
+
+
+1) MYSQL 
+
+
+
+2) POSTGRESQL 
+
+
+
+
+
+--> ESSES SÃO EXEMPLOS DE RDBMS perfeitos...
+
+
+
+
+
+
+
+
+
+--> VEREMOS ALGUMAS DIFERENÇAS
+ 
+ ENTRE OS COMANDOS 
+
+
+
+ DESSES 2 SISTEMAS (há algumas diferenças)...
+
+
+
+
+
+
+
+ --> MAS A LINGUAGEM É A MESMA, NÃO INTERESSA QUAL SISTEMA 
+
+
+ VOCÊ ESTÁ USANDO...
+
+
+
+
+
+ --> APESAR DE SQL 
+
+ NÃO SER LIMITADO APENAS A 
+
+
+ 'RDBMS',
+
+
+
+
+ __ ESSE É O CENÁRIO EM QUE É MAIS UTILIZADO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS AÍ 
+
+
+
+ TEMOS A PERGUNTA MAIS IMPORTANTE:
+
+
+
+
+
+
+
+
+ '''PQ DIABOS EU UTILIZARIA UM 
+
+ DESSES 
+
+ RDBMS'''' (database management systems)...?
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ok, mas quais são as razões, mesmo? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 1A  MAIN REASON ----> A) 
+
+
+
+ VOCÊ TALVEZ TENHA 
+
+
+ UM APP,
+
+ uma
+
+ TRANSACTIONAL DATA,
+
+
+ QUE PRECISA SER 'STORED' E 'HANDLED'  (TRANSACTIONAL DATA/APPLICATION DATA)
+
+
+
+
+
+ 2A MAIN REASON -->  
+
+
+
+ VOCÊ ESTÁ FAZENDO ALGUM 'DATA ANALYTICS'
+
+ SOBRE A DATA 
+
+ QUE 
+
+ ESTÁ 
+
+ SENDO ARMAZENADA...  (DATA ANALYTICS/REPORT DATA)
+
+
+
+
+
+
+
+
+
+
+ -----> O PROFESSOR JÁ NOS CONTA QUE 
+
+ '''NÃO EXISTE UMA FRONTEIRA HARD ENTRE 
+
+ ESSES 2 USE-CASES''' -----> ISSO PQ  
+
+VOCÊ 
+
+
+PODERIA 
+
+
+
+ANALISAR A DATA QUE FOI USADA/É USADA POR UMA APPLICATION (por isso a fronteira entre os dois é tênue)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ESSAS SÃO AS 2 CATEGORIAS 
+
+GERAIS
+
+QUE 
+
+
+TEMOS.... que podemos diferenciar...
+
+
+
+
+
+
+
+
+
+
+---> QUANDO O PROFESSOR FALA EM 'TRANSACTIONAL DATA',
+
+
+ELE SIMPLESMENTE 
+
+ESTÁ QUERENDO DIZER 
+
+
+'DATA GERADA POR __ SEUS __ USERS,
+
+
+USERS 
+
+QUE USAM 
+
+
+SEU MOBILE APP OU 
+
+
+WEBSITE' --> por trás das cenas,
+
+
+A DATA __ É GERADA__ E ARMAZENADA..
+
+
+
+
+
+
+
+
+
+
+EX: ONLINE SHOP --> A ORDER TEM QUE SER ARMAZENADA EM UMA DATABASE,
+
+PARA QUE VOCÊ POSSA FAZER 'FULFILL'
+
+dela...
+
+
+
+
+
+
+
+
+--> QUASE TODOS WEBSITES GRANDES GERAM 
+
+ALGUM TIPO DE DATA _ QUE __ PRECISA __ SER 'STORED' E 'HANDLED'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, ENTÃO,
+
+
+TVZ VOCÊ QUEIRA ANALISAR 
+
+
+ESSA DATA,
+
+
+OU ENTÃO 
+
+ANALISAR 
+
+DATA 
+
+
+
+VINDA DE OUTRO SOURCE... --> 
+
+
+
+
+
+
+
+
+'YOU NEED TO STORE (AND ANALYZE) analytics data' ...
+
+
+
+
+
+
+
+
+
+
+--> EXEMPLOS:
+
+
+'WEBSITE LOG DATA',
+
+
+'SALES DATA',
+
+'WEATHER DATA',
+
+
+'ENERGY DATA',
+
+etc..
+
+
+
+
+
+
+
+
+
+
+
+----> COMO A MAIORIA DOS 
+
+NEGÓCIOS
+ 
+ ARMAZENA DATA 
+
+
+ E __ QUEREM FAZER ANALYZE DESSA DATA,
+
+
+
+ ESSA 
+
+ É 
+
+ OUTRA ÁREA 
+
+ DE 
+
+ APPS 
+
+
+ PARA 'RMDBS'
+
+
+ E PARA O SQL....
+
+
+
+
+
+
+
+ --> É CLARO QUE EXISTEM 
+
+ ALTERNATIVAS 
+
+ A ESSES RDBMS,
+
+ COMO O MONGODB,
+
+
+
+
+ _ MAS __ ESSE NÃO É O FOCO DESSE CURSO,
+
+
+
+
+ E TEMOS 
+
+
+ UM OUTRO CURSO 
+
+
+
+ PARA O MONGODB (já vi)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> É POR ISSO QUE TALVEZ VOCÊ USE 'RDBMS' --> 
+
+ TEM DATA QUE PRECISA 
+
+ SER 'STORED' 
+
+ E 
+
+ 'MANAGED'..
+
+
+
+
+
+
+
+
+
+
+ --> MAS HÁ ALGUNS TERMOS QUE PRECISAM SER CLARIFICADOS,
+
+
+ PARA EVITAR CONFUSÕES...
+
+
+
+
+
+
+
+
+
+
+
+ --> TEMOS RDBMS, 
+
+
+
+ DATABASE MANAGEMENT SYSTEMS..
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ DATABASE MANAGEMENT SYSTEMS --> SÃO SOFTWARE QUE 
+
+
+
+ NOS AJUDAM
+
+
+ A MANAGEAR 
+
+ DATABASE,
+
+
+
+ AJUDAM NO MANAGE DAS DATABASES, PARA NÓS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -------> E, DE FATO,
+
+
+ SE INSTALAMOS 
+
+ SOFTWARE 
+
+ COMO ESSES,
+
+
+
+ GANHAMOS 
+
+
+ SOFTWARE QUE 
+
+ NOS DÁ 
+
+
+
+
+
+
+1 
+
+'DATABASE SERVER'
+
+
+QUE 
+
+ÀS VEZES 
+
+TAMBÉM 
+
+
+É CHAMADO 
+
+
+
+
+DE 
+
+
+'CLUSTER'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É ISSO QUE VOCê TIPICAMENTE 
+
+
+CONSEGUE QUANDO 
+
+INSTALA 
+
+
+ALGUM DOS SOFTWARE 
+
+
+DESSES DATABASE MANAGEMENT SYSTEMS  --> QUANDO VOCÊ 
+
+
+INICIA ISSO,
+
+
+
+
+
+INICIA ALGO COMO 'MYSQL'
+
+
+OU 
+
+'POSTGRESQL',
+
+
+
+VOCÊ 
+
+TIPICAMENTE 
+
+
+
+
+CONSEGUE UM SERVER DESSES (
+    um _CLUSTER__
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM 1 MESMO SERVER/CLUSTER,
+
+
+PODEMOS __ TER MÚLTIPLAS 
+
+DATABASES...
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+CLUSTER 
+
+
+
+
+
+DATABASE 
+
+DATABASE 
+
+DATABASE 
+
+DATABASE 
+
+
+MEGA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E A DATA EM CADA 1 DESSAS DATABASES PODE TER RELAÇÃO 
+
+
+COM OUTRAS DATABASES,
+
+MAS FREQUENTEMENTE 
+
+NÃO TERÃO RELAÇÃO ALGUMA COM AS OUTRAS DATABASES...
+
+
+
+
+
+
+
+
+
+
+--> O QUE É 'RELATED',
+
+
+NO ENTANTO,
+
+
+É
+
+
+A DATA 
+
+ARMAZENADA EM DIFERENTES 
+'TABLES',
+
+
+
+
+
+E É ISSO 
+
+QUE 
+
+
+VAI 
+
+
+
+EM CADA 1 DESSAS DATABASES,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+ 
+CLUSTER 
+I
+I
+I
+I
+I
+
+DATABASE   ---- table 
+        ----- table
+
+DATABASE   ---- table 
+        ----- table
+
+DATABASE   ---- table 
+        ----- table
+
+DATABASE   ---- table 
+        ----- table
+
+DATABASE   ---- table 
+        ----- table
+        ----- table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CADA DATABSE PODER SEGURAR 
+
+
+1 OU MAIS TABLES,
+
+
+
+ATÉ TER CENTENAS DE TABLES, se desejado..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO 
+
+DE 
+
+CADA TABLE,
+
+
+
+
+TEMOS 
+
+AS COLUMNS E ROWS (a data),
+
+
+
+
+QUE 
+
+A COMPÕEM..
+
+
+
+
+
+
+
+
+----> AO LONGO DESTE CURSO,
+
+
+
+
+VAMOS 
+NOS REFERIR 
+
+À 'DATABASE'
+
+
+como 
+
+expressão que 
+significa 
+
+
+
+o 
+
+'RDBMS' (
+
+    pq é mais curto do que dizer 'RDBMS'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS ESSA É A BIG PICTURE...
+
+
+
+
+
+
+
+
+
+--> E VIMOS A RAZÃO PARA USAR O SQL E ESSES 'RDBMS' --> 
+
+
+
+
+OS RDBMS 
+
+NOS AJUDAM A INTERAGIR COM A DATA,
+
+MANIPULAR A DATA, SETTAR 
+
+
+
+A DATABASE 
+
+E SUAS 
+
+TABLES,
+
+
+
+
+E, MAIS IMPORTANTE,
+
+
+FAZER:
+
+
+1) QUERY 
+
+2) FILTER 
+
+
+3) STRUCTURE 
+
+4) MERGE 
+
+
+
+de toda essa data...
+
+
+
+
+
+
+
+
+
+
+--> É ISSO QUE APRENDEREMOS, NESSE CURSOa...
