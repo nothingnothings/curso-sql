@@ -1,0 +1,77 @@
+ 
+
+
+
+
+
+
+ ANTES DE INSTALARMOS QUALQUER COISA,
+
+ DEVEMOS 
+ ENTENDER 
+
+ O QUE EXATAMENTE PRECISAMOS INSTALAR (
+
+    tools e functionalities...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> É SUPER IMPORTANTE ENTENDER:
+
+
+
+
+
+
+ QUANDO VOCÊ TRABALHA COM QUALQUER ENGINE 
+
+
+
+ COMO 'POSTGRESQL' OU 'MYSQL',
+
+ você 
+
+
+ tem 
+
+
+
+ 2 'KEY PARTIES'
+
+
+
+ QUE 
+
+
+
+ ESTÃO ENVOLVIDAS...
+
+
+
+
+
+
+
+
+ AS PARTIES SÃO:
+
+
+
+
+
+
+
+ 1) DATAB
