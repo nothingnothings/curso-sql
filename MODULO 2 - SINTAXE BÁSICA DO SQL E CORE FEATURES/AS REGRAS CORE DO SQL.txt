@@ -1,0 +1,517 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ VIMOS UM EXEMPLO,
+
+QUE FOI 
+
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> MAS JÁ EXISTEM ALGUMAS REGRAS SQL QUE DEVEMOS CONHECER:
+
+
+
+
+
+
+1) TODOS OS SQL STATEMENTS DEVEM ACABAR COM ';'...
+
+
+
+--> isso, na verdade,
+
+ SÓ __ SE APLICA__ SE VOCÊ TIVER 
+
+ MAIS __ DE 1 'SQL STATEMENT'
+
+ EM 1 MESMO COMANDO...  ->  ISSO QUER DIZER QUE 
+
+
+
+SE __ NÓS TIVÉSSEMOS ADICIONADO 1 SEGUNDO STATEMENT NO EXEMPLO ANTERIOR (
+
+
+    como, por exemplo,
+
+    'selecionar uma coluna diferente daquela table/outra table'
+
+),
+
+
+AMBOS COMANDOS UTILIZADOS POR 
+
+NÓS 
+
+TERIAM DE ACABAR COM ';'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers;
+SELECT first_name FROM customers;
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+AQUI TEMOS 2 DIFERENTES STATEMENTS,
+
+
+
+1 E 2,
+
+
+
+E ESSAS ';'
+
+
+precisariam ser adicionadas... ----> CASO CONTRÁRIO, RECEBEREMOS UM ERROR...
+
+
+
+
+
+
+
+
+
+--> MAS É SEMPRE RECOMENDADO 
+
+USAR O ';' 
+
+ao final 
+
+das frases,
+
+para se acostumar com essa lógica...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) A SEGUNDA REGRA --> 
+
+
+
+
+TODOS OS 'SQL STATEMENTS'
+
+
+SÃO __ CASE-INSENSITIVE -->  
+
+
+
+
+
+
+OU SEJA,
+
+
+
+
+
+ESCREVER 
+
+'SELECT'
+
+
+é a MESMA COISA QUE 
+
+ESCREVER 
+
+'select'...
+
+
+
+
+
+
+
+
+--> MESMA COISA COM 'FROM' e 'from'...
+
+
+
+
+
+
+
+
+
+--> 'SELECT' e 'FROM' geralmente 
+
+
+SÃO ESCRITOS COM CAPS,
+
+
+
+PQ _ 
+
+
+É REALMENTE A MELHOR PRÁTICA...
+
+
+
+
+
+
+
+
+
+----> select É A MESMA COISA QUE   'SELECT',
+
+mas seres humanos entendem melhor com 'SELECT'...
+
+
+
+
+
+
+
+
+
+
+
+
+3) EM CASOS EM QUE TEMOS 
+
+
+
+'''TABLE NAMES COM _ MESMO __ NOME __ 
+
+DE __ KEYWORDS (reserved words)'''',
+
+
+
+
+__ TEMOS 
+
+
+AQUILO QUE É CHAMADO DE 
+
+
+
+'Identifiers' (SÃO TABLE NAMES, COLUMN NAMES), 
+
+
+
+
+QUE É BASICAMENTE 
+
+O RECURSO 
+
+DE 
+
+
+
+
+_ ENVOLVER__ O NOME DE SUAS COLUMNS/TABLES 
+
+
+
+com 
+
+' " double quotes "  ' 
+
+
+
+
+
+
+
+
+
+
+
+
+-------> NO CASO, AQUI TEMOS UMA DIFERENÇA ENTRE POSTGRES E MYSQL:
+
+
+
+
+
+1) MYSQL --> para colocar seus identifiers, BACKTICKS são usados (ou seja, `identifier`) 
+
+
+
+
+
+2) POSTGRESQL --> para colocar os identifiers, são usados DOUBLE QUOTES (ou seja, "identifier") 
+
+
+
+
+
+
+
+
+
+COM ESSE RECURSO,
+
+VOCÊ 
+
+EVITA 
+
+CLASHES 
+
+COM ESSAS BUILT-IN 
+
+
+KEYWORDS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXEMPLO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers;
+
+SELECT first_name FROM customers;
+
+SELECT "select" FROM customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) REGRA FINAL:
+
+
+
+
+
+--> STATEMENTS __ PODEM SER COMPOSTOS DE 1 OU MAIS 'CLÁUSULAS' ('SELECT', 'FROM', 'WHERE', 'SELECT INTO', etc) ... --> 
+
+
+
+__ MAS A __ ORDEM__ DAS CLÁUSULAS__ 
+
+
+DEVE, EM 100% DOS CASOS, 
+
+_ SER CORRETA...
+
+
+
+
+
+
+
+
+
+
+----> COMO ASSIM,
+
+'ORDEM CORRETA'?
+
+
+
+
+
+
+
+
+
+
+bem, pense assim:
+
+
+
+
+
+_____ NÓS PRIMEIRAMENTE ADICIONAMOS A CLÁUSULA DE 'SELECT',
+
+E SÓ 
+
+DEPOIS 
+
+ADICIONAMOS 
+
+A CLÁUSULA DE 'FROM',
+
+
+
+PARA __ SÓ __ ENTÃO ADICIONARMOS A CLÁUSULA DE 'WHERE' (usada para o FILTER)...
+
+
+
+
+
+
+
+
+
+
+
+
+ENTÃO O COMBO É SEMPRE 'SELECT FROM WHERE'... (SFW)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ESSAS SÃO AS CORE RULES QUE DEVEMOS TER EM MENTE...
+
+
+
+
+
+
+
+
+
+
+--> OK... --> COMO O PROFESSOR APONTA,
+
+
+ESSAS SÃO COISAS QUE DEVEMOS 
+
+
+
+
+TER EM MENTE...
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+QUASE ACABAMOS COM ESTE MÓDULO...
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR SO QUER NOS MOSTRAR MAIS 1 PEQUENA COISA, ANTES DE PROSSEGUIRMOS...
