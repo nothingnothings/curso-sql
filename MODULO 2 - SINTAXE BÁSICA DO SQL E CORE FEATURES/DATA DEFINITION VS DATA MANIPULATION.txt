@@ -1,0 +1,702 @@
+
+
+
+
+
+
+
+EM SQL,
+
+TEMOS 2 TIPOS DE STATEMENTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SÃO:
+
+
+
+
+
+
+1) DATA DEFINITION STATEMENTS 
+
+
+
+
+
+2) DATA MANIPULATION STATEMENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM SQL,
+
+OBVIAMENTE 
+
+TRABALHAMOS MT COM DATA,
+
+
+COM TABLES,
+
+COLUMNS,
+
+ETC...
+
+
+
+
+
+
+
+
+
+
+--> PARA MASTERIZARMOS SQL,
+
+É IMPORTANTE,
+
+
+DESDE O INÍCIO,
+
+
+ENTENDER QUE 
+
+TEMOS 
+
+DIFERENTES COMANDOS PARA:
+
+
+
+
+
+
+
+1) DATA DEFINITION 
+
+
+
+
+
+
+
+2) DATA MANIPULATION....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSAS SÃO 2 COISAS DIFERENTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DATA DEFINITION -------> É FEITA ATRAVÉS DE 'QUERY STATEMENTS' (comandos SQL) QUE __ 
+
+
+FAZEM COISAS COMO 
+
+'DEFINE DATABASES,
+
+TABLES E TABLE STRUCTURES'...
+
+
+
+
+
+
+--> isso quer dizer QUE A OVERALL STRUCTURE DA DATA 
+
+
+_ NA NOSSA DATABASE __ É ALTERADA,
+
+
+__ E ISSO __ SEM SE REFERIR A VALUES _ INDIVIDUAIS NAS ENTRIES...
+
+
+
+
+
+
+
+
+(
+
+
+    OU SEJA,
+
+
+    ALTERAMOS COISAS COMO 
+
+    '''QUANTAS TABLES TEMOS NA NOSSA DATABASE'',
+
+
+
+E 
+
+
+'''COMO SÃO AS RELAÇÕES ENTRE ESSAS TABLES'''..
+)
+
+
+
+
+
+
+
+
+
+----> QUANTAS TABLES TEMOS NA NOSSA DATABASE --> comandos de CRIAÇÃO DE TABLE..
+
+
+
+
+
+
+
+--> 'COMO SÃO AS RELAÇÕES ENTRE ESSAS TABLES' --> comandos de RELAÇÃO DE TABLE, como 'CONSTRAINTS' e 'RELATIONSHIPS'...
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS QUE 
+
+
+'TEMOS DIFERENTES TABLES NA NOSSA DATABASE',
+
+
+
+
+
+
+
+TABLES __ QUE _ SEGURAM INFO/DATA _ QUE É 'RELACIONADA'...
+
+
+
+
+
+
+
+
+
+
+--> OK, ESSA É A DATA DEFINITION --> PARA CRIAR _ TABLES ASSIM,
+
+
+E PARA 
+
+
+DEFINIR RELATIONSHIPS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DATA DEFINITION TAMBÉM 
+
+
+ENTRA EM JOGO QUANDO 
+
+_RODAMOS_ COMANDOS __ QUE 
+
+
+NOS DEIXAM
+ 
+ 'CHANGE TABLES' 
+ OU ENTÃO 
+
+ DROP/DELETE TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OU SEJA,
+
+
+
+
+ '''DATABASE & TABLE MANAGEMENT (ex: altering tables, dropping tables) --> 
+
+ OU SEJA,
+
+ SEMPRE QUE 
+
+ LIDAMOS/INTERAGIMOS COM A GENERAL STRUCTURE, DENTRO DE SUA DATABASE,
+
+
+ ISSO _ ESTÁ RELACIONADO COM COMANDOS PARA/QUE FAZEM 'DEFINE DATA''''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> APRENDEREMOS MT SOBRE ESSES COMANDOS DE 'DATA DEFINITION' 
+
+ LÁ 
+
+ NO MÓDULO ___ 4__ DO CURSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ALÉM DA DATA DEFINITION, TEMOS A SEGUNDA CATEGORIA,
+
+ 'DATA MANIPULATION'...
+
+
+
+
+
+
+
+
+
+
+ 2) DATA MANIPULATION 
+
+
+
+
+
+
+
+ --> NESSA CATEGORIA,
+
+
+ TEMOS UMA DIFERENÇA ESSENCIAL,
+
+
+ PQ 
+
+ QUEREMOS DIZER QUE:
+
+ '''TEMOS QUERY STATEMENTS QUE MANIPULAM DATA,
+
+
+ QUE FAZEM COISAS COMO _ READ, INSERT, DELETE,
+
+ UPDATE DE DATA'... --> tudo 
+
+
+ isso
+
+
+ COM __ TABLES QUE JÁ EXISTEM...
+
+
+
+
+
+
+
+
+ --> ISSO QUER DIZER:
+
+
+
+
+
+
+ 1) DEFINITION --> CRIAMOS/DESTRUÍMOS A TABLE...
+
+
+
+
+
+
+ 2) MANIPULATION --> ADICIONAMOS/APAGAMOS DATA NESSAS TABLES (rows nas columns)...
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ --> É POR ISSO QUE, DE UMA PERSPECTIVA LÓGICA,
+
+ A 'DEFINITION'
+
+ SEMPRE 
+
+ VEM ANTES 
+
+ DA 
+
+ 'MANIPULATION'... 
+
+
+
+
+
+
+
+ --> VOCÊ SEMPRE PRECISA DE 1 TABLE ANTERIOR,
+
+ PARA 
+
+ PODER A MANIPULAR COM 'DATA MANIPULATION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ A 'DATA MANIPULATION' (2) 
+
+ TAMBÉM 
+
+ É REFERIDA
+  
+
+
+  COMO 
+
+  'CRUD' --> CRUD OPERATIONS --> CREATE, READ, UPDATE, DELETE...
+
+
+
+
+
+
+
+
+
+
+
+  COM O CRUD,
+
+  INTERAGIMOS COM A DATA NA NOSSA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  MANIPULATION TAMBÉM SIGNFICA QUE NÓS:
+
+
+
+
+
+  1) FILTRAMOS EXISTING DATA 
+
+
+
+
+2) SORT EXISTING DATA 
+
+
+
+3) JOINAMOS INFO __ DE DIFERENTES TABLES...
+
+
+
+
+
+
+
+
+
+
+
+--> NA PARTE DE `DATA DEFINITION`,
+
+
+
+
+
+
+
+podemos//devemos 
+
+
+DEFINIR 'RELATIONS' ENTRE TABLES... --> TABLES DIFERENTES QUE POSSUEM UMA RELAÇÃO 
+
+ENTRE SI..
+
+
+
+
+
+
+
+
+
+--> E, POR MEIO DO USO DE JOINS,
+
+NA PARTE DE 'DATA MANIPULATION',
+
+
+
+podemos garantir que 
+ESSA INFO,
+
+DE 2 DIFERENTES TABLES,
+
+
+CONSEGUE 
+
+SER _ EXTRAÍDA,
+
+
+tudo 
+
+graças 
+
+às relationships 
+
+PREVIAMENTE DEFINIDAS...
+
+
+
+
+
+
+
+
+
+
+--> QUANDO COMEÇAMOS COM SQL,
+
+
+
+
+É POSSÍVEL NOS DEPARARMOS COM UMA EXPRESSÃO 
+
+CHAMADA 
+
+DE 
+
+'DDS'... 
+
+
+
+
+
+
+
+
+
+
+DDS -->  'DATA DEFINITION STATEMENTS' --> ESSES SÃO 
+
+
+
+COMANDOS/STATEMENTS 
+
+QUE 
+
+
+NOS 
+
+
+
+DEIXAM 
+
+__CRIAR _ DATABASES 
+
+
+E TABLES... -------> E, COM OS 'DATA MANIPULATION STATEMENTS',
+
+
+
+
+INTERAGIMOS 
+
+COM 
+
+
+ESSAS TABLES 
+QUE 
+FORAM 
+
+CRIADAS 
+
+USANDO 
+
+
+OS 
+ 
+'DATA DEFINITION STATEMENTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ACERCA DA `DATA MANIPULATION`,
+
+
+
+veremos 
+
+ESSE TÓPICO NA SECTION 5,
+
+
+E EM OUTRAS 
+
+DO CURSO....
+
+
+
+
+
+
+
+
+
+--> JÁ ACABAMOS COM ESSE MÓDULO...
+
+
+
+
+
+
+
+
+
+--> AGORA ESTAMOS PRONTOS PARA COMEÇAR A ESCREVER NOSSOS PRÓPRIOS 
+
+STATEMENTS 
+
+
+SQL...
+
+
+
+
+
+---> VAMOS INSTALAR O POSTGRESQL 
+
+e 
+O 
+
+MYSQl 
+
+NAS NOSSAS MÁQUINAS...
