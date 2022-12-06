@@ -74,4 +74,715 @@
 
 
 
- 1) DATAB
+ 1) O 'DATABASE SYSTEM SERVER'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 2) ALGUM CLIENT SOFTWARE, QUE SE CONECTA A ESSE SERVER,
+
+ QUE VAI ENTÃO ENVIAR AS 'ACTUAL QUERIES'...
+
+
+ (
+
+
+   com isso,
+
+   temos 
+
+
+
+   A 'CLIENT-DATABASE' COMMUNICATION...
+ )
+
+
+
+
+
+
+
+
+
+ --> PRECISAMOS DO DATABASE SERVER...
+
+
+ E 
+
+ DO CLIENT...
+
+
+
+
+
+
+
+
+
+SE VOCÊ ESTIVESSE HOSTEANDO UM SITE DE VERDAE,
+
+
+VOCÊ TAMBÉM DEPLOYARIA 
+
+UM DATABASE SERVER DE VERDADE,
+
+
+
+
+TANTO POR MEIO DE 
+
+
+1) 'HOSTED AND MANAGED SERVICE' -> como o 'AWS Relational DAtabase Service'..
+
+
+(OU outras alternativas)
+
+
+
+2) sua própria máquina,
+
+com seu 
+
+próprio 'RDBMS' CONFIGURADO DENTRO DELA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, DURANTE O DEVELOPMENT,
+
+QUEREMOS  TER UMA DATABASE RODANDO NA NOSSA PŔOPRIA MÁQUINA,
+
+PARA QUE 
+
+APRENDAMOS A SINTAXE CORE SQL E OS COMANDOS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> O CLIENT É O QUE PRECISAMOS PARA ENVIAR ESSES COMANDOS...
+
+
+
+
+
+
+
+
+
+
+--> COMEÇAMOS COM OS SERVERS 'MYSQL' E 'POSTGRESQL.'..
+
+
+
+
+
+
+
+
+
+
+
+--> A RESPEITO DO CLIENT,
+
+TEMOS UMA 
+
+
+AMPLA VARIEDADE DE CLIENTS QUE PODEMOS UTILIZAR PARA ENVIAR 
+
+E TRABALHAR COM ESSAS QUERIES... (e se conectar a esses servers)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUANDO TRABALHAMOS COM O MYSQL 
+
+E ESTAMOS O INSTALANDO,
+
+HÁ 
+
+NA VERDADE 
+
+
+
+
+2 
+
+
+TOOLS 
+
+QUE 
+
+
+VEM JUNTO COM ELE,
+
+QUE PODEMOS 
+
+
+
+UTILIZAR PARA SE CONECTAR A ELE 
+
+
+E 
+
+RODAR QUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É O 'MYSQL WORKBENCH' --> é bem útil para compreender a DAtabase
+
+
+__
+
+DE UMA MANEIRA GRÁFICA...
+
+
+
+
+
+
+
+
+
+--> OU ENTÃO A 'CLI' tool (command line tool) DO MYSQL,
+
+QUE VOCÊ 
+
+USA 
+
+PARA 
+RODAR QUERIES,
+
+RODAR COMANDOS,
+
+FRENTE A ESSE SERVER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> COM O 'POSTGRESQL',
+
+
+
+VOCÊ:
+
+
+
+
+
+1) TAMBÉM TEM O 'PSQL COMMAND LINE TOOL',
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE EXISTEM 
+
+
+MTAS OUTRAS OPTIONS, 
+
+PARA TODOS ESSES 'DATABASE SYSTEMS' ( não interessa o sistema, se for 'mysql' ou 'postgresql')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VÁRIAS FERRAMENTAS PARA INTERAGIR COM O DATABASE SERVER...
+
+
+
+
+
+
+
+----> PARA MACOS,
+
+
+
+temos 
+
+
+
+
+'Sequel Pro'..
+
+
+
+
+
+
+
+
+--> ELE PODE SER USADO 
+
+PARA SE CONECTAR A SQL DATABASES...
+
+
+
+
+
+
+
+
+
+
+---_> ok..
+
+
+
+
+
+
+
+
+
+
+
+
+--> E VOCê PODERIA USAR UMA TOOL COMO ESSA PARA _ SE CONECTAR A UMA DATABASE 
+
+E RODAR 
+
+COMANDOS CONTRA ELA (para usar a GUI, e para deixar de usar  a 'CLI' que vem junto com a database)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS HÁ UMA COISA QUE 
+
+TODOS ESSES CLIENTS, LISTADOS ATÉ AGORA,
+
+
+
+POSSUEM EM COMUM --> VOCÊ 
+
+
+
+
+USA ELES,
+
+COMO ADMIN OU DEVELOPER,
+
+PARA 
+RODAR 
+
+
+QUERIES MANUALMENTE 
+
+
+
+
+CONTRA SUA DATABASE --> FREQUENTEMENTE 
+
+VOCÊÊ 
+
+USA 
+DATABASES 
+
+
+
+COMO PARTE DO SEU WEBSITE,
+
+OU DO SEU MOBILE APP ... --> E NOVA DATA 
+
+
+
+DEVE 
+
+
+SER ESCRITA SEMPRE QUE 
+
+SEU USER 
+
+FAZ SIGNUP,
+
+OU COMPRA UM PRODUTO...
+
+
+
+
+
+
+EM CASOS COMO ESSES, VOCÊ NÃO QUER QUE VOCÊ RODE O COMANDO,
+
+
+E SIM 
+QUE 
+
+O COMANDO SEJA 
+EXECUTADO PELO WEBSITE/MOBILE APP 
+
+
+USADO 
+
+PELO 
+
+USER..
+
+
+
+
+
+
+
+
+--> ESSE É UM USE-CASE BEM COMUM --> E É POR ISSO 
+
+
+
+
+
+QUE __ UM OUTRO 'COMMON CLIENT',
+
+QUE É USADO 
+
+
+COM MTA FREQUÊNCIA,
+
+
+É 
+
+
+
+ALGUM DRIVER/PACKAGE 
+
+
+USADO 
+
+DENTRO 
+
+
+
+DE SEU 'APPLICATION CODE'..
+
+
+
+
+
+
+
+
+
+
+--> MAS PARA APRENDERMOS SQL,
+
+QUEREMOS ESCREVER OS COMANDOS SQL MANUALMENTE,
+
+PARA QUE 
+
+
+
+TENHAMOS FULL CONTROL SOBRE OS COMANDOS,
+
+
+
+
+PARA OS APRENDER ETAPA-POR-ETAPA...
+
+
+
+
+
+
+
+
+
+-----> OK... 
+
+
+TEMOS ESSAS 5 OPÇÕES:
+
+
+
+
+
+
+
+
+1) MYSQL WORKBENCH 
+
+
+2) MYSQL COMMAND LINE TOOL 
+
+
+
+3) PSQL COMMAND LINE TOOL 
+
+
+4) VARIOUS THIRD-PARTY TOOL 
+
+
+
+5) APPLICATION COM DRIVER/PACKAGE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----_> MAS, EM VEZ DISSO, VAMOS USAR A OPÇÃO 6,
+
+QUE 
+
+
+
+É 
+
+O 
+
+
+
+6) VS CODE EXTENSION...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO SERÁ BEM SIMILAR A USAR UM 'COMMAND LINE TOOL' 
+
+
+OU UM 'THIRD PARTY TOOL'...
+
+
+
+
+
+
+
+
+
+
+
+--.> O BENEFÍCIO PRINCIPAL DO USO DO VSCODE É QUE 
+
+
+
+_ _PODEREMOS __ SALVAR _ O 
+
+CÓDIGO QUE 
+
+
+
+ESCREVEMOS/RODAMOS __ EM ARQUIVOS,
+
+
+e
+
+ESSES ARQUIVOS 
+
+FICAM DISPONÍVEIS A NÓS..
+
+
+
+
+
+
+
+-----_> 
+
+
+É ISSO QUE NOS DEIXA 
+
+GRAVAR E EXPLICAR ESSES COMANDOS,
+
+
+
+TUDO PARA QUE 
+
+
+
+SEJA POSSÍVEL BAIXAR ESSES COMANDOS 
+
+E COMPARÁ-LOS COM 
+
+O 
+
+CÓDIGO DOS PROFESSORES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É A MESMA COISA QUE 
+O 
+
+
+WORKBENCH E 
+
+CLI TOOLS (pq ainda vamos rodar coisas contra o servidor sql),
+
+
+
+MAS COM O BENEFÍCIO DE QUE 
+
+PODEMOS SALVAR TUDO ISSO EM ARQUIVOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... PORTANTO,
+
+
+VOLTANDO AO ASSUNTO DE 'O QUE INSTALAR',
+
+
+PRECISAMOS DE:
+
+
+
+
+
+1) DATABASE SERVER 
+
+
+2) CLIENT...
+
+
+
+
+
+
+
+
+--> NAS PRÓXIMAS AULAS O PROFESSOR NOS ENSINARÁ 
+
+A INSTALAR TUDO ISSO,
+
+
+
+E 'COMO PODEMOS USAR SQL WORKBENCH 
+
+E AS CLI TOOLS',
+
+
+
+MAS MAIS TARDE VEREMOS COMO PODEMOS CONFIGURAR O 
+
+
+
+VISUAL STUDIO CODE COM ESSA EXTENSION....
