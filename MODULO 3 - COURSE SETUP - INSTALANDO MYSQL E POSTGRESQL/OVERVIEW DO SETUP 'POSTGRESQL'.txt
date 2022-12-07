@@ -1,0 +1,438 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS INSTALAR EM QUALQUER SISTEMA OPERACIONAl..
+
+
+
+
+
+
+
+
+
+
+
+
+--> instalamos o postGres..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PostGreSQL 
+
+
+
+
+
+--> 
+
+
+
+isso instala o SERVER E O CLIENT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> o folder é no C mesmo....
+
+
+
+
+
+
+
+
+
+
+
+
+PGADMIN4 --> É UMA TOOL...
+
+
+
+
+
+
+
+
+
+
+--> o DEFAULT DIRECTORY É 
+
+
+
+'PROGRAM FILES' --> 'POSTGRESQL' / 13 (ou 14) /data...
+
+
+
+
+
+
+
+
+
+
+
+ESSE É O DIRETÓRIO EM QUE 
+
+A DATABASE DATA 
+
+FICARÁ 
+
+
+
+
+ARMAZENADA... (
+
+
+    pq 
+
+    a ''''DATABASE''' É APENAS 
+
+
+    UM SOFTWARE QUE 
+
+    GERENCIA 
+
+    O STORAGE DA DATA... --> ESSA DATA AINDA VAI SER ARMAZENADA EM ALGUM LUGAR,
+
+
+    QUE NO CASO É SEU 'HARD DRIVE'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ASSIM COMO O 'MYSQL',
+
+
+TEMOS 
+
+
+
+USER E SENHA 
+
+PARA 
+
+ESSE 
+
+
+'postgresql server'...]
+
+
+
+
+
+
+
+
+
+
+-_> PQ NEM TODOS DEVEM SER CAPAZES DE ACESSAR ESSE DATABASE SERVER..
+
+
+
+
+
+
+
+
+
+
+--> UM DEFAULT USER __ SEMPRE TERÁ
+ 
+ O NOME DE 
+
+
+
+ 'user: postgres' 
+
+
+ 'password: qualquer coisa'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O NOME DE 'mySQL' --> 'root' 
+
+
+
+
+
+
+--> o nome de 'postgres' --> é 'postgres'..
+
+
+
+
+
+
+
+
+
+
+
+-----> DEPOIS TEMOS A PORT... -----> O PROFESSOR 
+
+DIZ QUE 
+
+
+ESSA SERÁ A PORTA USADA PELO 'POSTGRESQL SERVER'... --> e esse será o port number 
+usado 
+para 
+
+se conectar a ele... --> vamos usar o default de 
+
+
+
+'5432' 
+
+
+
+
+
+
+
+(
+    para o MYSQL, 
+    O DEFAULT É 
+
+    '3306'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA O POSTGRES, O DEFAULT É ''5432'....
+
+
+
+
+
+
+
+
+
+
+--> AGORA TUDO SERÁ INSTALADO E CONFIGURADO...
+
+
+
+
+
+
+
+
+
+
+
+
+---> CERTO...
+
+
+
+
+
+
+
+DESMARCAMOS TUDO..
+
+
+
+
+
+
+--> COM ISSO INSTALADO,
+
+
+DEVEMOS SER CAPAZES DE 
+
+
+ABRIR NOSSOS APPS,
+
+NO 'FINDER',
+
+E AÍ 
+
+
+ENCONTRAR NOSSO FOLDER DE 'postGreSQL'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ ABRIR O 'pgAdmin4' --> 
+
+
+VOCÊ GANHARÁ UMA TOOL QUE 
+
+TE AJUDA 
+
+A ADMINISTRAR ESSE SERVER 
+
+
+
+POSTGRESQL..
+
+
+
+
+
+
+
+
+
+-_> primeira vez que você 
+
+abre o 'pgAdmin' ,
+
+
+
+PEDE-SE UMA SENHA (senha para essa admin tool)..
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DO 'pgAdmin',
+
+
+
+
+VOCÊ 
+
+
+SERÁ CAPAZ DE CRIAR NOVOS SERVERS POSTGRESQL..
+
+
+
+
+
+
+
+
+----> OK.... 
+
+
+AÍ TEMOS VÁRIAS DATABASES ('servers')...
+
+
+
+
+
+
+
+
+
+-----> OK... 
+
+
+
+
+O 'pgAdmin', portanto, pode ser útil..
+
+
+
+
+
+
+
+--> TEMOS TAMBÉM O 'SQL SHELL' --> 
+
+
+
+
+
+
+ISSO NOS DÁ UMA COMMAND LINE,
+
+QUE PODE SER USADA PARA ENVIAR COMANDOS AO POSTGRES SERVER...
+
+
+
+
+
+
+
+
+
+--> ok... acabamos ...
