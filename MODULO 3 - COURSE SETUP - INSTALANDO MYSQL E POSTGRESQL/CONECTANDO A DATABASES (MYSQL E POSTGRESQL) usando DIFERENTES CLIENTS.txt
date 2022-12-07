@@ -1,0 +1,262 @@
+
+
+
+
+
+
+
+AGORA PRECISAMOS TER ALGUNS 'CLIENTS'
+
+PARA 
+
+RODAR COMANDOS CONTRA NOSSAS 
+
+
+
+DATABASES 
+
+SQL...
+
+
+
+
+
+
+
+
+
+-_> PARA COMEÇAR, VAMOS USAR A COMMAND LINE DO 'MYSQL.'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> para isso,
+
+devemos escrever 'mysql'
+
+
+NO TERMINAL
+
+DE NOSSA MÁQUINA,
+
+PARA AÍ 
+
+
+NOS CONECTARMOS 
+
+
+À DATABASE que está rodando...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... MAS ISSO NÃO FUNCIONOU...
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS ESCREVER 
+
+
+
+
+mysql --host=localhost 
+
+
+
+
+
+
+
+
+
+
+
+-------> PRECISAMOS FAZER ISSO PARA COMUNICAR QUE QUEREMOS NOS CONECTAR À 'LOCAL MACHINE'...
+
+
+
+
+
+
+
+
+
+
+
+-> OU, ENTÃO, BASTA USAR O MYSQL SHELL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> continuando a aula do professor...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+escrevemos 
+
+
+
+
+mysql --host=localhost --user=root 
+
+
+
+
+
+
+
+
+
+
+
+
+
+com '--user' 
+
+DEFINIMOS O USER 
+
+
+QUE QUERMOS USAR PARA ESTABELECER A CONEXÃO ... 
+
+
+
+
+
+
+
+(e 'root' é o default user, criado durante a installation)...
+
+
+
+
+
+
+
+
+
+
+
+--> depois, temos 
+
+'--password=xxxx' 
+
+
+
+
+
+COLOCAMOS O PASSWORD AÍ....
+
+
+
+
+
+
+
+
+
+
+
+
+COM O SHELL, ACHO QUE JÁ ESTAMOS CONECTADOS..
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR DIZ QUE PODEMOS RODAR COMANDOS SQL SIMPLES,
+
+
+
+
+
+
+
+
+
+COMO 
+
+
+
+
+
+
+
+
+
+
+SELECT 'hello world!' 
+
+
+
+
+
+
+
+--> 
+
+
+
+O COMMAND LINE É HORRÍVEL...
+
+
+
+
+
+
+
+
+UTILIZE O 'MYSQL WORKBENCH'...
