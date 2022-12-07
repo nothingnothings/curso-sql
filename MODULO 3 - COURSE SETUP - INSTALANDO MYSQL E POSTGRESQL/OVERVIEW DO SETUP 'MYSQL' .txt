@@ -116,3 +116,69 @@ CLIENTS, ETC...
 
 
 Access denied....
+
+
+
+
+
+
+
+
+
+
+--> no meu pc, já tenho o 'mySql'..
+
+
+
+
+
+
+
+
+
+mas como configuro minha database?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- >bem, 
+
+
+é bem bugado,
+
+
+mas a senha era a mesma de sempre (isso no windows, no linux continua sem configuração)..
+
+
+
+
+
+
+
+
+
+
+
+
+--> com o setup terminado, podemos começar o 'mySql Workbench'..
+
+
+
+
+'mySql80' -->  esse serviço precisa ficar rodando se você quer 
+
+
+rodar 
+
+comandos sql contra sua database....
