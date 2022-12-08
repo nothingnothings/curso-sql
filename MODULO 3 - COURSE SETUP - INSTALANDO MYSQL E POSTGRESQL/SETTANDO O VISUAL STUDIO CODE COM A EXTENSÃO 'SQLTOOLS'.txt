@@ -1,0 +1,766 @@
+
+
+
+
+
+
+
+
+
+-> NAS ÚLTIMAS LIÇÕES,
+
+
+INSTALAMOS TODOS AQUELES DATABASE SERVERS,
+
+E 
+
+
+UM MONTE DE CLIENTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÃO VAMOS USAR NENHUM DAQUELES 
+
+
+CLIENTS...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA QUE 
+
+PÓSSAMOS 
+
+SALVAR NOSSAS QUERIES FACILMENTE,
+
+
+
+
+
+
+
+
+USAREMOS UMA EXTENSÃO (que deixa o connect a sql databases e o run de queries BEM CONVENIENTE)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ABRIMOS O 'EXTENSIONS'..
+
+
+
+
+-_> PROCURAMOS POR 'sql tools'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQLTools -> Matheus Teixeira...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA É A EXTENSÃO QUE USAMOS PARA 
+
+
+
+TRANSFORMAR O VISUAL STUDIO CODE EM UM CLIENT 
+
+
+
+QUE PODE SER USADO 
+
+PARA 
+
+SE CONECTAR A SQL DATABASES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO INSTALADO,
+E COM 
+
+
+AS SQL DATABASES RODANDO,
+
+O QUE PODEMOS 
+
+FAZER É 
+
+
+ABRIR A 'ACTIVITY BAR'...
+
+
+
+
+
+ 
+
+ --_> O QUE SERÁ ADICIONADO, NA PARTE INFERIOR ESQUERDA,
+
+ É UM CILINDRO... --> 
+
+
+
+
+ ESSE CILINDRO SERÁ O RECURSO DE CONNECT A DATABASES SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> LÁ, VOCÊ PODE ESTABELECER UMA CONNECTION  A ALGUM DE SEUS DATABASE SERVERS...
+
+
+
+
+
+
+
+
+
+
+
+ -> FUNCIONA DA MESMA FORMA EM TODAS AS PLATAFORMAS...
+
+
+
+
+
+
+
+
+ CLIQUE EM 'ADD NEW CONNECTION'...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> VOCÊ PRECISA ENCONTRAR DRIVERS PARA 
+
+
+
+
+
+ AS DATABASE ENGINES A QUE VOCÊ QUER SE CONECTAR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> QUEREMOS USAR O DRIVER 
+
+
+ 'SQLTOOls MySQL/MariaDB
+
+
+
+
+
+
+
+
+
+
+
+ --> FAZEMOS ISSO PARA OS 2 DRIVERS,
+
+
+ O 'MYSQL' E 'POSTGRESQL'...
+
+
+
+
+
+
+
+
+
+
+ --> COMEÇAMOS COM 'MYSQL'...
+
+
+
+
+
+
+
+
+
+ --> ABRIMOS O 'CONNECTION ASSISTANT'...
+
+
+
+
+
+
+
+
+
+ CONNECTION NAME --> É O NOME QUE IDENTIFICA SUA CONEXÃO (pode ser o que você quiser)...
+
+
+
+
+
+
+ 'localhost '--> queremos nos conectar a nossa máquina locall..
+
+
+
+
+
+ --> PORT DEFUALT...
+
+
+
+
+
+
+
+ --> Database --> é a database que queremos usar, no nosso server 
+
+ MYSQL...
+
+
+
+
+ --> username colocamos 'root' (o criado automaticamente)..
+
+
+
+
+
+
+
+
+ -_> o 'Use Password' -> colocamos 'Ask on connect'...
+
+
+
+
+
+
+
+
+
+
+
+ OK... CONSEGUIMOS NOS CONECTAR...
+
+
+
+
+
+
+ --> AGORA TEMOS 'CONNECTIONS'... --> 
+
+
+
+
+
+
+
+
+
+
+ DENTRO  
+
+
+
+
+
+
+
+ DESSE NOVO ARQUIVO 
+
+
+
+ 'mysql1.session.sql',
+
+
+
+
+ PODEMOS AGORA 
+
+
+
+
+
+
+ RODAR NOSSOS SSQL STATEMENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+ -_> PODEMOS RODAR 
+
+
+
+ COISAS COMO 
+
+
+
+
+
+
+
+ SELECT 'Hello World!';
+
+
+
+
+
+
+
+
+
+ --> UMA VANTAGEM É QUE TEMOS __ AUTOCOMPLETE__ 
+
+
+
+
+
+ COM 
+
+
+ O SQL..
+
+
+
+
+
+
+
+
+ --> ISSO É MT BOM...
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> OK, MAS SE TENTAMOS RODAR NOSSO COMANDO,
+
+ VAMOS __FALHAR_>..
+
+
+
+
+
+
+
+
+
+
+ ----> A RAZÃO PARA O FAIL É QUE DEFINIMOS AQUELE 'STRONG AUTHENTICATION METHOD' 
+
+ para nosso user,
+
+
+
+ durante o processo 
+
+
+ de setup e tal...
+
+
+
+
+
+
+ --> DEPOIS QUE VOCÊ ESCREVER SEU COMANDO,
+
+
+ CLIQUE EM 'RUN ON ACTIVE CONNECTION'...
+
+
+
+
+
+
+ -> MAS ISSO NÃO FALHOU NA  MINHA MÁQUINA..
+
+
+
+
+
+
+
+
+
+
+
+ --> OK, MAS SE TEMOS ESSA AUTENTICAÇÃO STRONG,
+
+
+
+ COMO 
+
+
+
+ PODEMOS CONSERTAR ESSE PROBLEMA?
+
+
+
+
+
+
+
+ --> O WORKAROUND É IR ATÉ 
+
+
+ O 
+
+
+ MYSQL WORKBENCH,
+
+ E, LÁ DENTRO,
+
+
+
+
+ RODAR UMA __ NOVA QUERY_....
+
+
+
+
+
+
+
+
+
+
+-----> RODAR UMA QUERY CONTRA A NOSSA DATABASE..
+
+
+
+
+
+
+É UMA QUERY DE 'ALTER USER'...
+
+
+
+
+
+
+
+-> ''''THIS IS A SQL COMMAND THAT WILL CHANGE THE DATABASE SERVER SETTING SUCH 
+
+THAT THE ___ROOT__ USER can be logged in with the 
+
+___WEAKER__ authentication method... During development,
+
+this is absolutely fine....''''''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> A QUERY INTEIRA É 
+
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ___SEUPASSWORDAQUI__
+
+
+
+
+
+
+
+
+
+tipo 
+
+
+
+
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY nothing
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO ALTERA O USER, FAZ COM QUE ELE USE UM AUTH PROTOCOL MAIS SIMPLES, NO FINAL DAS CONTAS,
+
+QUE SERÁ 
+
+SUPORTADO 
+
+POR ESSA EXTENSÃO DO VISUAL STUDIO CODE...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA EXTENSION DEIXA O TRABALHO COM O SQL BEM MAIS CONVENIENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA PODEMOS VOLTAR AO VISUAL STUDIO CODE 
+
+
+
+
+
+E NOS CONECTAR NORMALMENTE..
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS RODAR 'SELECT 'Hello World'...
+
+
+
+
+
+
+
+
+
+----->  O ERRO É QUE 'THE DEFAULT DATABASE AINDA NÃO EXISTE' (entretanto, no meu caso,
+
+ a database já existe)...
+
+
+
+
+
+
+
+
+
+ --> OK... JÁ CONSEGUIMOS NOS CONECTAR...
+
+
+
+
+
+
+
+
+
+
+
+ -> USAR ESSA EXTENSION É UMA BOA IDEIA PQ 
+
+ TEMOS AUTOCOMPLETION -> 
+
+ TEMOS SYNTAX HIGHLIGHTING -_> 
+
+
+
+ DEIXA O FIND E FIX DE ERRORS BEM MAIS FÁCIL, principalmente qunado seus comandos ficam mais complexos..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> TAMBÉM QUEREMOS ADICIONAR UMA CONEXÃO AO 'POSTGRESQL'..
+
+
+
+
+
+
+
+
+ certo... isso é bem útil...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> OK... 
+
+
+
+
+
+
+
+
+
+ ESSE É O CLIENT QUE USAREMOS AO LONGO DO CURSO..
+
+
+
+
+
+
+
+
+
+
+ -_> NOS DEIXA TROCAR ENTRE OS DATABASE SERVERS FACILMETNE, E TAMBÉM NOS DEIXA ARMAZENAR ESSES ARQUIVOS COM ESSES COMANDOS,
+
+
+ PARA QUE FIQUEM DISPONÍVEIS A NÓS...
+
+
+
+
+
+
+
+
+
+ ok... bem útil...
