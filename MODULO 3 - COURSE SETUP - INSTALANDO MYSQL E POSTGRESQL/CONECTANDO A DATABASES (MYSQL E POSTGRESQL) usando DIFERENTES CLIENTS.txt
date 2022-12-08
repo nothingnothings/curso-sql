@@ -260,3 +260,776 @@ O COMMAND LINE É HORRÍVEL...
 
 
 UTILIZE O 'MYSQL WORKBENCH'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo..
+
+
+
+
+
+
+USAR O 'MYSQL WORKBENCH'...
+
+
+
+
+
+
+
+
+
+
+
+
+-_> utilizei...
+
+
+
+
+
+
+
+agora é só criar uma nova database/server...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DO MYSQL WORKBENCH,
+
+PODEMOS:
+
+1) ADMINISTER NOSSO SERVER 
+
+
+
+2) PODEMOS RODAR QUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS RODAR QUERIES NAS TABS DE 'QUERIES',
+
+
+E ADICIONAR NOVAS QUERIES COM 'NEW QUERY'... (file > new query tab)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> CLIQUE NO RAIO ('flash')
+
+PARA EXECUTAR 
+
+
+
+SUA QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+NÃO USAREMOS ESSE CLIENT,
+
+
+MAS ELE 
+
+
+
+
+TEM ALGUMAS VANTAGENS --> 
+
+
+
+
+PODEMOS VER TODAS AS DATABASES E TODAS AS TABLES QUE TEMOS NESSE NOSSO SERVER...
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA GUI PODE SER BOA DE MEXER,
+
+MAS 
+
+
+VAMOS USAR UM CLIENT DIFERNETE DESSE,
+
+
+MENOS 'OVERLOADED'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA PARA NOS CONECTARMOS AO POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+-_> TEMOS O FOLDER DE 'POSTGRESQL'..
+
+
+
+
+
+
+
+
+--> temos a SHELL DO POSTGRES...
+
+
+
+
+
+
+
+
+POSTGRES....
+
+
+
+
+
+
+
+
+
+
+
+-----> EU ACHO MELHOR USAR O 'pgAdmin4'...
+
+
+
+
+
+
+--> database default é 'postgres',
+
+
+
+
+port default é '5432' ...
+
+
+
+
+
+
+
+username default é 'postgres'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> O 
+
+
+
+COMANDO É 
+
+
+
+postgres=# 
+
+
+
+
+
+
+
+
+
+E AÍ VOCÊ ESCREVE SUAS QUERIES,
+
+COMO 
+
+
+
+
+postgres=# SELECT 'Hello World'..
+
+
+
+
+
+
+
+
+
+
+--> ok... É ASSIM QUE PODEMOS NOS CONECTAR 
+
+
+A ESSAS SQL DATABASES..
+
+
+
+
+
+
+
+
+
+
+
+------> PARA CONECTAR SUA MYSQL SHELL A SUA DATABASE SQL,
+
+
+VOCÊ 
+
+DEVE USAR 
+
+O COMANDO INICIAL DE 
+
+
+
+
+shell.connect()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS PRECISAMOS ADICIONAR VÁRIOS PARÂMETROS DENTRO DESSE COMANDO.. ---> 
+
+
+
+
+
+
+
+
+PRECISAMOS:
+
+
+
+
+
+DE '{}',
+
+curly braces,
+
+
+
+
+PARA AÍ 
+
+
+
+ADICIONAR 
+
+
+UMA KEY DE 'host:' (que será, nesse caso, 'localhost') --> É ESSE IDENTIFIER QUE VAI SE REFERIR A NOSSA MÁQUINA LOCAL..
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+TEMOS A KEY DE 'user',
+
+que deverá ser 'root' (é o default)....
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+TEMOS A PASSWORD....
+
+
+
+
+
+
+
+--> FICA TIPO ASSIM:
+
+
+
+
+
+ shell.connect({host: 'localhost', user: 'root' })
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ISSO FEITO,
+
+ PROVIDENCIE A SENHA...
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+
+
+
+ 
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > shell.connect()
+Shell.connect: Invalid number of arguments, expected 1 to 2 but got 0 (ArgumentError)
+ MySQL  JS > shell.connect{)
+SyntaxError: Unexpected token '{'
+ MySQL  JS > shell.connect({)
+SyntaxError: Unexpected token ')'
+ MySQL  JS > shell.connect({host: 'localhost', user: 'root' })
+Creating a session to 'root@localhost'
+Please provide the password for 'root@localhost': ***************
+Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): no
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 24 (X protocol)
+Server version: 8.0.26 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+<Session:root@localhost:33060>
+ MySQL  localhost:33060+ ssl  JS >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> QUANDO O NEGÓCIO FICA ASSIM:
+
+
+
+ <Session:root@localhost:33060>
+ MySQL  localhost:33060+ ssl  JS >
+
+
+
+
+
+
+
+
+ ESTAMOS CONECTADOS AO MYSQL DATABASE....
+
+
+
+
+
+
+
+
+
+
+
+ ----> SE TENTAMOS ESCREVER 
+
+
+
+
+
+
+ ''''
+
+
+ SELECT 'Hello World';
+
+
+''''
+
+
+
+ISSO NOS DÁ UM ERRO, QUE SERÁ 'Unexpected String'...
+
+
+
+
+
+
+
+
+
+-----> PARA TIRARMOS ESSE ERRO,
+
+PRECISAMOS TROCAR PARA O 'SQL MODE',
+
+
+
+
+QUE É ACESSADO PELA ESCRITA 
+
+
+
+
+
+\sql 
+
+
+
+
+
+(PQ ESTAMOS COM O 'MODO JS' quando iniciamos essa SHELL)...
+
+
+
+
+------> OK...
+
+
+
+
+
+
+
+
+
+
+
+fazemos isso....
+
+
+
+EX;
+
+
+
+
+
+
+
+
+
+<Session:root@localhost:33060>
+ MySQL  localhost:33060+ ssl  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  localhost:33060+ ssl  SQL >
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... É ASSIM QUE PODEMOS USAR ESSA SHELL DE 'MYSQL SHELL'
+
+
+no windows..
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE A ALTERNATIVA É O WORKBENCH, QUE É BEM MELHOR....
+
+
+
+
+
+
+
+
+
+NÃO SÃO ESSAS AS INTERFACES QUE USAREMOS AO LONGO DO CURSO...
+
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS NOS CONECTAR AO DATABASE SERVER DO SQL..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO 'POSTGRESQL',
+
+tmos 
+
+
+
+
+
+o 
+
+
+
+'SEQUEL SHELL'...
+
+
+
+
+
+
+ele começa com 
+
+'Server [localhost]'..
+
+
+
+
+
+
+
+DIGITE ENTER...
+
+
+
+
+
+
+DEPOIS,
+
+
+ESCOLHA A DATABASE COM A QUAL VOCÊ QUER INTERAGIR... --> COLOCAMOS 'postgres'...
+
+
+
+
+
+
+
+A SENHA É 'nothing'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O OUTPUT FICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+psql (14.2)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=#
+postgres=#
+postgres=#
+postgres=#
+postgres=#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, PODEMOS RODAR QUERIES CONTRA NOSSA DATABASE SQL...
+
+
+
+
+
+
+
+
+
+--> ESSE É UM DOS CLIENTS QUE PODEMOS UTILIZAR...
