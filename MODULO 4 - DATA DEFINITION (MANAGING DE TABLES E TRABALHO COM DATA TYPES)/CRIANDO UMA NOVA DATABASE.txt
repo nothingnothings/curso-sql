@@ -1,0 +1,1111 @@
+
+
+
+
+
+
+
+
+
+
+DEVEMOS VER ALGUNS ACTUAL SEQUEL STATEMENTS....
+
+
+
+
+
+
+
+
+O PROFESSOR NOS RELATOU AQUELES 4 
+
+CORE 
+
+SQL STATEMENTS DE DATA DEFINITION:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) CREATE DATABASE 
+
+
+--> CONFIGURA NAME E BASE SETTINS DE 
+
+SUA DATABASE (ou seja, a respeito de coisas como 'TEXT HANDLING')...
+
+
+
+
+2) ALTER DATABASE (UPDATA A CONFIGURATION DE SUA DATABASE)....
+
+
+
+
+
+
+3) CREATE TABLE 
+
+(CONFIGURA NAME DA TABLE E FIELDS ---> CONFIGURA OS VALUES DOS FIELDS (field types) E DEFINE COISAS EXTRAS COMO CONSTRAINTS, KEYS, ETC)
+
+
+
+4) ALTER TABLE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS, COMO PRIMEIRO PASSO,
+
+
+
+O PROFESSOR QUER CRIAR UMA DATABASE 
+
+PARA 
+
+ESSA COMPANHIA FICTÍCIA DE 
+
+
+
+'Talently'...
+
+
+
+
+
+ESSA DATABASE VAI SEGURAR:
+
+
+
+
+
+
+
+
+
+
+
+
+1) 'EMPLOYERS' 
+
+
+
+
+
+2) 'USERS' 
+
+
+3) 'CONVERSATIONS' 
+
+
+
+
+
+
+
+
+SERÃO AS 3 TABLES DE NOSSO APp......
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONECTO NA MINHA DATABASE, COM 'nothing'..
+
+
+
+
+
+
+
+
+
+
+--> AGORA VAMOS CRIAR UMA 
+
+
+NOVA DATABASE,
+
+
+DE NOME 
+
+'Talently'....
+
+
+
+
+
+
+
+
+
+-->  COMPANHIAS MAIORES TERÃO 
+
+PROVAVELMENTE DIFERNTES DATABASES,
+
+
+PARA 
+
+
+DIFERENTES UNIDADES BUSINESS,
+
+
+
+
+MAS AQUI NÃO QUEREMOS OVERCOMPLICATE..
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR VOLTA AO 
+
+
+
+
+COURSE PROJECT...
+
+
+
+
+
+
+
+-_> ELE CLICA NA EXTENSION,
+
+
+
+E aí conecta os 2 database systems..
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+QUEREMOS RODAR O COMANDO PARA CRIAR UMA NOVA DATABASE...
+
+
+
+
+
+
+
+
+
+
+NO POSTGRES,
+
+
+O COMANDO PARA FAZER 'CREATE' 
+
+
+DE UMA NOVA DATABASE É SUPER SIMPLES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É 'CREATE DATABASE',
+
+
+
+e depois 
+
+O NOME 
+
+
+
+
+DA DATABASE QUE VOCÊ QUER CRIAR... --> criaremos 'Talently'..
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+CREATE DATABASE 'Talently';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS COLOCAR QUALQUER NOME,
+
+DESDE QUE ELE NÃO CONFLITE COM KEYWORDS como 'CREATE' E 'DATABASE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> é por isso que o professor escreve assim:
+
+
+
+
+
+
+
+
+
+
+
+CREATE DATABASE 'talently';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCê PODERIA CRIAR SUA DATABASE 
+
+
+
+COM UPPERCASE,
+
+
+
+MAS A CONVENÇÃO ,
+
+
+NO MUNDO SQL,
+
+É USAR 
+
+'LOWERCASE IDENTIFIERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR ISSO QUE USAMOS TUDO LOWERCASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ÀS VEZES VOCÊ TAMBÉM 
+
+PODERÁ 
+TER NAMES 
+PARA DATABASES/TABLES/COLUMNS EM TABLES
+
+
+
+QUE 
+
+CONSISTIRÃO DE MÚLTIPLAS PALAVRAS... ------> 
+
+
+
+
+
+
+
+NESSES CASOS,
+
+VOCÊ 
+
+
+DEVERÁ USAR UNDERLINES...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+talent_pool;
+
+
+
+
+
+
+
+
+
+CREATE DATABASE talent_pool;
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO É UMA REGRA PARA TABLE NAMES,
+
+MAS PARA 
+
+
+TAMBÉM 
+
+PARA 
+
+NAMES DE COLUMNS...
+
+
+
+
+
+
+
+
+
+--> MAS SE VOCê TEM UM NAME QUE 
+
+REALMENTE VAI CLASHEAR 
+
+
+
+COM UMA KEYWORD,
+
+
+
+
+
+
+COMO POR EXEMPLO O NOME 'create' de sua DATABSE,
+
+
+
+
+
+
+
+VOCÊ PODE FAZER ISSO FUNCIONAR,
+
+
+
+
+ISSO SE VOCÊ WRAPPAR O NOME 
+
+
+DESEJADO com "" (POSTGRESQL)
+
+
+
+ou 
+
+
+
+`` (PARA O MYSQL)...
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+CREATE DATABASE `create`;
+
+
+
+
+CREATE DATABASE "create";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS SE VOCÊ NÃO ESTÁ CLASHEANDO COM NENHUM KEYWORD,
+
+VOCÊ PODE ESPECIFICAR SEU NAME SEM NENHUM "" ou ``...
+
+
+
+
+
+
+
+
+
+--> DEPOIS COLOQUE O ';',
+
+
+
+PARA INDICAR QUE SUA QUERY ACABOU..
+
+
+
+
+
+
+
+
+
+
+-> siga essas conventions para columns,
+
+
+
+tables 
+
+
+e 
+
+
+databases..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+-_> É TUDO ISSO QUE PRECISAMOS FAZER PARA RODAR NOSSA QUERY....
+
+
+
+
+
+
+
+
+
+--> CERTO.... ENTRETANTO,
+
+PARA O 'MYSQL',
+
+
+PODERÍAMOS RODAR 
+
+TAMBÉM
+
+
+
+
+
+
+
+'''''
+
+
+
+
+CREATE SCHEMA talently;
+
+
+
+
+
+
+''''''
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ, CONFORME O PROFESSOR MENCIONOU,
+
+
+
+
+
+PARA O MYSQL,
+
+'SCHEMA'
+
+É UM 
+
+SINÔNIMO PARA DATABASE... --------> MAS PARA O POSTGRESQL 
+
+
+E OUTROS 
+
+
+
+
+SQL SYSTEMS SIMILARES,
+
+
+
+
+a expressão 
+
+
+
+'CREATE SCHEMA' (não é equivalente e 'CREATE DATABASE')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR SEMPRE VAI USAR 'CREATE DATABASE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUANDO VOCÊ RODA 
+
+
+
+
+COMANDOS COMO 'CREATE DATABASE',
+
+
+
+DIFERENTES
+
+
+
+
+DATABASE SYSTEMS TE CONFEREM
+
+
+DIFERENTES OPÇÕES A SEREM PASSADAS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR AQUI ESTÁ USANDO AS CONFIGURATIONS DEFAULT 
+
+
+DE NOSSO DATABASE SYSTEM PARA CRIAR ESSA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE VOCÊ QUER DESCOBRIR MAIS SOBRE AS OPTIONS DE CADA COMANDO,
+
+
+VOCÊ DEVE ESCREVER 
+
+
+'
+mysql NOME DO COMANDO' no goolge 
+
+
+
+ou então 
+
+
+'postgresql NOME DO COMANDO'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NOS DOCS DE 'MYSQL',
+
+
+
+
+temos 
+
+
+
+
+
+
+
+
+OUTRAS OPTIONS QUE PODEMOS USAR..
+
+
+
+
+
+
+
+
+
+
+
+-> NO MYSQL,
+
+PODERÍAMOS ADICIONAR A CLÁUSULA DE 
+
+
+'IF NOT EXISTS'..
+
+
+
+
+
+
+
+
+
+
+
+
+-> SE VOCÊ COLOCAR 'if not exists',
+
+
+VOCÊ PODE RODAR ESSE COMANDO DE '
+
+
+
+
+
+
+
+CREATE DATABASE IF NOT EXISTS talently;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> COM ESSE COMANDO, 
+
+
+
+
+SE UMA DATABASE COM ESSE NAME JÁ EXISTISSE,
+
+O 
+
+MYSQL NÃO FARIA O THROW DE UM ERROR,
+
+E SIM 
+
+
+APENAS 
+
+
+NÃO 
+
+CRIARIA UMA NOVA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+--> AQUI, NO ENTNAOT,
+
+
+SABEMOS QUE 
+
+
+ESSA 
+
+DATABASE AINDA NÕA EXISTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OBS: 
+
+
+
+O 'POSTGRESQL' 
+
+
+
+
+NÃO ACEITA '' (e sim APENAS ACEITA "")....
+
+
+
+
+
+
+
+
+--> OBS::: PARA O POSTGRESQL,
+
+
+
+
+NÃO É POSSÍVEL USAR 
+
+
+ESSA CLÁUSULA DE 
+
+'IF NOT EXISTS' 
+
+
+(
+
+
+
+    ELA NÃO EXISTE
+)
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE É SEMPRE BOM LER OS DOCS 
+
+
+DESSES DATABASE SYSTEMS..
+
+
+
+
+
+
+
+
+
+
+-> LÁ NO POSTGRESQL HÁ ALGUMAS OPTIONS EXTRAS,
+
+COMO 
+
+'COLLATION'...
+
+
+
+
+
+
+
+
+
+--> MAS HÁ OUTRAS OPTIONS QUE SÃO MT ESPECÍFICAS,
+
+
+E QUE 
+
+SÃO ÚTEIS AO 'DATABASE ADMIN',
+
+
+
+MAS NÃO PROPRIAMENTE AOS DEVS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... CRIAMOS UMA DATABASE BEM ASSIM....
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+
+
+
+CHECAMOS 
+
+O NOSSO DATABASE SERVER,
+PARA 
+
+CONSTATAR SE NOSSA 
+
+DATABASE FOI REALMENTE CRIADA...
+
+
+
+
+
+
+
+
+-> OK... COMO CRIAMOS UMA NOVA DATABASE,
+
+
+DEVEMOS TROCAR A DATABASE LÁ NA CONFIG DE NOSSO SQLTOOLS EXTENSION... (Basta editar)...
+
+
+
+
+
+
+
+OK.... FUNCIONOU...
+
+
+
+
+
+
+
+SEMPRE DEVEMOS FAZER ISSO, QUANDO CRIAMOS UMA NOVA DATABASE..
