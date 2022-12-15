@@ -1,0 +1,204 @@
+
+
+
+
+
+
+
+
+--> agora que começamos com alguns basics do SQL, 
+
+
+
+
+
+
+
+
+
+
+--> agora que sabemos a sintaxe básica do sql,
+
+
+
+
+
+
+e instalamos algumas databases,
+
+é hora 
+
+
+de voltar um pouco para trás,
+
+para 
+
+ver os basics 
+
+
+
+SOBRE A CREATION DE DATABASES E TABLES,
+
+
+
+E COISAS COMO 
+
+
+
+'DATA DEFINITION STATEMENTS'...
+
+
+
+
+
+
+
+
+--> MAIS TARDE NO CURSO ESTUDAREMOS:
+
+
+
+
+
+
+
+1) SQL QUERIES 
+
+
+2) COMO PODEMOS 'SELECT' E 'FILTER' DATA,
+
+
+
+
+
+3) COMO PODEMOS COMBINAR DATA DE MÚLTIPLAS TABLES...
+
+
+
+
+
+
+
+--> PARA FAZER TUDO ISSO, PRECISAMOS 
+
+
+CRIAR TABLES COM DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA VERDADE,
+
+
+JÁ TEMOS BASTANTE 
+
+
+
+KNOWLEDGE SOBRE 
+
+
+
+
+A CRIAÇÃO DE TABLES,
+
+OS DATA TYPES QUE PODEMOS USAR E ETC..
+
+
+
+
+
+
+
+
+
+
+-> É ISSO QUE ESTUDARMEOS NESSE MÓDULO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS:
+
+
+
+
+
+
+
+
+1) COMO CRIAMOS E MANAGEAMOS TABLES 
+
+EM DATABASES... (não interessa o database system que estamos usando)...
+
+
+
+
+
+
+
+
+
+
+
+2) ESTUDAREMOS ALGUNS 'KEY DATA TYPES' --> pq podemos armazenar difernetes tipos de data,
+
+
+STRINGS,
+
+NUMBERS,
+
+DIFERENTES TIPOS DE NUMBERS,
+
+ ETC...
+
+
+
+
+
+
+
+
+ 3) VEREMOS 'CONSTRAINTS' E 'DEFAULT VALUES'..
+
+
+
+
+
+
+
+
+
+ -> VAMOS EXPLORAR TUDO ISSO NESSA COURSE SECTION --> AO FINAL DELA, FICAREMOS 
+
+
+ PRONTOS PARA 
+
+
+ CRIAR NOSSAS PRÓPRIAS DATABASES,
+
+
+
+ COM NOSSAS PRÓPRIAS TABLES,
+
+
+ PARA OS TIPOS DE DATAS COM QUE DESEJAMOS TRABALHAR...

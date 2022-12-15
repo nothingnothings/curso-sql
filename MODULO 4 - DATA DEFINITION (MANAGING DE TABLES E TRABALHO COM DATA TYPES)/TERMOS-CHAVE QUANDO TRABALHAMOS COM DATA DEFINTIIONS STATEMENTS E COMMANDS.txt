@@ -1,0 +1,428 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ANTES DE ESTUDARMOS UM PCO DE CÓDIGO E ACTUAL 'SQL STATEMENTS',
+
+
+
+
+
+É IMPORTANTE ENTENDER
+ 
+
+
+
+ '''COMO UM DATABASE SYSTEM ACTUALLY FUNCIONA''''....
+
+
+
+
+
+
+
+
+
+
+ -> NA VERDADE, DEVEMOS ENTENDER 'COMO OS DIFERENTES ELEMENTOS QUE COMPÕEM 
+
+
+ UM 
+
+
+
+ DATABASE SYSTEM FUNCIONAM EM CONJUNTO'...
+
+
+
+
+
+
+
+
+--> ESTUDAREMOS A 'HIERARQUIA' DENTRO DE UM DATABASE SYSTEM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> IMPORTANTE ENTENDER:
+
+
+
+
+A COISA COM QUE COMEÇAMOS ANTERIORMENTE, COM O 'MYSQL' E 'POSTGRESQL',
+
+
+
+
+
+ERA UM 'DATABASE SERVER '( ou seja, não só uma database, mas um 
+
+
+
+
+WHOLE DATABASE SERVER)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E UM 'DATABASE SERVER'
+
+
+
+PODE TER MÚLTIPLAS DATABASES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> E EM CADA DATABASE, TEMOS MÚLTIPLAS 'TABLES',
+
+
+
+QUE 
+CONTERÃO
+
+
+A DATA QUE SEU APP/USE-CASE VAI 
+
+
+USAR...
+
+
+
+
+
+
+
+
+
+
+
+
+-- TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+DATABASE SERVER 
+
+
+I    I     I 
+
+DB   DB    DB 
+            I   I   I 
+            table table table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... MAS HÁ OUTRO TERMO QUE VAMOS ENCONTRAR COM FREQUÊNCIA,
+
+
+
+que é 
+
+
+
+
+''''SCHEMA'''' -------> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+E, EM 'MYSQL',
+
+
+
+
+'SCHEMA' É 
+
+
+__BASICAMENTE UM 
+
+
+
+SINÔNIMO PARA '''DATABASE''' (Que contém várias TABLES)... 
+
+
+
+
+
+
+
+
+
+
+----> QUANDO VOCÊ CRIA UMA SCHEMA NO MYSQL, VOCÊ CRIA UMA __ _DATABASE__... (com várias tables)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK, MAS COM O 'POSTGRESQL'
+
+
+
+
+e OUTROS DATABASE SYSTEMS,
+
+
+
+
+___ iSSO __ É UM BOCADO _ DIFERENTE... -> NESSES SISTEMAS,
+
+
+
+
+
+
+OS 'SCHEMAS' 
+
+
+
+SÃO 
+
+
+
+
+
+
+__aCTUALLY__ 
+
+
+
+
+'''MANEIRAS DE ORGANIZAR TABLES''''... ----------> OU SEJA,
+
+
+
+
+PODEMOS __ ORGANIZAR___ TABLES __ 
+
+
+
+CONJUNTAMENTE, EM 1 DETERMINADO 'SCHEMA',
+
+
+ O QUE FAZ COM QUE POSSAM COMPARTILHAR CERTAS FUNCTIONALITIES (
+
+
+
+COM ISSO,
+
+
+VOCÊ 
+
+
+PODE TER 
+
+MÚLTIPLAS
+
+
+TABLES, COM OS MESMOS NAMES,
+
+ISSO SE ESTIVEREM EM DIFERENTES 
+
+__ SCHEMAS____.....
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OU SEJA, ESSA COISA DE 'SCHEMAS' 
+
+ EXISTE APENAS NO POSTGRES,
+
+ E TE PERMITE FAZER COISAS COMO 'DAR NOMES REPETIDOS A SUAS TABLES',
+
+
+
+ isso 
+
+
+
+ SE ELAS ESTIVEREM MORANDO EM DIFERENTES SCHEMAS... (
+
+
+caso contrário,
+
+CADA TABLE DEVE TER UM NOME ÚNICO...
+
+
+ )
+
+
+
+
+
+
+
+
+
+
+ --> SE VOCÊ AGRUPA SUAS TABLES (com mesmos nomes) EM DIFERENTES 
+
+
+ SCHEMAS,
+
+
+
+
+ A REPETIÇÃO DE NOMES  É PERMITIDA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> OK... MAS ESSA COISA DE 'SCHEMAS'
+
+ É ESPECÍFICA A CERTOS DATABASE SYSTEMS,
+
+
+ E AQUI QUEREMOS FOCAR NAS QUERIES,
+
+
+
+
+ E EM 
+
+
+ 'COMO PODEMOS CRIAR TABLES',
+
+
+
+
+ e para, MAIS TARDE,
+
+
+
+
+
+
+
+ '''''COMO PODEMOS COLOCAR DATA DENTRO DE TABLES''',
+
+ 
+
+ E COMO PODEMOS 'QUERY DATA'...
+
+
+
+
+
+
+
+
+
+
+
+ --> O PROFESSOR QUERIA MENCIONAR ESSA COISA DE 'SCHEMA',
+
+
+ MAS ISSO NÃO SERÁ O FOCO DESSE CURSO...
+
+
+
+
+
+
+
+ --> MAS ESSES SÃO OS TERMOS (databases e schemas) que você ENCONTRARÁ QUANDO 
+
+
+ TRABALHAR COM SISTEMAS E FRAMEWORKS SQL...

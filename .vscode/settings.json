@@ -12,6 +12,16 @@
             "name": "MySqlHomeConnection",
             "database": "sql-course",
             "username": "root"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "MyPostGreSQLHomeConnection",
+            "database": "postgres",
+            "username": "postgres"
         }
     ]
 }

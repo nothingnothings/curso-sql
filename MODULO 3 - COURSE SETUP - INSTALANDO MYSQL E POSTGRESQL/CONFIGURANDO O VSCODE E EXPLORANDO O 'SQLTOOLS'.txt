@@ -1,0 +1,706 @@
+
+
+
+
+
+
+
+
+
+NA AULA ANTERIOR, SETTAMOS O VISUAL STUDIO CODE,
+
+ESSE EDITOR..
+
+
+
+
+
+
+
+
+
+
+
+-> MAS, EM VEZ DISSO,
+
+
+
+ESTAMOS USANDO 
+
+
+
+O VISUAL STUDIO CODE COMO CLIENT, PARA PODERMOS CONVERSAR COM NOSSA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS O PROFESSOR DIZ QUE TEMOS UM PROBLEMINHA QUE DEVE SER CONSERTADO COM O 'MYSQL...
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR APONTA QUE PODEMOS MANAGEAR NOSSAS CONNECTIONS ALI NA ESQUERDA --> 
+
+
+
+AÍ NÃO PRECISAMOS RODAR 'PLEASE CONNECT ME' DE NOVO,
+
+
+
+O QUE É BEM CONVENIENTE (basta colocar nossa senha, e pronto)...
+
+
+
+
+
+
+
+
+--> SEMPRE QUE VOCÊ ACABAR, PODE SIMPLESMENTE FECHAR AQUELA CONNECTION..
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM É BOM APONTAR QUE '''PODMEOS TROCAR ENTRE DATABASES POR MEIO DO SIMPLES CLICK ENTRE DATABASE'''..
+
+
+
+
+
+
+
+
+
+
+
+
+--> quando você faz isso, as tabs de 'query' mudam imediatamente... (
+    para a adequada ao database server que você está conectado...
+)
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS SÓ COPIAR O CONTEÚDO DE UMA DAS ABAS E USAR NA OUTRA (
+    E ADAPTAR certos comandos,
+
+
+    para ver a diferença
+     
+     entre o 'mysql'
+
+     e o 
+
+     'postgresql' ...
+)
+
+
+
+
+
+
+
+--> O SQL É MEIO PADRONIZADO, MAS HÁ DIFERENÇAS ENTRE 
+
+
+OS DATABASE SERVERS (
+
+
+
+    e podemos ver essas diferenças com esse 'switch' 
+
+    entre as databases....
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> OS 'BOOKMARKS' PODEM SER IGNORADOS,
+
+
+MAS A 'QUERY HISTORY' é útil....
+
+
+
+
+
+
+
+
+
+
+
+--> NOSSAS QUERIES FICAM 
+
+
+GRAVADAS ALI EM 'QUERY HISTORY'...
+
+
+
+
+
+
+
+
+
+
+
+-_> PODEMOS  FACILMENTE 
+
+
+
+CLICAR EM 1 DOS COMANDOS NO 'QUERY HISTORY'
+
+
+
+PARA __ COPIAR__ COMANDOS __ DO SQL 
+
+
+GRAVADOS ANTERIORMENTE...
+
+
+
+
+
+
+
+
+
+
+-> E, SE DESEJARMOS, PODEMOS CLICAR EM 'PLAY'
+
+
+PARA 
+
+
+REPETIR 
+
+COMANDOS SQL QUE DIGITAMOS NO PASSADO..
+
+
+
+
+
+
+
+
+
+-----> NA ABA DA DIREITA, DAS QUERIES, TAMBÉM 
+
+
+PODEMOS __ RE-RODAR UMA QUERY ("re-run query)"...
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS EXPORTAR NOSSOS RESULTS 
+
+A UM 
+
+ARQUIVO CSV/JSON...
+
+
+
+
+
+
+
+
+
+--> ISSO PODE SER CONVENIENTE SE VOCÊ TEM ALGUNS
+
+RESULTS QUE VOCÊ 
+
+FETCHEOU DE UMA DATABASE,
+
+QUE 
+VOCÊ QUER EXPORTAR EM UMA FILE SEPARADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM TEMOS 'CONSOLE',
+
+que 
+
+outputta 
+
+detalhes sobre a query que 
+
+RODAMOS....
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+
+TAMBÉM PODEMOS ARRASTAR 
+
+
+NOSSA TAB DA DIREITA PARA __ BAIXO,
+
+
+para ficarmos com um look 
+
+
+
+CIMA 
+
+
+BAIXO 
+
+
+
+
+EM VEZ DE 
+
+
+
+
+
+
+ESQUERDA DIREITA...
+
+
+
+
+
+
+
+
+
+
+
+-_>VAMOS USAR ESSE LOOK DE 'CIMA-BAIXO',
+
+
+
+
+
+
+
+
+pq _ aí 
+
+
+
+PODEREMOS 
+
+
+VER, AO MESMO TEMPO,
+
+A QUERY QUE FOI EXECUTADA 
+
+E O RESULT DESSA QUERY..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CADA CONNECTION QUE TEMOS,
+
+
+
+PODEMOS TER MÚLTIPLAS DATABASES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> vemos a key de 'Schemas'... (e dentro delas temos 'PUBLIC', e aí as TABLES)....
+
+
+
+
+
+
+
+
+
+
+
+'''PODEMOS IGNORAR O QUE EXATAMENTE É UM ''SCHEMA'' A ESSE PONTO DO CURSO.... VOCÊ 
+PODE PENSAR 
+
+EM UM SCHEMA SIMPLESMENTE COMO UM 'WRAPPER AO REDOR DE UMA DATABASE'',
+
+OU SIMPLESMENTE UM SINÔNIMO PARA ''DATABASE'' '''....
+
+
+
+
+
+
+
+
+
+----> TEMOS 'TABLES',
+
+
+'VIEWS',
+
+
+'MATERIALIZED VIEWS'
+
+
+
+
+e 
+
+
+'FUNCTIONS'...
+
+
+
+
+
+
+
+
+
+
+--> DEBAIXO DE 'TABLES',
+
+
+
+ENXERGAMOS QUAISQUER TABLES QUE FORAM CRIADAS...
+
+
+
+
+
+
+
+
+
+
+
+---> ESSA VISÃO DAS TABLES SE TORNARÁ 
+
+
+ÚTIL NO FUTUOR,
+
+PQ 
+
+PODEMOS 
+
+
+
+
+
+
+INSPECIONAR ESSAS TABLES AQUI, TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+---> PARA O MYSQL,
+
+NÃO CONSEGUIMOS VER NADA AGORA,
+
+PQ 
+
+
+
+NÃO ESTAMOS CONSEGUINDO NOS CONECTAR 
+
+
+
+
+
+A DATABASE DO MYSQL (pq nenhuma database foi criada dentro da engine do mysql)....
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER CRIAR UMA DATABASE NO WORKBENCH DE 'mySql'...
+
+
+
+
+
+
+
+
+
+
+
+
+-_> DENTRO DO MYSQL WORKBNCH,
+
+
+
+CLICAMOS EM 'schemas' --> 
+
+
+
+
+
+
+
+na tab de 'schemas',
+
+
+
+clicamos 
+
+
+
+
+e colocamos 'create schema '- --> 
+
+
+isso vai criar 1 das 
+
+
+DATABASES...
+
+
+
+
+
+
+
+
+
+--> O 'SCHEMA' SERÁ A DATABASE QUE VAMOS QUERER CONECTAR, NO NOSSO SERVER...
+
+
+
+
+
+
+
+
+
+
+RODA-SE O COMANDO DE 
+
+
+
+
+
+'
+
+
+CREATE SCHEMA 'database-exemplo';
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AÍ PODEMOS NOS CONECTAR A ESSE NEGÓCIO...
+
+
+
+
+
+
+
+
+
+
+
+VEREMOS NOSSA DATABASE DEFAULT DO 'mysql'...
+
+
+
+
+
+
+
+
+--> PARA CONCLUIR ESSA LIÇÃO, SOBRE ESSE SETUP,
+
+
+O PROFESSOR QUER MOSTRAR COMO PODEMOS 
+
+
+
+
+'SWITCH AWAY'
+
+
+DESSAS WINDOWS QUE TEMOS 
+
+
+PARA 
+
+
+
+RODAR __ oS COMMANDS _ (que serão apenas janelas, e não arquivos propriamente ditos),
+
+
+
+
+
+PARA __ 'FILES' QUE 
+
+
+ARMAZENAREMOS EM 1 FOLDER, E QUE 
+
+
+
+
+OS EXECUTAREMOS 
+
+
+QUANDO QUISERMOS...
+
+
+
+
+
+
+
+
+
+
+
+
+-------> VOCÊ NEM SEMPRE VAI QUERER ARMAZENAR COMANDOS EM FILES,
+
+MAS QUE 
+
+VAMOS QUERER FAZER, COMO PARTE DO CURSO,
+
+
+
+PARA __ QUE _ OS PROFESSORES 
+
+
+
+
+CONSIGAM NOS PROVIDENCIAR A SINTAXE DESSES COMANDOS...
+
+
+
+
+
+
+
+
+
+--> COM ESSES ARQUIVOS,
+
+
+NÃO PRECISAMOS RE-ESCREVER TUDO....
+
+
+
+
+
+
+
+
+
+---> CERTO...
+
+
+
+
+
+
