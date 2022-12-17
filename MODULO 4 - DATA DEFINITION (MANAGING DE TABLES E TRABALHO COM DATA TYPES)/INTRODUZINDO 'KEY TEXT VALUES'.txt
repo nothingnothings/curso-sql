@@ -1,0 +1,1063 @@
+
+
+
+
+
+
+--> MAS QUAIS DATA TYPES TEMOS?
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE VAMOS EXPLORAR ESSES DATA TYPES,
+
+VER 
+
+
+ELES NO CÓDIGO, NOS PRÓXIMOS MINUTOS..
+
+
+
+
+
+
+
+
+
+-_> BEM, O 'ACTUAL SET' DE 
+
+DATA TYPES 
+
+
+SUPORTADOS __ DEPENDE__ DO SISTEMA QUE VOCê ESTÁ USANDO..
+
+
+
+
+
+
+
+
+
+
+
+--> LÁ NO 'MYSQL' database docs,
+
+
+
+
+VOCÊ 
+VERÁ QUAIS TIPOS DE DATA TYPES SÃO SUPORTADOS..
+
+
+
+
+
+
+
+
+--> E OS TYPES MAIS IMPORTANTES SÃO:
+
+
+
+
+1) NUMERIC 
+
+
+
+2) DATE E TIME DATA TYPES 
+
+
+
+3) STRING DATA TYPES...
+
+
+
+
+
+
+
+
+
+--> MAS O MYSQL TAMBÉM SUPORTA ALGUNS OUTROS DATA TYPES,
+
+QUE 
+
+SÃO UM POUCO MAIS ESPECIALIZADOS, 
+
+
+
+E PODEM __ àS  VEZES SEREM ÚTEIS....
+
+
+
+
+
+
+
+
+--> SE VOCê OLHAR A DOCUMENTAÇÃO DO POSTGRES,
+
+VOCÊ TEM UM PONTO DE 'DATA TYPES',
+
+
+
+COM MTOS 
+
+
+DATA TYPES (
+
+    como 'GEOMETRIC TYPES' (e isso não existe no mysql )
+)
+
+
+
+
+
+GEOMETRIC TYPES --> É UM DATA TYPE USADO PARA ARMAZENAR LINES E POINTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRES, 
+
+
+
+
+
+OS TYPES MAIS IMPORTANTES SÃO: 
+
+
+1) NUMERIC TYPES 
+
+
+
+
+2) CHARACTER TYPES 
+
+
+
+
+3) DATE/TIME TYPES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS NESSE CURSO, FOCAREMOS NOS DATA TYPES QUE SÃO SUPER IMPORTANTES EM TODOS OS SISTEMAS SQSL...
+
+
+
+
+
+
+
+
+SÃO ELES:
+
+
+
+
+
+
+
+
+1) TEXT 
+
+
+
+
+2) NUMERIC 
+
+
+
+
+3) DATE 
+
+
+
+
+4) ALGUNS OUTROS (OTHER)..
+
+
+
+
+
+
+
+
+
+
+
+
+--> TEXT DATA TYPES --> NELES,
+
+TEMOS 
+
+3 DATA TYPES QUE 
+
+PODEMOS SETTAR PARA UMA COLUMN,
+
+
+
+QUANDO CRIAMOS UMA NOVA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+1o type --> 
+
+
+
+'CHAR(X)' () ----> É UM DATA TYPE --> DEPOIS DO 'CHAR',
+
+
+você 
+
+
+COLOCA, EM PARÊNTESES, UM NÚMERO...
+
+
+
+
+
+
+--> ESSE NÚMERO É O 'NÚMERO DE CARACTERES QUE VOCÊ VAI QUERER 
+
+ARMAZENAR, NO MÁXIMO, EM 1 GIVEN COLUMN'...
+
+
+
+
+
+
+
+
+--------> CHAR(256) ----> 256 CARACTERES MAX....
+
+
+
+
+
+
+
+
+
+--> MAS 1 COISA IMPORTANTE SOBRE O DATA TYPE DE 'CHAR(X)'
+
+
+
+É QUE __ SE __ VOCê __ 
+
+
+
+INPUTTA UM TEXT MENOR DO QUE O NÚMERO,
+
+O 
+
+
+SQL __ DATABASE__ SERVER____ 
+
+
+VAI ACTUALLY 'PAD' (fill up)
+
+
+
+O 
+
+
+TEXTO INPUTTADO COM __ESPAÇOS_,
+
+
+
+
+
+PARA __ QUE __ 
+
+
+VOCÊ SEMPRE 
+
+FIQUE 
+
+COM AQUELE NÚMERO DE CARACTERES (
+
+
+fica tipo 
+
+
+aaa                                                    
+
+)
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ INPUTTA 1 TEXTO MAIS LONGO DO QUE O PERMITIDO,
+
+
+
+VOCÊ GANHA UM ERROR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO O RESTO DO 'ESPAÇO' 
+
+
+
+DO CHAR É 
+
+
+PREENCHIDO COM 'BLANKS',
+
+
+
+TEMOS 1 
+
+
+
+DATA TYPE __ QUE É __ USADO __ COM MT MAIOR FREQUÊNCIA,
+
+
+
+
+QUE É 
+
+O 
+
+
+DATATYPE 
+
+DE 
+
+
+
+
+'VARCHAR(X)' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAR(X) VS VARCHAR(X)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'VARCHAR(X)'
+
+
+É UMA 
+
+ABREVIAÇÃO DE 
+
+'CHARACTER VARYING'..
+
+
+
+
+
+
+
+
+
+--> no VARCHAR,
+
+
+VOCê 
+
+ESPECIFICA 
+
+
+UMA 'MAXIMUM LENGTH' 
+
+
+
+que será o 
+
+
+'X'...
+
+
+
+
+
+
+
+--> MAS, AO CONTRÁRIO DE 'CHAR(X)',
+
+
+SE VOCÊ 
+
+INPUTTA 
+
+
+1 TEXT MAIS CURTO,
+
+
+
+O 
+
+
+
+'MISSING TEXT' (os 'espaços')
+
+
+NÃO SÃO 
+
+PREENCHIDOS COM BLANKS (com 'WHITE SPACE'),
+
+
+
+
+
+E SIM 
+
+
+
+SÃO 
+
+SIMPLESMENTE 
+
+
+__oMITIDOS_>...
+
+
+
+
+
+
+
+
+
+
+
+--> RESUMO:
+
+
+
+
+
+
+
+1) CHAR(4):
+
+
+inserted: 'hi' 
+
+stored: '  hi' 
+
+
+
+
+2) VARCHAR(4):
+
+
+inserted: 'hi' 
+
+
+stored: 'hi'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, ISSO QUER DIZER QUE COM 'VARCHAR(X)'
+
+
+
+TEMOS A OPÇÃO DE ARMAZENAR 
+
+
+TEXTO ATÉ O LIMITE 'X',
+
+MAS 
+
+
+TAMBÉM 
+
+PODEMOS __ ARMAZENAR TEXTOS MENORES SEM PROBLEMAS,
+
+PQ 
+
+
+SEU 'ESPAÇO EM BRANCO'
+
+NÃO SERÁ PREENCHIDO COM 'BLANKS'...
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ INSERTA TEXTO MT LONGO  (mais do que o limite) EM 'VARCHAR(X)',
+
+
+
+VOCÊ AINDA RECEBE UM ERRO, NO ENTANTO....
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O 'VARCHAR(X)'
+
+
+
+É UM 
+
+
+
+DATA TYPE DE USO MT FREQUENTE COM 'TEXT'..
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+ÀS VEZES VOCÊ PRECISA 
+
+
+ARMAZENAR TEXTO MT LONGOO,
+
+
+
+
+COMO 1 BLOG POST,
+
+OU ENTÃO 
+
+
+
+A DESCRIPTION DE UM PRODUTO EM 
+
+1 ONLINE SHOP...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU, ENTÃO,
+
+UMA 
+
+'CHAT MESSAGE'...
+
+
+
+
+
+
+
+
+-----> É PQ ÀS VEZES VOCÊ PODE TER TEXTO Q SERÁ 
+
+MT LONGO...
+
+
+
+
+
+
+
+-----> E APESAR DE 'VARCHAR(X)'
+
+
+SER CAPAZ DE 
+
+
+
+ARMAZENAR 
+
+
+
+STRINGS MT LONGAS DE TEXTO,
+
+
+
+
+EXISTIRÃO CASOS EM QUE VOCÊ NÃO SABERÁ 
+
+O TAMANHO
+
+
+
+DO TEXTO 
+
+
+QUE _ SERÁ INSERIDO..
+
+
+
+
+
+
+
+--> É POR ISSO QUE,
+ 
+ NA MAIOR PARTE DOS DATABASE SYSTEMS,
+
+
+ VOCÊ 
+
+
+
+ TEM 
+
+ OUTRO TIPO 
+
+ DE 
+
+ DATABASE TYPE,
+
+ QUE É 
+
+ 'TEXT' e 'LONGTEXT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> às VEZES VOCÊ TEM VARIAÇÕES, COMO 'MEDIUM TEXT'...
+
+
+
+
+
+
+
+
+
+ -->EX:
+
+
+
+
+
+
+
+
+
+ 1) MYSQL --> TEMOS 'MEDIUM TEXT'  'TEXT' E 'LONG TEXT'...
+
+
+
+
+
+
+
+ 2) POSTGRESQL --> TEMOS APENAS 'TEXT'...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> nesses sistemas, 
+
+
+ '1 byte PODE SER 1 CARACTER' --> mas isso depende do ENCODING...
+
+
+
+
+
+
+
+
+ EM POSTGRESQL, TEMOS APENAS 'TEXT'...
+
+
+
+
+
+
+
+
+
+ MAS A IDEIA POR TRÁS DE 'TEXT' É QUE 
+
+
+ PODEMOS ARMAZENAR __ TEXT __de 
+
+
+ QUALQUER LENGTH (
+
+    isso no postgresql
+ ),
+
+
+ E QUE 
+
+
+ NÃO PRECISAMOS ESPECIFICAR 
+
+
+
+ A LENGTH MÁXIMA 
+
+
+ DA STRING ARMAZENADA...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS É CLARO QUE EXISTEM ALGUNS LIMITES TÉCNICOS (
+
+
+
+    n podemos armazenar 1 
+
+    milhão 
+
+    de PÁGINAS DE CARACTERES EM 1 DATABASE.. --> pq isso 
+
+
+    explodiria seu database server...
+ )
+
+
+
+
+
+
+
+
+ --> MAS PODEMOS ARMAZENAR TEXTOS GIGANTES,
+
+
+
+ SEM ESPECIFICAR 
+
+ QUAL LIMITE QUEREMOS TER ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> É POR ISSO QUE 'TEXT' É UM 
+
+
+ DATA TYPE BOM PARA ARMANZENAR TEXTO,
+
+
+ QUANDO VOCÊ NÃO SABE QUAL LIMITE QUER COLOCAR NESSE ARMAZEANMENTO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OUTRO 'DATA TYPE 'ÚTIL:
+
+
+
+
+
+
+
+
+
+
+
+
+ 4) ENUM ---------> É UM DATA TYPE QUE 
+
+
+ TE PERMITE,
+
+ COMO ADMINISTRADOR DA DATABASE/TABLES 
+
+
+
+ DITAR, ANTECIPADAMENTE, 
+
+
+ __ ''''' QUAIS CONCRETE TEXT VALUES SERÃO 
+
+ ACEITOS EM 
+
+ 1 DETERMINADA COLUMN'''' (tipo 'true/false', mas com VÁRIOS VALUES)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... ISSO QUER DIZER QUE PODEMOS DEFINIR 
+
+
+
+ COISAS COMO 
+
+
+ '''NESSA COLUMN,
+
+ SÓ PODERÃO SER ACEITOS OS VALUES DE 
+
+
+ 'employed/unemployed/self-employed'...
+
+
+
+ '''''
+
+
+
+
+
+ (
+
+    e aí coisas como 'job-seeking' NÃO SERIAM ACEITAS,
+
+    SE DEFINÍSSEMOS SÓ AQUELES 3 VALUES...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ESSE DATA TYPE DE 'ENUM' É BEM ÚTIL, PENSANDO ASSIM....
+
+
+
+
+
+
+
+
+
+
+
+ --> SEMPRE DEVEMOS CHECAR A DOCUMENTAÇÃO OFICIAL DO 
+
+
+
+ RDBS 
+
+ COM QUE 
+
+ VOCê ESTÁ TRABALHANDO,
+
+ PARA 
+
+ ENTNDER OS 
+
+
+ DATA TYPES EXATOS QUE SÃO SUPORTADOS POR CADA 
+  SISTEMA..
+
+
+
+
+
+
+
+
+  --> EM 'POSTGRESQL',
+
+
+
+
+  CHAR(X) 
+
+
+  VARCHAR(X)
+
+
+  TEXT 
+
+
+
+  SÃO SUPORTADOS... 
+
+
+
+
+  (
+
+    e 'enum'
+
+    NÃO É SUPORTADO...
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> ENTRETANTO, VEREMOS MAIS TARDE QUE 
+
+
+  '''ENUMS''''
+
+  PODEM SER CRIADOS EM POSTGRESQL,
+
+  COM UMA GAMBIARRA...
