@@ -1,0 +1,439 @@
+
+
+
+
+
+
+
+
+
+AGORA QUE CRIAMOS UMA NOVA DATABASE,
+
+
+COM A QUERY DE 
+
+
+
+
+
+
+
+CREATE DATABASE "talently";
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+COMO JÁ CRIAMOS UMA DATABASE,
+
+
+
+O PRÓXIMO EXEMPLO É CRIAR UMA TABLE..
+
+
+
+
+
+
+
+--> PARA QUE TENHAMOS 
+
+
+
+
+
+
+AS TABLES E A DATA DENTRO DELAS..
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS SABER COMO CRIAR TABLES..
+
+
+
+
+
+
+
+
+--> MAS TAMBÉM PRECISAMOS 'PLAN AHEAD'
+
+QUAL DATA VAMOS QUERER QUE EXISTA
+ 
+
+ DENTRO 
+
+
+ DE UMA DETERMINADA TABLE.. 
+
+
+
+
+
+
+
+
+
+
+ --> ISSO PQ QUANDO CRIAMOS UMA TABLE,
+
+ TEMOS QUE 
+
+
+ IMEDIATAMENTE DEFINIR SUA ESTRUTURA..
+
+
+
+
+
+
+
+
+
+ --> PRECISAMOS 
+
+ DEFINIR SUA ESTRUTURA E QUAIS COLUMNS DEVEM EXISTIR EM CADA 
+
+
+ TABLE..
+
+
+
+
+
+
+
+
+ --> E, COMO MENCIONADO ANTERIORMENTE,
+
+
+
+
+ TEREMOS 3 TABLES (employers, users e conversations)...
+
+
+
+
+
+
+
+
+ --> USERS SERÁ OS 'POTENCIAIS TALENTOS' que nossa empresa terá...
+
+
+
+
+
+
+
+
+
+ ----> NESSA TABLE DE USERS,
+
+
+
+ QUEREMOS TER:
+
+
+
+
+
+ 1) NAME DE CADA USER 
+
+
+
+ 2) O SALÁRIO DE CADA USER 
+
+
+
+
+ 3) O STATUS DE CADA USER ('employed' ou não).... (true ou false), 'status': 'true/false'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> OK... É ESSA DATA QUE QUEREMOS ARMAZENAR DE CADA USER..
+
+
+
+
+
+
+
+
+
+ ---> É CLARO QUE PODEMOS ARMAZENAR QUANTIDADES BEM MAIORES DE DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS AQUI ESTAMOS COMEÇANDO,
+ QUEREMOS DEIXAR ESSE EXEMPLO SIMPLES...
+
+
+
+
+
+
+
+
+ --> QUEREMOS ARMAZENAR DATA TAMBÉM SOBRE OS EMPLOYERS..
+
+
+
+
+
+
+
+
+
+--> QUEREMOS ARMAZENAR O 'EMPLOYER ID' dentro de cada 
+
+user (que será o employer que contratou cada employee)
+
+
+
+
+
+
+
+
+
+
+
+
+---> É CLARO QUE também teremos 'employers'...
+
+
+
+
+
+
+
+
+
+
+
+--> nos employers, teremos:
+
+
+
+
+
+1) COMPANY NAME 
+
+
+
+
+
+
+2) ADDRESS --> 'street', 'city', etc etc... (location da company, em que os talents trabalhariam)..
+
+
+
+
+
+3) E O 'YEARLY REVENUE' da companhia --> PODEMOS ARMAZENAR ESSES VALORES NÃO COMO NÚMEROS POR EXTENSO, e sim por números abreviados como '12.5', etc etc...
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) --> TAMBÉM QUEREMOS ARMAZENAR UMA PEQUENA FLAG,
+
+'isHiring',
+
+
+QUE 
+
+INDICARÁ SE UMA COMPANHIA 
+
+ESTÁ 
+
+
+CONTRATANDO OU NÃO, NAQUELE MOMENTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM, TEMOS AS CONVERSATIONS:
+
+
+
+
+
+
+
+
+
+C) CONVERSATIONS:
+
+
+
+QUEREMOS:
+
+
+
+
+1) O USER 
+
+
+
+
+2) O EMPLOYER  (ou seja, a relação, user-employer, vista em cada CONVERSATION)
+
+
+
+
+3) A ACTUAL MESSAGE ENTRE ESSAS 2 FIGURAS/ENTES (ou seja, é uma table intermediária entre 'employers' e 'users')...
+
+
+(text)..
+
+
+
+
+
+
+
+FAREMOS ISSO PARA QUE EM 'CONVERSATIONS' CONSIGAMOS 
+
+ARMAZENAR MÚLTIPLAS CONVERSATIONS, ENTRE 
+
+
+
+EMPLOYERS E USERS...
+
+
+
+
+
+4) CADA CONVERSATION DEVERÁ TER UMA 'TIMESTAMP',  para mostrar como cada uma delas foi criada...
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIRMOS CRIAR CADA UMA DESSAS TABLES,
+
+PRECISAMOS CLARIFICAR 
+
+
+
+
+'''QUAL TIPO DE DATA QUAL COLUMN SEGURARÁ''..
+
+
+
+
+
+
+
+-----> SE VOCÊ TRABALHA COM SQL,
+
+VOCÊ PRECISA SER BEM CLARO ACERCA DE QUAL TIPO DE 
+
+DATA 
+
+
+VOCÊ 
+
+VAI ARMAZENAR EM CADA COLUMN (cada record que é armazenado em 1 table deverá 
+
+ter 1 mesmo type)...
+
+
+
+
+
+
+
+
+
+--> 'YEARLY SALARY' --> DEVE SER ARMAZENADO O MESMO TIPO DE VALUE 
+
+DENTRO DESSA COLUMn...
+
+
+
+
+
+
+
+--> ok, isso eu já sabia...
+
+
+
+
+
+
+
+--> POR ISSO É IMPORTANTE CONHECER OS 'KEY DATA TYPES',
+
+OS VALUES 
+COM QUE 
+
+TRABALHAREMOS NESSE CURSO...
