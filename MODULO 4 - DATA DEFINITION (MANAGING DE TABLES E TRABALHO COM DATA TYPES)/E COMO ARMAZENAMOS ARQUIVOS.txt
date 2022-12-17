@@ -1,0 +1,473 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+ --> OK, MAS ANTES DE CONTINUARMOS COM O EXEMPLO,
+
+ HÁ 
+
+ OUTRO IMPORTANTE DATA TYPE QUE 
+ O PROFESSOR QUER CLARIFICAR:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ''COMO ARMAZENAMOS ARQUIVOS NA DATABASE?'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> BEM, IMAGINE QUE 
+
+ VOCÊ TEM 
+
+ O BACKEND 
+
+ DE 
+
+ 1 
+
+ MOBILE APP... -> ESSE MOBILE APP SE COMUNICA COM UM 'DATABASE SERVER' 
+
+
+
+ PARA __ STORE E RETRIEVE DE DATA..
+
+
+
+
+
+
+
+
+
+
+
+
+ -> É UM SETUP BEM TÍPICO... -> EXPLORAREMOS MAIS TARDE NO CURSO,
+
+ QUANOD 
+
+
+ ESTUDARMOS O 'CONNECT' DE UMA DATABASE COM 1 BACKEND..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... AÍ DIGAMOS QUE TEMOS UM DATABASE 
+
+
+
+
+ PARA ESSE APP DE 'SOCIAL NETWORK'... --> 
+
+
+
+
+
+
+
+
+
+ aí nessa database,
+
+ temos 
+
+
+ TABLES PARA:
+
+
+
+
+
+
+
+
+
+ 1) USERS 
+
+
+ 2) POSTS 
+
+
+
+ 3) outras coisas..
+
+
+
+
+
+
+
+
+ -> MAS AÍ TEMOS UMA FEATURE QUE POSSIBILITA AOS USERS UPLOADAR IMAGES 
+
+
+
+ AO NOSSO BACKEND..
+
+
+
+
+
+
+
+
+ --> MAS COMO VAMOS ARMAZENAR ISSO NO DATABASE?
+
+
+
+
+
+
+
+ --> NÃO VAMOS ARMAZENAR NA NOSSA DATABASE --> 
+
+
+
+
+ DATABASES (TANTO SQL COMO NOSQL) 
+
+
+
+
+ SÃO 
+
+
+
+ DATA STORAGE 
+
+
+ SYSTEMS 
+ PARA 
+
+ 'PRIMITIVE DATA',
+
+
+ O QUE QUER DIZER 
+
+
+
+
+
+
+
+ 'NUMBERS',
+
+
+ 'TEXT',
+
+'BOOLEANS',
+
+
+
+TODAS ESSAS
+
+
+
+
+'SIMPLE DATA PIECES',
+
+QUE 
+
+
+PODEM SER COMBINADAS 
+
+PARA NOS ENTREGAR 
+
+
+'''A POWERFUL REPRESENTATION''
+
+
+DE 1 
+
+USER,
+
+OU DE 1 
+
+POST...
+
+
+
+
+
+
+
+
+--> MAS VAMOS ARMAZENAR 
+
+
+ESSAS INDIVIDUAL DATA PIECES,
+
+COMO 
+
+'FIRST NAME',
+
+'LAST NAME',
+
+
+
+'BIRTH DATE',
+
+etc etc...
+
+
+
+
+
+
+
+
+
+-> MAS 1 FILE NÃO É UMA PIECE OF DATA 
+
+
+
+
+PRIMITIVA, SINGULAR --> EM VEZ DISSO,
+
+E UMA 
+
+COLEÇÃO 
+
+DE 
+
+BITS E BYTES,
+
+
+NO FINAL DAS CONTAS,
+
+
+
+E 
+
+
+
+É POR ISSO QUE 
+
+UMA 
+FILE 
+ 
+
+
+ DESSAS DEVE SER 
+
+
+ ARMAZENADA EM 
+
+ 'DEDICATED FILE STORAGES',
+
+
+
+ EM 
+
+
+
+
+ '1 FILE SERVER',
+
+
+
+ NO HARD DRIVE DE ALGUM LUGAR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E É CLARO QUE EXISTEM SERVICES DEDICADOS PARA O STORE DE FILES...
+
+
+
+
+
+
+
+
+
+
+
+ -> E, QUANDO VOCÊ CONSTRÓI SEU PRÓPRIO SERVER,
+
+
+ VOCÊ 
+
+
+
+
+
+ PODE ARMAZENAR FILES,
+
+ UPLOADED IMAGES,
+
+
+ NO HARD DRIVE DESSE SERVER, OU DE ALGUM CONNECTED COMPUTER -----> A ÚNICA COISA QUE 
+
+ É ARMAZENADA 
+
+ NA DATABASE 
+
+ É 
+
+ O 
+ 'PATH' 
+
+
+ A ESSE ARQUIVOP -->  E ISSO SERIA TEXT,
+
+
+ E ESSE TEXT REALMENTE SERIA UMA PIECE OF DATA ISOLADA,
+
+ ARMAZENADA NA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> EMBORA EXISTAM MANEIRAS DE ARMAZENAR FILES INTEIRAS EM DATABASES,
+
+
+
+
+ DATABASES NÃO SÃO OPTIMIZADAS PARA ISSO...
+
+
+
+
+
+
+
+
+
+
+ --> DATABASES SÃO OPTIMIZADAS PARA TRABALHAR COM 'SIMPLE DATA',
+
+
+ E NÃO COM FILES PROPRIAMENTE DITAS..
+
+
+
+
+
+
+
+
+ --> É POR ISSO QUE 
+
+ VOCê 
+
+ CRIARIA TABLES QUE 
+
+
+ POSSUEM 
+
+
+
+ 'COLUMNS'
+
+ PARA 
+
+ ESSES FILE PATHS.. -> E ASSIM QUE 1 
+
+
+ FILE FOR UPLOADADA E ARMAZENADA NAQUELE COMPUTER/BACKEND,
+
+
+
+ APENAS AUQELE 
+
+
+
+ PATH __ ÀQUELE ARQUIVO SERIA ARMAZENADO 
+
+
+na database... ---> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    user_name VARCHAR(255),
+    image_path VARCHAR(200)      -------> COLUMN QUE DEVERÁ SEGURAR OS 'IMAGE FILE PATHS'...
+);
+
+
+
+
+INSERT INTO users (user_name, image_path)
+VALUES ('DBMax', 'uploads/images/db_max.jpg')  ----------> O PATH à IMAGE (que deverá ser armazenada em algum FILE SERVER)...
