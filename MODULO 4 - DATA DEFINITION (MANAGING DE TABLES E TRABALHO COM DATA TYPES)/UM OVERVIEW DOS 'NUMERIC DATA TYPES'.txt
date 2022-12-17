@@ -1,0 +1,3 @@
+When working with SQL, there are various numeric data types that can be used when defining tables and the column data types.
+
+The exact data types (and their names, keywords) depend on the underlying RDBMS / environment that's being used. Hence the official docs are always a great place to go.

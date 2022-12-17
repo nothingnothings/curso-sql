@@ -1,0 +1,617 @@
+
+
+
+
+
+
+
+
+ÀS VEZES PRECISAMOS ARMAZENAR NUMBERS..
+
+
+
+
+
+
+
+
+--> FREQUENTEMENTE PRECISAMOS TRABALHAR COM NUMBERRS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> HÁ UM NUMERIC DATA TYPE...
+
+
+
+
+
+
+--> HÁ VÁRIOS, NA VERDADE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O MAIS COMUM É 'INT'...
+
+
+
+
+
+
+
+1) INT ----> SÃO NÚMEROS INTEGRAIS.... --> NUMEROS INTEIROS...
+
+
+
+TAMBÉM TEMOS VARIAÇÕES DIFERENTES, COMO 'SMALL INT', 'BIG INT',
+ 
+ etc... (
+
+ELES DEFINEM A 'RANGE' DE NÚMEROS QUE PODE SER ARMAZENADA NO SEU INTERIOR...
+     
+ )
+
+
+
+
+
+
+
+
+ --> A CARACTERÍSTICA DE 'INTEGER TYPES' é que 
+
+ SÃO SEMPRE NÚMEROS INTEIROS,
+
+
+ como '1, 10, 100 , etc'...
+
+
+
+
+
+2) DECIMALS -->  NÚMEROS QUE SÃO 
+
+
+
+coisas como '3.14' ,
+
+
+'3.58',
+
+
+'-10.999',
+
+
+
+
+
+
+
+E __ COISAS COMO ESSAS ___>...
+
+
+
+PARA 
+
+
+NÚMEROS COMO ESSES,
+
+
+TEMOS 
+
+
+
+
+
+'''2 MAIN CATEGORIES''' 
+
+DE DATA TYPES QUE PODEMOS ESCOLHER PARA OS ARMAZENAR...
+
+
+
+
+
+
+
+
+
+
+1a categoria --> CONTÉM OS TYPES DE 
+
+'DECIMAL' 
+
+E 
+
+'NUMERIC.'..
+
+
+
+
+
+
+
+----> ESSES DATA TYPES( decimal e numeric) 
+
+
+te deixam 
+
+
+ARMAZENAR '''EXACT FRACTIONAL NUMBERS'''' (
+
+    ou seja,
+
+
+    POSSUEM UMA 'FIXED EXACT PRECISION'...
+)
+
+
+
+
+
+
+
+
+2a CATEGORIA ------> É UM DATA TYPE PARA 
+
+VALUES QUE NÃO SÃO ARMAZENADOS 
+
+'''EXACTLY''',
+
+
+QUE 
+
+SÃO 
+
+
+
+'FLOAT' 'REAL' 
+
+E 
+
+'DOUBLE'... (
+
+
+    os nomes diferem ENTRE DIFERENTES DATABASE SYSTEMS..
+)
+
+
+
+
+
+
+--> AQUI TAMBÉM ARMAZENAMOS NÚMEROS COM 'DECIMAL PLACES',
+
+MAS ELES NÃO SÃO ARMAZENAODS __ EXATAMENTE_...
+
+
+
+
+
+
+
+
+OK, MAS ISSO PARECE SUPER CONFUSO:
+
+'''PQ  NÃO ARMAZENARÍAMOS 
+1 
+
+VALOR EXATAMENTE''' --> É pq 
+
+ARMAZENAR 
+VALUES 
+
+DE 
+
+
+FORMA EXATA NÃO É TÃO 'STRAIGHTFORWARD' COMO PARECE..
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ COMPUTADORES POSSUEM SEUS PROBLEMAS,
+
+
+QUANDO 
+
+O ASSUNTO É 
+
+
+'WORKING WITH FRACTIONAL NUMBERS'...
+
+
+
+
+
+
+
+
+
+
+--------> ESTE NÃO É UM COURSE DE 'COMPUTER SCIENCE',
+
+
+
+
+
+
+mas 
+
+
+
+
+O MAIN TAKEAWAY É QUE 
+
+COMPUTADORES 
+
+
+
+TEM PROBLEMAS 
+
+COM O STORE DE 
+'DECIMAL PLACES',
+
+
+
+
+
+O QUE QUER DIZER 'FRACTIONAL NUMBERS'... --> é por isso que 
+
+
+
+
+SE VOCÊ 
+
+QUER 
+
+ARMAZENAR 1 
+
+
+NÚMERO EXATAMENTE,
+
+
+EM QUE 
+
+VOCÊ NÃO PERDE/PERDERÁ
+
+
+
+NENHUMA INFO NA CASA 
+
+DO LADO DIREITO DA VÍRGULA,
+
+
+
+
+
+VOCÊ TEM ESSA OPÇÃO MAIS 'PERFORMANCE-INTENSIVE',
+
+
+
+em que 
+
+você 
+
+ESCOLHE 
+
+
+
+NÚMEROS QUE SÃO ARMAZENADOS PRECISAMENTE (
+
+    gasta mais processamento/memória,
+
+
+    mas é REALMENTE PRECISO...
+)
+
+
+
+
+
+
+
+
+--> ESSA PRECISÁO 
+
+
+PODE 
+
+NÁO IMPORTAR SE VOCê ESTÁ ARMAZENANDO COISAS COMO 
+
+'10.15' 
+
+OU 
+'10.16'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM TEMOS 
+
+OS 'DATE' DATA TYPES... -> 
+
+
+
+
+A COISA IMPORTANTE 
+
+
+SOBRE O DATE DATA TYPE É QUE 
+
+
+
+
+
+
+_ VOCê _ VAI _ _ARMAZENAR_____ aPENAS_ A DATE_,
+
+
+
+SEM ARMAZENAR INFO SOBRE 
+
+
+AS 'HOURS' 
+
+
+E 
+
+'MINUTES'
+
+
+DO 
+
+SEU DIA...
+
+
+
+(
+
+    tipo 
+
+    assim: 
+
+    '1986-10-20'
+)
+
+
+
+
+
+
+--> É CLARO QUE ÀS VEZES 
+
+VOCÊ VAI QUERER 
+
+TER 
+
+
+
+
+
+A INFO ACERCA DE QUAL MINUTO/SEGUNDO DO DIA 
+ISSO ACONTECEU,
+
+
+
+
+
+
+
+
+
+E É JUSTAMENTE 
+
+POR ISSO QUE VOCÊ TEM UM DATA TYPE 
+
+
+DE 
+
+'DATETIME'
+
+
+E 
+
+'TIMESTAMP',
+
+
+
+
+
+QUE TE DEIXA 
+
+ARMAZENAR 
+
+
+COISAS COMO 
+
+
+
+
+'1986-10-20 14:39:05' ------> ISSO TE DEIXA ARMAZENAR 
+
+
+
+O TEMPO EM SEGUNDOS/MILISSEGUNDOS,
+
+
+E TAMBÉM 
+
+
+A 'TIMEZONE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM,
+
+TEMOS 
+
+
+
+
+O DATA TYPE DE 'BOOLEAN' --> TE DEIXA ARMAZENAR INFO SOBRE 'TRUE' OU 'FALSE',
+
+
+
+que pode 
+
+SER ÚTIL SE VOCê 
+
+
+TEM ALGO COMO UMA COLUMN DE 'ISHIRING' --> armazenamos 'true ou false',
+
+1 ou 0...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AÍ, POR FIM,
+
+
+
+
+VOCê 
+
+TAMBÉM
+TEM 
+
+ALGUNS DATA TYPES 
+
+
+AVANÇADOS,
+
+COMO 
+
+'JSON' (te deixa armazenar json data; EXISTE EM ALGUNS DATABASE SYSTEMS)... (JSON FORMATTED TEXT DATA)..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS, DEPOIS DISSO,
+
+TEMOS 
+
+CERTOS DATA TYPES 
+
+
+QUE SÃO QUESTIONÁVEIS,
+
+QUE 
+
+
+
+POSSÍVELMENTE VIOLAM 
+
+CERTOS PRINCÍPÍOS DO SQL...   (
+
+
+    ''''it always depends on the exact use-case, but storing JSON 
+    data could violate the idea of "data normalization", which we will 
+    explore in greater detail later in the course''''
+)
+
+
+
+
+
+
+
+
+----> É POR ISSO QUE NÃO FOCAREMOS EM 'JSON' E 'XML' NESSE CURSO..
+
+
+
+
+
+
+
+
+--> MAS PARECE QUE É REALMENTE POSSÍVEL (Apesar de ser questionável)...
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSES SÃO ALGUNS DOS KEY DATA TYPES QUE PODEM SER 
+
+DEFINIDOS EM TABLESa..
+
+
+
+
+
+
+
+--> VEREMOS COMO PODEMOS CRIAR TABLES COM ESSES DATA TYPES,
+
+E COMO PODEMOS 
+TRABALHAR COM ELES...
