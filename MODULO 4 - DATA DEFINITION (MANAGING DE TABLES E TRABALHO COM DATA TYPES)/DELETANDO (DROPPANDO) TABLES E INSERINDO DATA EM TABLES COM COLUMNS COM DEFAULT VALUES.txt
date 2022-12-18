@@ -1,0 +1,591 @@
+
+
+
+
+
+
+
+
+O PROFESSOR QUER MOSTRAR AMBAS AS COISAS:
+
+
+
+
+
+
+
+
+1) COMO DELETAR  E RECRIAR TABLES 
+
+
+
+
+
+
+
+
+2) COMO ALTERAR 'EXISTING TABLES'..
+
+
+
+
+
+
+
+ 
+
+
+É CLARO QUE SE VOCÊ TEM 'EXISTING DATA EM TABLES',
+
+
+
+
+
+VOCÊ TIPICAMENTE 
+
+
+VAI QUERER 
+
+
+A SEGUNDA OPÇÃO (não vai querer descartar essa data)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> JÁ ARMAZENAMOS UM BOCADO DE DATA DENTRO DAS NOSSAS TABLES,
+
+
+
+
+E SERIA RUIM FAZER DROP DELAS,
+
+
+
+MAS 
+
+
+
+
+EU JÁ TENHO 
+
+
+OS STATEMENTS QUE CRIAM ESSES RECORDS _ GUARDADOS__ LÁ 
+
+
+
+
+nos arquivos '.sql',
+
+POR ISSO 
+
+
+
+NÃO HÁ PROBLEMA EM APAGAR ESSAS TABLES....
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR CRIA UM NOVO ARQUIVO SQL,
+
+de nome 
+
+
+'drop(delete) table'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> SE QUEREMOS DROPPAR 1 TABLE PQ NÃO A DESEJAMOS MAIS, 
+
+
+OU PQ 
+
+
+QUEREMOS A RECRIAR,
+
+
+
+
+
+
+fazemos isso 
+
+
+
+
+
+
+
+
+
+
+com o comando 
+
+
+
+
+
+
+
+
+
+
+
+
+''''''''''''
+
+
+
+
+
+
+
+
+DROP TABLE
+
+
+
+
+
+
+
+
+
+
+
+
+
+''''''''''''
+
+
+
+
+
+
+
+
+
+
+--> APENAS PRECISAMOS ESPECIFICAR O NOME DA TABLE QUE PRECISA SER DROPPED --> QUERO DROPPAR 
+
+
+A  TABLE DE 'conversations',
+
+PQ 
+
+QUEREMOS A RECRIAR...
+
+
+
+
+
+
+
+
+
+
+-> TAMBÉM QUEREMOS DROPAR OUTRA TABLE,
+
+QUE É A TABLE DE 'EMPLOYERS'..
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+DROP TABLE conversations;
+DROP TABLE employers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+CONSEGUIMOS REMOVER ISSO...
+
+
+
+
+
+
+
+
+
+
+
+DROPPAMOS NOSSAS 2 TABLES... -----> NOSSAS TABLES REALMENTE ESTÃO 'GONE'...
+
+
+
+
+
+
+
+AGORA TEMOS APENAS A TABLE DE 'USERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DROP TABLE PODE SER USADO PARA DELETAR UMA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA VAMOS RE-EXECUTAR AQUELES COMANDOS PARA 
+
+
+
+
+RECRIAR NOSSAS 
+
+
+
+TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+-- PRONTo...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok... VOU RODAR DE NOVO...
+
+
+
+
+
+
+
+
+
+
+AGORA TEMOS ESSAS TABLES,
+
+COM 'DEFAULT VALUES'
+
+
+nas columns...
+
+
+
+
+
+
+
+
+ASSIM COMO ANTES,
+
+SE RECARREGARMOS A PÁGINA,
+
+ENXERGAMOS 
+
+
+NOSSAS TABLES....
+
+
+
+
+
+
+
+
+
+
+-_> AS TABLES ESTÃO COM NOSSA DATA ANTERIOR FALTANDO,
+
+
+MAS PODEMOS RECOLOCÁ-LA,
+
+
+
+
+COM OS ARQUIVOS DE 'insert data'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRONTO...
+
+
+
+
+
+
+
+MAS COMO TEMOS OS 'DEFAULT VALUES'
+
+settados agora,
+
+
+PODEMOS 
+
+
+
+
+OMITIR 
+
+
+
+
+
+COISAS COMO O 'ISHIRING' E O 'DATE',
+
+
+PQ 
+
+
+JÁ 
+
+
+DEFINIMOS OS DEFAULT VALUES DELES COMO 'false' e 'current date' 
+
+
+
+
+(
+
+    aí não precisamos especificar essas columns quando inserirmos coisas,
+
+    que esses values já serão inseridos..
+)
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+ESCREVO TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+INSERT INTO employers (
+        company_name,
+        yearly_revenue,
+        "address"
+    )
+VALUES ('Some example', 2500000, 'Default location');
+
+
+
+
+
+
+
+
+E ASSIm:
+
+
+
+
+
+
+
+
+
+
+    
+INSERT INTO conversations (user_name, employer_name, message)
+VALUES (
+        'Someone2',
+        'Somewho2',
+        'gibberish2 gibberish2 gibberis2h',
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA ESSES DEFAULT VALUES SERÃO USADOS...
+
+
+
+
+
+
+
+
+CERTO... ACHO QUE ENTENDI...
+
+
+
+
+
+
+
+---> SE CHECARMOS O 'TIMESTAMP',
+VEREMOS QUE ATÉ MESMO 
+
+OS MILISSEGUNDOS FORAM ADICIONADOS...
+
+
+
+
+
+
+
+
+
+ISSO FUNCIONOU, E É ASSIM QUE PODEMOS ADICIONAR 'DEFAULT VALUES',
+
+
+E COMO 
+
+PODEMOS 
+'DROP AND RE-CREATE' TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS E SE QUISÉSSEMOS 
+
+
+APENAS 'ALTERAR A TABLE QUE JÁ EXISTE',
+
+
+ADJUST A TABLE QUE JÁ EXISTE...
+
+
+
+
+
+
+
+
+ISSO TAMBÉM É POSSÍVEL..

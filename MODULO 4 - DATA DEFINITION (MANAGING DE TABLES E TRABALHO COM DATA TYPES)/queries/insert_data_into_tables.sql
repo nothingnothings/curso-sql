@@ -25,10 +25,33 @@
 --         "address"
 --     )
 -- VALUES ('Hipster Food', true, 2500000, 'Belgium');
-INSERT INTO conversations (user_name, employer_name, message, date_sent)
+
+
+--exemplo com 'default' na column de 'ishiring'...
+INSERT INTO employers (
+        company_name,
+        yearly_revenue,
+        "address"
+    )
+VALUES ('Some example', 2500000, 'Default location');
+
+
+
+
+-- INSERT INTO conversations (user_name, employer_name, message, date_sent)
+-- VALUES (
+--         'Someone',
+--         'Somewho',
+--         'gibberish gibberish gibberish',
+--          '2012-12-12'
+--     );
+
+
+
+    
+INSERT INTO conversations (user_name, employer_name, message)
 VALUES (
         'Someone',
         'Somewho',
         'gibberish gibberish gibberish',
-         '2012-12-12'
     );
