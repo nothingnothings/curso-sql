@@ -1,0 +1,376 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR ADICIONA MAIS UM ROW,
+
+COM ESTE COMANDO:
+
+
+
+
+
+
+
+
+
+ 
+
+
+ INSERT INTO users (yearly_salary, full_name, current_status) VALUES(25000, 'Julie Barnes', 'employed');
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO VAI INSERIR UM NOVO ROW NO NOSSO BANCO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK.... 
+
+
+
+
+
+
+
+ INSERI ESSE NOVO ROW....
+
+
+
+
+
+
+
+
+
+
+
+ -----> MAS PODEMOS TER MÚLTIPLOS 'INSERT INTO' QUERIES EM 1 MESMO ARQUIVO SQL,
+
+
+ E PODEMOS RODAR TODAS ESSAS QUERIES CONJUNTAMENTE..
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... 
+
+
+
+
+
+
+
+
+
+
+ --> MAS SE TENTAMOS EXECUTAR ESSE CÓDIGO 
+
+
+
+
+ NO 
+
+ 'MYSQL',
+
+
+
+
+ GANHAMOS UM ERROR --> MAS ISSO NÃO É UM ERROR,
+
+
+ E SIM UM 
+
+ BUG COM ESSA EXTENSÃO 
+
+
+
+ DE 
+
+
+ 'SQLTOOLS' ------> 
+
+
+
+  
+  O BUG É 
+
+
+  O RECEBIMENTO DA MENSAGEM 
+
+
+
+  de 
+
+  erro 
+
+
+  'Cannot destrucutre property 'name' of undefined as it is undefined --> 
+
+
+
+
+
+  
+  ISSO 
+
+
+
+  É 
+
+
+  BEM PROVÁVEL QUE SEJA ESSE BUG 
+
+  COM A TOOL DE 'SQLTOOLS',
+
+  
+
+
+
+
+
+
+  E TEMOS QUE 'DEAL WITH IT'...
+
+
+
+
+
+
+
+
+
+
+
+
+  --> ESSE BUG ACONTECE TIPICAMENTE SE VOCÊ TEM MAIS DE 1 SQL STATEMENT EM 1 MESMO ARQUIVo...
+
+
+
+
+
+
+
+
+  --> MAS NÃO TEMOS ESSE BUG NO POSTGRESQL, POR EXEMPLO.... (só em mysql databases)...
+
+
+
+
+
+
+
+
+
+
+
+  OK...
+
+
+
+
+
+
+
+
+  MAS ISSO FOI BEM SUCEDIDO,
+  É ISSO QUE INTERESSA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+   --> PARA 'USERS',
+
+   você clica na LUPA,
+
+
+   para aí 
+
+
+
+   RODAR UMA SELECT QUERY 
+
+
+
+
+
+
+   NAQUELA TABLE,
+
+   PARA ENCONTRARMOS TODAS AS ENTRIES DAQUELA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   --> OK, A DATA FOI INSERIDA, COM SUCESSO,
+
+
+   NAS 2 DATABASES, com esse mesmo comando..
+
+
+
+
+
+
+
+
+
+
+
+----> SE VOCÊ QUER SELECIONAR SUAS ROWS 
+
+MANUALMENTE,
+
+SEM USAR 
+
+
+
+
+
+O SQLTOOLS,
+
+você pode fazê-lo com a ajuda do comando 
+
+
+
+
+'SELECT * FROM users'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+JÁ VIMOS ISSO ANTES,
+
+MAS É UM COMANDO ÚTIL... --> SELECIONA TODOS OS ROWS,
+
+COM TODAS AS COLUMNS,
+
+DE UMA DETERMINADA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> com isso, inserimos data... -> 
+
+
+
+
+
+
+DEVEMOS VOLTAR AO TRABALHO COM AS TABLES,
+
+E APRENDER MAIS DATA TYPES...
