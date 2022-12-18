@@ -1,0 +1,735 @@
+
+
+
+
+
+
+
+
+--> A PRÓXIMA COLUNA,
+
+E A ÚLTIMA COLUNA (
+
+    pq vamos adicionar a coluna de 'employers' somente depois...
+),
+
+
+
+
+
+
+
+SERÁ 
+
+A COLUNA 
+
+
+DE 
+'STATUS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+STATUS --> VAI ACEITAR OS VALUES DE 'EMPLOYED',
+
+'UNEMPLOYED'
+
+E 
+
+'SELF-EMPLOYED'..
+
+
+
+
+
+
+
+
+
+
+--> EM VEZ DE ACEITARMOS QUAISQUER VALUES, 
+
+
+
+
+
+PODEMOS DEFINIR QUE APENAS OS VALUES DENTRO DE 1 DETERMINADO SET DEVERÃO SER ACEITOS..
+
+
+
+
+
+
+
+
+--> O RESTO DEVERÁ SER 'BLOCKED'...
+
+
+
+
+
+
+
+
+
+
+
+--> É AÍ QUE O DATA TYPE DE 'ENUM' 
+PODE SER USADO....
+
+
+
+
+
+
+
+
+
+
+-_> PODEMOS USAR O DATA TYPE DO 'ENUM' PARA 
+
+
+
+ESSE 
+
+
+FIELD DE 'current_status' -> VAMOS PERMITIR CERTOS VALUES,
+ 
+
+ E BLOQUEAR OUTROS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> 
+
+
+
+
+
+
+
+
+ 'job-seeking' --> SERÁ UM VALUE PROIBIDO, POR EXEMPLO..
+
+
+
+
+
+
+
+ --> 'ENUM' --> É UM DATA TYPE QUE É 
+
+
+ ''''STRINGS DENTRO DE 1 FIXED SET,
+
+
+ PERMITIDOS APENAS CERTOS CONCRETE VALUES''..- --> ainda é text,
+
+
+
+ MAS APENAS 
+
+ CERTAS PIECES OF TEXT... (determinadas pieces)...
+
+
+
+
+
+
+
+
+
+
+ -> E ENUMS 
+
+
+ SÃO 
+
+
+ PERMITIDOS 
+
+
+
+ __ NA MAIOR PARTE DOS 
+
+
+ DATABASE SYSTEMS (como 'postgresql' e 'mysql'),
+
+
+
+ MAS, POR EXEMPLO,
+
+ PARA 
+
+ O
+  
+
+
+
+  MYSQL E POSTGRESQL,
+
+
+
+
+  TEMOS ALGUMAS DIFERENÇAS DE SINTAXE --> ISSO OCORRE PQ 
+
+
+  'ENUMS' 
+
+
+
+  NÃO É ACTUALLY 1 'STANDARD SQL TYPE',
+
+
+  APEASR 
+
+  DE 
+
+
+
+  SER SUPORTADO PELA MAIOR PARTE DOS DATABASE SYSTEMS....
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''NOT STANDARD SQL, BUT SUPPORTED BY MANY DATABASE SYSTEMS - but concrete implementations may differ''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR EXEMPLO, PARA O MYSQL,
+
+
+VOCÊ 
+
+DEFINE 1 ENUM PARA UMA DETERMINADA COLUMM ___ _ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+current_status ENUM('v1', 'v2', 'v3') 
+
+
+
+
+
+
+
+------> PARA O POSGRESQL,
+
+O PROCESSO
+
+
+
+DE CRIAÇÃO DE 'ENUM' data type PARA UMA COLUMN É ACTUALLY 1 POUCO MAIS COMPLEXO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRESQL, VOCê ACTUALLY PRECISA DEFINIR AQUILO QUE É CHAMADO DE 
+
+'CUSTOM TYPE'... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CUSTOM TYPE --> QUE SERÁ UM ENUM, NESSE CASO --> E AÍ, CRIADO ESSE 'CUSTOM TYPE',
+
+(QUE é o enum),
+
+
+VOCÊ O UTILIZA NA 'COLUMN DEFINITION'....
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR NOS MOSTRARÁ AMBOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO MYSQL, É ASSIM:
+
+
+
+
+
+
+
+
+
+current_status ENUM ('v1', 'v2', 'v3') 
+ 
+
+
+
+
+
+
+
+
+ --> NO POSTGRESQL,
+
+ É ASSIM:
+
+
+
+
+
+
+
+
+ CREATE TYPE my_status AS ENUM('v1', 'v2', 'v3') 
+
+
+ current_status my_status
+
+
+
+
+
+
+
+
+
+
+
+
+ EX: mysql 
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE (
+    full_name VARCHAR(200),
+    yearly_salary INT,
+    current_status ENUM('v1', 'v2', 'v3')
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX: POSTGRESQL
+
+
+
+
+
+
+
+
+
+
+ CREATE TYPE my_status AS ENUM('v1', 'v2'); --CRIAÇÃO DE 1 CUSTOM TYPE (de tipo 'enum', nesse caso)
+
+
+ CREATE TABLE users (
+    full_name VARCHAR(200),
+    yearly_salary INT,
+    current_status my_status -- USO DE 1 CUSTOM TYPE (que é 1 type de 'enum', nesse caso aqui)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> no caso, vamos definir os values como 'employed', 'unemployed' e 'self-employed' (os values permitidos)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS TESTAR ISSO, RODAR ESSA QUERY NA DIREÇÃO DE NOSSA DATABSE....
+
+
+
+
+
+
+
+
+
+
+
+--> percebo que as 3 columns foram criadas...
+
+
+
+
+
+
+
+
+---> OK, ISSO FUNCIONOU..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS PARA O POSTGRESQL,
+
+
+
+
+
+
+A SINTAXE É OBVIAMENTE DIFERENET....
+
+
+
+
+
+
+
+
+
+fica tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE my_status AS ENUM("employed", "unemployed", "self-employed");
+
+
+
+
+
+CREATE TABLE (
+    full_name VARCHAR(200),
+    yearly_salary INT,
+    current_status my_status
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OBS: O COMANDO 'CREATE TYPE' NÃO EXISTE EM DATABASES MYSQL... (vai dar erro)....
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE my_status AS  ENUM("employed", "unemployed", "self-employed");
+
+
+
+
+
+CREATE TABLE (
+    full_name VARCHAR(200),
+    yearly_salary INT,
+    current_status my_status
+)
+
+
+
+
+
+
+
+
+
+
+
+------------> OK, 
+
+
+PRECISAMOS DAS KEYWORDS 
+
+'
+CREATE TYPE' 
+
+
+
+
+e 
+'AS'...
+
+
+
+
+
+
+
+
+
+
+
+-_> COMO ESSE COMANDO 
+
+
+
+
+
+de 'create type' é um comando standalone,
+
+
+SOMOS FORÇADOS A COLOCAR UM ';' 
+
+
+
+
+
+
+
+
+--> ISSO DIZ AO SQL QUE ESTAMOS 'DONE' com essa primeira linha..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ok.... RODAMOS ISSO CONTRA A ACTIVE CONNECTION (que é postgresql),
+
+
+ISSO VAI FUNCIONAR...
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+--> DATA-TYPE ESTÁ COMO 'USER-DEFINED'...
+
+
+
+
+
+
+
+
+
+--> É UM OUTPUT DIFERENTE, MAS FICAMOS COM UMA DESCRIPTION DESSA STRUTURE...
+
+É ASSIM QUE 
+
+PODEMOS CRIAR TABLES...
+
+
+
+
+
+
+
+--> FAREMOS ISSO DE FORMA RAPIDA NO FUTURO, 
+
+MAS É IMPORTANTE ENTENDER ESSA SINTAXE 
+
+
+
+E __ ENTENDER PQ USAMOS CERTOS DATA TYPESa...
