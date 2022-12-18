@@ -1,0 +1,169 @@
+
+
+
+
+
+
+--> 
+
+
+OK,
+
+
+
+
+
+
+AGORA VAMOS CRIAR A TABLE DE 
+
+
+
+
+
+
+'conversations'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> devemos ter 
+
+
+
+4 FIELDS...
+
+
+
+
+
+
+1) USER 
+
+
+
+
+2) EMPLOYER 
+
+
+
+3) MESSAGE 
+
+
+
+
+
+
+4) DATE SENT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+->  MESSAGE  É TEXT (podemos usar VARCHAR, ou então um 'TEXT' comum)....
+
+
+
+
+---> em employer, poderíamos colocar text, mas ainda não vamos colocar coisa alguma...
+
+
+
+
+
+
+
+em 'date sent',
+colocamos 
+
+
+
+UM TIMESTAMP (talvez rodar uma function nativa sql?)
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> BEM, COMEÇO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE (
+    message TEXT,
+    date_sent GET_DATE(),
+    user TEXT,
+    employer TEXT 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+OU TALVEZ SEJA ASSIM:
+
+
+
+
+
+
+
+
+CREATE TABLE (
+    message TEXT,
+    date_sent DATE(),
+    user TEXT,
+    employer TEXT
+);
+
+
+
+
+
+
+
+
+
+
+
+

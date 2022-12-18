@@ -1,0 +1,152 @@
+
+
+
+
+
+
+
+
+
+
+-_> OK... A ÚLTIMA COLUMN,
+
+DE 'isHiring',
+
+deverá 
+
+
+
+
+RECEBER UM DATA TYPE DE 'BOOLEAn'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(200),
+    "address" VARCHAR(200),
+    yearly_revenue FLOAT, --- SINTAXE POSTGRESQL É 'FLOAT' sem mais nada... sintaxe 'MYSQL' é 'FLOAT()' (com o número de DÍGITOS QUE VOCÊ QUER ARMAZEANR, EM GERAL, E QUANTOS DÍGITOS VOCÊ QUER ARMAZAENAR DEPOIS DO '.' ... ) 
+    -- yearly_revenue NUMERIC(5,2) 
+    isHiring BOOLEAN
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PODERÍAMOS ADICIONAR 'SMALLINT' em vez de 'true' ou 'false'..
+
+
+
+
+
+
+
+--> MAS É BEM MELHOR USAR O 'BOOLEAN',
+
+
+boolean data type --> TE DEIXA ARMAZENAR TRUE OU FALSE EM 1 COLUMN...
+
+
+
+
+
+
+
+
+
+-----> EXISTE NA MAIOR PARTE DOS DATABASE SYSTEMS..
+
+
+
+
+
+
+
+COM ISSO, APRENDEMOS 1 MONTE DE COISAS,
+
+
+E AGORA 
+
+
+
+
+APRENDEMOS 
+
+
+
+
+
+
+SOBRE OS 'NUMERIC DATA TYPES'
+
+E 
+
+'BOOLEAN DATA TYPES'..
+
+
+
+
+
+
+
+
+
+-> PROFESSOR RODA ESSE COMANDO NO POSTGRESQL...
+
+
+
+
+
+--> ok, essa table foi adicionada...

@@ -1,0 +1,1134 @@
+
+
+
+
+
+
+
+
+
+
+OK, ACABAMOS COM A TABLE DE 'users' (só faltou a coluna de 'employers', 'employerId')...
+
+
+
+
+
+
+
+
+
+
+--> AGORA O PROFESSOR QUER CONTINUAR,
+
+COM A TABLE DE 'EMPLOYERS'...
+
+
+
+
+
+
+
+
+
+
+NA TABLE DE EMPLOYERS, TEMOS ESTES FIELDS:
+
+
+
+
+
+
+1) COMPANY NAME 
+
+
+2) ADDRESS (Street, City)
+
+
+
+3) Yearly Revenue 
+
+
+
+
+4) IsHiring ..
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... OS TYPES SERÃO:
+
+
+
+
+
+
+1) VARCHAR(200)
+
+
+
+
+
+2) VARCHAR(200)
+
+
+
+3) INT 
+
+
+
+4) BOOLEAN...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> YEARLY REVENUE --> DEVERÁ SER ALGO COMO '12.15' --> É ALGO QUE O PROFESSOR QUER USAR PARA ESSE DEMO --> 12.15 --> vamos usar 'REAL' ou 'FLOAT' ... (sem precisão milimétrica).....
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(200),
+    "address" VARCHAR(200),
+    yearly_revenue FLOAT,
+    isHiring BOOLEAN
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> O PROFESSOR QUER USAR 
+
+
+
+'VARCHAR(200)' ... ----> 
+
+
+
+
+
+
+
+
+
+OU ENTÃO ALGO MENOR...
+
+
+
+
+
+
+
+--> O PROFESSOR USA 'VARCHAR'.. --> PQ NÃO QUER SUBSTITUIR 
+
+
+MISSING SPACES COM BLANKS..
+
+
+
+
+
+
+
+
+200 --> é um pco exagerado..
+
+
+
+
+
+
+
+
+
+
+
+-----> CERTO..
+
+
+
+
+
+
+
+
+O PRÓXIMO CAMPO É 'ADDRESS'..
+
+
+
+
+
+--> o professor coloca 'company_address'..
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+--> ESSE ADDRESS TAMBÉM SERÁ 'text',
+
+
+
+e por isso será um VARCHAR de 200...
+
+
+
+
+
+
+
+
+
+
+
+---->  AGORA SÓ FALTOU 'isHiring'
+
+
+
+
+E 
+
+
+
+
+'yearly_revenue'...
+
+
+
+
+
+
+
+
+
+
+
+----> O PROFESSOR DIZ QUE PODEMOS ENCONTRAR CERTOS PROBLEMAS SE TENTAMOS 
+
+ARMAZENAR 'CITY' E 'STREET'
+
+EM 
+
+
+1 
+
+
+MESMA COLUMN (razões para splittar essa info em múltiplas columns)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> YEARLY_rEVENUE --> DEVE SER UM INTEGER,
+
+
+UM DECIMAL POINT (precisão )
+
+
+ou então 
+
+
+
+'FLOAT'..
+
+
+
+
+
+
+
+
+
+
+
+
+-> FLOAT VS DECIMAL POINT..
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO ESTAMOS LIDANDO COM DINHEIRO,
+
+
+
+A EXATIDÃO INTERESSA...
+
+
+
+
+
+
+
+
+--> ESSE '0.1' IMPORTA MT --> DEPENDE BASTANTE DO SEU USE-CASE... --> SE VOCÊ 
+
+
+
+TEM UM 
+
+
+
+
+STATISTICAL USE-CASE,
+
+COM MILHARES DE ENTRADAS,
+
+ESSE '0.1'
+
+
+
+NÃO 
+
+VAI IMPORTAR.. ---> MAS SE ESTAMOS 
+
+
+REPRODUZINDO ISSO,
+
+COMO PARTE DE UMA 'OFFICIAL AUTHORITY',
+
+
+
+ISSO VAI IMPORTAR..
+
+
+
+
+
+
+
+
+
+
+--> MAS VAMOS USAR O FLOAT,
+
+PARA TER UMA 
+
+PRECISÃO 1 POUCO MENOR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''IN OTHER DATABASE SYSTEMS, LIKE POSTGRESQL,
+
+FLOAT IS ALSO SUPPORTED BUT ONLY WITHOUT THE (...) AFTER IT....'''
+
+
+
+
+
+
+
+
+
+
+
+-_> É EXATAMENTE POR ISSO QUE ESCREVEMOS 
+
+
+
+
+yearly_revenue FLOAT 
+
+
+
+
+
+
+(
+
+    apenas isso, sem o '()" 
+
+
+
+    NA NOSSA QUERY DO POSTGRESQL...
+)
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(200),
+    "address" VARCHAR(200),
+    yearly_revenue FLOAT, --- SINTAXE POSTGRESQL É 'FLOAT' sem mais nada... sintaxe 'MYSQL' é 'FLOAT()' (com o número de DÍGITOS QUE VOCÊ QUER ARMAZEANR, EM GERAL, E QUANTOS DÍGITOS VOCÊ QUER ARMAZAENAR DEPOIS DO '.' ... ) 
+    isHiring BOOLEAN
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO CASO DO MYSQL, MAIS COMPLEXO,
+
+
+
+
+
+temos assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+yearly_revenue FLOAT(5, 2) 
+
+
+
+
+
+
+
+
+
+5 -------> É A 'PRECISION' ---> É O GRAU DE PRECISÃO DE UM FLOATING POINT NUMBER --> CONTROLA O 'NÚMERO TOTAL DE DÍGITOS QUE PODE SER ARMAZENADO NESSE NUMBER/ROW dentro da column' (no caso, são 5, contando os números à esquerda e À direita da virgula)...
+
+
+
+
+
+
+2 -----> É A 'ESCALA' DOS NÚMEROS APÓS A VÍRGULA.. 
+
+
+
+
+
+
+
+
+
+
+5, 2 ------> SIGNIFICA QUE 
+
+
+
+
+NÚMEROS COMO 
+
+'123.12'
+
+
+
+SÃO PERMITIDOS (5 números no total, '2' números após a vírgula)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ UM NÚMERO COMO '12.1' 
+
+
+
+também SERIA ACEITO, NESSE EXEMPLO, PQ:
+
+
+
+
+1) MENOS DE 5 NÚMEROS, NO TOTAL 
+
+
+
+
+2) TEM 2 NÚMEROS DEPOIS DA VÍRGULA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+JÁ UM VALUE COMO 
+
+
+
+1234.12 NÃO SERIA PERMITIDO,
+
+PQ TEM 6 DÍGITOS (excede o limite de 5 dígitos que colocamos antes)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E SE TENTÁSSEMOS ESCREVER 
+
+'1.123',
+
+
+TAMBÉM GANHARÍAMOS UM ERROR, PQ 
+
+
+
+
+
+O NÚMERO TERIA MAIS DE 2 DÍGITOS DEPOIS DA VÍRGULA....
+
+
+
+
+
+
+
+
+
+
+
+1234.12 ------> NESSE CASO, O SQL ATIRARIA UM ERRO QUANDO ISSO FOSSE INSERIDo..
+
+
+
+
+
+
+
+
+1.123 -----> 'ROUNDED' --> ESSA IMPROPRIEDADE (mais do q 2 números na casa decimal) NÃO ATIRARÁ UM ERRO QUANDO A ROW FOR INSERIDA, MAS 
+
+
+O VALUE INSERIDO NESSA ROW ACABARIA 'ROUNDED' (ou seja, '1.123' ficaria como '1.12' )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+VALUES COMO 
+
+
+
+
+
+
+
+
+123.12 
+
+
+SERIAM PERMITIDOS,
+
+
+
+E 
+
+
+
+'1234.12',
+
+
+
+
+
+NÃO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+
+
+
+
+USE 'FLOAT' QUANDO 
+
+
+
+NÃO QUEREMOS TANTA PRECISÃO ASSIM....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> OK... MAS AÍ O PROFESSOR DECIDE COLOCAR 'GREATER PRECISION'
+
+LÁ NO 'yearly_revenue'...
+
+
+
+
+
+
+
+----> PARA ISSO, ELE USA A KEYWORD DE 'NUMERIC',
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(200),
+    "address" VARCHAR(200),, 
+    yearly_revenue NUMERIC
+    isHiring BOOLEAN
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, DEIXAMOS BEM CLARO QUE PODEMOS INSERIR NÚMEROS COM 'EXACT VALUES',
+
+PARA EVITAR DISCREPÂNCIAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS AQUI, 
+
+
+AO CONTRÁRIO DE 'FLOAT',
+
+
+
+OS PARÊNTESES 
+
+SÃO 
+
+
+
+
+
+OBRIGATÓRIOS EM 
+
+
+
+'yearly_revenue (NUMERIC)'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ACHO QUE ENTENDI..
+
+
+
+
+
+
+
+
+
+
+
+É ASSIM QUE PODEMOS DEFINIR UM 'EXACT COLUMN VALUE'..
+
+
+
+
+
+
+
+
+
+
+--> MAS ALÉM DE 'NUMERIC',
+
+
+
+
+TEMOS 
+
+
+
+
+O DATA TYPE 
+
+
+DE 
+
+
+'DECIMAL()" ------> 
+
+
+
+
+
+
+
+
+
+OK... MAS, COM ESSE DATA TYPE,
+
+
+
+
+
+
+NÓS ACTUALLY TAMBÉM CONSEGUIMOS 
+
+
+
+
+
+
+
+UM 'UNDER THE HOOD BEHAVIOUR'
+
+DA DATABASE.. --> NÓS BASICAMENMTE 
+
+
+
+temos 
+
+
+
+
+MENOS CONTROLE  ACERCA 
+
+
+
+
+
+DA QUANTIDADE DE DÍGITOS QUE EXISTEM APÓS DA VÍRGULA....
+
+
+
+
+
+
+
+
+OBS: com 'DECIMAL',
+
+
+
+
+APENAS A 'SCALE' 
+
+ESPECIFICADA POR NOS 
+
+É 
+
+GARANTIDA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> A 'PRECISÃO' 
+
+
+É EQUIVALENTE OU MAIOR DO QUE A PRECISÃAO DEFINIDA POR NÓs...
+
+
+
+
+
+
+
+
+
+
+
+
+
+tipicamente,
+
+você 
+
+
+
+
+
+
+
+USA O 'NUMERIC' QUANDO VOCÊ REQUER QUE APENAS 
+
+CERTO VALUES SIMPLES ACABEM ARMAZENADOS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> BTW,
+
+VOCÊ PODERIA TER PENSADO QUE 
+
+
+SERIA BOM TER 'SUPER LARGE VALUES'
+
+
+(TIPO '''''''''''' yearly_revenue NUMERIC (100, 100) '''''''''' )
+
+
+definidos 
+
+na table -->  --> MAS ISSO VEM ATRELADO A UM 'ENTRETANTO',
+
+
+pq 
+
+UM NOVO ESPACO PRECISARÁ SER RESOLVido sempre assim,
+
+
+
+
+
+
+
+
+por isso sempre coloque 1 tamanho realista aqui,
+
+
+para que não seja 
+
+
+
+RESERVADO ESPAÇO DESNECESSÁRIO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM 'DECIMAL',
+
+
+a database é que 
+
+
+INVENTA OS LIMITES, tipicamente.... (
+
+
+é menos exato do que o 'decimal'...
+,
+
+
+
+
+pq apenas garante a 'scale' (o número de dígitos no total, e não as casas depois da vírgula)...
+
+)
+
+
+
+
+
+
+
+
