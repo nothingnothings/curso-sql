@@ -1,0 +1,432 @@
+
+
+
+
+
+
+
+
+
+
+CRIAMOS AS TABLES DE 'USERS', 'EMPLOYERS' E 'CONVERSATIONS'...
+
+
+
+
+
+
+
+
+AGORA VAMOS COMEÇAR COM O INSERT DE ALGUNS NOVOS VALUESa..
+
+
+
+
+
+
+
+--> PARA ISSO, CRIAMOS UM NOVO ARQUIVO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS INSERIR DATA EM 'EMPLOYERS' E EM 'CONVERSATIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS FAZER ISSO COM QUALQUER DATA DE NOSSA ESCOLHA..
+
+
+
+
+
+
+--> COLOCAREMOS ALGUMA 'EMPLOYER DATA'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO.... CONSEGUI...
+
+
+
+
+
+FICOU UMA ROW DE 'fidelizou.me'..
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR FAZ ALGO PARECIDO:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO employers (company_name, ishiring, yearly_revenue, "address") VALUES (
+    'learning.inc', false, 1000000, 'London'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+PRONTO...
+
+
+
+
+
+
+
+
+
+AGORA VAMOS QUERER INSERIR MAIS DO QUE 1 EMPLOYER... --> VAMOS 
+
+
+
+FAZER MAIS DE 1 INSERT STATEMENT NESSE ARQUIVO..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+INSERT INTO employers (company_name, ishiring, yearly_revenue, "address") VALUES (
+    'learning.inc', false, 1000000, 'London'
+);
+
+
+
+INSERT INTO employers (company_name, ishiring, yearly_revenue, "address") VALUES (
+    'Big Oil inc.', true, 5000000, 'France'
+);
+
+
+
+
+INSERT INTO employers (company_name, ishiring, yearly_revenue, "address") VALUES (
+    'Hipster Food', true, 2500000, 'Belgium'
+);
+
+
+
+
+
+----------------------------
+
+
+
+
+
+
+
+
+CERTO... ISSO FUNCIONOU..
+
+
+ TENHO 5 RECORDS LÁ NA TABLE DE 'employers'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> OK... 
+
+
+
+
+ VALUES X VALUE (value não funciona, só 'VALUES' funciona)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... AGORA INSERIMOS DATA PARA NOSSAS COMPANIES...
+
+
+
+
+
+
+
+
+ --> COMENTAMOS TUDO PARA FORA,
+
+
+
+
+
+ E AÍ 
+
+
+
+prosseguimos..
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER INSERIR MAIS DATA,
+
+AGORA PARA AS 'CONVERSATIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> ELE ESCREVE:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO conversations (user_name, employer_name, message, date_sent) VALUES (
+
+'Someone', 'Somewho', 'gibberish gibberish gibberish', 12-12-1989
+);
+
+
+
+
+
+
+
+
+
+
+
+OK... . MAS GANHEI UM ERROR... -->  
+
+
+
+ISSO PQ 
+
+
+A 
+MINHA 'DATE' ESTÁ INCORRETA..
+
+
+
+
+
+
+
+
+--> PRECISO 
+
+PASSAR 
+
+
+UM TEXT NO FORMATO CERTO... --> O FORMATO QUE DEVO MANTER É 
+
+
+'2012-10-15'...
+
+
+
+
+MAS ISSO JUNTO DAS HORAS E MINUTOS E SEGUNDOS..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+16:35:10 
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+2012-12-12 10:10:00
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO conversations (user_name, employer_name, message, date_sent)
+VALUES (
+        'Someone',
+        'Somewho',
+        'gibberish gibberish gibberish',
+         '2012-12-12'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> obs: coloquei sem o HORÁRIO pq 
+
+
+
+o data type estava 'TIMESTAMP WITHOUT TIMEZONE'...
+
+
+
+
+
+
+
+
+
+
+
+
+------> feito....
+
+
+
+
+
+
+
+
+
+
+isso deve funcionar...
+
+
+
+
+
+
+rodamos contra nossas databases...
