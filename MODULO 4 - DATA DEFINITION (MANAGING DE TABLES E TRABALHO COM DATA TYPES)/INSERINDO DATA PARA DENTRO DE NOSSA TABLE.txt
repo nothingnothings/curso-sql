@@ -1,0 +1,736 @@
+
+
+
+
+
+AGORA QUE CRIAMOS A TABLE DE 'USERS',
+
+PARA 
+
+
+
+O MYSQL E O POSTGRESQL,
+
+
+
+ANTES 
+
+DE CRIARMOS MAIS TABLES, COM MAIS DATA TYPES,
+
+
+
+
+DEVEMOS INSERIR UM POUCO DE DATA 
+
+
+DENTRO DE 'USERS'...
+
+
+
+
+
+
+
+
+
+
+--> CRIO O ARQUIVO 'INSERT DATA INTO USERS TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS DIGITAR O SQL COMMAND QUE VAI INSERIR DATA...
+
+
+
+
+
+
+
+
+
+
+--> O COMANDO É 'INSERT INTO' --> 
+
+
+
+
+O COMANDO É SEMPRE 'INSERT INTO.'..
+
+
+
+
+
+
+
+
+
+
+
+
+----> AÍ VOCÊ DEVE ESCREVER O __ NOME__ DA TABLE__ EM QUE 
+
+VOCê QUER INSERIR DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS QUERER COLOCAR 'users'...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+
+
+
+
+TEMOS A QUESTÃO DAS 'DIFERENTES VARIAÇÕES DE INSERT DE DATA'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS, POR EXEMPLO,
+
+
+
+
+__INSERIR __ DATA__ 'RETORNADA DE OUTRA QUERY' ->  MAS ISSO É ALGO QUE VEREMOS MAIS TARDE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO MOMENTO, QUEREMOS INSERIR DATA QUE É 'BRAND NEW'... --> no caso,
+
+
+SERÁ DATA QUE 
+
+
+
+FOI 
+
+'FETCHEADA POR UM MOBILE APP',
+
+ou qualquer coisa do gênero...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FAZEMOS ISSO, A INSERÇÃO DESSA DATA, POR MEIO DO INPUT DA 
+
+
+KEYWORD DE 'VALUES'..
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users VALUES 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA ESPECIFICAREMOS OS 'VALUES QUE VAMOS INSERIR'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM... E 'INSERT INTO',,
+
+
+
+como TODO E QUALQUER  
+
+
+SQL STATEMENT, 
+
+
+
+
+POSSUÍ 
+
+
+
+
+CERTAS VARIATIONS ,
+
+
+E VÁRIAS OPTIONS QUE VOCÊ PODE SETTAR...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, QUANDO O ASSUNTO É O INSERT DE VALUES TIPO ASSIM,
+
+
+VOCÊ PODE ESPECIFICAR ___vALUES__ ,
+
+
+
+
+
+QUE 
+
+DEVERÃO 
+
+
+SER ESPECIFICADOS 
+
+
+NA MESMA ORDEM 
+
+
+
+
+DE SUAS COLUMNS,
+
+
+PARA QUE 
+SEJAM 
+
+
+
+'MAPEADOS POR ORDEm'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO A ORDEM DE NOSSAS COLUMNS FOI:
+
+1) NAME 
+
+
+2) YEARLY_SALARY 
+
+
+
+3) CURRENT_STATUS...
+
+
+
+
+
+
+
+
+
+--> VAMOS ESCREVER NOSSOS VALUES TIPO ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users VALUES("Arthur Panazolo", 24000, "employed");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok...
+
+
+
+
+
+
+
+ESCREVEMOS PARÊNTESES E 
+
+ENTÃO 
+
+DIGITAMOS 
+
+
+
+
+OS VALUES QUE QUEREMOS INSERIR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... MAS AQUI TEMOS MAIS UM DETALHE:
+
+
+
+
+
+
+
+
+
+
+
+> no mundo SQL,
+
+
+
+SEMPRE DEVEMOS ESCREVER AS 'STRINGS' A SEREM INSERIDAS (como values)
+
+
+
+
+______ COM _ '' , e NUNCA COM "" (pq o "" É RESERVADO PARA __IDENTIFIERS__, O QUE QUER DIZER QUE NÃO FUNCIONA PARA INSERIR/UPDATAR VALUES DE STRINGS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... É POR ISSO QUE FICAMOS COM UM CÓDIGO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- INSERT INTO users VALUES    --os values inseridos deverão ser inseridos/passados por ORDEM...
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users VALUES('Arthur Panazolo', 24000, 'employed');  --sempre use '' WRAPPANDO SUAS STRINGS A SEREM INSERIDAS/UPDATADAS, e nunca "" (pq isso resulta em ERROS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE, AQUI,
+
+TEMOS UMA TABLE MT SIMPLES,
+
+POR ISSO 
+
+
+INSERIR DATA 
+
+POR POSITION, AQUI,
+
+É ABSOLUTELY FINE...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE SUAS TABLES FICAREM MAIS COMPLEXAS,
+
+
+
+SE _ ELAS TIVEREM MTAS COLUNAS,
+
+
+E DIFERENTES PESSOAS TRABALHAREM COM ELAS,
+
+  
+
+  INSERIR DATA POR 'POSITION' PODE FICAR 
+
+
+  BEM ERROR-PRONE...
+
+
+
+  (
+
+ ''''   E SE A PRIMEIRA  COLUMN TAMBÉM FOSSE 1 TEXT VALUE,
+
+ MAS N FOSSE ALGO ESPERANDO O FULL NAME,
+
+E SIM O ADDRESS DE UM USER?''' --> ai você 
+
+
+INSERIRIA UM NEGÓCIO ERRONEAMENTE...
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE EXISTE UMA 
+
+
+
+
+__ OUTRA VARIAÇÃO DE 'INSERT INTO',
+
+
+QUE É 
+
+MAIS USADA, MAIS POPULAR... ->  
+
+
+
+
+
+
+
+
+
+
+
+
+QUAL É ESSA VARIANTE? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> -- INSERT INTO users VALUES    --os values inseridos deverão ser inseridos/passados por ORDEM...
+
+
+
+
+
+
+
+
+
+--VARIANTE DE 'insert into' MENOS USADA (considera a ORDEM de colunas na sua table)
+INSERT INTO users VALUES('Arthur Panazolo', 24000, 'employed');  --sempre use '' WRAPPANDO SUAS STRINGS A SEREM INSERIDAS/UPDATADAS, e nunca "" (pq isso resulta em ERROS)...
+
+
+
+
+
+
+--variante de 'INSERT INTO' MAIS USADA (DECLARA A ORDEM DOS FIELDS ANTERIORMENTE, PARA SÓ ENTÃO INSERIR VALUES NOS MESMOS...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A SINTAXE É TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+INSERT INTO users (yearly_salary, full_name, current_status) VALUES (24000, 'Arthur Panazolo', 'employed');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok...
+
+
+
+isso faz total sentido....
+
+
+
+
+
+
+
+
+
+
+ESSA VERSÃO É BEM MAIS USADA DO QUE A OUTRA...
+
+
+
+
+
+
+
+
+
+
+----> COM ESSA VERSÃO 
+
+
+
+DO 'INSERT INTO',
+
+PODEMOS __ OMITIR__ CERTAS COLUMNS ( 
+
+    deixar de inserir data na column de 'yearly_salary',
+    por exemplo... basta NÃO A REFERIR, NAQUELE '()' INICIAL...
+)
