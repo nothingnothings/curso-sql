@@ -1,0 +1,6 @@
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- É ASSIM QUE DEFINIMOS 1 'DEFAULT VALUE' para 1 determinada coluna...
+    user_name VARCHAR(200), ---e definimos 'CURRENT_TIMESTAMP' (é tipo uma function nativa, que retorna o CURRENT TIMESTAMP) como o DEFAULT VALUE desse 'date_sent', que será usado se NADA FOR INSERIDO NESSE CAMPO (com 'INSERT_INTO')...
+    employer_name VARCHAR(200)
+);

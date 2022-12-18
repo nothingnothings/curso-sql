@@ -1,0 +1,666 @@
+
+
+
+
+
+
+NÓS CONSEGUIMOS ADICIONAR A TABLE DE 'conversations',
+
+
+
+
+
+
+e também conseguimos adicionar data nessa table...
+
+
+
+
+
+
+
+
+
+--> mas HÁ ALGO IRRITANTE SOBRE O INSERT DE 'CONVERSATIONS DATA'..
+
+
+
+
+
+
+
+
+
+--> E ISSO É O INSERT DE 'DATE'
+
+
+
+NO COLUMN DESSA TABLE... --> TIVEMOS QUE 
+
+
+INPUTTAR 
+
+
+
+A DATE __ MANUALMENTE,
+
+TIPO ASSIm:
+
+
+
+'2021-10-15 16:32:10' 
+
+
+
+
+
+
+
+
+
+
+
+----> isso é irritante e ERROR-PRONE -->  PQ 
+
+
+
+
+
+__ É FÁCIL DE ESQUECER O ESPAÇO ENTRE A DATA E O TIME...
+
+
+
+
+
+
+
+
+
+
+
+--> TBM É IRRITANTE PQ __ NÃO É REALISTA --> QUANDO ENVIAMOS UMA MESSAGE,
+
+
+NÃO QUEREMOS DETERMINAR 'MANUALMENTE'
+
+
+A QUE 
+
+TEMPO ENVIAMOS ESSA MESSAGE --> ISSO DEVE SER FEITO AUTOMATICAMENTE QUANDO O RECORD É 
+
+ESCRITO NA DATABASE (
+
+    quando a row é INSERTED...
+)
+
+
+
+
+
+
+
+
+
+
+--> ESSE É UM REQUISITO __ TÃO COMUM _ QUE 
+
+
+É CLARO QUE 
+
+
+
+__ ISSO PODE, É CLARO,
+
+
+
+SER IMPLEMNTADO,
+
+E PODE SER IMPLEMENTADO SEM NENHUM PROBLEMA...
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ PODEMOS SETTAR 'DEFAULT VALUES'
+
+PARA COLUMNS NAS NOSSAS TABLES.. --> E PODEMOS FAZER ISSO 
+
+
+
+
+EM COISAS DIFERENTES DE 'DATE' (coisas distintas),
+
+
+
+
+
+APESAR DE DATE SER O USE-CASE MAIS COMUM ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS DEFINIR 'DEFAULT VALUES'
+
+
+PARA TODOS OS COLUMN TYPES...
+
+
+
+
+
+
+
+
+
+
+--> E ONDE FAZEMOS ESSA DEFINIÇÃO 
+
+
+DO DEFAULT VALUE DE 1 COLUMN TYPE?
+
+
+
+
+
+
+
+
+
+
+--> É FEITO QUANDO __ DEFINIMOS _ A 'TABLE STRUCTURE',
+
+
+
+COM O STATEMENT DE 'CREATE TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+------> NOSSO CÓDIGO ORIGINAL ESTAVA ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT, --STRINGS DE QUALQUER LENGTH
+    date_sent TIMESTAMP, --suportado PELO MYSQL E POSTGRESQL..
+    user_name VARCHAR(200), --strings de length 200 (200 bytes)
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> AGORA VAMOS ALTERAR UM POUCO ESSE NEGÓCIO,
+
+
+PARA QUE 
+SEJA DEFINIDO UM VALUE DEFAULT PARA 1 DE NOSSOS FIELDS (o field de 'date_sent')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AQUI, POR EXEMPLO, quando críamos a table de 'conversations',
+
+
+
+
+
+PODEMOS ADICIONAR UM DEFAULT VALUE A QUALQUER COLUMN DEFINITION... -> BASTA 
+
+
+
+
+
+
+COLOCAR A KEYWORD DE 'DEFAULT' DEPOIS DA ESCOLHA DO DATA TYPE,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent TIMESTAMP DEFAULT, -- É ASSIM QUE DEFINIMOS 1 'DEFAULT VALUE' para 1 determinada coluna...
+    user_name VARCHAR(200),
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> 'DEFAULT' É UMA KEYWORD QUE EXISTE NA MAIOR PARTE DOS DATABASE SYSTEMS,....
+
+
+
+
+
+
+
+
+
+
+
+----> OK... DEPOIS DE DEFINIR 'DEFAULT',
+
+VOCÊ 
+PODE 
+
+SIMPLESMENTE ESPECIFICAR 
+
+
+O 
+
+DEFAULT VALUE...
+
+
+
+
+
+
+
+
+
+--> PARA 'DATE',
+
+
+
+HÁ 
+
+
+
+
+UMA OUTRA KEYWORD, 
+
+'
+CURRENT_TIMESTAMP',
+
+
+
+
+
+QUE É UMA KEYWORD QUE TAMBÉM É SUPORTADA PELA MAIOR PARTE 
+
+DOS DATABASE SYSTEMS,
+
+
+E QUE 
+
+
+
+'LOOKS AFTER' 
+
+
+O 
+
+
+CURRENT_TIMESTAMP,
+
+
+
+PARA AÍ 
+
+
+USÁ-LO, E RETORNAR O VALUE DESSE CURRENT_TIMESTAMP,
+
+QUE ENTÃO É USADO COMO 1 DEFAULT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FICA TIPO ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- É ASSIM QUE DEFINIMOS 1 'DEFAULT VALUE' para 1 determinada coluna...
+    user_name VARCHAR(200),
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- É ASSIM QUE DEFINIMOS 1 'DEFAULT VALUE' para 1 determinada coluna...
+    user_name VARCHAR(200), ---e definimos 'CURRENT_TIMESTAMP' (é tipo uma function nativa, que retorna o CURRENT TIMESTAMP) como o DEFAULT VALUE desse 'date_sent', que será usado se NADA FOR INSERIDO NESSE CAMPO (com 'INSERT_INTO')...
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> 'WHEN SETTING ___DEFAULT__ VALUES, YOU CAN STILL OVERWRITE THEM WHEN ACTUALLY 
+
+INSERTING A NEW RECORD. BUT IF YOU DONT SPECIFY A CUSTOM VALUE, THE DEFAULT VALUE WILL 
+BE USED'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> É CLARO QUE NÃO TEMOS ISSO APENAS PARA 'DATES'...
+
+
+
+
+
+
+--> por exemplo, na table de 'employers',
+
+
+PODEMOS COLOCAR NA TABLE DEFINITION QUE 
+
+
+
+
+'''TODOS OS RECORDS "employer" que FOREM INSERIDOS SEM ESPECIFICAR O VALUE DA COLUMN DE ishiring terão 
+
+O VALOR DA MESMA DEFINIDO COMO _ FALSE''..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(200),
+    "address" VARCHAR(200),
+    yearly_revenue FLOAT,
+    isHiring BOOLEAN DEFAULT false
+)
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> É ASSIM QUE PODEMOS ADICIONAR 'DEFAULT VALUES'...
+
+
+
+
+
+
+
+
+
+--> E AQUI VAMOS QUERER ISSO 
+TANTO PARA 
+
+A TABLE DE 'EMPLOYERS' COMO A DE 'CONVERSATIONS'...
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO, AQUI FICAMOS COM UM PROBLEMA... --> 
+
+
+
+
+
+
+
+
+
+
+
+FICAMOS COM 2 TABLES JÁ DEFINIDAS,
+
+'conversations' e 'employers',
+
+
+e PRECISAMOS AS REMOVER....
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, VAMOS PRECISAR DO COMANDO DE 'DROP TABLE'..
+
+
+
+
+
+
+
+
+NÃO PODEMOS RECRIAR TABLES QUE JÁ EXISTEM...
+
+
+
+
+
+
+
+
+-_> TEMOS 2 POSSIBLE WORKAROUNDS: 
+
+
+
+
+
+
+
+1) '''DELETE THE TABLES, AND RE-CREATE THEM'...
+
+
+
+
+
+(
+    ESSA OPÇÃO ___ NÃO _ É IDEAL__ SE JÁ TEMOS DATA DENTRO 
+    DESSAS TABLES... --> PQ ESSA DATA SERIA PERDIDA... 
+)
+
+
+
+
+
+
+
+2) '''' PODEMOS __ MODIFICAR ESSAS TABLES''''' -------> PARA ISSO,
+
+USAMOS 
+
+O 
+COMANDO 
+
+DE 
+
+'ALTER TABLE'...
+
+
+
+
+
+
+  
+  --> VEREMOS ESSAS ACTIONS NA PRÓXIMA AULA...
