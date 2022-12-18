@@ -1,0 +1,593 @@
+
+
+
+
+
+
+
+
+VAMOS COMEÇAR COM A COLUMN DE 'NAME'
+
+
+DENTRO 
+
+
+
+
+da table de 'users'...
+
+
+
+
+
+
+
+
+
+
+ESTAMOS COM ISTO:
+
+
+
+
+
+
+
+CREATE TABLE users (
+    
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA VAMOS COLOCAR O NOME DA COLUMN QUE QUEREMOS TER,
+
+NO CASO, 'name'....
+
+
+
+
+
+
+
+
+eX:
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    
+    full_name
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ok.. --> vocÊ pode usar "" ou `` em volta do título,
+
+
+
+se ele fizer CLASH com alguma reserved keyword...
+
+
+
+
+
+
+
+
+
+
+
+OK.... DEPOIS DO NOME DA COLUMN,
+
+SEMPRE DEFINIMOS O 'DATA TYPE'... 
+
+
+
+
+
+
+
+
+
+
+--> E É SEMPRE ESSA A APARÊNCIA DE DEFINIÇÕES DE DATA TYPES:
+
+
+
+
+
+
+1) A COLUMN NAME 
+
+
+
+2) O TYPE DESSA COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS QUE 'full_name'
+
+
+seja _ UM TEXT,
+
+QUE 
+
+CONSIGA ARMAZENAR 
+
+'TEXT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> PARA ISSO,
+ DEVEMOS 
+
+
+ OPTAR POR 1
+  
+
+
+  DOS 4 'MAIN TEXT TYPES' SUPORTADOS PELO SQL...
+
+
+
+
+
+
+
+  RECAPITULANDO, SÃO ELES:
+
+
+
+
+  1) CHAR(X)
+
+
+
+
+  2) VARCHAR(X)
+
+
+
+
+
+  3) TEXT, LONGTEXT 
+
+
+
+  4) ENUM...
+
+
+
+
+
+
+
+
+
+
+
+
+  --> BEM, O NOME DE UMA PERSON TIPICAMENTE NÃO SERÁ TÃO LONGO,
+
+
+
+
+N SERÁ TÃO LONGO QUANTO UM BLOG POST OU DESCRIPTION...
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE NÃO PRECISAMOS USAR 'TEXT' OU 'LONGTEXT' (
+
+    pq não vamos usar algo tão grande...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODE SER QUE NA FORM QUE 
+
+O USER INPUTTE A NAME DATA,
+
+ELE É OBRIGADO A TER 
+
+
+NOMES NÃO TÃO GRANDES --> é por isso que 'CHAR(X)'
+
+
+E 'VARCHAR(X)'
+
+
+
+SÃO ESCOLHAS MAIS ADEQUADAS 
+
+
+
+
+PARA USE CASES COMO O 'NOME DE 1 PRODUCT/USER'..
+
+
+
+
+
+
+
+--> aí a pergunta é:
+
+
+''DEVEMOS USAR CHAR(X) OU VARCHAR(X)?''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, AQUI VOCÊ APRENDEU QUE 
+
+AMBOS OS DATA TYPES POSSUEM UMA 'MAX LENGTH',
+
+
+
+MAS QUE 
+
+QUANDO VOCÊ USA 
+
+
+'CHAR(X)',
+
+
+
+OS 
+
+
+CARACTERES OMITIDOS DAQUELA 'MAX LENGTH'
+
+
+
+
+
+SERÃO SEMPRE __ PREENCHIDOS PARA NÓS,
+
+COM 'WHITE SPACE' (com blanks)
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR VAI OPTAR POR 'VARCHAR(X)',
+
+
+PARA QUE 
+O ESPAÇO EM BRANCO 
+
+
+
+NÃO SEJA PREENCHIDO COM EMPTY SPACE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE FFICA TIPO ASSIm:
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    full_name VARCHAR 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> UMA CONVENÇÃO QUE DEVEMOS SEGUIR:
+
+
+
+
+todas as KEYWORDS devem ficar em __ UPPERCASE... ( por isso 'VARCHAR', e não 'varchar')...
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+
+full_name VARCHAR
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok...
+
+
+
+AÍ TEMOS, depois disso,
+
+
+PARÊNTESES,
+
+EM QUE 
+
+ESPECIFICAMOS O TAMANHO MÁXIMO, EM BYTES...
+
+
+
+
+
+
+
+
+--> EM MTOS ENCODINGS,
+
+
+
+'1 BYTE = 1 CHARACTER',
+
+
+APESAR 
+
+
+DE 
+
+
+EXISTIREM CERTOS CARACTERES QUE TOMAM MAIS DE 1 BYTE...
+
+
+
+
+
+
+
+
+
+
+--> EM CASOS COMO ESSES, SE VOCÊ 
+TIVER 
+
+
+
+1 MAX LENGTH DE 200 BYTES,
+
+
+VOCê 
+
+
+
+TALVEZ NÃO CONSIGA 'SQUEEZE' 
+
+
+200 CARACTERES DENTRO DISSO..
+
+
+
+
+
+
+
+
+
+KANJIS SÃO 2 BYTESa...
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS TER 200 CARACTERES, POR EXEMPLO...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    full_name VARCHAR(200)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... POR ENQUANTO, ISSO É TUDO..
+
+
+
+MAS ESCREVEMOS UMA VÍRGULA, 
+
+
+PQ VAMOS DEFINIR MAIS FIELDS/COLUMNS NESSA NOSSA TABLE..
+
+
+
+
+
+
+
+
+
+
+-> ESSA PRÓXIMA DEFINIÇÃO DE COLUMN PODE SER FEITA EM 1 NOVA LINE, OU NA MESMA LINE....
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    full_name VARCHAR(200),   -- NÚMERO MÁXIMO DE CARACTERES: 200 (VARCHAR(X))
+    yearly_salary 
+);
+
+
+
+

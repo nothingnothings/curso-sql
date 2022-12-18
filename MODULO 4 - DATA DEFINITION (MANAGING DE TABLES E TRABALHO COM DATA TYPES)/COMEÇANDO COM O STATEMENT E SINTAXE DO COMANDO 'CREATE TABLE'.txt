@@ -1,0 +1,663 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... DE VOLTA AO CÓDIGO,
+
+NOSSO OBJETIVO AGORA É CRIAR 
+
+
+
+
+
+
+
+
+A TABLE DE 'USERS',
+
+
+
+
+
+COM AS COLUMNS DE:
+
+
+
+
+
+
+1) NAME 
+
+
+2) YEARLY SALARY 
+
+
+3) STATUS ('employed'? )
+
+
+4) EMPLOYER 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK... E DEVEMOS DEFINIR OS DATA TYPES APROPRIADOS PARA 
+
+
+ESSAS COLUMNS (
+
+    tanto para o MYSQL como o POSTGRESQL..
+)
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+ADICIONAMOS UM NOVO ARQUIVO,
+
+
+de nome 
+
+
+
+
+
+02-create-users-table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMEÇO ESCREVENDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE ()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- >vAMOS ESCREVER 1 COMANDO QUE CRIARÁ 
+
+1 NOVA TABLE...
+
+
+
+
+
+
+
+
+
+-> O COMANDO UNIVERSAL É 'CREATE TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE...
+
+
+
+
+
+
+
+
+
+--> OK... --> É CLARO QUE ISSO VAI CRIAR 1 TABLE 'NA DATABASE EM QUE ESTAMOS CONECTADOS'...
+
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+DEVEMOS 
+
+COLOCAR O NAME DA TABLE --> MAS DEVEMOS EVITAR CLASHES ENTRE KEYWORDS (use "" para o POSTGRESQL, e `` para o MYSQL )..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER CRIAR UMA TABLE DE "users"...
+
+
+
+
+
+
+
+
+
+--> É MELHOR DEFINIR CADA TABLE COMO 'PLURAL'...
+
+
+
+
+
+
+PQ CADA 
+
+
+
+TABLE SEGURA MÚLTIPLOS RECORDS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ESCREVEMOS:
+
+
+
+
+
+
+
+
+CREATE TABLE users;
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CRIAR 1 TABLE,
+
+
+NÃO BASTA ESCREVERMOS APENAS 
+
+'CREATE TABLE users';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PRECISAMOS TAMBÉM DEFINIR A 'ESTRUTURA' 
+
+QUE 
+
+
+
+ESSA TABLE DEVERÁ TER..
+
+
+
+
+
+
+
+
+--> VOCÊ 
+
+
+DEVE DEFINIR ISSO COM UM PAR DE PARÊNTESES,
+
+
+
+EM QUE 
+
+
+VOCÊ LISTARÁ __ TODAS AS 'COLUMNS' 
+
+QUE 
+
+EXISTIRÃO 
+
+DENTRO DA TABLE... e, também, seus data types...
+
+
+
+
+
+
+
+
+
+
+-> ALÉM DOS NOMES DAS COLUMNS E SEUS DATA TYPES,
+
+VOCÊ DEVE DEFINIR ALGUNS 'POSSIBLE EXTRA SETTINGS',
+
+
+
+TUDO SEPARADO 
+
+POR 
+
+
+
+','..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+CREATE TABLE users () ;
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É IMPORTANTE TER ISSO EM MENTE:
+
+
+
+
+
+
+
+PODEMOS SEMPRE LER A OFFICIAL DOCUMENTATION,
+
+PARA 
+VER 
+
+
+TODAS AS POTENCIAIS 'CONFIGURATION OPTIONS' 
+e 
+
+VARIATIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+-_> PARA O 'POSTGRESL',
+
+
+
+POR EXEMPLO,
+
+
+SE 
+
+PROCURARMOS 
+
+O 
+
+
+'CREATE TABLE' --> ENCONTRAMOS EXPLICAÇÕES SOBRE TODAS AS VARIATIONS/OPTIONS QUE PODERÍAMOS USAR..
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS MT DESSAS OPTIONS SÃO INÚTEIS..
+
+
+
+
+
+
+
+
+
+--> HÁ MTAS VARIAÇÕES/OPÇÕES...
+
+
+
+
+
+
+
+
+
+
+
+-> MAS APRENDEREMOS SOBRE TODAS AS KEY OPTIONS AO LONGO DESTE CURSo...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS AQUI QUEREMOS CRIAR 1 USERS TABLE,
+
+
+
+
+POR ISSO O PROFESSOR COMEÇA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users ();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA MELHORAR A LEGIBILIDADE,
+
+
+
+
+
+
+DIGITE TUDO EM MÚLTIPLAS LINHAS....
+
+
+
+
+
+
+
+
+
+
+----> O PROFESSOR ACHA MELHOR ESPECIFICAR EM MULTIPLAS LINHAS,
+
+E ESPECIFICAR 1 NOVA COLUMN _ _POR LINHA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> EM 'USERS',
+
+QUEREMOS 
+
+TER 
+
+3 
+
+COLUMNs..
+
+
+
+
+
+
+
+
+-------> MAS ESTUDAREMOS,
+
+AGORA,
+
+TUDO MENOS 'employeer' (employeeId),
+
+PQ AINDA NÃO TEMOS UMA TABLE PARA 
+
+
+SE COMUNICAR/REFERENCIAR ESSE VALUE....
+
+
+
+
+
+--> QUERO TER:
+
+
+
+
+
+
+1)NOME 
+2) SALÁRIO 
+
+3 STATUS ('employeed 'ou 'não'.]
+]
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS TER 3 COLUMNS, INICIALMENTE, DENTRO 
+
+
+DESSE 
+
+
+'users'..
+
+
+
+
+
+
+
+-->
