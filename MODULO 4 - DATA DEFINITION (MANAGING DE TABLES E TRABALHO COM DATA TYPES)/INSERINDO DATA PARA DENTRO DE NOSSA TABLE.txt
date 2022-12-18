@@ -734,3 +734,287 @@ PODEMOS __ OMITIR__ CERTAS COLUMNS (
     deixar de inserir data na column de 'yearly_salary',
     por exemplo... basta NÃO A REFERIR, NAQUELE '()' INICIAL...
 )
+
+
+
+
+
+
+
+
+
+--> SE FAZEMOS ISSO, O VALUE DA COLUMN FICA COMO 'NULL'...
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+--> AQUI, NO ENTANTO,
+
+QUEREMOS INSERIR 
+
+
+
+DATA EM TODAS AS COLUMNS...
+
+
+
+
+
+
+
+É POR ISSO QUE O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO (yearly_salary, full_name, current_status) VALUES (19000, 'Max Schwarz', 'employed');
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... E ISSO FUNCIONA..
+
+
+
+
+
+
+
+
+OK, MAS O QUE ACONTECE SE TENTAMOS INSERIR 1 VALUE DE 
+
+
+'job-seeking' lá no field de 'current_status'? (que tem um enum que NÃO PERMITE values que não sejam 'employed', 'unemployed' e 'self-employed')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> SE FAZEMOS ISSO, GANHAMOS O ERROR DE '
+
+
+
+'INVALID INPUT VALUE FOR ENUM EMPLOYMENT_STATUS: job-seeking'...
+
+
+
+
+
+
+
+
+
+
+-----> OK...
+
+
+
+
+
+
+
+
+
+
+
+--> E, CONFORME MENCIONADO,
+
+
+
+
+ESSE É O MESMO COMANDO NO MYSQL,
+
+
+
+
+POR ISSO PODEMOS 
+
+RODAR TAMBÉM 
+
+
+
+
+
+o 
+
+
+
+
+
+
+
+
+INSERT INTO (yearly_salary, full_name, current_status) VALUES (19000, 'Max Schwarz', 'employed');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS INSERIR DATA EM 1 TABLE --> 
+
+
+
+
+
+
+
+
+
+
+ESSE CÓDIGO É UM 'DATA MANIPULATION STATEMENT'...
+
+
+
+
+
+
+
+
+
+-----> OK... AGORA CONSEGUIMOS INSERIR DATA NA NOSSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS O PROFESSOR AGORA QUER 
+1 DESAFIO...
+
+
+
+
+
+
+
+
+
+
+--> QUER QUE ADICIONEMOS 
+
+
+
+MAIS 2 ROWS A ESSA TABLE,
+
+
+COM QUALQUER USER DATA DE NOSSA CHOICE ...  -> 
+
+
+
+MAS 1 DOS USERS QUE VAMOS ADICIONAR DEVERÁ SER 'UNEMPLOYED',
+
+
+
+
+
+
+E __ TER UM SALARY DE '0'.... (pq todos que estão UNEMPLOYED não ganham coisa alguma)..
+
+
+
+
+
+
+
+
+É O CHALLENGE PARA NÓS...
+
+
+
+
+
+--> OK, CONSEGUI...
+
+
+
+
+
+
+
+
+
+--> acho melhor optimizar meu SQLTOOLS...
+
+
+
+
+
+--> NOVO ATALHO,
+
+QUE É 
+
+'CTRL + ALT + S'...
+
+
+
+
+
+--> ISSO ABRE O SQL TOOLS...
+
+
+
+
+
+

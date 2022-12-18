@@ -9,7 +9,7 @@
 
 
 --VARIANTE DE 'insert into' MENOS USADA (considera a ORDEM de colunas na sua table)
-INSERT INTO users VALUES('Arthur Panazolo', 24000, 'employed');  --sempre use '' WRAPPANDO SUAS STRINGS A SEREM INSERIDAS/UPDATADAS, e nunca "" (pq isso resulta em ERROS)...
+-- INSERT INTO users VALUES('Arthur Panazolo', 24000, 'employed');  --sempre use '' WRAPPANDO SUAS STRINGS A SEREM INSERIDAS/UPDATADAS, e nunca "" (pq isso resulta em ERROS)...
 
 
 
@@ -24,12 +24,12 @@ INSERT INTO users VALUES('Arthur Panazolo', 24000, 'employed');  --sempre use ''
 
 
 -- exemplo em que inserimos data em TODOS OS FIELDS de uma row (todas as columns)
-INSERT INTO users (yearly_salary, full_name, current_status) VALUES (24000, 'Arthur Panazolo', 'employed');
+-- INSERT INTO users (yearly_salary, full_name, current_status) VALUES (24000, 'Arthur Panazolo', 'employed');
 
 
 
 
 -- exemplo em que inserimos data em APENAS ALGUNS FIELDS de uma row (apenas o 'salary' e o 'full_name'; 'current-status' FICARÁ EM BRANCO)...
-INSERT INTO users (yearly_salary, full_name) VALUES (24000, 'Arthur Panazolo');
+INSERT INTO users (yearly_salary, full_name) VALUES (26000, 'Victor Panazolo');
 
 
