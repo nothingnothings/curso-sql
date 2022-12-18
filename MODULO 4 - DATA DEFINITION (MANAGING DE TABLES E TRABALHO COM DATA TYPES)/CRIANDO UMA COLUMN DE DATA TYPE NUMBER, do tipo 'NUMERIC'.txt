@@ -1,0 +1,1046 @@
+
+
+
+
+
+
+
+
+
+COMO PRÓXIMO PASSO, O PROFESSOR QUER DEFINIR UMA COLUMN 
+
+
+PARA O 'YEARLY_SALARY'
+
+DE UM DETERMINADO USUÁRIO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO, É CLARO,
+
+DEVERÁ SER UM NUMBER,
+
+
+PQ 
+
+
+1 SALÁRIO É SEMPRE UM NÚMERO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É UM NUMBER --> MAS 
+
+
+QUAL TIPO DE NUMBER QUEREMOS TER:
+
+
+
+
+
+
+
+
+1) INT, SMALLINT 
+
+
+
+
+
+
+2) DECIMAL, NUMERIC  (TEM PRECISION) 
+
+
+
+
+3) FLOAT, REAL (NÃO TEM PRECISION)...
+
+
+
+
+
+
+
+
+
+
+_ PARA _ CLARIFICAR:
+
+
+
+
+
+INTEGERS --> NÚMEROS INTEIROS (sem decimal places) --> NAÕ SÃO FRACTIONAL,
+
+E SIM WHOLE NUMBERS...
+
+
+
+
+
+3, -10, -1831, 9418125...
+
+
+
+
+
+
+E SE 
+
+CREATE TABLE users (
+    full_name VARCHAR(200),   -- NÚMERO MÁXIMO DE CARACTERES: 200 (VARCHAR(X))
+    yearly_salary 
+);
+
+
+
+
+E SE VOCÊ TENTA ENFIAR UM NÚMERO DECIMAL DENTRO DE UMA COLUMN 
+
+CONFIGURADA 
+
+PARA RECEBER 
+
+'INTEGER NUMBERS',
+
+
+ESSE SEU NUMBER SERÁ AUTOMATICMANETE ARREDONDADO PARA O 'NEAREST INTEGER'...
+
+
+
+
+
+
+
+
+
+
+
+------> 'INSERTED NUMBERS WITH DECIMAL PLACES ARE ROUNDED'....
+
+
+
+
+
+
+---> INTEGER NUMBERS SÃO ÓTIMOS PARA:
+
+
+
+1) MATHEMATICAL CALCULATIONS 
+
+
+
+2) OFERECEM GRANDE PERFORMANCE...
+
+
+
+
+3) EXISTEM DIFERENTES TIPOS DE INTEGER,
+COMO 'SMALL INT',
+
+
+QUE PERMITEM VOCÊ, COMO A PESSOA QUE DEFINE A TABLE,
+
+RESTRINGIR A 'RANGE' 
+
+DE INTEGER VALUES QUE PODEM SER USADOS... (ou seja, os 'SMALLEST' E 'BIGGEST' INT VALUES que poderão ser inseridos)...
+
+
+--> ISSO TE DEIXA SALVAR UM POUCO DE ESPAÇO NO FILE SYSTEM, NO FINAL DSA CONTAS,
+
+
+PQ AI VOCÊ EVITA SALVAR ESPAÇO PARA NÚMEROS LARGOS, NÚMEROS LARGOS QUE 
+
+PODEM NUNCA ACABAR SENDO INSERIDOS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) DECIMAL E NUMERIC --> NÚMEROS COM DECIMAL VALUES QUE EXIGEM PRECISÃO...
+
+
+
+
+
+
+-> A TRICK COM DECIMAL E NUMERIC É QUE 
+
+
+
+'''ARMAZENAMOS ESSES NUMBERS EXATAMENTE''',
+
+com precisão exata... 
+
+
+
+
+
+
+---> NUNCA EXISTIRÁ 
+
+DATA LOSS (
+
+     
+)
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ESSES VALUES 'DECIMAL' E 'NUMERIC'
+
+SÃO 
+ÓTIMOS 
+
+PARA ARMAZENAR COISAS COMO 
+
+
+'''PRODUCT PRICES''',
+
+
+coisas que 
+
+
+
+VOCÊ 
+
+_ NÃO FICA OK _ COM 'PERDER DATA'... -----> a diferença entre 
+
+
+
+
+0.98 
+
+
+e 
+
+
+0.99 
+
+
+
+
+
+--> É UMA DIFERENÇA DE 1 CENTAVO,
+
+
+MAS QUE 
+
+PODE FAZER DIFERENÇA SE VOCÊ ESTÁ VENDENDO 100.000 unidades (é 1000 reais, no caso)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O DOWNSIDE DE USAR ESSES EXACT NUMBERS,
+
+E A RAZÃO PARA 
+
+
+
+NEM SEMPRE OS UTILIZARMOS,
+
+
+É QUE 
+
+
+
+___ FAZER STORE E USE DELES __ VEM __ SEMPRE _ COM UM PERFORMANCE COST (
+
+
+
+    SEU USO 
+
+    É MAIS LENTO,
+
+    SÃO MAIS PESADOS,
+
+    QUERIES PODEM DEMORAR MAIS.... é claro QUE 
+
+    ISSO 
+
+    DEPENDE 
+
+
+    DA QUANTIDADE 
+
+    DE DATA QUE ESTÁ SENDO ARMAZENADA NA DAATBASE,
+
+
+
+    E DA EXATA QUERY QUE ESTÁ SENDO EXECUTADA...
+)
+
+
+
+
+
+
+
+------> SLOW PERFORMANCE...
+
+
+
+
+
+
+
+
+-->  COMO A PESSOA QUE 
+
+DEFINE A TABLE E OS DATA TYPES PARA AS COLUMNS,
+
+
+VOCÊ 
+
+ACTUALLY 
+
+PODE ESCOLHER QUAL TIPO DE PRECISION 
+
+
+VOCÊ QUER USAR QUANDO VOCÊ DEFINE 
+
+ 
+ DECIMAL/NUMERIC 
+
+ COMO 
+
+ 
+
+ DATA TYPES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS PARA CASOS EM QUE 
+
+ ''QUEREMOS ARMAZENAR FRACTIONAL NUMBERS',
+
+
+
+ COM DECIMAL PLACES,
+
+
+ MAS EM QUE 
+
+
+ VOCê 
+
+ NÃO PRECISA 
+
+
+ ARMAZENAR 
+
+ OS VALORES EXATOS,
+
+ VOCÊ PODE USAR 
+ OS TYPES DE 
+
+
+
+
+
+
+
+ 3) FLOAT, REAL -------->  NÚMEROS COMO 
+
+
+
+ 724.12, -8.195, 
+
+ 51431.1...
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> MAS AGORA OS ARMAZENAMOS SEM EXATIDÃO,
+
+
+ E SIM 
+
+
+
+
+ COM _ ''APROXIMAÇÃO'' ---> É POR ISSO QUE COM ELES PODEMOS TER CERTA 
+
+
+ LOSS DE DATA (algum decimal value pode acabar errado) ---> É POR ISSO QUE 
+
+ DEVEMOS 
+
+ OS UTILIZAR EM 
+
+ CASOS 
+
+
+
+ QUE NÃO INTERESSA SE É '10.13' OU '10.14' (EXEMPLO GERAL),
+
+
+
+
+
+ AÍ 
+
+ ESSES 
+
+ DATA TYPES PODEM SER GREAT,
+
+
+
+
+pq 
+
+
+
+esses data types, ao contrário de 'decimal' e 'numeric',
+
+
+
+NOS DÃO 
+
+
+
+
+_ÓTIMA PERFORMANCE... ------> OU SEJA,
+
+
+EVITAMOS O 
+
+PERFORMANCE PROBLEM
+
+
+QUE TEMOS 
+
+
+
+
+COM DECIMAL E NUMERIC...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... E  TEMOS DIFERENTES VARIAÇÕES,
+
+
+'FLOAT',
+
+
+'REAL',
+
+
+
+QUE 
+
+
+
+DEFINEM 
+
+
+DIFERENTES ESPAÇOS RESERVADOS PARA OS NÚMEROS ARMAZENADOS,
+
+
+
+e 
+
+DIFERENTES LIMITES (quando ultrapassados os limites, existe 'data loss')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... ESSES SÃO OS 3 DATA TYPES QUE TEMOS PARA 'NUMBERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS QUAL É O TIPO QUE DEVEMOS USAR PARA O 'YEARLY SALARY'? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TALVEZ O BOM SEJA 
+
+
+
+ARMAZENAR DE FORMA 'EXACT',
+
+
+PQ AQUI ESTAMOS FALANDO DE DINHEIRO... ------> E É CLARO QUE 
+
+
+
+
+1 SALÁRIO 
+
+
+NEM SEMPRE É EXATO... ---> ELE PODERIA 
+
+
+SER ALGO COMO 
+
+
+'19, 000.12' -------> E ISSO PODERIA 
+
+
+SER ARMAZENADO EXATAMENTE,
+
+
+PARA QUE PUDESSE SER USADO EM CÁLCULOS,
+
+SEM TER NENHUMA
+
+
+INACCURACY..
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE ISSO VEM A UM 'PERFORMANCE COST'.. apesar de ser necessário...
+
+
+
+
+
+
+
+
+
+porém, ele REALMENTE é necessário, esse data type, aqui?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> MESMO QUE O 'SALARY' SEJA UMA FORMA DE 'DINHEIRO',
+
+
+ELE _ NÃO É 
+
+
+A MESMA COISA QUE O 'PRICE'
+ 
+ DE 1 PRODUCT 
+
+ QUE 
+
+ TALVEZ ESTEJAMOS FETCHEANDO PARA A NOSSA ONLINE SHOP...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> NESSE CASO,
+
+ DE ONLINE SHOPS,
+
+
+
+ SE ESTAMOS AS CONSTRUINDO E ESTAMOS LIDANDO COM EXACT PRICES,
+
+
+
+
+ EXATIDÃO 
+
+
+
+ É IMPORTANET PARA QUE 
+
+ NOSSOS CUSTOMERS NÃO SEJAM COBRADOS MT/MT POUCO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS SE ESTAMOS FALANDO DE 'SALARIES'
+
+ QUE 
+
+ SÃO 
+
+
+
+
+ CONTADOS COMO  PARTE DE UMA 'TALENTS POOL',
+
+
+
+
+ É 
+
+
+ PROVÁVEL QUE 
+
+ ESSES VALUES ESTEJAM SENDO ARMAZENADOS POR 'STATISTICAL REASONS' --> E SE FOR ESSE USO,
+
+
+
+
+
+ REALMENTE TALVEZ NÃO IMPORTE 
+
+ A DIFERENÇA ENTRE 
+
+ '19, 000.12' 
+
+
+
+ e 
+
+ '19, 000.13'...
+
+
+
+
+
+
+
+
+
+
+
+
+ -> OU SEJA,
+
+
+
+ TER EXATIDÃO NÃO É TÃO IMPORATNTE, AQUI...-> ARMAZENAR VALUES APROXIMADOS,
+
+ AQUI,
+
+ JÁ 
+
+ É O SUFICIENTE...
+
+
+
+
+
+
+
+ ----> E PODEMOS USAR 1 DESSES TYPES MENOS EXATOS (como 'FLOAT' E 'REAL') 
+
+
+
+
+
+
+
+ MAS SE PENSARMOS SOBRE SALARIES, DE NOVO,
+
+  
+
+  não é TÃO COMUM 
+
+
+
+
+
+  OS EXPRESSARMOS COMO NÚMEROS COM 'DECIMAL VALUES'...
+
+
+
+
+
+
+
+
+
+
+
+  --> SE VOCÊ DIZ A ALGUÉM O SEU SALÁRIO,
+
+
+  VOCÊ 
+
+  TIPICAMENET DIZ ALGO COMO '25 THOUSAND',
+
+
+
+
+  e não '25 thousand and 15'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> É POR ISSO QUE TALVEZ FAÇA SENTIDO ARMAZENARMOS ESSE VALUE COMO '15000',
+
+
+
+  COMO UM VALUE INTEIRO,
+
+  PQ 
+
+
+  NÃO VAMOS FAZER CÁLCULOS SUPER EXATOS... -----> AÍ PODEMOS CONSEGUIR BOA PERFORMANCE 
+
+  SEM NOS 
+
+  IMPORTARMOS 
+
+  AT ALL COM 
+
+  OS DECIMAL VALUES...
+
+
+
+
+
+
+
+
+
+
+  --> PORTANTO, NESSE CASO,
+
+  VAMOS USAR O 
+
+
+
+  DATA TYPE DE 'INTEGER'  PARA 
+
+
+  ESSA COLUNA DE 'SALARY'...
+
+
+
+
+
+
+  --> MAS AGORA FAZ SENTIDO A RAZÃO DO PROFESSOR USAR ESSE INTEGER DATA TYPE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> O PROFESSOR NOS CONVENCEU A USAR ESSE DATA TYPE.. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> OK.. MAS E SE QUISERMOS ARMAZENAR ALGO COMO '20.000,12' --> 
+
+
+
+
+
+  MESMO NESSES CASOS,
+
+  VOCÊ 
+  NÃO PRECISA 
+
+
+
+  TER EXATIDÃO COMPLETA (
+
+
+bastaria 
+
+
+ter os 'FLOATS' e 'REALS'...
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  -> NO CASO DO SALARY, VAMOS USAR O INTEGER...
+
+
+
+
+
+
+
+
+
+
+
+  É POR ISSO QUE O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+CREATE TABLE users (
+    full_name VARCHAR(200),   -- NÚMERO MÁXIMO DE CARACTERES: 200 (VARCHAR(X))
+    yearly_salary INT,
+    
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRONTO....
+
+
+
+
+
+
+
+
+DEFINIMOS COMO 'INT' (isso é suportado, essa sigla, pela maior parte dos database systems)...
+
+
+
+
+
+
+
+
+
+É SUPER IMPORTANTE ENTENDER QUAIS DATA TYPES TEMOS , E QUANDO USAR CADA 1 DELES..
