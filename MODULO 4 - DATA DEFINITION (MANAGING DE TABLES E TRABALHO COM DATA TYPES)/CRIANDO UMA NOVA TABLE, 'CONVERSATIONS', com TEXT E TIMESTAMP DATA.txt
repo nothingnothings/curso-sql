@@ -121,18 +121,12 @@ UM TIMESTAMP (talvez rodar uma function nativa sql?)
 
 
 
-
-CREATE TABLE (
+CREATE TABLE conversations (
     message TEXT,
     date_sent GET_DATE(),
     user TEXT,
-    employer TEXT 
+    employer TEXT
 );
-
-
-
-
-
 
 
 
@@ -149,7 +143,7 @@ OU TALVEZ SEJA ASSIM:
 
 
 
-CREATE TABLE (
+CREATE TABLE conversation (
     message TEXT,
     date_sent DATE(),
     user TEXT,
@@ -167,3 +161,386 @@ CREATE TABLE (
 
 
 
+
+------------------------------------
+
+
+
+
+
+
+
+
+
+
+PROFESSOR COMEÇA ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+
+
+
+
+);
+
+
+
+
+
+
+
+
+
+
+CERTO..
+
+
+
+
+
+
+
+
+AÍ QUEREMOS ARMAZENAR O 'user_name',
+
+
+e o 'employer_name'..
+
+
+
+
+
+
+
+
+
+eX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent DATE(),
+    user_name TEXT,
+    employer_name TEXT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER QUE O USER SEJA UM 'VARCHAR(X)'....
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT,
+    date_sent DATE(),
+    user_name VARCHAR(200),
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- VAMOS QUERER VINCULAR ESSA COLUMN DE 'user_name'
+
+LÁ COM 
+
+OS USERS na table de 'users'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> certo... a message eu coloquei como 'TEXT'...
+
+
+
+
+-> MESSAGES PODEM SER 'FAIRLY SHORT' -> e nosso app pode impor um limite de caracteres --> por isso o professor colocou um varchar de 2000 caracteres..
+
+
+
+
+
+
+
+
+
+
+
+
+
+_> MAS TAMBÉM PODEMOS TER UM APP EM QUE 
+
+
+MESSAGES PODEM SER SUPER LOGNAS,
+
+
+
+POR ISSO USAMOS 
+
+O BUILT-IN DATA TYPE DE 'TEXT'...
+
+
+
+
+
+
+
+
+
+SETTAMOS ASSIM,
+
+
+E AÍ,
+COM ESSE DATA TYPE,
+
+
+
+
+
+ficamos bem....
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS COMO PODEMOS COLOCAR O 'date_sent'?
+
+
+
+
+
+
+----> MAS VAMOS QUERER MAIS DO QUE O 'DATE,'
+
+
+PQ 
+
+VAMOS QUERER O 'DATE AND TIME' ...--> PARA CONSEGUIRMOS ISSO,
+
+
+DEVEMOS USAR O DATA TYPE DE 
+
+'TIMESTAMP'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    message TEXT, --STRINGS DE QUALQUER LENGTH
+    date_sent TIMESTAMP, --suportado PELO MYSQL E POSTGRESQL..
+    user_name VARCHAR(200), --strings de length 200 (200 bytes)
+    employer_name VARCHAR(200)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PODERÍAMOS USAR 'DATE',
+
+
+MAS AQUI VAMOS USAR 'TIMESTAMP' (que é o DIA + HORA)..
+
+
+
+
+
+
+
+
+
+--> MAIS TARDE,
+
+
+VEREMOS COMO PODEMOS 
+
+
+''''SET THIS TIMESTAMP TO A DEFAULT VALUE'''  -> PARA QUE 
+
+
+
+SEJA LOGGADO 1 VALUE NESSE FIELD SEMPRE QUE 
+1 NOVA ENTRY É CRIADA EM 1 DE NOSSAS TABLES....
+
+
+
+
+
+
+
+
+
+OK, ESSA TABLE ESTÁ COMPLETA....
+
+
+
+
+
+
+
+
+
+
+
+--> REFRESHAMSO A P[AGINA..
+
+]
+
+
+
+
+
+
+
+
+
+
+AGORA TEMOS ESSAS 3 TABLES..
+
+
+
+
+
+
+
+-> DEVEMOS ADICIONAR UM PCO DE EXTRA DATA, 
+
+
+ANTES DE 
+
+
+
+ENTÃO FAZERMOS 'FINE-TUNE'
+
+DESSAS TABLES,
+
+PARA ENTÃO APRENDERMOS DEFAULT VALUES E CONSTRAINTS...
