@@ -1,0 +1,1305 @@
+AGORA 
+
+DIGAMOS QUE 
+
+
+NÃO ESTAMOS CONTENTES, AINDA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOS JÁ RECRIAMOS NOSSAS TABLES,
+ COM AQUELAS SETTINGS,
+
+ MAS DIGAMOS QUE AGORA QUEREMOS 
+
+
+
+
+ FAZER AINDA MAIS CHANGES..
+
+
+
+
+
+
+
+
+
+ DIGAMOS QUE QUEREMOS:
+
+
+
+
+
+ 1) AUMENTAR O NÚMERO DE CARACTERES permitidos para 'user_name', em 'conversations' (queremos colocar '300' caracteres, no VARCHAR(X))...
+
+
+
+
+
+ 2) QUEREMOS TROCAR 'yearly_revenue' DE DATA TYPE 'NUMERIC(5, 2)' (EXACT PRECISION) PARA 1 VALOR APROXIMADO, PARA 1 'FLOAT VALUE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO É POSSÍVEL TANTO POR MEIO DE:
+
+
+
+
+
+
+
+ 1) DROP DA TABLE E RE-CREATE,
+
+ COM O USO DAS NOVAS SETTINGS..
+
+
+
+
+
+
+
+
+
+ 2) USAR 1 COMANDO DEDICADO PARA O 'UPDATE' DE 1 TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> TIPICAMENTE VOCÊ USARÁ O '2',
+
+
+
+
+ PQ 
+
+
+
+ VOCê RARAMENTE VAI QUERER PERDER TODA A DATA ARMAZENADA EM 1 DETERMINADA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+ --> VOCÊ NÃO QUER FAZER 'THROW AWAY'
+
+ DE DATA JÁ EXISTENTE...
+
+
+
+
+
+
+
+
+
+
+ --> PROFESSOR CRIA UM NOVO ARQUIVO,
+
+
+
+
+ de nome 
+ 'update tables'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA ISSO,
+
+ VOCÊ TEM O COMANDO DE 
+
+ 'ALTER TABLE',
+
+
+
+
+
+
+
+
+ QUE EXISTE EM BASICAMNETE TODOS OS SISTEMAS SQL...
+
+
+
+
+
+
+
+ -> mas A MANEIRA DE UTILIZAR 
+
+ ESSE COMANDO _ DIFERE,
+
+ DE SISTEMA PARA SISTEMA..
+
+
+
+
+
+
+
+
+
+
+ ----> MAS VOCÊ SEMPRE VAI USAR 'ALTER TABLE'
+
+
+no início...  -->  ISSO E o NOME DA TABLE QUE VOCÊ QUER ALTERAR...
+
+
+
+
+
+--> COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA QUEREMOS COMUNICAR AO SQL QUE 'QUEREMOS UPDATAR 1 COLUMN ESPECÍFICA'...
+
+
+
+
+
+
+
+
+
+
+--> PQ É ASSIM QUE O ALTER TABLE FUNCIONA:
+
+
+
+
+
+> VOCÊ PRIMEIRAMENTE ESCREVE 'alter table' e o table name,
+
+
+E AÍ 
+
+
+VOCê 
+
+
+
+
+
+
+
+
+
+__ DEVE __ ESPECIFICAR ''' O QUE VOCÊ QUER ALTERAR'''....
+
+
+
+
+
+
+
+
+
+--> se você quer ''''RENOMEAR 1 TABLE'''',
+
+
+
+
+
+isso é possível...
+
+
+
+
+
+
+
+
+--> VOCê TAMBÉM PODE MUDAR 1 COLUMN ESPECÍFICA..
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR MENCIONA:
+
+
+
+
+
+
+
+
+OS  OFFICIAL DOCS É SEMPRE O LUGAR 
+
+
+A SER CHECADO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ALTER TABLE DIFERE BASTANTE DE SYSTEM PARA SYSTEM...
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRES,
+
+
+
+APRENDEMOS QUE 
+
+
+SE PODEMOS 
+
+RENOMEAR 1 TABLE,
+
+
+
+FAZEMOS ISSO  com 
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE table_name 
+    RENAME TO new_name 
+
+
+
+
+
+
+
+
+    --> É ASSIM QUE PODEMOS RENOMEAR UMA TABLE, COM O POSTGRES...
+
+
+
+
+
+
+
+
+
+-----> AQUI, NO ENTANTO, O PROFESSOR NÃO QUER RENOMEAR,
+
+
+
+E SIM 
+
+
+
+
+QUER APENAS MODIFICAR UMA COLUMN....
+
+
+
+
+
+
+
+
+
+
+MAS MESMO O MODIFY DE UMA COLUMN TEM DIFERENÇAS 
+
+ENTRE DATABASE SYSTEMS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRES,
+
+MODIFICAMOS 
+
+
+UMA COLUMN 
+
+
+
+POR MEIO DO COMANDO 'ALTER COLUMN'...
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+ALTER COLUMN
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers
+ALTER COLUMN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO NÃO É RECONHECIDO COMO UMA KEYWORD PELO EDITOR DE TEXTO,
+
+
+
+MAS É ASSIM QUE FAZEMOS ISSO...
+
+
+
+
+
+
+
+
+
+
+
+''''PLEASE NOTE THAT ALTER COLUMN IS PART OF THE _ ALTER TABLE _ STATEMENT!!! ALTER 
+
+TABLE SIMPLESMENTE 
+
+É UM 
+COMANDO GENÉRICO QUE '''TE DEIXA RODAR DIFERENTES UPDATE OPERATIONS'''''' ... (COMO 'ALTER COLUMN')...
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers  ---alter table é um TERMO GUARDA-CHUVA, pq te deixa RODAR UM MONTE DE OPERAÇÕES ESPECIAIS...
+ALTER COLUMN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AÍ VOCÊ ESPECIFICA O 'COLUMN NAME' da column que você quer alterar...
+
+
+
+
+
+
+
+
+
+escolhemos yearly_revenue ---------> DEPOIS DISSO,
+
+
+
+DESCREVEMOS ' O QUE QUEREMOS FAZER'...
+
+
+
+
+
+
+
+
+
+
+-----> TIPO ASSIM:
+
+
+
+
+
+
+ALTER TABLE employers
+ALTER COLUMN yearly_revenue 
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS O QUE PODEMOS FAZER, POR EXEMPLO?
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS USAR 'RENAME',
+
+
+PARA __ RENOMEAR 
+
+
+ESSA 
+
+
+COLUMN, TIPO ASSIm:
+
+
+
+
+
+
+ALTER TABLE employers
+ALTER COLUMN yearly_revenue RENAME xxxxx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ QUER 
+
+
+
+__ALTERAR _ O DATA TYPE,
+
+NO ENTANTO,
+
+VOCÊ 
+
+FAZ 
+
+
+ISSO 
+
+
+COM 
+
+
+
+'SET DATA TYPE'... --> O 'SET DATA TYPE'
+
+
+
+É USADO 
+
+
+
+LÁ NO POSTGRES,
+
+
+E É BEM FREQUENTE...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+ALTER COLUMN yearly_revenue SET DATA TYPE   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+VOCÊ ESPECIFICA 
+
+O DATA TYPE...
+
+
+
+
+
+
+
+
+AQUI, NO CASO,
+
+O PROFESSOR VAI QUERER CONVERTER 
+
+PARA 
+
+
+'FLOAT(5, 2)'...
+
+
+
+
+
+
+
+
+
+
+--> ALTER TABLE employers 
+ALTER COLUMN yearly_revenue SET DATA TYPE FLOAT(5,2)   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, mas o que ACONTECE COM OS VALUES JÁ EXISTENTES NESSA TABLE?
+
+
+
+
+BEM, ELES SERÃO CONVERTIDOS AUTOMATICAMENTE --> MAS É CLARO QUE 
+
+VOCÊ 
+
+NÃO QUER 
+FAZER ISSO 
+
+
+O 
+
+TEMPO TODO,
+
+
+PQ É PERFORMANCE-INTENSIVE...
+
+
+
+
+
+
+
+
+
+
+--> OK, ISSO VAI DEFINIR O DATA TYPE COMO 'FLOAT(5,2)'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK.... JÁ NO 'MYSQL',
+
+
+O COMANDO É UM POUCO DIFERENTE....
+
+
+
+
+
+
+
+
+NÃO É 'ALTER COLUMN',
+
+E SIM 
+
+'MODIFY COLUMN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- ALTER TABLE employers  ---alter table é um TERMO GUARDA-CHUVA, pq te deixa RODAR UM MONTE DE OPERAÇÕES ESPECIAIS...
+-- MODIFY COLUMN
+
+
+-- ALTER TABLE employers
+-- MODIFY COLUMN yearly_revenue RENAME century_revenue -- EXEMPLO DE OPERAÇÃO POSSÍVEL, DENTRO DE 'ALTER TABLE'...
+
+
+
+--- obs:: NO MYSQL, O TERMO é 'MODIFY COLUMN', e não ALTER COLUMN
+
+
+ALTER TABLE employers 
+MODIFY COLUMN yearly_revenue SET DATA TYPE FLOAT(5,2)   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK, 
+
+
+
+MAS, NO MYSQL,
+
+
+NÃO PRECISAMOS ESCREVER AQUELA KEYWORD DE 
+
+'SET DATA TYPE',
+
+
+E SIM 
+
+
+
+
+
+
+BASICAMENTE 
+
+
+
+COLOCAMOS O DATA TYPE DESEJADO NESSA COLUMN...
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+MODIFY COLUMN yearly_revenue FLOAT(5,2)   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+
+
+
+
+
+
+
+
+
+
+
+você PODE DEFINIR TAMBÉM 'DEFAULT VALUES' para essa column, se desejar..
+
+
+
+
+
+
+
+
+
+
+OK.. 
+
+ISSO FOI PARA A TABLE DE 'EMPLOYERS'...
+
+
+
+
+
+
+
+
+
+
+AGORA VAMOS 
+
+
+
+
+CONTINUAR COM O POSTGRES...
+
+
+
+
+
+
+
+
+
+----> NOS CONECTAMOS AO POSTGRESQL....
+
+
+
+
+
+
+
+--> PARA O 'POSTGRES',
+
+O 
+
+
+
+POSTGRES não aceita 'FLOAT(5,2)",
+
+
+
+e sim 
+
+apenas aceita solto, assim: 
+
+
+'FLOAT'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+ALTER TABLE employers 
+ALTER COLUMN yearly_revenue SET DATA TYPE FLOAT   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCê DEFINE FLOAT SÓ ASSIM,
+
+
+
+E ISSO FAZ SENTIDO,
+
+
+PQ __ ESSE VALUE SERÁ APROXIMADO DE QUALQUER JEITO,
+
+POR ISSO NÃO  PRECISAMOS DEFINIR 
+
+
+
+
+QUANTA PRECISÃO QUEREMOS TER...
+
+
+
+
+
+
+
+(
+
+    NO MYSQL FAZ SENTIDo,
+
+    mas essa maneira de usar 'FLOAT' também já resta DEPRECADA.. ---> podemos 
+
+    usar 
+
+    FLOAT sem mais nada, no caso..
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+-- ALTER TABLE employers  ---alter table é um TERMO GUARDA-CHUVA, pq te deixa RODAR UM MONTE DE OPERAÇÕES ESPECIAIS...
+-- MODIFY COLUMN
+
+
+-- ALTER TABLE employers
+-- MODIFY COLUMN yearly_revenue RENAME century_revenue -- EXEMPLO DE OPERAÇÃO POSSÍVEL, DENTRO DE 'ALTER TABLE'...
+
+
+
+--- obs:: NO MYSQL, O TERMO é 'MODIFY COLUMN', e não ALTER COLUMN
+
+
+
+
+ALTER TABLE employers 
+-- MODIFY COLUMN yearly_revenue FLOAT(5,2)   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+MODIFY COLUMN yearly_revenue FLOAT  -- e podemos escrever 'FLOAT' assim, sem a aproximação providenciada pelos '()'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+certo...
+
+
+
+
+
+
+
+
+
+aí podemos rodar isso,
+
+e dá certo...
+
+
+
+
+
+
+
+--> PARA O MYSQL,
+
+NOS CONECTAMOS À DATABASE MYSQl...
+
+
+
+
+
+
+
+
+PEGAMOS O EXEMPLO MYSQL,
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+MODIFY COLUMN yearly_revenue FLOAT; 
+
+
+
+
+
+
+
+
+
+
+-----> MAS SE EXAMINARMOS NOSSA TABLE,
+
+
+VEREMOS QUE 
+
+
+O TYPE DE NOSSA COLUMN ESTARÁ COMO 'FLOAT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok.. é assim que podemos mudar isso....
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR TAMBÉM QUER MUDAR A TABLE DE 'users',
+
+
+PQ 
+
+
+QUER 
+
+
+ASSEGURAR 
+
+
+QUE 
+
+
+
+O 
+
+'full_name'
+
+
+SEJA DE ATÉ 'VARCHAR(300)'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+ALTER COLUMN yearly_revenue SET DATA TYPE FLOAT   --outro tipo de OPERAÇÃO (altera o DATA TYPE de uma column)...
+
+
+ALTER TABLE users 
+ALTER COLUMN full_name SET DATA TYPE VARCHAR(300);
+
+
+
+
+
+
+
+
+
+ ESCREVI TIPO ASSIM:
+
+
+
+
+
+
+
+
+ 
+ALTER TABLE users 
+ALTER COLUMN full_name SET DATA TYPE VARCHAR(300);
+
+
+
+
+
+
+
+(SINTAXE POSTGRESQL)...
+
+
+
+
+
+CERTO, FUNCIONOU..
+
+
+
+
+
+
+AGORA DEVO PASSAR PARA A PRÓXIMA AULA...
