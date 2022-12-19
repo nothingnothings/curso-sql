@@ -1,0 +1,620 @@
+
+
+
+
+
+
+
+
+
+---> TEMOS O CÓDIGO DE 
+
+
+
+
+
+
+
+
+ALTER TABLE users 
+MODIFY COLUMN full_name VARCHAR(300);
+
+
+
+
+
+
+
+
+
+AGORA SABEMOS COMO UPDATAR TABLES, PARA TANTO O POSTGRESQL COMO O MYSQL..
+
+
+
+
+
+
+
+-_> A ESSE PONTO,]
+
+
+
+TEMOS ESSAS TABLES COM A ESTRUTURA PROPER,
+
+
+E TBM A DATA NESSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> DEVEMOS DAR UMA OLHADA NESSA DATA,
+
+ESPECIFICAMENTE A DATA ARMAZENADA NA TABLE DE 'USERS'...
+
+
+
+
+
+
+
+
+
+
+--> TODOS NOSSOS ROWS DE 
+
+
+USERS ESTÃO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESTAMOS COM ISTO:
+
+
+
+
+
+
+
+
+
+full_name   yearly_salary    current_status 
+
+
+Max         1900000           self-employed 
+Julie        250000            employed 
+Michael         0                 unemployed 
+
+
+
+
+
+
+
+
+
+
+
+----> estamos como '0' 
+
+,
+
+como VALUE..
+
+
+
+
+
+
+
+
+ISSO FAZ SENTIDO, MAS ISSO PODE SER UM PROBLEMA..
+
+
+
+
+
+
+
+
+
+
+
+
+-> O STORE DE '0', COMO UM NÚMEOR, PODE SER UM PROBLEMA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ QUANDO TRABLAHAMOS COM DATA,
+
+
+INDEPENDENTEMENTE DE SER UM 'SQL SYSTEM 'OU QUALQUER OUTRO 
+
+SISTEMA 
+
+DE STORAGE,
+
+
+
+
+
+
+
+É NECESSÁRIO DIFERENCIAR ENTRE:
+
+
+
+
+
+
+
+
+1) NO  DATA 
+
+
+
+
+
+2) DATA QUE EXISTE, MAS QUE É 0...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> O PROFESSOR QUER MOSTRAR O QUE ELE ESTÁ DIZEND...
+
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE QUEREMOS RODAR UMA QUERY EM QUE 
+
+
+
+
+__ CALCULAMOS O 'AVERAGE SALARY'
+
+
+DE NOSSOS USER...
+
+
+
+
+
+
+
+
+
+
+
+
+----> É NESSE CASO, E EM OUTROS, QUE TER 1 SALARY COMO '0' 
+
+
+PODE 
+
+
+
+
+TRAZER PROBLEMAS...
+
+
+
+
+
+
+
+
+
+
+
+-_> ESSE '0' DO MICHAEL SMITH PODE ACABAR __ DISTORCENDO NOSSA ANÁLISE... --> 
+
+
+
+
+
+
+ISSO A DEPENDER DA ANÁLISE QUE ESTAMOS RODNADO -->  POR EXEMPLO, SE ESTMAOS 
+
+
+CALCULANDO O AVERAGE DE SALARIES,
+
+
+
+
+
+
+
+AÍ, PARA OS NÚMEROS NO SLIDE,
+
+
+FICARÍAMOS COM UM RESULTADO DE 
+
+
+
+'11, 3333.33' ------> ISSO 
+
+
+
+
+
+
+
+
+PQ SE DESEJAMOS CALCULAR 
+
+
+
+
+O VALUE DE TODOS OS SALARIES 
+
+EM NOSSA DATABASE,
+
+
+TALVEZ QUEIRAMOS 
+
+
+
+CALCULAR APENAS A MÉDIA DOS USERS QUE REALMENTE POSSUEM SALARY (ignorados os users com salary de 'nothing'/'null')...
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ARMAZENAR '0' COMO UM VALUE PODE SER PERIGOSO,
+
+
+
+SE VOCê 
+
+
+TIVER ANÁLISES COMO ESSAS... -> É POR ISSO QUE 
+
+
+É PREFERÍVEL,
+NESSES CASOS,
+
+
+TER 
+
+
+
+
+O VALUE DE 'NULL' ( que é um VALUE ESPECIAL, NO SQL WORLD)..
+
+
+
+
+
+
+
+
+
+
+
+
+NULL --> SIGNIFICA UQE NÃO EXISTIRÁ DATA NESSA COLUMN --> NÃO É A MESMA COISA QUE '0'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> isso é realmente preferível em alguns cenários,
+
+
+PQ 'NULL VALUES'
+
+
+SERÃO IGNORADOS PARA UM MONTE DE SQL OPERATIONS, 
+
+
+
+
+
+COMO ESSA PRÓPRIA 'OPERATION QUE CALCULA UM AVERAGE'..
+.
+
+
+
+
+
+
+
+
+
+
+
+-> E PARA DEIXAR ISSO MENOS ABSTRATO, VOLTAMOS AO NOSSO CÓDIGO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO NOSSO CÓDIGO, DIGAMOS QUE
+
+
+
+
+
+
+
+NÃO QUEREMOS FAZER O 'SELECT  * FROM users',
+
+
+E SIM 
+
+QUEREMOS 
+
+
+
+'''OBTER O AVERAGE DOS yearly_SALARY DE TODOS OS USER..'''
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS OBTER ISSO POR MEIO DA FUNCTION DE 'AVG()',
+
+
+
+QUE É UMA BUILT-IN FUNCTION DO SQL... (suportada tnato no POSTGRES como no MYSQL)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+FICA TIPO 
+
+
+
+
+
+
+
+SELECT AVG() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> aí passamos 
+
+O NOME DA COLUMN 
+
+PELA QUAL QUEREMOS PEGAR O AVERAGE...
+
+
+
+
+
+
+
+
+-_> depois colocamos 'FROM',
+
+
+
+
+
+
+E AÍ O NOME DA TABLE 
+
+
+EM QUE QUEREMOS PEGAR ESSA MÉDIA..
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT AVG(yearly_salary) FROM users;
+
+
+
+
+
+
+
+
+
+
+
+
+---> ESSA FUNCTION É AQUILO QUE 
+
+
+
+É CHAMADO DE 'AGGREGATE FUNCTION' --> É CHAMADA ASSIM PQ 
+
+
+'AGREGA MÚLTIPLOS VALUES EM 1 NÚMERO ÚNICO' (nesse caso aqui)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> HÁ MTAS OUTRAS FUNCTIONS ASSIM,
+
+
+
+E AS VEREMOS AO LONGO DO CURSO...
+
+
+
+
+
+
+
+
+--> RECEBEMOS 1 SINGLE NUMBER (146666.666667)
+
+
+
+
+
+
+
+
+-----> ESSE É O AVERAGE DOS 3 RECORDS QUE TEMOS --> 
+
+
+
+
+
+
+
+SE CONSTATARMOS 
+
+
+
+OS RECORDS NESSA TABLE,
+
+
+
+VEREMOS QUE 
+
+O 
+
+
+
+VALUE DE '0' FOI CONSIDERADO NESSA MÉDIA, O QUE PODE SER RUIM....
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE É O PROBLEMA OUTLINEADO NO SLIDE... --> ESSE SINGLE NUMBER PODE ACABAR NÃO SENDO O NÚMERO DESJEAOD POR NÓS...
+
+
+
+
+
+
+
+
+
+E É AÍ QUE ESSE VALUE ESPECIAL DE 'NULL' SE TORNA IMPORTANTE...
