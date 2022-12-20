@@ -1,0 +1,185 @@
+NA AULA ANTERIOR, ESTUDAMOS 
+
+
+
+
+'''ALLOWING OR FORBIDDING NULL Values''',
+
+
+
+
+
+
+
+
+
+por meio 
+
+
+
+
+DA CONSTRAINT DE 'NOT NULL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOT NULL --> CONSTRAINT QUE ENFORCES 
+
+
+QUE 
+
+
+'CERTA COLUMN NÃO DEVE SER NULL',
+
+quando inserimos alguma data...
+
+
+
+
+
+
+
+
+--> ALGUMAS COLUMNS SÃO PREFERÍVEIS COMO 'NULL' QUANDO NÃO DESEJAMOS EMBAÇAR NOSSAS CALCULATIONS..
+
+
+
+
+
+
+
+
+--> MAS 'NOT NULL' 
+
+
+NÃO É O ÚNICO TIPO DE CONSTRAINT QUE PODEMOS ADICIONAR AS NOSSAS COLUNAS...
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ 'NOT NULL' 
+ 
+ REALMENTE RESTRINGE OS VALUES QUE VOCÊ 
+
+
+ PODE _ COLOCAR EM 1 COLUMN (
+
+    ou seja, 
+
+    FORÇA QUE VOCÊ DEVE PROVIDENCIAR 1 VALUE...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... MAS E SE VOCÊ QUER ASSEGURAR QUE 
+
+
+ '''1 VALUE SEJA PROVIDENCIADO''' (EM GERAL),
+
+
+
+
+
+ MAS QUE 
+
+ ESSE VALUE 
+
+ TAMBÉM SEJA DE CERTA 'RANGE',
+
+ OU DE CERTA 'SHAPE'...
+
+
+
+
+
+
+
+
+ --> PARA TERMOS UM EXEMPLO MAIS CONCRETO, RECORREMOS AO 'yearly_salary'...
+
+
+
+
+
+
+
+
+
+
+
+ --> POR ENQUANTO, A ÚNICA RESTRIÇÃO QUE TEMOS EM 'yearly_salary'
+
+
+ É QUE OS VALUES INSERIDOS NESSA COLUMN DEVERÃO SER NUMBERS,
+
+ E QUE 
+
+ DEVERÃO SER 'NON DECIMAL'...
+
+
+
+
+
+ --> SE TENTAMOS ENFIAR 'DECIMAL' 
+
+
+ NUMBERS,
+
+ ELES SERÃO ARREDONDADOS --> UM VALUE DE 'NULL' TAMBÉM É POSSÍVEL (pq não temos o check de 'not null')....
+
+
+
+
+
+
+
+
+
+ MAS E SE 
+
+
+ QUEREMOS DIZER 
+
+
+
+ '''QUEREMOS 1 VALUE, VALUE QUE PODE SER NULL,
+
+
+
+ MAS  ___ SE ESSE VALUE FOR REALMENTE PROVIDENCIADO, QUEREMOS 
+
+ FORÇÁ-LO A SER __ GREATER THAN 0''''...
+
+
+
+
+
+
+
+
+ 
