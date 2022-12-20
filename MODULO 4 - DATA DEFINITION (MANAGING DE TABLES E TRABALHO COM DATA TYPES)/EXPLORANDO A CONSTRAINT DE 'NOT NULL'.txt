@@ -1,0 +1,778 @@
+
+
+
+
+
+
+
+
+
+
+
+
+NA NOSSA TABLE,
+
+
+
+COMO A PESSOA QUE CRIA A TABLE/MANAGEIA A TABLE,
+
+
+
+
+QUEREMOS 
+
+
+
+'PERMITIR UM __NULL _ VALUE __ PARA  ALGUMAS COLUMNS' ( como o 'yearly_salary')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS AÍ,
+
+
+
+PARA __ OUTRAS COLUMNS, COMO 'first_name',
+
+
+V
+AMOS QUERER
+ 
+
+ QUE NÃO SEJA POSSÍVEL 
+
+
+
+ COLOCAR UM 'NULL VALUE'...
+
+
+
+
+
+
+
+
+
+
+
+ --> BEM, E, NA VERDADE,
+
+
+ OUT OF THE BOX, QUANDO VOCÊ CRIA UMA TABLE COMO ESTA:
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employers (
+    company_name VARCHAR(250),
+    company_address VARCHAR(300),
+    yearly_revenue NUMERIC(5,2),
+    is_hiring BOOLEAN
+ );
+
+
+
+
+
+
+
+
+
+
+ OUT OF THE BOX,
+
+ TODAS AS COLUMNS QUE VOCÊ 
+
+
+ __ DEFINE __ NA SUA TABLE PODEM SER 'OMITIDAS' (
+
+
+
+    T
+    ODAS ESSAS COLUMNS SÃO ACTUALLY ''''OPTIONAL''',
+
+
+    com essa config que vemos aqui....
+ )
+
+
+
+
+
+
+
+
+
+
+ -> É POR ISSO QUE QUANDO INSERIMOS UM NOVO 'EMPLOYER',
+
+ PODEMOS DEIXAR DE FORA VALUES PARA TODAS AS COLUMNS,
+
+ E AÍ 
+
+
+ ESSENCIALMENTE 'INSERT AN EMPTY RECORD' --> E ISSO PODE 
+
+
+ ACABAR 
+
+ NÃO SENDO O QUE 
+
+
+
+ QUEREMOS...
+
+
+
+
+
+
+
+
+
+ -> PODEMOS 'REFORÇAR' QUE 
+
+
+
+
+ VALUES SÃO NECESSÁRIOS PARA CERTAS COLUMNS,
+
+
+ AO MESMO PASSO QUE 
+
+
+
+ __ OUTRAS COLUMNS 
+
+ DEVERÃO CONSEGUIR SEMPRE ACEITAR 'EMPTY VALUES'...
+
+
+
+
+
+
+
+
+
+
+
+ -> E ISSO PODE SER CONTROLADO COM A CONSTRAINT DE 'NOT NULL'...
+
+
+
+
+
+
+
+
+
+
+ -> é a primeira CONSTRAINT...
+ ]
+
+
+
+
+
+
+
+
+
+ -> CONSTRAINTS --> SÃO UMA FEATURE NO MUNDO SQL ---> são uma feature que você pode settar 
+ QUANDO VOCÊ CRIA UMA TABLE,
+
+ E QUE 
+
+
+ 'CONSTRAIN' OS VALUES ARMAZENADOS,
+
+
+
+ _ VÃO 'CONSTRAIN' O 
+
+
+
+ VALUE QUE É ARMAZENADO, OS VALUES QUE SERÃO ARMAZENADOS EM CERTAS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+
+ ---> EXEMPLO:
+
+
+
+
+
+
+
+
+
+ CREATE TABLE users (
+    full_name VARCHAR(255) NOT NULL,
+    salary INT --  AQUI, NULL É PERMITIDO, PQ NÃO É 'FORBIDDEN' (como com 'NOT NULL')....
+ )
+
+
+
+
+
+
+
+
+
+ -----> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E 1 'ENUM',
+
+
+
+ NO CASO,
+
+
+É, DE CERTA FORMA, UMA CONSTRAINT,
+
+
+PQ 
+
+ELE 
+
+
+
+'CONTROLA QUE ___ APENAS CERTOS STRING VALUES PODERÃO SER INSERIDOS'...
+
+
+
+
+
+
+
+
+
+
+
+--> e 'NOT NULL'
+
+
+É UMA CONSTRAINT QUE 
+
+
+DETERMINA  __ QUE, PARA CERTA COLUMN,
+
+DEVERÁ SER PROVIDENCIADO UM VALID VALUE (não poderá ser OMITTED)..
+
+
+
+
+
+
+
+
+VOU REGISTRAR ISSO EM 1 ARQUIVO....
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    company_name VARCHAR(250) NOT NULL, --não poderá ser NULL (sempre devemos passar o value desse field, quando criamos um record nessa table)
+    company_address VARCHAR(250),
+    yearly_revenue NUMERIC(5,2),
+    is_hiring BOOLEAN
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PODEMOS CRIAR 1 TABLE... -----> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS REPLICAR A MESMA COISA COM 1 TABLE DE ùsers`..
+
+
+
+
+
+
+
+
+
+
+ex?
+
+
+
+
+
+
+
+CREATE TABLE users (
+    full_name VARCHAR(300) NOT NULL 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA SE TENTAMOS INSERIR UM RECORD DE 'user'
+
+
+SEM 1 VALUE EM 'full_name',
+
+
+VAMOS GANHAR 1 ERROR...
+
+
+
+
+
+
+
+
+
+
+---->  PODEMOS FAZER 1 NOVA TABLE DEFINITION..
+
+
+
+
+
+
+
+-> OU DROPPAMOS UMA TABLE DEFINITION (em que a maior parte dos columns não será null, com a constraint de NOT NULL)...
+
+
+
+
+
+
+
+
+
+
+-> OU ENTÃO RODAMOS 'ALTER TABLE'... (mantemos os dados anteriores)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> vamos alterar a table, pq é melhor...
+
+
+
+
+
+
+(versão POSTGRES do c´digo)
+
+
+
+
+
+ALTER TABLE users 
+ALTER COLUMN full_name 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> mas PRECISAMOS ESCREVER MAIS UMA KEYWORD,
+
+PARA ALTERAR ESSA COLUMN --> QUEREMOS 
+
+
+
+
+
+COLOCAR 'SET',
+
+PARA AÍ __ SETTAR A NOSSA CONSTRAINT (que será 'NOT NULL')...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+ALTER TABLE users 
+ALTER COLUMN full_name 
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE users 
+ALTER COLUMN full_name SET NOT NULL, ---É ASSIM QUE DEFINIMOS UMA CONSTRAINT EM 1 COLUMN, EM 1 TABLE, POR MEIO DE 'ALTER TABLE' (aí não precisamos RECRIAR A TABLE)...
+ALTER COLUMN current_status SET NOT NULL
+;   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> AGORA, EM 'yearly_salary',
+
+VAMOS 
+
+QUERER 
+
+
+REALMENTE TER O VALUE DE 'NULL',
+
+
+PQ 
+
+
+
+VAMOS QUERER NÃO TER A OPÇÃO DE 
+
+
+
+
+
+'0' (pq 
+
+
+o NULL NÃO É CONSIDERADO EM AGGREGATE FUNCTIONS, E O 'ZERO' é....)
+
+
+
+
+
+
+
+
+
+
+
+
+---> AGORA PODEMOS __ ADICIONAR ESSA CONSTRAINT DE 'NOT NULL'
+
+
+
+
+EM TODAS AS 
+
+
+TABLES.... -----> EM TODAS AS COLUMNS QUE 
+
+
+SE BENEFICIARIAM DISSO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA A VERSÃO 'MYSQL' do código:
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE employers 
+MODIFY COLUMN company_name VARCHAR(300) NOT NULL,   --no MYSQL, somos forçados a REPETIR TODA A DEFINIÇÃO DA COLUMN, para settar uma CONSTRAINT no seu interior....
+MODIFY COLUMN current_status ENUM('employed', 'unemployed', 'self-employed');
+
+
+
+
+
+
+
+
+
+
+
+
+----> A SINTAXE DO MYSQL É PIOR, PQ EXIGE QUE 
+
+
+
+CITEMOS NOVAMENTE 
+
+
+
+A DEFINIÇÃO DE CADA COLUMN....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA PODEMOS TESTAR ESSAS CONSTRAINTS COM 
+
+
+INSERT DE RECORDS NAS NOSSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TENTAMOS ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users(current_status)
+VALUES('employed');
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, VAMOS RECEBER 1 ERRO, PQ 
+
+
+
+NÃO COLOCAMOS NENHUM VALUE PARA 'full_name' (pq ele ESTÁ COMO 'NOT NULL')..
+
+
+
+
+
+
+
+
+
+----> MAS SE TENTAMOS ESCREVER ASSIm:
+
+
+
+
+
+
+INSERT INTO users(full_name, current_status)
+VALUES("MANUEL", 'employed');
+
+
+
+
+
+
+
+--> ISSO VAI FUNCIONAR, PQ 
+
+NÃO ADICIONAMOS NENHUMA CONSTRAINT AO FIELD DE 'yearly_salary' ----> 
+
+
+
+
+É POR ISSO QUE ESSE FIELD, NESSE RECORD, VAI ACABAR COM UM VALUE DE 'null' ( 
+
+    o que é ótimo, pq 
+
+
+É IGNORADO EM CALCULATIONS E AGGREGATE FUNCTIONS...
+
+
+)
+
+
+
+
+
+
+
+---> E O ENFORCE DE VALUES ('DEFAULT VLAUES')
+
+
+
+
+pode ser RUIM 
+
+
+em casos em que você NÃO QUER QUE ESSES 
+
+
+
+RECORDS 'INÚTEIS' (que deveriam ter null)
+
+
+SEJAM CONSIDERADOS NAS CALCULATIONS,
+
+
+
+
+o que é obtido por meio de 'NULL'...
+
+
+
+
+
+como um exercício, podemos dar uma olhada nas 2 outras tables que temos 
+
+
+e adicionar CONSTRAINTS DE 'NOT NULL' nas columns adequadas...
