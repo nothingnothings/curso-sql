@@ -183,3 +183,1279 @@ NÃO É O ÚNICO TIPO DE CONSTRAINT QUE PODEMOS ADICIONAR AS NOSSAS COLUNAS...
 
 
  
+
+
+
+
+ --->  OK... ESSA CONSTRAINT DE  'CHECK' PODE SE MT ÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ------> queremos que a column de 'yearly_salary'
+
+
+ SEJA MAIOR DO QUE 
+
+ 0... ISSO PQ 
+
+ SALÁRIOS N PODEM SER MENORES DO Q 0...
+
+
+
+
+
+
+
+
+ ---> QEUREMOS QUE O VALUE SEJA 'OF A CERTAIN RANGE, OF A CERTAIN SHAPE'.
+
+
+
+
+
+
+
+
+
+
+ ----> CREATE TABLE users (
+   full_name VARCHAR(300) NOT NULL,
+   salary INT 
+ )
+
+
+
+
+
+
+
+
+
+ QUEREMOS QUE, SE UM SALARY FOR PROVIDENCIADO,
+
+ ELE SEMPRE SEJA MAIOR DO QUE 0....
+
+
+
+
+
+
+
+
+ -_> PODEMOS FAZER ISSO COM UMA CONSTRAINT, UMA CONSTRAINT DE 'CHECK'..
+
+
+
+
+
+
+
+
+
+
+ --> ADICIONAMOS UM NOVO ARQUIVO,
+
+
+ 'CHECK CONSTRAINT' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> QUEREMOS DEFINIR ESSA CONSTRAINT EM 1 DAS COLUMNS DE 'USER',
+
+
+ NA SUA CRIAÇAÕ (depois veremos como ADICIONAR A 1 TABLE JÁ EXISTNETE, com 'ALTER TABLE')...
+
+
+
+
+
+
+
+
+
+
+
+ -----> OK...
+
+
+
+
+
+
+
+
+ ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+ CREATE TABLE users (
+   full_name VARCHAR(300) NOT NULL,
+   yearly_salary INT CHECK
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> SE VOCÊ ESCREVE 'CHECK'
+
+
+ DEPOIS 
+
+
+ DA DEFINIÇÃO DO DATA TYPE DE SUA COLUMN,
+
+
+ VOCê VAI ESTAR COLOCANDO ESSA CONSTRAINT --> 
+
+
+
+
+
+
+ ESSA CONSTRAINT 'CHECA'
+
+ O VALUE 
+
+ QUE É PROVIDENCIADO PARA ESSA COLUMN,
+
+
+ QUANDO 1 NOVO ROW 
+
+ É INSERIDO,
+
+
+
+ PARA 1 CERTA CONDITION...
+
+
+
+
+
+
+
+  
+  --------------> E A SINTAXE 
+
+
+DAS 'CONDITIONS'
+
+
+do CHECK 
+
+
+
+
+É A MESMA PARA O POSTGRES E PARA O MYSQL...
+
+
+(e a maior parte dos SQL database management SYSTEMS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  A SINTAXE PEDE QUE 
+
+
+
+VOCê 
+
+
+
+
+
+
+
+ESCREVA 
+
+
+O NOME DA COLUMN DENTRO DE PARÊNTESES,
+
+
+
+e então 
+
+
+
+A __ CONDIÇÃO DESEJADA ( no caso, 'yearly_salary' DEVE SER MAIOR DO QUE 0)...
+
+
+
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+CREATE TABLE users (
+   full_name VARCHAR(300) NOT NULL,
+   yearly_salary INT CHECK (yearly_salary > 0)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+----> vale a pena MENCIONAR QUE, MESMO COM ESSA CONSTRAINT DE 'CHECK',
+
+
+
+
+__ SERÁ __ POSSÍVEL __ oMITIR__ 
+
+
+
+
+
+O value de 'yearly_salary'
+
+
+
+QUANDO VOCÊ INSERE ROWS NESSA TABLE (deixar como NULL)...
+
+
+
+
+
+
+
+
+
+------> ISSO QUER DIZER QUE PROVIDENCIAR UM VALUE DE 'NULL',
+
+
+isso é okay...
+
+
+
+
+
+
+
+
+--> VOCÊ TAMBÉM PODE COMBINAR 
+
+
+MÚLTIPLAS CONDITIONS DENTRO 
+
+
+
+
+
+
+
+DO '()',
+
+
+
+
+
+
+
+ISSO __ COM AS KEYWORDS MÁGICAS 
+
+DE 
+
+
+'AND' (&&)
+
+
+
+e 
+
+
+
+'OR' (pipe operator)...
+
+
+
+
+
+
+
+
+VEREMOS ESSAS PALAVRAS, EM UM CONTEXTO DISTINTO,
+
+
+MAIS TARDE NO CURSO...
+
+
+
+
+
+
+
+
+
+
+-> ESSAS KEYWORDS TE DEIXAM COMBINAR MÚLTIPLAS CONDITIONS 
+
+ 
+ DENTRO DA SUA CONSTRAINT DE 'CHECK'..
+
+
+
+
+
+
+
+ ex: (yearly_salary deverá ser mAIOR DO QUE 0 E MENOR DO QUE 100.000)...
+
+
+
+
+
+
+
+
+
+
+
+ ex:
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE users (
+   full_name VARCHAR(300) NOT NULL,
+   yearly_salary INT CHECK(yearly_salary > 0 AND yearly_salary < 100.000)
+ );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---->  E VOCÊ __ TAMBÉM __ PODE 
+
+
+COLOCAR CONSTRAINTS DE 'CHECK'
+
+
+
+QUE __ aFETAM _ 
+
+
+
+
+TODA __ A TABLE,
+
+
+EM VEZ 
+
+
+DE APENAS 1 COLUMN ÚNICA (como essa constraint de check aqui )...
+
+
+
+
+
+
+
+--> PARA FAZER COM QUE UMA CHECK CONSTRAINT __ AFETE _ TODAS __aS COLUMNS 
+
+
+
+
+DE SUA TABLE,
+
+
+VOCÊ 
+
+
+DEVE 
+
+
+ESCREVER 
+
+O CHECK __ NO COMEÇO DE UMA LINHA, E AÍ colocar '()' DO LADO DELA, PARA AÍ DEFINIR OS FIELDS QUE DEVERÃO 
+
+SER AFETADOS POR ELA...
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+ex (check constraint que AFETARÁ VÁRIOS FIELDS/COLUMNS):
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+   full_name VARCHAR(300) NOT NULL,
+   yearly_salary INT,
+   CHECK (yearly_salary < max_salary
+   )
+
+)
+
+
+
+
+
+
+
+
+
+
+---> SUPONHA QUE TEMOS ESSA COLUMN DE 'max_salary' -->  COM ESSE CHECK,
+
+
+
+
+COM ESSA SINTAXE, PODEMOS 
+
+
+
+
+
+DEFINIR RELATIONS/TABLE-WIDE CHECK CONSTRAINTS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS COMO AQUI _ _ JÁ TEMOS __ UMA 
+
+TABLE DE 'users',
+
+
+
+O QUE O PROFESSOR VAI QUERER FAZER É 
+
+
+__UPDATAr_ _ ESSA TABLE,
+
+FAZER 
+
+COM QUE 
+
+
+
+
+
+
+ELA AGORA TENHA UMA CONSTRAINT DE 'CHECK'...
+
+
+
+
+
+
+
+
+
+
+
+--> Ex:
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE users 
+MODIFY/ALTER COLUMN nome_da_column CHECK 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXEMPLO DE POSTGRESQL --> 
+
+
+
+
+
+
+
+ALTER TABLE 
+ALTER COLUMN nome_da_column 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS PARA _ ADICIONAR _ UMA CONSTRAINT DE 'CHECK'
+
+
+
+EM 1 TABLE JÁ CRIADA, NO POSTGRES,
+
+ 
+
+
+
+
+FAZEMOS 
+
+
+
+ISSO DE FORMA UM POUCO DIFERENTE DA CONSTRAINT DE 'NULL'....
+
+
+
+
+
+
+
+
+
+
+
+
+------> NO POSTGRES,
+
+DEVEMOS USAR O COMANDO DE 'ADD CONSTRAINT'...
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+ALTER TABLE users 
+ADD CONSTRAINT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E TAMBÉM EXISTE UM COMANDO DE 'DROP CONSTRAINT',
+
+PARA DELETAR CONSTRAINT DE ALGUMA COLUMN/DA TABLE EM SI...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO QUEREMOS ADICIONAR UMA CONSTRAINT DE 'CHECK',
+
+
+escrevemos assim:
+
+
+
+
+
+
+
+
+
+ALTER TABLE users
+ADD CONSTRAINT CHECK(yearly_salary > 0 AND yearly_salary < 100.000)
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+ALTER TABLE users
+ADD CONSTRAINT CHECK(  --não precisamos dizer 'QUAL COLUMN QUEREMOS OBJETIVAR POR MEIO DESSA CONSTRAINT'
+        yearly_salary > 0
+        AND yearly_salary < 100.000
+    );
+
+
+
+
+
+
+
+
+
+
+
+---> REPARE:
+
+QUANDO NÓS ALTERAMOS UMA TABLE, PARA ADICIONAR UMA CONSTRAINT,
+
+
+ADICIONAMOS 
+
+ESSA 
+
+CONSTRAINT COMO UMA 'TABLE-WIDE CONSTRAint'... --> MAS COMO O PROFESSOR 
+
+
+
+
+ESTÁ _ ESPECIFICANDO BEM 
+
+
+'''A QUAL COLUMN QUERO APLICAR ESSA CONSTRAINT'',
+
+
+
+NÃO HÁ PROBLEMAS QUANTO A ISSO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE TEMOS ESSA SINTAXE PARA ALTERAR UMA 
+
+TABLE E ADICIONAR UMA CONSTRAINT NELA...
+
+
+
+
+
+
+
+
+
+
+
+-> e é EXATAMENTE POR ISSO QUE ANTES O COMANDO DE ADICIONAR CONSTRAINT DE 'NOT NULL'
+
+
+era diferente:
+
+
+
+
+
+
+--> ANTES, TÍNHAMOS 'ALTER COLUMN column_name SET NOT NULL',
+
+
+
+
+
+
+
+
+
+PQ LÁ ERA REALMENTE NECESSÁRIA A REFERÊNCIA A 1 COLUMN ESPECÍFICA...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok...
+
+
+
+
+
+HÁ SÓ 1 CHANGE 
+
+
+QUE RESTA A SER FEITA... --> 
+
+
+
+ANTES 
+
+
+
+
+DE __ ADICIONAR ESSA CONSTRAINT 
+
+
+
+
+A NOSSA TABLE, DE FORMA 'GLOBAL' na table,
+
+
+
+
+É NECESSÁRIO __ DAR UM _ NOME ___ À CONSTRAINT... --> 
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE users
+ADD CONSTRAINT yearly_salary_positive CHECK (yearly_salary > 0);
+
+
+
+
+
+
+
+
+-> E ISSO É NECESSÁRIO, PELA PRÓPRIA SINTAXE -> SE VOCÊ 
+
+
+ESTÁ ESCREVENDO QUERIES MAIS COMPLEXAS,
+
+E SE VOCÊ 
+
+
+QUER ENTÃO TRABALHAR COM ESSA CONSTRAINT EM 
+
+
+
+___OUTRAS LINHAS DO STATEMENT DE 'ALTER TABLE',
+
+
+
+ESSA 
+
+
+CONSTRAINT REQUER 1 NOME..
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA CONSTRAINT SEMPRE REQUER 1 NOME,
+
+POR ISSO ESCREVEMOS ASSIM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK.... ESSA É A MANEIRA DE ALTERAR ESSA TABLE 
+
+LÁ NO POSTGRES..
+
+
+
+
+
+
+
+
+
+
+----> MAS AÍ,
+
+AO TENTARMOS APLICAR ESSA CONSTRAINT,
+
+
+GANHAMOS 1 ERROR -------> 
+
+
+
+
+
+
+
+
+O ERROR É 
+
+''ESSA CONSTRAINT É VIOLADA POR  UM BOCADO DE DATA LÁ NA SUA TABLE'''.
+
+
+
+
+
+
+
+
+
+
+--> TEMOS ALGUNS ROWS QUE ESTÃO COM DATA CONTRADITÓRIA,
+QUE CONFLITA COM ESSA 
+
+
+
+CONSTRAINT...
+
+
+
+
+
+
+
+--> ESTAMOS COM 1 ROW QUE TEM VALOR DE SALARY DE '0',
+
+
+
+e isso 
+
+
+ESTÁ CONTRADIZENDO A CONSTRAINT QUE ESTAMOS TENTANDO ADICIONAR ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> portanto, o que precisamos fazer é 
+
+
+'CONSERTAR O ROW QUE 
+
+ESTÁ VIOLANDO ESSA CONSTRAINT',
+
+
+
+antes de A ADICIONAR...
+
+
+
+
+
+
+
+-> O QUE O PROFESSOR FARÁ, AQUI,
+
+
+É 
+
+
+O RÁPIDO UPDATE 
+
+DO RECORD QUE 
+
+ESTÁ COM O VALUE INDEVIDO...
+
+
+
+
+
+
+
+
+
+
+
+---> ACHO QUE ESTOU COMEÇANDO A ENTENDER O 'SQL'..
+
+
+
+
+
+
+
+
+--> SETTEI O VALUE DO yearly_salary
+
+
+
+do 
+
+
+MANU 
+
+
+
+
+COMO EQUIVALENTE A 10000
+
+
+
+
+
+
+
+
+
+
+
+
+o CÓDIGO DO PROFESSOR FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+UPDATE users 
+SET yearly_salary = NULL 
+WHERE full_name = 'Michael Smith';
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... ESSE FOI O POSTGRES...
+
+
+
+
+
+
+
+
+
+
+MAS COMO ADICIONAMOS ESSA CONSTRAINT DE 'CHECK'
+
+LÁ NO MYSQL?
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, A BOA NOTÍCIA É QUE O CÓDIGO É __ eXATAMENTE IGUAl..
+
+
+
+
+
+
+
+FICA ASSIM, PORTNATO:
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE users 
+ADD CONSTRAINT yearly_salary_positive CHECK (yearly_salary > 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> PARA __ CHECAR _QUE _ NÃO PODEMOS  INSERIR __ 
+
+
+
+
+
+DATA _QUE _ VIOLA__ ESSA CONSTRAINT,
+
+
+
+
+O PROFESSOR CRIA UM 
+
+
+
+
+
+QUERY 
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users (full_name, yearly_salary, current_status)
+VALUES('Some User', -1000, 'unemployed');
+
+
+
+
+
+
+
+
+--> SE TENTAMOS RODAR ISSO,
+
+
+GANHAMOS UM ERROR 
+
+
+DE 
+
+'''A CONSTRAINT DE is_positive_ FOI VIOLADA'''...
+
+
+
+
+
+
+
+
+
+
+---> essa é a CONSTRAINT DE 'CHECK'
+
+
+
+EM AÇÃO.. --> É UMA CONSTRAINT QUE PODE SER MT ÚTIL,
+
+
+PRINCIPALMENTE COM NUMBERS,
+
+
+PQ 
+
+
+FORÇA 
+
+CERTAS CONDIÇÕES 
+
+
+
+no insert de rows (rows só poderão ser inseridos se as satisfizerem)...

@@ -1,0 +1,38 @@
+ALTER TABLE users  ---' yearly_salary_positive_constraint' SERÁ O NOME DE NOSSA CONSTRAINT (nomes de constraints SÃO NECESSÁRIOS)...
+ADD CONSTRAINT yearly_salary_positive_constraint CHECK(  --não precisamos dizer 'QUAL COLUMN QUEREMOS OBJETIVAR POR MEIO DESSA CONSTRAINT'
+        yearly_salary > 0
+        AND yearly_salary < 100.000
+    );
+
+
+
+
+--- A SINTAXE DE 'ADD' CONSTRAINT É EXATAMENTE A MESMA ENTRE O POSTGRES E O MYSQL...
+
+
+
+
+
+
+-- ---> REPARE:
+
+-- QUANDO NÓS ALTERAMOS UMA TABLE, PARA ADICIONAR UMA CONSTRAINT,
+
+
+-- ADICIONAMOS 
+
+-- ESSA 
+
+-- CONSTRAINT COMO UMA 'TABLE-WIDE CONSTRAint'... --> MAS COMO O PROFESSOR 
+
+
+
+
+-- ESTÁ _ ESPECIFICANDO BEM 
+
+
+-- '''A QUAL COLUMN QUERO APLICAR ESSA CONSTRAINT'',
+
+
+
+-- NÃO HÁ PROBLEMAS QUANTO A ISSO....
