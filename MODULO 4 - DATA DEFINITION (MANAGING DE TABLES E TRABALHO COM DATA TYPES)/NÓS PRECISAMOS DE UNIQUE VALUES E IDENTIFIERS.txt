@@ -1,0 +1,658 @@
+
+
+
+
+
+
+
+
+
+
+NÓS DEMOS UMA OLHADA NAQUELA CONSTRAINT DE 'CHECK',
+
+
+QUE PODE SER BEM ÚTIL....
+
+
+
+
+
+
+
+
+
+
+MAS PARA A HABILITAR,
+
+
+
+
+PRECISAMOS __ DEFINIR __ TODAS AS ROWS COM VALORES 'INVÁLIDOS' (iguais ou menores do que 0)...
+
+
+
+
+
+
+
+
+
+
+----> É POR ISSO QUE FOMOS ATÉ O ROW DE 'MICHAEL SMITH'
+
+
+E 
+
+
+ALTERAMOS O VALUE DELE...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS AGORA O PROFESSOR QUER FALAR DE ALGO EXTREMAMENTE IMPORTANTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE ESTÁ FALANDO DE IDs...
+
+
+
+
+
+
+
+--> SE TIVÉSSEMOS MÚLTIPLOS USERS COM NOME DE 'MICHAEL SMITH',
+
+
+
+ACABARÍAMOS ATUALIZNADO MÚLTIPLOS 
+
+
+
+USERS COM O COMANDO DE 
+
+
+
+
+
+UPDATE users 
+SET yearly_salary = NULL 
+WHERE full_name = 'Michael Smith';
+
+
+
+
+
+
+
+
+
+--> É BEM PROVÁVEL QUE 
+
+TENHAMOS 
+
+
+
+MÚLTIPLOS MICHAEL SMITH NA DATABASE,
+
+A CERTO PONTO 
+
+
+NO TEMPO...
+
+
+
+
+
+
+
+
+
+
+-->É POR ISSO QUE QUANDO VOCê ARMAZENA DATA EM TABLES,
+
+
+VOCÊ 
+
+
+
+DEVE 
+
+TER 
+
+1 'UNIQUE VALUE'
+
+
+
+POR ROW,
+
+EM 1 TABLE...
+
+
+
+
+
+
+
+-> E 1 'UNIQUE Id'
+
+
+
+ESTÁ 
+
+FALTANDO EM TODA 
+
+DUMMY DATA COM A QUAL TRABALHAMOS ATÉ AGORA....
+
+
+
+
+
+
+
+
+
+''''WHEN STORING DATA, EACH DATA ENTRY SHOULD HAVE AT LEAST ___ ONE __ UNIQUE __ VALUE (for identifying the record)' '''
+
+
+
+
+
+
+
+
+
+UNIQUE ID- --> 
+
+
+
+
+QUANDO O ASSUNTO É 'UNIQUE ID',
+
+
+HÁ MÚLTIPLOS VALORES POSSÍVEIS
+ 
+ PARA ELE..
+
+
+
+
+
+
+
+ --> E O NOME DE 1 USER NÃO É UM GOOD UNIQUE IDENTIFICATION CRITERIA....
+
+
+
+
+
+
+
+
+
+
+
+ --> PODERÍAMOS DEFINIR NOSSOS ID MANUALMENTE,
+ TIPO ASSIM:
+
+
+
+
+
+
+
+
+ user1 
+ user2 
+ user3
+ user4
+
+
+
+
+
+
+
+  ('CHOOSE AND SET IDs MANUALLY')...
+
+
+
+
+
+
+
+
+
+  ISSO FUNCIONARIA, SIM,
+
+  MAS PODERÍAMOS IR ALÉM E 
+
+  ESCOLHER UMA _ RANDOM _COMBINATION 
+
+  DE CHARACTERS,
+
+
+
+
+
+
+  PARA QUE FICASSE TIPO ASSIM, CADA RECORD:
+
+
+
+
+
+
+
+  hefzar32qjka 
+  nlonkj147rkn
+
+
+
+
+
+
+
+
+
+
+  (GENERATE UNIQUE, RANDOM STRINGS, AUTOMATICALLY)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ESSAS COMBINAÇÕES NUNCA SE REPETIRIAM --> PODERÍAMOS USAR 
+
+ALGORITMOS/TPPs 
+
+
+
+
+
+QUE GERAM 
+
+
+
+UNIQUE IDS COMO ESSES ... ------> 
+
+
+
+
+
+OU, 
+
+ENTÃO,
+
+
+
+
+PODEMOS SIMPLESMENTE ACEITAR O SISTEMA DE 'INCREMENTING INTEGERS',
+
+
+
+QUE 
+
+PODERIAM/PODEM SER GERADOS AUTOMATICAMENTE 
+
+
+PELA DATABASE... -----> ISSO PARA QUE, 
+
+SEMPRE QUE 
+
+CRIÁSSEMOS UMA NOVA ROW,
+
+
+O DATABASE 
+
+SIMPLESMENTE 
+
+ADICIONA/ADICIONARÁ 
+
+
+'1'
+
+
+AO VALUE DO 'UNIQUE ID'
+
+
+
+DE CADA ROW... ------> 
+
+
+
+
+
+
+
+AÍ ASSIGNA UM NOVO UNIQUE ID 
+
+AO NOVO ROW...
+
+
+
+
+
+
+
+
+--> E ESSA É UMA FEATURE QUE É OFERECIDA POR 'TODOS OS SQL DATABASE MANAGEMENT SYSTEMS',
+
+E TANTO NO 
+
+
+POSTGRES COMO NO MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR AGORA VAI ADICIONAR ISSO,
+
+PARA QUE TENHAMOS UM UNIQUE ID PARA CADA ROW EM NOSSA TABLE...
+
+
+
+
+
+
+--> PARA CONSEGUIRMOS SETTAR 1 DESSES UNIQUE IDS,
+
+
+
+
+DEVEMOS VER O CÓDIGO DE CREATE A TABLE...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+CREATE TABLE users (
+    id INT NOT NULL 
+    full_name VARCHAR(300) NOT NULL,
+    salary INT
+)
+
+
+
+
+
+
+
+
+
+
+--> AÍ PODEMOS ADICIONAR UMA column id,
+
+
+
+
+
+E AÍ DEFINIR O TYPE De 'INTEGER'
+lá dentro,
+
+
+
+E TAMBÉM A CONSTRAINT DE 'NOT NULL' (para que seja obrigatório o value de algum number em cada row)..
+
+
+
+
+
+
+
+
+
+-_> POR FIM,
+
+
+
+
+INSERIMOS A CONSTRAINT DE 'UNIQUE',
+
+PARA __ GARANTIR _ QUE 
+NÃO SEJA POSSÍVEL
+INSERIR 
+
+QUAISQUER 'DUPLICATE VALUES'
+
+
+nessa column,
+
+tipo assim:
+
+
+
+
+
+
+CREATE TABLE users (
+    id INT NOT NULL 
+    full_name VARCHAR(300) NOT NULL,
+    salary INT
+)
+
+
+
+
+
+
+
+
+-> AÍ, SE TENTAMOS INSERIR 
+
+UM USER COM 1 EXISTING ID,
+
+
+
+VAMOS GANHAR 1 ERROR.... ------> 
+
+
+
+
+
+
+
+
+
+
+OBS: E A CONSTRAINT DE 'UNIQUE'
+
+
+PODE SER ADICIONADA A QUALQUER COLUMN --> E ISSO REALMENTE GARANTE QUE 
+
+CERTOS VALUES NUNCA SE REPITAM...
+
+
+
+
+
+
+
+
+
+--> MAS NÃO FAZ SENTIDO FAZER ESSE ADD A ALGUMA COLUMN COMO 'full_name',
+
+
+
+PQ 
+
+
+NÃO SERÁ BOM 
+
+
+NÃO TER A OPÇÃO DE 'REPETIR NOMES NOS RECORDS',
+
+
+PQ 
+
+
+
+
+REALMENTE É BEM POSSÍVEL QUE 
+
+
+MÚLTIPLOS USERS TENHAM O MESMO NOME....
+
+
+
+
+
+
+
+--> MAS O UNIQUE PODE SER USADO EM QUALQUER COLUMN QUE VOCÊ DESEJA...
+
+
+
+
+
+
+
+
+
+--> O UNIQUE 'NÃO É REALMENTE UNIQUE',
+
+em outras palavras...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO, A ESSE PONTO,
+SE TENTÁSSEMOS IMPLEMENTAR
+ 
+
+
+
+ O ID POR MEIO DESTE CÓDIGO:
+
+
+
+
+
+
+
+
+ 
+
+CREATE TABLE users (
+    id INT NOT NULL 
+    full_name VARCHAR(300) NOT NULL,
+    salary INT
+)
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+NÓS __ AINDA __ TERÍAMOS DE PROVIDENCIAR _ O ID _ POR CONTA PRÓPRIA,
+
+
+POR NÓS MESMOS (a database NÃO O FORNECERIA PARA NÓS)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE A SINTAXE UTILIZADA NO MYSQL E POSTGRES É __ UM POUCO DIFERENTE,
+
+PARA ADICIONAR ESSE 'ID QUE INCREMENTA AUTOMATICAMNETE'...
+
+
+
+
+
+
+
+
+
+
+--> A PRIMEIRA SINTAXE POSSÍVEL (postgres vs MYSQL)
+
+
+
+É ESTA:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(255) NOT NULL,
+    salary INT
+)
