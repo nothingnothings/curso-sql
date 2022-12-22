@@ -656,3 +656,1041 @@ CREATE TABLE users (
     full_name VARCHAR(255) NOT NULL,
     salary INT
 )
+
+
+
+
+
+
+
+--> A SINTAXE É ESTA, LÁ NO MYSQL...
+
+
+
+
+
+
+
+PARA O POSTGRESQL,
+
+
+
+O COMANDO É UM POUCO DIFERENTE....
+
+
+
+
+
+
+
+
+
+-_> AQUI TEMOS 2 NOVOS 'PEDAÇOS DE INFORMAÇÃO',
+
+
+
+
+
+
+QUE SÃO ADICIONADOS à COLUMN DE 'id'...
+
+
+
+
+
+
+
+
+1)  A PRIMEIRA INFO É 'PRIMARY KEY'...
+
+
+
+
+-_> primary key é 
+
+
+
+'''TIPO UMA CONSTRAINT'''....
+
+
+
+
+
+
+
+----> a primary key é basicamente uma COMBINAÇÃO DE
+
+
+
+'NOT NULL' 
+
+E 'UNIQUE'...  
+
+
+(
+
+    OU SEJA,
+
+    É A MESMA COISA QUE TÍNHAMOS ANTES,
+
+    AQUELA ESCRITA DE 
+
+
+    'id INT NOT NULL UNIQUE '
+)
+
+
+
+
+
+
+--> ok... essa constraint especial de 'PRIMARY KEY' é basicamente isso,
+
+
+uma fusao de 'NOT NULL' e 'UNIQUE'...
+
+
+
+
+
+--> A ÚNICA COISA __ ESPECIAL ___ SOBRE A 
+
+'PRIMARY KEY'
+
+
+
+É QUE 
+
+__ 
+
+SOMENTE É POSSÍVEL TER __ 
+
+1 ÚNICA 
+
+
+'PRIMARY KEY'
+
+
+
+POR TABLE...
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA, SE 
+
+VOCÊ 
+
+
+TEM MÚLTIPLAS 
+
+
+COLUMNS,
+
+
+
+
+COLUMNS CADA 1 COM UM 'unique'
+
+
+adicionado a si,
+
+
+
+
+APENAS 
+
+
+
+
+
+
+
+__ UMA __ DELAS__ PODERÁ 
+
+TER ESSA 'PRIMARY KEY';
+
+
+APENAS 
+UMA 
+
+DELAS PODERÁ 
+
+
+
+TER O 'MERGE' 
+
+
+
+DE 
+'NOT NULL' E 'UNIQUE' (2 constraints em uma, essa é a vantagem/uso do 'primary key')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ISSO PQ 
+
+A 'PRIMARY KEY' 
+
+
+SINALIZA 
+
+
+
+AO 
+
+
+'DATABASE MANAGEMENT SYSTEM'
+
+
+
+
+QUE 
+
+ESSA COLUMN SERÁ O 
+'PRIMARY IDENTIFICATION COLUMN'
+
+
+PARA OS ROWS 
+ARMAZENADOS 
+
+
+EM UMA GIVEN TABLE. .
+
+
+
+
+
+
+
+
+
+ELA BASICAMENTE COMUNICA '''QUEREMOS IDENTIFICAR ROWS, NESSA TABLE,
+
+
+PRINCIPALMENTE COM A AJUDA DESSA __PRIMARY__ KEY __ COLUMN (column com essa primary key definida)...'''
+
+
+
+
+
+
+
+
+
+
+-> A DATABASE VAI USAR ESSA INFO, 
+
+
+
+
+INFO 
+
+
+ACERCA 
+
+
+
+DE '''QUAL COLUMN É A COLUMN __ PRIMARY KEY'''',
+
+
+
+PARA __ ENTÃO _ OPTIMIZAR ACESSO INTERNO A ESSA COLUMN -->  ISSO PARA QUE VOCÊ, QUANDO PROCURAR 
+
+
+
+POR 1 ROW ESPECÍFICA, POR MEIO DESSE ID (primary key),
+
+
+ESSA 
+
+SUA PROCURA 
+
+PODERÁ SER 'SPED UP'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FALAREMOS 
+
+
+SOBRE ISSO MAIS TARDE NO CURSO,
+
+
+quando falarmos sobre optimization e indexes,
+
+
+
+
+mas essa 
+
+é uma das razões 
+
+
+pelas quais 
+
+
+'''apenas podemos ter 1 única primary key por table'''....
+
+
+
+
+
+
+
+
+
+
+
+-----> SÓ PODEMOS TER 1 PRIMARY KEY POR TABLE PQ 
+
+
+ESSA KEY É HANDLADA ESPECIALMENTE PELA DATABASE --> É POR ISSO QUE 
+
+
+SÓ PODEMOS TER 1 POR TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> VOCÊ PODE TER MÚLTIPLAS COLUMNS COM A COMBINAÇÃO 
+
+
+
+'NOT NULL + UNIQUE' (de constraints),
+
+
+
+
+
+
+
+MAS APENAS 
+
+
+UMA COLUMN COM O 'PRIMARY KEY' (que é tipo '''NOT NULL + UNIQUE + SPED UP QUERY'') 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo...
+
+
+
+
+
+
+
+
+
+
+
+-> MAS, UNDER THE HOOD,
+
+
+O 
+
+
+'PRIMARY KEY' 
+
+É REALMENTE UMA COMBINAÇÃO 
+
+DE 
+
+
+
+'not null' e 'unique'..
+
+
+
+
+
+
+
+
+-> AÍ, POR FIM,
+
+
+
+NAQUELE CÓDIGO, TEMOS:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    id PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(255) NOT NULL,
+    salary INT
+)
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo...
+
+
+
+
+
+
+
+
+
+
+----> TEMOS ESSA COISA DE 'AUTO_INCREMENT' ------> ISSO É AQUILO QUE CHAMAMOS DE 
+
+
+
+'''ATTRIBUTE'''' (
+
+
+
+    não é uma CONSTRAINT...
+)
+
+
+
+
+
+
+
+
+
+
+--> NÃO É UMA CONSTRAINT JUSTAMENTE PQ ''NÃO CONSTRAINA OS VALUES QUE PODEM SER INSERIDOS'',
+
+
+
+E SIM 
+
+
+
+
+
+
+''''MUDA COMO ESSA COLUMN SE COMPORTA'''' -----> É 
+
+
+MAIS OU MENOS 
+
+
+UM FUNCIONAMENTO SIMILAR AO 
+
+
+
+
+DA SETTING DE 'DEFAULT'
+
+
+QUE VIMOS ANTES (que era tipo assim:
+
+
+
+
+
+
+''''''''''
+
+CREATE TABLE conversations (
+    user_name VARCHAR(200),
+    employer_name VARCHAR(250),
+    message TEXT,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+'''''''''''
+
+
+)
+
+
+
+
+
+
+
+
+
+
+->----> O 'AUTO_INCREMENT'
+
+
+
+TAMBÉM 
+
+ADICIONA 
+
+
+
+'SOME KIND OF AUTOMATION' (assim como 'DEFAULT' FAZ)
+
+
+
+
+
+
+
+
+
+E 'AUTO_INCREMENT',
+
+
+
+
+
+NO CASO DO MYSQL,
+
+
+
+
+SIMPLESMENTE GARANTE QUE A 
+
+'DATABASE ENGINE' (server em si)
+
+
+VAI ARMAZENAR
+ 
+
+
+
+ 'AUTOMATICALLY INCREMENTED NUMBERS'
+
+ nessa column ....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ AUTO_INCREMENT --> É UM 'ATTRIBUTE' ' --> O DB SYSTEM VAI AUTOMATICAMENTE INSERIR UM 'INCREMENTING VALUE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> ISSO QUER DIZER QUE O DB SYSTEM VAI INSERIR VALUES PARA NÓS,
+
+ E VAI AUTOMATICAMENTE INCREMENTAR ESSES NUMBERS...
+
+
+
+
+
+
+
+
+
+ ISSO QUER DIZER QUE, COM ESSA COMBINAÇÃO 'PRIMARy_KEY' e 'AUTO_INCREMENT',
+
+
+
+
+
+ ESSA COLUMN DE 'id'
+
+
+ FUNCIONA 'TOTALLY ON ITS OWN',
+
+
+
+
+ E NÃO TEMOS QUE ASSIGNAR UM ID MANUALMENTE QUANDO ASSIGNAMOS/ASSIGNARMOS NOVAS ROWS...
+
+
+
+
+
+
+
+
+
+
+ MAS AQUI HÁ ALGO QUE VOCÊ DEVE SABER:
+
+
+
+
+
+
+
+
+
+
+
+ ''''PARA A MAIOR PARTE DOS DATABASE SYSTEMS/ENVIRONMENTS,
+
+
+
+
+
+ O __ AUTO_INCREMENT__ NÃO É SUPORTADO'''....
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO PQ O 'AUTO_INCREMENT'
+
+
+ É ALGO __ BEM ESPECÍFICO __ AO MYSQL...
+
+
+
+
+
+
+
+
+ -----> EM VEZ DISSO,
+
+
+ PARA __ OUTROS _ DATABASE MANAGEMENT SYSTEMS, COMO O 'POSTGRESQL',
+
+
+
+
+
+ NÓS __ USAMOS 
+
+
+
+
+
+ A CONFIGURAÇÃO 
+
+
+ 'SERIAL PRIMARY KEY'
+
+ em vez 
+
+
+
+ de 
+
+ ''''INT PRIMARY KEY AUTO_INCREMENT''''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> ISSO PQ _ O 'ATTRIBUTE' DE 'AUTO_INCREMENT'
+
+ NÃO 
+
+ EXISTE NO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> OK... 
+
+
+
+
+
+
+
+
+
+ ISSO QUER DIZER QUE, PARA O POSTGRESQL,
+
+ O NEGÓCIO FICA ASSIM:
+
+
+
+
+
+  
+
+  CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    salary INT
+  );
+
+
+
+
+
+
+
+
+
+
+  ESSA FEATURE DO POSTGRESQL
+
+
+  NÃO 
+
+  USA O 'AUTO_INCREMENT'
+
+  ATTRIBUTE,
+
+
+
+E SIM 
+
+
+O 
+
+DATA TYPE ESPECIAL DE 'SERIAL',
+
+
+
+
+QUE,
+
+UNDER THE HOOD,
+
+É 
+
+
+
+UM 
+
+'INTEGER CONFIGURADO __ PARA QUE _ SEMPRE SEJA INCREMENTADO QUANDO UM NOVO ROW 
+
+
+É INSERIDO'...
+
+
+
+
+
+
+
+
+OU SEJA, 
+
+FAZ A MESMA COISA QUE 'AUTO_INCREMENT'....
+
+
+
+
+
+
+
+
+
+
+
+-----> OK....
+
+
+
+
+
+
+
+
+
+RESUMINDO:
+
+
+
+
+
+
+
+1) MYSQL ----> PRIMARY KEY AUTO_INCREMENT 
+
+
+
+
+
+
+
+
+2) POSTGRESQL --> SERIAL PRIMARY KEY 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS O PROFESSOR QUER HIGHLIGHTAR:
+
+
+
+
+
+
+
+A SINTAXE QUE 
+
+
+
+ENXERGAMOS AQUI:
+
+
+
+
+
+
+
+  CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    salary INT
+  );
+
+
+
+
+
+
+
+
+
+
+
+
+TAMBÉM ___ É SUPORTADA__ NO 'MYSQL'... 
+
+
+
+
+
+
+
+
+
+
+---> ISSO QUER DIZER QUE 
+
+
+ESSA SINTAXE (a ÚLTIMA)
+
+
+É SUPORTADA__ 
+
+
+
+EM TODOS OS DATABASE SYSTEMS...
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 
+
+
+
+VOCÊ PODE PREFERIR ESSA VERSÃO AÍ,
+
+PQ 
+
+
+ELA É UNIVERSAL...
+
+
+
+
+
+
+
+
+--> MAS MT GENTE USA O APPROACH DE 'AUTO_INCREMENT'... (com o mysql)...
+
+
+
+
+
+
+
+
+
+
+
+--> OK, USE O APPROACH 'SERIAL' PARA O POSTGRES,
+
+
+
+E O 
+
+
+APPROACH DE 
+
+
+'AUTO_INCREMENT'
+
+
+
+COM O MYSQL....
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+AGORA VAMOS PRATICAR TUDO ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS GARANTIR QUE NOSSAS TABLES REALMENTE SEJAM SETTADAS COM ESSE FIELD DE 'id',
+
+
+que existirá nos nossos rows..
