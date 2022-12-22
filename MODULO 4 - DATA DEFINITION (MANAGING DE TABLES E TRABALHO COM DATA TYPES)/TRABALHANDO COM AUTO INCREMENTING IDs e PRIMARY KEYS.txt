@@ -1,0 +1,866 @@
+OK... DE VOLTA AO NOSSO PROJETO,
+
+
+
+
+
+
+
+
+
+
+ADICIONAMOS UM NOVO ARQUIVO,
+
+
+
+
+
+
+
+de 'primary_key'...
+
+
+
+
+
+
+
+-> NELE, VAMOS ACTUALLY __ RECRIAR __ TODAS NOSSAS TABLES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS CRIAR TODAS AS TABLES DNV,
+
+PQ TIPICAMENTE ESSE ID 
+
+É CRIADO A TODAS AS TABLES, quando críamos cada 1 delas...
+
+
+
+
+
+
+
+
+
+
+NÃO É ALGO QUE VOCÊ 
+
+
+
+
+
+VAI COMUMMENTE ESQUECER,
+
+
+
+
+É 
+
+UMA GOOD CONVENTION E UMA BEST PRACTICE 
+
+
+
+QUANDO VOCÊ 
+T
+RABALHA 
+
+COM O SQL 
+
+
+(
+
+    ADICIONAR UMA 
+
+
+    COLUMN 
+
+
+    COM PRIMARY KEY,
+    TIPICAMENTE UM 'AUTO INCREMENTING INTEGER' 
+
+
+
+A CADA __ TABLE QUE VOCÊ CRIA..
+
+)
+
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE TER UMA COLUMN 
+
+
+
+
+QUE É 
+
+
+'PRIMARY KEY' 
+
+E 
+
+'AUTO INCREMENTING' 
+
+DE 
+
+'ID'
+
+É 
+
+O DEFAULT EM TODAS AS TABLES QUE VOCÊ CRIAR...
+
+
+
+
+
+
+
+VAMOS PRECISAR _ DROPPAr__ TODAS NOSSAS TABLES...
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+DROP TABLE users;
+DROP TABLE conversations;
+DROP TABLE employers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... COM AS 3 DROPPADAS,
+
+
+PODEMOS AS RECRIAR..
+
+
+
+
+
+
+
+
+VAMOS RECRIAR  COM TODOS OS FIELDS DE ANTES,
+
+MAS AGORA 
+
+
+TAMBÉM COM AQUELE ID FIELD ADICIONAL...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+DROP TABLE users;
+DROP TABLE conversations;
+DROP TABLE employers;
+
+
+
+-- CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');     --versao POSTGRES
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(300) NOT NULL,    
+    yearly_salary INT CHECK(yearly_salary > 0),
+    current_status ENUM('self-employed', 'employed', 'unemployed') -- código enum QUE FUNCIONA PARA O MYSQL...
+
+);
+
+
+CREATE TABLE employers (
+    id INT PRIMARY KEY AUTO_INCREMENT
+);
+
+
+
+CREATE TABLE conversations (
+    id INT PRIMARY KEY AUTO_INCREMENT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO MYSQL, VOCÊ TIPICAMENTE COLOCA COMO DATA TYPE DESSE ID FIELD 
+
+
+1 'INTEGER',
+
+
+PQ ISSO TE DÁ UMA HUGE RANGE 
+
+DE NÚMEROS INTEGERS QUE 
+
+PODEM 
+
+SER ASSIGNED --> DEPOIS COLOCAMOS 
+
+
+'PRIMARY KEY' (fusão de NOT NULL e UNIQUE),
+
+
+
+e aí 
+
+
+
+o 'AUTO_INCREMENT'...
+
+
+
+
+
+
+
+
+
+
+-_> FAZEMOS ISSO COM O RESTO DAS TABLES...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    company_name VARCHAR(300) NOT NULL,
+    company_address VARCHAR(300) NOT NULL,
+    yearly_revenue FLOAT CHECK(yearly_revenue > 0)
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> COLOCAMOS UMA CONSTRAINT DE 'CHECK' 
+
+PQ 
+
+O 
+
+yearly_revenue NÃO PODE SER MENOR DO QUE 0..
+
+
+
+
+
+
+
+-> IS HIRING DEVERÁ SER 'DEFAULT FALSe'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+CREATE TABLE employers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    company_name VARCHAR(300) NOT NULL,
+    company_address VARCHAR(300) NOT NULL,
+    yearly_revenue FLOAT CHECK(yearly_revenue > 0),
+    is_hiring BOOLEAN DEFAULT false
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM, O PROFESSOR ADICIONA UMA TABLE DE 'conversations',
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    message TEXT NOT NULL,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+
+
+
+
+
+
+
+
+(PODERÍAMOS ADICIONAR UM VALUE DE 'EMPTY STRING' como value )
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------
+
+
+
+
+
+
+
+
+
+
+--> APRENDEMOS QUE 'names'
+
+
+não são bons identificadores...
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE VAMOS COLOCAR IDS , aqui...
+
+
+
+
+
+
+
+
+
+---> É POR ISSO QUE O PROFESSOR ADICIONA UM 
+
+
+
+
+field de 'user_id',
+
+
+
+e outro 
+
+
+de 
+
+
+'employer_id'..
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE conversations (
+    user_id INT,
+    employer_id INT,
+    message TEXT NOT NULL,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS O PROFESSOR NÃO ADICIONA 
+
+
+
+
+
+'PRIMARY KEY AUTO_INCREMENT'
+
+
+A ESSES FIELDS,
+
+
+PQ 
+
+ELES NÃO DEVEM SER INCREMENTADOS SEMPRE QUE ADICIONAMOS UMA NOVA CONVERSATION RECORD...
+
+
+
+
+
+
+
+
+
+EM VEZ DISSO,
+
+
+
+O PROFESSOR QUER DEFINIR 
+
+
+
+''O ID DE QUAL EMPRESA E QUAL USER ESTÃO ENVOLVIDOS NESSA CONVERSATION'
+
+
+
+
+
+MANUALMENTE,
+
+
+
+MAS ELE _ TEM QUE 
+
+
+USAR 
+
+
+O MESMO TYPE (INT )
+
+
+
+
+
+DOS IDs USADOS NAS OUTRAS TABELAS,
+
+
+
+JUSTAMENTE PQ 
+
+VAMOS QUERER USAR 
+
+
+OS VALUES DOS IDS ARMAZENADOS NAS OUTRAS TABELAS...
+
+
+
+
+
+
+
+
+
+E CADA MESSAGE DEVERÁ TER SEU PRÓPRIO 'UNIQUE IDENTIFIER',
+
+
+
+POR ISSO COLOCAMOS ESSE ID AUTO INCREMENTING TAMBÉM..
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE users;
+DROP TABLE conversations;
+DROP TABLE employers;
+
+
+
+CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+--versao POSTGRES
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(300) NOT NULL,
+    yearly_salary INT CHECK(yearly_salary > 0),
+    current_status employment_status -- código enum QUE FUNCIONA PARA O MYSQL...
+);
+CREATE TABLE employers (
+    id SERIAL PRIMARY KEY,
+    company_name VARCHAR(300) NOT NULL,
+    company_address VARCHAR(300) NOT NULL,
+    yearly_revenue FLOAT CHECK(yearly_revenue > 0),
+    is_hiring BOOLEAN DEFAULT false
+);
+CREATE TABLE conversations (
+    id SERIAL PRIMARY KEY,
+    -- id da própria table
+    user_id INT,
+    --identifica o USER envolvido nessa conversation
+    employer_id INT,
+    --identifica o EMPLOYER envolvido nessa conversation
+    message TEXT NOT NULL,
+    date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
+
+
+
+OK... FAZEMOS ISSO...
+
+
+
+
+
+
+
+
+
+CONECTO AO POSTGRESQL E RODO TUDO ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+AS TABLES FORAM RECRIADAS,
+
+E AGORA 
+
+POSSUEM 
+
+
+COLUMNS COM 
+
+
+
+
+ÍCONE DE 'CHAVE' --> ESSAS SÃO AS PRIMARY KEYS,
+
+
+
+
+
+
+
+
+
+O DATABASE SERVER (E a extension)
+
+
+RECONHECEM QUE 
+
+
+
+
+AS ID COLUMNS SÃO DEFINIDAS COMO AS 'PRIMARY KEY COLUMNS'
+
+
+das tables respectivas,
+
+
+
+
+
+
+E AÍ É FÁCIL IDENTIFICAR A PRIMARY KEY COLUMN ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESTAMOS SEM DATA 
+
+
+
+
+NESSAS TABLES...
+
+
+
+
+
+
+
+---> O PROFESSOR COPIA O CÓDIGO ANTERIOR, PARA 
+
+
+AÍ 
+
+
+RODAR A VERSÃO POSTGRESQL...
+
+
+
+
+
+
+
+
+---> (COLOCA 'id SERIAL PRIMARY KEY'),
+
+
+
+e então 
+
+
+coloca o NEGÓCIO DO TYPE,
+
+que é 
+
+
+
+tipo 
+
+
+
+
+
+
+
+
+'current_status employment_status'....
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+deu tudo certo..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR GANHOU UM ERROR DE 'employment_status'
+
+
+JÁ EXISTE (
+
+
+
+    ISSO ACONTECE PQ 
+
+
+
+    TYPES QUE VOCÊ CRIA _ SÃO REALMENTE ARMAZENADOS 
+
+    NA MEMÓRIA 
+
+    DO POSTGRESQL ---> 
+
+
+
+
+    E PROVAVELMENTE É POSSÍVEL LIMPAR ISSO DAÍ....
+)
