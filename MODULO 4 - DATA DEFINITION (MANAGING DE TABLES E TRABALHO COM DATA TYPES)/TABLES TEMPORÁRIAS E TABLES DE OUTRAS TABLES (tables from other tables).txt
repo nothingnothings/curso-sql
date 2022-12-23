@@ -1,0 +1,536 @@
+MAIS MANEIRAS DE CRIAR TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA COURSE SECTION FOI GIGANTE...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR QUER MOSTRAR MAIS MANEIRAS DE CRIAR TABLES,
+
+QUE PODEM ÀS VEZES SER ÚTEIS... -->  TIPOS DE TABLES QUE PODEM SER ÚTEIS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM VEZ DE CRIAR TABLES PERMANENTES, TEMOS OUTRAS OPÇÕES:
+
+
+
+
+
+
+
+
+
+
+1) 'TEMPORARY TABLES' 
+
+
+
+
+
+
+
+
+
+
+2) 'TABLES QUE SÃO BASEADAS/CRIADAS A PARTIR DE DATA DE OUTRAS TABLES'... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TEMPORARY TABLES ------> SÃO CRIADAS 
+
+
+
+
+
+QUANDO VOCÊ COLOCA A KEYWORD DE 'TEMPORARY'
+
+antes de 'TABLE',
+
+EM 'CREATE TABLE'..
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TEMPORARY TABLE ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A IDEIA, AQUI, 
+
+
+
+É QUE ESSAS TABLES SÃO ARMAZENADAS APENAS TEMPORARIAMENTE,
+
+
+NA MEMÓRIA --> SE O DATABASE SYSTEM SERVER FOR REINICIADO, POR ALGUMA RAZÃO,
+
+
+ESSAS TEMPORARY TABLES 
+
+
+
+TERÃO SIDO __ APAGADAS--> 
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+ELAS DEVEM SER USADAS PARA 'STORE INTERMEDIATE RESULTS',
+
+
+
+
+
+ou qualquer outra 'non-permanent data'...
+
+
+
+
+
+
+
+
+
+
+AÍ TEMOS O SEGUNDO CASO, DE 'CREATE DE TABLES A PARTIR DE OUTRAS TABLES',
+
+
+
+
+
+
+
+
+
+
+
+que é feito tipo assim:
+
+
+
+
+
+
+
+
+2) TABLES CRIADAS A PARTIR DE OUTRAS TABLES:
+
+
+
+
+
+CREATE TABLE  ... AS 
+
+
+
+
+
+
+
+
+------> PARA CONSEGUIR ACESSAR ESSE RECURSO,
+
+
+VOCÊ DEVE COLOCAR A KEYWORD DE 'AS'
+
+
+
+
+depois de TODA SUA COLUMN DEFINITION,
+
+LÁ NO CREATE TABLE,
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE ... AS <query>
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> 
+
+
+
+
+
+
+
+
+
+
+---> EXEMPLO (depois de criar a table):
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(300) NOT NULL,
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status ENUM ('employed', 'self-employed', 'unemployed')
+) AS  ....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+
+ESCREVER 'AS'
+
+
+e então ESCREVER/CRIAR UMA 
+
+QUERY QUE VAI __ FETCHEAR__ A DATA _ LÁ DE OUTRA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TEMOS UM EXEMPLO LÁ NA DOCUMENTAÇÃO DO POSTGRESQL:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE films_recent AS 
+SELECT * FROM films WHERE date_prod >= "2002" 
+
+
+
+
+
+
+
+----> OU SEJA,
+
+
+
+NÓS BASICAMENTE 
+
+
+
+INSERIMOS DATA __ DE OUTRA _ TABLE,
+
+DENTRO DESSA TABLE QUE ESTAMOS CRIANDO (cria uma 'cópia' da data da outra table, nessa nossa table que estamos criando)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> NESSE CASO,
+
+
+COMO NÓS ESPECIFICAMOS 
+
+
+AS DEFINIÇÕES DE COLUNA,
+
+
+
+
+
+AS COLUNAS SERÃO 'INFERRED'
+
+
+
+da table a que vocÊ está 'FETCHING DATA FROm'..
+.
+
+
+
+
+
+
+
+
+
+
+
+-> ISSO QUER DIZER QUE ESTAMOS FETCHEANDO DATA LÁ DE 'films'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO MYSQL,
+
+
+
+ESSA SINTAXE TAMBÉM EXISTE,
+
+
+
+MAS A KEYWORD DE 
+
+
+'AS'
+
+é opcional...
+
+
+
+
+
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+CREATE TABLE bar (m INT) SELECT n FROM foo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK.. POPULAMOS ISSO COM DATA DE OUTRA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA COISA DE 'CREATE TABLE ... AS '
+
+
+
+PODE SER ÚTIL SE VOCÊ 
+
+
+
+'''TEM DATA EM OUTRA TABLE,
+
+MAS QUER ARMAZENAR UM SUBSET 
+
+DESSA DATA, PERMANENTEMENTE,
+
+EM UMA TABLE STANDALONE''...
+
+
+
+
+
+
+
+
+
+
+
+
+É UM CASO MEIO NICHO,
+
+
+MAS àS VEZES É UTILIZADO...
+
+
+
+
+
+
+
+
+
+
+
+--------> ISSO PQ 
+
+
+VOCÊ FREQUENTEMENTE VAI CRIAR TABLES DO MODO 'VANILLA'...
