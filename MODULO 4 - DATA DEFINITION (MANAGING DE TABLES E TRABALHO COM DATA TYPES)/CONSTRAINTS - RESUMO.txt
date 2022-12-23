@@ -1,0 +1,372 @@
+]
+
+
+
+
+
+
+
+
+
+
+
+
+MAIS SOBRE CONSTRAINTS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VIMOS O BÁSICO SOBRE CONSTRAINTS...
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER RESUMIR O QUE VIMOS ATÉ AGORA, SOBRE CONSTRAINTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CONSTRAINTS --> SÃO 'ALL ABOUT' O 
+
+RESTRICT
+ 
+
+ DE 
+ '
+ QUAIS VALUES PODEM SER INSERIDOS EM 1 COLUMN' 
+
+
+
+
+
+ QUANDO VOCÊ INSERE 1 NOVO ROW 
+
+
+ EM 1 TABLE..
+
+
+
+
+
+
+
+
+
+
+
+
+ APRENDEMOS AS CONSTRAINTS:
+
+
+
+
+
+
+ 1) NOT NULL --> O OMIT DE UM VALUE É IMPOSSÍVEL.. é o contrário de 'DEFAULT'( pq o default define que um VALUE DEAFULT SERÁ USADO CASO NÃO SEJA PASSADO NENHUM VALUE A ALGUMA COLUMN)..
+
+
+
+
+
+
+
+
+ 2) UNIQUE --> GARANTE QUE A COLUMN NÃO ACEITE ROWS COM 1 certo value 'duplicado' em si.....
+
+
+
+
+
+
+
+
+
+ 3) PRIMARY KEY --> É A COMBINAÇÃO DE 'UNIQUE' E 'NOT NULL', mas também fornece uma info ao DATABASE SYSTEM, 
+
+ determinando que 
+
+
+ ESSA COLUMN EM QUE FOI SETTADA SERÁ A 'MAIN IDENTIFICATION CRITERIA' para todas as rows em 1 table...
+
+
+
+
+
+
+
+
+ 4) CHECK --> É USADO PARA GARANTIR QUE O VALUE QUE 
+
+ É INSERIDO
+
+
+
+ SEJA __ CHECADO (
+
+
+'''value must pass a SPECIFIC CHECK'''..
+ )
+
+
+
+
+
+
+
+
+
+
+ 5) POR FIM, TEMOS O CONCEITO DE 'FOREIGN KEY',
+
+
+ QUE É OUTRA CONSTRAINT --> É UM CONCEITO QUE SE TORNARÁ 
+
+
+ IMPORTANTE MAIS TARDE NO CURSO,
+
+
+ QUANDO 
+
+
+ ESTUDARMOS A FUNDO 'RELATIONSHIPS'
+
+
+
+ ENTRE RECORDS ARMAZENADOS EM DIFERENTES TABELAS (
+
+
+
+    ELE GARANTE QUE 
+
+
+__ 1 VALUE __ QUE É INSERIDO EM UMA TABLE 'A' 
+
+
+JÁ EXISTE/EXISTIRÁ EM UMA TABLE 'B'...
+
+ )
+
+
+
+
+
+
+
+
+
+ --> MAS VEREMOS O CONCEITO DE 'FOREIGN KEY' mais tarde...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> TAMBÉM VALE A PENA APONTAR QUE 'CONSTRAINTS PODEM SER ADICIONADAS A COLUMNS'... (conjuntamente)...
+
+
+
+
+
+
+
+
+
+
+ --> ALGUMAS CONSTRAINTS COMO 
+
+ 'NULL' 
+
+
+
+  E 
+
+  'UNIQUE'
+
+
+  PODEM SER ADICIONADAS A COLUMNS UNITÁRIAS...
+
+
+
+
+
+
+
+
+
+
+  --> MAS TAMBÉM TEMOS 'TABLE-WIDE CONSTRAINTS',
+
+
+
+  CONSTRAINTS QUE CONSIDERAM TODAS AS COLUMNS DE 1 TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ----> QUANDO VOCÊ CRIA 1 TABLE,
+
+  VOCÊ PODE ADICIONAR 1 CONSTRAINT A 1 TABLE,
+
+
+
+  BASTA 
+
+
+
+  COLOCÁ-LA DEPOIS 
+
+
+
+  DO DATA TYPE 
+
+
+
+
+
+  DE 1 COLUMN..
+
+
+
+
+
+
+  tipo assim:
+
+
+
+
+
+
+salary INT CHECK (salary > 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU, ENTÃO,
+
+VOCÊ PODE DEFINIR SUA CONSTRAINT COMO UM 'TABLE-WIDE CONSTRAINT',
+
+
+
+BASTA A ESCREVER NO INÍCIO DE UMA LINHA, TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+salary INT,
+CHECK (salary > 0);
+
+
+
+
+
+
+(
+
+
+    OU SEJA,
+
+    É COMO SE VOCÊ FOSSE ADICIONAR UMA NOVA COLUMN 
+
+
+    NA SUA TABLE,
+
+    MAS VAI ADICIONAR A CONSTRAINT...
+)
+
+
+
+
+
+
+
+
+
+
+-> NÃO IMPORTA QUAL DOS 2 TIPOS ESCOLHEMOS --> MAS IMPORTA 
+
+
+SE 
+
+
+COM A CONSTRAINT DE 'CHEck'
+
+
+
+você 
+
+QUER COMPARAR OS VALUES DE 
+
+
+2 DIFERENTES COLUMNs (como condição/critério)
