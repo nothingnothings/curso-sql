@@ -1,0 +1,1129 @@
+
+
+
+
+
+
+
+
+
+DE FATO, NÓS ADICIONAMOS AQUELAS 
+
+
+
+
+2 COLUMNS DE 'PRIMARY KEY',
+
+A DIFERENTES TABLES....
+
+
+
+
+
+
+
+
+
+
+
+MAS O QUE NÃO FIZEMOS, AINDA,
+
+
+É INSERIR NOVA DATA NESSAS TABLES...
+
+
+
+
+
+
+
+
+----> MAS O PROFESSOR AGORA QUER PASSAR A UM NOVO TÓPICO,
+
+QUE DEVEMOS COMPREENDER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSE TÓPICO É 
+
+
+'''COMO VOCÊ DEVE TRABALHAR COM __ TEXT, NO SQL'''....
+
+
+
+
+
+
+
+
+
+
+-_> COM SQL E COM SQL DATABASE MANAGEMENT SYSTEMS EM GERAL..
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER TRATAR DO TÓPICO DE 'ENCODING' E 'COLLATIONS'...
+
+
+
+
+
+
+
+
+
+
+--> BEM, RESUMINDO:
+
+
+
+
+
+
+* QUANDO VOCÊ TRABALHA COM 'TEXT VALUES',
+
+
+COMO 
+
+
+
+
+'O NOME DE UM USER',
+
+
+
+
+
+ou então 
+
+
+
+
+'THE MESSAGE SENT BY A USER, TO A COMPANY',
+
+
+
+
+
+
+
+
+ESSES 2 CONCEITOS SE TORNAM IMPORTANTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUANDO VOCÊ SETTA 1 DATABASE OU 1 TABLE EM 1 DATABASE,
+
+
+
+
+VOCÊ SEMPRE PODE 
+
+
+
+
+ESPECIFICAR O 'ENCODING DE TEXT VALUES' ARMAZENADOS NA SUA TABLE....
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ISSO SIMPLESMENTE ''''CONTROLA QUAL TIPO DE CARACTERES PODEM SER ARMAZENADOS NA SUA TABLE''..
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PODE PARECER ESTRANHO EM 1 PRIMEIRO MOMENTO,
+
+
+MAS VOCÊ DEVE SE LIGAR QUE 
+
+
+'
+''AO LONGO DO MUNDO TEMOS UMA 
+
+AMPLA VARIEDADE DE CARACTERES' '' 
+
+
+
+
+
+
+
+
+
+--> tEMOS CARACTERES COMO:
+
+
+
+1) DÍGITOS 
+
+
+
+
+2) CARACTERES ESPECIAIS (como '?')
+
+
+
+
+3) CARACTERES NEM TÃO USADOS (como 'u' especial) 
+
+
+
+
+
+
+
+4) JAPANESE SIGNS (kanjis) 
+
+
+
+
+
+
+5) até mesmo EMOJIS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TODOS ESSES SÃO VALID CHARACTERS,
+
+E
+ VOCÊ PODE 
+
+ CONTORLAR 
+
+
+
+ QUAIS 
+
+
+ TIPOS DE CARACTERES VOCÊ QUER 
+
+ SUPORTAR NAS SUAS DATABASES E COLUMNS ESPECÍFICAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E 'COLLATION' É 
+
+
+
+
+ BASICAMENTE RELACIONADO A ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ COM 
+
+
+ 'ENCODING',
+
+ DEFINIMOS 
+
+
+
+
+ ''QUAIS VALORES DE CHARACTER PODEM SER ARMAZENADOS, ANTES DE MAIS NADA''.. --> 
+
+
+
+
+
+
+
+
+
+
+ JÁ COM 'COLLATION' VOCÊ DEFINE '''' COMO DIFERENTES CARACTERES SE COMPARAM, UM COM O OUTRO'''...
+
+
+
+
+
+
+ COMO ASSIM,
+
+
+ 'comparam-se'? 
+
+
+
+
+
+
+
+
+
+
+ --> BEM, SE VOCÊ 
+
+
+ FOSSE FAZER 'SORT'
+
+ DE DATABASE ROWS,
+
+
+
+
+
+
+
+
+
+ ISSO SE TORNA IMPORTANTE -> 
+
+
+
+
+
+
+
+
+
+ PERGUNTAS COMO 
+
+
+
+ 'QUAL t VEM ANTES?' 
+
+ (
+
+CAIXA ALTA vs caixa baixa ( T vs t)
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+ UM KANJI VEM ANTES DE UMA LETRA?
+
+
+
+
+
+
+
+
+
+ UM EMOJI VEM ANTES DE UMA LETRA DO ALFABETO? 
+
+
+
+
+
+
+
+
+
+
+
+
+ ESSAS PERGUNTAS SÃO RESOLVIDAS COM AS CHAMADAS 
+
+
+
+
+ ''COLLATION RULES''' (collations),
+
+
+
+
+ QUE PODEMOS 
+
+
+ SETTAR EM :
+
+
+
+ 1) DATABASE LEVEL 
+
+
+
+
+ 2) TABLE LEVEL 
+
+
+
+ 3) COLUMN LEVEL..
+
+
+
+
+
+
+
+
+ (
+
+    O grau de Definição 
+
+    de ENCODING   __DEPENDE_ _ DO RDBMS com que você está trabalhando... o config da encoding e collation
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> OK.... A IDEIA POR TRÁS DE 'ENCODING' 
+
+
+
+
+ É QUE VOCÊ PODE 'CONTROLAR QUAIS 
+
+
+
+ CARACTERES SÃO SUPORTADOS' --> E PODEMOS SETTAR ISSO NO NÍVEL DA DATABASE,
+
+ TABLE 
+
+ OU COLUMN...
+ .
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> JÁ COLLATION,
+
+
+
+
+ É 'ALL ABOUT'
+
+
+
+ COMO 
+
+
+
+ OS CARACTERES SE COMPARAM, UNS COM OS OUTROS...
+
+
+
+
+
+
+
+
+
+
+
+ --> E O 'COLLATION' TAMBÉM PODE SER DEFINIDO 
+
+
+
+ EM NÍVEIS DE 'COLUMN', 'TABLE' E 'DATABASE'....
+
+
+
+
+
+
+
+
+
+ --> OK.... MAS É CLARO QUE 
+
+
+
+
+ ESSE GRAU DE CONFIGURAÇÃO DEPENDE DO RDBMS 
+
+
+ QUE VOCê ESTÁ 
+
+
+ USANDO...
+
+
+
+
+
+
+
+
+
+
+ -> PARA MOSTRAR RAPIDAMENTE 
+
+
+ O QUE O PROFESSOR QUER DIZER,
+
+
+
+
+
+ ELE ENTRA NO 'PGADMIN4',
+
+
+
+
+
+
+ E AÍ 
+
+
+
+
+
+
+
+
+
+
+
+ ELE CLICA EM BOTÃO DIREITO -> PROPRIEDADES (na nossa 'table')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> DENTRO DA TABLE,
+
+
+ TEMOS 
+
+
+ A CONFIGURAÇÃO DE 'ENCODING',
+
+
+ QUE ESTÁ DEFINIDA COMO 
+
+
+ 'UTF-8' -----> 
+
+
+
+
+
+
+
+ E O DEFAULT É 'UTF-8'..
+
+
+
+
+
+
+
+
+
+
+
+ QUANTO À 'collation',
+
+
+
+
+ O DEFAULT É 'C'..
+
+
+
+
+
+
+
+
+
+
+
+
+ -> MAS ESSES DEFAULTS NÃO PODEM SER MUDADOS DEPOIS QUE SUA DATABASE JÁ ESTÁ SETTADA....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ESSES DEFAULTS SÓ PODEM SER ALTERADOS __ NO MOMENTO EM QUE VOCÊ CRIA A DATABASE....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E, LÁ NO 'MYSQL WORKBENCH',
+
+
+
+
+ TEMOS basicamente A MESMA SITUAÇÃO...
+
+
+
+
+
+
+
+
+
+
+ --> PODEMOS DEFINIR O 'ENCODING' 
+
+
+
+ E 'COLLATION' 
+
+
+
+DA DATABASE 
+
+QUANDO A SETTAMOS....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O DEFAULT, HOJE EM DIA,
+
+
+
+
+É O CHARACTER SET DE 'UNICODE,'
+
+
+
+
+QUE BASICAMENTE SUPORTA TODOS OS CARACTERES DO MUNDO..
+
+
+
+
+
+
+
+
+
+
+
+--> ESSES CARACTERES SÃO BASICAMENTE 'REGULAR CHARACTERS', EMOJIS e outros caracteres (usados em outras linguagens)
+
+
+
+
+
+
+
+
+
+
+
+
+
+você pode ver quais character sets são suportados por cada database management system -> 
+
+
+
+
+
+
+
+
+
+E VOCÊ TEM CHARACTER SETS BEM MAIS RESTRITIVOS
+
+
+
+DO QUE O 'UNICODE' ----->  E SE TAIS CARACTERES FOSSEM INSERIDOS SEM SEREM SUPORTADOS,
+
+
+
+ELES NÃO SERIAM INSERTADOS CORRETAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ 
+
+
+SABE QUE VAI USAR CARACTERES SIMPLES NO SEU APP,,
+
+
+
+VOCÊ
+
+
+PODERIA USAR UM ENCODING MAIS SIMPLES NELE..
+
+
+
+
+
+
+
+
+
+
+
+--> E O CHARACTER SET QUE VOCÊ ESCOLHE AFETA O 'NÚMERO DE BYTES QUE CADA CARACTER TOMA'...
+
+
+
+
+
+
+
+
+
+
+HÁ ALGUNS CHARACTER SETS QUE 
+
+
+NÃO SUPORTAM TODOS OS CARACTERES,
+E QUE 
+
+TOMAM APENAS 1 ÚNICO BYTE PER CHARACTER..
+
+
+
+
+
+
+
+
+JÁ O 'UTF-8 UNICODE'
+
+
+
+ARMAZENA CARACTERES QUE 
+
+
+'''PODEM TOMAR UP TO __ 4 BYTES POR CARACTER'''.
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 
+
+O
+ PROFESSOR 
+
+
+ MENCIONOU QUE 
+
+
+
+ NO VARCHAR(X)
+
+
+
+
+
+
+
+
+
+ O NÚMERO 'X'
+
+ É O NÚMERO
+
+ DE __ BYTES___ QUE SUA STRING PODERÁ TOMAR (E não caracteres) --> ISSO PQ CADA CARACTER PODE TOMAR MAIS DO Q 1 BYTE DE ESPAÇO...
+
+
+
+
+
+
+
+
+
+
+ E 1 MONTE DE CARACTERES TOMAM APENAS 1 BYTE...
+
+
+
+
+
+
+
+
+
+
+
+ ------> MAS CARACTERES MAIS COMPLEXOS, COMO EMOJIS,
+
+ PODEM 
+
+
+ TOMAR MAIS DE 1 BYTE --> é por isso que não podemos enfiar 300 emojis em um VARCHAR(300)...
+
+
+
+
+
+
+
+
+
+ --> PARA CHARACTER SETS QUE SUPORTAM 'MAIS TIPOS DE CHARACTERS',
+
+ VOCÊ 
+
+
+ NÃO TEM A GARANTIA DE '1 CHARACTER = 1 BYTE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> E NOS CASOS DOS 'UNICODE',
+
+
+ 
+
+ CARACTERES (alguns deles)
+
+ PODEM TOMAR ATÉ 4 BYTES DE ESPAÇO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -------> no postgresql também temos a mesma coisa, uma lista de POSSÍVEIS ENCODING..
+
+
+
+
+
+
+
+
+
+
+
+ ---> ok.... UTF8 -> suporta quase todos os caracteres,
+
+
+
+
+
+ É O DEFAULT,
+
+
+
+ E É CONFIÁVEL..
+
+
+
+
+
+
+
+
+
+ SE VOCÊ QUER SER MAIS RESTRICTIVE,
+
+
+ PODE ALTERAR ESSE DEFAULT ENCODING DE 'UTF-8'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ E SE VOCÊ QUER MUDAR ESSE ENCODING,
+
+
+
+
+ NA COLUMN/TABLE/DATABASE LEVLE,
+
+
+
+
+ VOCÊ 
+
+ DEVE 
+
+ CHECAR OS DOCS DE SEU 
+ RDBMS
+
+ PARA VER COMO FAZER ISSO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> NO OFFICIAL DOCS DO MYSQL,
+
+
+
+ ENCONTRAMOS QUE 
+
+
+
+
+ ''TEMOS UMA OPTION DE 'table_option',
+
+
+
+ em que 
+
+
+
+
+
+ PODEMOS DEFINIR O CHARACTER SET
+
+
+ COMO SENDO ALGUM 
+
+
+
+ DAQUELES ENCODING TYPES/CHARACTER SETS 
+
+
+
+
+
+ mencionados anteriormente'''..
+
+
+
+
+
+
+
+
+ JÁ 
+
+
+ NO POSTGRESQl,
+
+
+
+
+ VOCÊ ACTUALLY NÃO PODE SETTAR CHARACTER SETS NO CONTEXTO DA TABLE,
+
+ E SIM APENAS 
+
+
+ NA DATABASE INTEIRA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> ok...
+
+
+
+
+
+
+
+
+ISSO É BEM MAIS AVANÇADO, MAS É BOM MENCIONAR..
+
+
+
+
+
+
+
+
+
+
+É BOM SABER DE CHARACTER SETS E COLLATION, EM GERAl...
