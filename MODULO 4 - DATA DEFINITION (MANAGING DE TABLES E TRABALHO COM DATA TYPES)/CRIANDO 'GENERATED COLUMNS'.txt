@@ -23,8 +23,1249 @@ ABORDAR É 'GENERATED COLUMNS'...
 
 
 
-
+ 
 
 
 
 -> É UM TÓPICO QUE ÀS VEZES PODE SER ÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO.
+
+
+
+
+
+
+
+
+
+--> É UM TÓPICO QUE PODE SER ÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONSIDERE O SEGUINTE CENÁRIO:
+
+
+
+
+
+
+
+
+
+TEMOS 3
+
+COLUMNS EM 1 TABLE...
+
+
+
+
+
+
+
+
+
+
+
+AS COLUMNS DE :
+
+
+
+
+
+
+
+1) first_name 
+
+
+
+
+
+
+
+
+
+
+2)  last_name 
+
+
+
+
+
+
+
+
+
+3) full_name 
+
+
+
+
+
+
+
+
+
+NESSA TABLE AÍ,
+
+
+
+
+
+VOCÊ QUER QUE A TERCEIRA TABLE,
+
+'full_name',
+
+
+
+SEJA 
+
+
+SEMPRE CRIADA (seu valor seja sempre criado)
+
+
+
+A PARTIR 
+
+
+DOS VALUES DAS OUTRAS 2 TABLES.... (
+
+
+
+
+
+
+SERÁ A COMBINAÇÃO DE 'FIRST' E 'LAST' NAME...
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ ___ 
+
+FORÇAR OS USERS 
+
+
+DE SEU 
+
+SITE 
+
+
+A ESCREVER 
+
+
+
+CADA 
+NOME 
+COMPLETO 
+
+
+É:
+
+
+
+
+
+A) ANNOYING (forçar o user a escrever DE NOVO ESSES MESMOS VALORES)
+
+
+
+
+
+
+
+2) ERROR-PRONE --> user pode errar value inputtado.. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O VALUE DESSA COLUMN DEVE SER 
+
+
+A COMBINAÇÃO 
+
+
+DE VALUES DE 2 OUTRAS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É NESSAS HIPÓTESES QUE 
+
+AS 
+
+'GENERATED COLUMNS'
+
+
+PODEM SER ÚTEIS..
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ PODE CONFIGURAR COLUMNS,
+
+DEIXÁ-LAS COM O CREATE 'AUTOMÁTICO',
+
+
+
+
+
+
+
+
+
+__ E SE VOCê FIZER ISSO,
+
+
+1 VALUE __ NÃO PODERÁ SER INSERIDO MANUALMENTE NELAS...-> AÍ,
+
+
+
+
+
+
+SÓ SERÁ POSSÍVEL POPULAR ESSAS COLUMNS COM VALUES A PARTIR 
+
+
+
+DE VALUES INSERIDOS EM OUTRAS COLUMNS (
+
+    processo realizado pelo DATABASE MANAGEMENT SYSTEM,
+
+
+
+
+
+    TUDO COM BASE NA 'GENERATION LOGIC'
+
+
+    QUE VOCÊ ARMAZENOU PARA 
+
+    ESSAS 'GENERATED COLUMNS'...
+)
+
+
+
+
+
+
+
+
+'''VALUE IS DERIVED AUTOMATICALLY''
+
+
+
+
+
+'DATA DOESNT HAVE TO BE (and cant be) 
+
+INSERTED MANUALLY'....
+
+
+
+
+
+
+
+MAS CABE MENCIONARW -->  APESAR 
+
+
+
+
+
+
+
+DO FATO DE 
+
+QUE 
+
+ESSAS COLUMNS PODEM SER ÚTEIS PARA ESSES CASOS NICHO,
+
+
+
+
+
+
+
+
+
+VOCÊ PODERIA ARGUMENTAR QUE A COMBINAÇÃO 
+
+
+
+
+DOS VALUES DESSAS COLUMNS EM 1 ÚNICA COLUMN É DESNECESSÁRIA....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> EM VEZ DISSO,
+
+
+VOCÊ 
+
+
+PODERIA TER A 'RAW DATA'
+
+LÁ 
+
+
+
+NA TABLE DA DATABASE... --> E SE SEU APP/SITE 
+
+
+
+ESTÁ _ CONVERSANDO COM A DATABASE,
+
+
+
+
+
+E SE PRECISA O 'FULL_NAME',
+
+
+VOCÊ 
+
+
+
+
+PODERIA 
+
+SÓ FETCHEAR ESSES 2 VALUES 'STANDALONE',
+
+
+
+E AÍ OS COMBINAR EM 1 FULL NAME,
+
+COMO PARTE 
+
+
+
+
+
+
+
+
+DA 'FETCHING QUERY',
+
+
+
+
+OU 
+
+
+NO CÓDIGO DE SEU 
+
+WEBSITE...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE ARGUMENTO E VÁLIDO, NO FINAL DAS CONTAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> GENERATED COLUMNS PODEM SER ÚTEIS,
+
+
+MAS VOCÊ 
+
+
+TALVEZ 
+
+
+VENHA A PREFERIR 
+
+
+
+
+
+
+'''COMBINING VALUES IN A QUERY''',
+
+
+OU ENTÃO 
+
+
+
+NO CÓDIGO QUE
+
+
+CONVERSA COM A DATABASE,
+
+EM VEZ 
+
+
+DE 
+
+ARMAZENAR 
+
+
+
+
+
+
+A COMBINAÇÃO DESSES VALUES EM COLUMNS EXTRAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK, MAS COMO É ESCRITA ESSA FEATURE?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É UTILIZADA MAIS NO 'MYSQL',
+
+
+pq 
+
+o SUPORTE POSTGRESQL
+ 
+
+ É MAIS POBRE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> o professor QUER MOSTRAR COMO PODEMOS 
+
+
+
+ FAZER UMA 'GENERATED_COLUMN',...
+
+
+
+
+
+
+
+
+
+
+
+ --> O PROFESSOR USARÁ DE EXEMPLO A TABLE DE 
+
+ 'users'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(VERSÃO POSTGRESQL)....
+
+
+
+ CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    full_name VARCHAR(300) NOT NULL,
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    full_name VARCHAR(300) NOT NULL,
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE QUISERMOS DEIXAR ESSA COLUMN DE 'full_name'
+
+
+COMO UMA 
+
+
+
+GENERATED COLUMN (nunca mais precisaremos inserir values nela MANUALMENTE),
+
+
+
+
+
+
+
+BASTARIA 
+
+
+
+
+
+
+
+
+ESCREver 
+
+
+
+
+
+
+
+
+
+
+
+full_name(601)    (PQ VAMOS COMBINAR O PRIMEIRO FIELD COM O SEGUNDO, O QUE DÁ 600 CARACTERES... COLOCAMOS 1 CARACTER PARA AGIR COMO O 'BLANK' ENTRE OS 2 VALUES)..
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    full_name VARCHAR(601) NOT NULL,    --assim, 'full_name' SERÁ UMA COLUMN CUJO VALUE SERÁ CONSTRUÍDO A PARTIR DE 'first_name' e 'last_name'
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CRIAR 
+
+
+A GENERATED COLUMN,
+
+
+
+DEVEMOS 
+
+
+COLOCAR A KEYWORD DE 
+
+
+
+'
+GENERATED' 
+
+
+
+
+,
+
+
+E DEPOIS 
+
+
+
+
+'ALWAYS' 
+
+
+
+E 
+
+DEPOIS 
+
+'AS',
+
+
+
+
+SEGUIDO DE '()',
+
+
+
+
+
+ONDE COLOCAREMOS A LÓGICA DO COMBINE, TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    full_name VARCHAR(601) GENERATED ALWAYS AS (),    --assim, 'full_name' SERÁ UMA COLUMN CUJO VALUE SERÁ CONSTRUÍDO A PARTIR DE 'first_name' e 'last_name'
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    full_name VARCHAR(601) GENERATED ALWAYS AS (),    --assim, 'full_name' SERÁ UMA COLUMN CUJO VALUE SERÁ CONSTRUÍDO A PARTIR DE 'first_name' e 'last_name'
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK... DENTRO DO '()",
+
+
+VAMOS 
+
+USAR 
+UMA FUNCTION 
+
+
+QUE EXISTE 
+NA  
+
+
+
+
+MAIOR PARTE DOS RDBMS,
+
+QUE É 
+
+A FUNCTION DE 'CONCAT()' -----> É UMA FUNCTION QUE NOS RETORNA UM VALUE,
+
+
+E APRENDEREMOS MAIS SBORE ELA AO LONGO DO CURSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> 'CONCAT()'
+
+
+SIMPLESMENTE CONCATENA 
+
+MÚLTIPLOS STRING VALUES 
+EM 
+
+
+1 
+
+STRING MAIOR....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMOO QUEREMOS UM ESPAÇO ENTRE ESSES 2 VALUES,
+
+DEIXAMOS UMA EMPTY STRING NO MEIO:
+
+
+
+
+
+
+
+
+
+
+CREATE TYPE employment_status AS ENUM('self-employed', 'employed', 'unemployed');
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL, --CONCAT() É UMA FUNÇÃO QUE EXISTE NO SQL...
+    full_name VARCHAR(601) GENERATED ALWAYS AS (CONCAT(first_name, "", last_name)),    --assim, 'full_name' SERÁ UMA COLUMN CUJO VALUE SERÁ CONSTRUÍDO A PARTIR DE 'first_name' e 'last_name'
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status employment_status
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---- >  OK.. 
+
+
+
+
+
+
+
+
+
+
+E É ESSE 'COMBINED VALUE'
+
+
+
+QUE SERÁ 
+
+
+INSERIDO 
+
+
+
+NESSA COLUMN 
+
+
+GERADA AUTOMATICAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS AQUI O PROFESSOR APONTA UM PROBLEMA:
+
+
+ 
+
+ 
+ 
+
+ ''ISSO NÃO VAI RODAR ASSIM LÁ NO POSTGRESQL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> VAMOS COMEÇAR PELO MYSQL, PORTANTO..
+
+
+
+
+
+ A SINTAXE MYSQL FICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(200) NOT NULL,
+    last_name VARCHAR(200) NOT NULL,
+    --CONCAT() É UMA FUNÇÃO QUE EXISTE NO SQL...
+    full_name VARCHAR(401) GENERATED ALWAYS AS (CONCAT(first_name, "", last_name)),
+    --assim, 'full_name' SERÁ UMA COLUMN CUJO VALUE SERÁ CONSTRUÍDO A PARTIR DE 'first_name' e 'last_name'
+    yearly_salary INT CHECK (yearly_salary > 0),
+    current_status ENUM('self-employed', 'employed', 'unemployed')
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AÍ SE TENTAMOS RODAR ISSO 
+
+
+
+
+
+NO MYSQL,
+
+
+O NEGÓCIO FUNCIONA..
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS NAS TABLES 
+
+o 
+
+
+
+'first_name'
+
+e 
+
+'last_name',
+
+
+E AÍ 
+
+
+
+TEREMOS A COLUMN DE full_name,
+
+QUE 
+
+SEMPRE ARMAZENRÁ 
+
+
+VALUES AUTOMATICAMENTE (
+
+    e impossibilitará o insert MANUAL de 
+
+
+
+    values dentro dela...
+
+)
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR TESTA ISSO COM O INSERRT 
+
+
+
+
+DE VALUES NESSA COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users (first_name, last_name, yearly_salary, current_status, full_name)
+VALUES ('Art', 'Panazolo', 24000, 'employed', 'Art Panazolo');
+
+
+
+
+
+
+
+
+
+
+--> E ISSO VAI REALMENTE DAR UM ERRO....
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE TENTAMOS RODAR ISSO CONTRA O MYSQL,
+
+
+
+
+
+
+
+
+GANHAMOS UM ERROR..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE TENTAMOS INSERIR COM O FORMATO CORRETO ( sem o insert de data na column de 'full_name'),
+
+
+
+
+LÁ RECEBEMOS TODAS AS COLUMNS COM VALUES CERTINHOS 
+
+
+(e a full_name preenchida com 'Art Panazolo', combinação dos values das columns 'First name' e 'last_name")..
+
+
+
+
+
+
+CERTO, ACABAMOS....
