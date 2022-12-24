@@ -1,0 +1,454 @@
+
+
+
+
+
+
+
+
+HORA DO EXEMPLO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA PRATICAR TODAS ESSAS CRUD OPERATIONS,
+
+
+O PROFESSOR QUER TRABALHAR COM UM PUNHADO DE 
+
+'EXAMPLE DATA'...
+
+
+
+
+
+
+
+
+
+--> o professor quer 
+TRABALHAR COM UMA DATABASE DE 'SALES',
+
+
+
+
+
+
+QUE TERÁ 
+
+UMA TABLE DE 'sales',
+
+
+
+E DENTRO 
+DELA
+
+
+TEREMOS SALE DATA...
+
+
+
+
+
+
+ CADA SALE TERÁ ESTA ESTRUTURA:
+
+
+
+
+
+
+
+
+
+
+
+ 1) id 
+
+
+ 2) date_created 
+
+
+ 3) date_fulfilled 
+
+
+ 4) customer_name 
+
+
+
+ 5) product_name 
+
+
+
+
+ 6) volume 
+
+
+
+ 7) is_recurring 
+
+ 8) is_disputed 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> OK..
+
+
+
+
+
+
+
+
+
+
+
+
+ HÁ MAIS FIELDS QUE PODERÍAMOS ADICIONAR,
+
+
+
+
+ MAS 
+
+
+
+
+
+ QUEREMOS TRATAR DESSES CRUD OPERATIONS BÁSICOS..
+
+
+
+
+
+
+
+
+
+
+
+ VAMOS TRABALHAR APENAS COM 1 TABLE (apesar de essa data ser capaz de ser splittada em múltiplas tables)...
+
+
+
+
+
+
+
+
+
+
+ -> O PROFESSOR QUER QUE PRATIQUEMOS 
+
+
+
+ A CRIAÇAÕ 
+
+ DESSA TABLE 
+
+
+ POR CONTA PRÓPRIA,...
+
+
+
+
+
+
+
+
+
+ CERTO...
+
+
+
+
+
+
+ assim que settarmos essa table,
+
+
+
+ HÁ UM PUNHADO DE TASKS/OPERATIONS QUE ELE QUER REALIZAR 
+
+ NELA..
+
+
+
+
+
+
+
+
+
+ TASKS:
+
+
+
+
+
+
+ 1) CRIAR A DATABASE E TABLE (definir data types adequados)..
+
+
+
+
+
+
+
+2) INSERIR EXAMPLE DATA...
+
+
+
+
+
+
+
+
+
+FAREMOS ISSO AO LONGO DAS PRÓXIMAS AULAS..
+
+
+
+
+
+
+
+
+
+--> JÁ PODEMOS IR PRATICANDO COM O COMANDO DE 'INSERT INTO'.
+
+
+
+
+
+
+
+
+depois TEREMOS TASSKS SOBRE O QUERY DE DATA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUERY GOALS:
+
+
+
+
+
+
+1) ACHAR TODAS AS SALES COM VOLUME DE  1000 
+
+
+
+
+
+2) ACHAR TOP 10 SALES
+
+
+
+
+3) ACHAR BOTTOM 10 SALES 
+
+
+
+
+
+4) ACHAR TODAS AS 'RECURRING SALES'
+
+
+
+
+5) ACHAR TODAS AS DISPUTED SALES COM VOLUME SUPERIOR A 5000 
+
+
+
+
+6) ACHAR TODAS AS SALES CRIADAS ENTRE 2 DATES...
+
+
+
+
+
+
+7) ACHAR TODAS AS SALES 'fulfilled <= 5 days DEPOIS DA CREATION DATE''..
+
+
+
+
+
+
+
+8) PEGAR UMA LISTA DE TODOS OS CUSTOMERS DISTINTOS NAS NOSSAS SALES...
+
+
+
+
+
+9) PEGAR UMA LISTA DE TODOS OS PRODUCTS DISTINTOS NAS NOSSAS SALES...
+
+
+
+
+
+
+
+
+
+
+
+
+OK... SÃO BASTANTES GOALS...
+
+
+
+
+
+
+
+
+
+VAMOS MEXER COM O COMANDO DE 'SELECT'
+
+E 
+
+'FILTERING' (where) ,
+
+
+ALÉM DE APRENDER OUTRAS FEATURES IMPORTANTES...
+
+
+
+
+
+
+
+
+--> ESSES QUERY GOALS 
+
+
+
+
+SERÃO VISTOS AO LONGO DESSA SECTION...
+
+
+
+
+
+
+
+
+
+--> VAMOS APRENDER MAIS SOBRE ESSAS CRUD OPERATIONS, SOBRE DATA FETCHING, FILTERING 
+
+
+E OPERATIONS MAIS COMPLEXAS (acerca do read de data)...
+
+
+
+
+
+
+
+
+
+
+--> essa course section será PRINCIPALMENTE SOBRE O FETCH DE DATA...
+
+
+
+
+
+
+
+
+
+
+--> UMA COISA QUE FAREMOS É 
+
+
+'UPDATE E DELETE UM PUNHADO DE DATA',
+
+
+
+para 
+
+
+testarmos esses comandos...
+
+
+
+
+
+
+
+
+-- >vamos começar pela criaçaõ da database e da table,
+
+na próxima aula...
+
+
+
+
+
+
+
+
+
+
+
+
+--> CRIEI A TABLE, COM CONSTRAINTS, COM O SEGUINTE CÓDIGO:
+
+
+
+
+
+
+
+
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_fulfilled TIMESTAMP,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume DECIMAL,
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false
+);
+
+
+

@@ -20,7 +20,7 @@
             "askForPassword": true,
             "driver": "PostgreSQL",
             "name": "MyPostGreSQLHomeConnection",
-            "database": "shop",
+            "database": "sales",
             "username": "postgres"
         }
     ]
