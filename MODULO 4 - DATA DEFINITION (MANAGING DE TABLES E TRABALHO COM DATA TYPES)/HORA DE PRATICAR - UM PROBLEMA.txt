@@ -1,0 +1,1921 @@
+
+
+
+
+
+
+
+
+
+
+
+HORA DO EXERCÍCIO..
+
+
+
+
+
+
+
+
+--> DEVEMOS PRATICAR TUDO QUE APRENDEMOS...
+
+
+
+
+
+
+
+
+
+
+
+
+----> PEQUENO EXERCÍCIO..
+
+
+
+
+
+
+
+
+--> APLICA TODOS OS CONCEITOS QUE 
+
+
+APRENDEMOS AO LONGO DESSA SECTION...
+
+
+
+
+
+
+
+
+
+
+
+EXEMPLO:
+
+
+
+
+
+
+
+
+
+--> ESTAMOS CONSTRUINDO UMA ONLINE SHOP..
+
+
+
+
+
+
+
+
+
+
+1) QUEREMOS UMA DATABASE...
+
+
+
+
+
+
+
+
+2) PARA ESSA ONLINE SHOP,
+
+
+QUEREMOS CRIAR 
+
+
+
+
+
+
+1 NOVA DATABASE,
+
+
+
+QUE TERÁ 
+
+
+
+APENAS 1 MAIN TABLE,
+
+A 
+
+
+
+'products'...
+
+
+
+
+
+
+
+
+
+
+--> EM DATABASES DE VERDADE, TERÍAMOS MAIS TABLES, MAS ASSIM JÁ ESTÁ BOM...
+
+
+
+
+
+
+
+
+
+
+--> NESSA TABLE,
+
+
+
+QUEREMOS 
+
+ARMAZENAR:
+
+
+
+
+
+
+1) NAME DE UM PRODUCT 
+
+
+2) PRICE DE UM PRODUCT (em dollars)
+
+
+
+
+
+3) DESCRIPTION DE UM PRODUCT 
+
+
+
+4) NÚMERO DE EXEMPLARES DAQUELE PRODUCT, DO ESTOQUE...
+
+
+
+
+
+5) image --> NÃO A IMAGE FILE EM SI, 
+
+E SIM 
+
+O PATH à IMAGEM QUE VOCê TERÁ 
+
+ARMAZENADO NO BACKEND.
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> VAMOS CONSTRUIR ESSA TABLE 
+
+
+
+
+
+
+COMO SE ESTIVÉSSEMOS A CONSTRUINDO EM 1 APP DE VERDADE..
+
+
+
+
+
+
+TASKS:
+
+
+
+
+
+1) CRIAR UMA NOVA DATABASE PARA A SHOP...
+
+
+
+
+2) ADICIONAR UMA TABLE PARA OS PRODUCTS 
+
+
+
+
+3) ESCOLHER 'APPROPRIATE COLUMN NAMES + DATA TYPES'...
+
+
+
+
+4) INSERT DUMMY DATA DENTRO DA TABLE CRIADA..
+
+
+
+
+
+
+5) UPDATAR TABLE E ADICIONAR 'SENSIBLE CONSTRAINTS'...
+
+
+
+
+6) UPDATAR A TABLE E ADICIONAR UMA 'PRIMARY KEY' (constraint especial)...
+
+
+À ela...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> A PARTE 6 
+
+VAI SER DIFÍCIL,
+ PQ NUNCA UPDATAMOS UMA 
+
+
+ TABLE 
+
+ PARA _ ADICIONAR NOVAS COLUMNS (
+
+
+
+    A DICA:
+
+
+
+    'AINDA USAREMOS O COMANDO DE ALTER TABLE',
+
+
+    E O ADD DE COLUMNS COM ELE É BEM SIMPLES,
+
+
+    HÁ UMA SIMPLES VARIAÇÃO 
+
+
+    DESSE COMANDO, QUE VAI ADICIONAR UMA COLUMn...
+ )
+
+
+
+
+
+
+
+
+ --> NA PRÓXIMA LIÇÃO, VEERMOS COMO FAZER TUDO ISSO, JUNTO DO PROFESSOR...
+
+
+
+
+
+
+
+
+
+
+ OK...
+
+
+
+
+
+
+ 1) CRIAR UMA NOVA DATABASE PARA A SHOP...
+
+
+
+
+2) ADICIONAR UMA TABLE PARA OS PRODUCTS 
+
+
+
+
+3) ESCOLHER 'APPROPRIATE COLUMN NAMES + DATA TYPES'...
+
+
+
+
+4) INSERT DUMMY DATA DENTRO DA TABLE CRIADA..
+
+
+
+
+
+
+5) UPDATAR TABLE E ADICIONAR 'SENSIBLE CONSTRAINTS'...
+
+
+
+
+6) UPDATAR A TABLE E ADICIONAR UMA 'PRIMARY KEY' (constraint especial)...
+
+
+
+
+
+
+
+
+
+
+
+
+FIZ O 1..
+
+
+
+
+
+
+
+AGORA VOU FAZER O 2 E 3...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) NAME DE UM PRODUCT 
+
+
+2) PRICE DE UM PRODUCT (em dollars)
+
+
+
+
+
+3) DESCRIPTION DE UM PRODUCT 
+
+
+
+4) NÚMERO DE EXEMPLARES DAQUELE PRODUCT, DO ESTOQUE...
+
+
+
+
+
+5) image --> NÃO A IMAGE FILE EM SI, 
+
+E SIM 
+
+O PATH à IMAGEM QUE VOCê TERÁ 
+
+ARMAZENADO NO BACKEND.
+
+
+
+
+
+
+
+
+
+
+
+CERTO.... FIZ ISSO....
+
+
+
+
+
+
+
+
+
+
+
+AGORA O 4 -----> 
+
+
+
+
+
+
+
+
+
+PARA INSERIR,
+
+ESTE COMANDo:
+
+
+
+
+
+
+
+INSERT INTO products (
+        product_name,
+        price,
+        product_description,
+        stock,
+        image_path
+    )
+VALUES (
+        'Chair',
+        200,
+        'A simple chair.',
+        5,
+        'google.com/chair'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+depois disso,
+
+
+
+
+
+
+
+
+
+5) UPDATAR TABLE E ADICIONAR 'SENSIBLE CONSTRAINTS'...
+
+
+
+
+
+
+
+
+CÓDIGO FICOU ASSIM:
+
+
+
+
+
+
+
+ALTER TABLE products
+ALTER COLUMN product_name SET NOT NULL,
+ADD CONSTRAINT price_higher_than_0 CHECK (price > 0),
+ALTER COLUMN product_description SET NOT NULL, 
+ALTER COLUMN stock SET NOT NULL, 
+ALTER COLUMN image_path SET NOT NULL;
+
+
+
+
+
+
+
+
+6) UPDATAR A TABLE E ADICIONAR UMA 'PRIMARY KEY' (constraint especial)...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA UPDATAR ESSA TABLE E ADICIONAR UMA 'PRIMARY KEY',
+
+PROVAVELMENTE TEREMOS DE USAR A SINTAXE DE 'ADD CONSTRAINT'...
+
+
+
+
+
+
+
+
+
+
+
+OK.... FIZ TUDO ISSO.
+..
+
+
+
+
+
+
+
+
+
+
+
+
+O ADD DA PRIMARY KEY FICOU ASSIm:
+
+
+
+ALTER TABLE products
+ADD COLUMN id SERIAL PRIMARY KEY;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------
+
+
+
+
+
+
+CLARO QUE ESSA SOLUÇÃO AÍ FOI A DO 'POSTGRESQL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA O PROFESSOR QUER NOS MOSTRAR COMO ELE FEZ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE COLOCOU TUDO EM 1 ARQUIVO,...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> a primeira etapa é CRIAR UMA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+professor fez tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE DATABASE shop;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR COLOCOU 'SHOP'...
+
+
+
+
+
+
+
+
+
+
+----> CERTO... isso vai criar a database...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A PRÓXIMA ETAPA É 'CRIAR 1 TABLE PARA AS PRODUCTS'...
+
+
+
+
+
+
+
+
+
+
+
+--> E A PRÓXIMA É ESCOLHER 'CORRECT COLUMN NAMES, E TYPES DELAS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE products (
+    product_name VARCHAR(255),
+    product_description VARCHAR(255),
+    image_path VARCHAR(255),
+    amount_in_stock INT,
+    price DECIMAL (ou NUMERIC)
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS UM NAME QUE SEJA NO MÁXIMO 200 OU 300 CARACTERES...
+
+
+
+
+
+
+-=-> PRECISAMOS DE UM NUMBER EM 'price'...
+
+
+
+
+
+
+
+-_> QUAL TIPO DE NUMBER?
+
+
+
+
+
+
+
+--> PRECISAMOS ARMAZENAR OS PRICES EM CENTS,
+
+
+
+
+É POR ISSO QUE É BOM USAR 
+
+
+
+
+
+'FLOAT' (MENOS PRECISO) ou 'DECIMAL.'.. (mais preciso)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS QUE O VALUE SEJA EXATO,
+
+
+
+POR ISSO COLOCAMOS 'decimal' ou 'numeric'...
+
+
+
+
+
+
+
+
+PROFESSOR COLOCOU 'NUMERIC,'
+
+
+
+PQ ELE 
+
+
+QUER DEFINIR A QUANTIDADE TOTAL DE DÍGITIOS,
+
+
+
+E A QUANTIDADE DE ESPAÇOS DEPOIS DA VÍRGULA (só 2)...
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE products (
+    product_name VARCHAR(255),
+    product_description TEXT,
+    image_path VARCHAR(255),
+    amount_in_stock INT,
+    price NUMERIC(10, 2)
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OS LIMITES DO 'NUMERIC' DEVEM SEMPRE SER 
+
+
+PEQUENINOS,
+
+
+
+
+NÚMEROS PEQUENOS,
+PQ ISSO VAI REALMENTE 
+
+
+___ DEIXAR MAIS LENTO __ O SEU QUERYING MECHANISM..
+
+
+
+
+
+
+
+
+
+--> A DESCRIPTION 
+
+
+
+DEVERÁ 
+
+SER 'TEXT',
+
+
+MAS PODERÁ SER TEXT ''QUITE LONG'',
+
+
+
+por isso o professor VAI QUERER USAR 'TEXT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... FOI ISSO QUE FIZ...
+
+
+
+
+
+
+
+
+
+
+--> JÁ O 'amount_in_stock'
+
+É UM NUMBER,
+MAS SERÁ
+ 
+
+
+ UMA INT...
+
+
+
+
+
+
+
+
+
+
+
+(NÃO TERÁ DECIMAL VALUESa)..
+
+
+
+
+
+
+
+
+
+
+-------> 
+  PODERÍAMOS COLOCAR 'SMALLint',
+
+
+
+
+  PQ 
+
+
+
+  ESSA SMALL RANGE DE NUMBERS QUE 
+
+
+
+
+  TEREMOS DE ARMAZENAR PARA ESSA COLUMN __ PODERÁ _ SER SUFICIENTE, a depender do caso...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'image_path'
+
+
+
+
+
+DEVERÁ SER VARCHAR(500) ou TEXt,
+
+
+pq sabemos que isso não será mt  longo....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, JÁ PEGAMOS TODOS OS DATA TYPES QUE PRECISÁVAMOS, PARA CRIAR ESSA TABLE...
+
+
+
+
+
+
+
+-_> COMEÇAMOS COM A DATABASE DO POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA TASK N4,
+
+
+
+
+DEVEMOS INSERIR DUMMY DATA NESSA TABLE, TIP OASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO products (
+    producT_name,
+    product_description,
+    image_path,
+    price,
+    amount
+) VALUES (
+
+
+    'CHAIR',
+    'YOUR DESCRIPTION',
+    '/asasass/dsasdadas',
+    2399.99,
+    5
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO.... isso vai inserir o record na nossa table...
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE PODERÍAMOS INSERIR MAIS PRODUCTS,
+
+MAS O PROFESSOR VAI DEIXAR ASSIM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok, já poodemos ver essa table lá na nossa database...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SEGUNDA PARTE DA SOLUÇÃO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> A TAREFA N5 É UPDATAR A TABLE E ADICIONAR ALGUMAS CONSTRAINTS QUE FAZEM SENTIDO..
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+USAREMOS 
+O COMANDO 
+
+'ALTER TABLEW'
+
+
+
+
+E 
+
+
+'ADD CONSTRAINT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> O 'NAME' NÃO PODERÁ SER NULL,
+ NEM O PRICE,  NEM A DESCRIPTION...
+
+
+
+
+
+
+
+
+
+
+ --> O 'AMOUNT IN STOCK'
+
+
+ poderá ser null,
+
+ a depender...
+
+
+
+
+
+
+
+
+
+
+
+ ----> MAS 'NAME', 'PRICE' E 'DESCRIPTION' NÃO PODEM SER NULL....
+
+
+
+
+
+
+
+
+
+ --> IMAGE PATH 
+
+ PODERIA SER NULL, A DEPENDER DO CASO..
+
+
+
+
+
+
+ ----> PROFESSOR QUER DEFINIR AS 3 PRIMEIRAS COLUMNS COMO 'NOT NULL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --------> O PROFESSOR TAMBÉM QUER UMA CONSTRIANT PARA 
+
+ DEIXAR 
+
+
+
+
+ O PRICE _ MAIOR _dO QUE 0 SEMPRE...
+
+
+
+(CHECK CONSTRAINT)..
+
+
+
+
+
+
+
+
+
+
+
+-> NO 'amount_in_stock',
+
+
+QUEREMOS 
+
+
+QUE O VALUE NÃO SEJA MENOR DO QUE 0,
+
+TAMBÉM..
+
+
+
+
+
+
+
+-_> TAMBÉM PODERÍAMOS TER MAIS REQUIREMENTS/RESTRICTIONS, MAS ESSAS JÁ ESTÃO BOAS...
+
+
+
+
+
+
+
+
+
+
+
+
+FICOU TIPO ASSIM, NA MINHA VERSÃO:
+
+
+
+
+
+
+
+
+
+ALTER TABLE products
+ALTER COLUMN product_name SET NOT NULL,
+ADD CONSTRAINT price_higher_than_0 CHECK (price > 0),
+ALTER COLUMN product_description SET NOT NULL, 
+ALTER COLUMN stock SET NOT NULL, 
+ALTER COLUMN image_path SET NOT NULL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS O 'STOCK' HAVIA FICADO ERRADO, PQ COLOQUEI 'not null',
+
+quando deveria ser um CHECK de 'stock > 0'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONSEGUI:
+
+
+
+
+
+
+
+
+
+ALTER TABLE products 
+ADD CONSTRAINT stock CHECK (stock > 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO DEU CERTO....
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS COMO POSSO VER AS CONSTRAINTS DE MINHA TABLE,
+
+USANDO O SQLTOOLS?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TENHO ESTE CÓDIGo:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select tc.table_schema,
+    tc.table_name,
+    string_agg(col.column_name, ', ') as columns,
+    tc.constraint_name,
+    cc.check_clause
+from information_schema.table_constraints tc
+    join information_schema.check_constraints cc on tc.constraint_schema = cc.constraint_schema
+    and tc.constraint_name = cc.constraint_name
+    join pg_namespace nsp on nsp.nspname = cc.constraint_schema
+    join pg_constraint pgc on pgc.conname = cc.constraint_name
+    and pgc.connamespace = nsp.oid
+    and pgc.contype = 'c'
+    join information_schema.columns col on col.table_schema = tc.table_schema
+    and col.table_name = tc.table_name
+    and col.ordinal_position = ANY(pgc.conkey)
+where tc.constraint_schema not in('pg_catalog', 'information_schema')
+group by tc.table_schema,
+    tc.table_name,
+    tc.constraint_name,
+    cc.check_clause
+order by tc.table_schema,
+    tc.table_name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> OK... MAS QUANTO AO ASSUNTO DE 'ADD CONSTRAINTS',
+
+    O QUE 
+    DEVEMOS FAZER 
+
+
+MUDA,
+
+
+A DEPENDER 
+
+
+
+DA TABLE COM A QUAL ESTAMOS TRABALHANDO...
+
+
+
+
+
+
+
+
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+(MYSQL) -----> vamos escrever basicamente, inicialmente, a DEFINIÇÃO DE UMA COLUMN...
+
+
+
+
+ALTER TABLE products 
+MODIFY COLUMN product_name VARCHAR(200) NOT NULL,
+MODIFY COLUMN price NUMERIC(10,2) NOT NULL CHECK(price > 0),
+MODIFY COLUMN description TEXT NOT NULL,
+MODIFY COLUMN amount INT CHECK(amount >= 0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE products
+ADD CONSTRAINT stock_equal_or_greater_than_0 CHECK (stock >= 0);
+-- DROP CONSTRAINT stock_equal_or_greater_than_0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+
+
+CONSEGUI ADICIONAR ESSA CONSTRAINT A TABLE DE 'products'.
+.
+
+
+
+
+
+
+
+
+
+
+
+OS TYPES ESTARÃO OS MESMOS,
+
+
+MAS AGORA OS VALUES NÃO PODERÃO SER 'NULL'....
+
+
+
+
+
+
+
+
+
+
+---> OK... 
+
+
+
+
+
+
+
+
+
+AÍ O PROFESSOR 
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVE A MESMA COISA, MAS NO FORMATO POSTGRESQL:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE products 
+
+
+ALTER COLUMN product_name SET NOT NULL,
+ALTER COLUMN price SET NOT NULL,
+ALTER COLUMN product_description SET NOT NULL,
+ADD CONSTRAINT price_must_be_positive CHECK(price > 0),
+ADD CONSTRAINT amount_must_be_positive CHECK(amount > 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> EXECUTAMOS ISSO AÍ,
+
+
+
+DÁ SUCESSO,
+
+E ESSAS CONSTRAINTS PASSAM A FICAR ATIVAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A ÚLTIMA TAREFA É 'UPDATAR A TABLE PARA ADICIONAR A COLUMN DE PRIMARY KEY'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> É POR ISSO QUE O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+(SINTAXE POST-GRES):
+
+
+
+
+ALTER TABLE products 
+ADD COLUMN id SERIAL PRIMARY KEY;
+
+
+
+
+
+
+
+
+
+SINTAXE MYSQL:
+
+
+
+
+
+
+
+
+
+ALTER TABLE products
+ADD COLUMN id INT PRIMARY KEY AUTO_INCREMENT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.. AGORA TEREMOS ESSA COLUMN DE 'ID'...
+
+
+
+
+
+
+
+
+
+
+
+---> CADA RECORD TERÁ ADICIONADO, A SI,
+
+
+1 COLUMN DE 'id' (com o id auto-incrementador)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.. ISSO É TUDO...
+
+
+
+
+
+É ASSIM QUE ADICIONAMOS UMA NOVA COLUMN,
+
+
+COM O POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE QUERIAMOS A DATA JÁ EXISTENTE,
+
+
+
+
+ENCONTRAMOS 
+
+
+
+
+OS RECORDS JÁ ADICIONADOS..
+
+
+
+
+
+
+
+
+
+
+
+
+ACABAMOS COM ESSE EXERCISE..
+
+
+
+
+
+
+
+
+
+
+
+--> PRATICAMOS OS KEY ASPECTS DESSA COURSE SECTION..
+
+
+
+
+
+
+
+
+
+
+--> aGORA SAÍREMOS DO MUNDO DE 'TABLE CREATION' E 'DATA TYPES',
+
+PARA AÍ 
+
+MANIPULARMOS,
+
+FILTRARMOS
+,
+
+
+FETCHEARMOS E  TRABALHAR COM DATA...

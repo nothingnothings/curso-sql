@@ -20,7 +20,7 @@
             "askForPassword": true,
             "driver": "PostgreSQL",
             "name": "MyPostGreSQLHomeConnection",
-            "database": "talently",
+            "database": "shop",
             "username": "postgres"
         }
     ]
