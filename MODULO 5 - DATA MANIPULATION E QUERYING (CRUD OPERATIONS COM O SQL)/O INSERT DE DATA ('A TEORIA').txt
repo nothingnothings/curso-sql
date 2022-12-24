@@ -1,0 +1,439 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... DEVEMOS DAR UMA MELHOR OLHADA 
+
+NESSES COMANDOS INDIVIDUAIS... VAMOS COMEÇAR PELO INSERT DE DATA...
+
+
+
+
+
+
+
+
+
+--> VAMOS VER TODOS ESSES COMANDOS EM AÇÃO __ AO LONGO DESSA SECTION,
+
+MAS 
+
+VAMOS COMEÇAR COM UM POUCO DE TEORIA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> INSERT DE DATA- --> 
+
+
+
+
+
+
+
+
+
+
+QUANDO 
+
+
+COMEÇAMOS COM O 'INSERT DE DATA',
+
+
+ O COMANDO É GERALMENTE 
+
+ O DE 
+
+
+
+
+
+
+ 'INSERT INTO <table_name> (<column names>)
+
+ VALUES(<column values>)' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> SE VOCÊ OMITIR O NOME DAS COLUMN NAMES NESSE STATEMENT DE INSERT,
+
+ VOCÊ É OBRIGADO A PASSAR OS VALUES DAS COLUMNS 
+
+
+ __EM ORDEM_...
+
+
+
+
+
+
+
+
+
+
+ --> A MESMA ORDEM 
+
+
+
+ QUE VOCÊ USOU/DEFINIU QUANDO CRIOU A TABLE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS SE VOCÊ ESPECIFICA A LISTA DE COLUMN NAMES 
+
+
+
+
+
+ NO INÍCIO,
+
+
+ VOCÊ 
+ PODE 
+
+ 'MIXAR' A ORDEM... (não é obrigado a MEMORIZAR O FORMATO/ORDEM DAS COLUMNS, lá na definição da mesma )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... MAS HÁ UMA VARIAÇÃO MALANDRA 
+
+ DESSA 
+
+
+ SINTAXE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ VARIAÇÃO MALANDRA ------> COM ELA,
+
+ PODEMOS 
+
+
+ 'INSERIR MÚLTIPLOS ROWS DE 1 SÓ VEZ'...
+
+
+
+
+
+
+
+
+
+
+ BASTA ADICIONAR UMA __ LISTA DE 'VALUE LISTS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> A SINTAXE COMUM É ASSIM:
+
+
+
+
+
+
+
+
+
+ INSERT INTO nome_da_table (column1, column2, column3) VALUES ("OI", 2, "/SAASASAS/dasdsasad") 
+
+
+
+
+
+
+
+
+
+
+ e a sintaxe 
+
+
+ de INSERT MÚLTIPLO é assim:
+
+
+
+
+
+
+
+
+
+ INSERT INTO nome_da_table (column1, column2, column3)
+VALUES 
+    ("OI", 2, "/SAASASAS/dasds2121asad") 
+    ("OI2", 23, "/SAASASAS/dasd31sasad") 
+    ("OI3", 3212132, "/SAASASAS/da2sdsasad") 
+    ("OI4", 2451241, "/SAASAdassadzcCCSAS/dasdsa1231sad") 
+    ("OI5", 1221122, "/SAASASAS/dasdsa5sassad") 
+
+
+
+
+
+
+
+
+
+
+
+    oK... NÃO SABIA DISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS INSERIR MÚLTIPLOS ROWS 
+
+
+COM APENAS 1 ÚNICO COMMAND..
+
+
+
+
+
+
+
+
+
+
+
+--> ok... bem legal...
+
+
+
+
+
+
+
+
+--> É CLARO QUE PODERÍAMSO RODAR 'INSERT INTO'
+
+
+
+múltiplas vezes,
+
+
+
+MAS __ 
+
+
+ESSA VERSÃO AÍ _ REALMENTE__ ECONOMIZA TEMPO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM,
+
+
+
+
+TEMOS 
+
+
+
+
+A VERSÃO Número 3,
+
+
+
+
+
+
+
+
+
+QUE É 
+
+
+
+
+
+A VERSÃO EM QUE 'INSERIMOS DATA__ __ , MAS _ DATA QUE __ FOI SELECIONADA __ ANTERIORMENTE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+A SINTAXE É ASSIM:
+
+
+
+
+
+
+INSERT INTO <table name> (<column_names>)
+SELECT <query>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+AQUELA QUERY DE 'SELECT' É RODADA _ PRIMEIRAMENTE,
+
+
+e AÍ 
+
+
+
+TODA A DATA OBTIDA NESSE 'SELECT <query>' 
+
+
+
+
+
+É 
+
+
+__ - INSERIDA__ 
+
+
+DENTRO DAS COLUMNS de '<table_name>'...
+
+
+
+
+
+
+
+
+
+
+
+-----> COM ISSO, CONSEGUIMOS INSERIR ESSA DATA EM UMA TABLE..
+
+
+
+
+
+
+
+
+-> VEREMOS TUDO ISSO EM AÇÃO DAQUI A POUCO...
+
+
+
+
+
+
+--> E É ASSIM QUE PODEMOS INSERIR DATA EM TABLES,
+
+NO SQL...
