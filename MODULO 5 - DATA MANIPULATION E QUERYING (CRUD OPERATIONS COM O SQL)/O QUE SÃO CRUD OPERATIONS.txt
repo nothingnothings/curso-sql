@@ -1,0 +1,290 @@
+
+
+
+
+
+
+
+
+PARA COMEÇAR COM CRUD OPERATIONS,
+
+DEVEMOS CLARIFICAR O QUE ELAS SÃO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> A DEFINIÇÃO É QUITE STRAIGHTFORWARD:
+
+
+
+
+
+
+1) CREATE 
+
+
+
+2) READ 
+
+
+
+3) UPDATE 
+
+
+
+
+4) DELETE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EXISTEM EM QUALQUER BANCO DE DADOS,
+
+
+E TAMBÉM 
+
+
+NO MUNDO 
+
+SQL...
+
+
+
+
+
+
+
+
+
+
+----> CERTo...
+
+
+
+
+
+
+
+
+--> SÃO AS OPERAÇÕES DE MANIPULAÇÃO DE DADOS __ BÁSICAS..
+
+
+
+
+
+
+
+
+--> VAMOS USAR ELAS EM TODAS AS LANGUAGES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE 
+PODEMOS REALIZAR 
+
+
+ESSAS OPERATIONS COM O SQL...
+
+
+
+
+
+
+
+
+
+--> LÁ TEMOS UM PUNHADO DE 'KEYWORDS' (CLAUSES)
+
+
+QUE SÃO IMPORTANTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUANDO FALAMOS DO 'CREATE DE DATA',
+
+
+
+ESTAMOS FALANDO 
+
+
+
+
+
+
+DO 'MOVING' DE DATA 
+PARA DENTRO DE 1 TABLE,
+
+
+
+OU, EM OUTRAS PALAVRAS,
+
+
+
+O 
+
+
+
+
+
+1) INSERT INTO de data em tables...
+
+
+
+
+
+--> VAMOS PRECISAR DESSE COMANDO PARA 
+
+ADICIONAR DATA 
+
+
+
+PARA DENTRO DE TABLES, NO SQL.
+.
+
+
+
+
+
+
+
+
+
+--> VAMOS NOS APROFUNDAR NESSE COMANDO,
+
+NESSE MÓDULO DO SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) CERTO... JÁ O 'READ' DE DATA SIGNIFICA QUE QUEREMOS 
+
+FAZER 
+
+'GET' 
+
+DA 
+
+DATA,
+
+
+E TAMBÉM 
+
+
+'FILTER' OU 'SORT'
+
+
+DA DATA...
+
+
+
+
+
+
+
+
+
+--> FAZEMOS TUDO ISSO POR MEIO DO COMANDO DE 'SELECT',
+
+QUE É COMBINADO COM 'WHERE'
+
+
+E 'SORT BY'( acho)...
+
+
+
+
+
+
+
+
+
+
+
+
+3) PARA O UPDATE DE DATA,
+
+TEMOS 
+
+O COMANDO DE 'UPDATE',
+
+
+
+
+
+
+
+QUE VEREMOS NESSA SECTIOn...
+
+
+
+
+
+
+
+
+
+
+
+4) POR FIM, TEMOS O COMANDO DE 'DELETE',
+ 
+
+ QUE É USADO PARA DELETAR DATA...
+
+
+
+
+
+
+
+
+
+ --> O PROFESSOR QUER DAR UM OVERVIEW RÁPIDO DE COMO USAMOS ESSES COMANDOS,
+
+ ANTES DE PEGARMOS UM EXEMPLO PRÁTICO..
