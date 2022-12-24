@@ -1,0 +1,322 @@
+
+
+
+
+A VERDADE É QUE 
+
+
+
+
+
+
+
+
+àS VEZES VAMOS QUERER FAZER 'READ'
+
+
+DE 
+
+DATA,
+
+
+FAZER 
+
+
+'FETCH' OU 'GET' 
+
+
+DE DATA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AQUI, 
+
+A CLÁUSULA SUPER IMPORTANTE QUE 
+
+
+
+TEMOS DE MEMORIZAR É 
+
+
+
+
+
+'SELECT'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT, NO MUNDO SQL,
+
+É A MESMA COISA QUE 
+
+
+
+'GET' 
+
+OU 
+
+'FETCH'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM ....
+
+
+
+
+
+
+
+
+
+SELECT <columns> FROM <table name>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+SELECT * (todas as columns)
+
+
+
+
+LÁ 
+
+
+
+
+DA 
+
+
+
+'TABLE NAME'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT name, description, path, price, amount FROM products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA É A MANEIRA MAIS 'STRAIGHTFORWARD'
+
+
+DE 
+
+
+
+
+FETCHEAR DATA,
+
+MAS É CLARO QUE PODEMOS 'DEVIATE'
+
+DE ISSO AÍ...
+
+
+
+
+
+
+
+
+
+
+
+-----> EM VEZ DE SEMPRE FETCHEAR TODOS OS ROWS (ou seja, 'TODA A DATA', TODAS AS ROWS NAQUELA TABLE),
+
+
+
+
+VOCÊ 
+
+
+PODE ADICIONAR A CLÁUSULA 
+
+DE 
+
+'WHERE',
+
+
+
+
+
+
+
+NO FINAL,
+
+QUE 
+
+ISSO 
+
+
+
+VAI 
+
+
+
+ADICIONAR UMA CONDIÇÃO (filtro)
+
+
+QUE 
+
+VAI CONTROLAR 'QUAIS ROWS SERÃO FETCHEADOS DESSA DATABASE TABLE'...
+
+
+
+
+
+
+
+
+A SINTAXE COMPLETA FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT <columns> FROM <table name> WHERE <condition> 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ --> A PARTE DE 'COLUMNS' É USADA PARA ESPECIFICAR 'EM QUAIS COLUMNS ESTAMOS INTERESSADOS'...
+
+
+
+
+
+
+
+ -->  A CLÁUSULA DE 'WHERE'
+
+
+
+
+ DETERMINA QUAIS ROWS VOCÊ QUER PEGAR (
+
+
+
+    é o filtro...
+ )
+
+
+
+
+
+
+
+
+
+
+ -_> A CONDITION DO 'WHERE' PRECISA SER SATISFEITA,
+
+ PARA CONSEGUIRMOS 
+
+ RETORNAR 
+
+ OS ROWS DESEJADOS...
+
+
+ VEREMOS ISSO EM AÇÃO, EM BREVE...
