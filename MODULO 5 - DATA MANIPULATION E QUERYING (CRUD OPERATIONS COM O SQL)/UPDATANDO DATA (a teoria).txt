@@ -1,0 +1,222 @@
+
+
+
+
+
+
+
+
+O UPDATE DE DATA...
+
+
+
+
+
+
+
+
+
+
+
+O INSERT E READ DE DATA É NICE,
+
+SIM,
+
+
+
+
+
+
+
+
+MAS EXISTEM CASOS EM QUE 
+
+VOCÊ VAI QUERER 
+
+'UPDATE'
+
+A SUA DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RAZÕES:
+
+
+
+
+1) UM ERROR ACONTECEU, E VOCÊ PRECISA CONSERTAR A SUA DATA...
+
+
+
+
+
+
+2) AS COISAS MUDARAM (1 user pode ter mudado o email address vinculado à conta dele)... --> AÍ A USER ACCOUNT ENTRY NA DATABASE PRECISARIA SER UPDATADA, PARA MUDAR O EMAIL ADDRESS...
+
+
+
+
+
+
+
+
+
+
+
+
+O COMANDO DE UPDATE,
+
+NO SQL,
+
+
+SE PARECE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE <nome da table>
+SET <nome da column> = <novo valor>, <nome da column> = <novo valor>, <nome da column> = <novo valor>, <nome da column> = <novo valor>
+WHERE <condition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO....
+
+
+
+
+
+
+
+FAZ SENTIDO, EU ACHO... 
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DA KEYWORD DE UPDATE,
+
+VOCÊ ESPECIFICA A TABLE CUJA DATA VOCê QUER ATUALIZAR...
+
+
+
+
+
+
+
+
+
+
+
+AÍ COM A KEYWORD DE 'SET'
+
+VOCÊ 
+
+DEFINE QUAIS COLUMNS NA TABLE DEVERÃO RECEBER NOVOS VALUES...
+
+
+
+
+
+
+
+
+
+---> EM 'SET',
+
+PODEMOS UPDATAR MÚLTIPLAS 
+
+ 
+ COLUMNS, DE 1 SÓ VEZ, NESSE RECORD/RECORDS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM 'WHERE',
+
+
+
+
+DEFINIMOS QUAIS ROWS QUEREMOS UPDATAR (
+
+
+    UPDATAR SÓ ALGUNS ROWS...
+) ---> ISSO É CONTROLADO COM A CONDITION DE 'WHERE'..
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS CABE DIZER QUE 
+O 
+
+'UPDATE'
+
+PERMITE A VOCÊ UPDATAR MÚLTIPLOS 
+
+RECORDS NA SUA TABLE,
+
+
+TUDO COM 
+
+APENAS 1 ÚNICO COMMAND (
+
+
+    se você não colocar o WHERE, por exemplo....
+)
