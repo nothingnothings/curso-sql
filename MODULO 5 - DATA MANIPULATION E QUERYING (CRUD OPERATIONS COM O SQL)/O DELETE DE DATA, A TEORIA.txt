@@ -1,0 +1,170 @@
+
+
+
+
+
+
+
+
+
+
+
+MAS OCASIONALMENTE VOCÊ VAI QUERER DELETAR A DATA...
+
+
+
+
+
+
+
+
+1) ERROS NA DATABASE 
+
+
+
+2) A DATA NÃO É MAIS NECESSÁRIA ( 
+
+
+
+    ex: social network,
+
+
+    e aí 
+
+    1 USER DELETOU A ACCOUNT DELE..
+)
+
+
+
+
+
+
+
+
+----> AÍ VOCê VAI QUERER DELETAR OS RECORDS ASSOCIADOS A ELE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA DELETAR , USAMOS ESTA SINTAXE:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELETE FROM <table name>
+WHERE <condition>;
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESPECIFICAMOS A TABLE EM QUE ESTÁ ESSE ROW,
+
+E AÍ 
+
+
+COLOCAMOS A CONDITION 
+
+PELA QUAL QUEREMOS DELETAR ROWS (
+
+
+    por id,
+
+    etc etc...
+)
+
+
+
+
+
+
+
+
+
+
+
+IMPORTANTE --> VOCÊ PODE DELETAR 'MÚLTIPLOS ROWS' 
+
+
+
+
+
+DE UMA VEZ SÓ,
+
+
+
+
+
+
+
+
+MAS TUDO DEPENDE DA CONDITION DEFINIDA POR NÓS...
+
+
+
+
+
+
+
+
+
+
+
+BEM STRAIGHTFORWARD...
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+VIMOS TODAS ESSAS CRUD OPERATIONS NA TEORIA...
+
+
+
+DEVEMOS 
+
+
+VER TUDO ISSO NA PRÁTICA,
+
+
+COM DATA DE VERDADE...
