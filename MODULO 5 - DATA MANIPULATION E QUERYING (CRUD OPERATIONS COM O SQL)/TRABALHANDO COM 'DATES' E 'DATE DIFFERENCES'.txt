@@ -1,0 +1,993 @@
+
+
+
+
+
+
+
+
+
+
+--> AGORA DEVEMOS VOLTAR AOS NOSSOS 'QUERY GOALS'...
+
+
+
+
+
+
+
+
+
+
+--> ANTES DE 
+
+
+
+
+TENTARMOS O RESTO DOS GOALS E TALS,
+
+
+
+
+
+
+
+
+
+O PROFESSOR QUER VER O QUERY GOAL 7,
+
+
+
+
+
+
+QUE É 
+
+
+
+''ACHAR TODAS AS SALES QUE 
+
+FORAM FULFILLED 
+
+
+SMALLER OR EQUAL THAN 
+
+
+5 DAYS AFTER CREATION DATE''.
+
+
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+FIND ALL SALES FULFILLED <= 5 DAYS AFTER CREATION DATE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE É UM GOAL INTERESSANTE...
+
+
+
+
+
+
+
+
+
+
+COMO PODEMOS RESOLVER ISSO?
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR CRIA 1 ARQUIVO DE 'DATE CALCULATIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DALI,
+
+
+O PROFESSOR QUER COMEÇAR COM 
+
+
+
+SELECT * FROM sales  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ele quer começar pelo find de 'TODAS AS SALES QUE JÁ FORAM FULFILLEd' (is TRUE no field de 'is_fulfilled')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE is_fulfilled IS TRUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> SALES QUE FORAM FULFILLED... -> MAS O PROBLEMA É QUE 
+
+NÃO TENHO FIELD DE 'is_fulfilled',
+
+
+ e sim 
+
+
+ apenas 
+ o 
+
+ 'date_fulfilled' 
+
+
+
+
+
+
+
+
+
+
+ --> É POR ISSO QUE QUEREMOS PROCURAR POR TODOS OS RECORDS COM 
+
+
+
+ date_fulfilled 
+
+
+
+ como 'IS NOT NULL'....
+
+
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+
+ SELECT *
+FROM sales
+WHERE date_fulfilled IS NOT NULL; ----- selecionar todas as sales que foram fulfilled 
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> CERTO...
+
+
+
+
+
+
+
+---> CONFORME MENCIONAMOS ANTERIORMENTE,
+
+
+QUANDO 
+
+
+
+
+
+CHECAMOS POR 'NULL' 
+
+E 'BOOLEANS',
+
+SEMPRE 
+
+USAMOS 
+'IS' E 'IS NOT'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok... mas esse não é nosso goal...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM VEZ DISSO,
+
+O GOAL 
+
+É 
+
+'
+SELECIONAR TODAS AS SALES
+
+
+
+
+
+EM QUE 
+
+O _ date_fulfilled
+
+
+É 
+
+
+___ SMALLER __ OR EQUAL 
+
+
+
+a 
+
+
+5 dias DEPOIS DA CREATION_DATE...
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+DEVEMOS ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+ SELECT *
+FROM sales
+WHERE date_fulfilled <= date_created; ----- selecionar todas as sales que foram fulfilled 
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODERIA ESCREVER ASSIM, EU ACHO...
+
+
+
+
+
+
+MAS FALTOU '+5 DIAS DEPOIS DA CREATION DATE'..
+
+
+
+
+
+
+
+como poderia escrever essa expressão? ('mais 5 dias)'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, E SE EU ESCREVESSE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ SELECT *
+FROM sales
+WHERE date_fulfilled <= (date_created + 5); ----- selecionar todas as sales que foram fulfilled 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, PRECISAMOS FAZER UM POUCO DE CÁLCULO... --> 
+
+
+
+
+
+
+
+ADICIONAR 5 DIAS A ESSE CREATION DATE..
+
+
+
+
+
+
+-> PARA IMPLEMENTAR ISSO,
+
+
+
+
+TANTO NO POSTGRESQL COMO NO MYSQL (e na maior parte dos RDBMS)
+
+
+
+
+É 
+
+
+
+
+PEGAR A VARIÁVEL DE 'date_fulfilled'
+
+
+
+
+
+E __ ACTUALLY __ SUBTRAIR O 
+
+
+'date_created'
+
+
+
+
+
+
+
+
+
+
+EM RELAÇÃO A ELA,
+
+
+
+TIPO ASSIm:
+
+
+
+
+
+
+
+
+ SELECT *
+FROM sales
+WHERE date_fulfilled - date_created; ----- selecionar todas as sales que foram fulfilled 
+
+
+
+
+
+
+
+
+----------------------------------------
+
+
+
+
+
+
+
+
+
+PODEMOS FAZER SUBTRAÇÕES COMO ESSAS,
+
+
+EM TODOS RDBMS --> 
+
+E ESSA 
+SUBTRACTION AÍ,
+
+NO CASO,
+
+
+VAI 
+TE 
+
+
+
+
+DAR 
+
+
+'''
+ 
+ A DIFERENÇA, EM DIAS''' --> 
+
+
+
+ E É CLARO QUE 
+
+ QUEREMOS 
+
+
+
+ CHECAR 
+
+
+
+ SE A DIFERENÇA ENTRE ESSES 2 VALUES É 
+
+
+
+ MENOR OU IGUAL A 5,
+
+
+ POR ISSO ESCREVEMOS ASSIM:
+
+
+
+
+
+ 
+ SELECT *
+FROM sales
+WHERE date_fulfilled - date_created <= 5; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 5--------------> 
+
+
+
+
+
+
+
+OK, PQ TÍNHAMOS ESSA DIFERENÇA DE 5 DIAS..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE RODAMOS ISSO CONTRA O MYSQL,
+
+
+
+VEREMOS 
+
+
+
+
+QUE 
+
+
+
+
+O RESULT SET REALMENTE ESTARÁ CORRETO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... 
+
+
+
+
+
+
+
+ESSA É UMA MANEIRA DE FAZER ISSO..
+
+
+
+
+
+
+
+
+
+
+
+MAS EXISTEM ALTERNATIVAS..
+
+
+
+
+
+
+
+
+
+
+--> O QUE PODERÍAMOS FAZER, NO CASO,
+É USAR 
+
+
+MAIS 'BUILT-IN FUNCTIONS'
+
+
+QUE NOS AJUDAM A LIDAR COM DATES..
+
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS REALIZAR 
+
+
+
+
+
+
+
+
+aquele 
+
+
+calculo de 
+
+
+
+
+
+WHERE date_fulfilled - date_created <= 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+SIM,
+
+
+
+
+
+MAS 
+
+E 
+
+
+SE 
+
+
+ESSE TEMPO 
+
+FOSSE ARMAZENADO COMO 'TIMESTAMP',
+
+
+COMO FICARIA 
+
+
+
+NOSSA EXPRESSÃO? (aí o '5' solto SERIA INÚTIL)... --> 
+
+
+
+
+
+ainda poderíamos rodar essa subtraction,
+
+
+
+MAS O RESULTADO NÃO 
+
+
+
+SERIA 
+
+
+
+
+UM RESULTADO EM DIAS,
+
+E SIM 
+
+
+__ UMA 'TIME DIFFERENCE',
+
+
+EM HORAS E MINUTOS,
+
+
+
+COMO 
+
+RESULTADO...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA AÍ __ SEGUIR _ CONVERTENDO ISSO EM DIAS,
+
+
+
+VOCÊ PODE/PODERIA USAR A FUNCTION DE 'EXTRACT()',
+
+
+
+
+QUE EXISTE 
+
+
+EM MTOS 
+
+DATABASE ENVIRONMENTS.. .(sql environments),
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE EXTRACT(date_fulfilled - date_created);
+
+
+
+
+
+
+
+
+
+
+
+AÍ VOCÊ COLOCARIA A EXPRESSÃO DENTRO DESSE 'EXTRACT',
+
+
+
+
+
+
+PARA ENTÃO COLOCAR A KEYWORD DE 'DAY FROM xxxx',
+
+
+
+
+
+
+O QUE FINALMENTE _ TE __DARIA_ A DIFERENÇA, EM DIAS...
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE EXTRACT(DAY FROM date_fulfilled - date_created) <= 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+E AÍ 
+
+VOCÊ ADICIONA, É CLARO, o '<= 5' 
+
+
+
+AO FINAL,
+
+PARA AÍ COMPARAR COM O NÚMERO DE DIAS DESEJADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE EXTRACT(DAY FROM date_fulfilled - date_created) <= 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA SINTAXE APENAS FUNCIONA SE ESTAMOS 
+
+TRABALHANDO COM TIMESTAMPS.... (
+    mas como estamos trabalhando com 
+    DATES,
+
+    ela n funciona...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+veja a documentação dos RDBMS
+para 
+
+ver 
+
+
+as functions disponíveis...
