@@ -1,0 +1,689 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> agora que demos uma olhada em 'insert' 'update' e 'delete' 
+
+de data,
+
+
+
+veremos 
+
+
+
+
+
+
+
+a operação mais comum de dados que vocÊ realizará,
+
+que é 
+
+
+
+
+o FETCH de DATA, usando "SELECT"...
+
+
+
+
+
+
+
+
+
+
+
+--> para isso,
+
+
+
+
+veremos os query goals...
+
+
+
+
+
+
+
+
+--> os query goals são estes:
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) ACHAR TODAS AS SALES COM VOLUME DE  1000 
+
+
+
+
+
+2) ACHAR TOP 10 SALES
+
+
+
+
+3) ACHAR BOTTOM 10 SALES 
+
+
+
+
+
+4) ACHAR TODAS AS 'RECURRING SALES'
+
+
+
+
+5) ACHAR TODAS AS DISPUTED SALES COM VOLUME SUPERIOR A 5000 
+
+
+
+
+6) ACHAR TODAS AS SALES CRIADAS ENTRE 2 DATES...
+
+
+
+
+
+
+7) ACHAR TODAS AS SALES 'fulfilled <= 5 days DEPOIS DA CREATION DATE''..
+
+
+
+
+
+
+
+8) PEGAR UMA LISTA DE TODOS OS CUSTOMERS DISTINTOS NAS NOSSAS SALES...
+
+
+
+
+
+9) PEGAR UMA LISTA DE TODOS OS PRODUCTS DISTINTOS NAS NOSSAS SALES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> com isso, aprenderemos  um monte sobre o query e filter de data...
+
+
+
+
+
+
+
+
+
+
+--> vamos começar com o básico..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 'select-data.sql'...
+
+
+
+
+
+
+
+
+
+--> vamos ver o comando geral de select..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> aqui, a key keyword de que você precisa é  O
+
+
+
+
+comando de "SELECT"...
+
+
+
+
+
+
+
+--> isso te deixa pegar data de uma table...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SELECT...
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+UMA LISTA DAS COLUMNS 
+
+
+
+
+
+PELAS QUAIS VOCê QUER PEGAR DATA, 
+
+PARA 1 TABLE ESPECÍFICA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FREQUENTEMENTE VOCÊ VERÁ '*', 
+
+QUE REPRESENTA 'TODAS AS COLUMNS'...
+
+
+
+
+
+
+
+
+
+
+-> COMEÇAMOS COM '*',
+
+mas vamos fine-tune isso depois..
+
+
+
+
+
+
+
+
+TIPO 
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> É CLARO QUE PODEMOS SPLITTAR ISSO EM MÚLTIPLAS LINHAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok.... agora se rodarmos isso,
+
+enxergamos todos os resultados de nossa table..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> é a  mesma coisa que clicar na 'lupa'
+
+
+
+lá no sql tools...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSES SÃO OS BASICS..
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ TAMBÉM PODE ESPECIFICAR AS COLUMNS ESPECÍFICAS DESEJADAS POR VOCÊ..
+
+
+
+
+
+
+
+
+
+tipo assim
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT customer_name, product_name, volume, date_created 
+FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ DEVE ESCREVER ISSO __ TUDO SEPARADO,
+
+
+
+
+EM UMA 'COMMA-SEPARATED LIST'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, VAMOS PEGAR APENAS ESSAS COLUMNS, E DESCARTAR O RESTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS PEGAR TODA A DATA,
+
+
+
+
+PQ NÃO TEMOS NENHUMA CONDITION DE WHERE DEFINIDA...
+
+
+
+
+
+
+
+
+
+--> MAS A ÚNICA COISA QUE ACTUALLY RETRIEVAMOS 
+
+
+FOI A DATA DAS COLUMNS,
+
+
+
+NA ORDEM QUE ESPECIFICAMOS (
+
+
+
+    ou seja,
+
+
+    customer_name, product_name, volume, date_created 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> se desejássemos ter 'date_created'
+
+no início,
+
+
+bastaria 
+
+
+a colocar como primeiro item naquela list,
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+SELECT date_created, customer_name, product_name, volume
+FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR SINAL,
+
+
+
+
+O 'SORTING' 
+
+E 
+
+'FILTERING'
+
+
+
+EXISTE TAMBÉM NO SQLTOOLS... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> O NOME DA 'SNAPSHOT' PRODUZIDA 
+
+
+
+SOBRE O CONTEÚDO DE UMA TABLE, NO CASO,
+
+É 
+
+CHAMADA 
+
+DE 
+
+'RESULT SET'...
+
+
+
+
+
+
+
+
+
+
+
+-----> ISSO SIGNIFICA QUE 
+
+
+'SELECT - FROM '
+
+
+
+
+SEMPRE VAI RETORNAR UM ___ 'RESULT SET' __ ....
+
+
+
+
+
+
+
+--> E, BTW,
+
+PODERÍAMOS 
+
+
+USAR ESSE 'RESULT SET'
+
+
+
+COMO 1 
+
+SOURCE PARA OUTRO COMANDO DE 'INSERT INTO',
+
+
+APESAR DE ISSO SER ALGO QUE 
+
+VEREMOS MAIS TARDE...
