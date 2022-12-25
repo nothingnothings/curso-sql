@@ -1,0 +1,330 @@
+
+
+
+
+
+
+
+
+
+
+---> OK.. VAMOS COMEÇAR PELO INSERT DE UM BOCADO DE DATA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CRIAMOS UM NOVO ARQUIVO PARA ISSO...
+
+
+
+
+
+
+
+
+
+VAMOS USAR O 'INSERT INTO'...
+
+
+
+
+
+
+
+
+--> COLOCAMOS O NOME 
+
+
+
+
+'sales'...
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO sales () VALUES ();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA SINTAXE É MELHOR, PQ PODEMOS OMITIR CERTAS COLUNAS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE CHECAMOS A TABLE NOVAMENTE,
+
+
+TEMOS ISTO:
+
+
+
+
+
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    date_created DATE DEFAULT CURRENT_DATE,
+    date_fulfilled DATE,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume NUMERIC(10, 3) NOT NULL CHECK(volume > 0),
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS INSERIR DATA 
+
+PARA 
+
+
+
+
+O 'customer_name'
+
+
+
+e 'product_name'..
+
+
+
+
+
+
+
+
+--> queremos DEFINIR TAMBÉM O 'VOLUME'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR QUER COMEÇAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO sales (
+
+customer_name,
+product_name,
+volume,
+is_recurring
+
+) VALUES (
+'Paul',
+
+'Chair',
+
+2000,
+
+true
+
+
+);
+
+
+
+
+
+
+
+
+
+
+ISSO 'WILL DO THE TRICK'..
+
+
+
+
+
+
+
+
+
+--> rodamos isso na active connection...
+
+
+
+
+
+
+
+--> ESSE É O INSERT INTO...
+
+
+
+
+
+
+
+
+--> O PROFESSOR COMENTA TUDO PARA FORA,
+
+PQ QUER MOSTRAR UMA VARIATION...
+ ( A DO 'MULTIPLE ROWS'...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+ INSERT INTO sales (
+    date_fulfilled,
+
+        customer_name,
+        product_name,
+        volume,
+        is_recurring,
+        is_disputed
+    )
+VALUES (NULL, 'Paul', 'Chair', 2000, true, true),
+(NULL, 'Chris', 'Table', 4000, true),
+(NULL, 'Ana', 'Tools', 2000, true),
+(NULL, 'John', 'Ladder', 2000, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ok...
+ 
+ ]
+
+ COLOCAMOS O 'date_fulfilled'
+
+ COMO NULL,
+
+ PQ COLOQUEI COMO PERMITIDO ESSE 'value'...
+
+
+
+
+
+
+
+
+ --> O PROFESSOR RODA TODAS ESSAS QUERIES LÁ 
+
+
+
+
+
+ NO POSTGRES..
+
+
+
+
+
+
+ -> ok.. tudo isso funcionou. É assim que podemos adicionar múltiplas rows de uma só vez..
