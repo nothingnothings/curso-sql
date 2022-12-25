@@ -1,0 +1,786 @@
+
+
+
+
+
+---> A ESSE PONTO, 
+JÁ TRABALHAMOS COM NUMBERS,
+
+DATES 
+
+
+E 
+
+DIFERENTES COMPARISON OPERATORS...
+
+
+
+
+
+
+
+
+
+>>> AGORA DEVEMOS EXPLORAR '''COMO PODEMOS FILTRAR COM TEXT''',
+
+
+
+
+pq isso é algo que AINDA NÃO FIZEMOS, ATÉ AGORA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR  vai começar com 'SELECT * FROM sales';
+
+
+
+
+
+
+
+--> MAS AGORA ELE VAI PROCURAR POR ROWS EM QUE O CUSTOMER NAME 
+
+
+SERÁ 
+
+IGUAL A 
+
+'MAX SCHWARZ'...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE customer_name = 'Max Schwarz';
+
+
+
+
+
+
+
+
+
+
+
+
+---> O PROFESSOR PROCURA POR EQUALITY,
+
+E, REALMENTE,
+
+COM TEXT,
+
+
+VOCÊ 
+
+
+
+USA (como com numbers e dates ) 
+
+
+
+O OPERATOR DE EQUALITY ('='),
+
+
+
+E SEMPRE APENAS 1 ÚNICO '=' --------> 
+
+
+
+
+
+
+SE EXECUTAMOS ISSO,
+
+
+
+RECEBEMOS 
+
+
+
+TODOS OS ROWS EM QUE O customer_name
+
+
+
+
+É 'Max Schwarz'...
+
+
+
+
+
+
+
+
+ISSO É UMA COISA QUE PODEMOS FAZER, SIM...
+
+
+
+
+
+
+
+
+
+
+
+
+TAMBÉM PODERÍAMOS CHECAR POR TODOS OS ROWS EM QUE 
+
+
+O customer_name
+
+NÃO É MAX SCHWARZ,
+
+
+tipo assim:
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE customer_name != 'Max Schwarz';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS ISSO É STRAIGHTFORWARD,
+
+
+
+e fácil de entender...
+
+
+
+
+
+
+MAS O QUE VOCÊ PODE FAZER COM TEXT,
+
+
+
+
+
+É _ TAMBÉM __ USAR:
+
+
+
+
+
+
+
+1) GREATER THAN OR EQUAL 
+
+
+
+
+
+
+
+2) SMALLER THAN OR EQUAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE customer_name > 'Company A';
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS QUERER PROCURAR POR TODAS AS COLUMNS EM QUE O 'customer_name'
+
+É ''''MAIOR''''
+
+
+do que 
+
+
+'Company A'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... SE DERMOS UMA OLHADA EM TODA A DATA QUE TEMOS EM 'sales',
+
+VEREMOS QUE 
+
+
+
+
+em 'customer_name'
+
+
+
+TEMOS   
+
+
+
+'Comapny A',
+
+
+
+'Company B'
+
+e 
+
+'Company C'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA QUERY PODE/PODE NÃO 
+
+FAZER MT SENTIDO,
+
+
+MAS PODERÍAMOS 
+
+
+
+
+
+'''ESTAR PROCURANDO POR TODOS OS CUSTOMERS 
+
+QUE 
+
+
+
+POSSUEM 'Company' e então 
+
+ALGUM CARACTER,
+
+MAS 
+
+ESSE CARACTER DEVERÁ SER __ MAIOR __ DO QUE _A'''..
+
+
+
+
+
+
+
+
+
+------> OK... E SE RODARMOS ESSA QUERY,
+
+DE FATO,
+
+RECEBEREMOS ALGUNS RESULTS...
+
+
+
+
+
+
+
+
+
+
+MAS OS RESULTS NÃO SERÃO AQUELES ESPERADOS POR NÓS..
+
+
+
+
+
+
+
+
+
+
+------> O PROFESSOR ENCONTRA 
+
+
+
+OS 
+
+
+RECORDS COM VALUES DE 
+
+
+'Company B' 
+
+
+
+'Company C'
+
+
+e 
+
+
+'Company D',
+
+
+
+
+
+
+
+
+MAS __ ELE __ ENCONTRA TAMBÉM COISAS COMO 
+
+
+
+'Max Schwarz' 
+
+
+
+
+e 
+
+'Learning Inc'..
+
+
+
+
+
+
+apesar de 
+NÃO ENCONTRAR  'COMPANY A'...
+
+
+
+
+
+
+
+
+
+
+
+-----> ISSO ACONTECE/ACONTECEU PQ, DE FATO,
+
+
+ 
+ 'Company A' 
+
+
+
+ não é 'MAIOR DO QUE COMPANY A',
+
+
+
+ e sim 
+
+
+ é 
+
+ IGUAL...
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO QEUR DIZER QUE 
+
+ O 
+
+
+
+ OPERATOR DE '>' 
+
+
+ FUNCIONA (e os outros, '>', '>=' e '<=')
+
+
+
+
+
+
+
+ ,
+
+
+ MAS 
+
+
+
+ TAMBÉM QUE 
+
+ VOCê 
+
+ DEVE _ _TER CUIDADO _ QUANDO O UTILIZA COM TEXT....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O QUE NÃO ACONTECE, AQUI, É 
+
+
+
+ ''O SQL EXAMINA O ÚLTIMO CHARACTER  APENAS,
+
+
+ E AÍ 
+
+
+
+ VERIFICA 
+
+
+
+
+ QUAIS CUSTOMERS POSSUEM UM EQUAL NAME,
+
+ E AÍ 
+
+ APENAS O ÚLTIMO CARACTER É O MAIOR''...
+
+
+
+
+///////////////////////////
+
+
+
+
+
+
+ EM VEZ DISSO, QUANDO O SQL PROCURA POR TEXT,
+
+
+
+
+ com filtros, comparando,
+
+
+
+ o 
+
+
+
+
+
+ SQL _ SEMPRE__ COMEÇA PELO _ PRIMEIRO CHARACTER DE 1 STRING.. --> E AÍ 
+
+ PROCURA 
+
+
+ POR TODOS OS 
+
+ OUTROS 
+
+
+
+ VALUES NESSA COLUMN ESPECIFICADA,
+
+
+
+
+
+PROCURA POR VALUES QUE 
+
+SEJAM  REALMENTE 'MAIORES' 
+
+DO QUE 
+
+
+
+ESSE AÍ,
+
+NESSE 'PRIMEIRO SLOT'
+
+das strings.. --> E A COLLATION 
+
+
+CONTROLA 
+
+
+'COMO DIFERENTES CARACTERES SÃO RELACIONADOS ENTRE SI'...
+
+
+
+
+
+
+
+
+
+
+
+
+-_> POR EXEMPLO,
+
+
+
+UM 
+
+'D' 
+
+É 
+
+CONSIDERADO __ MAIOR_ DO QUE 
+
+
+UM 'C',
+
+
+
+E É EXATAMENTE 
+
+
+
+
+POR ISSO QUE 
+
+TEMOS 
+
+COMPANIES COMO 
+
+'Max Schwarz'
+
+
+
+APARECENDO 
+
+LÁ 
+
+
+
+NESSE NOSSO RESULT SET... (
+
+
+
+    PQ UM 'M' 
+
+
+    ou 'L' 
+
+
+    REALMENTE É MAIOR DO QUE UM VALUE DE 'C'...
+)
+
+
+
+
+
+
+
+
+
+O SQL, POR DEFAULT,
+
+CONSIDERA O ALFABETO COMO 'ORDEM DE VALUES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ISSO SIGNIFICA QUE 
+
+PODEMOS FAZER ESSE FILTERING TAMBÉM COM TEXT,
+
+
+
+
+PROCURAR POR 'GREATER THAN' E 'SMALLER THAN' 
+
+
+no text,
+
+
+
+
+MAS 
+
+
+você deve entender que 
+
+
+
+
+isso tudo é comparado 
+
+
+''CARACTER POR CARACTER'',
+
+
+
+e essa comparação COMEÇA PELO PRIMEIRO CARACTER...
+
+
+
+
+
+
+
+
+-->  E __ APENAS_ SE O PRIMEIRO CARACTER FOR __ IGUAL___ 
+
+
+
+O SQL VAI 'MOVE TO THE NEXT CHARACTER',
+
+
+e assim por diante...
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM que isso funciona...
+
+
+
+
+
+
+--> tudo 
+
+
+isso pode não fazer tão sentido,
+
+
+
+
+mas 
+
+saiba que 
+
+você pode filtrar por text,
+
+
+
+
+
+
+
+
+e usar greater e smaller com isso,
+
+
+
+e como tudo isso funciona...
