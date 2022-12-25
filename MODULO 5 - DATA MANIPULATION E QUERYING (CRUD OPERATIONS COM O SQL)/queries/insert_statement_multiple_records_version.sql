@@ -10,7 +10,6 @@
 
 INSERT INTO sales (
     date_fulfilled,
-
         customer_name,
         product_name,
         volume,
@@ -18,6 +17,6 @@ INSERT INTO sales (
         is_disputed
     )
 VALUES (NULL, 'Paul', 'Chair', 2000, true, true),
-(NULL, 'Chris', 'Table', 4000, true),
-(NULL, 'Ana', 'Tools', 2000, true),
-(NULL, 'John', 'Ladder', 2000, true);
+(NULL, 'Chris', 'Table', 4000, true, true),
+(NULL, 'Ana', 'Tools', 2000, true, true),
+(NULL, 'John', 'Ladder', 2000, true, true);

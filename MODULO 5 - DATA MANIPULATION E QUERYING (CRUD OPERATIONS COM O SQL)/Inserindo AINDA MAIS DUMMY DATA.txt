@@ -1,0 +1,98 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+ ANEXADA 
+
+
+ A ESSA LIÇÃO 
+
+
+ HÁ 
+
+
+
+
+
+
+ UM ARQUIVO DE 'INSERT MORE DATA',
+
+
+
+
+ QUE 
+
+
+
+ É UM ARQUIVO 
+
+
+
+
+ COM UM MONTE DE RECORDS EXTRAS --> 
+
+
+
+
+ VAMOS USAR ESSA DATA PARA _ SELECIONAR E FILTRAR _ DATA__ PELO RESTO DESSA COURSE SECTION...
+
+
+
+
+
+
+
+
+
+
+
+ CERTO... FIZ ISSO...
+
+
+
+
+
+
+
+
+
+
+
+ --> aGORA FICAMOS COM BEM MAIS DATA (12 ROWS DE DATA, com mt dummy data)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ASSIM QUE VOCê SETTAR TUDO ISSO,
+
+
+
+
+
+ PODEMOS CONTINUAR NAS PRÓXIMAS SECTIONS (
+    vamos ver o update e DELETE DE DATA,
+
+
+    para então estudarmos 'select' e 'filter'...
+ )
