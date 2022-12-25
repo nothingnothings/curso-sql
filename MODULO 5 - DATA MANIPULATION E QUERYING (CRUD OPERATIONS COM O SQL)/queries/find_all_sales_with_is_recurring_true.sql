@@ -1,0 +1,3 @@
+SELECT *
+FROM sales
+WHERE is_recurring IS true;  ---DEVEMOS USAR 'IS' e 'IS NOT' para operations de comparação com __BOOLEANS E NULL (e '=' e '!=' para operations COM NUMBERS E STRINGS)...

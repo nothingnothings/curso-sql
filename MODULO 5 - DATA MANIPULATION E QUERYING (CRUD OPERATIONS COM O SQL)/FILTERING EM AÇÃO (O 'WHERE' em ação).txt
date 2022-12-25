@@ -1,0 +1,487 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... 
+
+
+
+
+TEMOS AQUELA LIST DE 'QUERY GOALS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER COMEÇAR PELO PRIMEIRO GOAL, 
+
+
+QUE É 
+
+
+
+
+'FIND ALL SALES WITH VOLUME > 1000'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA ISSO, NOSSA QUERY FICARÁ ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE volume > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ACHO QUE É ISSO...
+
+
+
+
+
+
+
+
+
+
+
+É ASSIM QUE PODEMOS 
+
+
+
+
+PROCURAR POR TODAS AS SALES QUE POSSUEM VOLUME MAIOR DO QUE 1000..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+também poderíamos escrever assim:
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE volume >= 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+SE RODARMOS ISSO,
+
+
+FICAREMOS COM APENAS ALGUNS ROWS (rows que satisfizeram a condição)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR ESCREVEU 1000 como um INTEGER,
+
+
+
+
+
+
+
+
+pq não faz diferença escrever 
+
+'1000' ou '1000.0'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+DEVEMOS CONTINUAR COM OS GOALS...
+
+
+
+
+
+
+
+
+
+
+TENTAMOS FAZER O GOAL NÚMERO 4,
+
+
+
+que é 
+
+
+'FIND ALL RECURRING SALES'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> para isso, precisamos de um where que atue sobre a column de 'is_recurring'...
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE is_recurring = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS EU __ ERREI__.... ----> PQ QUANDO CHECAMOS POR 'BOOLEAN' E 'NULL',
+
+
+
+
+DEVE-SE UTILIZAR A KEYWORD DE 'IS'/'IS NOT',
+
+
+
+E NÃO 
+
+
+O EQUALITY...
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+
+DEVE FICAR ASSIM:
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE is_recurring IS true;  ---DEVEMOS USAR 'IS' e 'IS NOT' para operations de comparação com __BOOLEANS E NULL (e '=' e '!=' para operations COM NUMBERS E STRINGS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> certo...
+
+
+
+
+
+
+
+
+--> ALTERNATIVAMENTE,
+
+COMO BOOLEANS SÃO 
+
+
+SEMPRE 
+
+
+
+TRATADOS COMO '0' 
+
+OU 
+
+'1' (ou not zero values),
+
+
+
+
+VOCÊ 
+
+
+
+
+PODERIA 
+
+PROCURAR PELO 
+
+
+'0' (0 é igual a TRUE...)..
+
+
+
+
+
+
+E SE ESTAMOS 
+
+
+
+
+
+PROCURANDO POR TODAS AS ROWS EM QUE 'is_recurring' ESTÁ COMO FALSE,
+
+PODERÍAMOS 
+
+
+CHECAR 
+
+
+POR 
+
+
+
+INEQUALITY DE  0 (pq será '1' ou outro valor, que é false),
+
+
+
+
+
+
+O QUE PODERIA SER OBTIDO COM '!=' ou '<>'...
+
+
+
+
+
+
+eX:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE is_recurring <> 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> MAS A MAIOR PARTE DAS DATABASE SYSTEMS SUPORTAM A SINTAXE COM 
+
+
+
+A KEYWORD DE 'IS' e 'IS NOT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> OK, ISSO FUNCIONOU,
+E AÍ 
+
+RETORNAMOS 
+
+
+
+
+
+4 ROWS...
+
+
+
+
+
+
+
+
+
+---> SE RODAMOS ISSO NOVAMENTE,
+
+CONTRA O MYSQL,
+
+ISSO FUNCIONA,
+
+E AÍ 
+
+RETORNAMOS OS MESMOS ROWS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> 

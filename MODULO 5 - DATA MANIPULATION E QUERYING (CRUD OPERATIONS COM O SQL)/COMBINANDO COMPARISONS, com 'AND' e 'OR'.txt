@@ -1,0 +1,394 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... PARA COMPLETAR NOSSO QUERY GOAL DE NÚMERO 5,
+
+
+
+
+
+
+que é 
+
+
+
+'FIND ALL DISPUTED SALES WITH VOLUME > 5000' 
+
+
+(
+    ou seja,
+
+
+    com a condition de 'is_disputed' igual (IS) a true 
+
+
+    E VOLUME MAIOR DO QUE 5000...
+),
+
+
+
+
+
+
+
+
+
+
+
+COMEÇAMOS ASSIM (com o 'AND')...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE is_disputed IS true AND volume > 5000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE is_disputed IS true
+    AND volume > 5000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> PODEMOS COMBINAR CONDITONS, COM 'AND' 
+
+
+e 
+
+'OR'...
+
+
+
+
+
+
+
+
+--> NÃO RETORNEI COISA ALGUMA,
+
+PQ 
+
+
+
+LÁ NA DATABASE NÃO TENHO NENHUM RECORD COM ESSA CONDITION..
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE is_disputed IS TRUE
+    AND volume > 5000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ALÉM DISSO,
+
+    CABE RESSALTAR QUE 
+
+
+
+PODEMOS COMBINAR QUANTAS CONDITIONS DESEJAMOS, COM 'AND' E 'OR'..
+
+
+
+
+
+
+
+
+---> E PODEMOS MISTURAR AND E OR...
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS WRAPPAR 
+NOSSAS CONDITIONS COM 
+
+'()"
+
+
+
+ 
+ PARA IDENTIFICAR MELHOR NOSSAS CONDTIONS...
+
+
+
+
+
+
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+ SELECT * FROM sales 
+ WHERE (is_disputed IS TRUE) AND ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> E OS '()'
+
+
+ TE DEIXAM CONTROLAR 'COMO ESSAS DIFERENTES CONDITIONS DEVEM SER SATISFEITAS,
+
+ EM CONJUNTO'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... O PROFESSOR SÓ ADICIONA 1 ÚNICA OUTRA CONDIÇÃO,
+
+ QUE É 
+
+ 'volume > 5000'...
+
+
+
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+
+ SELECT *
+FROM sales
+WHERE (is_disputed IS TRUE)
+    AND (volume > 5000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ----> ok...
+
+
+
+
+
+
+
+    ISSO REALMENTE FUNCIONA....
+
+
+
+
+
+
+
+
+
+
+
+
+    e ganhamos os mesmos resultados no mysql e postgresql...
+
+
+
+
+
+
+
+    É ASSIM QUE PODEMOS USAR 'AND' E 'OR'...
+
+
+
+
+
+
+
+
+
+
+
+
+    -- >E TAMBÉM PODEMOS USAR 'OR',
+
+
+    EXATAMENTE COMO ANTES:
+
+
+
+
+
+
+
+
+    
+ SELECT *
+FROM sales
+WHERE (is_disputed IS TRUE)
+    OR (volume > 5000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O AND E OR FUNCIONAM EXATAMENTE COMO NO JAVASCRIPT...
