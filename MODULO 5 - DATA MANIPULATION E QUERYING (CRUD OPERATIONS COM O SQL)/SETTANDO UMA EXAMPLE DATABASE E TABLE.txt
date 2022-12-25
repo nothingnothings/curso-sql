@@ -1,0 +1,666 @@
+
+
+
+
+
+
+
+PARA TRABALHAR COM O EXAMPLE,
+
+
+O PROFESSOR 
+
+
+
+PRECISA, PRIMEIRAMENTE, CRIÁ-LO...
+
+
+
+
+
+
+
+
+
+--> ELE CRIA UM 
+
+
+
+
+
+
+CREATE DATABASE sales;
+
+
+
+
+
+
+
+
+CREATE TABLE sales (
+
+    xxx yyy, 
+
+    zzz www,
+
+
+)
+
+
+
+
+
+
+
+
+-----> OK...
+
+
+
+
+
+
+AÍ ELE VAI CRIANDO A TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O MEU FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+-- CREATE DATABASE sales;
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_fulfilled TIMESTAMP,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume DECIMAL,
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE QUISÉSSEMOS CRIAR AQUELA COLUMN DE 'MYSQL',
+
+
+FICARIA ASSIM:
+
+
+
+
+
+
+
+
+id INT PRIMARY KEY AUTO_INCREMENT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+MAS NO POSTGRESQL É ASSIM:
+
+
+
+
+
+
+
+
+
+id SERIAL PRIMARY KEY
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+E AS OUTRAS COLUMNS? 
+
+
+
+
+
+
+
+
+
+
+
+--> temos 'date_created'
+
+
+
+e 
+'date_fulfilled'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+date_created 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS O PROFESSOR COLOCOU O DATA TYPE DE 'DATE',
+
+E NAÕ DE 'TIMESTAMP'...
+
+
+
+
+
+
+
+-> mas ele admite que poderia/pode ser 'timestamp'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> date_created DATE 
+
+
+
+
+
+
+
+
+
+
+date_created DATE 
+
+
+
+
+
+
+
+
+
+
+-_> O 'DATE' É SUPORTADO POR TANTO O 'MYSQL' COMO 'POSTGRES'...
+
+
+
+
+
+
+
+
+
+O PROFESSOR USA, COMO DEFAULT VALUE,
+
+
+
+
+
+a function de 'CURRENT_DATE',
+
+
+
+
+
+que existe para tanto o postgresql como o mysql ...
+
+
+
+
+
+
+
+
+TAMBÉM VAI ARMAZENAR 'date_fulfilled',
+
+
+
+
+e isso DEVERÁ SER POPULADO MANUALMENTE (será normalmente 'null')...
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE sales (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    date_created DATE DEFAULT CURRENT_DATE,
+    date_fulfilled DATE,
+    customer_name VARCHAR(300) NOT NULL,
+    product_name VARCHAR(300) NOT NULL
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+certo...
+
+
+
+
+
+
+
+
+
+aí temos também 'volume',
+
+que 
+
+
+
+será um value 
+
+
+
+
+BEM ESPECÍFICO (Vai ter casas decimais)....
+
+
+
+
+
+
+
+
+
+
+
+-> é por isso que uso numeric/decimal..
+.
+
+
+
+
+
+
+
+
+
+
+
+AÍ PODEMOS DEFINIR QUANTOS DÍGITOS QUEREMOS...
+
+
+
+
+
+
+
+
+--> PROFESSOR COLOCA 
+
+
+
+NUMERIC(10, 3) 
+
+
+
+
+
+
+(10 DÍGITOS NO TOTAL, 3 DÍGITOS MAX DEPOIS DA VÍRGULA)...
+
+
+
+
+
+
+
+
+
+
+-> DEPOIS O PROFESSOR COLOCA UMA CONSTRAINT DE CHECK 
+
+
+EM 'NUMERIC',
+
+PARA GARANTIR QUE O VOLUME NÃO CONSIGA SER MENOR DO QUE 0...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    date_created DATE DEFAULT CURRENT_DATE,
+    date_fulfilled DATE,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume NUMERIC(10, 3) NOT NULL CHECK(volume > 0),
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false
+);
+
+
+
+
+
+
+
+
+
+----> UM VOLUME NEGATIVO NÃO FAZ SENTIDO...
+
+
+
+
+
+
+
+
+--> POR FIM, TEMOS 2 BOOLEAN COLUMNS,
+
+COMO 
+
+
+'is_recurring',
+
+que será BOOLEAN, E O DEFAULT SERÁ FALSE..
+
+
+
+
+
+
+
+aí temos 
+
+
+
+
+o 
+
+'is_disputed',
+
+
+
+E SERÁ 
+FALSE TAMBÉM o default...
+
+
+
+
+
+
+
+
+
+COM ISSO, CRIAMOS UMA TABLE DESSAS...
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS AQUI TEMOS UMA DIFERENÇA ENTRE O MYSQL E O 
+POSTGRESQL:
+
+
+
+
+
+
+
+
+
+O MYSQL REQUER QUE 
+'CURRENT_DATE'
+
+
+SEJA ESCRITO COM 
+
+'(CURRENT_DATE)'  
+
+
+(parênteses envolvendo a escrita)...
+
+
+
+
+
+
+
+
+
+
+
+
+com isso, isso passa a funcionar...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+''''WHEN WORKING WITH SQL, YOU SHOULD GENERALLY ALWAYS LOOK FOR TRAILING COMMAS 
+
+LIKE THE ONE THE TEACHER REMOVED. THEY TYPICALLY CAUSE ERRORS WHEN NOT REMOVED!''''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA, ISTO AQUI VAI DAR ERRO:
+
+
+
+
+
+
+
+
+
+CREATE TABLE sales (
+    id SERIAL PRIMARY KEY,
+    date_created DATE DEFAULT CURRENT_DATE,
+    date_fulfilled DATE,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume NUMERIC(10, 3) NOT NULL CHECK(volume > 0),
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false,  ------> ISSO DÁ ERRO...
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ok... 
+
+
+
+
+aí isso funciona..
+
+
+
+
+
+
+
+COM O MYSQL A SINTAXE É QUASE IGUAL:
+
+
+
+
+
+
+CREATE TABLE sales (
+    id INT PRIMARY KEY AUTO_INCREMENT, ------> ISSO MUDA
+    date_created DATE DEFAULT CURRENT_DATE,
+    date_fulfilled DATE,
+    customer_name VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    volume NUMERIC(10, 3) NOT NULL CHECK(volume > 0),
+    is_recurring BOOLEAN DEFAULT false,
+    is_disputed BOOLEAN DEFAULT false
+);
+
+
+
+
