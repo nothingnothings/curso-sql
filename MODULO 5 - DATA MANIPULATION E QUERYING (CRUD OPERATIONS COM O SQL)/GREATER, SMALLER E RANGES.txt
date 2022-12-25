@@ -1,0 +1,955 @@
+
+
+
+
+
+
+
+
+
+
+A ESSE PONTO,
+
+VOCÊ JÁ DEVE TER UM BASIC FEEL DE COMO O 'WHERE'
+
+
+
+FUNCIONA,
+
+
+
+E COMO VOCÊ PODE 
+
+
+
+'LOOK FOR EQUALITY'
+
+
+
+E
+ 
+
+
+ 'GREATER THAN' 
+
+ VALUES 
+
+
+
+ e assim por diante,
+
+
+
+
+ e
+  
+
+  também 
+
+  COMO 
+
+
+COMBINAR 
+
+
+
+CONDITIONS...
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS E SE VOCÊ ESTIVESSE LIDANDO COM 'DATES',
+
+
+OU ENTÃO 
+
+LIDANDO COM 'RANGES'?
+
+
+
+
+
+
+
+
+
+
+
+--> BEM,
+
+
+AÍ 
+
+
+
+VOCÊ 
+
+
+
+
+PODE TAMBÉM 'FILTER'
+
+
+POR ESSAS COISAS...
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+
+
+DIGAMOS QUE QUEREMOS 
+
+
+TACKLE
+
+
+
+
+NOSSO GOAL
+
+6,
+
+
+QUE É 
+
+
+
+
+
+'ACHAR TODAS AS SALES QUE FORAM CRIADAS _ 
+
+
+
+
+ENTRE 2 DATES ESPECÍFICAS'...
+
+
+
+
+
+
+
+
+
+
+PARA ISSO,
+
+
+
+O PROFESSOR CRIA UM NOVO ARQUIVO..
+
+
+
+
+
+
+
+
+
+COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE date_created BETWEEN xxx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS COMO VOU ESCREVER O RESTO DISSO?
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, PARA ISSO, PRECISO ESCREVER UMA CERTA 'RANGE'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, CLARO ,
+
+
+
+
+
+DEVEMOS CLARIFICAR 
+
+QUE 
+
+
+
+
+NA NOSSA TABLE DE 'SALES',
+
+
+
+
+SE ENXERGARMOS 
+
+
+TODOS NOSSOS RECORDS,
+
+
+
+
+
+VEREMOS QUE 
+TEMOS 
+
+
+
+
+O FIELD DE 'date_created'...
+
+
+
+
+
+
+
+
+
+--> E O QUE PODEMOS FAZER,
+
+SE ESTAMOS 
+
+
+PROCURANDO POR UMA CERTA RANGE DE DATTES,
+
+
+
+
+
+
+É USAR 
+
+
+
+
+date_created > '2021-11-01' 
+
+
+
+
+
+
+
+
+(COMO UM TEXT MESMO)
+
+
+
+
+
+
+
+
+
+----> AS DATES, PASSADAS COMO STRINGS,
+
+
+SÃO 
+
+
+TRATADAS, INTERNAMENTE, COMO 
+
+
+DATES PELO PRÓPRIO SQL...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE date_created > '2021-11-01'; --- DATES, PASSADAS COMO STRINGS, SÃO TRATADAS INTERNAMENTE COMO 'DATES', PELO SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> ISSO SIGNIFICA QUE 
+
+ESTAMOS 
+PROCURANDO 
+
+POR 
+
+DATES 
+
+
+
+MAIORES DO QUE ESSE VALUE...
+
+
+
+
+
+
+
+
+
+
+MAS ISSO NÃO É UMA RANGE.. --> 
+
+SE VOCÊ ESTÁ PROCURANDO POR UMA RANGE,
+
+ 
+
+ VOCÊ PODE SIMPLESMENTE ADICIONAR 
+
+ 'AND'
+
+
+ E AÍ 
+
+ ESCREVER O RESTO DA QUERY,
+
+ COM 
+
+
+
+
+ A DATE QUE VOCÊ QUER QUE SEJA INFERIOR AO LIMITE..
+
+
+
+
+
+
+
+
+ ex:
+
+
+
+
+
+
+ 
+SELECT * FROM sales
+WHERE date_created > '2021-11-01' AND date_created < '2022-12-02';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A OUTRA MANEIRA DE ESCREVER ISSO, PENSO EU,
+
+É ESTA:
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE date_created BETWEEN ('2021-11-01', '2022-12-02'); -- OUTRA MANEIRA (mais elegante) de definir RANGES
+
+
+
+
+
+
+
+
+
+----------->
+
+
+
+
+
+
+
+
+
+
+
+    SE VOCÊ TIVER CONDITIONS CONTRADITÓRIAS,
+
+    NENHUM ROW SERÁ ENCONTRADO...
+
+
+
+
+
+
+
+
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> assim conseguimos buscar por certas ranges, sim...
+
+
+
+
+
+
+
+
+-> E ISSO FUNCIONA TANTO NO POSTGRESQL COMO MYSQL..
+
+
+
+
+
+
+
+
+
+
+-> MAS PODEMOS ESCREVER ISSO COM O OPERATOR DE 'BETWEEN',
+É CLARO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE date_created BETWEEN (date1, date2);
+
+
+
+
+
+
+
+
+
+ESCREVEMOS AS DATES DESEJADAS,
+
+NAQUELES 2 SLOTS....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> MAS EU ESCREVI ERRADO... -> A SINTAXE NÃO É 'BETWEEN (date1, date2)',
+
+
+
+
+E SIM 
+
+É 
+
+
+
+
+
+
+BETWEEN '2021-11-01' AND '2022-05-01';
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE date_created BETWEEN '2021-11-01' AND '2022-12-02'; -- OUTRA MANEIRA (mais elegante) de definir RANGES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+
+
+MAS É IMPORTANTE MENCIONAR QUE 
+
+
+COM 
+
+
+'BETWEEN X AND Y',
+
+
+
+
+
+
+
+
+
+OS VALUES QUE VOCê COLOCA COMO _ DATES_ TAMBÉM SÃO INCLUÍDOS NA SUA CONDITION (
+
+
+    já com 
+
+
+    'date_created > '2021-11-01' AND date_created < '2022-05-01'',
+
+
+
+    ESSAS DATAS 'LIMITE'
+
+    SÃO 
+
+
+
+    EXCLUÍDAS DA CONDITION...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO SIGNIFICA QUE 
+
+
+SE VOCÊ QUER 
+
+
+
+EXCLUIR ESSAS DATAS DE SEU STATEMENTT DE 'BETWEEN AND',
+
+
+
+
+você 
+
+
+
+PRECISA 'subtrair 1 dia' do LIMITE FINAL, 
+
+E 
+
+
+
+'adicionar 1 dia'
+
+
+AO LIMITE INICIAL (
+
+    para aí 
+
+    EXCLUIR ESSES DIAS QUE VOCÊ QUER EXCLUIR...
+)
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE date_created BETWEEN '2021-11-02' AND '2022-12-01'; -- OUTRA MANEIRA (mais elegante) de definir RANGES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, ENTAÕ TUDO DEPENDE DE VOCÊ 
+
+'QUERER OU NÃO 
+
+INCLUIR OS __ END POINTS_''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+certo...
+
+
+
+
+
+
+
+COM ISSO, EXECUTAMOS ISSO CONTRA O POSTGRESQL...
+
+
+
+
+
+ganhamos os mesmos results de antes...
+
+
+
+
+
+
+
+
+
+O MYSQL E POSTGRESQL SUPORTAM ESSE 'BETWEEN AND' ...
+
+
+
+
+
+
+------->
+
+
+
+
+
+
+
+
+
+
+OBS::: VOCÊ PODE USAR O 'BETWEEN - AND' 
+
+
+
+COM OUTRAS COISAS,
+
+ALÉM DE 
+
+'DATE RANGES'.. --> 
+
+
+
+PODE USAR TAMBÉM COM NUMBERS,
+
+
+
+
+
+
+
+
+
+
+com outros numbers...
+
+
+
+NUMBERS EM QUE VOCÊ ESTÁ PROCURANDO POR RANGES (
+
+    como o volume...
+)
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+WHERE volume > 1000 AND volume < 100000;
+
+
+
+
+
+
+
+
+
+
+
+OU 
+
+
+SELECT * FROM sales 
+WHERE volume BETWEEN 1000 AND 100000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------
+
+
+
+
+
+
+OK, ISSO É DISPONÍVEL TAMBÉM PARA NUMBERS, EM OUTRAS PALAVRAS...
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+TUDO ISSO FUNCIONA PARA O POSTGRESQL E MYSQL...
+
+
+
+
+
+É ASSIM QUE PODEMOS TRABALHAWR COM DATES E RANGES..
+
+
+
+
+
+
+
+
+--> você também pode procurar por equality e inequality,
+
+tudo é possível com dates,
+
+com text,
+com numbers,
+
+etc...
