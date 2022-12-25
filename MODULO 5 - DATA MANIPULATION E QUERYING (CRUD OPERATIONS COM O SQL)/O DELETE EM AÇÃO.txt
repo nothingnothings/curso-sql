@@ -1,0 +1,247 @@
+
+
+
+
+
+
+
+
+
+
+--> O UPDATE DE DATA É MT IMPORTANTE,
+
+
+
+E VOCÊ FREQUENTEMENTE TERÁ DE O FAZER..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> 1 USER PODE UPDATAR O PRÓPRIO EMAIL ADDRESS, ETC ETC..
+
+
+
+
+
+
+
+
+
+
+
+-- MAS àS VEZES VOCÊ TERÁ 
+
+
+
+DE DELETAR 
+
+
+
+
+ROWS..
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+
+
+COMECE COM O COMANDO DE 
+
+
+
+''''
+
+
+DELETE FROM 
+
+''''
+
+
+
+e aí 
+
+
+
+o nome 
+
+da table 
+
+
+
+de que vocÊ quer deletar...
+
+
+
+
+
+
+
+
+
+
+
+
+--> aí use 'where'
+
+para 
+
+
+
+especificar 
+
+
+
+
+
+qual row você quer apagar...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+delete from sales
+where id = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok, com isso deletaremos apenas 
+
+1 
+
+row,
+
+
+
+
+
+
+
+
+
+
+mas 
+
+
+
+é claro que 
+
+
+poderíamos 
+
+
+
+colocar qualquer column 
+
+
+
+
+
+
+como condição... -> 
+
+
+
+
+
+
+
+
+mas veremos 
+
+
+
+mais sobre a where clause 
+
+mais tarde,
+
+nessa section...
+
+
+
+
+
+
+
+
+
+
+
+--> ok..
+
+
+
+
+podemos rodar essa query e deletar esse row específico....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> veremos que a última row estará sumida...
+
+
+
+
+
+
+
+
+
+
+--> é assim que podemos delete data,
+
+com 
+
+o comando de 'delete from'...
