@@ -1,0 +1,765 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... É ASSIM QUE PODEMOS USAR 'SELECT FROM',
+
+
+
+COM/SEM 'specific column names' (com ou sem a estrela, em outras palavras)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE TAMBÉM PODEMOS 'FILTER' NOSSA DATA..
+
+
+
+
+
+
+
+
+
+
+
+--> FILTER NOSSA DATA PARA PEGAR APENAS ALGUNS RECORDS (menos do que o total)...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> A KEYWORD DE 'WHERE',
+
+
+
+QUE TAMBÉM É USADA PARA O UPDATE E DELETE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, ESSA CLÁUSULA 
+
+
+
+NOS DEIXA DEFINIR UMA CONDITION QUE CONTROLA 
+
+
+
+__ QUAL TIPO DE DATA É FETCHEADA.. (quais rows são incluídos)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> PARA ISSO,
+
+
+DEVEMOS 
+
+
+DAR UMA OLHADA 
+
+NESSA CLÁUSULA 
+
+DE 
+
+
+'WHERE',
+
+
+E 
+
+
+OS TIPOS DE CONDITIONS QUE PODEMOS DEFINIR DEPOIS DA KEYWORD DE 'WHERE'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E HÁ 6 OPERATORS QUE PODEMOS USAR, DEPOIS DA WHERE CLAUSE:
+
+
+
+
+
+
+
+
+
+
+
+
+1) '=' ou 'IS'....
+
+
+
+
+
+
+
+
+
+2) <>, !=, ou IS NOT 
+
+
+
+
+
+
+
+3) >, >=
+
+
+
+
+4) < ou <=
+
+
+
+
+
+
+
+5) AND 
+
+
+
+
+
+6) OR 
+
+
+
+
+
+
+
+
+
+
+
+----> --> EQUALIDADE -----> É O '=' ou 'IS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO CHECA POR EQUALIDADE ---> 'EQUALITY' ----> 
+
+
+
+
+
+
+
+
+TIPO QUANDO PROCURAMOS POR 
+
+
+
+'id = 13'...
+
+
+
+
+
+
+
+
+A IDEIA É 
+
+
+
+SEMPRE QUE 
+
+
+VOCÊ 
+
+
+VAI ESPECIFICAR:
+
+
+
+
+
+
+<column_name> = <value> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE sales 
+SET product_name = 'A Truck',
+    volume = volume * 1000 
+WHERE id = 13;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O SQL VAI PROCURAR POR ''TODOS OS ROWS 
+
+ 
+
+ QUE CONCORDAM COM ESSA CONDIÇÃO'''...
+
+
+
+
+
+
+ --> TODOS OS ROWS 
+ SERÃO RETORNADOS POR ESSA CONDITION DE 'ID = 13' (
+
+    será apenas 1 row...
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK...
+
+
+
+
+
+
+
+
+
+
+
+ MAS É CLARO QUE VOCÊ PODERIA TER DIFERENTES CONDITIONS, 
+
+
+PARA ENCONTRAR  MAIS ROWS....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE 
+
+
+
+
+
+
+O 'EQUAL SIGN'
+
+
+É USADO PARA A MAIOR PARTE 
+
+DOS CASOS  
+
+(
+
+    ESPECIALMENTE QUANDO TRABALHAMOS COM NUMBERS,
+
+
+    OU ENTÃO QUANDO CHECAMOS POR EQUALITY COM STRINGS...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... --> MAS QUAL A UTILIDADE DE 'IS'? 
+
+
+
+
+
+
+
+
+
+
+
+
+---> BEM, O 'IS' 
+
+
+
+É USADO __ PARA COMPARAR __ VALUES __  COM 'NULL'...
+
+
+
+
+(
+
+    EX: 
+
+
+        VOCÊ QUER CHECAR SE 
+
+        CERTA COLUMN _ NÃO TEM DATA ALGUMA (null)...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+SE VOCÊ QUER CHECAR SE CERTA COLUMN 
+
+
+TEM SEU VALUE DEFINIDO COMO NULL (sem data),
+
+
+VOCÊ 
+
+
+
+DEVE ESCREVER 
+
+'IS NULL',
+
+
+E NÃO 
+
+
+
+'= NULL'...
+
+
+
+
+
+
+
+
+
+
+
+-----> OK... ESSE É UM USE CASE PARA A KEYWORD DE 'IS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) OCASIONALMENTE, VOCÊ CHECARÁ NÃO POR EQUALITY, E SIM POR __ INEQUALITY,
+
+
+
+COM O '!=' OU 
+
+
+
+'IS NOT'...
+
+
+
+
+
+OU ENTÃO 
+
+
+'<>'...
+
+
+
+
+
+
+
+
+ISSO TUDO CHECA POR INEQUALITY... --> 
+
+
+
+
+
+no caso, 
+
+o 
+
+'!=' 
+
+é um 
+
+ALIAS 
+
+
+para '<>'...
+
+
+
+
+
+
+
+
+
+----> E VOCÊ USA O '!=' 
+
+
+
+
+para NUMBERS E STRINGS....
+
+
+
+
+
+
+
+
+--> VOCê SÓ USA 
+
+
+O 
+
+
+
+
+'IS NOT' 
+
+
+SE VOCÊ 
+
+
+ESTÁ 
+
+
+PROCURANDO POR ROWS EM QUE 
+
+CERTA COLUMN É 
+
+'NOT NULL'...
+
+
+
+
+
+IS NULL, IS NOT NULL --> USAMOS QUANDO QUEREMOS CHECAR PELO VALUE DE 'NULL' NAS NOSSAS COLUMNS... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS É CLARO QUE EQUALITY/INEQUALITY 
+
+
+NEM SEMPRE É O QUE VOCÊ QUER PROCURAR POR...
+
+
+
+
+
+
+
+
+
+3)  VOCÊ TAMBÉM PODE PROCURAR POR 
+
+
+
+GREATER THAN/GREATER THAN OR EQUAL 
+
+
+
+
+
+
+
+OU 
+
+
+SMALLER THAN/SMALLER THAN OR EQUAL.. .
+
+
+
+
+
+
+
+
+
+
+--> ISSO É USADO PARA TANTO NUMBERS COMO _ DATES....
+
+
+
+
+
+
+
+
+----->  OK... MAS AQUI HÁ UMA KEYWORD 
+
+
+QUE É UM __MISTO __ DE '> >=' e '< <=' ,
+
+
+
+QUE 
+
+
+É 
+
+
+
+A KEYWORD DE 
+
+
+
+'BETWEEN' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A KEYWORD DE BETWEEN É USADA PARA EXPRESSAR CERTAS CONDITIONS 
+DE 
+'GREATER OR SMALLER THAN'
+
+
+
+ DE UMA MANEIRA MAIS FÁCIL... (mas veremos isso em ação mais tarde)...
+
+
+
+
+
+
+
+
+
+
+ --> 4) PODEMOS COMBINAR TODAS ESSAS CONDITIONS,
+
+ USANDO 
+
+ 'AND' E 'OR',
+
+
+ para 
+
+ CRIAR CONDITIONS MAIS ELABORADAS...
+
+
+
+
+
+
+
+
+
+ --> ESSA É A TEORIA;
+
+ DEVEMOS 
+
+ VER TUDO ISSO 
+
+
+ APLICADO
+  
+  A  UM EXEMPLO PRÁTICO...
