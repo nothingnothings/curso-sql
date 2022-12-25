@@ -1,0 +1,997 @@
+
+
+
+
+
+
+
+
+
+
+
+--> na última lição, 
+
+aprendemos sobre o comando 
+
+
+básico de 
+
+
+
+
+
+
+
+
+
+
+
+
+''SELECT''...
+
+
+
+
+
+
+
+
+
+
+
+SELECT date_created, customer_name, product_name, volume FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA PRÓXIMA LIÇÃO, VEREMOS COMO PEGAR APENAS ALGUNS ROWS,
+
+EM VEZ DE TODOS OS ROWS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ANTES DE PROSSEGUIRMOS,
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+QUER DAR UMA OLHADA NOS 'COLUMN NAMES',
+
+
+
+e no 
+
+
+CÓDIGO/PARTE QUE 
+
+
+VOCÊ 
+
+
+ESCREVE DEPOIS DA KEYWORD DE 'SELECT',
+EM GERAL...
+
+
+
+
+
+
+
+
+
+
+
+
+--> FREQUENTEMNETE ADICIONAREMOS COLUMN NAMES NESSE LOCAL (ou,
+
+então, uma 
+
+'*',  para SELECIONAR TODAS AS COLUMNS DESSA TABLE).....
+
+
+
+
+
+
+
+
+
+
+
+--> MAS FREQUENTEMENTE VOCÊ NÃO ESTARÁ LIMITADO A ISSO...
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ VOCê PODE ASSIGNAR 'ALIASES' 
+
+A SUAS COLUMNS ------> ISSO SIGNIFICA QUE 
+
+
+VOCÊ PODE 
+
+BASICAMENTE 
+
+
+'MUDAR SEUS NOMES',
+
+
+ISSO 
+
+
+PARA 
+
+
+1 DETERMINADA QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ, POR EXEMPLO, QUISESSE RENOMEAR 'VOLUME'
+
+PARA 'total_sales' (trocar de nome)
+
+
+PARA 
+
+
+1 
+QUERY ESPECÍFICA,
+
+
+
+
+
+
+
+APENAS ESSA QUERY,
+
+
+
+VOCÊ 
+
+PODERIA 
+ 
+FAZER ISSO 
+
+
+
+
+
+
+
+
+POR MEIO DA KEYWORD DE 'AS',
+
+
+
+seguido do nome que você quer que essa column tome/assuma, nessa query específica..
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT date_created,
+customer_name,
+product_name,
+volume AS total_sales 
+FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> agora, esse 'Name'
+ 
+ NÃO FICARÁ ARMAZENADO NA DATABASE, 
+
+ 
+
+ E __ TAMBÉM NÃO VAI MUDAR A TABLE JÁ EXISTENTE OU ALGO DO GÊNERO..
+
+
+
+
+
+
+
+
+
+
+ --> MAS, EM VEZ DISSO,
+
+
+
+
+O 'RESULT SET'
+ 
+ DESSA EXPRESSÃO 
+
+
+ VAI 
+
+
+
+
+ TER AGORA, NA COLUMN DE 'volume',
+
+
+ teremos O NOME DE 'total_sales'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> e, aqui,
+
+
+ ESSA FEATURE PODE NÃO SER  TÃO ÚTIL,
+
+ MAS CERTAMENTE É 
+
+ UMA FEATURE 
+
+ QUE 
+
+
+ PODE SER NICE DE SE TER...  (renomear columns que 
+ 
+ 
+ 
+ POSSUEM NOMES POUCO CLAROS/CONFUSOS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> E O ASSIGN DE TAIS ALIAS NAMES 
+
+
+ PODE SER ÚTIL SE __ VOCÊ _ _ 
+
+
+
+ VAI FAZER, EVENTUALMENTE,
+
+ O JOIN 
+
+ DE 
+
+ 2 
+
+ TABLES 
+
+ EM 
+
+ 1 Só.... --> É ALGO QUE VEREMOS, EM DETALHES,
+
+ NA PRÓXIMA COURSE SECTION...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PROFESSOR 
+
+ QUER DEMONSTRAR:
+
+
+
+
+
+
+
+
+
+
+
+
+ -> SE ELE RODA ESSA QUERY,
+
+ ELE FICA
+
+
+ COM UNS RECORDS COM essas columns ali + 'total_sales'( esse nome aí, no lugar de 'volume', nessa column)....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... ESSA É A FEATURE DE 'ALIAS'...
+
+
+
+
+
+
+
+
+
+
+ MAS É BOM TAMBÉM SABER QUE 
+
+
+
+ VOCÊ 
+
+
+ PODE FAZER MAIS DO QUE 
+
+
+ ESPECIFICAR 'COLUMN NAMES'
+
+
+
+
+
+ nesse espaço depois de 'SELECT' (apesar de isso ser o mais comum)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> VOCÊ TAMBÉM PODE ADICIONAR EXPRESSIONS DEPOIS DE 'SELECT',
+
+e também 
+
+
+LITERALS...
+
+
+
+
+
+
+
+
+--> por exemplo, o professor poderia adicionar 
+
+
+
+'Hello world',
+
+
+
+como uma STRING,
+
+
+
+
+ou ENTÃO UM NUMBER...
+
+
+
+
+
+
+
+
+
+
+
+
+FICARIA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT 
+'Hello World',
+15000,
+date_created,
+customer_name,
+product_name,
+volume
+FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VOCÊ PODE FAZER ISSO,
+
+
+
+
+MISTURAR HARD-CODED VALUES 
+
+DENTRO 
+
+
+
+DO ESPECIFY 
+
+DA COLUMN LIST ------->  SE VOCÊ FIZER ISSO,
+
+
+
+VERÁ QUE 
+
+
+
+
+
+O QUERY AINDA FUNCIONARÁ,
+
+
+
+
+
+
+
+E QUE 
+
+A ÚNICA DIFERENÇA É QUE ESSES 'HARD CODED PIECES OF DATA'
+
+
+
+SERÃO 
+
+
+
+SIMPLESMENTE ADICIONADOS 
+
+
+
+EM COLUNAS SEPARADAS,
+
+
+
+EM CADA ROW...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O USO AQUI É BEM LIMITADO,
+
+MAS ÀS VEZES ISSO PODE SER ÚTIL (
+
+
+    se você 
+
+    TIVER DATA __ QUE __ 
+
+    PRECISA __ SER ADICIONADA _ A TODO E QUALQUER ROW,
+
+
+    E QUE 
+
+
+    NÃO 
+
+
+    FAZ/NÃO FARÁ
+
+
+    PARTE DA TABLE 
+
+    normalmente...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 
+
+
+É BOM SABER QUE 
+
+
+
+É POSSÍVEL ADICIONAR ESSAS COLUMNS E SEUS VALUES AOS NOSSOS RESULT SETS,
+
+
+
+
+POR MEIO DESSE HARD CODE...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS O QUE É TIPICAMENTE MAIS ÚTIL É O FATO DE QUE 
+
+
+
+VOCÊ 
+
+PODE 
+
+
+
+
+TAMBÉM 
+
+
+'''RODAR FUNCTIONS/TRANSFORMAR VALUES'''
+
+
+
+
+DAS COISAS QUE 
+
+
+
+SÃO/ESTÃO ARMAZENADAS NAS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+
+-_> OU SEJA,
+
+PODEMOS ESCREVER COISAS ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT 
+    date_created,
+    customer_name,
+    product_name,
+    volume * 1000
+FROM 
+    sales;
+
+
+
+
+
+
+
+
+
+    -_> E ISSO VAI REALMENTE _ PEGAR O __ VOLUME, OS VALUES DE 'volume' nessa column específica,
+
+    e então 
+
+
+
+    VAI MULTIPLICAR POR MIL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS DIVIDIR POR 1000... 
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT 
+    date_created,
+    customer_name,
+    product_name,
+    volume / 1000
+FROM 
+    sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> e, EM GERAL,
+
+
+
+
+VOCÊ 
+
+PODE RODAR VÁRIOS CÁLCULOS NAS COLUMNS E NOS VALUES ARMAZENADOS NELAS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E VOCÊ PODE USAR AS VÁRIAS FUNCTIONS QUE 
+
+SÃO 'BUILT-IN' 
+
+NA 
+
+
+RDBMS... -->
+
+
+
+E VEREMOS 
+
+
+ALGUMAS DESSAS FUNCTIONS NO FINAL DESSA SECTION...
+
+
+
+
+
+
+
+
+
+--> MAS O PROFESSOR JÁ NOS MOSTRA ISSO AGORA..
+
+
+
+
+
+
+
+
+
+
+-----> E ESSE É TAMBÉM UM EXEMPLO 
+
+
+
+
+
+DE USO DE 'ALIAS',
+
+
+
+
+PQ 
+
+QUANDO 
+
+
+DIVIDIMOS/MULTIPLICAMOS 
+
+
+1 VALUE 
+
+
+POR ALGUMA COISA,
+
+
+TIPICAMNETE 
+
+
+
+
+ELE 
+
+
+
+
+
+TERÁ OUTRO NOME 
+
+
+
+
+(
+
+
+    tipo 
+
+
+    'mass' pode ser renomeado/ficar com um alias de 'mass_in_kg',
+
+
+    se vocÊ 
+
+    DIVIDIR A MASSA, EM GRAMAS,
+
+    POR 1000...
+)
+
+
+
+
+
+
+
+
+
+
+--> ex:
+
+
+
+
+
+
+
+
+
+SELECT date_created,
+    customer_name,
+    product_name,
+    mass / 1000 AS mass_in_kg    --- PODERÍAMOS ESCREVER ASSIM, se quiséssemos DIVIDIR O VALUE, NO RESULT SET... poderíamos dar esse nome de 'mass_in_kg', pq realmente não será mais a 'mass' original, em gramas...
+FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+ESSAS SÃO ALGUMAS DAS FEATURES QUE 
+
+
+VOCÊ DEVE CONHECER,
+
+E QUE 
+
+
+VAI 
+
+
+
+
+VER NO FINAL DESSA SECTION...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUANDO EXAMINARMOS OUTROS CONCEITOS, VEREMOS O USO 
+
+
+
+DESSA MANIPULAÇÃO DOS RESULT SETS...
+
+
+
+
+
+
+
+
+--> NA PRÓXIMA LIÇÃO, VEREMOS COMO PODEMOS 'FILTER' NOSSA DATA...
