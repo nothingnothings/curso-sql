@@ -1,0 +1,542 @@
+
+
+
+
+
+
+
+
+
+
+
+---> PARA PRATICAR O UPDATE E DELETE,
+
+
+O PROFESSOR 
+
+
+
+PREPAROU 
+
+
+
+
+
+
+
+OUTRO ARQUIVO,
+
+O 
+
+DE 
+
+
+'INSERT WRONG DATA',
+
+
+
+
+PARA 
+
+AÍ 
+
+
+INSERIR 
+
+
+
+__ DATA NA SUA TABLE DE 'products'
+
+QUE ESTARÁ ERRADA...
+
+
+
+
+
+
+
+
+
+SERÁ DATA QUE ESTÁ ERRADA -> VAMOS QUERER UPDATAR 
+
+ESSA 
+
+DATA QUE JÁ FOI INSERIDA (
+    ou então deletar essa row/múltiplos rows... 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR INSERIU UMA SALE EM QUE EXISTE UM TYPO ('Tuck' em vez de 'Truck')...
+
+
+
+
+
+DEVEMOS 
+
+
+
+
+
+CONSERTAR ESSE TYPO, USANDO 'UPDATE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA UPDATAR 
+
+
+ESSA DATA, PRECISAMOS DE 'update',
+
+
+
+
+
+
+
+
+COM A ESTRUTURA CLÁSSICA DE 
+
+
+
+
+
+
+
+
+
+
+UPDATE <table-name>
+SET <column-name> = <value>
+WHERE id = xxx
+
+
+
+
+
+
+
+
+
+--> TAMBÉM QUEREMOS UPDATAR O 'VOLUME' --> queremos que custe 109000 ( e não 109.99)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> CRIAMOS UM NOVO ARQUIVO PARA ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVO TIPO ASSIM:
+
+
+
+
+
+
+UPDATE sales
+SET product_name = 'A Truck', volume = 102000
+WHERE id = 14;
+
+
+
+
+
+
+
+
+----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE sales 
+SET product_name = 'A Truck'
+WHERE id = xxxx 
+
+
+
+
+
+
+
+
+
+
+
+
+--> O QUE INTERESSA É A CONDITION, NO CASO...
+
+
+
+
+
+
+
+
+
+
+
+--> E VOCê PODE UPDATAR MÚLTIPLAS COLUMNS POR STATEMENT DE 'update',
+
+BASTA ENUMERÁ-LOS com ',' (vírgulas)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+UPDATE sales 
+
+SET product_name = 'A Truck',
+    volume = volume * 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+PODEMOS 
+
+
+USAR VALORES JÁ ARMAZENADOS  NESSAS OPERAÇÕES/DEFINIÇÕES 
+
+
+DE NOVOS VALORES...
+
+
+
+
+
+
+---> PODEMOS USAR VALORES QUE JÁ EXISTEM PARA 
+
+
+
+
+DEFINIR NOVOS VALORES...
+
+
+
+
+
+
+
+
+--> MAS TIPICAMENTE NÃO VAMOS QUERER UPDATAR TODAS AS ROWS DE NOSSA TABLE...
+
+
+
+
+
+
+
+
+
+
+----> O WHERE NOS PERMITE 
+
+
+
+DEFINIR 
+
+
+
+
+QUAIS ROWS QUEREMOS ATUALIZAR/QUE SEJAM AFETADAS PELO UPDATE 
+
+NESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> VOCÊ TIPICAMENTE VAI QUERER PROCURAR POR UM 'UNIQUE IDENTIFICATION CRITERIA' (como o ID)..
+
+
+
+
+
+
+
+
+
+
+
+
+---> É SÓ PEGAR O NÚMERO...
+
+
+
+
+
+
+
+
+
+OK, AÍ O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+UPDATE sales
+SET product_name = 'A Truck', 
+-- volume = 102000
+volume = volume * 1000
+WHERE id = 14;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> E ISSO FUNCIONA...
+
+
+
+
+
+
+
+
+
+
+
+--> 'id = SEU NÚMERo'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS 'WHERE' MAIS TARDE,
+
+QUANDO 
+
+
+
+começarmos a estudar o 'DATA FILTERING'...
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ ----> É IMPORTANTE TER APENAS 1 único '=' para definir 
+
+
+
+
+
+
+o critério do 'where',
+
+
+e não dois..
+
+
+
+
+
+
+
+
+----> é apenas 1 único equal sigN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AQUI VAMOS ATUALIZAR 1 ÚNICO ROW..
+
+
+
+
+
+
+
+
+-- MAS PODERÍAMOS 
+
+
+
+
+ATUALIZAR MÚLTIPLOS ROWS...
+
+
+
+
+
+
+
+
+
+
+-------> ok, isso funciona...
+
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS UPDATE DATA...
