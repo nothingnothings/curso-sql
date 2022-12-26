@@ -1,0 +1,929 @@
+
+
+
+
+
+
+
+
+
+
+
+-_> OK... COM ESSA NOVA INFO ADQUIRIDA,
+
+
+É HORA DE VER ESSAS KEYWORDS DE 
+
+
+
+
+
+1) LIMIT 
+
+
+
+2) OFFSET 
+
+
+
+3) ORDER BY 
+
+
+4) DISTINCT...
+
+
+
+
+
+
+
+
+EM AÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS COMEÇAR COM O ORDER E LIMIT DE NOSSOS RESULTS...
+
+
+
+
+
+
+
+
+PEGAREMOS OS 'TOP 10' 
+
+
+E 
+
+'TOP 10 BOTTOM' 
+
+
+sales (por 'VOLUME', consideramos o 'VOLUME')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIR AS TOP 10 SALES,
+
+
+
+ACHO QUE 
+
+
+O CÓDIGO VAI FICAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales
+ORDER BY volume
+LIMIT 10 ;
+
+
+
+
+
+
+(
+
+    isso vai pegar os 10 BOTTOM VOLUMES (
+
+
+        pq 
+
+
+        A ORDER VAI SER 'ASCENDING',
+
+        os values MENORES primeiro...
+    )
+)
+
+
+
+
+
+
+
+
+
+PARA PEGAR OS 'TOP 10 VOLUMES',
+
+
+
+
+os records com top 10 volumes,
+
+
+escrevemos assim:
+
+
+
+
+
+SELECT * FROM sales
+ORDER BY volume DESC
+LIMIT 10 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> COM 'SELECT *',
+
+
+selecionamos 
+
+
+TODAS AS COLUMNS 
+
+
+
+DA TABLE DE 'sales'...
+
+
+
+
+
+
+
+--> MAS QUEREMOS PEGAR 10 ROWS,
+
+
+AS 'TOP 10 SALES BY VOLUME' ----> 
+
+
+
+
+
+
+
+
+
+
+POR ISSO O PROFESSOR ESCREVE 
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+ORDER BY volume DESC
+LIMIT 10;
+
+
+
+
+
+
+
+
+
+
+
+
+----> ISSO PQ QUEREMOS  '''OS TOP 10 VOLUME VALUES'' 
+
+
+e 
+
+
+'10 RESULTS APENAS''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+A KEYWORD DE LIMIT É MAIS 'FORTE' DO QUE O WHERE...
+
+
+
+
+
+
+
+
+
+
+
+--> O 'LIMIT' FAZ SENTIDO QUANDO 
+
+
+
+É USADO COM O 'ORDER BY'..
+
+
+
+
+
+
+_> PQ 'ORDER BY' TE DEIXA  PRIMEIRAMENTE ORDENAR OS RESULTS,
+
+PARA __ SÓ _ ENTÃO _ '''PEGAR OS TOP 10''',
+
+
+
+para limitar o que você consegue...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Certo, isso faz total sentido...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM 
+
+
+
+
+
+A ESCRITA ASSIM:
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+ORDER BY volume 
+LIMIT 10;
+
+
+
+
+
+(
+
+    ISSO VAI PEGAR OS 10 BOTTOM SALES,
+
+    os menores valores,
+
+
+    o que é o default....
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE PODEMOS COMBINAR TUDO ISSO COM A CLAUSE DE 'WHERE'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+ORDER BY volume DESC 
+LIMIT 3;
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+
+VAMOS QUERER 
+
+PEGAR 
+
+AS 
+
+'3 BIGGEST SALES',
+
+
+
+
+mas vamos querer APENAS AS SALES QUE NÃO ESTÃO DISPUTED..
+
+
+
+
+
+
+
+
+
+--> para isso, escrevemos assim:
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE is_disputed IS false;
+ORDER BY volume DESC 
+LIMIT 3;
+
+
+
+
+
+
+
+
+
+
+
+
+---> DEVEMOS ADICIONAR A CLAUSE DE 'WHERE' _ ANTES__ DO ORDER BY...
+
+
+
+
+
+
+
+
+
+
+
+
+--> com isso,
+
+
+DIZEMOS AO RDBMS 
+
+QUE 
+
+estamos 
+PROCURANDO 
+
+
+
+
+APENAS POR ROWS EM QUE ESSA COLUMN ESTÁ FALSE --> 
+
+
+
+
+
+E SE ESSA CONDIÇÃO FOR SATISFEITTA,
+
+
+
+QUEREMOS QUE O RESULTADO 
+
+
+
+SEJA ORDENADO POR 'VOLUME'
+
+
+EM ORDEM DESCENDENTE, 
+
+
+
+E QUEREMOS 
+
+
+LIMITAR ESSE RESULT POR 'APENAS 3 ROWS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... É POR ISSO QUE 
+
+
+
+ESSES 'ORDER BY'
+
+
+E 
+
+'LIMIT'
+
+
+SÃO RODADOS POR ÚLTIMO,
+
+pq 
+
+
+ATUAM SOBRE OS RESULTS 
+
+
+
+OBTIDOS COM 'SELECT X FROM ... WHERE'...
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ A ORDEM SEMPRE SERÁ:
+
+
+
+
+
+
+
+
+
+ 1) SELECT X FROM ... 
+
+
+
+
+
+ 2) WHERE 
+
+
+
+
+
+ 3) ORDER BY 
+
+
+
+ 4) LIMIT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CERTO...
+
+
+
+
+
+
+
+ E VOCÊ PODE COMBINAR 
+
+
+
+ TODAS ESSAS CLAUSES...
+
+
+
+
+
+
+
+
+
+
+ --> PRATICANDO ESSAS QUERIES, APRENDEMOS O SQL E A ESCREVER AS QUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS TEMOS MAIS UMA OBSERVAÇÃO:
+
+
+
+
+
+
+
+
+''PODEMOS ORDENAR POR MAIS DE 1 
+
+
+COLUMN,
+
+
+
+BASTA 
+
+
+ADICIONAR 
+
+
+
+
+UMA VÍRGULA 
+
+
+
+E AÍ 
+
+
+
+ORDENAR POR MAIS COISAS''...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE is_disputed IS FALSE 
+ORDER BY volume DESC, customer_name  ----ASSIM 
+LIMIT 3;
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM sales
+WHERE is_disputed IS FALSE
+ORDER BY volume DESC,
+    customer_name ----ASSIM  - SEGUNDO CRITÉRIO DE ORDERING (só é aplicado, no caso, se 2 records tiverem o MESMO VALUE PARA O CRITÉRIO 1, de 'volume')
+LIMIT 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ESSE 'SEGUNDO CRITÉRIO' 
+
+SÓ 
+
+IMPORTARÁ 
+
+
+SE,
+ 
+ PARA A PRIMEIRA ORDERING,
+
+
+ VOCÊ 
+ TIVER ALGUNS ROWS 
+ COM O EXATO MESMO VALOR...
+
+
+
+
+(
+
+    aí o segundo critério será considerado...
+)
+
+
+
+
+
+--> MAS ESSA É APEANS UMA PEQUENA 
+
+
+
+SIDENOTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM,
+
+
+
+TEMOS UMA NOTE ACERCA DO LIMIT DE VALUES...
+
+
+
+
+
+
+
+
+
+
+
+
+-- PODEMOS USAR O 'OFFSET',
+
+
+conforme mencionado.. ------>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ACHO QUE O OFFSET É USADO POR __ FIM...
+
+
+
+
+
+
+------> O OFFSET É 
+
+
+
+
+
+RODADO AO FINAL,
+
+E 
+
+
+
+PODEMOS ESCREVER ASSIM:
+
+
+
+
+
+
+SELECT * FROM sales 
+ORDER BY volume DESC 
+LIMIT 5
+OFFSET 3;
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS BASICAMENTE 'PULAR 3 RECORDS',
+
+
+E AÍ 
+
+
+
+
+RETORNAR OS PRÓXIMOS 5 (
+
+    aí não vou 
+
+    ter 
+
+
+    as 3 sales maiores,
+
+
+    e aí 
+
+
+    PEGAMOS 
+
+    OS PRÓXIMOS 5 MAIORES...
+
+)
+
+
+
+
+
+
+
+
+
+
+O 'OFFSET' É ÚTIL 
+
+SE VOCÊ 
+
+
+ESTÁ BUILDANDO UM WEBSITE COM MÚLTIPLAS PAGES,
+
+
+
+E 
+
+
+
+SE VOCÊ JÁ MOSTROU AS 'TOP 10 SALES'
+
+
+NA PÁGINA NÚMERO 1 (
+
+    e agora o user está na page número 2...
+) 
+
+
+
+
+
+
+----> COMO VOCÊ VAI QUERER OS BIGGEST SALES PARA A SEGUNDA PAGE,
+VOCÊ 
+
+VAI SKIPPAR OS RESULTS MOSTRADOS NA PAGE 1 (
+
+    um exemplo em que 
+
+
+    offset é útil...
+)

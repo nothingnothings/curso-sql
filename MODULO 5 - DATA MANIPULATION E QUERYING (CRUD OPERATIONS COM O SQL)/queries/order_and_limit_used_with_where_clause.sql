@@ -1,0 +1,5 @@
+SELECT *
+FROM sales
+WHERE is_disputed IS false; --- A CLAUSULA DE 'WHERE' DEVE SER ESCRITA__ ANTES DE 'ORDER BY' e 'LIMIT'
+ORDER BY volume DESC
+LIMIT 3;
