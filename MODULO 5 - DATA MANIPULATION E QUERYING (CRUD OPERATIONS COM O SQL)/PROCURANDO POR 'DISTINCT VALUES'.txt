@@ -1,0 +1,301 @@
+
+
+
+
+
+
+
+
+
+
+--> AGORA, POR FIM,
+
+
+
+
+
+
+TEMOS QUE CUMPRIR OS GOALS '8' E '9',
+
+ 
+
+ QUE SÃO 
+
+
+ SOBRE O  GET DE 'DISTINCT CUSTOMERS'
+
+
+ E 
+
+ 'DISTINCT PRODUCTS'..
+
+
+
+
+
+
+
+
+
+ --> ISSO É BEM SIMPLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  --> criamos um novo arquivo..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> para conseguir 
+
+  DISTINCT VALUES,
+
+
+
+  DEVEMOS 
+
+
+  ESCREVER O CLÁSSICO 'SELECT * (ou qualquer outra coisa)',
+
+
+
+
+
+  MAS 
+
+
+
+  AÍ 
+
+  VAMOS ESCREVER 'DISTINCT'
+
+
+
+  do lado 
+
+
+
+
+
+  da coisa que você quer selecionar,
+  tipo assim:
+
+
+
+
+
+
+
+
+
+
+  SELECT customer_name DISTINCT FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  tipo assim:
+
+
+
+
+
+
+
+  -- SELECT customer_name DISTINCT
+-- FROM sales;
+
+
+
+-- SELECT product_name DISTINCT
+-- FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI ME DAR 1 LISTA COM 
+
+
+OS 'UNIQUE VALUES'
+
+
+
+DOS CUSTOMER NAMES...
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+
+VOU GANHAR ALGO ASSIM:
+
+
+
+
+
+
+
+
+
+
+customer_name 
+
+
+
+Max Schwarz 
+Learning Inc 
+Big Oil Inc 
+Company A 
+Company B 
+Company C 
+Company D 
+
+
+
+
+
+
+
+
+E TODAS AS __ DUPLICATAS_ 
+
+DESSE NOMES __ NÃO SERÃO RETRIEVADAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- SELECT customer_name DISTINCT
+-- FROM sales;
+
+
+
+-- SELECT product_name DISTINCT   --- ganhamos TODOS OS VALUES DISTINTOS DE 'product_name' nessa table...
+-- FROM sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> É CLARO QUE PODEMOS __ ORDENAR_ _ 
+
+
+
+
+
+
+
+AS COISAS RETORNADAS POR 'SELECT DISTINCT',
+
+
+basta usar a keyword de 'ORDER BY',
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+SELECT DISTINCT customer_name
+ORDER BY customer_name;
+
+
+
+
+
+
+
+
+(
+
+    ISSO VAI ORDENAR TODOS OS RESULTS, SEGUINDO A ORDEM ALFABÉTICA...
+)
