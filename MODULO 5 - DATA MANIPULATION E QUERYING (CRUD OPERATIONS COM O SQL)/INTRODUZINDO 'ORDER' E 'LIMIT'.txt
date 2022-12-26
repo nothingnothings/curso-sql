@@ -1,0 +1,553 @@
+
+
+
+
+
+
+
+
+----> AGORA QUE JÁ GASTAMOS UM MONTE DE TEMPO EM 'OPERATORS'
+
+E O COMPARE DE 
+
+
+
+VALUES E DATES,
+
+
+
+
+É HORA 
+
+
+DE APRENDER ALGUNS NOVOS CONCEITOS,
+
+RELATIVOS 
+
+AO FETCH DE DATA,
+
+
+
+QUE 
+
+
+VAI NOS PERMITIR 
+
+
+
+
+'''GET THE TOP 10 SALES'''
+
+
+
+
+
+
+
+E 
+
+
+'''GET THE 10 BOTTOM SALES''',
+
+
+
+
+
+
+ASSIM COMO 
+
+
+
+
+
+
+
+'GET A LIST OF DISTINCT CUSTOMERS' 
+
+
+E 
+
+'GET A LIST OF DISTINCT PRODUCTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+O TÓPICO É 
+
+
+'SORTING/ORDERING' DE RESULTS...
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS:
+
+
+
+
+
+
+1) GET THE TOP 10 SALES...
+
+
+
+
+
+
+
+
+
+2) GET THE BOTTOM 10 SALES...
+
+
+
+
+
+
+
+
+
+
+
+-> PODEMOS 'SORT' E 'ORDER' NOSSOS RESULTS...
+
+
+
+
+
+
+
+---> BASTA ESCREVER ASSIm:
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+ORDER BY <column name>;
+
+
+
+
+
+
+
+^^^^^^^ ESSE STATEMENT AÍ VAI 
+
+
+'SORT THE SELECTED DATA IN ASCENDING ORDER'''...
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS ADICIONAR A CLÁUSULA DE 'WHERE' para filtrar nossos results...
+
+
+
+
+
+
+
+--> POR DEFAULT,
+
+O SORT OCORRE POR 'ASCENDING ORDER'...
+
+
+
+
+
+
+
+
+
+-> MAS SE VOCê ESCREVER A KEYWORD DE 'DESC'
+
+
+DEPOIS 
+
+
+
+
+
+DO '<column name>',
+
+
+
+VOCê 
+
+
+
+
+
+PODE __ TROCAR PARA 'DESCENDING'...
+
+
+
+
+
+
+
+VOCÊ PODERIA ESCREVER 'ASC',
+
+
+MAS ISSO 
+
+É 
+
+REDUNDANTE (já é o default)...
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS 'ORDER' NOSSOS RESULTS,
+
+
+
+INDEPENDENTEMENTE 
+
+DA EXISTÊNCIA DA CLAUSE DE 'WHERE'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS 'LIMIT'
+
+NOSSOS RESULTS,
+
+TUDO 
+
+POR MEIO 
+
+
+DO USO DA KEYWORD DE 'LIMIT'..
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+LIMIT <number x>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, PODEMOS PEGAR UM NÚMERO X de records...
+
+
+
+
+
+
+
+
+
+-->  E É CLARO QUE PODEMOS ADICIONAR ESSA CLAUSE 
+
+
+JUNTO COM 'WHERE' E 'ORDER BY'...
+
+
+
+
+
+
+
+
+
+
+--> ISSO __LIMITA_ A QUANTIDADE DE ROWS QUE SÃO FETCHEADAS,
+
+
+ATÉ UM 
+
+NÚMERO X... ->  E ISSO PASSA POR CIMA DA CONDIÇÃO/FILTRO DE 'WHERE' (caso exista, no mesmo statement)...
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE TEMOS AS SEGUINTES KEYWORDS/MODIFIERS:
+
+
+
+
+
+
+1) SELECT 
+
+
+
+2) FROM 
+
+
+
+3) ORDER BY 
+
+
+4) WHERE 
+
+
+
+5) LIMIT ...
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS __ COMBINAR__ 
+
+
+O 'LIMIT'
+
+
+
+COM COISAS 
+
+
+
+
+
+
+COMO A KEYWORD DE 'OFFSET',
+
+
+
+
+
+
+QUE É USADA PARA __ 'LIMITAR OS RESULTS __APENAS_ DEPOIS _ DE SKIPPAr__ UM CERTO AMOUNT DE _ROWS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+LIMIT 10
+OFFSET 5;
+
+
+
+
+
+
+(
+    OU SEJA,
+
+    VAI __ PULAR__ 5 ROWS,
+
+    PARA AÍ __ PEGAR _ 10 ROWS E ENTÃO PARAR...
+)
+
+
+
+
+
+
+
+---> ISSO PODE NOS AJUDAR, NO CASO,
+
+COM _ PAGINATION _ EM UM WEBSITE.... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> mas veremos isso em ação em um punhado de segundso..
+
+
+
+
+
+
+
+
+--> POR FIM, 
+
+TEMOS 
+
+A KEYWORD DE 'DISTINCT',
+
+
+QUE 
+
+NOS AJUDA 
+
+
+
+A
+ 
+ 'GET RID'
+
+
+
+
+ DE ___ DUPLICATE__ VALUES __ 
+
+
+
+
+
+
+
+
+ QUANDO FETCHEAMOS RESULTS DE TABLES...
+
+
+
+
+
+
+ ex:
+
+
+
+
+
+
+
+
+ SELECT DISTINCT * FROM sales;
+
+
+
+
+
+
+
+
+
+
+------> ISSO NOS AJUDA A 'FIND A LIST COM TODOS OS CUSTOMER NAMES/PRODUCT NAMES__ SEM DUPLICATE NAMES'... (
+    se precisamos 
+
+    de uma info dessas, de uma table...
+)
