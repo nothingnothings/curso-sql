@@ -1,0 +1,1082 @@
+
+
+
+
+Agora com 'limit' e 'distinct' FORA DO CAMINHO,
+
+
+
+
+COMO 
+
+1 BUILDING BLOCK FINAL,
+
+
+É 
+
+
+
+
+IMPORTANTE FICAR CIENTE DO FATO DE  QUE,
+
+QUANDO TRABALHAMOS COM SQL,
+
+
+
+
+
+___ ALGUMAS __ QUERIES PODEM 'CONTER OUTRAS QUERIES',
+
+
+
+
+QUE SERÃO ENTÃO CHAMADAS DE 'SUBQUERIES'..
+
+
+
+
+
+
+
+
+'''SOME QUERIES CAN ALSO CONTAIN OTHER QUERIES: SUBQUERIES''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> PARA ISSO,
+
+
+DEVEMOS 
+
+DAR UMA OLHADA NESSE TÓPICO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CRIAMOS UM ÚLTIMO ARQUIVO,
+
+'SUBQUERIES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS SELECIONAR TODAS AS COLUMNS (records)
+
+DE SALES,
+
+
+MAS APENAS AS SALES EM QUE 'VOLUME É MAIOR DO QUE 1000',
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM sales 
+WHERE volume > 1000;
+
+
+
+
+
+
+
+
+
+
+
+É UMA QUERY BEM SIMPLES...
+
+
+
+
+
+
+
+
+
+
+É UMA QUERY COMO VÁRIAS QUE JÁ EXECUTAMOS, AO LONGO DESSA SECTION..
+
+
+
+
+
+
+
+
+--> SE RODAMOS ISSO,
+
+
+RECEBEMOS AS ROWS 
+
+QUE 
+
+SATISFAZEM ESSA CONDIÇÃO...
+
+
+
+
+
+
+
+--> MAS O PROFESSOR MENCIONOU QUE 
+
+O RESULTADO DE 1 COMANDO DE 
+
+'SELECT'
+
+É 
+
+UM 
+
+'RESULT SET'..
+
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+MAS SE VOCÊ INVESTIGAR MELHOR,
+
+
+1 
+
+'RESULT SET'
+
+
+SE _ PARECE __ COMO UMA TABLE -->  E, DE FATO,
+
+
+
+1 
+
+RESULT SET 
+
+
+'''É COMO UMA TABLE'',
+
+
+
+MAS UMA 
+
+TABLE 
+
+QUE NÃO É 
+
+
+ARMAZENADA PERMANENTEMENTE 
+
+
+
+NA DATABASE, EM ALGUM LUGAR,
+
+MAS UMA 
+
+TABLE   ARMAZENADA NA MEMÓRIA...
+
+
+
+
+
+
+
+
+
+----> E, COMO ELA TEM O SHAPE E A FORMA 
+
+
+DE UMA TABLE,
+
+
+
+POSSUI 
+
+TAMBÉM 
+
+
+
+
+PRATICAMENTE AS FUNCIONALIDADES DE UMA TABLE..
+
+
+
+
+
+
+
+---> E É EXATAMENTE POR ISSO QUE 
+
+
+
+PODEMOS USAR 
+
+
+ESSE 
+
+'RESULT SET'
+
+
+
+COMO _ SE FOSSE UMA TABLE, COM OUTRAS QUERIES..
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OU SEJA,
+
+O QUE PODEMOS FAZER É 
+
+
+__ESCREVER OUTRO QUERY DE SELECT,
+
+
+EM QUE 
+
+
+VOCÊ 
+
+ESTÁ TALVEZ _INTERESSADO __ 
+
+
+NO 
+'customer_name'
+
+
+
+e 
+
+
+'product_name',
+
+
+
+
+MAS 
+
+
+ESSES VALUES 
+
+__EXTRAÍDOS/CONSULTADOS LÁ DE SEU 
+
+RESULT SET.
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O CÓDIGO FICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT customer_name, product_name 
+FROM SELECT * FROM sales 
+WHERE volume > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> para isso,
+
+BASTA WRAPPAR A SEGUNDA PARTE COM PARÊNTESES...
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+SELECT customer_name, product_name 
+FROM (SELECT * FROM sales 
+WHERE volume > 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> além disso,
+
+VOCÊ 
+
+
+__PRECISA__ ASSIGNAR UM ALIAS A ESSA SUBQUERY,
+
+
+COM A KEYWORD DE 'AS'...
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT customer_name,
+    product_name
+FROM (  ---precisamos do WRAP com '()' na nossa subquery, e também do DEFINE DE UM ALIAS para esse result set...
+        SELECT *
+        FROM sales
+        WHERE volume > 1000
+    ) AS some_base_result_set;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -------> SE RODAMOS ISSO,
+
+
+
+
+    VAMOS REALMENTE 
+
+
+    EXTRAIR/RETORNAR O VALUE DAS COLUMNS 
+
+
+
+
+
+
+
+    CONSIDERANDO AQUELE 'RESULT SET' ( e não a table de 'sales' em si)...
+
+
+
+
+
+
+
+
+
+---> O USO DE SUBQUERY NESSE EXEMPLO FABRICADO É MEIO INÚTIL,
+
+
+
+MAS 
+
+
+EM QUERIES MAIS 
+
+COMPLEXAS,
+
+O USO 
+
+
+
+DE QUERIES EM CIMA DE RESULT_SETS
+
+É 
+
+BEM ÚTIL --> O NEST DE 
+
+
+
+QUERIES DENTRO DE OUTRAS QUERIES _ PODE _ SER ÚTIL,
+
+E PODE TE AJUDAR 
+
+
+A CONSEGUIR RESULTADOS MAIS COMPLEXOS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ 
+
+
+
+se tocar que 
+
+
+
+
+''ESTÁ USANDO 1 MESMA QUERY EM OUTRAS QUERIES UM MONTE DE VEZES'',
+
+
+VOCÊ 
+
+
+PODE CRIAR AQUILO QUE É CHAMADO DE 'VIEW'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CRIAR VIEWS,
+
+
+VOCÊ USA O COMANDO DE 
+
+
+
+
+'CREATE VIEW'...
+
+
+
+
+
+
+
+
+
+--> depois disso,
+
+
+VOCÊ 
+
+
+
+
+
+COLOCA _ o NOME _ DA SUA QUERY,
+
+
+
+
+
+
+
+
+como 
+
+
+
+
+
+
+
+
+
+
+CREATE VIEW some_base_result_query
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+VOCÊ ESCREVE A QUERY QUE VOCÊ VAI QUERER 'ARMAZENAR NESSA CONST',
+
+
+
+
+
+QUE 
+
+
+NESSE CASO SERÁ 'SELECT * FROM sales WHERE volume > 1000;'
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO É BASICAEMNTE UMA VARIÁVEL,
+
+
+
+VAI ARMAZENAR ESSA EXPRESSÃO NESSE NOME DE 'some_base_result_query'...
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+-- exemplo da criação de 'views' (é basicamente uma VARIÁVEL QUE SEGURA UMA QUERY, que você pode chamar em vários lugares de seu código/queries)...
+
+
+
+
+
+CREATE VIEW some_base_result_query_view AS SELECT * FROM sales WHERE volume > 1000; -- QUANDO CHAMAMOS 'some_base_result_query_view', estaremos ESCREVENDO ESSE CÓDIGO DEPOIS DO 'AS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sempre que vocÊ usar essa view,
+
+você 
+
+vai reexecutar essa query que vocÊ armazenou anteriormente, com aquele alias (definido com 'AS')...
+
+
+
+
+
+
+
+--> COM ISSO,
+
+
+VOCÊ PODE ARMAZENAR QUERIES E ENTÃO 
+
+
+
+
+
+AS RODAR DEPOIS...
+
+
+
+
+
+
+
+
+
+
+
+
+-> VIEWS SÃO '''COISAS ACTUALLY ARMAZENADAS PELAS DATABASE ENGINES''',
+
+
+
+é uma coisa PERMANENTE,
+
+QUE VOCÊ 
+
+PODE USAR NO FUTURO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A DIFERENÇA 
+
+DE 1 TABLE PARA 1 VIEW É QUE 
+
+
+
+A 
+
+VIEW 
+
+'APENAS ARMAZENA A QUERY',
+
+E 
+
+A
+ 
+ QUERY 
+
+ É 
+
+
+ _REEXECUTADA_ SEMPRE QUE 
+
+ VOCÊ 
+
+
+
+ REEXECUTA A VIEW  ----> ISSO SIGNIFICA QUE 
+ NAÕ SÃO OS RESULTS QUE 
+
+
+ SÃO ARMAZENADOS,
+
+ E SIM 
+
+
+ __ A VIEW _ QUE É REEXECUTADA..
+
+
+
+
+
+
+
+
+
+
+
+ -------> E ESSA FEATURE É SUPORTADA NO MYSQL E NO POSTGRESQL....
+
+
+
+
+
+
+
+
+
+
+ COMO A VIEW FOI CRIADA,
+
+
+ PODEMOS 
+
+
+
+ CHAMAR ESSA VIEW EM VEZ DA QUERY DE 
+
+
+ SELECT * FROM sales 
+WHERE volume > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... É ASSIM QUE PODEMOS USAR VIEWS....
+
+
+
+
+
+
+
+
+
+
+
+--> E , SE VOCÊ 
+
+NÃO QUER ARMAZENAR 
+
+
+
+ESSA QUERY COMO UMA VIEW,
+
+VOCÊ 
+
+PODE SEGUIR A UTILIZNADO COMO UMA 'SUBQUERY',
+
+SEM PROBLEMAS...
+
+
+
+
+
+
+
+
+
+--> AS VIEWS TE AJUDAM PQ 
+
+
+
+ECONOMIZAM A ESCRITA DE CÓDIGO (você não tem de digitar tudo de novo e de novo)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR FIM,
+
+
+
+SUBQUERIES 
+
+PODEM 
+
+SER USADOS 
+
+
+PARA 
+
+OUTRAS COISAS ALÉM 
+DE 
+
+'SELECt *',
+
+
+
+
+
+como 
+
+
+
+
+TAMBÉM COM 'INSERT INTO'...
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO top_sales (column1, column2)
+
+
+
+
+
+
+
+
+
+
+
+--> MAS EM VEZ DE USARMOS 'VALUES' 
+
+
+PARA INSERIR 
+
+
+
+VALUES,
+
+
+
+
+
+
+
+
+
+PODEMOS 
+
+
+
+
+USAR O 'RESULT SET' DE OUTRA QUERY,
+
+
+
+
+
+por meio da simples escrita de '
+
+
+
+
+SELECT'
+
+,
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+INSERT INTO top_sales (column1, column2)
+SELECT * FROM some_sales;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO É MEIO INCOMUM DE ACONTECER,
+
+
+MAS É POSSÍVEL (usar uma SUBQUERY QUANDO ESTAMOS INSERINDO DATA)...
