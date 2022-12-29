@@ -1,0 +1,1498 @@
+
+
+
+
+
+
+
+
+
+-----> OK... A ESSE PONTO,
+AINDA NÃO TEMOS NENHUMA DATA QUE SERÁ 'SPLITTADA AO LONGO DE MÚLTIPLAS TABLES'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO, ESSE É UM ASPECTO CHAVE 
+
+
+
+DA 'DATA NORMALIZATION' (
+
+    O SPLIT 
+
+
+
+    DE DATA EM MÚLTIPLAS TABLES...
+)
+
+
+
+
+
+
+
+
+--> VOCÊ QUER DIVIDIR SUA DATA EM MÚLTIPLAS TABLES,
+
+PARA QUE VOCÊ TENHA 
+
+''1 TABLE POR DATA ENTITY''',
+
+
+
+no final das contas...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR TEM 1 EXEMPLO, DE 'users':
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Users 
+
+
+
+id          f_name        l_name      Address
+
+
+
+1           Max            Schwarz       SUPER ENDEREÇO
+
+
+
+
+
+
+
+
+
+
+
+
+
+SE VOCÊ OLHA O FIELD DE 'ADDRESS',
+
+
+
+VOCÊ JÁ PODE PERCEBER QUE 
+
+
+
+''TALVEZ SEJA BOM SPLITTAR ESSE FIELD EM MÚLTIPLAS COLUMNS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... MAS, NESSE EXEMPLO AQUI,
+
+
+
+NÓS TIPICAMENTE SPLITTARÍAMOS 
+
+ESSA DATA 
+
+EM MÚLTIPLAS TABLES...
+
+
+
+
+
+
+
+(1 TABLE PARA OS USERS, E OUTRA PARA OS ADDRESSES, COM O 'ADDRESS ID' conectando o user Àquele endereço)...
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+Users 
+
+
+
+id          f_name        l_name      a_id
+
+
+
+1           Max            Schwarz      8
+
+
+
+
+
+
+
+
+
+
+ADDRESSES 
+
+
+
+
+id          street      num    city
+
+
+
+8           UMA RUA    815     PORTO ALEGRE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+
+
+
+O 'FOREIGN KEY FIELD' 
+
+
+de 
+
+'a_id'
+
+
+
+
+ESTABELECE A CONEXÃO ENTRE ESSAS 2 TABLES...
+
+
+
+
+
+
+
+(
+
+
+    E NESSA TABLE DE 'addresses'
+
+    TAMBÉM 
+
+    DIVIDE A DATA DE 'ADDRESS'
+
+
+    EM MÚLTIPLAS COLUMNS... 
+)
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS AQUI VOCÊ PODERIA SE PERGUNTAR:
+
+
+
+
+
+
+
+
+''' O QUE FAZ 1 ADDRESS SER CONSIDERADO UMA ENTIDADE DE DATA SEPARADA?'''' 
+
+
+(SEPARATE DATA ENTITY)..
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE ISSO SEMPRE VAI DEPENDER DO QUE VOCÊ ESTÁ CONSTRUINDO,
+
+
+
+DE SUAS PREFERÊNCIAS E DE SEU JULGAMENTO...
+
+
+
+
+
+
+
+
+
+MAS VOCÊ DEVE RECONHECER QUE:
+
+
+
+
+
+1) UMA DATA ENTITY,
+
+QUANDO VOCÊ ESTÁ MODELANDO E ARMAZENANDO DATA,
+
+
+NÃO É ALGO COMO UMA 'BIG THING' (
+
+    como 1 product em 1 shop,
+
+    ou 1 CUSTOMER em 1 shop
+),
+
+
+
+
+
+
+
+
+
+E SIM 
+
+É TAMBÉM
+
+
+AS 'SMALLER THINGS',
+
+
+
+
+QUE VÃO COMPOR AS 'BIGGER ENTITIES' ------> e, em geral,
+ 
+
+
+
+
+ SE VOCÊ TEM 1 PUNHADO DE FIELDS (data fields),
+
+
+
+
+ COMO 
+
+
+ 1 STREET, 
+
+
+
+ 1 'HOUSE NUMBER' 
+
+
+ E 
+
+ 1 CITY,
+
+
+
+ E SE 
+
+
+ ESSAS 
+
+
+
+
+
+
+
+
+
+ COISAS, EM CONJUNTO,
+
+
+ DESCREVEM ALGO COMO 1 'ADDRESS',
+
+
+
+ ESSE SOMETHING PODERÁ SER TRATADO __ SEPARADAMENTE,
+
+ COMO UMA DATA ENTITY À PARTE...
+
+
+
+
+
+
+
+
+
+
+
+ --> O 'house number',
+
+ sozinho, por exemplo,
+
+
+ NÃO É ALGO QUE SERIA TIPICAMENTE TRATADO COMO UMA 'DATA ENTITY'... (
+
+    isso pq 
+
+    UM NUMBER É APENAS 1 NUMBEr...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS 1 NUMBER, QUANDO COMBINADO COM 1 'city'
+
+ e '1 street',
+
+
+ ELE 
+
+ SE TORNA ALGO,
+
+ SE TORNA 1 'ADDRESS' (e pode ser armazenado como uma entidade separada)..
+
+
+
+
+
+
+
+
+
+ -----> MAS VOCÊ PODERIA ARGUMENTAR QUE 
+
+
+ 'O ADDRESS É PARTE DE 1 USER',
+
+
+
+
+
+ e, 'assim como 1 house number é parte de 1 address',
+
+
+
+
+
+ ' o address faz parte da user',
+
+
+
+
+''' E POR ISSO O USER É A ÚNICA DATA ENTITY QUE DEVERÍAMOS TER''...
+
+
+
+
+
+
+
+
+MAS O OBJETIVO COM 'RELATIONAL DATABASE MANAGEMENT SYSTEMS' 
+
+
+
+
+
+
+É JUSTAMENTE SPLITTAR NOSSA DATA E DATA ENTITIES EM 
+
+'SMALLER, GRANULAR PIECES'.
+
+
+
+
+
+
+
+
+-> É ISSO QUE VAI NOS PERMITIR 
+SPLITTAR 
+
+NOSSA DATA EM MÚLTIPLAS TABLES, 
+
+
+
+
+O QUE 
+
+
+VAI 
+
+
+REDUZIR DATA REDUNDANCY,
+
+
+
+AUMENTAR A PERFORMANCE 
+
+
+
+
+
+E ATÉ MESMO 'INCREASE DATA MAINTAINABILITY'..
+
+
+
+
+
+
+
+
+
+--> E É EXATAMENTE POR ISSO QUE QUEREMOS UM 'GRANULAR SPLIT',
+
+
+
+MAS 
+
+
+1 SPLIT NÃO TÃO GRANULAR (não queremos ter de tratar CADA COLUMN COMO 1 TABLE SEPARADA)...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS QUEREMOS TER 1 GRANULAR SPLIT,
+
+
+
+COM MÚLTIPLAS DATA ENTITIES,
+
+
+
+E QUEREMOS 
+
+
+DEIXAR 
+
+
+
+NOSSOS OLHOS ABERTOS PARA DATA ENTITIES COMO O 'ADDRESS', aqui...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E  O SPLIT DE NOSSA DATA 
+
+
+
+
+EM MÚLTIPLAS TABLES PODE AJUDAR A EVITAR 'DATA REDUNDANCY'
+
+
+E OPERATIONS REDUNDANTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOLTAMOS A 1 EXEMPLO, EXEMPLO DE 'USERS'...
+
+
+
+
+
+
+
+
+
+
+--> VOLTAMOS AO APPROACH EM QUE 'O ADDRESS FAZ PARTE DA TABLE'..
+
+
+
+
+
+
+
+
+
+
+
+
+É 1 TABLE BEM GRANDE, TIPO ASSIM:
+
+
+
+
+
+
+
+
+id         first_name   last_name   address_street    address_num  address_city 
+1           Max         Schwarz      TestStreet         5            Munich 
+2           Manu         Lorenz      MyStreet           12           Berlin 
+3           Julie        Barnes         TestStreet       5           Munich 
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+A COISA POSITIVA É QUE 
+
+'O ADDRESS ESTÁ SPLITTADO EM MÚLTIPLAS COLUMNS',
+
+
+
+
+
+
+MAS O PONTO NEGATIVO É QUE ESSE ADDRESS ESTÁ FAZENDO PARTE DE 'USER'...
+
+
+
+
+
+
+
+
+
+
+TUDO ESTÁ FAZENDO PARTE 'DA MESMA TABLE'...
+
+
+
+
+
+
+
+MAS O QUE PODEMOS OBSERVAR AQUI,
+LOGO DE CARA,
+
+É QUE TEMOS 
+
+
+
+''''1 DATA REDUNDANCY'... -->  
+
+
+
+
+
+
+
+
+OS USUÁRIOS 1 e 3 
+
+
+
+POSSUEM 
+
+
+
+_ O EXATO MESMO ADDRESS. ... --> ISSO PQ ELES VIVEM 'NA MESMA CASA/PRÉDIO'...
+
+
+
+
+
+
+
+
+
+
+
+----> OK.... ISSO É RUIM...
+
+
+
+
+
+
+
+
+--> A DESVANTAGEM DISSO É QUE _ SEMPRE _ QUE __ QUISERMOS 
+
+
+
+
+___ALTERAR_ ESSE ADDRESS (
+
+    pq o NOME DA RUA MUDOU, por exemplo... é algo incomum, mas pode acontecer
+),
+
+
+(
+
+    ESSE MESMO TIPO DE COISA PODE ACONTECER COM _DATA QUE MUDA COM MAIOR FREQUÊNCIA DO QUE RUAS, BTW...
+)
+
+
+
+
+SE QUISERMOS FAZER ISSO, SEREMOS FORÇADOS 
+
+
+
+
+A UPDATAR  _MÚLTIPLOS ROWS,
+
+TUDO 
+
+PQ __ NÃO 
+
+SPLITTAMOS ISSO 
+
+
+
+EM MÚLTIPLAS TABLES (
+
+
+em vez disso,
+
+
+TEMOS 
+
+DATA REPETIDA, EM MÚLTIPLAS ROWS,
+
+TUDO 
+
+PQ 
+
+
+ARMAZENAMOS TODA ESSA DATA 
+
+
+
+EM 1 MESMA TABLE...
+
+)
+
+
+
+
+
+
+
+
+
+
+--> se tivéssemos só o 'address_id'
+
+
+ali,
+
+
+
+
+
+BASTARIA 
+
+ALTERAR 1 ÚNICA ROW,
+A DESSE ADDRESS,
+
+
+LÁ NA TABLE DE 'ADDRESSES'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE DEVEMOS 
+
+
+''EVITAR DUPLICATE DATA,
+
+AO LONGO DE MÚLTIPLOS ROWS,
+
+
+
+
+
+EM 1 MESMA TABLE''...
+
+
+
+
+
+
+
+
+--> E, SE VOCÊ TEM __ DATA __ DUPLICATA, COMO ESSA,
+
+
+ESSE É UM 
+
+
+
+
+CLARO INDÍCIO DE QUE 
+
+
+
+''VOCÊ AINDA NÃO ATINGIU DATA NORMALIZATION''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OUTRA COISA:
+
+
+
+
+
+
+SE VOCÊ ESTÁ 
+
+
+ESCREVNEDO MÚLTIPLAS COLUMNS, EM 1 TABLE,
+
+
+assim:
+
+
+
+
+
+
+
+address_street
+address_city
+address_num
+address_apt 
+
+,
+
+
+
+
+
+
+
+
+
+ESSE É UM ÓTIMO INDICADOR DE QUE 
+
+
+
+ESSA COISA AÍ __ DEVERIA _ SER UMA 'STANDALONE DATA ENTITY'... ( e não FIELDS dentro de 1 table que é outra coisa)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE VOCÊ VAI QUERER 
+
+SPLITTAR 
+
+SUA 
+
+DATA 
+
+
+EM MÚLTIPLAS TABLES,
+
+
+
+EM QUE 
+
+CADA TABLE 
+
+SEGURARÁ 
+
+SUA PRÓPRIA 
+
+'DATA ENTITY',
+
+
+
+QUE SERÃO 
+
+CONECTADAS 
+
+
+POR MEIO DE  1 FOREIGN KEY (nesse caso, 'address_id'),
+
+
+
+QUE 
+
+
+
+VAI APONTAR À 'PRIMARY KEy'
+
+
+dos 'related records' a sua table (no caso, 'addresses', a table de 'addresses')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> CERTO....
+
+
+
+
+
+
+
+
+É POR ISSO QUE QUEREMOS SPLITTAR NOSSA DATA EM MÚLTIPLAS TABLES,
+
+
+E É POR ISSO QUE QUEREMOS NORMALIZAR NOSSA DATA...
+
+
+
+
+
+
+
+
+NORMALIZE NOSSA DATA ------> OU SEJA,
+
+
+QUEREMOS EXTRAIR AS DATA ENTITIES
+
+E ENTÃO
+
+
+
+
+
+
+
+
+AS ARMAZENAR EM TABLES SEPARADAS...
+
+
+
+
+
+
+
+
+
+2) ALÉM DISSO,
+
+QUEREMOS 
+
+EVITAR 
+
+'COMPOUND VALUES' 
+
+E 
+
+'GROUPED VALUES'
+
+
+em 
+
+columns únicas,
+
+
+como vimos na última aula...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> QUEREMOS NORMALIZAR NOSSA DATA PQ,
+
+SE NÃO FIZERMOS ISSO,
+
+
+PODEREMOS NOS DEPARAR COM ALGUNS PROBLEMAS,
+
+
+PROBLEMAS 
+RELATIVOS 
+
+
+
+
+ÀS 
+
+
+
+OPERAÇÕES DE 
+'CREATE' 'UPDATE' 
+
+
+e
+
+'DELETE'..
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS ENCONTRAR PROBLEMAS 
+
+
+DE:
+
+
+
+
+
+
+1) CREATION ANOMALY --> QUANDO CRÍAMOS DATA,
+
+PODERÍAMOS ACABAR COM CENÁRIOS EM QUE 
+
+
+''INSERIMOS INCOMPLETE DATA'' (
+
+    logo veremos 1 exemplo...
+)
+
+
+
+
+
+
+
+
+2)  COM 'UPDATE ANOMALY',
+
+
+FICAMOS COM SITUAÇÕES
+ 
+ EM QUE 
+
+
+
+
+ 'SOMOS FORÇADOS A UPDATAR MÚLTIPLOS ROWS EM 1 TABLE',
+
+
+
+ TUDO 
+
+
+
+ PQ 1 SINGLE PIECE OF DATA MUDOU --------> ESSE É O EXEMPLO QUE RECÉM VIMOS,
+
+
+ com o 'address' -->  SE O 'TestStreet'
+
+
+
+
+ ,
+
+ ESSE VALUE DESSE NOME,
+
+ FOR ALTERADO,
+
+
+ SEREMOS 
+
+ FORÇADOS A MUDAR OS RECORDS 1 E 3 -->  E ISSO É ALGO QUE TIPICAMENTE QUEREMOS EVITAR,
+
+
+
+ PQ 
+
+
+ É 
+
+ TRABALHO EXTRA,
+
+
+ CUSTA PERFORMANCE EXTRA,
+
+
+
+
+ E É 
+
+
+ 'ERROR-PRONE'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 3) DATA DELETION ANOMALY --> SE TIVERMOS SUBOPTIMAL NORMALIZATION,
+
+
+ PODEMOS ACABAR 'DELETANDO DATA EM EXCESSO'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> O PROFESSOR QUER MOSTRAR EXEMPLOS DE COISAS RUINS QUE PODEM ACONTECER,
+
+
+
+ no 'creation anomaly'
+
+
+ e 
+
+ no 
+ 'deletion anomaly',
+
+
+
+
+
+ nos casos em que a data normalization não está boa...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 1) CREATION ANOMALY...
+
+
+
+
+
+
+
+
+
+
+
+ --> DIGAMOS QUE TEMOS 1 TABLE EM QUE 
+
+
+ ARMAZENAMOS 
+
+
+ OS 'courses' 
+
+
+ e 
+
+
+ os 
+
+ TEACHERs QUE 
+
+ estão 
+
+ OS ENSINANDO..
+
+
+
+
+
+(é uma table que contém info SOBRE TODOS NOSSOS CURSOS E TODOS NOSSOS TEACHERS)....
+
+
+ ex
+
+
+
+
+
+
+
+
+
+ COURSES:
+
+
+
+
+
+
+
+
+
+ id         course          teacher
+
+ 1          SQL 1           Max
+
+
+ 2          Web Dev         Manuel
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -------> PODERÍAMOS NOS DEPARAR COM UM PROBLEMA:
+
+
+
+
+ '''SE TEMOS 1 PROFESSOR NOVO NA ESCOLA,
+ QUE AINDA NÃO TEM UM COURSE DEFINIDO,
+
+ SEREMOS FORÇADOS A INSERIR 1 RECORD QUE ESTARÁ __ INCOMPLETO,
+ que 
+
+ terá 
+
+
+ 1 CAMPO VAZIO, TIPO ASSIm':
+
+
+
+
+
+
+ 
+ id         course          teacher
+
+ 1          SQL 1           Max
+
+
+ 2          Web Dev         Manuel
+
+
+
+3                           Julie 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> INCOMPLETE DATA DEVERÁ SER INSERIDA,
+
+TUDO PQ 
+
+
+'NÃO NORMALIZAMOS NOSSA DATA ADEQUADAMENTE',
+
+
+
+
+
+TUDO PQ _ NÃO SPLITTAMOS A DATA EM TABLES DE 'COURSES' E 'TEACHERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2) PARA O UPDATING,
+
+
+
+TEMOS O PROBLEMA EXIBIDO NA ÚLTIMA LIÇÃO (
+
+
+    SE TEMOS 
+
+
+    DATA 
+
+    QUE É ENTÃO ALTERADA,
+
+    COMO O NOME DE 1 RUA,
+
+    TEREMOS DE ALTERAR 
+
+
+    TODAS AS ROWS QUE POSSUEM O NOME 
+
+    DESSA RUA... --> é ruim de performance, e também é error-prone...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3) DELETE --> BASICAMENTE A MESMA COISA DO 'UPDATE' --> 
+
+
+
+
+
+EXEMPLO:
+
+
+
+
+ID        student        Course 
+
+1        Max              SQL 
+
+2        Manuel           SQL 
+
+
+3        Max               MongoDB
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NESSE EXEMPLO, SE TENTAMOS 'DELETAR TODOS OS STUDENTS 'MAX'' ,
+
+
+
+podemos ACABAR DELETANDO TAMBÉM A DATA RELATIVA AO CURSO DE 'MongoDB',
+
+
+se o MAX era o ÚNICO STUDENT QUE ESTAVA CURSANDO ESSE CURSO.... (remove inteiramente a menção a esse course, da database)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO MOSTRA O QUÃO IMPORTANTE É O NORMALIZE 
+
+
+DE DATA NO MUNDO SQL... --> QUEREMOS 
+
+
+EVITAR TRABALHO DESNECESSÁRIO E POSSÍVEIS ERRORS...
