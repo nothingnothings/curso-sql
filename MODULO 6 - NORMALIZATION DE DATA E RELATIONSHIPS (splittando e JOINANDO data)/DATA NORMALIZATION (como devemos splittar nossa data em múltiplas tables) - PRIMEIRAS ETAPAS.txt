@@ -1,0 +1,577 @@
+
+
+
+
+
+
+
+
+
+
+PRIMEIRA PERGUNTA:
+
+
+
+
+
+
+
+
+
+
+''''PQ DEVERÍAMOS 
+
+SPLITTAR NOSSA DATA EM MÚLTIPLAS 
+
+TABLES,
+EM VEZ 
+
+
+DE 
+
+MANTER TUDO EM 1 ÚNICA TABLE?'''    
+
+
+
+
+
+
+
+
+
+
+
+
+-> BEM, É PQ, QUANDO ESTAMOS USANDO RDBMS (relational database management systems),
+
+
+
+A DATA 
+
+
+DEVE 
+
+
+SER NORMALMENTE 'NORMALIZED'...
+
+
+
+
+
+
+
+
+--> OK, MAS O QUE SIGNIFICA 
+
+'DATA NORMALIZATION'?
+
+
+
+
+
+
+
+
+
+
+---> SIGNIFICA QUE 
+
+
+QUEREMOS 'REDUZIR DATA REDUNDANCY'
+
+
+
+E
+ __ AUMENTAR 'DATA MAINTAINABILITY',
+
+
+
+ tudo 
+
+
+
+ __ POR MEIO DO SPLIT DE NOSSA DATA EM MÚLTIPLAS TABLES,
+
+
+
+ E AÍ 
+
+ O 
+
+ ORGANIZE
+
+
+ DE 
+
+ NOSSAS TABLES,
+
+ DE ACORDO 
+
+ COM 
+
+
+ AS 
+
+ DATA ENTITIES 
+
+ COM QUE ESTAMOS TRABALHANDO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O OBJETIVO -->  '''SPLIT COMPOUND AND GROUPED DATA __ INTO _ MULTIPLE, STANDALONE VALUES''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ------> FAZER ESSE SPLIT DE NOSSA DATA DEIXA ELA MAIS FÁCIL DE 'MANAGE'
+
+ E 
+
+ DE 
+
+ 'MAINTAIN'..
+
+
+
+
+
+
+
+
+
+
+ --> PARA DEIXAR ISSO MENOS TEÓRICO,
+
+
+ DIGAMOS QUE 
+
+ TEMOS 
+
+
+
+ 1 TABLE DE 'USERS',
+
+
+
+
+
+com 1 column de 'Full name'...
+
+
+
+
+
+
+
+
+
+
+
+-> TEMOS TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+Full Name 
+
+Maximillian Schwarzmuller
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... O nome completo está armazenado ali..
+
+
+
+
+
+
+
+
+
+---> O PROBLEMA COM ISSO É QUE 
+
+
+'
+''NÃO TEMOS NENHUMA REGRA SOBRE 
+
+COMO ESSA DATA 
+
+DEVE SER ARMAZENADA''..
+
+
+
+
+
+
+
+
+
+
+-----> NO CASO DO PROFESSOR, TEMOS O 'FIRST NAME'
+
+antes, e depois o 'Last Name'...
+
+
+
+
+
+
+
+----> CERTO... MAS O PROBLEMA, AQUI, É QUE 
+
+UM NOME PODERIA 
+
+TAMBÉM SER ARMAZENADO ASSIM:
+
+
+
+
+
+
+
+Schwarzmuller, Maximillian...
+
+
+
+
+
+
+
+
+
+
+
+------> OU SEJA,
+
+PODERÍAMOS ARMAZENAR NOSSO FULLNAME COMO 'UMA LISTA DE NAMES',
+
+separados por vírgula -----------> COM ISSO,
+
+
+
+AINDA TERÍAMOS UM 'FULL NAME',
+
+
+
+MAS 
+
+ELE __ FICARIA ARMAZENADO DE UMA FORMA DIFERENTE --------> ISSO QUER DIZER QUE 
+
+
+
+
+NÓS 
+
+
+
+SIMPLESMNETE 
+
+
+
+'DONT HAVE A CLEAR RULE'
+
+SOBRE 
+
+
+COMO 1 NOME DEVE SER ARMAZENADO NESSA COLUMN --------> 
+
+
+
+
+
+
+
+
+E O PROBLEMA/PERIGO É QUE 
+
+
+
+__ÀS VEZES _ OS NOMES 
+
+
+
+ACABARÃO
+
+ARMAZENADOS COMO 'MAX SCHWARZ',
+
+
+
+E OUTRAS 
+
+
+COMO 
+
+
+
+'SCHWARZ, MAX'..
+ 
+
+
+
+
+
+OU ATÉ MESMO 
+
+'MAX, SCHWARZ'...
+
+
+
+
+
+
+
+
+
+E SE TEMOS 
+
+MÚLTIPLOS APPS 
+
+TRABALHANDO COM A MESMA DATABASE,
+
+
+OU 
+
+
+
+MÚLTIPLAS PESSOAS TRABALHANDO COM A MESMA DATABASE,
+
+
+
+
+HÁ O PERIGO DE __DATA_ _INCONSISTENTE ACABAR NESSA COLUMN,
+
+
+
+em records,
+
+
+
+
+
+
+o que fará 
+
+
+com que 
+
+
+
+'O MESMO TIPO DE DATA ACABE ARMAZENADO 
+
+
+
+
+EM __ SLIGHTLY DIFFERENT VARIATIONS '------> 
+
+
+
+E, SE ISSO ACONTECER,
+
+
+
+AS QUERIES FICARÃO AUTOMATICMAENTE MAIS DIFÍCEIS,
+
+
+
+PQ NÃO VAMOS SABER
+
+
+EXATAMENTE 
+
+
+'''COMO A DATA EM 1 GIVEN COLUMN É ORGANIZADA E ESTRUTURADA' --> e isso leva a problemas,
+
+mais adiante..
+
+
+
+
+
+
+
+
+
+
+
+
+E ISSO LEVA A UM PROBLEMA,
+
+DE 
+
+
+'DATA MAINTAINABILITY E USABILITY'...
+
+
+
+
+
+
+
+
+
+
+também temos outros PROBLEMAS,
+
+COMO 
+
+'DATA REDUNDANCY',
+
+
+
+
+QUE NÃO ENXERGAMOS NESSE EXEMPLO,
+
+
+MAS QUE 
+
+VEM JUNTO DESSE PROBLEMA DE 'DATA MAINTAINABILITY E USABILITY'.. -->  É POR ISSO QUE 
+
+
+
+
+SEMPRE VAMOS QUERER 
+
+
+
+'NORMALIZE' NOSSA DATA,
+
+
+SPLITTÁ-LA EM 
+
+ENTIDADES 
+
+
+MENORES,
+
+
+
+FAZER COISAS COMO 
+
+
+
+
+
+
+
+
+
+
+
+'DIVIDIR O NOME EM 2 COLUMNS',
+
+
+
+1 PARA O FIRST NAME,
+
+OUTRA PARA O LAST NAME...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ESSA É A PRIMEIRA ETAPA NO SENTIDO DE 'DATA NORMALIZATION',
+
+
+e de como devemos estruturar nossas tables...
+
+
+
+
+
+
+
+
+
+ENTRETANOT,
+
+
+AQUI AINDA ESTAMOS FALANDO DE 'ONE AND THE SAME TABLE',
+
+
+
+pq essas 2 columns ainda estão na mesma table...
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE AINDA NÃO TEMOS DATA QUE É SPLITTADA AO LONGO DE MÚLTIPLAS TABLES..
+
+
+
+
+
+
+
+
+
+
+OK ,MAS O DATA NORMALIZATION NÃO ACABA AQUI,
+
+
+
+NÃO ACABA 
+
+NO 'SPLIT DE COLUMNS EM MÚLTIPLAS COLUMNS'...
