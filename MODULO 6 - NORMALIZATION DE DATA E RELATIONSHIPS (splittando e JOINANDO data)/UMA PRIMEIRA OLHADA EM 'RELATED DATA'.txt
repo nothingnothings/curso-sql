@@ -1,0 +1,822 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA, ANTES DE COMEÇARMOS 
+
+
+
+A ESTUDAR 'DATA NORMALIZATION'
+
+
+
+E COMO COMBINAR DATA,
+
+
+
+E 
+
+
+
+
+ANTES 
+
+
+
+DE 
+DARMOS UMA OLHADA 
+
+EM DIFERENTES TIPOS DE DATA RELATIONSHIPS,
+
+
+
+
+
+
+
+
+
+
+
+
+DEVEMOS VER UM EXEMPLO 
+
+
+QUE 
+
+MOSTRARÁ 
+
+
+
+O QUE ESTUDAREMOS NESSA SECTION,
+
+e O QUE 
+
+'JOIN DE DATA'
+
+
+
+SIGNIFICA,
+
+NO CONTEXTO DOS RDBMS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+-----> AÍ TEMOS ISTO AQUI:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIRECTORS:
+
+
+
+
+id     first_name   last_name 
+1      George       Lucas 
+
+2     John          McTiernan 
+
+3     Jan         de Bont 
+
+
+
+
+
+
+
+
+
+
+
+MOVIES 
+
+
+id  title         director_id 
+
+1   Star WARS 1     1 
+
+2   Speed          3 
+3   Star WARS 2    1 
+
+
+
+
+
+
+
+
+
+
+
+-------> O QUE É INTERESSANTE SOBRE ISSO É QUE 
+
+A 
+
+'DATA'
+
+
+NESSAS TABLES É 'KIND OF' 
+
+
+RELATED...
+
+
+
+
+
+
+
+
+
+
+--> NA TABLE DE 'movies',
+
+
+temos 
+
+
+
+o id de 'director_id',
+
+
+
+
+
+
+
+E ESSA COLUNA LISTA OS IDS 
+
+
+
+
+DOS DIRECTORS QUE 
+
+SÃO RESPONSÁVEIS 
+
+POR CADA FILME...
+
+
+
+
+
+
+
+
+
+
+
+------> E ISSO, NO CASO,
+
+
+É UMA RELATION MT COMUM EM 
+
+'RDBMS'...
+
+
+
+
+
+
+
+
+
+
+
+-_> DE FATO,
+ PODERÍAMOS FETCHEAR TODA A DATA DESEJADA COM UMA QUERY COMO ESTA:
+
+
+
+
+
+
+
+
+
+
+
+ SELECT d.first_name, d.last_name, m.title
+ FROM directors AS d
+ INNER JOIN movies AS m ON m.director_id = d.id
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> PODERÍAMOS FETCHEAR TODA A DATA COM UMA QUERY COMO ESSA,
+
+ E AÍ 
+
+ JOINAR A DATA DAS 2 TABLES,
+
+
+
+ TUDO 
+
+
+ COM 1 'INNER JOIN STATEMENT',
+
+
+
+
+
+
+
+
+ algo que 
+
+ APRENDEREMOS NESSA COURSE SECTION..
+
+
+
+
+
+
+
+
+
+ --> ESSE STATEMENT
+
+
+
+
+
+ VAI __ JOINAR__ A DATA_ __ DAS 2 TABLES,
+
+ JOINAR OS 'RELATED RECORDS' (rows),
+
+
+
+
+
+ E AÍ 
+
+ VAI PRODUZIR ALGO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ d.first_name      d.last_name      m.title
+
+ George             Lucas            Star WARS 1 
+ George             Lucas            Star WARS 2 
+ Jan                de Bont          Speed  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+
+COMBINAMOS DATA DA PRIMEIRA E SEGUNDA TABLES,
+
+
+PARA QUE 
+
+
+FIQUEMOS COM UMA 'COMBINED INFORMATION',
+
+QUE PODERÁ 
+
+SER ÚTIL NO APP/WEBSITE QUE 
+
+
+ESTAMOS CONSTRUINDO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR EXEMPLO, SE NO NOSSO SITE QUEREMOS OUTPUTTAR 
+
+
+'''UMA LISTA DE DIRECTORS E FILMES CRIADOS POR ELES'',
+
+
+
+ESSE TIPO DE QUERY 
+
+
+PODERIA  SER ÚTIL PARA 'GET THE DATA THAT IS STORED IN DIFFERENT TABLES'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, DE FATO,
+
+É ASSIM QUE 
+
+
+
+VOCÊ 
+
+ARMAZENA 
+
+
+'RELATED DATA'
+
+
+
+EM _ SQL DATABASES ---> VOCÊ TIPICAMENTE 
+
+SPLITTA 
+
+DATA 
+
+
+EM DIVERSAS TABLES (
+
+
+
+
+    por uma série de razões, que logo estudaremos...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> E AÍ VOCÊ PODE JOINAR TUDO ISSO,
+
+
+por meio 
+
+
+
+
+
+desses comandos...
+
+
+
+
+
+
+
+
+
+--> O QUE USAMOS, NO FINAL DAS CONTAS,
+
+
+
+SÃO ESSES IDS (unique identification criteria),
+
+
+
+
+PARA CONECTAR OS ROWS DESSES 2 TABLES..
+
+
+
+
+
+
+
+
+
+
+'DATA IS ___CONNECTED__ ACROSS TABLES,
+
+VIA KEYS''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O QUE ESTAMOS FAZENDO, AQUI,
+
+
+É O USO 
+
+
+
+DE 1 'PRIMARY KEY'
+
+
+de 1 
+
+table,
+
+
+
+COMO ___ A 'FOREIGN KEY' DE 
+
+
+OUTRA TABLE...
+
+
+
+
+
+(
+    a __FOREIGN KEY__ DE 1 DETERMINADA TABLE _ É SEMPRE _ A PRIMARY KEY __ 
+
+    DE UMA OUTRA TABLE...
+)
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+DIRECTORS:
+
+
+
+
+id     first_name   last_name 
+1      George       Lucas 
+
+2     John          McTiernan 
+
+3     Jan         de Bont 
+
+
+PRIMARY 
+
+KEY
+
+
+
+
+
+
+
+
+
+MOVIES 
+
+
+id  title         director_id 
+
+1   Star WARS 1     1 
+
+2   Speed          3 
+3   Star WARS 2    1 
+
+
+                    FOREIGN KEY (que é a primary key de 'directors', no caso)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ isso quer dizer que 
+
+ pegamos 
+
+ a column id de 'directors'
+
+
+
+ e usamos seus values 
+
+
+
+ COMO ___ 'FOREIGN KEY VALUES'
+
+
+
+ lá na table de 'movies'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ E É ASSIM QUE ESTABELECEMOS CONNECTIONS NO MUNDO SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK...
+
+
+
+
+
+
+
+ MAS AQUI TEMOS UMA REGRA DE OURO:
+
+
+
+
+
+
+
+
+
+
+ 1) TODA TABLE __ DEVE_ _ TER APENAS _1  PRIMARY KEY,
+
+  NO MÁXIMO...
+
+
+
+
+
+
+
+
+2) MAS TODA TABLE_ _ PODE TER MAIS DE 1 'foreign key'...
+
+
+
+
+
+
+
+
+'The primary key of table A is used as a foreign key in table B'...
+
+
+
+
+
+
+
+
+
+
+'EVERY TABLE HAS __ AT MOST_ ONE __ PRIMARY KEY,
+
+BUT EVERY TABLE MAY USE MULTIPLE FOREIGN KEYS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ NÃO PRECISA TER 1 FOREIGN KEY AT ALL,
+
+
+
+
+
+MAS _ VOCÊ PODE TER 1 FOREIGN KEY 
+PARA __ FAZER ISSO,
+
+PARA 
+
+FAZER 'RELATE' DE 1 GIVEN TABLE __ 
+
+
+COM A DATA DE OUTRA TABLE...
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS CONECTAR DATA, ATRAVÉS DE TABLES,
+
+NO MUNDO SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ISSO NOS LEVA A OUTRA PERGUNTA MT IMPORTANTE:
+
+
+
+
+
+
+
+
+'''PQ ESTAMOS SPLITTANDO DATA AO LONGO DE MÚLTIPLAS TABLES?'''
+
+
+
+
+
+
+
+
+
+-> N SERIA MT MAIS FÁCIL MANTER TODA ESSA DATA EM 1 ÚNICA TABLE,
+PARA 
+
+TER 
+
+
+DE 
+
+EVITAR TER DE FAZER O JOIN DESSA DATA? 
+
+
+
+
+
+
+
+
+
+
+
+
+--> OUTRA PERGUNTA, RELACIONADO A ESSE PRIMEIRO PONTO,
+
+
+
+
+''' SE ESTAMOS SPLITTANDO DATA,
+
+COMO DEVEMOS SPLITTAR E ORGANIZAR NOSSA DATA,
+
+AO LONGO DE MÚLTIPLAS TABLES?'''
+
+
+
+
+
+
+
+
+
+
+VEREMOS ISSO NA PRÓXIMA AULA...
