@@ -1,0 +1,199 @@
+
+
+
+
+
+
+
+
+A ESSE PONTO NO CURSO,
+
+JÁ APRENDEMOS BASTANTE SOBRE: 
+
+
+
+
+
+
+1) CREATE TABLES 
+
+
+2) INSERT, DELETE, UPDATE, FETCH DATA..
+
+
+
+
+
+
+
+
+
+3) TAMBÉM APRNEDEMOS SOBRE FILTERING (where)
+
+E ASSIM POR DIANTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> MAS AINDA NÃO VIMOS UMA FEATURE ESSENCIAL AO MUNDO DO SQL,
+
+
+
+QUE É 
+
+'DATA RELATIONSHIPS' 
+
+
+
+E 
+
+O 
+
+'JOIN DE DATA'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSES SÃO CONCEITOS CHAVE DE 'RDBMS' (relational database management systems ),
+
+
+
+
+
+E O SPLIT DE DATA EM MÚLTIPLAS TABLES E O JOIN 
+]
+
+
+DE DATA, TOGETHER,
+
+
+
+COMO 
+
+PARTE DE QUERIES,
+
+É ALGO QUE VOCÊ DEVE ENTENDER,
+
+
+
+
+SE FOR TRABALHAR COM SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA QUE TIRAMOS AQUELES BASICS DO CAMINHO,
+
+
+
+PODEMOS EXPLORAR ESSES TÓPICOS:
+
+
+
+
+
+
+
+
+
+VAMOS:
+
+
+
+
+
+1) 'VER COMO DEVEMOS SPLITTAR 
+
+DATA _ AO LONGO DE MÚLTIPLAS TABLES'' --> vamos explorar o conceito de 'DATA NORMALIZATION' (entender isso)...
+
+
+
+
+
+
+
+
+
+
+
+2) ISSO FEITO,
+
+VEREMOS 
+
+'DIFERENTES TIPOS DE DATA RELATIONSHIPS'.... (
+
+
+    ESPECIALMENTE 
+
+    'ONE-TO-ONE',
+
+    'ONE-TO-MANY'
+
+
+    E 
+
+    'MANY-TO-MANY'...
+)
+
+
+
+
+
+
+
+
+--> VEREMOS O QUE SÃO,
+VEREMOS ALGUNS EXEMPLOS CONCRETOS....
+
+
+
+
+
+
+
+
+
+-> veremos 'COMO PODEMOS COMBINAR DATA',
+
+
+COM 
+
+'INNER JOIN',
+
+
+'LEFT JOIN'
+
+
+
+E MAIS... E O QUE ESSAS CLÁUSULAS SÃO, E COMO FUNCIONAM...
+
+
+VAMOS COMEÇAR...
