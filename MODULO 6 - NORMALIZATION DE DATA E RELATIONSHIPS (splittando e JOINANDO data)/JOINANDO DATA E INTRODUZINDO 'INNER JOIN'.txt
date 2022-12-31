@@ -1,0 +1,727 @@
+ PARA QUERIAR 'RELATED DATA'
+
+
+
+
+ e mergear 
+
+
+ DATA DE DIFERENTES TABLES EM 1 ÚNICO 'RESULT SET',
+
+
+ PRECISAMOS 
+
+
+ DE UMA NOVA CLAUSE,
+
+ SUPER IMPORTANTE,
+
+ QUE É 
+
+
+
+  
+  O 'INNER JOIN',
+
+
+
+
+  QUE 
+
+
+  DEVEMOS ADICIONAR AOS NOSSOS STATEMENTS DE 'SELECT'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É A CLAUSE DE 'INNER JOIN'....
+
+
+
+
+
+
+
+
+
+
+
+
+------> ESSA CLAUSE PERMITE A NÓS __ SELECIONAR_ DATA __ DE MÚLTIPLAS 
+
+
+TABLES,
+
+
+
+TUDO POR MEIO 
+
+ 
+ DO COMANOD 
+
+
+ ''''INNER JOIN ____ ON'''.,
+
+
+
+
+
+
+
+
+
+
+ como visto neste exemplo aqui:
+
+
+
+
+
+
+
+
+
+
+
+ SELECT u.first_name, a.street, a.house_number
+ FROM users as U
+ INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O PROFESSOR 
+
+
+
+ AINDA QUER MENCIONAR QUE 
+
+
+ '''AINDA SEREMOS CAPAZES DE __ FILTER_ E SORT_
+
+
+ E __FAZER__ TODAS AS COISAS ___ 
+
+ QUE FAZÍAMOS NAS ÚLTIMAS COURSE SECTIONS''',
+
+
+
+ 
+
+ MAS AGORA 
+
+
+ ___ USANDO RESULT SETS 
+
+
+ _DE DIVERSAS TABLESa...
+
+
+
+
+
+
+
+
+
+
+
+ --> BEM.... O 'INNER JOIN'
+
+ FUNCIONA DE MODO QUE 
+
+
+
+
+
+
+
+
+
+ VOCê 
+
+
+
+
+
+ ___ ESPECIFICA A 'TABLE' (addresses)
+
+
+
+
+ QUE __ VOCê VAI QUERER __ COMBINAR__ COM OUTRA __ TABLE,
+
+
+
+ COM A __ TABLE __ A QUAL VOCÊ ESTÁ SELECIONANDO DATA (no caso, 'users')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NESSE EXEMPLO, ESTAMOS SELECIONANDO 
+
+
+
+DATA DA TABLE DE 'users',
+
+
+E AÍ 
+
+ESTAMOS 
+
+
+__ JOINANDO_ A TABLE DE 'addresses' 
+
+
+
+__ JUNTO _ DO RESULT__ sET __ 
+
+
+EXTRAÍDO DA QUERY DE 'SELECT X FROM'
+
+
+ANTERIOR...
+
+
+
+
+
+
+
+
+-----> OK.... ISSO QUER DIZER QUE 
+
+
+
+
+
+
+A PARTE 
+
+
+
+
+
+
+'''''
+SELECT u.first_name, a.street, a.house_number
+FROM users as u 
+'''''
+
+
+
+
+
+
+
+----->  É O PRIMEIRO RESULT SET...
+
+
+
+
+
+
+E ISSO É USADO COM O 'INNER JOIN' da segunda parte, que é esta:
+
+
+
+
+
+
+''''''''''''
+ INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+ ''''''''''''''''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> DEPOIS,
+
+ VEREMOS COMO ADICIONAR 'MÚLTIPLOS JOIN STATEMENTS'
+
+
+ EM UM GRANDE SELECT STATEMENT...
+
+
+
+
+
+
+
+ --> É IMPORTANTE TER EM MENTE QUE 
+
+ VOCê SEMPRE_  'JOINA'__ UMA TABLE__ (como 'addresses', nesse caso,)
+
+
+
+ COM O RESULT SET_ 
+
+ QUE _ FOI DERIVADO __ aTÉ __ ESSA 'JOIN CLAUSE'  (a coisa escrita no SELECT _ FROM anterior a essa join clause ).
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ISSO, POR SUA VEZ,
+
+ PRODUZ UM NOVO RESULT SET,
+
+
+ E AÍ 
+
+ VOCÊ 
+ PODE 
+
+ __ SELECIONAR__ 
+
+
+
+
+
+
+
+
+
+ COLUMNS DESSE 'OVERALL RESULT SET' que foi produzido (como visto em 'SELECT u.first_name, a.street, a.house_number')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --------> ISSO VAI SELECIONAR COLUMNS DESSE OVERALL RESULT SET QUE FOI PRODUZIDO...
+
+
+
+
+
+
+
+
+
+
+
+ NESSE EXEMPLO DE AGORA,
+
+ O PROFESSOR TAMBÉM ESTÁ SETTANDO ALGUNS 'ALIASES',
+
+
+
+ como visto 
+
+ nessas linhas: 
+
+ '''''
+
+ FROM users as u
+
+
+ '''''
+
+
+'''''
+
+INNER JOIN addresses AS a 
+
+
+'''''''
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ISSO NÃO É REQUERIDO,
+
+APESAR 
+
+DE SER USADO 
+
+
+PARA __ _ENCURTAR OS TABLE NAMES E DEIXAR O OVERALL 'STATEMENT'
+
+
+MAIS 
+
+
+LEGÍVEL.. . (mas não é tecnicamente necessário)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+SQL DOT NOTATION ------> '<table name or alias>.<column_name>'  ------> USADO PARA __ ESPECIFICAR CLARAMENTE '''QUAL COLUMN, DE QUAL TABLE''' deve ser acessada...
+
+
+--------> ENTRETANTO,
+
+
+AQUI DEVEMOS USAR A 'DOT NOTATION' do SQL 
+
+
+para __ SERMOS BEM CLAROS 
+
+ACERCA DE _ '''QUAL COLUMN  ESTÁ VINDO DE QUAL TABLE''',
+
+
+
+
+JÁ QUE 
+
+AGORA,
+
+
+CONTRARIAMENTE ao que tínhamos no passado,
+
+
+
+TEMOS 
+
+
+COLUMNS VINDAS DE __ MÚLTIPLAS TABLES....
+
+
+
+
+
+
+
+
+
+
+
+---> É POR ISSO QUE, SE VOCÊ DESEJA SELECIONAR COLUMNS DE MÚLTIPLAS TABLES,
+PARA AS INCLUIR NO RESULT SET FINAL,
+
+
+
+
+
+
+__ NÓS FREQUENTEMENTE DEVEMOS SER BEM CLAROS 
+
+ACERCA 
+
+__ DE 'QUAL TABLE SEGURA CERTA COLUMN'...
+
+
+
+
+
+
+
+--> SE VOCÊ TEM COLUMNS EM DIFERENTES TABLES QUE _ POSSUEM __ NOMES COMPLETAMENTE DIFERENTES,
+
+
+ESSA DOT NOTATION NÃO É TOTALMENTE NECESSÁRIA (tecnicamente),
+
+
+
+MAS É 
+
+NECESSÁRIA SE VOCÊ TEM 
+
+COLUMN NAMES COM NOMES IGUAIS EM DIFERENTES TABLES,
+
+
+
+E _ SE ESSAS TABLES 
+
+SERÃO
+ 
+ MERGADAS NO FUTURO, com  um JOIN STATEMENT (como 'INNER JOIN', no nosso exemplo)... É NESSES 
+
+ CASOS 
+
+
+ QUE __ A 'DOT NOTATION' SE TORNA NECESSÁRIA,
+
+
+
+
+ PQ 
+
+
+
+ DIZ AO SQL '''QUAL COLUMN DEVERÁ SER PARTE DO RESULT SET''' ...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E, MESMO SEM TER 'CLASHING COLUMN NAMES',
+
+ É 
+
+ UMA BOA IDEIA USAR A DOT NOTATION PARA 
+
+ MELHORAR 
+
+ A LEGIBILIDADE 
+
+ DO OVERALL STATEMENT (para ver 'de qual table está vindo cada statement')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> E A PARTE DE 'ON' 
+
+
+ É USADA PARA __ DEFINIR 
+
+ '''''COMO __ ESSAS TABLES__ DEVERÃO SER JOINED''' (how they should be joined),
+
+
+
+
+ ISSO 
+
+
+ _ PQ __ __ PRECISAMOS__ TER UMA 
+
+
+
+
+
+
+ COLUMN QUE TENHA 'RELATED DATA',
+
+
+
+ QUE 
+
+ SERÁ USADA 
+
+ PARA __ 'IDENTIFICAR RELATED RECORDS' 
+
+ NA OUTRA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+ ou seja,
+
+
+
+ ON <critério de identificação de table1 -> table2>
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR ESCREVEU 
+
+
+
+
+ON u.address_id = a.id,
+
+
+
+
+
+PQ ESSE SERÁ O CRITÉRIO..
+
+
+
+
+
+
+
+
+
+
+
+--> AS TABLES VÃO FICANDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+addresses 
+
+
+id    street      house_number 
+
+
+1     TestStreet     10A 
+
+
+2     Some Street     5 
+
+
+
+3     My  Street     18 
+
+
+
+
+
+
+
+
+
+users 
+
+
+id      first_name    ...      address_id
+
+
+
+1        Max          ...         1 
+
+
+
+2        Manuel       ...         3
+
+
+
+
+
+
+
+
+
+
+
+--> SELECIONARÍAMOS OS 1 E 3 ADDRESSEs, para esses users..
+
+
+
+
+
+
+
+--> o record de 'id 2'
+
+
+
+
+NÃO SERIA SELECIONADO (não faria parte do result set),
+
+
+
+
+PQ NÃO TEM RELAÇÃO COM OS USERS SELECIONADOS...
+
+
+
+
+
+
+
+--> HÁ JOINS QUE PEGARIAM 
+
+ESSE 
+
+RECORD TAMBÉM, MAS VEREMOS ISSO MAIS TARDE.
