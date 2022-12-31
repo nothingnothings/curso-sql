@@ -1,0 +1,606 @@
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... DEVEMOS INSERIR UM POUCO DE DATA NAS NOSSAS TABLES...
+
+
+AS TABLES:
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+    address_id SERIAL UNIQUE NOT NULL --devemos usar o MESMO DATA TYPE do field 'id' do addresses (e isso devemos fazer sempre, no caso, com qualquer foreign key que escrevermos)
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(255) NOT NULL,
+    house_number INT NOT NULL,
+    city_id SERIAL UNIQUE NOT NULL
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    city_name VARCHAR(255) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS INSERIR DATA...
+
+
+
+
+
+
+
+
+
+
+--> É IMPORTANTE 
+
+
+
+'INSERIR DATA NA ORDEM CORRETA'.
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+NÃO POSSO:
+
+
+
+
+
+1) COMEÇAR PELO INSERT DE 1 'USER' --> ISSO PQ __ NÃO TENHO NENHUM 'address_id'... (não tenho nenhum address criado na outra table)
+
+
+
+
+
+
+2) NÃO POSSO COMEÇAR PELO INSERT DE 1 'address', pq NÃO TENHO NENHUM  'city_id' (não tenho nenhuma city, na outra table)...
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE A ÚNICA OPÇÃO QUE TEMOS É O 'CREATE DE 1 CITY',
+
+
+
+lá na table de 'cities'...
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE VAMOS ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO cities (city_name)
+VALUES ('São Paulo'),
+    ('Rio de Janeiro'),
+    ('Nova York');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> ok, ISSO FUNCIONOU....
+
+
+
+
+
+
+
+
+
+
+
+
+INSERI 3 RECORDS...
+
+
+
+
+
+
+
+--> NÃO PRECISAMOS INSERIR 
+
+
+
+
+
+
+O 'id' 
+
+
+EM CADA RECORD,
+
+PQ O VALUE DESSA COLUMN É ADICIONADO AUTOMATICAMENTE...
+
+
+
+
+
+
+
+
+PARA GARANTIR QUE 
+
+CADA 
+
+
+
+
+CITY FIQUE 'ÚNICA' (não repetir city names),
+
+
+PODERÍAMOS 
+
+COLOCAR 
+
+
+A CONSTRAINT
+
+
+
+
+
+
+
+
+DE 
+
+'UNIQUE'...
+
+
+
+
+
+
+
+
+eX:
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    city_name VARCHAR(300) UNIQUE NOT NULL
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+
+
+ISSO É POSSÍVEL..
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR N FEZ ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA QUE TEMOS ESSAS 3 CITIES,
+
+
+
+VAMOS 
+
+
+QUERER 
+
+
+POPULAR TAMBÉM A TABLE DE 'ADDRESSES'..
+
+
+
+
+
+
+
+
+
+
+
+NESSA TABLE, QUEREMOS 
+
+POPULAR 
+
+
+
+
+os fields de 
+
+'street'
+
+'house_number'
+
+e 
+
+'city_id' ------> E VAMOS APONTAR A CIDAde (ID, numeral) MANUALMENTE, agora...
+
+
+
+
+
+
+
+
+FICARÁ TIPO ASSIM:
+
+
+
+
+
+
+INSERT INTO addresses(street, house_number, city_id) VALUES (
+    'TestStreet',
+    42,
+    3
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO REALMENTE FUNCIONOU,
+
+
+INSERIU 
+
+ESSE RECORD NA TABLE DE 'addresses'...
+
+
+
+
+
+
+
+
+----> MAS O PROFESSOR QUER INSERIR MAIS ALGUMAS ROWS,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+INSERT INTO addresses(street, house_number, city_id) VALUES (
+    'TestStreet',
+    42,
+    3
+),
+(
+    'Some Street', 10, 2
+),
+('TestStreet', 512, 2),
+('That Street', 21, 1)
+
+
+
+
+
+
+
+
+
+
+CERTO.... sucesso...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> agora temos vários records em 'addresses'....
+
+
+
+
+
+
+
+
+
+--> FINALMENTE, PODEMOS INSERIR DATA 
+
+
+NA NOSSA USER TABLE,
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO users (
+    first_name,
+    last_name,
+    email,
+    address_id
+) VALUES (
+
+    'Arthur',
+    'Panazolo',
+    'someEmail@exemplo.com',
+    3
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+INSERT INTO users (
+        first_name,
+        last_name,
+        email,
+        address_id
+    )
+VALUES (
+        'Arthur',
+        'Panazolo',
+        'someEmail@exemplo.com',
+        3
+    ),
+    (
+        'Manu',
+        'Lorentz',
+        'someEmdsaasddsaad@exemplo.com',
+        1
+    ),
+    (
+        'Bob',
+        'Log',
+        'CCCC@exemplo.com',
+        2
+    ),
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+
+
+
+
+
+A IDEIA É QUE 'SÓ TEMOS AS RELATIONS DE QUE PRECISAMOS' 
+(
+    e nem todos os rows,
+
+    de todas as tables,
+
+    terão relação entre si... e isso é 'fine'....
+
+)
+
+
+
+
+
+
+
+
+
+TODA ESSA DATA FOI INSERIDA,
+SIM..
+
+
+
+
+
+
+MAS A PRÓXIMA ETAPA É 'COMO 
+
+
+FAZER PARA _ QUERY _ UP _ 
+
+DATA QUE ESTÁ 'RELATED'' ?
+
+
+
+
+(HOW TO QUERY THAT RELATED DATA)...
+
+

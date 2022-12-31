@@ -1,0 +1,2 @@
+ALTER TABLE addresses 
+ALTER COLUMN city_id SET NOT NULL;
