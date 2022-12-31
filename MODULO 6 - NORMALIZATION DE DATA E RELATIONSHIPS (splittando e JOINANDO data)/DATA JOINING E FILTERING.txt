@@ -1,0 +1,561 @@
+
+
+
+
+
+
+
+
+
+QUANDO TRABALHAMOS COM 'INNER JOIN' ,
+
+
+
+
+
+ou com joins em GERAL,
+
+
+INCLUINDO OUTROS 'JOINS'
+
+
+
+
+QUE VOCÊ APRENDERÁ NO FUTURO,
+
+
+
+VOCÊ 
+
+
+PODE TAMBÉM 
+
+'FILTER'
+
+E 
+
+'SORT'
+
+SUA 
+
+DATA 
+
+ENQUANTO VOCÊ USA 
+
+'INNER JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EM GERAL,
+
+VOCê PODE FAZER AS MESMAS COISAS DE ANTES,
+
+
+
+
+AS MESMAS COISAS NORMAIS DE 'SELECT STATEMENTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA MOSTRAR ISSO,
+
+O PROFESSOR COPIA 
+
+AQUELE 
+
+
+SELECT STATEMENT 
+
+
+
+DE INNER JOIN
+que 
+
+escrevemos antes...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name
+       c.city_name AS city_name_for_real --PODEMOS DEFINIR ALIASES PARA NOSSAS COLUMNS ATÉ MESMO NO PRIMEIRO SELECT STATEMENT, PARA DEIXAR NOSSO CÓDIGO MAIS CLARO...
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ----> OK...
+
+
+
+
+
+    AGORA VAMOS MANTER ESSES STATEMENT DE 'INNER JOIN',
+
+
+    MAS VAMOS QUERER FILTRAR,
+
+    COM 'WHERE'..
+
+
+
+
+
+
+
+    TIPO ASSIM:
+
+
+
+
+
+    
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name
+       c.city_name AS city_name_for_real --PODEMOS DEFINIR ALIASES PARA NOSSAS COLUMNS ATÉ MESMO NO PRIMEIRO SELECT STATEMENT, PARA DEIXAR NOSSO CÓDIGO MAIS CLARO...
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id
+WHERE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--OK... 
+
+AÍ AGORA PODEMOS 
+
+
+
+ESCREVER FILTROS A PARTIR DE TODAS AS COLUMNS QUE FORAM INCLUÍDAS NO NOSSO 'SELECT STATEMENT',
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name c.city_name AS city_name_for_real --PODEMOS DEFINIR ALIASES PARA NOSSAS COLUMNS ATÉ MESMO NO PRIMEIRO SELECT STATEMENT, PARA DEIXAR NOSSO CÓDIGO MAIS CLARO...
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id
+WHERE  -- podemos usar, nesse filtro, todas as columns mencionadas no primeiro 'select'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK...
+
+
+
+
+
+
+
+PODEMOS FILTRAR NOSSA DATA...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+'''POSSO QUERER PROCURAR POR USERS QUE MORAM EM BERLIN''...
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+COMO NÃO ARMAZENAMOS 
+
+
+
+
+
+
+A CITY DE BERLIN EM 'USERS' (nessa table aí),
+
+
+
+
+
+
+
+DEVEMOS ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+
+
+WHERE u.address_id = a.id AND a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS ISSO AINDA NÃO FUNCIONOU...
+
+
+
+
+
+
+
+
+
+FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT u.id,
+    u.address_id,
+    u.first_name, 
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name 
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id
+WHERE u.address_id = a.id
+    AND a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... MAS SE QEUREMOS RODAR UMA QUERY BEM ESPECÍFICA,
+
+
+PODEMOS COLOCAR 
+
+'WHERE c.id = 1' ------> ISSO VAI REALMENTE RETORNAR 
+
+APENAS 
+
+
+
+O RECORD DE 'user'
+
+
+QUE 
+
+TEM 1 CITY COM ID DE '1',
+
+
+pq é isso que especificamos, aqui... 
+
+
+
+
+
+
+
+
+
+
+--> NO RESULT SET,
+
+AINDA TEREMOS ESSA MERGED DATA,
+
+
+COM TODAS AS COLUMNS QUE DEFINIMOS NO 'SELECT STATEMENT',,
+
+
+PQ ISSO NÃO TERÁ MUDADO (a única alteração é o WHERE STATEMENT)...
+
+
+
+
+
+
+
+
+
+
+--> SE QUEREMOS INCLUIR MÚLTIPLAS CITIES NESSE RESULT SET,
+
+PODEMOS COLOCAR 
+
+
+
+
+
+
+
+
+
+
+'WHERE c.id = 1 OR c.id = 2;'
+
+
+
+
+
+EX:
+
+
+
+
+
+SELECT u.id,
+    u.address_id,
+    u.first_name, 
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name 
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id
+WHERE c.id = 1 OR c.id = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AÍ CONSEGUIREMOS 2 RECORDS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+MAS O PROFESSOR RESSALTA:
+
+
+
+
+AINDA PODEMOS RODAR 'ORDER BY'
+
+E 'LIMIT'
+
+E 
+
+'OFFSET'...
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT u.id,
+    u.address_id,
+    u.first_name, 
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name 
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id
+WHERE c.id = 1 OR c.id = 2;
+ORDER BY u.id DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... O 'WHERE' E 'ORDERING'
+
+TAMBÉM 
+
+FICA DISPONÍVEL,
+
+MAS AGORA 
+
+FAZEMOS ISSO AO LONGO DE MÚLTIPLAS TABLES, EM VEZ DE APENAS 1...
