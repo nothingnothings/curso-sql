@@ -1,0 +1,700 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... APRENDEMOS SOBRE A CLAUSE DE 'INNER JOIN'
+
+
+NA ÚLTIMA AULA...
+
+
+
+EIS SUA SINTAXE:
+
+
+
+
+
+
+
+
+
+
+
+SELECT u.id, u.first_name, u.last_name, a.street, a.house_number, a.city_id
+FROM users AS u 
+INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'INNER JOIN'
+
+
+É EXTREMAMENTE IMPORTANTE E EXTREMAMENTE USADO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS VOCÊ NÃO ESTÁ LIMITADO APENAS A UMA ÚNICA JOIN CLAUSE --> 
+
+
+
+
+
+
+
+
+ISSO PQ 
+
+É BEM COMUM QUE VOCÊ PRECISE MERGEAR DATA SPLTITADA 
+
+
+
+AO LONGO DE MAIS DO QUE 2 TABLES....
+
+
+
+
+
+
+
+
+
+
+
+
+É EXATAMENTE ESSE NOSSO CASO, AQUI:
+
+
+
+
+
+
+
+
+
+
+
+
+TEMOS 3 TABLES (users, addresses, cities),
+
+
+
+
+
+
+
+
+
+E QUEREMOS ACTUALLY MERGEAR 
+
+TAMBÉM 
+
+NOSSA column de 'city_name' 
+
+
+
+
+PARA DENTRO DO 
+
+
+RESULT SET 
+DO SELECT STATEMENT DE 'users'...
+
+
+
+
+
+
+ 
+
+ MAS É CLARO QUE 
+
+
+
+
+
+
+
+ ESSES 'city_name'
+
+
+ ESTÃO 
+
+
+
+
+ ARMAZENADOS EM UMA TABLE SEPARADA,
+
+ O QUE 
+ QUER DIZER QUE 
+
+
+
+
+
+
+
+
+ 1 ÚNICO INNER JOIN STATEMENT NÃO BASTA...
+
+
+
+
+
+
+
+
+
+ -------> ISSO QUER DIZER QUE PRECISAMOS MERGEAR 'cities' com 'addresses',
+
+ para que nossa info FIQUE REALMENTE COMPLETA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA ISSO, COMEÇAMOS COM ESTE CÓDIGO:
+
+
+
+
+
+
+ 
+SELECT u.id, u.first_name, u.last_name, a.street, a.house_number, a.city_id
+FROM users AS u 
+INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS O COMPLEMENTAR:
+
+
+
+
+
+
+
+
+
+SELECT u.id, u.first_name, u.last_name, a.street, a.house_number, a.city_id
+FROM users AS u 
+INNER JOIN addresses AS a ON u.address_id = a.id
+INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TENTEI ESCREVER ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    a.city_id
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> MAS ISSO NÃO RETORNOU O RESULT SET QUE EU QUERIA...
+
+
+
+
+
+
+
+
+
+
+
+
+---> PROFESSOR DIZ QUE ISSO É FÁCIL,
+
+
+
+
+
+
+
+
+QUE REALMENTE DEVEMOS ESCREVER OUTRO 'INNER JOIN STATEMENT'..
+
+
+
+
+
+
+
+
+--> ELE ESCREVEU A MESMA COISA, BASICAMENTE..
+
+
+
+
+
+
+
+
+
+
+ELE EXPLICA QUE 'PODEMOS MERGEAR ESSA TABLE COM A TABLE DO STATEMENT ANTERIOR, 
+
+DO INNER JOIN ANTERIOR ('addresses')',
+
+
+
+EXATAMENTE COMO EU FIZ...
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+
+
+'''VOCÊ NÃO É OBRIGADO A MERGEAR TUDO COM 
+
+A MAIN TABLE,
+
+COM A TABLE QUE VEM DEPOIS DA CLAUSE DE 'SELECT',
+
+
+PQ VOCê PODE TAMBÉM MERGEAR 
+
+
+SUAS DIFERENTES 'JOIN TABLES'...
+
+
+
+
+
+
+(
+
+
+    """você pode JOINAR A TABLE __ DE CITIES __ 
+
+    COM _ QUALQUER COLUMN, DE QUALQUER TABLE 
+
+
+    QUE ESTÁ FAZENDO PARTE DO RESULT SET _ QUE 
+
+    FOI/ESTÁ SENDO DERIVADO ATÉ ESSA SEGUNDA CLAUSE DE JOIN'...
+)
+
+
+
+
+
+
+
+
+
+
+
+---> ok, foi isso que escrevi, mas nao consegui a informaçaõ 
+
+
+
+desejada...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÃO HAVIA CONSEGUIDO A INFO PQ _ EU NÃO HAVIA 
+
+SUBSTITUÍDO 'city_id'
+
+
+por 
+
+
+'city_name',
+
+lá no 
+
+PRIMEIRO SELECT STATEMENT (da 'MAIN TABLE')...
+
+
+
+
+
+
+
+
+
+eX:
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name ----EIS O CÓDIGO EM QUESTÃo.
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ---> trocamos o 'a.city_id'
+
+
+    POR 
+
+
+
+    'c.city_name'...
+
+
+
+
+
+
+
+
+
+
+    ok.... USAMOS O ALIAS E A DOT NOTATION PARA APONTARMOS 
+
+
+
+    À COLUMN ESPECÍFICA NA NOSSA TABLE...
+
+
+
+
+
+
+
+
+
+    ISSO FUNCIONA,
+
+    CONSEGUIMOS TODA A DATA DE ANTES,
+
+    MAS AGORA 
+
+    COM O CITY NAME..
+
+
+
+
+
+
+     
+OBs:
+
+
+
+
+
+
+
+
+QUANDO VOCÊ TEM CASOS COMO ESSES,
+
+
+
+
+QUANDO VOCÊ TEM DATA DE DIVERSAS TABLES,
+
+
+FICA BEM CONFUSO NÃO USAR OS ALIASES..
+
+
+
+
+
+
+
+
+
+
+
+--> É ESSA A UTILIDADE DOS ALIAS E DA DOT NOTATION...
+
+
+
+
+
+
+
+''name'' pode aparecer em qualquer table,
+
+
+
+é perigoso,
+
+por isso 
+
+
+
+DEVEMOS USAR ALIASES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+PARA MELHORAR A CLARIDADE DE NOSSO CÓDIGO,
+
+
+
+
+
+PODEMOS ATÉ MESMO COLOCAR 
+
+
+
+ALIASES 
+
+
+PARA NOSSAS COLUMNS LÁ 
+
+
+
+NO PRIMEIRO SELECT STATEMENT,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name as city_name ----EIS O CÓDIGO EM QUESTÃo.
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+SELECT u.id,
+    u.first_name,
+    u.last_name,
+    a.street,
+    a.house_number,
+    c.city_name
+       c.city_name AS city_name_for_real --PODEMOS DEFINIR ALIASES PARA NOSSAS COLUMNS ATÉ MESMO NO PRIMEIRO SELECT STATEMENT, PARA DEIXAR MAIS CLARO...
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id
+    INNER JOIN cities AS c ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+E É BEM COMUM FAZER ISSO,
+
+
+COM CLAUSES DE 'JOIN'
+
+MAIS COMPLEXAS,
+
+
+PQ AÍ O RESULT SET FICA MAIS FÁCIL DE SER COMPREENDIDO...
+
+
+
+
+
+
+
+
+
+
+
+OK... ISSO É ALGO QUE VOCÊ DEVE TER EM MENTE,
+
+
+1 PEQUENO TWEAK PARA SEUS 'SELECT - JOIN' 
+
+STATEMENTS...
