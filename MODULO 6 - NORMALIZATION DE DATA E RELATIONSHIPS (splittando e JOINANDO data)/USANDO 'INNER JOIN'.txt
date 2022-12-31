@@ -1,0 +1,1169 @@
+
+
+
+
+
+
+
+OK... DE VOLTA AO NOSSO CÓDIGO,
+
+O PROFESSOR CRIA UM NOVO ARQUIVO, DE NOME 'INNER JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DELE,
+
+VAMOS QUERER 
+
+
+CONSEGUIR NOSSA 'RELATED DATA'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> cOMEÇAMOS COM A KEYWORD DE 'SELECT',
+
+
+PQ AINDA 
+
+
+SERÁ UM 
+
+
+REGULAR SELECT STATEMENT,
+
+A ÚNICA DIFERENÇA É QUE 
+
+ELE 
+
+É 
+
+'ENRIQUECIDO' COM A CLÁUSULA DE 'INNER JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  COMEÇAMOS PELO SELECT DE TODAS AS COLUMNS DESEJADAS..
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR COLOCA "*",
+
+PARA 
+
+PEGAR TODAS AS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR PEGA TODAS AS COLUMNS LÁ DA TABLE DE USERS,
+
+tipo assim:
+
+
+
+
+
+
+
+SELECT * FROM users;
+
+
+
+
+
+
+
+
+
+-----> ISSO NOS DÁ UM SELECT STATEMENT BÁSICO,
+
+
+E PEGAMOS TODA A DATA 
+
+DA TABLE DE 'USERS'...
+
+
+
+
+
+
+
+
+
+
+--> MAS PERCEBA QUE 
+
+
+
+em 'address_id'
+
+
+
+CONSEGUIMOS O ADDRESS ID 
+
+EM SI,
+
+
+
+PQ É CLARO QUE 
+
+
+
+ESSA É A COLUMN QUE ESTÁ REALMENTE ARMAZENADA 
+
+NA TABLE DE USERS... (
+
+
+    ISSO QUER DIZER QUE NÃO VOU PEGAR 
+
+
+    A DATA DE 'address',
+
+    lá da table de 'ADDRESSES',
+
+    AUTOMATICAMENTE,
+
+
+    JUSTAMENTE PQ 
+
+    ISSO ESTÁ EM UMA TABLE SEPARADA..
+
+)
+
+
+
+
+
+
+
+
+E É PARA ISSO QUE SERVE O  'INNER JOIN' STATEMENT,
+
+PARA QUE 
+
+
+
+SEJA POSSÍVEL O RETRIEVE DESSA INFO DO 'ADDRESS'
+
+desses users (as columns de 'address' que PERTENCEM a esse USER),
+
+
+
+
+
+
+
+
+
+por meio do 'address_Id',
+
+que TEM O MESMO VALUE Da 'primary key'
+
+
+de 
+
+
+
+'address',
+
+nesse caso...
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ, A ESSE PONTO,
+
+AINDA NÃO ESTAMOS FAZENDO O MERGE DE QUAISQUER TABLES..
+
+
+
+
+
+
+
+--> PARA MERGEAR AS 2 TABLES,
+
+O PROFESSOR ESCREVE ASSim:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users 
+INNER JOIN;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+
+--> VOCÊ TAMBÉM PODE ESCREVER 'JOIN',
+
+APESAR DE SER MAIS COMUM ESCREVER 'INNER JOIN'... (
+
+
+    PQ ISSO É MAIS FÁCIL DE ENXERGAR,
+
+
+    ESPECIALMENTE SE VOCÊ TEM _ 
+
+    JOIN STATEMENTS MAIS COMPLEXOS,
+
+    QUE 
+
+    PODEM TER MÚLTIPLOS 
+
+    INNER JOINS 
+
+    EM 1 MESMO STATEMENT...
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE VAMOS USAR 'INNER JOIN'..
+
+
+
+
+
+
+
+
+
+--> DEPOIS DE 'INNER JOIN',
+
+
+
+
+
+DEFINIMOS O 'NOME DA TABLE'
+
+A QUE 
+
+VOCê 
+VAI QUERER 
+COMBINAR A DATA__ COM _ A DATA __ DA PRIMEIRA TABLE..
+
+
+
+
+--> colocamos a table de 
+
+'addresses',
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM users 
+INNER JOIN addresses;
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA ESTAMOS JOINANDO ESSAS TABLES...
+
+
+
+
+
+
+ENTRETANTO,
+PARA QUE O INNER JOIN FUNCIONE,
+
+
+
+PRECISAMOS (obrigatório)
+
+
+
+DO STATEMENT DE 'ON',
+
+
+para 
+
+
+COMUNICAR 'QUAL COLUMN DEVE SER USADA _ COMO _ RELATION _ ENTRE AS 2 TABLES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users 
+INNER JOIN addresses ON xxxxx;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA DEFINIR 'EM QUE COLUMN VALUES VAMOS QUERER JOINAR',,
+
+
+
+
+
+__ VAMOS _ QUERER USAR__ COLUMNS __ QUE POSSUEM 'EQUAL DATA' AO LONGO DAS 2 TABLES...
+
+
+
+
+
+
+
+
+
+
+(
+
+
+
+    O '''ON''' BASICAMENTE COMUNICA AO SQL 
+
+
+    '''QUAIS COLUMNS SEGURAM A RELATED (em outras palavras, EQUAL) DATA... ISSO PQ 2 ROWS, QUE 
+
+    SÃO ARMAZENADOS EM TABLES SEPARADAS,  DEVEM OBRIGATORIAMENTE POSSUIR 1 DATA EM COMUM 
+    PARA PODEREM SER JOINADAS''''...
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+-->  FAZEMOS ISSO PARA QUE, NA TABLE DE 'users',
+
+ 
+
+
+ peguemos a column de 'address_id',
+
+
+ e AÍ 
+
+
+
+
+ ENCONTREMOS 'FITTING IDs na column de id' 
+
+
+
+
+ LÁ 
+
+
+
+ NA TABLE DE 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+ ----> É POR ISSO QUE O PROFESSOR ESCREVE ASSIM ('address_id = id';)
+
+
+
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+
+ 
+SELECT * 
+FROM users 
+INNER JOIN addresses ON address_id = id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS É CLARO QUE ESCREVER ASSIM SERIA __ SUBÓPTIMO...
+
+
+
+
+
+
+
+
+
+
+
+------> SERIA SUBÓPTIMO, E TAMBÉM __ NÃO FUNCIONARIA (o SQL naõ vai saber '''QUAL TABLE POSSUI A COLUMN DE ID''', se é a de 'addresses' ou a de 'users')...
+
+
+
+
+
+
+
+
+--> O ERRO QUE OBTEMOS 
+
+É 
+
+
+'ER_NON_UNIQ_ERROR' --> COLUMN 'ID' in 'ON' Clause is AMBIGUOUS..
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE VAMOS PRECISAR __ DE _ _ ALIASES,
+
+ALIASES 
+
+PARA O 'users'
+
+e 
+
+para 
+
+o 
+
+
+'addresses'..
+
+
+
+
+
+
+
+
+
+PRECISAMOS DE 'ALIASES' E DA 'SPECIAL DOT NOTATION'...
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users as u
+INNER JOIN addresses as a ON address_id = id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> DEPOIS DISSO,
+
+ALTERAMOS O STATEMENT DE 'ON',
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT * 
+FROM users
+INNER JOIN addresses as a ON a.id = users.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODERÍAMOS DEFINIR OS 'users' como 'u',
+
+
+MAS ISSO NÃO É NECESSÁRIO, NESSE EXEMPLO (pq só temos esse field de 'address_id' EM 'users'; ELE NÃO EXISTE NA TABLE DE 'ADDRESSES')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> ok.... SIGNIFICA QUE REALMENTE FICA ASSIm:
+ 
+
+
+
+
+SELECT *
+FROM users 
+INNER JOIN addresses as a ON users.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------>  TAMBÉM PODERÍAMOS ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM users 
+INNER JOIN addresses ON users.address_id = addresses.id;
+
+
+
+
+
+
+
+
+
+
+--> EX:
+
+
+
+
+
+SELECT *
+FROM users
+    INNER JOIN addresses ON users.address_id = addresses.id;  -- primeira maneira de escrever um INNER JOIN (sem o uso de aliases)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+E A MANEIRA ALTERNATIVA, FICARIA ASSIM:
+
+
+
+
+
+
+SELECT *
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id;  -- primeira maneira de escrever um INNER JOIN (sem o uso de aliases)...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM users
+    INNER JOIN addresses ON users.address_id = addresses.id;
+-- primeira maneira de escrever um INNER JOIN (sem o uso de aliases)...
+
+
+
+SELECT *
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id;
+-- segunda maneira de escrever um INNER JOIN (com o uso de aliases)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... ISSO FAZ TOTAL SENTIDO...
+
+
+
+
+
+
+
+
+
+
+E AÍ PODEMOS USAR ESSES 'ALIAS'
+
+
+
+
+NA PARTE DE 'ON',
+
+
+
+EM VEZ DO ACTUAL TABLE NAME...
+
+
+
+
+
+
+
+
+
+
+
+
+--> RODAMOS ISSO, E O NEGÓCIO AINDA FUNCIONA...
+
+
+
+
+-> NO RESULT SET,
+
+OBTEREMOS:
+
+
+
+ 
+
+
+
+
+
+
+
+ u.id       first_name             last_name        email
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ok... isso quer dizer que temos a data de 'users',
+
+ mas também 
+
+ a data 
+
+
+
+ lá 
+
+ da table de 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+ ---->  
+
+
+
+
+ COMO 1 DOS ADDRESSES NÃO FOI ASSIGNADO A USER ALGUM (não aparece como 'address_id' em nenhum record de users),
+
+
+
+ ELE NÃO APARECE 
+
+
+
+ NO RESULT SET..
+
+
+
+
+
+
+
+
+
+
+
+ --> OK...
+
+
+
+
+
+
+
+
+
+
+
+ MAS É CLARO QUE PODEMOS TAMBÉM 'FINE-TUNE'
+
+
+
+ AS COLUMNS QUE QUEREMOS SELECIONAR (PQ TALVEZ NÃO EXISTA INTERESSE POR __ TODAS AS COLUMNS _ DE NOSSAS TABLES)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA ISSO,
+
+ BASTA TIRAR A '*'
+
+
+ E ENUMERAR SUAS COLUMNS..
+
+
+
+SELECT id, first_name, last_name, street, house_number, city_id
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+    QUEREMOS ESSAS INFOS/COLUMNS aí...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE AINDA PRECISAMOS SER CLAROS,
+
+
+USAR 
+
+ALIASES E 
+
+ESPECIFICAR BEM 'DE QUAL TABLE QUEREMOS PEGAR X COLUMN',
+
+etc....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> É POR ISSO QUE O CÓDIGO FICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+--- já esta versão nos deixa SELECIONAR COLUNAS ESPECÍFICAS ENTRE AS 2 TABLES... (e ver isso nos records)
+SELECT u.id, u.first_name, u.last_name, a.street, a.house_number, a.city_id
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> PODEMOS USAR OS 'table names', ou então nossos ALIASES,
+
+COM A DOT NOTATION,
+
+
+PARA 
+
+
+SERMOS CLAROS SOBRE 'QUAL COLUMN ESTAMOS FALANDo'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> >>
+
+
+
+
+RODAMOS TUDO ISSO E CONSEGUIMOS NOSSA DATA desejada...
+
+
+
+
+
+
+
+
+
+--> COM ISSO, PODEMOS SELECIONAR APENAS AS COLUMNS DAS TABLES QUE __ NOS INTERESSAM,...
+
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS USAR 'INNER JOIN'
+
+PARA MERGEAR 
+
+DATA DE MÚLTIPLAS TABLES
+ 
+
+ EM 1 ÚNICO RESULT SET...

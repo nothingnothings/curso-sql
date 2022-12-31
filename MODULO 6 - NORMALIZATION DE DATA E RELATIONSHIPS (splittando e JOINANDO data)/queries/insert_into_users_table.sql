@@ -21,5 +21,4 @@ VALUES (
         'Log',
         'CCCC@exemplo.com',
         2
-    ),
-;
+    );
