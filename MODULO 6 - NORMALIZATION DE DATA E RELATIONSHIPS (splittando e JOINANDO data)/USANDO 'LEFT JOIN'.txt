@@ -1,0 +1,909 @@
+
+
+
+
+
+
+
+
+
+PARA VER O 'LEFT JOIN' 
+
+
+EM AÇÃO ,
+
+
+
+
+
+criamos um novo arquivo...
+
+
+
+
+
+
+
+DENTRO DO ARQUIVO, COMEÇAMOS COM UM SELECT STATEMENT PADRÃO...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO SLIDE ANTERIOR,
+
+O PROFESSOR ESTAVA FAZENDO UM SELECT ALL EM 'addresses',
+
+
+MAS PRIMEIRAMENTE 
+
+O PROFESSOR QUER MOSTRAR QUE 'A ORDEM DAS COISAS IMPORTA'
+
+
+
+
+
+
+
+
+
+POR ISSO
+
+
+
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+
+
+
+VAI COMEÇAR COM UM LEFT JOIN NESSES USERS...
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT * 
+FROM users 
+LEFT JOIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok, MAS AINDA TEMOS QUE ESPECIFICAR 'A TABLE A QUE VAMOS QUERER FAZER JOIN'..
+
+
+
+
+
+
+
+
+
+
+--> nesse caso,
+
+será a table de 'addresses'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users 
+LEFT JOIN addresses
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR COLOCA 'ALIASES'
+
+PARA O 'users' e o 'addresses'..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users AS u
+LEFT JOIN addresses AS a;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... ENTRETANTO, COMO COM 'INNER JOIN',
+
+PRECISAMOS 
+
+COLOCAR A KEYWORD 
+
+DE 
+
+
+'ON',
+
+
+E AÍ __ DEFINIR 'EM QUE COLUMN QUEREMOS FAZER O JOIN'... -->  ISSO PQ A IDEIA,
+
+AQUI,
+
+AINDA 
+
+É 
+
+
+'CONNECT', 'RELATE' A DATA,
+
+ 
+
+
+
+
+
+
+
+E A ÚNICA DIFERENÇA (em relação ao 'inner join') 
+
+
+É QUE 
+
+
+
+
+
+, PARA 1 DAS TABLES CONECTADAS,
+
+VAMOS QUERER 
+
+
+'RETURN  ALL THE ROWS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OU SEJA,
+
+
+
+
+
+
+
+VAMOS RETORNAR __ tODOS OS USERS DA TABLE DE USERS,
+
+
+
+MAS AÍ 
+
+
+vamos RETORNAR 
+
+
+
+
+
+APENAS AS 'MATCHING DATA ENTITIES' de 'addresses',
+
+
+
+
+
+
+
+descartadas as outras..
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users AS u 
+LEFT JOIN addresses AS a ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE RODAMOS ESSE STATEMENT,
+
+
+RECEBEMOS UM RESULT 
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+u.id            first_name         last_name       email              address_id            a.id    street          house_number           city_id
+1               Max                 Schwarz         max@test.com            2               2       Some Street         10                  1
+
+
+
+
+
+
+
+
+
+
+
+CONSEGUIMOS UM RESULTADO,
+
+SIM,
+
+
+
+
+
+
+
+
+MAS O PROBLEMA É QUE ESSE RESULT SET __ É EXATAMENTE O MESMO QUE OBTIVEMOS MAIS CEDO,
+
+COM O 'INNER JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A RAZÃO PARA ISSO,
+
+NO CASO,
+
+
+É QUE 
+
+ESTAMOS USANDO 'LEFT JOIN'
+
+
+com 'users' ------> E ISSO FAZ COM QUE 
+TODOS OS USERS 
+
+
+SEJAM RETORNADOS (pq é a 'LEFT TABLE', a table MAIN)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A TABLE DE USERS INTEIRA É RETORNADA,
+
+E AÍ 
+
+
+APENAS OS 'MATCHING ADDRESSES'
+
+SÃO RETORNADOS 
+
+
+
+
+(''''FOR THE TABLE AFTER LEFT JOIN, ADDRESSES IN THIS CASE, LEFT JOIN BEHAVES LIKE __ INNER JOIN__: 
+ONLY MATCHING ROWS, ROWS EM QUE A CONDITION DE "ON" RENDE MATCHES, SÃO INCLUÍDAS"""""
+)
+
+
+
+
+
+
+
+
+
+
+
+---->  OK........
+
+
+
+
+
+
+ISSO QUER DIZER QUE APENAS ENXERGAMOS , NO RESULT SET,
+
+
+
+
+'MATCHING ADDRESSES '--> E OS ADDRESSES QUE NÃO MATCHEIAM USERS NÃO _ SÃO INCLUÍDOS -----> 
+
+
+
+
+
+
+
+
+
+
+
+É POR ISSO QUE OBTEMOS O MESMO RESULTADO QUE CONSEGUIMOOS COM 'INNER JOIN'... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. MAS AGORA DEVEMOS MUDAR UM POUCO AS COISAS.....
+
+
+
+
+
+
+
+
+
+--> VAMOS 'SELECT TUDO LÁ DE ADDRESSES',
+
+
+E AÍ 
+FAZER 
+
+
+LEFT JOIN DESSA TABLE DE 'ADDRESSES' 
+
+
+
+
+
+COM ___ A TABLE DE USERS (que ficará com o comportamento de 'inner join',
+
+de MATCHING IDs COM O 'ON')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT *   --- no nosso exemplo, é a mesma coisa que o INNER JOIN DE 'USERS' COM ADDRESSES...
+FROM addresses AS a
+LEFT JOIN users AS u ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE FAZEMOS ISSO,
+
+
+AS COISAS MUDAM COMPLETAMENTE..
+
+
+
+
+
+
+
+
+
+-----> NOSSO RESULT SET FICA ASSIm:
+
+
+
+
+
+{
+  "id": 10,
+  "street": "That Street",
+  "house_number": 21,
+  "city_id": 1,
+  "id (1)": null,
+  "first_name": null,
+  "last_name": null,
+  "email": null,
+  "address_id": null
+}
+
+
+
+{
+  "id": 9,
+  "street": "TestStreet",
+  "house_number": 512,
+  "city_id": 3,
+  "id (1)": null,
+  "first_name": null,
+  "last_name": null,
+  "email": null,
+  "address_id": null
+}
+
+{
+  "id": 8,
+  "street": "Some Street",
+  "house_number": 10,
+  "city_id": 2,
+  "id (1)": null,
+  "first_name": null,
+  "last_name": null,
+  "email": null,
+  "address_id": null
+}
+
+
+{
+  "id": 1,
+  "street": "TestStreet",
+  "house_number": 42,
+  "city_id": 3,
+  "id (1)": 2,
+  "first_name": "Manu",
+  "last_name": "Lorentz",
+  "email": "someEmdsaasddsaad@exemplo.com",
+  "address_id": 1
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO VOCê PODE VER,
+
+
+
+
+
+
+
+GANHAMOS 4 ROWS,
+
+
+E 
+
+
+EM VÁRIOS 
+
+DESSES ROWS 
+
+
+FICAMOS 
+
+COM UM MONTE DE 'NULL DATA'...
+
+
+
+
+
+
+
+
+
+
+-_> ISSO  ESTÁ ACONTECENDO JUSTAMENTE 
+
+PQ 
+
+ESTAMOS FETCHEANDO 
+
+
+
+'TODOS OS ROWS'
+
+DE 
+
+
+
+ADDRESSES 
+
+
+AO MESMO TEMPO QUE 
+
+ESTAMOS FETCHEANDO TODA A 'MATCHING USER DATA'...
+
+
+
+
+
+
+
+
+
+
+--> MAS, COMO EM ALGUNS ADDRESSES 
+
+
+NÃO 
+
+TEMOS 'MATCHING USER DATA',
+
+
+FICAMOS COM OS FIELDS COMO 'NULL'...
+
+
+
+
+
+
+
+
+
+
+--> OK... ISSO FAZ TOTAL SENTIDO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA OBSERVARMOS A DIFERENÇA ENTRE OS 2 STATEMENTS,
+
+O PROFESSOR 
+
+TROCA 
+
+
+'LEFT JOIN'
+
+COM 'INNER JOIN' -----> ISSO FARÁ,
+NO CASO,
+
+
+
+
+
+COM QUE 
+
+
+__ APENAS __ 
+
+
+
+
+AS ROWS COM 'MATCHING USER DATA' (values de 'address_id' em user e 'id' em address equivalentes)
+
+
+
+SEJAM RETORNADAS...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+-- SELECT *   --- no nosso exemplo, é a mesma coisa que o INNER JOIN DE 'USERS' COM ADDRESSES...
+-- FROM addresses AS a
+-- INNER JOIN users AS u ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK... 
+
+
+
+COM 'INNER JOIN',
+
+
+APENAS 
+
+
+A 'MATCHING TABLE DATA'
+
+É 
+
+
+INCLUÍDA/RETORNADA ----> SÃO INCLUÍDOS 
+
+APENAS 
+ROWS 
+COM 
+
+MATCHING DATA,
+NAS 2 TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ COM 'LEFT JOIN',
+
+
+A 
+TABLE 
+
+ANTES DA CLAUSE DE 'LEFT JOIN' 
+
+
+
+
+
+TEM TODOS SEUS RECORDS RETORNADOS, SEMPRE... (a única exceção são filtros, com 'where')...
+
+
+
+
+
+
+
+TEM TODOS SEUS RECORDS RETORNADOS,
+
+
+MAS ALGUNS DOS RECORDS PODERÃO 
+
+
+
+TER COLUMNS COM VALUE DE 'NULL' (caso não exista matching data)...
+
+
+
+
+
+
