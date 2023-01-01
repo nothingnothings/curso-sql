@@ -1,0 +1,270 @@
+
+
+
+
+
+
+
+
+
+
+
+APRENDEMOS SOBRE O 'INNER JOIN'
+
+
+E
+ 
+ 
+ 'LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS NÃO EXISTE ESSE 'RIGHT JOIN',
+
+
+
+ COMO EXISTE O 'INNER JOIN'
+
+ E 
+
+ 'LEFT JOIN'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> A RESPOSTA É 'SIM, EXISTE O RIGHT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS ELE É RARAMENTE USADO, NA REALIDADE...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> NÃO USAMOS COM MT FREQUÊNCIA PQ __ 'CADA RIGHT JOIN __ PODE __ SER SUBSTITUÍDO POR UM LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> EXEMPLO:
+
+
+
+
+
+
+
+
+
+
+
+ SELECT * 
+ FROM addresses AS a
+ LEFT JOIN users AS u ON a.id = u.address_id
+ LEFT JOIN cities AS c ON c.id = a.city_id;
+
+
+
+
+
+
+
+
+
+
+
+
+ ESSE PRIMEIRO LEFT JOIN,
+
+
+ EM QUE FAZEMOS JOIN DA DATA DOS 'USERS'
+
+
+ COM A TABLE DE 'ADDRESSES' (e ficamos com alguns records com 'null' em alguns campos, como sempre),
+
+
+
+
+
+
+
+
+
+
+
+ PODERIA 
+
+ SER SUBSTITUÍDO 
+
+
+
+
+
+
+
+ POR __ 
+
+
+
+
+
+ 1 'RIGHT JOIN' 
+
+ em que 
+
+
+
+
+
+ TEMOS O 'users' NO FROM,
+
+
+ e 
+
+ o 
+
+ 'addresses' no RIGHT JOIN ------> 
+
+
+
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+
+ 
+
+ SELECT * 
+ FROM users AS u
+ RIGHT JOIN addresses AS a ON a.id = u.address_id
+ LEFT JOIN cities AS c ON c.id = a.city_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, 
+
+
+COM ISSO FICARÍAMOS COM O EXATO RESULTADO DE ANTES (result set),
+
+APENAS 
+
+COM UMA COLUMN ORDER DIFERENTE..
+
+
+
+(
+
+    e poderíamos ALTERAR 
+
+    A ORDER DAS COLUMNS AINDA MAIS,
+
+    BASTA 
+
+
+    SUBSTITUIR '*' 
+
+    PELA ORDER DESEJADA DAS SUAS COLUMNNS..
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O 'RIGHT JOIN' EXISTE,
+
+
+
+MAS VOCÊ TIPICAMENTE USA O 'LEFT JOIN'...
+
+
+
+
+
+--> ESSA É A CONVENTION,
+
+E A 
+
+
+CLAUSE MAIS COMUM QUE VOCÊ ENCONTRA 
+
+POR AÍ..
+
+
+
