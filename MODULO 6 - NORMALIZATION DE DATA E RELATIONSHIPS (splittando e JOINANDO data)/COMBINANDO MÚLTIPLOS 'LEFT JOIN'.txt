@@ -1,0 +1,531 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK..
+
+
+
+
+
+
+ESSE FOI O 'LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIM COMO COM 'INNER JOIN',
+
+VOCÊ 
+
+PODE 
+
+
+TER 
+
+
+
+
+___ MÚLTIPLOS 'LEFT JOIN' 
+
+
+
+
+EM 1
+ 
+
+
+ SELECT STATEMENT..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ PODE USAR MÚLTIPLOS LEFT JOIN,
+
+E TAMBÉM 
+
+
+PODE MISTURAR 
+'LEFT JOIN'
+
+E 
+'INNER JOIN',
+
+
+
+
+
+
+
+
+PARA CONSEGUIR O RESULTADO APROPRIADO ..
+
+
+
+
+
+
+
+
+
+
+é claro que 
+
+VAI LEVAR UM PCO DE EXPERIÊNCIA 
+
+
+E PRÁTICA 
+
+PARA 
+
+SABER 
+
+COMO 
+
+CONSTRUIR 
+
+STATEMENTS CORRETOS,
+
+PARA 
+
+ATINGIR CERTOS RESULT SETS...
+
+
+
+
+
+
+
+
+
+--> PRATICAREMOS UM POUCO COM ESSE CURSO...
+
+
+
+
+
+
+
+
+
+
+-----> O PROFESSOR ADICIONA UM SEGUNDO 'LEFT JOIN',
+
+
+PARA 
+
+JOINARMOS TAMBÉM NOSSAS 'CITIES':
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM addresses AS a 
+LEFT JOIN users AS u ON a.id = u.address_id
+LEFT JOIN cities AS c ON;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS PRECISAMOS DO CRITÉRIO DE 'ON',
+
+desse outro LEFT JOIN...
+
+
+
+
+
+
+
+vamos usar provavelmente 
+
+
+
+
+
+
+a.city_id = c.id 
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+SELECT * 
+FROM addresses AS a 
+LEFT JOIN users AS u ON a.id = u.address_id
+LEFT JOIN cities AS c ON c.id = a.city_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+SE RODAMOS ISSO AÍ,
+
+
+
+ainda ficamos com 
+
+TODOS OS 'addresses',
+
+é claro,
+
+
+
+
+
+MAS AGORA TEREMOS 
+
+
+O 'city_name'
+
+LÁ NO FINAL DOS NOSSOS RECORDS...
+
+
+
+
+
+E PODERÍAMOS USAR O 
+
+
+'INNER JOIN'
+
+NO LUGAR DE 'LEFT JOIN',
+
+AQUI,
+
+que 
+
+isso 
+
+
+NÃO FARIA A MENOR DIFERENÇA --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... MAS É ESSENCIAL RESSALTAR QUE,
+
+
+
+
+
+
+
+PARA ESSE ÚLTIMO JOIN AÍ (seja ele LEFT JOIN/INNER JOIN),
+
+
+
+
+
+
+
+
+ESPECIALMENTE SE ELE É UM 'LEFT JOIN' (aí importa mesmo),
+
+
+
+
+
+
+
+
+A LEFT TABLE 
+
+SERÁ 
+
+CONSIDERADA __ COMO  ___ _ O RESULTADO _ 
+
+
+
+
+
+
+DAQUELAS 3 LINHAS ANTERIORES,
+
+OU SEJA:
+
+
+
+
+
+
+
+ 
+----------------
+SELECT * 
+FROM addresses AS a        ------------------------> ISTO É CONSIDERADO COMO A 'LEFT TABLE' daquele último 'LEFT JOIN' statement....
+LEFT JOIN users AS u ON a.id = u.address_id
+--------------
+LEFT JOIN cities AS c ON c.id = a.city_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE A 'LEFT TABLE'
+
+
+
+DESSE último 'left join'
+
+NAÕ 
+
+
+SERÁ 
+
+SOMENTE 
+
+
+AQUELE 'addresses' 
+
+lá do início,
+
+
+
+
+
+
+
+MAS __ SIM __ 
+
+
+
+O 'INTERMEDIATE RESULT SET'
+
+
+QUE VAMOS OBTER 
+
+
+DO 'addresses' left JOINADO com o 'users'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA SERÁ A NOVA 'LEFT TABLE',
+
+
+
+PARA ESSE ÚLTIMO 'LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO É MT IMPORTANTE DE ENTENDER:
+
+
+
+
+
+
+
+
+
+A LEFT TABLE DO ÚLTIMO 'LEFT JOIN STATEMENT'
+É SEMPRE 
+
+
+
+O 'RESULT SET'/combinação de todos os statements de 'LEFT JOIN'/'INNER JOIN'
+
+
+QUE TÍNHAMOS ANTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ESSA É REALMENTE UMA REGRA GERAL:
+
+
+
+
+
+
+
+
+PARA O PRIMEIRO 'LEFT JOIN'( de 'LEFT JOIN users ...') ,
+
+
+
+
+
+
+a left TABLE 
+
+TAMBÉM É CONSIDERADA COMO SIMPLESMENTE O 'RESULT SET QUE OBTIVEMOS ATÉ AGORA' (
+
+
+    que, nesse simples exemplo,
+
+    é realmente 
+    TODA A DATA DE ADDRESSES,
+
+    por meio de 'SELECT * FROM addresses AS a'
+)
+
+
+
+
+
+
+
+
+
+
+
+E ISSO VAI SENDO CONSTRUÍDO,
+
+STEP-BY-STEP,
+
+
+
+
+à MEDIDA QUE VOCÊ VAI ADICIONANDO MAIS JOIN STATEMENTS...
+
+
+
+
+
+
+
+
+
+-> SQL STATEMENTS PODEM FICAR CADA VEZ MAIS COMPLEXOS,
+SE VOCÊ MIXAR 
+
+
+CADA VEZ MAIS E MAIS JOIN STATEMENTS...
