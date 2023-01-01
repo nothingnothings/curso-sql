@@ -1,0 +1,419 @@
+
+
+
+
+
+
+
+
+
+
+
+
+NÓS JÁ ESTUDAMOS O 'INNER JOIN'... --> ELE SELECIONA E NOS DÁ TODA A 'MATCHING DATA'
+
+
+
+DE MÚLTIPLAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> E ISSO É IMPORTANTE,
+
+
+O 
+
+
+'INNER JOIN'
+
+
+NOS DAVA __ APENAS _ A 'MATCHING DATA' (ou seja,
+
+
+
+
+SÓ NOS RETORNA DATA QUE 
+
+
+SEJA CORRESPONDENTE,
+
+
+
+rows de 2 tables em que 
+o 
+
+
+'xxx_id' 
+
+de 1 table tem seu value EQUIVALENTE ao VALUE 'id'
+
+DE OUTRA TABLE... 
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+----> MAS TAMBÉM TEMOS OUTRA MANEIRA DE 'JOINING DATA'..
+
+
+
+
+
+
+
+
+UMA MANEIRA DE FAZER JOIN DE ROWS DE DIFERENTES TABLES...
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA MANEIRA É O 'LEFT JOIN'...
+
+
+
+
+
+--> O LEFT JOIN àS VEZES TAMBÉM É CHAMADO DE 'LEFT OUTER JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> A SINTAXE PARA O USO DE 'LEFT JOIN'
+
+
+
+
+
+
+É __ BEM SIMILAR__ ÀQUELA SINTAXE QUE TÍNAHMOS ANTES,
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SINTAXE 'INNER JOIN':
+
+
+
+
+
+SELECT u.id, u.first_name, u.last_name, a.street, a.house_number, a.city_id
+FROM users AS u
+    INNER JOIN addresses AS a ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SINTAXE LEFT JOIN:
+
+
+
+
+
+
+
+
+SELECT u.first_name, a.street, a.house_number,
+FROM addresses AS a
+LEFT JOIN users AS u ON u.address_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR SUBSTITUIU A KEYWORD DE 'INNER' 
+
+
+COM 'LEFT',
+
+ali embaixo....
+
+
+
+
+
+
+
+
+O PROFESSOR TAMBÉM SWITCHOU A ORDER DAS TABLES... (agora ESTAMOS SELECIONANDO 'addresses' ),
+
+
+E ESTAMOS JOINANDO O 'users'
+
+
+
+
+COM O 'addresses'. -----> A RAZÃO PARA ISSO É CLARA:
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR -_ VAI __ INCLUIR __ TODOS OS ADDRESSES  __ NO RESULT SET,
+
+
+EM VEZ DE 
+
+
+
+OMITIR AQUELES QUE NÃO SATISFIZERAM/não ficaram compreendidos 
+
+
+
+
+pela comparação 'table1.xxxx_id = table2.id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A RAZÃO PARA ISSO, NO CASO,
+
+É QUE 
+
+COM 'LEFT JOIN',
+
+A DATA 
+
+
+
+NA __ TABLe_ DA ESQUERDA ('addresses') 
+
+
+
+
+
+
+,
+
+
+
+
+
+na table QUE ESTAMOS SELECIONANDO COM 'SELECT * FROM',
+
+
+
+
+ELA 
+
+VAI 
+
+ TER ___ tODOS __OS SEUS ROWS INCLUÍDOS 
+
+
+
+ NO RESULT SET... (DESDE que você não tenha alguma CONDIÇÃO DE 'WHERE')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ '''ASSIM COMO INNER JOIN, O LEFT JOIN __ CONSIDERA MAIS DO QUE APENAS A 'LEFT TABLE'; 
+ CONSIDERA__ O ENTIRE RESULT SET__ QUE __ FOI DERIVADO_ _ ATÉ ___ A CLAUSE DE LEFT JOIN'' (o qual,
+ 
+ nesse nosso exemplo, é, apesar disso, realmente apenas a table de 'addresses')....'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... E AÍ, DA TABLE DA DIREITA (no caso, 'users'),
+
+
+
+a 
+
+table 
+QUE VEM DEPOIS DO 'LEFT JOIN',
+
+
+
+DESSA TABLE _ TEREMOS _ APENAS _OS 'MATCHING RECORDS'
+
+
+INCLUÍDOS..
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ISSO SIGNIFICA QUE 
+
+
+SE NÓS 
+
+TIVERMOS 
+
+
+
+
+
+1 
+
+USER 
+
+
+QUE 
+
+
+__ NÃO _ TEM UM 'ADDRESS_id',
+
+ 
+ POR EXEMPLO,.
+
+
+
+
+
+
+ aí 
+
+ ele 
+
+
+
+ REALMENTE NÃO SERIA PARTE DO RESULT SET (
+
+
+
+    pq  ELE DEPENDE DA LEFT TABLE,
+
+    DA TABLE PRIMEIRA, no caso... A QUE EXISTA na esquerda 
+
+    DO LEFT JOIN STATEMENT...
+ )
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS DA TABLE DE 'addresses',
+
+
+ TODOS OS ROWS SÃO INCLUÍDOS... 
+
+
+
+
+
+
+
+ --> ESSA É A TEORIA, MAS AGORA DEVEMOS VER ISSO EM AÇÃO...
