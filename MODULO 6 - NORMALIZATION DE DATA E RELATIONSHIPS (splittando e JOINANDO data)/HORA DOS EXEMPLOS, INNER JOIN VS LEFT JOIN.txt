@@ -35,3 +35,1404 @@ VAI INSERIR UM BOCADO DE DATA EXTRA..
 --->  
 
 ARQUIVOS '.SQL' para utilizarmos...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ADICIONEI VÁRIOS RECORDS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> agora temos mais data para 'play around'...
+
+
+
+
+
+
+
+
+AÍ CRIAMOS UM NOVO ARQUIVO 'MORE-JOINS',
+
+
+em que 
+
+vamos brincar mais com joins...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... DEVEMOS ESCREVER SELECT STATEMENTS COM 'JOIN' STATEMENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM cities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS SELECIONAR TODAS NOSSAS CITIES,
+
+
+
+MESMO SE ELAS NÃO TIVEREM 'NENHUM RELATED ADDRESS'...
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+SELECT * 
+FROM cities as c
+LEFT JOIN addresses as a ON c.id = a.city_id
+LEFT JOIN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS, PARA ESSAS CITIES,
+
+QUEREMOS REALMENTE 'FETCHEAR OS USERS QUE MORAM NESSAS CITIES'..
+
+
+
+
+
+
+(isso quer dizer que NÃO VAMOS QUERER FETCHEAR A 'ADDRESS DATA',
+
+
+MAS VAMOS QUERER FETCHEAR TODOS OS USERS 
+
+QUE MORAM EM TODAS ESSAS CITIES)...
+
+
+
+
+
+
+
+
+---> O PROFESSOR COMEÇA ESCREVENDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT name AS city_name
+
+
+ (pq o nome da column de 'name' em cities deverá ficar com esse nome melhor)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK.. AÍ VAMOS SELECIONAR ESSA COLUMN DE 'name'
+
+LÁ 
+
+
+DA TABLE DE 'cities'...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT c.name
+FROM cities as c
+LEFT JOIN addresses as a ON c.id = a.city_id
+LEFT JOIN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... SE RODAMOS ISSO, FICAMOS COM UMA LISTA DE TODAS NOSSAS CITIES:
+
+
+
+
+
+
+
+
+SELECT c.city_name
+FROM cities as c;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... 
+
+
+
+
+MAS NÃO É ISSO QUE QUEREMOS FAZER...
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS PEGAR TAMBÉM A 'DATA DE TODOS NOSSOS USERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, PODERÍAMOS JOINAR A DATA DAS CITIES COM NOSSOS 'USERS'...
+
+
+
+
+
+
+
+MAS O PROBLEMA, AQUI,
+
+É QUE NÃO EXISTE CONEXÃO DIRETA ENTRE 'CITIES' 
+
+E 
+
+'USERS'...
+
+
+
+
+
+
+
+
+
+
+
+----> NO USERS, A ÚNICA CONEXÃO QUE TEMOS É COM 'addresses' (que estão conectados às cities)...
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE SE VOCÊ QUER 'PEGAR TODOS OS USERS QUE MORAM NAS NOSSAS CITIES',
+
+
+
+TEREMOS 
+
+
+DE JOINAR 
+
+
+
+
+
+NOSSA DATA,
+
+ATRAVÉS DA TABLE DE 'addresses'... (com nossos 'users' AO FINAL)...
+
+
+
+
+
+
+
+VAMOS USAR UM 'INNER JOIN' AQUI,
+
+para começar... (vamos excluir os users que NÃO TEM NENHUM ADDRESS DEFINIDO , no caso)..
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+SELECT c.city_name
+FROM cities as c
+INNER JOIN addresses;
+
+
+
+
+
+
+
+
+
+
+
+--> JOINAMOS NOSSAS CITIES COM NOSSOS 'ADDRESSES',
+
+PQ ISSO É NECESSÁRIO,
+
+PARA 
+
+QUE 
+
+NA SEGUNDA 
+
+ETAPA 
+
+
+
+
+
+SEJA __POSSÍVEL O JOIN DOS ADDRESSES COM OS USERS...
+
+
+
+
+
+
+
+
+
+PRECISAMOS DA KEYWORD DE 'ON':
+
+
+
+
+
+
+
+SELECT c.city_name
+FROM cities as c
+INNER JOIN addresses AS a ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT c.city_name
+FROM cities as c
+    INNER JOIN addresses AS a ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+    --> SE QUEREMOS PEGAR 'APENAS VALUES DISTINTOS' desses records, podemos colocar 'DISTINCT' em 'SELECT'...
+
+
+
+
+
+
+
+
+
+
+    QUANDO DEFINIMOS UM 'JOIN',
+
+    SEMPRE PRECISAMOS DE 'ON' (
+
+        em que field deverá ser joinado isso aí...
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> O RESULTADO DO PROFESSOR FICA BEM DIFERENTE DO MEU:
+
+
+
+
+
+
+
+
+
+    London 
+    Berlin 
+    London 
+    New York 
+    Munich 
+    Munich 
+    Rome
+    New York 
+    Berlin 
+    London
+
+
+
+
+
+
+
+
+
+
+
+    A DATA DO PROFESSOR ESTÁ DIFERENTE...
+
+
+
+
+
+
+
+
+ISSO ACONTECE/ACONTECEU 
+
+justamente pq 
+
+
+
+
+ESTOU COM ALGUNS ROWS FALTANDO (é a data anterior)...
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+MAS O QUE INTERESSA É QUE TEMOS ALGUNS CITY_NAMES 
+
+QUE 
+
+ESTÃO DUPLICADOS...
+
+
+
+
+
+E OUTROS __ CITY_NAMES NEM MESMO SÃO VISTOS 
+
+
+
+(como 'TOKYO')...
+
+
+
+
+(ISSO ACONTECEU JUSATMENTE PQ ESTAMOS USANDO 'INNER JOIN'),
+
+
+
+
+
+
+que 
+
+
+
+
+
+É UM STATEMENT QUE 
+
+
+RETRIEVA 
+
+
+
+
+
+APENAS AS ROWS QUE 'TEMOS MATCHING DATA 
+
+EM AMBAS  AS TABLES.'....
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+
+'''CITIES QUE NÃO SÃO USADAS EM NENHUM ADDRESS'''
+
+
+NÃO SÃO INCLUÍDAS...
+
+
+
+
+
+
+
+POR OUTRO LADO,
+
+
+
+
+SE TEMOS MÚLTIPLOS ADDRESSES,
+
+
+MÚLTIPLAS 
+
+STREETS 
+
+NA MESMA CITY,
+
+
+
+
+
+
+
+AÍ FICAMOS COM MÚLTIPLOS ROWS (é por isso que temos 'washington dc' 2 vezees)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ISSO FICA MAIS CLARO SE INCLUÍMOS 'street' 
+
+
+
+NO RESULT SET,
+
+lá no SELECT:
+
+
+
+
+
+
+
+
+
+
+SELECT c.city_name, a.street
+FROM cities as c
+    INNER JOIN addresses AS a ON a.city_id = c.id;
+
+
+
+
+FICAMOS COM 2 RECORDS COM 'CITY_NAME'
+
+
+e 
+
+'street'
+
+IGUAIS,
+
+
+
+MAS N SÃO IGUAIS,
+
+PQ O QUE DIFERE É O 'HOUSE NUMBER'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É BEM COMUM ISSO:
+
+
+
+
+
+
+FICAR COM 'DUPLICATE ROWS'
+
+
+NO SEU RESULT SET... ---> ISSO PQ 
+
+TODA 
+
+
+A MATCHING 
+
+DATA 
+
+É 
+
+'JOINED TOGETHER',
+
+
+
+E ISSO 
+
+PODE RESULTAR 
+
+EM ROWS EXTRAS (
+
+
+
+
+ISSO PQ 
+
+
+
+os 2 rows de 'washington, dc' 
+
+
+são 
+
+
+2 DIFERENTES 'ADDRESS ROWS' 
+
+na table de addresses,
+
+
+e agora 
+
+estamos 
+
+MERGEANDO 
+
+
+ISSO TUDO COM A 'FITTING CITY DATA' ----> 
+
+
+
+
+
+É POR ISSO QUE A CITY DATA (city_name) 
+
+É DUPLICADA 
+
+PARA ESSES 2 ROWS DE 'ADDRESS'...
+
+)
+
+
+
+
+
+
+
+
+
+
+MAS VOCê DEVE TER EM MENTE QUE 'ESSA DUPLICATION ESTÁ ACONTECENDO APENAS NO RESULT SET,
+
+E NÃO NA ACTUAL TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, NO 'RESULT SET',
+
+
+AO CONTRÁRIO DA TABLE ORIGIANL,
+
+
+
+
+DUPLICATION 
+
+
+
+NÃO É UM PROBLEMA,
+
+PRINCIPALMENTE EM CASOS COMO ESSES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS AQUI ESTAMOS NOS PERDENDO ----> 
+
+
+
+
+
+
+
+
+
+ERA IMPORTANTE EXPLICAR ISSO,
+
+
+PQ MOSTRA COMO 
+
+
+OS JOINS FUNCIONAM.,..
+
+
+
+
+
+
+
+
+
+
+
+MAS NOSSO OBJETIVO ORIGINAL 
+
+
+
+
+
+
+
+
+NÃO É 'INCLUIR ADDRESS DATA'
+
+
+
+no result... 
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR TIRA  'a.street' e 'a.house_number'...
+
+
+
+do SELECT STATEMENT:
+
+
+
+
+SELECT c.city_name,
+    a.street
+FROM cities as c
+    INNER JOIN addresses AS a ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ---> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+    POR OUTRO LADO,
+
+    O GOAL É 
+
+    
+    INCLUIR 'TODAS AS CITIES',
+
+
+    MESMO 
+
+    SE ELAS NÃO TIVEREM 
+
+
+
+    'RELATED ADDRESS' ALGUM....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> PARA SATISFAZER ISSO,
+
+    PRECISAMOS DO 'LEFT JOIN',
+
+
+
+    PARA INCLUIR CIDADES COMO 'TOKYO' E 'WASHINGTON'...
+
+
+
+
+
+
+
+
+
+
+
+    DEVEMOS TROCAR PARA O 'LEFT JOIN',
+
+
+    QUE 
+
+
+    É O JOIN QUE VOCê SEMPRE USARÁ 
+
+    QUANDO VOCÊ QUER 
+
+    RETORNAR TODAS AS ROWS DE 1 TABLE,
+
+
+    AINDA QUE 
+
+    NÃO EXISTA MATCHING DATA 
+
+
+    EM RELAÇÃO A OUTRA TABLE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    COMEÇO TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT c.city_name
+FROM cities as c
+    LEFT JOIN addresses AS a ON a.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> MAS É CLARO QUE ISSO ESTÁ COMPLETO --> 
+
+PQ PRECISAMOS 
+
+
+
+DA USER DATA 
+
+
+nesse negócio...
+
+
+
+
+
+
+
+---> PARA CONSEGUIR A USER DATA 
+
+NESSE STATEMENT,
+
+O PROFESSOR COMEÇA COM UM 'INNER JOIN'...
+
+
+
+
+
+
+ex:
+
+
+
+
+SELECT c.city_name
+FROM cities as c
+    LEFT JOIN addresses AS a ON a.city_id = c.id
+    INNER JOIN users AS u ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS COMEÇAR COM ALGO ASSIM...
+
+
+
+
+
+
+
+--> OK, MAS ISSO FALHARÁ...
+
+
+
+
+
+
+
+
+
+
+
+
+-> PQ SÓ VAMOS RETORNAR 
+
+
+
+2 'city_names',
+
+
+
+
+E NAÕ TODOS OS CITY NAMES (pq usamos 
+'inner join' 
+
+em vez de 
+
+
+
+LEFT JOIN, e aí o negócio EXCLUI AS ROWS QUE NÃO SATISFAZEM OS CRITÉRIOS)...
+
+
+
+
+
+
+
+O QUE VAI NOS DAR O RESULTADO DESEJADO É ESTE STATEMENT:
+
+
+
+
+
+
+SELECT *
+FROM cities as c
+    LEFT JOIN addresses AS a ON a.city_id = c.id
+        LEFT JOIN users AS u ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'LEFT JOIN'
+
+
+
+TROUXE 
+
+
+
+
+TODOS OS 'CITY NAMES'..
+
+
+
+
+
+
+
+
+
+
+O FATO DE TERMOS 'INNER JOIN'
+
+
+por final
+
+
+
+ACABA 
+
+
+
+
+TRATANDO TODO O STATEMENT ANTERIOR COMO A 'LEFT TABLE'... ---> 
+
+
+
+ESSA LEFT TABLE TEM TODAS AS CITIES, SIM,
+
+
+
+MAS 
+
+COMO USAMOS UM 'INNER JOIN' POR ÚLTIMO,
+
+
+
+
+
+APENAS A 'FULL MATCHING DATA'
+
+É INCLUÍDA NO RESULT SET FINAL...
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE, SE QUEREMOS MANTER TODAS AS CITIES,
+
+
+PRECISAMOS 
+
+
+COLOCAR 'LEFT JOIN' POR FIM...
+
+
+
+
+
+
+
+
+
+
+
+
+GANHAMOS 'NULL' 
+
+
+
+em WASHINGTON, em 1 das rows,
+
+
+PQ 
+
+NÃO TEMOS NENHUM USER CORRESPONDENTE 
+
+
+A ESSE ENDEREÇO,
+
+
+
+
+específico... (
+
+
+
+    PQ FIZEMOS MERGE COM O 'ADDRESS' tambem, para sermos mais específicos... --> MESMO QUE NÃO TENHAMOS FEITO 'SELECT' DE COLUMNS DO PRÓPRIO 'addresses' table...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCê QUER UM RESULT SET SEM 
+
+'NULL VALUES'
+
+
+PARA O 'first_name' e etc,
+
+VOCÊ 
+
+
+
+
+
+PODE SIMPLESMENTE COLOCAR UM FILTER DE 
+
+
+'WHERE u.first_name IS NOT NULL';
+
+
+
+
+
+
+
+
+
+
+OK.. COM ISSO, ESTAMOS JOINANDO TODA DATA..
+
+
+
+
+
+
+
+--> E MESMO SE NÃO SELECIONAMOS TODAS AS COLUMNS,
+
+
+DE TODAS AS TABLES,
+
+
+NO SELECT STATEMNT,
+
+
+A DATA AINDA É 'JOINED TOGETHER',
+
+E AINDA 
+
+AFETA 
+
+O RESULT SET....
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ÀS VEZES É BOM ADICIONAR MAIS ALGUMAS COLUMNS AO RESULT_SET,
+
+PELO MENOS TEMPORARIAMENTE,
+
+
+
+PARA ENTENDER '''PQ CERTOS ROWS SÃO DUPLICADOS''',
+
+e
+ pq 
+
+ CERTOS 
+ rows 
+
+
+ podem acabar ficando com 'null values'...
+
+
+
+
+
+
+
+
+ --> COMO 'QUEREMOS TODOS OS RECORDS DE 1 DAS TABLES,'
+
+
+ precisamos usar o LEFT JOIN EM VEZ DE 'INNER JOIN'...
+
+
+
+
+
+
+
+ DEVEMOS VER COMO OS RESULT SETS 
+ ficam...
