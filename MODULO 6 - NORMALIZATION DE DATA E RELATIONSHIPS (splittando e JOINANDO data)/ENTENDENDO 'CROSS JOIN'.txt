@@ -1,0 +1,331 @@
+
+
+
+
+
+
+
+
+
+
+--> ALÉM DE 'INNER JOIN'
+
+
+
+E 'LEFT JOIN' (e right join, que é como o 'left join', mas raramente usado...),
+
+
+
+
+
+
+HÁ UM ÚLTIMO TIPO DE JOIN,
+
+QUE VOCê 
+
+
+VAI RARAMENTE USAR,
+
+QUE É O 
+
+
+'CROSS JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+-----> O PROFESSOR VAI NOS MOSTRAR COMO ISSO FUNCIONA:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVEMOS ISTo:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS QUERER FAZER CROSS JOIN DE 'USERS'
+
+com 
+
+
+
+
+
+'addresses'...
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, ESCREVEMOS 'CROSS JOIN'
+
+
+e então 'addresses'...
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT * 
+FROM users
+CROSS JOIN addresses;
+
+
+
+
+
+
+
+
+
+
+
+
+----> AO CONTRÁRIO DE TODOS OS OUTROS JOIN STATEMENTS,
+
+
+
+
+
+
+O 'CROSS JOIN' 
+
+
+__ NÃO PRECISA _ DE 
+
+
+'ON' para completar o statement..
+
+
+
+
+
+
+
+
+-> ELE NAÕ PRECISA DISSO __ JUSTAMENTE__ PQ 
+
+ELE 
+
+VAI 
+
+
+'JOINAR TODAS AS ENTRIES DA PRIMEIRA TABLE COM A SEGUNDA TABLE...'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... SE EXECUTAMOS ISSO,
+
+
+
+
+
+GANHAMOS UM RESULT SET __ SUUUUUPER LONGO,
+
+
+COM 'ALL THE POSSIBLE VALUE COMBINATIONS' (
+
+
+
+
+    TODAS AS COMBINATIONS, DE TODOS OS USERS,
+
+    COM TODOS OS ADDRESSES...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+
+
+
+
+O 'CROSS JOIN'
+
+
+
+MOSTRA RESULTS ATÉ MESMO QUANDO 'NÃO HÁ RELATION' ENTRE 1 address e 1 'user'...
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+'AGORA TEMOS ROWS QUE COLOCAM 'USERS' 
+
+DENTRO DE ADDRESSES EM QUE  _ELES NÃO VIVEM'' ---> TODOS OS VALUES SÃO JOINADOS 1 COM OS OUTROS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE O 'CROSS JOIN'
+
+
+CONSTRÓI AQUILO QUE É CHAMADO DE 'CARTESIAN PRODUCT'..
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT *
+FROM users
+    CROSS JOIN addresses; --- te entrega um result set COM TODAS AS POSSÍVEIS COMBINATIONS da relation entre o 'users' e o 'addresses' (é o CARTESIAN PRODUCT, OU SEJA, MOSTRA TODOS OS RECORDS POSSÍVEIS, toda as relations POSSÍVEIS, que não existem na table de verdade, mas que PODERIAM EXISTIR)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA FEATURE __ PODE SER ÚTIL__ QUANDO VOCÊ 
+
+ESTÁ TRABALHANDO COM MATHEMATICAL DATA
+
+
+E ENTÃO 
+
+
+VOCê 
+
+TEM 
+
+2 TABLES EM QUE VOCÊ QUER MULTIPLICAR TODOS OS VALUES CONJUNTAMENTE (
+
+    existem alguns outros use-cases, 
+
+    mas o cross-join 
+    é bem raro...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> OS JOINS MAIS IMPORTANTES SÃO REALMENTE O 'INNER JOIN'
+
+E 
+O 
+'LEFT JOIN'....
