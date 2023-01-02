@@ -1,0 +1,979 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ATÉ ESSE PONTO, NESSA COURSE-SECTION,
+
+
+
+
+
+JÁ APRENDEMOS UM MONTE SOBRE O CONNECT DE 
+
+
+
+DATA  
+
+
+
+
+
+
+
+COM A AJUDA DE 'COLUMNS'
+
+
+EM QEU 
+
+
+
+NOS REFERIMOS A VALUES EM OUTRAS TABLES (relations
+),
+
+
+
+
+
+
+
+
+E TAMBÉM 
+
+
+APRENDEMOS 
+
+
+
+A FAZER 
+
+
+JOIN DE DATA 
+
+
+EM RESULT SETS ESPECIAIS,
+
+
+
+TUDO POR MEIO DE 
+
+'LEFT' E 'INNER JOIN',
+
+
+QUE UTILIZAM ESSAS 'RELATED COLUMNS',
+
+
+
+QUE 
+
+
+
+EXISTEM EM DIFERENTES TABLES..
+
+
+
+
+
+
+
+
+
+
+
+
+MAS É IMPORTANTE MENCIONAR QUE 
+
+ESSAS COLUMNS,
+
+
+QUE 
+
+
+
+USAMOS 
+
+PARA CONECTAR DATA EM DIFERENTES TABLES,
+
+
+COMO 
+
+VISUALIZAMOS NESTE EXEMPLO:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(50) NOT NULL,
+    city_id SERIAL NOT NULL --- EIS O CÓDIGO EM QUESTÃO
+)
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY, ---eis o código em questão.
+    name VARCHAR(300) NOT NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ESSAS COLUMNS AÍ,
+
+
+AS COLUMNS DE 'city_id' 
+
+
+
+e etc 
+
+
+
+SÃO _ 'APENAS REGULAR COLUMNS'...  ------> 
+
+
+
+
+
+
+
+ELAS POSSUEM 1 COLUMN NAME,
+
+POSSUEM 1 DATA TYPE ('SERIAL'),
+
+
+podem OU NÃO TER UMA CONSTRAINT DE 'NOT NULL'... --> E PODEMOS REALMENTE 
+
+
+
+TRATÁ-LAS 
+
+COMO 
+
+
+COLUMNS COMUNS .... A ÚNICA COISA ESPECIAL SOBRE ELAS 
+
+É QUE 
+
+
+
+''NÓS SABEMOS QUE 
+
+
+
+OS VALUES QUE ARMAZENAMOS NESSAS COLUMNS VÃO EXISTIR COMO VALUES _ 
+
+EM OUTRAS TABLES''' ----> E, PARA SERMOS MAIS PRECISOS,
+
+
+VÃO EXISTIR 
+
+
+
+
+NAS COLUMNS 'PRIMARY KEY'
+
+
+
+DAS OUTRAS 
+
+TABLES...
+
+
+
+
+
+
+
+
+
+(
+    
+    ''''THOUGH, AS MENTIONED BEFORE, THIS IS NOT A HARD RULE. YOU CAN ESTABLISH 
+    RELATIONS WITH _ ANY__ COLUMNS... INCLUDING 
+    NON-PRIMARY KEY COLUMNS...'''
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---->
+
+
+
+
+
+EX:
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id SERIAL NOT NULL --- EIS O CÓDIGO EM QUESTÃO
+)
+
+
+
+
+
+
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(50) NOT NULL,
+    city_id SERIAL NOT NULL --- EIS O CÓDIGO EM QUESTÃO
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR EXEMPLO,
+
+
+sabemos que 
+
+
+OS VALUES ARMAZENADOS, EM 'users',
+
+
+NA COLUMN DE 'ADDRESS_ID',
+
+
+SERÃO 
+
+
+VALUES 
+
+TAMBÉM ENCONTRADOS 
+
+
+
+NA TABLE DE 'addresses',
+
+
+
+LÁ 
+
+
+
+NA COLUMN DE 'ID' (primary key)... --> E ISSO NÃO É UMA HARD RULE,
+
+
+
+MAS É 
+
+ASSIM QUE 
+
+
+NÓS TIPICAMENTE 
+
+ARMAZENAREMOS DATA,
+
+
+PARA QUE 
+
+EXISTA UMA SUCCESSFUL
+ 
+ CONNECTION 
+
+
+ ENTRE 
+
+
+
+ TABLES,
+ ENTRE 
+
+ 'USERS'
+
+ E 
+
+ 'ADDRESSES'...
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS O PROFESSOR AQUI, NO CASO,
+
+
+
+ QUER 
+
+ __DESTACAR_ QUE 
+
+
+
+
+
+ O uso da escrita 
+
+
+ 'address_id'
+
+
+
+ e a conexão dessa column 
+
+
+ com o field primary key 'id' 
+
+
+
+
+ DA TABLE DE 'addresses'
+
+
+
+ É APENAS __ UMA CONVENÇÃO.... -->  NÓS 
+
+ APENAS 
+
+
+
+
+
+
+
+ DEFINIMOS QUE 
+
+ 'PLANEJAMOS ARMAZENAR IDs 
+
+
+
+
+ que encontramos na COLUMN DE 'ids' 
+
+ de  ADDRESSES 
+
+ LÁ 
+
+
+
+ NA COLUMN DE ' address_id' dos users'...
+
+
+
+
+------------------------
+
+
+
+
+ NÓS PLANEJAMOS 
+
+ FAZER ISSO,
+
+ SIM,
+
+
+
+MAS __ NÃO EXISTE UMA HARD RULE PARA ISSO...
+
+
+
+
+
+
+
+
+
+--> E O PROFESSOR TAMBÉM DESTACA:
+
+
+
+
+
+
+
+
+''NÓS TAMBÉM USAMOS A PRIMARY KEY de ADDRESSES 
+
+
+
+COMO A FOREIGN KEY DE 
+
+'users',
+
+
+
+naquela column de 'address_id',
+
+
+
+
+
+MAS __ ISSO __ TAMBÉM 
+
+
+NÃO É UM 'MUST HAVE'...
+
+
+
+
+
+
+
+
+------> ISSO PQ 
+
+TAMBÉM PODERÍAMOS TER UMA 
+
+COLUMN COM UM NOME 
+
+
+COMO 
+
+
+'address_street',
+
+
+DE TYPE 
+
+
+
+
+
+'VARCHAR(300)',
+
+
+
+
+
+
+
+E EM QUE 
+
+
+
+ARMAZENAMOS/ARMAZENARÍAMOS 
+
+
+
+
+O VALUE DA COLUMN DE 'street',
+lá 
+
+de addresses,
+
+como 
+
+UMA FOREIGN KEY... ----->  ISSO SERIA ABSOLUTELY FINE,
+
+TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------> ENTRETANTO,
+
+É CLARO QUE 
+
+
+
+O USO DE 'PRIMARY KEYS'
+
+
+COMO 
+FOREIGN KEYS 
+
+É 
+
+
+O USE-CASE MAIS COMUM --> PQ __ ESSA PRIMARY KEY 
+
+É GARANTIDAMENTE 'UNIQUE',
+
+
+
+E 
+
+
+
+FAZ O 
+
+'CLEAR-MATCHING' DE ROWS DE DIFERENTES TABLES 
+
+
+
+BEM MAIS FÁCIL... -----------> 
+
+
+
+
+
+
+
+
+MAS VOCË AINDA PODE 
+
+
+
+
+
+
+USAR __ QUALQUER COLUMN___ 
+
+
+PARA DEFINIR UMA RELATION (
+
+
+
+
+
+
+    é por isso que poderíamos usar a column de 'street', lá em 'addresses',
+
+    para 
+
+    definir uma relation, TAMBÉM...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... mas é claro que se fizéssemos essa identifação por 'street',
+
+
+
+
+se tivéssemos 2 addresses com a mesma 'city',
+
+
+
+NÃO FICARIA 
+
+
+TÃO CLARO 'A QUAL DOS 2 ADDRESS O USER PERTENCE'... ---> 
+
+
+
+
+
+
+
+
+
+E É POR ISSO QUE O USO DE  'PRIMARY KEY'
+
+
+É MAIS RECOMENDADO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A ESSE PONTO,
+
+NO ENTANTO,
+
+
+
+
+
+
+
+
+NÓS _ REALMENTE _ PLANEJAMOS 
+
+
+
+
+
+
+ARMAZENAR 
+
+
+'address ids'
+
+
+LÁ 
+
+
+NA COLUMN 
+
+
+
+
+
+
+
+DE 'address_id',
+
+
+
+
+LÁ EM 'users'... --> MAS NÃO HÁ NADA QUE NOS FORCE A SEGUIR ISSO... ----> 
+
+
+
+
+
+
+
+
+
+NÃO HÁ NENHUM CHECK QUE NOS FORCE A 'ADICIONAR VALID IDS',
+
+
+LÁ 
+DA TABLE DE ADDRESSES,
+
+
+
+
+NA COLUMN DE 'address_id',
+
+
+DE NOSSOS RECORDS DA TABLE DE USERS (
+
+
+    pq podemos inserir users 
+
+
+    COM NÚMEROS/IDS que ainda não existem 
+
+    como addresses,
+
+    como 
+
+    25,
+
+    32,
+
+    46,
+
+    etc...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+-. ISSO PQ PODEMOS INSERIR QUALQUER INTEGER 
+
+NO 'address_id',
+
+
+
+
+
+
+MESMO SE ESSE VALUE AINDA NÃO EXISTE 
+
+
+
+COMO 'id' de 1 record 'address'
+
+
+na table de 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> PROFESSOR EXEMPLIFICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO (first_name, last_name, email, address_id)
+VALUES ('Max', 'Schwarz', 'max@tet.com', 100);
+
+
+
+
+
+
+--> ESSE CÓDIGO SERIA LIDO E REALMENTE INSERIRIA 
+
+
+
+ESSE RECORD 
+
+
+
+NA NOSSA TABLE DE USERS... MAS O PROBLEMA É QUE o address de id '100'
+
+EFETIVAMENTE 
+AINDA 
+INEXISTE --->  E NÃO HÁ 
+
+
+
+NENHUM CHECK 
+ 
+
+ NO NOSSO SISTEMA,
+
+ NO MOMENTO,
+ QUE 
+
+
+
+ IMPEÇA
+  
+
+  O USER/DESENVOLVEDOR DE INSERIR 
+
+  1 
+
+  RECORD 
+  COM ESSE ID 'INVÁLIDO'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ----> ISSO QUER DIZER QUE AGORA TEMOS UM 'USER ROWW'
+
+
+  COM UM INVALID ADDRESS...
+
+
+
+
+
+
+
+
+
+
+
+  --> MAS, DE NOVO,
+
+   DEPENDENDO DO QUE 
+   ESTAMOS  
+
+
+   CONSTRUINDO,
+
+
+
+
+   ISSO TALVEZ NÃO SEJA 
+
+   UM PROBLEMA... --> 
+   
+
+
+   MAS SE ALGUM DIA 
+
+
+
+   TENTARMOS FAZER `JOIN'
+
+
+   DA USER 
+
+   DATA 
+
+   COM A 'ADDRESS DATA',
+
+
+   POR MEIO DE 1 INNER JOIN,
+
+   
+
+   NÃO SERÁ ENCONTRADO 1 ADDRESS PARA ESSE USER,
+
+
+
+   JUSTAMENTE 
+
+   PQ 
+
+
+
+   NO MOMENTO NÃO 
+
+   
+   TEMOS 1 ADDRESS PARA ESSE ID...
+
+
+
+
+
+
+
+
+
+
+
+   --> É ISSO QUE O PROFESSOR MENCIONOU:
+
+
+
+   '''NÓS, NO MOMENTO, APENAS TEMOS A __ CONVENÇÃO,
+
+   A IDEIA DE QUE DEVEMOS __ ARMAZENAR VALUES DE ID 
+
+   corretos 
+
+   NESSe address_id do users, MAS __ NÃO 
+
+   TEMOS NADA QUE ATIVAMENTE 
+
+   NOS FORCE 
+
+
+   A USAR ACTUAL VALID VALUES, CHECKS ESPECÍFICOS'...
+
+
+
+
+
+
+
+
+
+
+
+
+   -----> E TAMBÉM TEMOS OUTROS PROBLEMAS COM NOSSO CURRENT APPROACH,
+
+   QUE 
+   SERÃO VISTOS AGORA...
