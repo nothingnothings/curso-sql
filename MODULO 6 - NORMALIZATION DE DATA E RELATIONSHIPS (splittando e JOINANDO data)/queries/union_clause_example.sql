@@ -42,3 +42,5 @@ SELECT id, street_name FROM addresses;  -- isso FUNCIONARÁ, pq os 2 'union tabl
 --- a data de 'street_name' vai acabar aparecendo na column de 'email' --> por isso é rara a utilização de 'UNION' para fazer append de data de 2 tables com DIFERENTES ESTRUTURAS (mas mesmo número de columns)...
 
 
+
+
