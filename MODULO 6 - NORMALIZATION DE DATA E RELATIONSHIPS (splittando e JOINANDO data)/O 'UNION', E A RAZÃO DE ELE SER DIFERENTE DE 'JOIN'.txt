@@ -1,0 +1,1706 @@
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> 
+
+
+
+
+
+
+
+
+
+  OK..
+
+
+
+
+
+
+
+
+  JOINS,
+
+  TANTO OS 
+
+
+  'LEFT JOINS'
+
+
+  COMO 
+
+
+
+  OS 'INNER JOIN',
+
+  'RIGHT JOIN'
+
+
+
+  E 
+
+
+  'CROSS JOIN',
+
+
+
+
+
+
+
+  SÃO 
+
+
+  TODOS ELES 
+
+  1 MANEIRA 
+
+
+
+
+  DE 
+
+
+  FAZER 'MERGE DE DATa' --> E SÃO UMA MANEIRA BEM COMUM,
+
+
+
+
+  PQ 
+
+  O USO 
+
+  DE 
+
+  'FOREIGN KEYS'
+
+
+
+
+  PARA _ SPLITTAR __ DATA AO LONGO DE MÚLTIPLAS TABLES É BEM COMUM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> É BEM COMUM FAZER ISSO, QUANDO TRABALHAMOS COM UM 'RDBMS'..
+
+
+
+
+
+
+
+
+
+
+
+  -> MAS OS 'JOIN'
+
+
+  NÃO SÃO A ÚNICA MANEIRA DE FAZER MERGE DE DATA,
+
+  QUANDO USAMOS O SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> ISSO PQ TAMBÉM TEMOS AS CLAUSES DE 'UNION',
+
+
+  QUE TAMBÉM É SUPORTADA PELO SQL (tODOS OS SQL ENVIRONMENTS)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR COLOCOU ALGO INTERESSANTE,
+
+
+
+
+
+
+
+
+
+
+' FALSE FRIEND: UNION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR CHAMA O UNION DE 'FALSO AMIGO',
+
+NESSE CONTEXTO,
+
+
+
+PQ 
+
+
+
+
+
+ELE _ _ FAZ_ _ ALGO TOTALMENTE DIFERENTE 
+
+
+DE 
+
+'JOIN',
+
+É ALGO TOTALMENTE DISTINTO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÃO É COMO 'JOINS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM 'UNION',
+
+
+PODEMOS COMBINAR __ MÚLTIPLOS RESULT SETS (
+
+
+    QUE VOCê 
+
+    CONSEGUE 
+
+    A PARTIR DE MÚLTIPLOS SELECT STATEMENTS...
+)
+
+
+
+EM 
+
+
+
+__aPENAS __ 1 ÚNICO RESULT SET...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER, EM OUTRAS PALAVRAS,
+
+
+QUE 
+
+'UNION'
+
+
+
+
+
+É UM STATEMENT QUE 
+
+FAZ ___ APPEND__ DE ROWS... APPENDA ROWS UNS AOS OUTROS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+''''UNION IS A CLAUSE THAT COMBINES MULTIPLE RESULT SETS __ INTO __ ONE _ RESULT 
+SET BY __ APPENDING ROWS'''...
+
+
+
+
+
+
+'''JOIN CLAUSES MERGE MULTIPLE TABLES INTO __ ONE __ RESULT SET __ BY __ APPENDING __________COLUMNS____''''
+
+
+
+
+
+
+
+
+
+------> POR OUTRO LADO, 
+
+ESSAS CLAUSES DE 'JOIN'
+
+
+ERAM ALL ABOUT O 
+
+'MERGE DE MÚLTIPLAS TABLES EM 1 ÚNICO RESULT SET POR MEIO DO __ APPEND DE ___ COLUMNS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM JOINS,
+
+VOCÊ ERA CAPAZ DE 
+
+
+
+
+ADICIONAR MAIS DATA AO  SEU RESULT SET POR MEIO 
+
+DO MERGE 
+DE 1 
+
+TABLE COM OUTRA -------> com isso,
+
+
+
+podemos 
+
+
+adicionar 
+
+'address data'
+
+AO 
+'user data' ---------->  OU SEJA,
+
+NOVAS COLUMNS,
+RELATIVAS 
+
+
+A ESSE 'ADDRESS DATA',
+
+eram adicionados ao result set... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> JÁ COM 'UNION TYPE',
+
+
+TUDO É DIFERENTE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM O 'UNION',
+
+
+PODEMOS __ USAR ___ OS RESULTS __ 
+
+
+
+
+
+
+DE 2 DIFERENTES 'SELECT STATEMENTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE FAZEMOS __ 2 QUERIES _EM CIMA DA TABLE DE USERS, DISTINTAS:
+
+
+
+
+
+
+
+
+
+
+
+
+id    first_name    last_name 
+1      Max          Schwarz 
+2      Manuel        Lorenz 
+
+
+
+
+
+id    first_name       last_name 
+3      Julie            Barnes 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> esses 2 'BOXES'
+
+fazem parte da MESMA TABLE,
+SIM,
+
+
+
+MAS SÃO CONSIDERADOS 
+
+'
+''''2 RESULT SETS DISTINTOS''' -------> SE QUEREMOS OS 'FUNDIR,'
+
+
+
+USAMOS 
+
+
+JUSTAMENTE O 
+
+
+
+
+'UNION',
+
+para aí 
+
+FAZER 'APPEND' DE 1 RESULT SET AO OUTRO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+(
+    SÃO DIFERENTES PQ SÃO ADVINDOS DE 2 DIFERENTES 'SELECT STATEMENTS')....
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS COMO É USADA A 'UNION CLAUSE'?
+
+
+
+
+
+
+
+
+
+
+--> É TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM users WHERE id < 3   
+UNION   ---- A CLAUSE DE 'UNION' É USADA PARA __ MERGEAR (fazer append) 1 RESULT SET COM OUTRO (podem até mesmo ser da mesma table; apenas devem ser result sets DIFERENTES, ADVINDOS DE 2 'SELECT X FROM' DISTINTOS)..
+SELECT * FROM users where id = 3;
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT * FROM users WHERE id < 3   
+UNION   ---- A CLAUSE DE 'UNION' É USADA PARA __ MERGEAR (fazer append) 1 RESULT SET COM OUTRO (podem até mesmo ser da mesma table; apenas devem ser result sets DIFERENTES, ADVINDOS DE 2 'SELECT X FROM' DISTINTOS)..
+SELECT * FROM users where id = 3;
+
+
+
+-- O UNION VAI _ RETORNAR UM RESULT SET FINAL, QUE SERÁ A COMBINAÇÃO DOS RESULT SETS QUE FORAM COMBINADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A CLAUSE DE UNION PODE SER ÚTIL SE VOCÊ TEM ROWS RETORNADOS POR 1 SELECT STATEMENT,
+
+
+E AÍ 
+
+
+VOCÊ 
+
+QUER MERGEAR 
+
+ESSES ROWS 
+
+COM OS ROWS 
+
+
+RETORNADOS POR OUTRO SELECT STATEMENT...
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ --> É UM USE-CASE NICHO, SIM,
+
+
+
+ MAS QUE EXISTE....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> OK...
+
+
+
+
+
+
+
+
+
+
+
+ --> É CLARO QUE A CLAUSE DE 'UNION'
+
+
+
+
+
+ FREQUENTEMENTE É MAIS ÚTIL
+
+
+ SE OS 
+
+ 2 RESULT SETS 
+
+
+ QUE SERÃO/SÃO COMBINADOS 
+
+
+
+
+
+
+
+ POSSUEM ___ AS MESMAS COLUMNS E DATA TYPES...
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO PQ __ SE VOCÊ ESTÁ TENTANDO COMBINAR 
+
+ 2 RESULT SETS 
+
+ DE 
+
+ 2 TABLES COMPLETAMENTE DIFERENTES,
+
+
+ COM COLUMNS TOTALMENTE DIFERENTES,
+
+
+ 
+
+ O UNION AINDA VAI FUNCIONAR,
+
+
+
+ MAS O RESULT QUE 
+
+
+ VOCÊ 
+
+ VAI CONSEGUIR 
+
+ CERTAMENTE NÃO SERÁ TÃO ÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+ E JÁ VEREMOS O UNION EM AÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ PARA CLARIFICAR, NOVAMENTE, A DIFERENÇA 
+
+ ENTRE 'UNION' 
+
+ E 'JOIN':
+
+
+
+
+
+
+
+
+
+
+
+ 1) COM JOIN,
+
+ VOCÊ TERIA 1 USE CASE COMO ESTE:
+
+
+
+
+
+
+
+
+ 
+id      name    address_id
+1      Max          1
+2      Manuel        2
+
+
+
+
+
+id    street            city
+1     TestStreet           Munich
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM O 'JOIN',
+
+VOCÊ TIPICAMENTE TERÁ 2 DIFERENTES TABLES,
+
+COM DIFERENTES STRUCTURES,
+
+
+
+
+
+COMO '1 TABLE DE USER E 1 TABLE DE ADDRESS'..--> 
+
+
+
+
+
+
+AÍ VOCÊ PODE/VAI 
+
+
+MERGEAR 
+
+
+ESSES RESULTS 
+
+
+
+EM 1 ÚNICO RESULT SET,
+
+
+
+OU PARA CRIAR 1 RESULT SET,
+
+QUE 
+
+VAI CONTER DATA DE 2 DIFERENTES TABLES (
+
+
+
+
+    e, no final, o que interessa é que fazemos append de COLUMNS...
+)
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT u.id, name, street, city
+FROM users as u
+INNER JOIN addresses AS a
+ON a.id = u.address_id;
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, FICAMOS COM UM RESULT SET ASSIM:
+
+
+
+
+id      name        street       city  
+1      Max          TestStreet   Munich
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> um RESULT SET QUE TEM TANTO 'USER' COMO 'ADDRESS' DATA...
+
+
+
+
+
+
+
+
+
+
+-----> OU SEJA,
+
+É DATA QUE NÃO CONTINHA ESSA ESTRUTURA, LÁ NAS TABLES...
+
+
+
+
+
+
+
+
+
+
+--> AQUI O PROFESSOR USOU 'INNER JOIN',
+
+
+MAS SERIA A MESMA IDEIA COM 'LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 'UNION'
+
+
+NÃO É UMA CLAUSE QUE VOCÊ USA 
+
+PARA 
+
+'RETORNAR DATA QUE FOI SPLITTADA AO LONGO DE MÚLTIPLAS TABLES'...
+
+
+
+
+
+
+
+  
+  -----> EM VEZ DISSO,
+
+
+  A CLAUSE DE 'UNION'
+
+
+  É USADA __ PARA __ ADICIONAR MAIS DATA,
+
+
+
+
+  TIPICAMENTE/GERALMENTE 
+
+
+
+  DA MESMA ESTRUTURA DA DATA INICIAL/PRIMÁRIA,
+
+
+
+
+  A
+   1 
+
+
+   RESULT SET QUE JÁ EXISTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ----> O PROFESSOR ESCREVE 1 EXEMPLO COM 'UNION'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ----> O PROFESSOR VAI QUERER CRIAR 1 UNION...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ELE ESCREVE:
+
+
+
+
+
+
+
+
+
+
+
+
+
+   SELECT * FROM users
+   WHERE id < 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   --> QUEREMOS PEGAR TODOS OS USERS COM O VALUE DE 'ID' INFERIOR A 3...
+
+
+
+
+
+
+
+
+
+
+
+   --> ESSE USE-CASE NÃO É TÃO COMUM,
+
+   MAS PODERIA SER SUBSTITUÍDO POR 'DATE', por exemplo...
+
+
+
+
+
+
+
+
+
+
+
+
+
+   EX:
+
+
+
+
+
+   
+
+
+   SELECT * FROM users
+   WHERE id < 3;
+
+
+
+
+
+
+
+
+
+
+--> OK, AGORA QUEREMOS JOINAR O RESULT DE 'SELECT * FROM USERS'
+
+
+
+COM _ O RESULTADO DE OUTRA 
+
+
+QUERY...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, O PROFESSOR ESCREVE 
+
+
+'UNION'
+
+
+E ENTÃO O OUTRO SELECT STATEMENT,
+
+
+
+
+QUE SERÁ 
+
+
+'WHERE id > 5'...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+   SELECT * FROM users
+   WHERE id < 3
+   UNION
+   SELECT * FROM users
+   WHERE id > 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... OS 2 RESULT SETS FORAM MERGEADOS EM 1 SÓ,
+
+COM A AJUDA DAA KEYWORD DE 'UNION'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE 
+
+ISSO É APENAS UM EXEMPLO..
+
+
+
+
+
+
+
+E PODERÍAMOS TER ESCRITO, NO FILTRO, ALGO ASSIM:
+
+
+
+
+
+
+
+
+
+ 
+
+
+   SELECT * FROM users
+   WHERE id < 3 OR id > 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+O USO DESSE 'OR'
+
+
+RENDERIA O MESMO RESULT SET DE ANTES... --> ISSO FAZ SENTIDO,
+
+
+
+
+
+
+
+
+
+
+
+PQ O 'UNION'
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> O UNION CLAUSE PODE SER ÚTIL EM 
+
+CENÁRIOS 
+
+
+EM QUE 
+
+VOCÊ TEM 
+
+
+1) 2 SELECT STATEMENTS MAIS COMPLEXOS 
+
+
+
+
+2) QUE VOCê QUER MERGEAR EM 1 ÚNICO RESULT SET....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS O FATO É QUE 
+
+
+'UNION'
+
+
+
+É BEM MENOS USADO DO QUE OS 'JOIN' STATEMENTS..
+
+
+
+
+
+
+
+
+
+
+OK..
+
+
+
+
+
+
+
+
+MAS AÍ O PROFESSOR COMENTA TUDO PARA FORA,
+
+PQ QUER NOS MOSTRAR OUTRO EXEMPLO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NESSE EXEMPLO,
+
+ELE TAMBÉM SELECIONA TUDO DE 'users',
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ENTRETANTO,
+
+
+
+ALI NO 'UNION',
+
+
+
+
+O PROFESSOR DECIDE RODAR 'UNION'
+
+PARA 
+
+MERGEAR TODOS OS ROWS DE 'users' (por causa do select statement)
+
+
+
+
+
+
+COM 
+
+
+
+OS ROWS DE 'addresses' ------> E ISSO, NO CASO,
+
+
+
+
+
+É AQUELA COISA de '''TENTAR JOINAR 2 DATA __dE 2 TABLES COMPLETAMETNE DIFERENTES,
+
+
+DE ESTRUTURAS DIFERENTS''' ------> 
+
+
+
+E SE TENTAMOS RODAR ISSO, 
+
+GANHAMOS UM ERROR:
+
+
+
+
+
+
+
+
+
+
+
+O ERROR É ::
+
+
+
+
+
+
+
+
+'ER_WRONG_NUMBER_OF_COLUMNS_IN_SELECT''' ----> 'THE USED SELECT STATEMENTS 
+
+
+HAVE A DIFFERENT NUMBER OF COLUMNS'...
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+ -----> OK... ISSO SIGFNIIC QUE QUANDO USAMOS 'UNION',
+
+
+ DEVEMOS ASSEGURAR QUE 'TEMOS O MESMO NÚMERO DE COLUMNS'
+
+
+ entre as 2 tables... ------------> isso FAZ SENTIDO, PQ 
+
+
+'''O UNION NÃO FAZ ADD DE OUTRAS COLUMNS,
+
+
+
+NÃO
+
+  FAZ ALGO INTERESSANTE COM ELAS''' --> em vez disso,
+
+
+
+
+
+a ÚNICA COISA QUE ELE FAZ É 'ADD ROWS' ----> 
+
+
+
+
+
+
+
+ELE ADICIONA ROWS, POR MEIO DO 'UNION'...  --> E __ O UNION NÁO PODE ADICIONAR ROWS 
+
+SE 
+
+
+
+
+1 DOS RESULT SETS TEM, POR EXEMPLO,
+
+
+
+
+
+
+
+
+
+
+
+
+
+se vocë temm 1 record com 5 letras, e outro com art,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok.. isso quer dizer que 
+
+
+
+NÁO PODEMOS USAR ÙNION`
+
+SE TIVERMOOS DEVIATING 
+ 
+
+
+ COLUMN COUNTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EMTRETANTO, E __POSSÍVEL 
+
+USAR 
+
+
+'UNION'
+
+
+COM DIFERENTES TABLE STRUCTURES/TYPESA,
+
+
+
+
+
+
+
+
+
+BASTA _ ASSEGURARMOS QUE TEMOS OS 'MESMOS VALUE COUNTS'...
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+Ex:
+
+
+
+
+
+
+
+
+
+
+SELECT first_name, email FROM users as u
+UNION
+SELECT ID, street, something FROM addresses;  -- isso não dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE SALGADINHOS..
+
+
+
+ --- SE VOCÊ TIVER UM NÚMERO DISTINTO DE FIELDS NESSA VERSÃO DE EXEMPLO E A VERSÃO ATUAL/DA GELADEIRA,  ESSE 'UNION ' NÃO VAI CONSEUGIR)....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ok... se fazemos isso  e salvamos ,
+
+
+
+
+
+ PERCEBEMOS QUE 
+
+
+ O 'address_Data
+ '
+ FOI SIMPLESMENTE APENSO AO 'USER DATA', logo depois do 'USER DATA... ----->  E ISSO NAÕ É MT ÚTIL,
+
+
+  
+  PQ AGORA TEMOS 
+
+
+
+
+
+
+
+  1 COLUMN DE 'first_name'
+
+  QUE 
+
+  INCLUI TAMBEM STREET NAMES (
+
+
+
+
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> vocÊ provalvemente vai usar union PARA  APPENDAR DATA COM DATA SIMILAR,
+  A UM 
+
+  RESULT SET...
