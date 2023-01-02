@@ -16,8 +16,29 @@ SELECT * FROM users  WHERE id > 5;
 
 SELECT first_name, email FROM users as u
 UNION
-SELECT ID, street, something FROM addresses;  -- isso não dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE SALGADINHOS..
+SELECT id, street_name, something FROM addresses;  -- isso não dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE COLUMNS..
 
 
 
- --- SE VOCÊ TIVER UM NÚMERO DISTINTO DE FIELDS NESSA VERSÃO DE EXEMPLO E A VERSÃO ATUAL/DA GELADEIRA,  ESSE 'UNION ' NÃO VAI CONSEUGIR)....
+
+
+
+SELECT * FROM users as u
+UNION
+SELECT * FROM addresses;  -- ESSA VERSÃO DA QUERY TAMBÉM NÃO dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE COLUMNS.. (E eles não tem, quando selecionamos com '*', nesse caso aí)
+
+ --- SE VOCÊ TIVER UM NÚMERO DISTINTO DE FIELDS ENTRE AS 2 TABLES QUE SERÃO UNIONZADAS,  ESSE 'UNION ' NÃO VAI FUNCIONAR)....]
+
+
+
+
+
+ SELECT id, email FROM users as u
+UNION
+SELECT id, street_name FROM addresses;  -- isso FUNCIONARÁ, pq os 2 'union tables' TERÃO MESMO NÚMERO DE COLUMNS... MAS O RESULT SET DESSA QUERY NÃO SERÁ TÃO ÚTIL, pq a 'address_data' vai ficar no lugar do 'first_name' column (vamos encontrar o nome das street no meio do field de 'name' dos users)...
+
+
+
+--- a data de 'street_name' vai acabar aparecendo na column de 'email' --> por isso é rara a utilização de 'UNION' para fazer append de data de 2 tables com DIFERENTES ESTRUTURAS (mas mesmo número de columns)...
+
+

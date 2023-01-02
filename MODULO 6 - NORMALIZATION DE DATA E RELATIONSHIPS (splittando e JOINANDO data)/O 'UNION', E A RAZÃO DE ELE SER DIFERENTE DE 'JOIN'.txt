@@ -1704,3 +1704,76 @@ SELECT ID, street, something FROM addresses;  -- isso não dará certo, pq os 2 
   A UM 
 
   RESULT SET...
+
+
+
+
+
+
+
+
+  EX:
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+SELECT first_name, email FROM users as u
+UNION
+SELECT ID, street, something FROM addresses;  -- isso não dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE COLUMNS..
+
+
+
+
+
+
+SELECT * FROM users as u
+UNION
+SELECT * FROM addresses;  -- ESSA VERSÃO DA QUERY TAMBÉM NÃO dará certo, pq os 2 'union tables' deverão ter o MESMO NÚMERO DE COLUMNS.. (E eles não tem, quando selecionamos com '*', nesse caso aí)
+
+ --- SE VOCÊ TIVER UM NÚMERO DISTINTO DE FIELDS ENTRE AS 2 TABLES QUE SERÃO UNIONZADAS,  ESSE 'UNION ' NÃO VAI FUNCIONAR)....]
+
+
+
+
+
+ SELECT first_name, email FROM users as u
+UNION
+SELECT ID, street FROM addresses;  -- isso FUNCIONARÁ, pq os 2 'union tables' TERÃO MESMO NÚMERO DE COLUMNS... MAS O RESULT SET DESSA QUERY NÃO SERÁ TÃO ÚTIL, pq a 'address_data' vai ficar no lugar do 'first_name' column (vamos encontrar o nome das street no meio do field de 'name' dos users)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NESSE CASO DE 'número de coluns igual, mas diferentes TIPOS de columns' (como 'first_name, last_name' na table de USERS, e 'street_name, house_number' na table de ADDRESSES --> pq isso vai fazer com que algo como a data/values de 'street_names' aparecam na column de 'first_name' do user, por exemplo)...
