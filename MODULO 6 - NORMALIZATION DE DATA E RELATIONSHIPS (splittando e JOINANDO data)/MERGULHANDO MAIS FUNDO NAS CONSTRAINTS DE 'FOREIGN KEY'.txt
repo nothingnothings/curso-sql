@@ -1,0 +1,397 @@
+ 
+
+
+
+
+
+
+
+
+
+
+ --> OK...
+
+
+
+
+
+
+
+
+ PARA VISUALIZAR A CONSTRAINT DE 'FOREIGN KEY'
+
+
+ EM AÇÃO,
+
+
+ TERÍAMOS/TEMOS DE UPDATAR 
+
+
+
+ AS NOSSAS TABLES....
+
+
+
+
+
+
+
+
+ OU, ENTÃO, PARA 
+
+ ESSE EXERCÍCIO,
+
+
+
+ O PROFESSOR VAI DROPPAR 
+
+
+ E RECRIAR NOSSAS TABLES...
+
+
+
+
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+
+
+ DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR VAI DROPPAR E RECRIAR ESSAS 3 TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ALTERAR ESSAS TABLES TBM SERIA UMA OPÇÃO,
+
+
+MAS VEREMOS 
+
+
+ISSO 
+
+NA PRÓXIMA AULA...
+
+
+
+
+
+
+
+
+
+--> OK... O PROFESSOR ENTÃO 
+
+
+
+
+
+RODA O STATEMENT DOS DROPS, NADA DE MAIS...
+
+
+
+
+
+
+
+--> COM ISSO ACABADO,
+O PROFESSOR ADICIONA 
+
+
+O CÓDIGO DE 'CREATE TABLES WITH REFERENCES' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'REFERENCES'
+
+
+
+
+É A CONSTRAINT QUE 
+
+
+NOS PERMITE 
+
+
+
+CRIAR A 'CONSTRAINT DE FOREIGN KEYS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+FICAMOS COM ESTES CREATE STATEMENTS, DE INÍCIO:
+
+
+
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id VARCHAR(300) NOT NULL,
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO.. E AGORA O PROFESSOR QUER MANIPULAR ESSES STATEMENTS DE 'CREATE TABLE'...
+
+
+
+
+
+
+
+
+--> QUER OS MANIPULAR PARA QUE PASSEM A USAR ESSAS CONSTRAINTS DE 'FOREIGN KEY'...
+
+
+
+
+
+
+
+
+
+--> COMEÇAMOS PELO 'users'...
+
+
+
+QUEREMOS QUE O 'address_id'
+
+
+
+
+
+ACTUALLY SE REFIRA 
+
+
+AO FIELD DE 'id'
+
+
+EXISTENTE NA TABLE DE 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+------> PARA ISSO,
+
+USAREMOS 
+
+
+A CONSTRAINT DE 'REFERENCES'..
+
+
+
+--> TIPO ASSIm:
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+
+address_id INT REFERENCES addresses(id) 
+
+)
+
+
+
+
+
+
+
+
+-----> CERTO....
+
+
+MAS É CLARO QUE SÓ ISSO NÃO BASTA....
+
+
+
+
+
+
+
+O CÓDIGO VAI FICANDO ASSIM:
+
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id) NOT NULL, ---- eis o código em questão.
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+OK... FICAMOS COM ESSA CONSTRAINT DE 'REFERENCES'...
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR NOS EXPLICA QUE ESSA COLUMN DEVERÁ REMOVER A CONSTRAINT DE 'NOT NULL',
+
+POR ISSO FICA ASSIM:
+
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id), ---- eis o código em questão.
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
