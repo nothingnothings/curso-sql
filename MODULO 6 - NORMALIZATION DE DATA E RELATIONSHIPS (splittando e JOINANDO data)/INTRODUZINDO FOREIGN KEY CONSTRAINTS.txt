@@ -1,0 +1,825 @@
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA ÚLTIMA LIÇÃO, O PROFESSOR EXPLICOU 
+
+
+
+SOBRE COMO 
+
+
+
+NÓS ATUALMENTE HANDLAMOS NOSSAS RELATIONS 
+
+E 
+
+
+
+1 PROBLEMA EM POTENCIAL QUE 
+
+
+ENFRENTAMOS,
+
+COM ESSA MANEIRA ESPECÍFICA (nenhum 'enforce' da validade da 'primary key' de 1 table em relação a 1 'xxxx_id' column de outra table...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> E O PROFESSOR QUER VOLTAR A ESSE PROBLEMA AQUI,
+
+E TAMBÉM MOSTRAR UMA SOLUÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+----> NO MOMENTO, ESTAMOS 
+
+LIDANDO COM PROBLEMAS 
+
+RELACIONADOS COM NOSSA 'DATA INTEGRITY', QUANDO O ASSUNTO É 'RELATED DATA'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, BASTA VER ESTE SLIDE:
+
+
+
+
+
+
+
+
+
+
+
+addresses 
+
+
+
+id   street   house_number    
+
+
+
+1   TestStreet   10a
+
+2   Some street    5
+
+
+3    My Street     18
+
+
+
+
+
+
+
+
+
+users 
+
+
+
+
+id  first_name   ... address_id 
+
+
+1    Max                1
+
+
+2   Manuel             3
+
+
+
+
+
+
+
+
+
+
+
+--> OK, TEMOS 2 USERS QUE REALMENTE APONTAM A ADDRESSES QUE EXISTEM NA TABLE 
+
+DA ESQUERDA... (
+
+    isso quer dizer que temos relationships CORRETAS,
+
+    NESSE SAMPLE...
+)
+
+
+
+(
+
+
+    MAS NO ÚLTIMO EXEMPLO,
+
+    CRIAMOS 1 USER COM ADDRESS, id_address,
+
+    inválido...
+)
+
+
+
+
+
+
+
+
+
+
+
+--> MAS MESMO NESSE CASO,
+
+EM QUE 
+
+
+
+TEMOS VALID RELATIONS E WORKING RELATIONS,
+
+
+
+MESMO NESSE CASO,
+
+
+O QUE 
+
+
+
+
+ACONTECERÁ 
+
+
+
+
+SE ACTUALLY _ _ DELETARMOS__ A 'RELATED DATA'?
+
+
+
+
+
+
+
+
+
+
+--> NESSE EXEMPLO, SÃO OS FIRST E THIRD ADDRESSES QUE 
+
+POSSUEM RELAÇÃO COM ESSES USERS...
+
+
+
+
+
+
+
+
+
+--> MAS O QUE acontece
+
+
+
+SE DELETAMOS ESSE PRIMEIRO ADDRESS?
+
+
+
+
+
+
+
+
+-->  NESSE CASO,
+
+O 'ADDRESS_ID'
+
+
+
+
+
+
+
+DO USER DE 'MAX',
+
+
+que é este:
+
+
+
+
+
+
+id  first_name   ... address_id 
+
+
+1    Max                1
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAI FICAR APONTANDO A UM ADDRESS QUE __ NÃO EXISTE MAIS_...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> isso ocorre exatamente como na última lecture,
+
+
+
+em que 
+
+adicionamos 1 novo user,
+
+com 1 address_id 
+
+que
+
+ NÃO EXISTIA/EXISTE..
+
+
+
+
+
+
+
+
+
+
+ --> MAS AGORA, COM ISSO, FICAMOS COM UM PROBLEMA 
+
+
+
+
+ COM NOSSO CÓDIGO/DATA,
+
+
+ PQ FICAMOS COM UMA RELATION QUE 
+
+ NÃO FUNCIONA MAIS...
+
+
+
+
+
+
+
+
+
+
+
+ --> É CLARO QUE 
+
+
+
+
+PODERÃO EXISTIR USE-CASES E APPS 
+
+
+
+EM QUE 
+
+
+ISSO NÃO É UM PROBLEMA,
+
+
+
+MAS FREQUENTEMENTE SERÁ UM PROBLEMA... --> 
+
+
+
+
+
+
+
+
+E, É CLARO,
+
+
+
+POR ISSO SER FREQUENTEMENTE 1 PROBLEMA,
+
+
+
+SQL DATABASE SYSTEMS 
+
+
+E O SQL STANDARD 
+
+
+
+POSSUEM 
+
+UMA SOLUÇÃO PARA NÓS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------> PODEMOS SETTAR 'REFERENTIAL INTEGRITY',
+
+
+
+POR MEIO DE 'FOREIGN KEY CONSTRAINTS' --> COM ISSO,
+
+
+
+FAZEMOS A FOREIGN KEY SER UM POUCO MAIS 'OFICIAL'
+
+
+
+
+DO QUE O QUE TÍNHAMOS ANTES...
+
+
+
+
+
+
+
+
+
+
+
+---> PODEMOS FAZER ISSO POR MEIO DO __ ADD __ DE MAIOR QUANTIDADE DE 'CONFIGURATION'
+
+
+
+QUANDO CRIAMOS/ALTERAMOS UMA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE users (
+
+    ...
+    address_id INT REFERENCES addresses (id) ON DELETE CASCADE
+    ...
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA SERMOS PRECISOS:
+
+
+
+
+
+
+
+
+
+QUANDO DEFINIMOS UMA TABLE,
+
+
+
+NO MOMENTO EM QUE COLOCAMOS NAME E DATA TYPES ÀS COLUMNS,
+
+
+
+NÓS 
+
+TAMBÉM PODEMOS COLOCAR A CLAUSE DE 'REFERENCES', 
+
+
+
+
+
+QUE NA VERDADE É A __ _CONSTRAINT___ 
+
+
+
+DE 'REFERENCES'...
+
+
+
+
+
+
+
+
+
+
+
+THE 'REFERENCES CONSTRAINT'... 
+
+
+
+
+
+
+
+
+
+
+------> ESSA CONSTRAINT É COMO AS OUTRAS CONSTRAINTS,
+
+
+COMO 'NOT NULL' OU 'CHECK'...
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+COM ESSA 
+
+CONSTRAINT DE 'REFERENCES',
+
+
+PODEMOS 
+
+
+
+
+
+DEFINIR 
+
+
+
+
+'''A QUAL OUTRA TABLE,,
+
+
+E COLUMN NESSA TABLE,
+
+
+ESSA COLUMN DE __ ADDRESS_ID, nesse exemplo,
+
+
+DEVERÁ
+
+
+SE REFERIR''' ------->  
+
+
+
+
+
+
+
+AQUI, NESSE EXEMPLO,
+
+
+
+DIRÍAMOS QUE 
+
+
+
+A COLUMN DE 'address_id', que faz parte da 
+
+
+TABLE DE 'users',
+
+
+
+DEVERÁ __ APONTAR/ser 'related to' 
+
+
+
+
+
+
+A COLUMN DE 'id' 
+
+
+
+
+(
+
+    'addresses(id')
+)
+
+
+
+
+
+
+LÁ NA TABLE DE 'addresses'... ---> É ASSIM QUE LEMOS ISTO...
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+CREATE TABLE users (
+
+
+    <field_da_table_1> INT REFERENCES <table_2> (<field_da_table_2>) ON DELETE CASCADE
+)
+
+
+
+
+
+
+
+
+
+--> SERÁ TIPO ASSIM, BASICAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE HÁ MAIS, NESSE PEQUENO EXEMPLO...
+
+
+
+
+
+TEMOS TAMBÉM AQUELA PARTE DE 'ON DELETE CASCADE',
+
+
+
+
+
+
+
+
+
+
+
+E COM 'ON DELETE',
+
+E TAMBÉM 
+
+COM 
+
+'ON UPDATE',
+
+
+
+
+PODEMOS DEFINIR 'O QUE DEVE ACONTECER __ COM 1 DATA ENTRY,
+
+COM 1 ROW,
+
+
+__ SE _a 'RELATED ENTRY', o 'related row',
+
+
+
+É DELETADO OU UPDATADO'''....
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+PODEMOS DEFINIR 
+
+
+'''QUAIS ACTIONS DEVERÃO SER REALIZADAS 
+
+
+A PARTIR DO DELETE/UPDATE 
+
+DAQUELE FIELD 
+
+QUE ESTÁ SE COMUNICANDO COM O FIELD DA OUTRA TABLE'''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> POR EXEMPLO, COM 
+
+
+'CASCADE',
+
+
+
+
+O QUE ACONTECE É ___ O 'DELETE DE TODOS OS ROWS 
+
+NA TABLE DE USERS QUE __ TINHAM ESSE ID/REFERENCIA A ESSA ENTRY DA OUTRA TABLE, POR MEIO 
+
+DO VALUE DAQUELA COLUMN'...
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE ___ SE O ADDRESS VINCULADO àQUELE USUÁRIO FOR APAGADO,
+
+O USUÁRIO EM SI SERÁ APAGADO TAMBÉM...
+
+
+
+
+ 
+ --> VEREMOS ISSO EM AÇÃO NOS PRÓXIMOS MINUTOS...
+
+
+
+
+
+
+
+ COM ESSA FEATURE,
+
+
+
+ COM A FEATURE DESSA 
+
+
+ 'FOREIGN KEY CONSTRAINT' (que é realmente essa constraint de 'REFERENCES'),
+
+
+
+
+
+
+
+ PODEMOS FAZER ESSA RELATION SER MAIS 'OFICIAL',
+
+
+ PQ PODEOMS CONTROLAR 
+
+
+ '''O QUE DEVE ACONTECER SE RELATED DATA __ É ALTERADA __ OU DELETADA''...
+
+
+
+
+
+
+
+
+
+
+ --> ALÉM DISSO,
+
+
+ COM ESSA CONSTRAINT,
+
+
+
+ VAMOS TAMBÉM __ RECEBER__ ERRORS_ __
+
+
+ SE TENTAMOS INSERIR DATA 
+
+ QUE __ NÃO APONTA à 'RELATED DATA'... (o que é ótimo)...
+
+
+
+
+
+
+
+
+
+
+ --> DEVEMOS VISUALIZAR ISSO EM AÇÃO...
