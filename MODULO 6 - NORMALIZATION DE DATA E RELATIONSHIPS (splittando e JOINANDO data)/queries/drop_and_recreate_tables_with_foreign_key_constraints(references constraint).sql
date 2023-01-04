@@ -19,3 +19,64 @@ CREATE TABLE cities (
     id SERIAL PRIMARY KEY,
     name VARCHAR(300) NOT NULL,
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SIDE NOTE: SE VOCÊ 
+
+-- QUER FAZER UMA RELATION DESSA COLUMN COM __ A 'PRIMARY KEY'
+
+
+
+-- DA OUTRA TABLE,
+
+-- DIRETAMENTE,
+
+
+-- VOCê 
+
+
+-- PODE SIMPLESMENTE OMITIR ESSA ESPECIFICAÇÃO (esse '(id)' ),
+
+
+
+-- TIPO ASSIM:
+
+
+
+
+
+
+
+
+-- '''''''''''''''''''''''''
+
+-- address_id INT REFERENCES addresses
+
+-- ''''''''''''''''''''
+
+
+
+
+
+-- --> SE VOCÊ QUER __ SETTAR_ _ UMA RELATION __ COM A PRIMARY KEY DESSA TABLE,
+
+
+
+
+-- ISSO É FINE...

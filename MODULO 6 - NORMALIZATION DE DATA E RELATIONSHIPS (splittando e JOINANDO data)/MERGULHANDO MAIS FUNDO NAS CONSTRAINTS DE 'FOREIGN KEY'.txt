@@ -395,3 +395,824 @@ CREATE TABLE cities (
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... VAMOS COLOCAR A CONSTRAINT DE 'REFERENCES',
+
+
+
+E AÍ 
+
+
+PRECISAMOS ESPECIFICAR ' A QUE TABLE ESSA COLUMN DEVERÁ 
+
+
+SER RELACIONADA'... -> COLOCAMOS 'id',
+
+
+PQ 
+
+SERÁ ISSO AÍ MSM...
+
+
+
+
+
+
+
+
+
+
+
+--> SIDE NOTE: SE VOCÊ 
+
+QUER FAZER UMA RELATION DESSA COLUMN COM __ A 'PRIMARY KEY'
+
+
+
+DA OUTRA TABLE,
+
+DIRETAMENTE,
+
+
+VOCê 
+
+
+PODE SIMPLESMENTE OMITIR ESSA ESPECIFICAÇÃO (esse '(id)' ),
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+'''''''''''''''''''''''''
+
+address_id INT REFERENCES addresses
+
+''''''''''''''''''''
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ QUER __ SETTAR_ _ UMA RELATION __ COM A PRIMARY KEY DESSA TABLE,
+
+
+
+
+ISSO É FINE...
+
+
+
+
+
+
+
+
+
+
+---> ESSE É O CASO AQUI, CLARO,
+
+
+MAS O PROFESSOR QUER MESMO ASSIM DEFINIR ISSO COMO 'addresses (id)',
+
+
+
+
+PQ QUER NOS MOSTRAR  A SINTAXE COMPLETA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI SETTAR NOSSA RELATION... 
+
+
+
+
+
+
+
+
+
+-> E JÁ COM ISSO,
+
+
+NÓS NÃO VAMOS SER  CAPAZES DE FAZER 'INSERT' DE USERS __ QUE 
+
+
+
+
+
+POSSUAM VALUES DE 'address_id'
+
+
+
+QUE NÃO 
+
+
+EXISTEM/AINDA NÃO EXISTEM LÁ EM 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok, isso já é bem bom...
+
+
+
+
+
+
+
+
+
+
+--> ESSAS ACTIONS DE INSERT SERIAM BLOCKEADAS,
+
+
+E 
+
+APENAS SERÍAMOS CAPAZES/SEREMOS CAPAZES 
+
+
+
+
+
+DE INSERIR NOVOS USERS __ COM __ 
+
+
+
+VALUES DE 'address_id'
+
+
+
+
+
+
+QUE 
+
+
+
+JÁ EXISTAM LÁ NA COLUMN DE 'PRIMARY KEY'
+
+
+
+da table de 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR TAMBÉM QUER DEFINIR
+
+
+ESSA COLUMN 
+
+
+
+DE MODO ___ QUE __ 
+
+ELA TAMBÉM SEJA UPDATADA E HANDLADA 
+
+
+
+CORRETAMENTE _ _SEMPRE QUE __ 
+
+
+1 
+
+'RELATED ADDRESS'
+
+
+FOR ALTERADO (
+
+    ou seja,
+
+
+    cases em que 
+
+
+''''1 RELATED ADDRESS É/FOI DELETADO''',
+
+
+
+OU ENTÃO 
+
+
+''''1 RELATED ADDRESS FOI UPDATADO''' (apesar de essas actions de update de VALUES de 'id', de values de id primary key, serem INCOMUNS)...
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS O QUE IMPORTA É QUE 
+
+
+
+
+
+__ESSAS ACTIONS PODEM SER 
+
+
+CONFIGURADAS,
+
+COM:
+
+
+
+
+
+
+1) ON DELETE --> VEM ANTES... É USADO PARA _ CONFIGURAR '''O QUE DEVE ACONTECER SE O RELATED RECORD, O RECORD RELACIONADO A ESSA COLUMN, FOR DELETADO'''.
+
+
+
+
+
+
+
+
+
+2) ON UPDATE ----> VEM DEPOIS .. ---> É USADO PARA DEFINIR/CONFIGURAR 'O QUE DEVE ACONTECER SE O RELATED ADDRESS FOR ALTERADO', ou seja, se o value do 'id' daquele related address FOR ALTERADO...
+
+
+
+
+
+
+
+
+
+
+
+
+OK... É ISSO QUE PODEMOS DEFINIR AQUI...
+
+
+
+
+
+
+
+
+
+
+
+MAS ISSO NOS TRAZ UMA PERGUNTA:
+
+
+
+
+
+'''QUE AÇÕES PODEMOS DEFINIR, 
+
+
+AÇÕES QUE PODEM OCORRER, A PARTIR DE __ ON DELETE?'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OBSERVAÇÃO:
+
+
+
+
+
+
+
+''''ON DELETE'''' É O ALTERADOR BEM MAIS COMUM/FREQUENTE 
+
+
+
+
+QUE VOCÊ DEFINE,
+
+
+PQ __ VOCê RARAMENTE VAI UPDATAR OU ALTERAR __ 'RELATED VALUES'...
+
+(
+
+
+pelo menos quando você está APONTANDO A PRIMARY KEYS DE NOSSAS TABLES...
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE É BEM MAIS COMUM O 'DEAL WITH' 
+
+
+
+COM DELETED RELATED DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> 'UPDATED RELATED DATA',
+
+
+o define de actions a serem tomadas a partir dessa action,
+
+
+
+
+__ ACONTECE COM MAIOR FREQUÊNCIA 
+
+
+
+SE VOCÊ 
+
+ESTÁ 
+
+USANDO UMA 'NON-PRIMARY KEY VALUE' COMO __ _RELATED COLUMN,
+
+
+vinculada com essa constrinat de 'references'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK, MAS QUE ACTIONS PODEMOS DEFINIR/TRIGGAR, A PARTIR 
+
+DE 
+
+'ON UPDATE' E 'ON DELETE'?
+
+
+
+
+
+
+
+
+
+
+
+
+-> BEM, 
+
+
+TEMOS, DE INÍCIO:
+
+
+
+
+
+
+
+
+
+
+1) RESTRICT ------> 
+
+
+
+
+
+
+
+
+
+
+2) NO ACTION ------>
+
+
+
+
+
+
+
+
+
+
+
+
+
+OS 2 __ SÃO MT SIMILARES...
+
+
+
+
+
+
+
+
+
+
+
+
+2) NO ACTION ------> É ACTUALLY O ___dEFAULT__...
+
+
+-> É O DEFAULT, OCORRE QUANDO VOCÊ NÃO ESPECIFICA SETTINGS DE 'ON DELETE'  E 'ON UPDATE'..
+
+
+
+
+
+
+
+
+
+
+EM AMBOS OS CASOS,
+
+
+
+
+
+
+DE 'RESTRICT' E 'NO ACTION',
+
+
+
+
+
+
+O SQL/VOCÊ 
+
+
+
+
+
+
+
+
+__ É __ IMPEDIDO__ DE APAGAR 1 'RELATED RECORD'... --> 
+
+
+
+
+
+
+
+OU SEJA, O QUE ELE FAZ É 
+
+
+
+
+'''PREVENT THE INTENDED ACTION (EX: DELETING A RELATED ROW)''''...
+
+
+
+
+
+
+
+
+
+----> ISSO QUER DIZER QUE SE TENTAMOS DELETAR 1 ADDRESS QUE PERTENCE/ESTÁ RELACIONADO COM 
+
+
+1 DETERMINADO 'user' ( da outra table),
+
+
+ISSO 
+
+
+NÃO VAI FUNCIONAR...
+
+
+
+
+
+
+
+
+
+
+
+--> A DIFERENÇA ENTRE 
+
+
+
+'NO ACTION'
+
+
+e 
+
+
+
+'RESTRICT'
+
+
+
+
+
+
+
+É QUE 
+
+'NO ACTION' 
+
+
+
+
+É MENOS RÍGIDO (aceita o delete/update DO RECORD RELACIONADO, EM ALGUNS CASOS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> 'NO ACTION',
+
+
+o DEFAULT,
+
+
+
+
+É DIFERENTE... A DELEÇÃO/UPDATE PODE FUNCIONAR,
+
+ÀS VEZES,
+
+
+
+ISSO 
+
+
+
+
+SE A SUA OPERAÇÃO FAZ PARTE DE UMA 'OVERALL TRANSACTION',
+
+
+
+
+UMA TRANSACTION EM QUE O 'END RESULT'
+
+
+
+LEVA A __ UMA SITUAÇÃO EM QUE TEMOS 'CORRECT DATA ONCE AGAIN'...
+
+(
+
+    transactions são operações com várias etapas,
+
+    em que 
+
+
+    todas as etapas são executadas de 1 só vez,
+
+    como se fossem só 1 etapa....
+)
+
+
+
+
+
+
+
+
+
+MAS VEREMOS TRANSACTIONS EM UM COURSE SECTION FUTURO....
+
+
+
+
+
+
+
+
+
+
+
+POR FIM, DEPOIS DE 'RESTRICT' E 'NO ACTION',
+TEMOS 
+
+
+'CASCADE'...
+
+
+
+
+
+
+
+
+
+
+
+3) CASCADE -----> COM 'CASCADE',
+
+
+
+A ACTION É SIMPLESMENTE 
+
+
+
+__REALIZADA___ NA TABLE RELACIONADA ("related table")
+
+
+
+TAMBÉM... ---------------------------> ISSO QUER DIZER QUE 
+
+
+
+__ SE VOCÊ APAGAR__ O RECORD LÁ NA TABLE DE 'addresses',
+
+
+
+
+
+ISSO VAI __ APAGAR DIRETAMENTE O 'USER'
+
+QUE CONTINUA 
+
+UMA RELATION ÀQUELE ADDRESS ESPECÍFICO....
+
+
+
+
+(
+
+    "PERFORM THE SAME ACTION (e.g. deleting a related row) ON THE 
+    ROW WITH THE FOREIGN KEY'''...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... ALÉM DESSAS 3 OPTIONS,
+
+
+
+TEMOS MAIS ESSAS 2:
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) SET NULL  -------> COM 
+
+
+ O 'SET NULL',
+
+
+
+ VAMOS __ SIMPLESMENTE DEIXAR O VALUE _ DA FOREIGN KEY COMO 'NULL',
+
+
+ NA HIPÓTESE DO 'RELATED ROW' SER APAGADO (se o address é apagado, todos users com aquele address ficarão com 'NULL' nesse field)...
+
+
+
+
+
+
+
+
+
+
+
+5) SET DEFAULT ------> COM ESSA OPTION,
+
+
+
+VAMOS SIMPLESMENTE DEIXAR O VALUE DA FOREIGN KEY COMO 'DEFAULT',
+
+NA HIPÓTESE DO RELATED ROW SER APAGADO (
+
+    se o address é apagado,
+
+
+    TODOS USERS COM AQUELE ADDRESS FICARÃO COM O VALUE DEFAULT DEFINIDO PARA ESSA COLUMN,
+    nessa table específica...
+)
