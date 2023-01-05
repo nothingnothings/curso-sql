@@ -1,0 +1,1763 @@
+ 
+
+ DE VOLTA AO NOSSO ARQUIVO QUE VAI CRIAR UMA TABLE COM 
+
+
+
+
+
+
+ __ A CONSTRAINT DE REFERENCES,
+
+
+
+
+
+
+
+
+
+ EM QUE 
+
+
+
+ COMEÇAMOS A SETTAR 'FOREIGN KEYS DE VERDADE',
+
+
+
+
+ ESTAMOS COM ESTE CÓDIGO:
+
+
+
+
+
+
+
+ DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    -- address_id INT NOT NULL,
+    address_id INT REFERENCES addresses(id),
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK.... 
+
+
+
+
+
+
+ENTRETANTO, em 'address_id',
+
+
+PRECISAMOS DEFINIR 
+
+
+ACTIONS PARA 'ON DELETE'
+
+E 
+
+'ON UPDATE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ACTUALLY,
+
+NÃO NOS IMPORTAMOS MT SOBRE 'ON UPDATE',
+
+
+PQ 
+
+ESSE NÃO 
+
+SERÁ 
+
+
+UM CENÁRIO  
+
+
+MT COMUM, 
+
+
+QUANDO A HIPÓTESE É 'O USO DE UMA PRIMARY KEY DE OUTRA 
+
+
+TABLE COMO REFERENCE' ------> pq NÃO É PROVÁVEL
+
+
+O ATO 
+
+
+DE 
+
+'ALTERAR __ MANUALMENTE__ O ID __ 
+
+
+DE ALGUM ADDRESS NA TABLE DE ADDRESSES' (ESPECIALMENTE SE ESSA PRIMARY KEY É UM 'UNIQUE ID')..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> A 'PRIMARY KEY'
+
+
+
+
+DE 
+
+
+1 TABLE É MANAGEADA AUTOMATICAMENTE PARA NÓS (cada record incrementa 1),
+
+ 
+
+
+
+
+
+ E _ NÓS RARAMENTE DESEJAREMOS 
+
+
+
+ UPDATAR _ 
+
+
+ O VALUE 
+
+ DA 'PRIMARY KEY'
+
+
+ DE ALGUM RECORD,
+
+ EM QUALQUER TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ENTRETANTO, O OUTRO CASO,
+
+ DE 
+
+ 'DELETE',
+
+ É 
+
+
+ 1 QUE PODE ACONTECER,
+
+ E QUE É FREQUENTE..
+
+
+
+
+
+
+
+
+ --------->>>> SE DELETAMOS AQUELE 'REFERENCED RECORD',
+
+
+
+ algo deve acontecer na outra table (a que segura a reference),
+
+
+ EM CONTRAPARTIDA....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> NOSSAS OPÇÕES:
+
+
+
+
+ 1) 'NO ACTION' (é o default) --> não permite que você delete esse record, apenas se ESTIVER DENTRO DE 1 TRANSACTION, E O END RESULT FOR 'VÁLIDO'..
+
+
+
+
+
+
+
+
+ 2) RESTRICT -> É A MESMA COISA QUE 'NO ACTION', MAS AINDA MAIS RESTRITO (vai sempre bloquear)...
+
+
+
+
+
+
+ 3) CASCADE --> VAI APAGAR __ O __ RECORD ARMAZENADO NA TABLE COM A REFERÊNCIA (ou sjea, o 'user' que segura aquele address)...
+
+
+
+
+4) SET NULL --> vai definir o CAMPO De 'address_id' do USER como NULL...
+
+
+
+
+
+
+
+5) SET DEFAULT --> vai definir o campo do address_id do user como O DEFAULT VALUE, QUE VOCÊ JÁ DEVERÁ TER DEFINIDO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------>  OK..
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR COMEÇA COM 'RESTRICT':
+
+
+
+
+
+
+
+
+
+
+
+ DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    -- address_id INT NOT NULL,
+    address_id INT REFERENCES addresses(id) ON DELETE RESTRICT
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... O PROFESSOR QUER RODAR ESSE COMANDO DEFINIDOR AÍ,
+
+
+
+MAS __ 
+
+
+SE ELE TENTAR RODAR ISSO 
+
+
+AÍ,
+
+ 
+
+ ELE __ VAI IMEDIATAMENTE GANHAR UM ERRO:
+
+
+
+
+
+
+
+ 'relation addresses DOES NOT EXIST'''..
+
+
+
+
+
+
+
+
+
+ O PROBLEMA AQUI É SIMPLES:
+
+
+
+ ESTAMOS 
+
+
+ TENTANDO SETTAR 1 RELATION EM DIREÇÃO A UMA TABLE DE 'addresses' que 
+
+
+ SIMPLESMENTE AINDA NÃO EXISTE NA NOSSA DATABASE.... 
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ESTAMOS CRIANDO LOGO DEPOIS,
+
+ COMO VISTO AQUI:
+
+
+
+
+
+
+ 
+
+
+ DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    -- address_id INT NOT NULL,
+    address_id INT REFERENCES addresses(id) ON DELETE RESTRICT
+);
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS TEREMOS DE CRIAR ESSA TABLE DE 'ADDRESSES'
+
+
+ANTES,
+
+ EM OUTRAS PALAVRAS,
+
+
+ PARA QUE 
+
+ ESSA RELATION NÃO BUGUE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ------> ESSES STATEMENTS SÃO EXECUTADOS EM ORDEM,
+
+ DE CIMA PARA BAIXO....
+
+
+
+
+
+
+
+
+
+
+ --> ASSIM QUE VOCÊ ESTÁ 'SÉRIO' SOBRE AS FOREIGN KEYS E AS DEFINIU,
+
+
+
+
+
+
+ VOCê 
+ DEVE 
+
+
+ SE ASSEGURAR DE QUE 
+
+
+ AS TABLES A QUE VAMOS QUERER NOS 'REFERIR'
+
+
+ JÁ EXISTEM NO NOSSO BANCO,
+
+ ANTES 
+
+
+
+
+ DE SETTARMOS COLUMNS RELACIONADAS/LIGADAS A ELAS (elas/suas primary keys)..
+
+
+
+
+
+
+
+
+
+  
+
+  -> é por isso que PRECISAMOS COLOCAR A TABLE DE 'addresses'
+
+
+  ANTES 
+
+
+  DE 'users'... (
+
+
+    e a table de 'cities'
+
+
+
+    ANTES DA DE ADDRESSES,
+
+    SE VAMOS CRIAR 
+
+    UMA COLUMN DE 'city_id' relacionada à table de 'cities'...
+  )
+
+
+
+
+
+
+
+  Ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+------1
+CREATE TABLE cities ( --- deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+);
+
+-------2 (precisa de 'cities' para definir o 'city_id')
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL,
+);
+
+------3 precisa de 'addresses' para definir o 'address_id'
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id) ON DELETE RESTRICT
+     -- address_id INT REFERENCES addresses(id) ON DELETE NO ACTION --- É O DEFAULT (impede operations que deletem o record de 'address' relacionado a esse field, COM A EXCEÇÃO DE OPERAÇÕES DE DELETE DENTRO DE TRANSACTIONS)
+    -- address_id INT REFERENCES addresses(id) ON DELETE RESTRICT  --- quase a mesma coisa que default, mas ainda mais restrito
+     -- address_id INT REFERENCES addresses(id) ON DELETE CASCADE
+      -- address_id INT REFERENCES addresses(id) ON DELETE SET NULL
+       -- address_id INT REFERENCES addresses(id) ON DELETE SET DEFAULT
+);
+-- CREATE TABLE addresses (
+--     id SERIAL PRIMARY KEY,
+--     street VARCHAR(300) NOT NULL,
+--     house_number VARCHAR(300) NOT NULL,
+--     city_id INT NOT NULL,
+-- );
+-- CREATE TABLE cities ( //deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(300) NOT NULL,
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... AGORA ISSO VAI FUNCIONAR, DESSA FORMA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, SE EXECUTAMOS TUDO ISSO,
+
+
+TEMOS SUCESSO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ESTAMOS COM ESSAS TABLES SETTADAS,
+
+E AGORA TEMOS 
+
+AQUELA CONSTRAINT DE 'foreign key'
+
+
+NA TABLE 
+
+DE 'users',
+
+
+
+COM AQUELE EFEITO DE 'RESTRICT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+
+------1
+CREATE TABLE cities ( --- deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL
+);
+
+-------2 (precisa de 'cities' para definir o 'city_id')
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL
+);
+
+------3 precisa de 'addresses' para definir o 'address_id'
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id) ON DELETE RESTRICT
+     -- address_id INT REFERENCES addresses(id) ON DELETE NO ACTION --- É O DEFAULT (impede operations que deletem o record de 'address' relacionado a esse field, COM A EXCEÇÃO DE OPERAÇÕES DE DELETE DENTRO DE TRANSACTIONS)
+    -- address_id INT REFERENCES addresses(id) ON DELETE RESTRICT  --- quase a mesma coisa que default, mas ainda mais restrito
+     -- address_id INT REFERENCES addresses(id) ON DELETE CASCADE
+      -- address_id INT REFERENCES addresses(id) ON DELETE SET NULL
+       -- address_id INT REFERENCES addresses(id) ON DELETE SET DEFAULT
+);
+-- CREATE TABLE addresses (
+--     id SERIAL PRIMARY KEY,
+--     street VARCHAR(300) NOT NULL,
+--     house_number VARCHAR(300) NOT NULL,
+--     city_id INT NOT NULL,
+-- );
+-- CREATE TABLE cities ( //deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(300) NOT NULL,
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SIDE NOTE: SE VOCÊ 
+
+-- QUER FAZER UMA RELATION DESSA COLUMN COM __ A 'PRIMARY KEY'
+
+
+
+-- DA OUTRA TABLE,
+
+-- DIRETAMENTE,
+
+
+-- VOCê 
+
+
+-- PODE SIMPLESMENTE OMITIR ESSA ESPECIFICAÇÃO (esse '(id)' ),
+
+
+
+-- TIPO ASSIM:
+
+
+
+
+
+
+
+
+-- '''''''''''''''''''''''''
+
+-- address_id INT REFERENCES addresses
+
+-- ''''''''''''''''''''
+
+
+
+
+
+-- --> SE VOCÊ QUER __ SETTAR_ _ UMA RELATION __ COM A PRIMARY KEY DESSA TABLE,
+
+
+
+
+-- ISSO É FINE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... PARA TESTAR ESSA CONSTRAINT DE 'ON DELETE',
+
+
+PRECISAMOS INSERIR ALGUMA DATA NOVA..
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR QUER INSERIR ALGUNS ADDRESS E USER DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+
+INSERIMOS ALGUMAS ROWS QUE JÁ TINHAMOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ USAMOS ESTE CÓDIGO:
+
+
+
+
+
+
+
+ INSERT INTO cities (name)
+VALUES ('Munich'),
+    ('Rome'),
+    ('Tokyo'),
+    ('Washington, D.C.');
+INSERT INTO addresses (street, house_number, city_id)
+VALUES ('Beerstreet', '91', 4),
+    ('Beerstreet', '12', 4),
+    ('Pizzastreet', '1', 5),
+    ('Burgerstreet', '9', 2),
+    ('Anotherstreet', '12', 1),
+    ('Smallstreet', '11', 3);
+INSERT INTO users (first_name, last_name, email, address_id)
+VALUES ('Marina', 'Marks', 'marina@test.com', 2),
+    ('Hans', 'Mayer', 'hansm@test.com', 5),
+    ('Maria', 'Marionatti', 'maria@test.com', 7),
+    ('Michael', 'Smith', 'michael@test.com', 8);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TENTAMOS RODAR ISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK, RECEBEMOS UM POUCO DE DATA LÁ DENTOR..
+
+
+
+
+
+
+
+A PRIMEIRA COISA INTERESSANTE QUE PODEMOS 
+
+TESTAR É 
+
+
+'INSERTING VIOLATING DATA' --> 
+
+
+
+
+DENTRO DESSE ARQUIVO,
+
+
+
+
+
+
+VAMOS TENTAR INSERIR 1 USER QUE 
+
+
+
+
+TEM 1 FIELD DE 'address_id'
+
+
+QUE APONTA A 1 ADDRESS QUE NÃO EXISTE...
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+INSERT INTO users (first_name, last_name, email, address_id) 
+VALUES ('Max', 'Schwarz2', 'max@test.com', 100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok.... rodamos isso aí:
+
+
+
+
+
+ERRO:
+
+
+
+
+
+
+
+insert or update on table "users" violates foreign key constraint "users_address_id_fkey"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> LEMBRE-SE:
+
+MAIS CEDO,
+
+PODÍAMOS INSERIR 
+
+
+ISSO AÍ 
+
+SEM NENHUM PROBLEMA...
+
+
+
+
+
+
+
+
+-> AGORA TEMOS ESSE ERRO,
+
+QUE 
+
+INFORMA QUE 
+
+
+A CONSTRAINT FOI VIOLADA --> ISSO SIGNIFICA QUE A NOSSA FOREIGN KEY CONSTRAINT ESTÁ FUNCIONANDO,
+
+
+
+PQ ELA GARANTE QUE NÃO PODEMOS 
+
+
+
+
+INSERIR DATA INVÁLIDA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+
+
+
+ISSO _ AINDA NÃO NOS MOSTRA___ A AÇÃO DE 'RESTRICT',
+
+
+
+
+PQ ESSA ACTION SÓ VAI TRIGGAR SE TENTARMOS FAZER UM DELETE (pq foi assignada a 'ON DELETE')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... PARA EXAMINARMOS ISSO EM AÇÃO,
+
+
+
+
+QUEREMOS 
+
+
+DAR UMA OLHADA NA DATA QUE INSERIMOS --------> 
+
+
+
+
+PERCEBEMOS QUE TEMOS 1 MONTE DE USERS RELACIONADOS AO ADDRESS DE ID '2' --> 
+
+
+
+
+
+
+VAMOS TENTAR DELETAR ESSE ADDRESS, PARA VER O QUE ACONTECE...
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+DELETE FROM addresses
+WHERE id = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... TENTAMOS RODAR ISSO --> GANHAMOS 1 ERROR ---> E ISSO ERA O ESPERADO:
+
+
+
+
+
+
+
+
+
+
+update or delete on table "addresses" violates foreign key constraint "users_address_id_fkey" on table "users"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ERA ISSO O QUE QUERÍAMOS, PQ ADICIONAMOS A OPÇÃO DE 'ON DELETE RESTRICT' -----> 
+
+
+
+COM RESTRICT,
+
+QUEREMOS 
+
+GARANTIR QUE 
+
+ESSA 
+
+OPERATION DE DELETE SEJA PROIBIDA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OBS: SE DEIXAMOS ISSO COMO 'NO ACTION',
+
+OU SE NÃO 
+
+
+DEFINIMOS COISA ALGUMA (deixamos sem nada escrito no final),
+
+
+
+
+
+
+
+
+
+
+VAMOS ____ GANHAR _ O MESMO COMPORTAMENTO (vai bloquear a deleção)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> O DROP DE TABLES TAMBÉM DEVE SER FEITO EM ORDEM..
+
+
+
+
+
+
+
+
+CASO CONTRÁRIO, RECEBEMOS ESTE ERROR:
+
+
+
+
+
+
+
+
+'cannot drop table addresses because other objects depend on it''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO FAZ SENTIDO,
+
+
+
+PQ ATUALMENTE 'NÃO PERMITIMOS 
+
+
+A DELEÇÃO DE ADDRESSES __ SE TEMOS _ USERS_ QUE DEPENDEM DESSES ADDRESSES' --> e é óbvio 
+
+que 
+
+
+o DELETE DA TABLE NÃO SERÁ POSSÍVEL, POR EXTENSÃO (
+    isso 
+
+
+    SE TIVERMOS 
+
+    USERS QUE AINDA DEPENDAM DOS ADDRESSES...
+)
+
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE DEVEMOS DELETAR A TABLE DE 'users'
+
+
+ANTES,
+
+PARA SÓ DEPOIS DELETARMOS A TABLE DE 'addresses'....
+
+
+
+
+
+
+
+
+
+
+
+
+-----> COM ISSO,
+
+PODEMOS RECRIAR A TABLE,
+
+
+MAS SEM NENHUMA ACTION ESPECÍFICADA PARA ESSA FOREIGN KEY,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+
+------1
+CREATE TABLE cities ( --- deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL
+);
+
+-------2 (precisa de 'cities' para definir o 'city_id')
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL
+);
+
+------3 precisa de 'addresses' para definir o 'address_id'
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id)
+     -- address_id INT REFERENCES addresses(id) ON DELETE NO ACTION --- É O DEFAULT (impede operations que deletem o record de 'address' relacionado a esse field, COM A EXCEÇÃO DE OPERAÇÕES DE DELETE DENTRO DE TRANSACTIONS)
+    -- address_id INT REFERENCES addresses(id) ON DELETE RESTRICT  --- quase a mesma coisa que default, mas ainda mais restrito
+     -- address_id INT REFERENCES addresses(id) ON DELETE CASCADE
+      -- address_id INT REFERENCES addresses(id) ON DELETE SET NULL
+       -- address_id INT REFERENCES addresses(id) ON DELETE SET DEFAULT
+);
+-- CREATE TABLE addresses (
+--     id SERIAL PRIMARY KEY,
+--     street VARCHAR(300) NOT NULL,
+--     house_number VARCHAR(300) NOT NULL,
+--     city_id INT NOT NULL,
+-- );
+-- CREATE TABLE cities ( //deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+--     id SERIAL PRIMARY KEY,
+--     name VARCHAR(300) NOT NULL,
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. SE AGORA TENTAMOS DELETAR A RELATED DATA,
+
+GANHAMOS O MESMO EFEITO DE ANTES,
+
+
+
+ISSO 
+
+
+PQ 
+
+
+'NO ACTION' E 'RESTRICT' SÃO MT SIMILARES (exceto quando o assunto é 'transactions')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> AGORA DEVEMOS VER O QUE ACONTECE QUANDO USAMOS 'CASCADE'....
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR DROPPA TODAS AS TABLES NA ORDER CERTA...
+
+
+
+
+
+
+
+
+
+---> LÁ NA TABLE DE 'users',
+
+
+
+O PROFESSOR COLOCA A ACTION DE 'CASCADE'
+
+
+
+
+como aquela a ser performada a partir da action de 'on delete'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE users;
+
+------1
+CREATE TABLE cities ( --- deve ser criada primeiro, pq addresses vai a referenciar... e addresses, por sua vez, vai ser referenciada por 'users'.. essa é a ordem correta... (ordem correta do define da foreign key constraint....)
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL
+);
+
+-------2 (precisa de 'cities' para definir o 'city_id')
+CREATE TABLE addresses (
+    id SERIAL PRIMARY KEY,
+    street VARCHAR(300) NOT NULL,
+    house_number VARCHAR(300) NOT NULL,
+    city_id INT NOT NULL
+);
+
+------3 precisa de 'addresses' para definir o 'address_id'
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) NOT NULL,
+    address_id INT REFERENCES addresses(id) ON DELETE CASCADE
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA SE APAGARMOS 'RELATED DATA',
+
+O USER/USERS 
+
+
+
+
+CORRESPONDENTES SÃO APAGADOS TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... AGORA SE DELETAMOS ESSE RECORD DE 'ADDRESS',
+
+
+
+
+NÃO RECEBO 1 ERRO- --> 
+
+E O USER 
+
+
+CCOM ESSE ADDRESS ARMAZENADO NA COLUMN DE 'address_id'
+
+
+TAMBÉM 
+
+
+
+TERÁ SIDO DELETADO...
+
+
+
+
+
+
+
+
+
+
+
+------> É TUDO PQ __ DEFINIMOS ESSA REFERENCE COM ESSA AÇÃO DE 'CASCADE'..
+
+
+
+
+
+
+
+
+
+ESSA É A IDEIA POR TRÁS DE 'CASCADE' --> ELA PODE SER MT ÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+--> E TEMOS TAMBÉM 'SET NULL' 
+
+
+
+E 
+
+
+'SET DEFAULT' -------> ELES SÃO EXATAMENTE O QUE DIZEM NA CAPA... ---->
+
+
+
+
+
+
+
+
+MAS 'RESTRICT'/'NO ACTION' E CASCADE SÃO 
+
+AS OPTIONS MAIS COMUNS.. .---------> E ELAS, JUNTO DA CONSTRAINT 'REFERENCES' EM GERAL,
+
+
+
+
+
+
+VOCÊ FICA COM GRANDE CONTROLE SOBRE SUAS 'FOREIGN KEYS',
+
+
+E ASSEGURA 
+
+
+
+
+
+
+A 'REFERENTIAL INTEGRITY' NO SEU CÓDIGO ----> ISSO PQ AGORA VOCÊ GARANTE QUE 'INSERTED DATA'
+
+
+TERÁ UMA CORRECT RELATION 
+
+(
+
+
+    não será possível apontar a addresses que não existem....
+)
+
+
+
+
+
+
+VOCÊ TAMBÉM PODE DEFINIR O QUE ACONTECE SE O 'RELATED RECORD'
+
+É 
+
+
+
+APAGADO OU UPDATADO...( ON DELETE E  ON UPDATE)
+
+
+
+
+
+
+
+
+
+
+
+
+-> COM ISSO,
+
+AOGRA TEMOS TODO O CONTROLE NECESSÁRIO PARA SETTAR DATA SPLITTADA 
+
+AO LONGO DE MÚLTIPLAS TABLES,
+
+QUE É 'RELATED'
+
+E QUE 
+
+É 'KINDOF'
+
+managed como um 'whole'...

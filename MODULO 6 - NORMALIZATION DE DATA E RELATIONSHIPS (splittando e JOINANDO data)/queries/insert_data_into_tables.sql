@@ -1,4 +1,4 @@
-INSERT INTO cities (city_name)
+INSERT INTO cities (name)
 VALUES ('Munich'),
     ('Rome'),
     ('Tokyo'),
@@ -12,6 +12,6 @@ VALUES ('Beerstreet', '91', 4),
     ('Smallstreet', '11', 3);
 INSERT INTO users (first_name, last_name, email, address_id)
 VALUES ('Marina', 'Marks', 'marina@test.com', 2),
-    ('Hans', 'Mayer', 'hansm@test.com', 5),
-    ('Maria', 'Marionatti', 'maria@test.com', 7),
-    ('Michael', 'Smith', 'michael@test.com', 8);
+    ('Hans', 'Mayer', 'hansm@test.com', 3),
+    ('Maria', 'Marionatti', 'maria@test.com', 2),
+    ('Michael', 'Smith', 'michael@test.com', 2);
