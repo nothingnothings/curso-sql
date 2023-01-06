@@ -1,0 +1,495 @@
+
+
+
+
+
+
+
+
+
+
+
+ESTAMOS CHEGANDO AO FINAL DESSA SECTION...
+
+
+
+
+
+
+
+
+
+
+
+
+APRENDEMOS SOBRE AS 'KEY' SQL KEYWORDS E FEATURES RELACIONADAS AO 'MANAGE DE RELATED DATA'
+
+
+
+
+
+E 
+
+
+
+
+
+A 'KEEPING THE RELATIONAL INTEGRITY'...
+
+
+
+
+
+
+
+
+
+
+ATÉ O FINAL DESSA SECTION,
+
+O PROFESSOR QUER QUE ESTUDEMOS 
+
+
+
+
+'''OS TIPOS _ GERAIS_ DE RELATIONSHIPS 
+
+QUE PODEMOS MODELAR, COM ESSE NOSSO CONHECIMENTO QUE ADQUIRIMOS''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA SERMOS MAIS PRECISOS,
+
+NÃO ESTAMOS APRENDENDO SINTAXE SQL NOVA,
+
+
+
+
+
+
+E SIM APRENDEMOS/APRENDEREMOS 
+
+
+
+
+
+
+
+
+
+
+'''COMO PODEMOS MODELAR E 
+ARMAZENAR 
+
+
+DIFERENTE DATA NA NOSSA DATABASE,
+
+COM AS FEATURES QUE JÁ APRENDEMOS' ''- -> OU SEJA,
+
+
+
+COM RELATIONS ENTRE 
+
+
+DIFERENTES ENTIties,
+
+
+QUE 
+
+SÃO 
+
+ARMAZENADAS EM DIFERENTES TABLES..
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+E HÁ 3 TIPOS 'MAIN'
+
+
+DE DATA RELATIONSHIPS,
+
+QUE 
+
+VOC~E 
+
+VAI 
+
+ENCONTRAR NO MUNDO DAS DATABASES:
+
+
+
+
+
+
+
+
+
+
+
+1) 'ONE-TO-MANY' ----> TAMBÉM É CHAMADA DE '1 TO N'... (1 to n) -->  TEMOS ESSE TIPO 
+
+
+
+DE RELATIONSHIP 
+
+SE TEMOS 
+
+DATA NA TABLE 'A' 
+
+QUE 
+
+
+
+É __ RELACIONADA COM '1 OU MAIS RECORDS'
+
+
+
+NA TABLE B... (
+
+
+
+    ESSE É O CASO DOS 'ADDRESSES',
+
+
+    COM NOSSOS USERS...
+) ------> 
+
+
+
+ENTRETANTO,
+
+NESSE TIPO DE RELATION, CADA RECORD NA TABLE 'B'
+
+SÓ PODE 
+
+
+TER RELAÇÃO 
+
+
+COM '1' RECORD DA TABLE A,
+
+
+NO MÁXIMO (ou seja,
+
+
+são os 'USERS', que só podem ter 1 único address)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> TEMOS ESSA RELATIONSHIP,
+
+POR EXEMPLO,
+
+
+SE TEMOS:
+
+
+
+
+
+
+1) UMA DATABASE EM QUE TEMOS 'EMPLOYEE DATA' -----> 1 MESMA EMPRESA PODE TER MÚLTIPLOS EMPLOYEES,
+
+
+MAS CADA EMPLOYEE SÓ PODE TER 1 ÚNICA EMPRESA... '''''ONE TO MANY'''....
+
+
+
+
+
+
+
+
+--> OK... MAS É CLARO QUE ISSO É APENAS TEÓRICO,
+
+ PQ CADA EMPLOYEE, NO MUNDO REAL, PODE FAZER PARTE DE MÚLTIPLAS COMPANHIAS....
+
+
+
+
+
+
+
+-> também temos uma relation dessas com os 'addresses' e 'users' --> 1 USER PODE TER EXATAMENTE 1 ÚNICO ADDRESS,
+
+
+MAS 1 ADDRESS PODE, TEORICAMENTE, 
+
+PERTENCER A MÚLTIPLOS USERS (
+
+    caso de '1 casa, com vários apartamentos', vários users morando nesse address..
+)
+
+
+
+
+
+
+
+
+
+
+
+------> 1 'isp' TEM VÁRIOS NÚMEROS, MAS CADA NÚMERO SÓ PODE TER 1 ISP...
+
+
+
+
+(
+    '1:n' 
+)
+
+
+
+
+
+ 2) O OUTRO TIPO DE RELATIONSHIP É O 'MANY-TO-MANY'...
+
+
+
+
+
+
+ ---> TAMBÉM É CHAMADO DE 'n to n' 
+
+
+
+
+(n:n)
+
+
+
+ --> NO 
+
+ MANY-TO-MANY,
+
+
+
+ 1
+  MESMO RECORD,
+
+
+  NA TABLE 'A',
+
+
+
+
+  PODE 
+
+
+
+  SER RELACIONADO A MÚLTIPLOS RECORDS NA TABLE B,
+
+
+  E VICE-VERSA...
+
+
+
+
+
+
+
+
+
+
+
+  ----> UM EXEMPLO PODERIA SER:
+
+
+
+
+
+
+
+
+  '''''UM EMPLOYEE É PARTE DE MÚLTIPLOS PROJECTS,
+
+  E CADA PROJECT TEM MÚLTIPLOS EMPLOYEES ASSIGNADOS A SI''''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  -----> NESSA SECTION, AINDA NÃO VIMOS UMA RELATION DE 'MANY-TO-MANY',
+
+
+  MAS A VEREMOS NAS PRÓXIMAS LIÇÕES...
+
+
+
+
+
+
+
+-_> ESSA RELATION, NO CASO,
+
+
+TAMBÉM É MT COMUM...
+
+
+
+
+
+
+
+
+
+
+
+
+3) O ÚLTIMO TIPO IMPORTANTE DE RELATION É 
+
+'one-to-one' 
+
+
+
+
+
+
+(1:1)
+
+
+
+
+
+
+
+
+
+--> NESSE TIPO DE RELATIONSHIP,
+
+
+CADA RECORD NA TABLE A 
+
+
+É RELACIONADO EXATAMENTE A 1 ÚNICO RECORD NA TABLE B,
+
+E VICE-VERSA...
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+EXEMPLO PRÁTICO:
+
+
+
+
+
+'1 EMPLOYEE TEM EXATAMENTE 1 ÚNICA CONTA INTRANET,
+E CADA 
+
+CONTA INTRANET PERTENCE EXATAMENTE A 1 ÚNICO EMPLOYEE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> certo... faz sentido...
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSA É A TEORIA..
+
+
+
+
+
+
+
+NAS PRÓXIMAS LIÇÕES,
+
+VEREMOS 1 NOVO EXEMPLO,
+
+EM QUE VAMOS ESTRUTURAR DADOS AO LONGO DE MÚLTIPLAS TABLES,
+
+
+
+e em que vamos 
+
+construir as RELATIONSHIPS
+
+
+
+de acordo com o que aprendemos aqui...
+
+
+
+
+
+ 
+
+ --> VAMOS APRENDER A ESCREVER O CÓDIGO SQL 
+
+ PARA CRIAR AS TABLES NO CÓDIGO,
+
+ E TAMBÉM PARA INSERIR DUMMY DATA...
