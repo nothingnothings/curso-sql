@@ -1,0 +1,1498 @@
+
+
+
+
+
+
+
+
+
+
+O CÓDIGO ANTERIOR DE CRIAÇÃO FOI ESTE:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    --- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS CRIAR TEAMS E BUILDINGS..
+
+
+
+
+
+
+
+
+
+
+
+PROFESSOR QUER FAZER MAIS QUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR ISSO ELE 
+
+CRIA 1 NOVO ARQUIVO,
+
+
+'clean database',
+
+
+
+
+EM QUE ELE VAI QUERER DROPPAR AS 2 TABLES QUE CRIAMOS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+PQ VAMOS RECRIAR ESSAS TABLES, COM MAIS RELATIONS..
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+DROP TABLE intranet_accounts;
+DROP TABLE employees;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ok...
+
+
+
+
+
+
+DROPPAMOS AS ACCOUNTS, E DEPOIS DROPPAMOS OS EMPLOYEES..
+
+
+
+
+
+
+
+
+É CLARO QUE A ORDEM IMPORTA, 
+
+
+
+PQ 
+
+
+
+
+A TABLE DE 'intranet_accounts'
+
+
+DEPENDE DE EMPLOYEES... 
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> REMOVO intranet_accounts
+
+
+
+ANTES,
+
+E DEPOIS employees...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AÍ O PROFESSOR COLOCA 1 ARQUIVO DE 'more-relations'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK... AINDA VAMOS CRIAR AS TABLES DE ACCOUNTS E DE EMPLOYEES,
+
+
+
+MAS AGORA 
+
+
+O PROFESSOR VAI QUERER CRIAR 1 TABLE DE 'teams'...
+
+
+
+PRECISAMOS DEFINIR 1 RELATION ENTRE 'EMPLOYEES' E 'TEAMS'..
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE teams(
+
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    --- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMECEI ESCREVENDO ALGO ASSIM:
+
+
+
+
+
+
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id SERIAL REFERENCES teams ON DELETE RESTRICT
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    --- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL
+);
+
+
+
+
+-------------------------
+
+
+
+
+
+
+
+
+
+
+CADA 'TEAM' -->
+
+
+
+TERÁ
+
+RELATION:
+
+
+1) COM VÁRIOS EMPLOYEES...
+
+
+
+
+
+
+
+2) COM 1 ÚNICA BUILDING, QUE VAI ARMAZENAR ESSA TEAM..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR TAMBÉM CRIA UMA TABLE DE 'company_buildings',
+
+
+QUE TERÁ 1 LISTA DE TODAS AS BUILDINGS..
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE LOGO PRECISAREMOS DA TABLE DE 'PROJECTS',
+
+
+
+
+MAS AINDA NÃO CHEGAMOS LÁ... ANTES QUEREMOS 
+
+
+SETTAR 
+
+AS RELATIONS ENTRE 'EMPLOYEES E TEAMS',
+
+
+
+
+E 
+
+'TEAMS' E 'BUILDINGS'...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> COMEÇAMOS COM company_buildings ---> 
+
+
+
+
+
+1 mesma 'building' pode SEGURAR MÚLTIPLOS TEAMS... '(one-to-many)'...
+
+
+
+
+
+
+
+
+BEM, E EU HAVIA CRIADO ASSIM:
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ISSO ESTÁ ERRADO.... PQ, AO CONTRÁRIO DE COMO FAZEMOS/FIZEMOS COM ONE-TO-ONE RELATIONS,
+
+
+
+
+
+COM 'ONE-TO-MANY'  __ NÃO TEMOS __ A ESCOLHA __ DE 'ONDE QUEREMOS SETTAR ESSA RELATION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> COM 'ONE-TO-ONE' RELATIONS,
+
+PODÍAMOS COLOCAR A RELATION (a column)
+
+
+TANTO 
+
+
+EM 'employees' COMO EM 'intranet_accounts', 
+
+qualquer 
+
+uma das 2 funcionaria...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> JÁ COM o 'one-to-many',
+
+
+
+NÃO TEMOS 
+
+
+
+ESSA OPÇÃO.... ---> PARA SERMOS MAIS PRECISOS,
+
+
+
+
+
+___ NÃO __ PODEMOS __ COLOCAR ESSA COLUMN/RELATION LÁ 
+
+
+
+na table de 'company_buildings'.... ------> 
+
+
+
+
+
+NÃO, EM VEZ DISSO,
+
+SOMOS FORÇADOS 
+
+
+
+A COLOCAR 
+
+
+
+
+ESSA FOREIGN-KEY/CONSTRIANT DE 'REFERENCES'
+
+
+LÁ EM 'teams',
+
+
+
+
+
+
+
+como eu fiz antes,
+
+
+com 
+
+'''     building_id SERIAL REFERENCES company_buildings ''''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> É POR ISSO QUE A COLUMN DA RELATION DEVE SER SETTADA EM 'teams'....
+
+
+
+
+
+
+
+
+---> OK, MAS QUAL O MELHOR DATA TYPE?
+
+
+
+
+
+
+
+
+--> eu ACHAVA QUE SERIA  'SERIAL',
+
+
+MAS __ O PROFESSOR NOS DIZ QUE DEVE SER 'INT'..
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+
+COM ISSO,
+
+
+
+
+DEFINIMOS ESSA RELATION --> 
+
+
+TAMBÉM 
+
+
+
+DEVEMOS/PODEMOS
+
+
+
+ESPECIFICAR 'O QUE DEVE ACONTECER SE 1 DAS BUILDINGS FOREM DELETADAS'...
+
+
+
+
+
+
+
+
+
+
+---> O PROFESSOR COLOCA 'ON DELETE'
+
+
+para aí 
+
+
+
+colocar ALGO _ QUE DEVE ACONTECER SE A 'COMPANY BUILDING'
+
+A QUE PERTENCIA ESSA TEAM FOR DELETADA..
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROVAVELMENTE NÃO VAMOS QUERER '''APAGAR 1 TEAM'''
+
+
+SE SUA BUILDING FOR DELETADA --> EM VEZ DISSO,
+
+
+PODEMOS SETTAR ISSO COMO 'SET NULL',
+
+
+
+PARA __ QUE __ O BUILDING_ID __ DE 1 TEAM SEJA SETTADA COMO 'NULL'
+
+SE 
+
+
+
+SUA 
+BUILDING RELACIONADA
+
+FOR DELETADA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE SET NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTERNATIVAMENTE, PODERÍAMOS COLOCAR 'RESTRICT' OU 'NO ACTION',
+
+
+
+
+
+PARA FORÇAR O USUÁRIO DA DATABASE A 'ASSIGN A NEW BUILDING TO A TEAM'
+
+
+ANTES 
+
+DE 
+
+DELETAR 1 EXISTING BUILDING...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+SIDENOTE --> VOCÊ SEMPRE PODE  ALTERAR OS VALUES QUE ESTÃO ARMAZENADOS EM COLUMNS COMO 
+
+'building_id',
+
+BASTA OVERWRITTAR O VALUE 
+
+
+EXISTENTE 
+
+
+EM 1 RECORD, NESSA COLUMN,
+
+E 
+
+O UPDATAR 
+
+
+
+
+COM 1 NOVO 'BUILDING ID',
+
+
+O ID DE UMA NOVA BUILDING..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, TEOMS 1 RELATION ENTRE 'teams'
+
+
+e 'company_buildings'..
+
+
+
+
+
+AGORA PRECISAMOS DE UMA RELATION ENTRE 'teams'
+
+e 'employees'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ENTRE 'teams' e 'employees'
+
+TAMBÉM TEMOS 1 RELATION DE 'ONE-TO-MANY'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> é por isso que vamos 
+
+colocar o value de 'team_id'
+
+
+
+LÁ NA TABLE DE EMPLOYEES,
+
+NESSA COLUMN PRÓPRIA..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE SET NULL  ---- se 1 das buildings for DELETADA da database, esse field, nos records 'teams' relacionados, ficará como NULL...
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id SERIAL REFERENCES teams ON DELETE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+
+
+---------------------
+
+
+
+
+
+
+
+
+
+1 TEAM TIPICAMENTE TEM MÚLTIPLOS EMPLOYEES... -- >
+
+
+
+
+mas 1 employee PERTENCE A EXATAMENTE 1 ÚNICA TEAM...
+
+
+
+
+
+
+
+-_> por isso coloquei 'team_id'....
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM VAMOS COLOCAR 'INT' (é a convenção, para 'RELATED COLUMNS')...
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE SET NULL  ---- se 1 das buildings for DELETADA da database, esse field, nos records 'teams' relacionados, ficará como NULL...
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id INT REFERENCES teams ON DELETE RESTRICT
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    --- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM 'ON DELETE',
+
+PODEMOS 
+
+DEFINIR O QUE DEVE ACONTECER COM 'EMPLOYEES',
+
+
+exatamente como antes... -> não queremos deletar o employee em si,
+
+
+
+
+
+
+
+POR ISSO 
+
+
+
+O LEGAL SERIA DEFINIR 'SET NULL' OU 'SET DEFAULT' OU 'RESTRICT' (
+
+    COM RESTRICT,
+    VOCÊ DEVE ASSIGNAR o
+
+    USER A 1 OUTRA TEAM,
+
+    ANTES DE APAGAR 
+    ESSA TEAM....
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR VAI DEIXAR A ACTION COMO 'SET DEFAULT',
+
+
+QUE SERÁ 1 DEFAULT DE '1',
+
+NESSE EXEMPLO:
+
+
+
+
+
+
+
+
+
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE SET NULL  ---- se 1 das buildings for DELETADA da database, esse field, nos records 'teams' relacionados, ficará como NULL...
+);
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id INT DEFAULT 1 REFERENCES teams ON DELETE SET DEFAULT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+COM ISSO,
+
+ADICIONAMOS MAIS TABLES E MAIS RELATIONS...
+
+
+
+
+
+
+
+
+
+
+
+DEVEMOS RODAR ISSO CONTRA NOSSA CONEXÃO..
+
+
+
+
+
+
+
+
+
+
+
+OK.... ISSO FUNCIONOU...
+
+
+
+
+
+
+
+
+
+AGORA PODEMOS INSERIR MAIS DUMMY DATA NESSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+TEMOS 1 ARQUIVO DE 'MORE DUMMY DATA',
+
+
+QUE DEVRÁ SER UTILIZADO...
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO company_buildings (name)
+VALUES ('Main Building'),
+    ('Research Lab'),
+    ('Darkroom');
+INSERT INTO teams (name, building_id)
+VALUES ('Admin', 1),
+    ('Data Analysts', 3),
+    ('R&D', 2);
+INSERT INTO employees (first_name, last_name, birthdate, email, team_id)
+VALUES (
+        'Julie',
+        'Barnes',
+        '1988-10-01',
+        'julie@test.com',
+        3
+    ),
+    (
+        'Max',
+        'Schwarz',
+        '1989-06-10',
+        'max@test.com',
+        1
+    ),
+    (
+        'Manuel',
+        'Lorenz',
+        '1987-01-29',
+        'manu@test.com',
+        2
+    );
+INSERT INTO intranet_accounts (email, password)
+VALUES ('max@test.com', 'abcae1'),
+    ('manu@test.com', 'fdasfdas1'),
+    ('julie@test.com', 'adsfsaf3');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    OK.. GANHAMOS SUCCESS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> PODEMOS VER QUE TEMOS TODOS OS RECORDS CERTINHOS...
+
+
+
+
+
+
+
+    AINDA NÃO RODAMOS NENHUM JOIN, MAS VEREMOS ISSO EM BREVE...
+
+
+
+
+
+
+
+
+
+MAS ANTES DE MAIS NADA,
+
+O PROFESSOR QUER FINALIZAR NOSSA STRUCTURE..
+
+
+
+
+
+-_> QUEREMOS 
+
+DEFINIR A TABLE DE 'PROJECTS',
+
+
+
+
+Q VAI FICAR RELACIONADA COM 
+
+'EMPLOYEES'...
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+COMO SERÁ UMA RELATION MANY-TO-MANY,
+
+PRECISAREMOS, OBRIGATORIAMENTE,
+
+DE 
+
+1 
+
+
+'EXTRA TABLE'...
+
+
+
+ISSO SERÁ EXPLICADO NA PRÓXIMA AULA..
