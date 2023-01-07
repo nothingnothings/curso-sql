@@ -1,0 +1,2185 @@
+
+
+
+
+
+
+
+
+
+
+
+----> 
+
+
+VAMOS IMPLEMENTAR ESSE EXEMPLO COM ALGUNS ACTUAL COMANDOS SQL...
+
+
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS DROPPAR NOSSAS TABLES E ENTÃO AS READICIONAR COM RELATIONS,
+
+
+
+
+OU ENTÃO CRIAR NOVAS TABLES, com essas relations...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> MAS O PROFESSOR, PARA ESSE EXEMPLO,
+
+
+ELE VAI QUERER MANTER A DATABASE NOSSA,
+
+
+
+
+E APENAS SE LIVRAR DAS EXISTING TABLES,
+
+
+PARA CRIAR NOVAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> O PROFESSOR RODA 
+
+
+
+
+DROP TABLE cities;
+DROP TABLE addresses;
+DROP TABLE employees;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. 
+
+
+
+
+
+
+
+
+O PROFESSOR ADICIONA UM NOVO ARQUIVO, DE 'relationships'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUEREMOS:
+
+
+
+
+
+
+
+1) CRIAR AS TABLES QUE OUTLINEAMOS NO SLIDE (as 5 tableS)
+
+
+
+
+
+2) QUEREMOS CRIAR AS COLUMNS APROPRIADAS,
+
+
+
+
+COM FOREIGN KEY CONSTRAINTS APROPRIADAS,
+
+PARA MODELAR
+
+
+ESSAS RELATIONS QUE VEMOS NO SLIDE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR COMEÇA PELA TABLE DE 'EMPLOYEE'..
+
+
+
+
+
+
+
+1) CREATE TABLE employees (
+
+    id,
+    name,
+    birthdate,
+    email 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... O NAME DEVERÁ SER 'VARCHAR(255)',
+
+
+
+MAS VAMOS QUERER DIVIDIR O NAME EM MÚLTIPLAS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees (
+
+    id,
+    first_name,
+    last_name
+    birthdate,
+    email 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, FAZEMOS ENFORCE DE 'DATA NORMALIZATION'... --------> 
+
+
+
+
+
+ESTAMOS SPLITTANDO NOSSA DATA AO LONGO DE MÚLTIPLAS COLUMNS,
+
+O QUE É BOM...
+
+
+
+
+
+
+
+--> para o id,
+colocamos 'SERIAL'...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name,
+    last_name
+    birthdate,
+    email 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK....
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+
+
+
+
+
+PASSAMOS AOS PRÓXIMOS FIELDS...
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR DEFINE O firsT_name COMO 'varchar(300)',
+
+E COLOCA A CONSTRAINT DE NOT NULL...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate,
+    email 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM BIRTHDATE,
+
+COLOCAMOS 
+
+O TYPE DE 'DATE'...
+
+
+
+
+
+
+
+
+
+--> EM EMAIL,
+
+também colocamos 'VARCHAR(255)'...
+
+
+
+
+
+
+
+
+
+
+1) CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+ESSA TABLE DE EMPLOYEES ESTARÁ SETTADA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE ESSA TABLE DE 'EMPLOYEES' NÃO ESTARÁ REFLETINDO SUAS RELATIONS 
+
+
+
+ÀS ENTITIES DE 'TEAMS', 'PROJECTS' E 'INTRANET ACCOUNTS' (o que faz sentido, pq ainda não ADICIONAMOS ESSAS TABLES)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE DEVEMOS CRIAR 
+
+
+
+AS TABLES 
+
+
+
+QUE SERÃO USADAS NOS FIELDS DE 'xxxx_Id'
+
+
+
+de employees...
+
+
+
+
+
+
+
+
+
+-----> A PRIMEIRA TABLE CRIADA PELO PROFESSOR FOI 
+
+
+
+
+'intranet_accounts'...
+
+
+
+
+
+
+
+
+ESSA É UMA TABLE SIMPLES ....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> LÁ DENTRO,
+
+TEREMOS 
+
+
+
+
+UMA PRIMARY KEY,
+
+
+
+E AÍ 
+
+
+'email' e 'password'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ENTRETANTO, AQUI O PROFESSOR QUER DEMONSTRAR QUE A 
+
+
+
+
+
+
+
+
+PRIMARY KEY DE UMA TABLE _ NÃO PRECISA SER UM 'AUTO-INCREMENTING ID'...
+
+
+
+
+
+
+
+
+
+
+--> É FREQUENTEMENTE ISSO, E É UMA BOA PRACTICE,
+
+MAS NÃO É OBRIGATÓRIO...
+
+
+
+
+
+
+
+PODEMOS ESCREVER ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    email VARCHAR(200) PRIMARY KEY,
+    password VARCHAR(200) NOT NULL
+)
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------> E AÍ PODEMOS USAR ESSE 'email' COMO 
+
+
+1 RELATIONAL FIELD,
+
+
+LÁ 
+
+NA NOSSA TABLE DE 'employees'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... COM ESSA TABLE CRIADA,
+
+
+
+
+
+
+
+PODEMOS TRANSFORMAR aquela column de 'email VARCHAR(200) NOT NULL'
+
+
+
+em 'employees' 
+
+
+
+
+EM ___ 1 'FOREIGN KEY COLUMN',
+
+que 
+
+
+
+vai referenciar a column de 'email'
+
+
+lá de 'intranet_account'...
+
+
+
+
+
+
+
+
+
+
+
+-_> PARA FAZER ISSO,
+
+
+
+
+
+
+
+
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+email VARCHAR(200) REFERENCES intranet_accounts(email);
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    email VARCHAR(200) PRIMARY KEY,
+    password VARCHAR(200) NOT NULL
+)
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) REFERENCES intranet_accounts(email)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO....
+
+
+
+
+
+
+
+
+
+ISSO VAI SETTAR ESSA RELATION ENTRE OS 2...
+
+
+
+
+
+
+
+(PODERÍAMOS DEFINIR ESSA RELATION SEM ESCREVER O '(email)',
+
+PQ O 
+
+
+DEFAULT DAS RELATIONS É SEMPRE 'ESCOLHER O PRIMARY KEY DA OUTRA TABLE',
+QUE, NESSE CASO,
+
+
+é realmente 'email')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA TAMBÉM PODEMOS DEFINIR O QUE DEVE ACONTECER QUANDO UMA intranet_account FOR 
+DELETADA,
+
+
+
+COM 'ON DELETE'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> MAS O PROFESSOR ACHA QUE O EMPLOYEE N DEVE SER DELETADO
+ 
+
+ SE A intranet_account DELE FOR DELETADA..
+
+
+
+
+
+
+
+
+
+
+ --> MAS O CAMINHO INVERSO FAZ SENTIDO (deletar a intranet_account DAQUELE USER, SE O EMPLOYEE EM SI FOR DELETADO)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    email VARCHAR(200) PRIMARY KEY,
+    password VARCHAR(200) NOT NULL
+)
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) REFERENCES intranet_accounts(email)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> DEVEMOS DEFINIR A RELATION LÁ NA TABLE DE 'intranet_account',
+
+
+
+E AÍ FAZER COM QUE, SE 1 RELATED EMPLOYEE FOR APAGADO,
+
+
+
+
+
+
+__ A CORRESPONDING INTRANET_ACCOUNT DEVERÁ 
+
+SER APAGADA TBM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA O PROFESSOR VAI MOSTRAR A SOLUÇÃO PARA O PROBLEMA DE 'DEFINIR RELATIONS EM AMBAS AS TABLES,
+
+EM CASOS DE ONE-TO-ONE RELATIONS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA FAZER ISSO FUNCIONAR, O PROFESSOR 
+
+
+
+COLOCA 
+
+
+
+
+
+
+A COLUMN DE EMAIL COMO ANTES, SEM A CONSTRAINT DE 'REFERENCEs':
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    email VARCHAR(200) PRIMARY KEY,
+    password VARCHAR(200) NOT NULL
+)
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL -- eis o código em questão
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... AGORA, NO CASO,
+
+
+
+
+
+QUEREMOS DEFINIR 1 RELATION LÁ 
+
+
+NA 
+
+TABLE DE 'intranet_account'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> É POR ISSO QUE O PROFESSOR 
+
+
+
+VAI QUERER USAR 'SERIAL'/primary key de 'id' 
+
+
+comum (em vez de usar 1 email)...
+.
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY
+    email VARCHAR(200),
+    password VARCHAR(200) NOT NULL
+)
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL -- eis o código em questão
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS QUERER DEFINIR 1 'employee_id'
+
+
+
+
+LÁ DENTRO DO 'intranet_account'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> A RAZÃO PRINCIPAL PARA FAZER ISSO: '''É PARA QUE 
+
+
+SETTEMOS A 'REFERENTIAL INTEGRITY'
+
+DE MODO QUE 
+
+
+INTRANET ACCOUNTS SÃO __ DELETADAS_ SE 
+
+OS 
+
+
+RESPECTIVOS EMPLOYEES SÃO DELETADOS'' ' (
+
+
+    e não queremos fazer isso
+    THE OTHER WAY AROUND,
+
+
+    por isso seguimos
+
+    esse caminho....
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE 
+
+
+EM 'intranet_accounts',
+
+
+
+
+
+FICA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL -- eis o código em questão
+);
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY
+    email VARCHAR(200),
+    password VARCHAR(200) NOT NULL,
+    employee_id SERIAL REFERENCES employees(id)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS ISSO ESTÁ ERRADO.... PQ O PROFESSOR VAI QUERER SETTAR A COLUMN DE 'email'
+
+LÁ 
+
+
+
+
+DO 'intranet_accounts'
+
+
+
+COMO NOSSA FOREIGN KEY....
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) NOT NULL -- eis o código em questão
+);
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY
+    email VARCHAR(200) REFERENCES employees(email) ,
+    password VARCHAR(200) NOT NULL,
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK.. COM ISSO, NOS REFERIMOS À COLUMN DE 'email'
+
+
+
+LÁ 
+
+
+
+
+NA TABLE DE 'employees'....
+
+
+
+
+
+
+
+-> COM ISSO, SETTAMOS 1 RELATION SEM USAR ACCOUNT 'PRIMARY KEY'
+
+da outra table...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> NÃO USAMOS O 'id'
+PARA SETTAR 
+
+A RELATION ENTRE 
+
+
+
+
+AS 2 TABLES 
+
+
+__ JUSTAMENTE_ PQ TEMOS A COLUMN DE 'email'
+
+
+
+COMO PONTO COMUM ENTRE AS 2 --> E PODEMOS CONFIAR NO 'FATO DE O EMAIL SER UNIQUE',
+
+
+DE QUALQUER FORMA (
+
+    e para assegurar que ele REALMENTE SEJA UNIQUE,
+    podemos 
+
+    COLOCAR ESSA CONSTRAINT LÁ 
+
+
+    NA TABLE DE 'employees'
+
+)
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIm:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL -- eis o código em questão
+);
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY
+    email VARCHAR(200) REFERENCES employees(email) ,
+    password VARCHAR(200) NOT NULL,
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... AGORA TEMOS UMA GARANTIA DE QUE 
+
+'CADA EMAIL
+
+
+PERTENCE A EXATAMENTE 1 ÚNICO EMPLOYEE'..
+
+
+
+
+
+
+
+
+E AGORA PODEMOS FACILMENTE USAR 
+
+
+
+
+
+ESSE EMAIL COMO 1 'RELATION COLUMN'
+
+
+PARA SETTAR NOSSA RELATION...
+
+
+
+
+
+
+
+
+
+
+
+
+SÃO TODOS CONCEITOS NOVOS,
+
+
+
+
+MAS 
+
+
+
+
+SÃO COISAS QUE APRENDEMOS ANTERIORMENTE,
+
+APLICADAS A UM EXEMPLO CONCRETO...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> TEMOS GRANDE FLEXIBILIDADE 
+
+
+
+QUANDO O ASSUNTO É O DEFINE E MODEL DE NOSSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+ESTAMOS CRIANDO 1 TABLE DE 'intranet_accounts'
+
+QUE SE RELACIONA COM A TABLE DE 'EMPLOYEES',
+
+
+
+E ESTAMOS 
+
+
+
+
+
+
+
+USANDO 1 RELATION 
+
+
+
+
+
+
+
+EM QUE CONFIAMOS EM UMA COLUMN 'NON-PRIMARY KEY',
+
+
+
+
+QUE É ALGO QUE ABSOLUTAMENTE PODEMOS FAZER....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E AGORA, AQUI, EM 'intranet_accounts',
+
+
+podemos adicionar 'ON DELETE'
+
+
+mais uma vez,
+
+
+
+na column de 'email',
+
+
+
+PODEMOS COLOCAR 'CASCADE' --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----->  
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE ,
+    password VARCHAR(200) NOT NULL,
+)
+
+
+
+
+
+ CREATE TABLE employees (
+
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL -- eis o código em questão
+);
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+
+
+SE 
+
+
+
+1 EMPLOYEE FOR DELETADO,
+
+A INTRANET ACCOUNT 
+PERTENCENTE A ESSE 'employee'
+SERÁ APAGADA TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO A TABLE DE 'intranet_account'
+
+
+DEPENDE DA De 'employees',
+
+
+
+escrevemos nessa ordem aí...
+
+
+
+
+
+
+
+--> é a conta de 'intranet_accounts'
+
+
+QUE DEPENDE DA TABLE DE 'employees',
+
+por isso críamos a de 'employees' antes..
+
+
+
+
+
+
+
+
+
+--> OK... 
+
+
+
+MAS É IMPORTANTE DELINEAR, AQUI,
+
+
+QUE 
+
+
+
+ENTRE 'intranet_accounts'
+
+e 
+
+
+
+'employees' QUEREMOS 
+
+
+
+
+
+TER UMA 
+
+'ONE-TO-ONE' RELATIONSHIP..
+
+
+
+
+
+
+
+
+
+
+E, COM ESSE TIPO DE RELATIONSHIP,
+
+
+
+
+PODEMOS REALMENTE 
+
+
+
+DEFINIR 
+
+A 'RELATION COLUMN' (no nosso caso, a column de 'EMAIL' de 'intranet_accounts', que está como 
+
+
+'''''''
+email VARCHAR(200) REFERENCES employees(email) ON DELETE  CASCADE
+''''''''
+
+)
+
+
+
+
+
+
+__ EM QUALQUEr__ UMA _ DAS TABLES... (
+
+    e não é necessário settar em AMBAS AS TABLES AO MESMO TEMPO, COMO EU ESTAVA IMAGINANDO..
+)
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ __ SÓ __ VAI PRECISAR SETTAR 
+
+
+RELATIONS EM COLUMNS __ NAS 2 TABLES __ 
+
+
+__ EM 
+
+__ CASOS __ 
+
+
+DE 'ONE-TO-MANY'
+
+
+E 
+
+'MANY-TO-MANY' relationships....
+
+
+
+
+
+
+
+
+
+
+
+
+--> LÁ, COMO VEREMOS EM ALGUNS MINUTOS,
+
+
+VOCÊ NÃO TEM ESSA ESCOLHA (TEM que settar relations por meio de 2 columns, 1 em cada table.... )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS PARA 'ONE-TO-ONE' RELATIONSHIPS,
+
+TEMOS ESSA CONVENIÊNCIA,
+
+
+
+
+PODEMOS USAR APENAS ESSA COLUMN EM 'intranet_accounts',
+
+
+
+PARA FAZER COM QUE 
+
+AS INTRANET_ACCOUNTS SEJAM __ REMOVIDAS__ SEMPRE Q 1 EMPLOYEE É REMOVIDO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+
+O PROFESSOR FALOU MT,
+
+
+MAS VAMOS VER SE ISSO FUNCIONOU....
+
+
+
+
+
+
+
+
+
+AGORA DEVEMOS CHECAR SE ISSO FUNCIONA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEU.. FICOU ASSIM:
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    --- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+    -- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+    password VARCHAR(200) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA ESSAS 2 TABLES FORAM CRIADAS...
+
+
+
+
+
+
+
+
+ADICIONAREMOS AS OUTRAS TABLES MAIS TARDE....
+
+
+
+
+
+
+
+
+
+
+
+COM ESSAS 2 TABLES, JÁ PODEMOS TENTAR INSERIR DATA NELAS,
+
+SÓ PARA VER SE ISSO FUNCIONA...
+
+
+
+
+
+
+
+
+
+
+--> CRIO 1 NOVO ARQUIVO,
+
+
+'INSERT COMPANY DATA'...
+
+
+
+
+
+
+
+
+
+
+
+-_> QUEREMOS INSERIR DATA EM 'employee' e em 'intranet_accounts'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMO SETTAMOS A RELATION DE MODO QUE OS 'EMPLOYEES' FICARAM PRIMEIRO,
+
+É NECESSÁRIO FAZER PRIMEIRAMENTE O INSERT DE ROWS NA TABLE DE 'employees'...
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+INSERT INTO employees (
+    first_name,
+    last_name,
+    birthdate,
+    email 
+) VALUES (
+    'Arthur',
+    'Panazolo',
+    '1998-06-10',
+    'arthur@panazolo.com'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO, PODEMOS INSERIR DATA NOS 'intranet_accounts'..
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO employees (
+        first_name,
+        last_name,
+        birthdate,
+        email
+    )
+VALUES (
+        'Arthur',
+        'Panazolo',
+        '1998-06-10',
+        'arthur@panazolo.com' ---- o email é o que defnie, nesse caso, A RELATION ENTRE O 'intranet_accounts' e o 'employees', pq é ele que está com a FOREIGN KEY CONSTRAINT (criada com 'REFERENCES')....
+    );
+INSERT INTO intranet_accounts (email, password)
+VALUES (
+        'arthur@panazolo.com',
+        'sadasdasdas'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> precisamos que o email seja 'arthur@panazolo.com',
+
+
+
+
+
+
+
+    PQ SE TENTAMOS INSERIR O RECORD 
+
+
+
+    COM 1 EMAIL QUE AINDA NÃO EXISTE NOS RECORDS DE 
+
+
+    'employees',
+
+    RECEBEREMOS 1 ERROR...
+
+
+
+
+
+
+
+
+
+
+COM ISSO, RECEBEMOS SUCCESS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TENHO MEU RECORD LÁ NOS EMPLOYEES.... AGORA SE EU QUISER DELETAR ESSE EMPLOYEE, ÚNICO EMPLOYEE,
+
+
+A INTRANET_ACCOUNT CORRESPONDENTE SERÁ APAGADA...
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS QUERY A 'RELATED DATA',
+
+
+COM A AJUDA DE INNER JOIN E LEFT JOIN,
+
+
+MAS FAREMOS ISSO MAIS TARD.E...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> bem, mas agora temos EMPLOYEES E INTRANET_ACCOUNTS, o que é bom...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO PRÓXIMA ETAPA,
+ 
+
+ O PROFESSOR QUER ADICIONAR AS 'TEAMS' E AS 'BUILDINGS',
+
+
+
+ e todas as relations entre 
+
+
+
+
+ essas tables..
+
+
+
+
+
+
+
+
+
+
+ DEVO TENTAR FAZER ISSO POR CONTA PRÓPRIA...
