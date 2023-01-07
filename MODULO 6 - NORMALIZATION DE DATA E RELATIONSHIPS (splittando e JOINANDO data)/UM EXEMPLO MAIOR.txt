@@ -1,0 +1,980 @@
+
+
+
+
+
+
+
+
+
+OK.... VAMOS EXPLORAR ESSES DIFERENTES TIPOS DE RELATIONSHIP (
+
+one-to-many,
+
+many-to-many 
+
+
+e 
+one-to-one..
+
+)
+
+
+
+
+
+
+
+
+
+VEREMOS ISSO COM UM EXEMPLO CONCRETO -> O EXMEPLO QUE O PROFESSOR CRIOU 
+
+
+
+
+
+É 'KIND OF'
+
+
+PARECIDO COM O EXEMPLO DA ÚLTIMA LIÇÃO, MAS NÃO É O MESMO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+NESSE EXEMPLO,
+
+
+TEMOS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'SOME COMPANY' 
+
+
+
+
+
+-_> EMPLOYEES DEVEM SER ORGANIZADOS EM 'TEAMS'.... 
+
+E DEVEM TER 1 ÚNICA INTRANET ACCOUNT POR EMPLOYEE...
+
+
+
+
+TEAMS DEVEM FICAR EM DIFERENTES 'COMPANY BUILDINGS',
+
+
+
+
+
+APESAR DE 1 MESMA 'BUILDING' PODER SEGURAR MÚLTIPLAS TEAMS...
+
+
+
+
+
+
+
+
+
+
+
+
+-_> ALÉM DE 'TEAMS',
+
+OS EMPLOYEES PODERÃO FAZER PARTE DE 'PROJECTS'....
+
+
+
+
+
+
+
+--> CADA 'EMPLOYEE'
+
+DEVE FAZER PARTE DE 1 ÚNICA TEAM,
+
+MAS 
+
+
+DEVE PODER FAZER PARTE DE MÚLTIPLOS PROJECTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK....
+
+
+
+
+
+
+
+
+COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+ENTIDADES:
+
+
+
+1) EMPLOYEE
+
+
+
+
+2) INTRANET ACCOUNT
+
+
+
+
+3) TEAM
+
+
+
+4) BUILDING 
+
+
+
+
+5) PROJECT
+
+
+
+
+
+
+
+
+
+
+
+
+EMPLOYEE - INTRANET ACCOUNT -------> ONE-TO-ONE (1:1)
+
+
+
+EMPLOYEE - TEAM ------> ONE-TO-MANY (1:n)
+
+
+EMPLOYEE - PROJECT --> MANY-TO-MANY (n:n)
+
+
+
+
+
+
+TEAM - employee --> ONE-TO-MANY (1:n) 
+
+
+TEAM - BUILDING --> one-to-many(1:n) --> building segura várias teams...
+
+
+
+
+
+
+
+BUILDING - team --> one-to-many 
+
+
+
+
+
+PROJECT - employee --> MANY-TO-MANY  (n:n:)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO.... 
+
+
+
+
+
+
+ESSAS SÃO AS RELATIONS...
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR QUER CRIAR ESSAS TABLES E AS CONFIGURAR, CONOSCO...
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+
+
+
+
+VAMOS CRIANDO AS TABLES ASSIM:
+
+
+
+
+
+
+
+
+
+
+(COMEÇAMOS PELA TABLE QUE TEM MENOS RELATIONS/dependencies, que é 'intranet_account')...
+
+
+
+
+
+
+
+
+
+-> essa table, é claro, DEVERÁ SER RELACIONADA DIRETAMENTE COM 'employees' (por meio de 1 field de 'user_id')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    user VARCHAR(255),
+    employee_id SERIAL REFERENCES employees(id) 
+);
+
+
+
+
+
+
+
+
+
+
+PARECE ESTAR CERTO....
+
+
+
+
+
+
+
+
+
+AGORA VAMOS PARA OS EMPLOYEES...
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    user VARCHAR(255),
+    employee_id SERIAL REFERENCES employees(id) 
+);
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    intranet_account_id SERIAL REFERENCES intranet_accounts(id)
+);
+
+
+
+
+
+
+
+
+
+NÃO SEI SE ESSA CRIAÇÃO DE TABLES SERÁ ACEITA (
+
+    se não vou receber 1 erro de 'essa table ainda não existe'...
+)
+
+
+
+
+
+
+
+
+
+
+OK, MAS VOU PROSSEGUIR, AINDA ASSIM....
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    user VARCHAR(255) NOT NULL,
+    employee_id SERIAL REFERENCES employees(id) 
+);
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    intranet_account_id SERIAL REFERENCES intranet_accounts(id),
+    team_id SERIAL REFERENCES teams(id)
+);
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    building_name VARCHAR(255) NOT NULL
+);
+
+
+
+CREATE TABLE teams (
+    id SERIAL PRIMARY KEY,
+    team_name VARCHAR(255) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings(id)
+);
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NÃO SEI SE A ORDEM ESTÁ CERTA...
+
+
+
+
+
+
+ACHO QUE PARA A ORDEM FICAR CERTA, COMEÇAMOS COM AS TABLES SEM REFERENCES EXPLÍCITAS A OUTRAS TABLES (ou seja, 'company_buildings' e 'projects')...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    building_name VARCHAR(255) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS, COLOCAMOS 'teams' (referencia 'company_buildings')...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    building_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE teams (
+    id SERIAL PRIMARY KEY,
+    team_name VARCHAR(255) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS, COLOCAMOS.... (ou employees, ou 'intranet_accounts', mas o problema é que ELES POSSUEM UMA RELAÇÃO 'ONE-TO-ONE', E QUALQUER UM DELES VAI DAR ERRO, SE TENTAMOS ADICIONAR DESSA FORMA 'LEGACY'):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL
+);
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    building_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE teams (
+    id SERIAL PRIMARY KEY,
+    team_name VARCHAR(255) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings(id)
+);
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    user VARCHAR(255) NOT NULL,
+    employee_id SERIAL REFERENCES employees(id) 
+);
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    intranet_account_id SERIAL REFERENCES intranet_accounts(id),
+    team_id SERIAL REFERENCES teams(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+UMA ALTERNATIVA SERIA 
+
+'''ADICIONAR O 'intranet_accounts' 
+
+SEM ESSA REFERENCE, INICIALMENTE, PARA 
+
+
+A COLOCAR _ _APENAS __ DEPOIS'''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ok... vou tentar adicionar tudo isso, agora...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TOUCHÉ, GANHEI UM ERROR:
+
+
+
+
+
+'RELATION EMPLOYEES DOES NOT EXIST'...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK....
+
+
+
+
+
+
+
+
+
+
+
+PARECE QUE É EXATAMENTE O QUE EU HAVIA PENSADO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR NOS MOSTRA AS DATA ENTITIES QUE ELE IDENTIFICOU:
+
+
+
+
+
+
+1) EMPLOYEES 
+
+
+
+2) TEAMS 
+
+
+
+3) INTRANET ACCOUNT 
+
+
+
+4) BUILDINGS 
+
+
+
+5) PROJECTS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O QUE POSSO FAZER, NO CASO,
+
+É CRIAR ESSA TABLE INICIALMENTE, SEM A CONSTRAINT...
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- DROP TABLE projects;
+-- DROP TABLE intranet_accounts;
+-- DROP TABLE employees;
+-- DROP TABLE teams;
+-- DROP TABLE company_buildings;
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    building_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE teams (
+    id SERIAL PRIMARY KEY,
+    team_name VARCHAR(255) NOT NULL,
+    building_id SERIAL REFERENCES company_buildings(id)
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    employee_id SERIAL
+    -- employee_id SERIAL REFERENCES employees(id)
+);
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    -- intranet_account_id SERIAL REFERENCES intranet_accounts(id),
+    intranet_account SERIAL,
+    team_id SERIAL REFERENCES teams(id)
+);
+
+ALTER TABLE employees
+ADD FOREIGN KEY intranet_account REFERENCES intranet_accounts(id) ON DELETE RESTRICT;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS ESSE CÓDIGO REALMENTE NÃO FUNCIONOU...
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR PROSSEGUE COM A AULA....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1 table por 'data entity'.....
+
+
+
+
+
+
+
+
+
+
+
+MAS É CLARO QUE TEMOS RELATIONS ENTRE ESSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EMPLOYEE - TEAM --> é uma 'ONE-TO-MANY', pq uma team pode ter MÚLTIPLOS EMPLOYEES...( mas cada employee tem apenas 1 única team)...
+
+
+
+
+
+
+
+intranet-account - employee --> é '1 to 1'..
+
+
+
+
+
+
+
+
+
+
+
+
+TEAM- building --> É '1 TO MANY', pq cada team só pode pertencer a 1 building, mas cada building pode segurar múltiplas buildings..
+
+
+
+
+
+
+
+
+
+
+PROJECTS - employees ----> CADA EMPLOYEE TEM 1 RELATION COM OS PROJECTS, E É 'MANY TO MANY',
+
+
+
+PQ 
+
+
+1 PROJECT PODE TER MÚLTIPLOS EMP,
+
+
+E CADA EMP PODE PARTCIPAR 
+
+
+DE MÚLTIPLOS PROJECTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA QUEREMOS DEFINIR TUDO...
+
+
+
+
+
+
+
+
+--> MAS O PROFESSOR EXPLICA QUE, PARA A RELATION DE 'MANY-TO-MANY',
+
+PRECISAMOS 
+
+
+DE UMA TABLE EXTRA,
+
+UMA QUE AINDA NÃO ESTÁ NESSE SLIDE (
+    vamos estudar isso nas próximas aulas....
+)
+
+
+
+
+
+--> 'PROJECTS E EMPLOYEES' --> é uma relation MANY-TO-MANY,
+
+E REQUER 
+1 TABLE INTERMEDIÁRIA...
