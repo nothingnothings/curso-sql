@@ -1,0 +1,696 @@
+
+
+
+
+
+
+
+
+
+
+
+CÓDIGO DA AULA ANTERIOR:
+
+
+
+
+
+-- SELECT * FROM employees AS e
+-- LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+-- LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+--- mesma coisa que o query ali de cima, mas com menos data sendo retornada (apenas algumas colummns das tables, e não toda a data de todas as tables queriadas....)
+SELECT e.id AS employee_id, first_name, last_name, p.title FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS É CLARO QUE NÃO ESTAMOS LIMITADOS 
+
+
+
+A APENAS 
+
+'GET ALL THE EMPLOYEES + THEIR PROJECT DATA'...
+
+
+
+
+
+
+
+
+
+
+
+--> tAMBÉM PODEMOS PROCURAR POR TODOS OS 
+
+
+EMPLOYEES QUE FAZEM PARTE DE 
+
+
+1 TEAM ESPECÍFICA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR ESCREVE 1 NOVA QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name 
+FROM employees AS e
+INNER JOIN  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS MERGEAR NOSSOS 'EMPLOYEES', COM INNER JOIN.... (queremos excluir os employees que não fazem parte de 1 team)..
+
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name 
+FROM employees AS e
+INNER JOIN teams 
+
+
+
+
+
+
+
+
+--> QUEREMOS JOINAR OS EMPLOYEES NA TABLE DE 'teams'...
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name 
+FROM employees AS e
+INNER JOIN teams AS t ON 
+
+
+
+
+
+
+
+
+EM 'ON',
+
+QUEREMOS 
+
+
+DEFINIR COMO QUEREMOS MERGEAR ESSAS TABLES...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name 
+FROM employees AS e
+INNER JOIN teams AS t ON e.team_id = t.id
+WHERE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS O PROFESSOR ESPECIFICOU QUE QUER 'PROCURAR POR MEMBERS DE 1 TEAM ESPECÍFICO'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ANTES DISSO,
+
+DEVEMOS EXECUTAR ESSA QUERY...
+
+
+
+
+
+
+
+
+
+--> ELA NOS DEU 4 RESULTADOS --> 
+
+
+
+
+
+
+
+
+EMPLOYEES 
+
+
+1 
+
+2 
+
+3 
+
+4 
+
+
+
+
+--> E ISSO NOS DÁ AS TEAMS A QUE PERTENCEM, NOS 'name'..;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA DIGAMOS QUE ESTAMOS INTERESSADOS APENAS 
+
+
+NOS EMPLOYEES QUE FAZEM PARTE DA 
+
+
+
+
+TEAM DE 'Data Analysts'...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO, PRIMEIRAMENTE PRECISAMOS SABER QUAL É O 'ID'
+
+
+
+DESSE TEAM...
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+PRECISAMOS COLOCAR ESSA COLUMN 
+
+DENTRO DAS NOSSAS COLUMNS 
+
+
+
+do select...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name, t.id
+FROM employees AS e
+INNER JOIN teams AS t ON e.team_id = t.id;
+
+
+
+
+
+
+
+--> CERTO... O ID É 
+
+'2'...
+
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIR ISSO,
+
+ESCREVEMOS ASSIM:
+
+
+
+SELECT e.id AS employee_id, e.first_name, e.last_name, t.name, t.id
+FROM employees AS e
+INNER JOIN teams AS t ON e.team_id = t.id
+WHERE t.id = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... CONSEGUIMOS 
+
+
+
+
+
+TODOS OS EMPLOYEES ASSIGNADOS A 
+
+
+
+ESSA TEAM..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok... isso significa que 
+
+esse é um 
+
+
+EXEMPLO 
+
+PARA 1 QUERY EM QUE ESTAMOS 'JOINING DATA',
+
+E QUE 
+
+ENTÃO ESTAMOS 
+
+
+TAMBÉM 'FILTERING' ESSA DATA...
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, JÁ PRATICAMOS 1 POUCO, DE NOVO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO ÚLTIMO EXERCÍCIO,
+
+O PROFESSOR QUER DESCOBRIR 
+
+
+
+'QUAIS 
+
+EMPLOYEES ESTÃO NO PRÉDIO DE NÚMERO 3'...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+PRECISAMOS FAZER MÚLTIPLOS JOINS....
+
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS 
+
+
+DESCOBRIR:
+
+
+
+
+
+
+
+1) QUAIS TEAMS ESTÃO NO BUILDING NUMBER 3 
+
+
+2) QUAIS employees fazem parte dessas teams....
+
+
+
+
+
+
+
+
+
+
+--> fazemos tipo assim:
+
+
+
+
+
+
+
+SELECT e.first_name, e.last_name
+FROM employees as e
+INNER JOIN teams AS t ON e.team_id = t.id
+INNER JOIN buildings as b ON t.building_id = b.id
+WHERE b.id = 3
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT e.first_name,
+    e.last_name
+FROM employees as e
+    INNER JOIN teams AS t ON e.team_id = t.id
+    INNER JOIN company_buildings AS b ON t.building_id = b.id
+WHERE b.id = 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> E, REALMENTE, ISSO ME RETORNOU 
+
+'Manuel Lorenz'
+
+
+
+e 
+
+'Michael Smith'...
+
+
+
+
+
+
+
+
+
+
+
+--> posso pegar mais fields, se o desejar...
+
+
+
+
+
+
+
+
+OK... PARECE QUE ACERTEI ESSE EXEMPLO...
+
+
+
+
+
+o filtro é o 'WHERE', é claro...
+
+
+
+
+
+
+
+PODERÍAMOS TAMBÉM COLOCAR 'ORDER BY'
+
+
+
+'OFFSET'
+
+E 
+
+'LIMIT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PROFESSOR EXEMPLIFICA POR MEIO DE UM:
+
+
+
+
+
+
+SELECT e.first_name,
+    e.last_name
+FROM employees as e
+    INNER JOIN teams AS t ON e.team_id = t.id
+    INNER JOIN company_buildings AS b ON t.building_id = b.id
+WHERE b.id = 3
+ORDER BY e.birthdate;
+
+
+
+
+
+
+
+
+
+
+
+
+ok... isso realmente funcionou...
+
+
+
+
+
+
+
+
+
+ESSE FOI OUTRO EXEMPLO DE QUERY QUE VOCÊ PODE EXECUTAR....
+
+
+
+
+AGORA SABEMOS COMO FAZER MERGE E MANAGE DE NOSSA DATA,
+
+MESMO ACROSS MÚLTIPLAS TABLES...
