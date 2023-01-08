@@ -1,0 +1,673 @@
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA, PARA CONCLUIR ESSE LONGO MÓDULO,
+
+O PROFESSOR 
+
+QUER 
+PLAY AROUND COM O DELETE,
+
+
+
+
+
+
+DIFERNETES DELETE SETTINGS,
+
+
+
+
+
+
+
+
+
+
+
+
+
+VER COMO 
+
+
+
+FUNCIONAM 
+
+NOSSAS TABLES,
+
+
+
+QUANDO EXAMINAMOS O MECANISMO DE 'ON DELETE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VAMOS BRINCAR COM ALGUMA DATA,
+
+E TENTAR APAGAR 1 POUCO DE DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR EXEMPLO, PARA 'TEAMS',
+
+
+
+COLOCAMOS QUE 
+
+
+
+''SE 1 BUILDING RELACIONADA A 1 TEAM FOR APAGADA''',
+
+
+
+vamos deixar a column de 'building_id'
+
+COMO NULL...
+
+
+
+
+
+
+
+
+
+
+
+FICOU TIPO ASSIm:
+
+
+
+
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE
+    SET NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. ISSO SIGNIFICA QUE A 'TEAM' 
+
+que pertence a 1 building/as teams 
+
+
+NÃO SERÃO APAGADAS...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> APAGAMOS A BUILDING DE ID 2.... --> 
+
+
+
+
+
+
+
+USAMOS DELETE FROM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELETE FROM company_buildings
+WHERE id = 2;
+
+
+
+
+
+
+
+
+
+
+
+------> CERTO... isso deve deletar a building assignada 
+À 
+
+team de 'R & D'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+MAS NESSA TABLE DE TEAMS,
+
+
+
+
+
+
+
+VEMOS QUE A TABLE DE 'R & D'
+
+está com esse id de 'building_id' 
+
+
+como '2' --> 
+
+
+
+
+
+
+SE APAGAMOS ESSA BUILDING 
+
+
+E VISUALIZAMOS ESSA ROW NOVAMENTE,
+
+VEREMOS QUE 
+
+O BUILDING_ID 
+
+TERÁ FICADO COMO UM 'NULL'...
+
+
+
+
+
+
+
+
+
+ESSE É EXATAMENTE O COMPORTAMENTO DESEJADO POR NÓS..
+
+
+
+
+
+
+
+
+
+E ESSE FOI O PRIMEIRO EXEMPLO....
+
+
+
+
+
+
+
+
+
+
+
+DE VOLTA 
+
+
+
+
+
+A NOSSAS TABLES,
+
+
+
+
+
+
+
+TÍNHAMOS UMA REGRA 
+
+DE
+
+
+'''SE A TEAM DE 
+
+1 EMPLOYEE FOR DELETADA,
+
+
+O 
+
+
+EMPLOYEE DEVERÁ TER O VALUE DE SUA COLUMN DE 
+
+
+team_id 
+
+
+RESETTADA PARA 1''' (
+
+
+    é o 'SET DEFAULT'...
+)
+
+
+
+
+
+
+
+O CÓDIGO ERA ESTE:
+
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id INT DEFAULT 1 REFERENCES teams ON DELETE
+    SET DEFAULT
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E O PROFESSOR VAI DELETAR 
+
+
+
+
+
+A TEAM 
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+DELETE FROM teams 
+WHERE id = 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+RODAMOS ISSO,
+
+
+
+
+E 
+
+
+TAMBÉM HÁ SUCESSO --> SE OLHARMOS OS EMPLOYEES QUE 
+
+ESTAVAM ASSIGNADOS A ESSA TEAM,
+
+
+
+AGORA ELES 
+
+TERÃO 
+
+
+'1'
+
+
+COMO O VALUE DE SEU 'TEAM_ID',
+
+
+
+tudo 
+
+pq 
+
+
+COLOCAMOS 
+
+O SETTING DE 'SET DEFAULT'
+
+
+
+
+no 'ON DELETE' (
+
+
+    ON DELETE SET DEFAULT 
+)
+
+
+
+
+
+
+
+
+
+
+-_> E O DEFAULT REALMENTE ERA '1'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR FIM,
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+
+
+QUER __ REMOVER 1  EMPLOYEE 
+
+INTEIRO,
+
+
+E AÍ VISUALIZAR 
+
+OS EFEITOS DISSO 
+
+NA INTERMEDIATE TABLE DE
+
+
+
+'projects_employees' -------->  O QUE 
+
+
+
+VAI ACONTECER,
+
+
+NESSA TABLE,
+
+
+É QUE 
+
+
+
+_ TODOS OS RECORDS_ QUE ENVOLVIAM/ENVOLVEM 
+
+
+
+
+
+ESSE EMPLOYEE DEVERÃO SER REMOVIDOS (
+
+    Pq colocamos 
+
+
+    'ON DELETE CASCADE'
+)
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+DELETE FROM employees
+WHERE id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E A DEFINIÇÃO DA TABLE:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE projects_employees(
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES employees ON DELETE CASCADE,
+    ---- queremos que todos os records correspondentes a esse EMPLOYEE, nessa table de 'projects_employees', também sejam removidos a partir de sua deleção..
+    project_id INT REFERENCES projects ON DELETE CASCADE --- mesma coisa aqui, pq também vmaos querer remover as entries relativas a esse 'project_id', nessa nossa table...
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... E, COMO UM SIDENOTE,
+
+
+
+
+
+
+
+__ O RECORD RELATIVO A ESSE 'EMPLOYEE',
+
+LÁ 
+
+
+NA TABLE DE 'INTRANET_ACCOUNTS',
+
+TAMBÉM FOI REMOVIDO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+
+
+acabamos com essa section...
+
+
+
+
+
+
+
+
+
+
+--> APRENDEMOS SOBRE 
+
+
+
+FOREIGN KEYS (constraint de 'REFERENCES')....
+
+
+
+
+
+
+
+
+
+
+
+-_> APRNEDEMOS SOBRE COMO PODEMOS CONFIGURAR NOSSAS TABLES,
+PARA ENTÃO AS UTILIZAR NAS NOSSAS QUERIES...
