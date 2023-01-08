@@ -1,0 +1,278 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> LEMBRE-SE:
+
+
+
+
+
+
+
+
+
+
+PRIMARY KEYS NÃO PRECISAM SER OBRIGATORIAMENTE 'AUTO-INCREMENTING INTEGERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AS PRIMARY KEYS DE SUA TABLE,
+
+
+
+AS 'PRIMARY IDENTIFICATION COLUMNS',
+
+
+
+ELAS _ _NÃO PRECISAM SER 'AUTO-INCREMENTING INTEGERS '--> EMBORA 
+
+ESSE SEJA 
+
+
+
+
+
+O DEFAULT, O MAIS UTILIZADO,
+
+QUANDO VOCÊ 
+
+TRABALHAR
+
+
+COM SQL ---------> MAS ISSO NÃO É UM MUST-HAVE --------> PODEMOS TAMBÉM USAR OUTRAS COLUMNS (fora 'id') E COLUMN
+
+
+VALUE TYPES (fora 'serial')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> POR EXEMPLO, NA ÚLTIMA COURSE SECTION,
+
+
+
+O PROFESSOR HAVIA CRIADO, POR SINAL,
+
+UMA 
+
+TABLE 
+
+
+PARA 'INTRANET_ACCOUNTS',
+
+
+
+
+
+
+
+
+
+
+E ELE AGORA 
+
+
+
+
+
+APONTA QUE ELE PODERIA TER DEFINIDO A COLUMN DE 'email' 
+
+
+
+COMO PRIMARY KEY -------> ISSO PQ EMAILS DEVEM, TIPICAMENTE, SER 'UNIQUE', de qualquer forma...
+
+
+
+
+
+
+
+
+
+
+
+
+----> É POR ISSO QUE PODERÍAMOS TER USADO 'email' em vez de 
+
+
+1 column extra de 'id'
+
+
+dentro desse 'intranet_accounts'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ 'emails'
+
+
+
+, EM SITES,
+ 
+
+ TIPICAMENTE SÃO O 'IDENTIFICATION CRITERIA'
+
+
+
+ DE 
+
+ 1 USER ---> MAS 
+
+
+
+
+
+ HÁ RAZÕES PARA EVITAR USAR ESSE EMAIL COMO PRIMARY KEY--> EXEMPLO: SITES EM QUE 
+
+
+
+ O EMAIL PODE MUDAR UM MONTE (
+
+aí não seria vantajoso ter 1 sistema que 
+
+utilize 
+
+essa column com esse value 'email'
+
+
+como primary key....
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS A QUESTÃO PRINCIPAL É:
+
+
+
+
+
+
+ '''' ESSE VALUE/COLUMN MUDA MT OU NÃO?''''
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS O QUE INTERESSA É QUE PODERÍAMOS REALMENTE TER USADO A COLUMN DE 'email'
+
+
+ em vez de 'id',
+
+
+
+ como PRIMARY KEY,
+
+
+
+ nessa table de 'intranet_accounts'..
+
+
+
+
+
+
+ --> QUALQUER COLUMN PODE ATUAR COMO PRIMARY KEY ---------> A ÚNICA COISA QUE 
+
+
+ VOCÊ TEM QUE SABER SOBRE A COLUMN QUE SERÁ A PRIMARY KEY É:
+
+
+
+
+
+
+
+
+ 1) SÓ PODE EXISTIR 1 PRIMARY KEY POR TABLE 
+
+
+ 2) O VALUE TEM DE SER NOT NULL 
+
+
+ 3) O VALUE DEVERÁ SER OBRIGATORIAMENTE 'UNIQUE'...
+
+
+
+
+
+
+
+
+
+
+
+ -------> 
