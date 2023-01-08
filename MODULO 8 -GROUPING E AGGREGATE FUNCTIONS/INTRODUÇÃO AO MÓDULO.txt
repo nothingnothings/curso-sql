@@ -1,0 +1,209 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NESSE MÓDULO, VEREMOS ALGUMAS QUERIES MAIS AVANÇADAS...
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS, ESPECIFICAMENTE,
+
+'AGGREGATE FUNCTIONS',
+
+
+
+E 
+
+
+
+A 
+KEYWORD DE 
+
+
+
+'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> AMBOS SÃO TÓPICOS COMPLETAMENTE NOVOS,
+
+
+AINDA INEXPLORADOS PELO CURSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VEREMOS:
+
+
+
+
+
+
+
+A) A COMPREENSÃO DAQUILO QUE É 'AGGREGATE FUNCTIONS'...
+
+------> veremos 'QUAL É A AGGREGATION' QUE É REALIZADA COM ELAS,
+
+E 
+
+
+A.2) 'O QUE É UMA FUNCTION, EM GERAL'...
+
+
+
+
+
+
+
+
+
+
+B) VEREMOS A KEYWORD DE 'GROUP BY' --> ESPECIFICAMENTE, 
+
+
+VEREMOS O USO 
+
+
+DESSA KEYWORD COM 
+
+
+'AGGREGATE FUNCTIONS'....
+
+
+
+B.1) ESTUDAREMOS 
+
+
+'''HAVING'''' VS ''''WHERE'''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---->  KEYWORD DE 'WHERE' NOS DEIXA FILTRAR OS DADOS...
+
+
+
+
+
+
+
+
+
+
+
+--> O 'HAVING' PODE __ PARECER _ QUE 
+
+FAZ 
+
+A MESMA COISA QUE 'WHERE',
+
+
+MAS HÁ ALGUMAS DIFERENÇAS 
+
+CONCEITUAIS EM RELAÇÃO AO 'WHERE',
+
+
+QUE 
+
+DEVEMOS 
+
+COMPREENDER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR FIM,
+
+ESTUDAREMOS 
+
+
+
+
+
+
+
+C)  'NESTED SUBQUERIES' -----> ELAS COMBINAM 2 'SELECT KEYWORDS' EM 1 ÚNICA QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+D) VEREMOS O QUE SÃO 'WINDOW FUNCTIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE É O CONTEÚDO DESTE MÓDULO...

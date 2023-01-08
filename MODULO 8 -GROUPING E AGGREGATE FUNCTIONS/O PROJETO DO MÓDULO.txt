@@ -1,0 +1,551 @@
+
+
+
+
+
+
+
+
+
+O PROJETO DESSE MÓDULO É 'RESTAURANTS'..
+
+
+
+
+
+
+
+
+
+
+
+--> PARA COMEÇARMOS,
+PRECISAMOS DESSE 
+
+PROJECT..
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> TEREMOS 1 DATABASE QUE VAI 'ARMAZENAR DATA RELACIONADA A 1 OU MÚLTIPLOS RESTAURANTES'...
+
+
+
+
+
+
+
+
+
+
+
+ESPECIFICAMENTE,
+
+CRIAREMOS 3 DIFERENTES TABLES:
+
+
+
+
+
+
+
+
+
+
+1) BOOKINGS 
+
+
+
+
+
+
+
+
+2) TABLES 
+
+
+
+
+3) PAYMENT METHODS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A TABLE DE 'BOOKINGS' VAI ARMAZENAR TODAS AS 'BOOKINGS'
+
+
+
+QUE 
+
+VAMOS 
+
+
+
+CONSEGUIR,
+
+
+
+
+PARA '1 GIVEN DAY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> JÁ A TABLE DE 'TABLES' 
+
+
+
+VAI _ ARMAZENAR INFO SOBRE AS _ TABLES__ QUE TEMOS NO NOSSO RESTAURANTE (
+
+    por exemplo, 
+
+
+    A
+     __ CAPACIDADE_ DE 1 GIVEN TABLE...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> E A TABLE DE 'PAYMENT METHODS'
+
+VAI CONTER 
+
+
+
+INFO 
+SOBRE 
+
+O MÉTODO DE PAGAMENTO USADO POR CADA 1 DE NOSSOS USERS (
+
+    cash or credit card,
+
+    etc...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS PRECISAR DE COLUMNS EM CADA 1 DESSAS TABLES..
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+NA TABLE DE 'BOOKINGS,'
+
+TEREMOS:
+
+
+
+
+
+
+
+
+
+
+1) id ------> TEREMOS 1 UNIQUE IDENTIFIER PARA CADA BOOKING..
+
+
+
+
+
+
+
+
+2) BOOKING DATE -----> SERÁ 1 FIELD QUE VAI CONTER O 'YEAR', 'MONTH' E 'DAY' --> poderíamos incluir 1 TIME OF THE DAY, mas para esse módulo, ter o YEAR, MONTH E DAY É SUFICIENTE..
+
+
+
+
+
+
+
+
+
+3) 'GUESTS' ------> TEREMOS INFO SOBRE 'QUANTOS GUESTS VÃO FAZER PARTE DESSE BOOKING'...
+
+
+
+
+
+
+4) 'BILLED' -----> É A QUANTIDADE DE 'BILL' PARA 1 BOOKING ESPECÍFICO...
+
+
+
+
+
+
+5) 'TIPPED' --> VEREMOS O QUANTO NOSSOS GUESTS FIZERAM 'TIP', de 1 booking (e poderá ser NULL, ESSE VALUE AÍ, SE O GUEST NÃO DEU NADA DE GORJETA)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUANTO à TABLE DE 'TABLES',
+
+
+TEMOS:
+
+
+
+
+
+
+
+
+1) ID --> serial primary key 
+
+
+
+
+
+2) SEATS --> ASSENTOS PARA 1 GIVEN TABLE --> PODEMOS TER TABLES COM CAPACIDADES DIFERENTES...
+
+
+
+
+
+3) POR FIM, 
+
+CADA TABLE TERÁ UMA 'TABLE CATEGORY' (SMALL, medium ou large table)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FINALMENTE, TEMOS A TABLE DE 'PAYMENT METHODS', QUE CONTERÁ OS FIELDS:
+
+
+
+
+
+
+
+
+1) ID 
+
+
+
+
+2) NAME (name do payment method utilizado)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> CERTO... ATÉ AÍ, TUDO BEM...
+
+
+
+
+
+
+
+
+
+
+ESSAS SÃO AS 3 TABLES INDIVIDUAIS --> O QUE FALTA É A CONNECTION, RELATION ENTRE 
+
+ESSAS DIFERENTES TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE, ENTRE AS TABLES DE 'Bookings' e 'Tables',
+
+
+
+
+
+_USAREMOS _A COLUMN DE 'id' 
+
+
+
+EM TABLES,
+
+
+que será referenciada em uma column de 'table_id',
+
+
+LÁ EM 'BOOKINGS'...
+
+
+
+
+
+
+
+
+
+
+
+
+---> a column de 'id',
+
+NA TABLE DE 'TABLES',
+
+
+SERÁ NOSSA PRIMARY KEY..
+
+
+
+
+
+
+
+
+-_> JÁ A 'TABLE_ID'  SERÁ A FOREIGN KEY DA TABLE DE 'Bookings'...
+
+
+
+
+
+
+
+
+
+
+
+--> TEREMOS A MESMA LÓGICA COM O 'PAYMENT METHODS' table,
+
+
+
+QUE SERÁ 
+
+
+__CONECTADA_ A 1 COLUMN DE 'payment_id'
+
+
+NA TABLE 
+
+DE 
+
+'bookings'..
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE tables (
+    id SERIAL PRIMARY KEY,
+    seats INT NOT NULL,
+    category VARCHAR(30) DEFAULT 'small'
+);
+
+
+
+CREATE TABLE bookings (
+    id SERIAL PRIMARY KEY,
+    booking_date DATE NOT NULL,
+    guests INT NOT NULL,
+    billed INT NOT NULL,
+    tipped INT,
+    payment_id INT REFERENCES payment_methods(id),
+    table_id INT REFERENCES tables(id)
+)
+
+
+
+
+CREATE TABLE payment_methods (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> o 'PAYMENT_ID'
+
+
+É NOSSA FOREIGN KEY,
+
+E O 
+
+'table_id'
+
+
+TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+----> VAMOS USAR ESSE CÓDIGO COMO PRÁTICA....
+
+
+
+
+
+
+
+
+--> É UM PROJECT PEQUENO, 
+
+
+MAS NOS ENSINA SOBRE 
+
+
+AS AGGREGATE FUNCTIONS E A KEYWORD DE 'GROUP BY'..
+
+
+
+
+
+
+
+
+ANTES DE EXAMINARMOS 
+A PARTE PRÁTICA,
+
+DEVEMOS 
+
+
+FALAR MAIS UM PCO SOBRE TEORIA..
