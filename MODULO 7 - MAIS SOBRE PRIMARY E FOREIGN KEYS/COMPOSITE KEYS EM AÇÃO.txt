@@ -1,0 +1,176 @@
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA PARA VER SE TUDO ISSO FUNCIONA,
+
+
+O PROFESSOR 
+
+
+DROPPA TODAS AS TABLES... (da última course section)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+DROP TABLE projects;
+DROP TABLE company_buildings;
+DROP TABLE teams;
+DROP TABLE employess;
+DROP TABLE intranet_accounts;
+DROP TABLE projects_employees;
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+DROP TABLE projects_employees;
+DROP TABLE intranet_accounts;
+DROP TABLE projects;
+DROP TABLE employees;
+DROP TABLE teams;
+DROP TABLE company_buildings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AGORA QEUREMOS SETTAR UMA 'COMPOSITE PRIMARY KEY',
+
+
+POR ISSO VAMOS ESCREVER ALGO COMO  
+
+
+
+
+
+CREATE TABLE projects_employees (
+
+    ...
+    PRIMARY KEY (employee_id, project_id)
+    ...
+)
+
+
+
+
+
+
+
+
+TAMBÉM VAMOS DEFINIR NOSSA 'FOREIGN KEY'
+
+
+COMO SENDO 'employee_Id',
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE projects_employees (
+
+    employee_id INT,
+    project_id INT REFERENCES projects ON DELETE CASCADE,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY (employee_id) REFERENCES employees ON DELETE CASCADE
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... TEMOS O MESMO RESULTADO DE ANTES,
+
+
+
+MAS AGORA COM A FOREIGN KEY E PRIMARY KEYS SETTADAS 
+
+DE FORMA DIFERENTE...
+
+
+
+
+
+
+
+
+
+
+AGORA VIMOS 'COMO PODEMOS SETTAR PRIMARY KEYS'
+
+
+COM ESSA SINTAXE ALTERNATIVA (de 'composite keys')...
