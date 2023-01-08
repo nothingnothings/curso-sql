@@ -1,0 +1,811 @@
+
+
+NA ÚLTIMA AULA,
+
+
+
+
+
+ESCREVEMOS 1 COMPOSITE KEY,
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+CREATE TABLE projects_employees (
+    --- ID SERIAL PRIMARY KEY -- é a surrogate key, que foi removida...
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO. -- esse é um excemplo de 'REAL KEY', pq é formada por values 'NÃO ARTIFICIAIS' (ao contrário do field de 'id' como a primary key, que teoricamente é ARTIFICIAL)...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> VIMOS COMO PODEMOS 'DEFINIR 1 COMPOSITE PRIMARY KEY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS PARECE QUE TAMBÉM PODEMOS 'DEFINIR FOREIGN KEYS'
+
+DE MANEIRA DIFERENTE,
+
+
+
+
+E TAMBÉM __ PODEMOS __ TER __ FOREIGN KEYS_ QUE 
+
+
+
+COMPREENDEM/USAM MÚLTIPLAS COLUMNS para derivar seus values...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK, MAS QUANDO AS 'COMPOSITE FOREIGN KEYS'
+
+
+SÃO UTILIZADAS?
+
+
+
+
+
+
+
+
+
+------> DIGAMOS QUE 
+
+
+
+
+VOCÊ:
+
+
+
+
+
+1) TEM OUTRA TABLE,
+
+QUE VOCÊ QUER CONECTAR A ESSA TABLE DE 'projects_employees'..
+
+
+
+
+
+
+
+
+
+
+2) COMO A 'PRIMARY KEY'
+
+
+DESSA TABLE DE 'projects_employees'
+
+
+É FORMADA POR 2 DIFERENTES COLUMNS (employee_id e project_id),
+
+
+
+
+
+
+
+VOCÊ TAMBÉM GOSTARIA DE ESPECIFICAR A 'FOREIGN KEY'
+
+
+
+
+
+COMO __ SENDO UMA COMBINAÇÃO 
+
+DE COLUMNS,
+
+
+TIPICAMENTE...
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ SUA _ FOREIGN KEY _ TIPICAMENTE 
+
+
+
+__ APONTA à 'PRIMARY KEY'
+
+
+DE OUTRA TABLE... (
+
+    ESSE NÃO É UM HARD REQUIREMENT, MAS É COMUM...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, COMO A NOSSA PRIMARY KEY É UMA 'COMPOSITE KEY',
+
+nesse nosso exemplo,
+
+
+
+
+
+
+A FOREIGN KEY, NA OUTRA TABLE,
+
+TAMBÉM DEVERÁ APONTAR 
+
+
+A ESSA 'COMBINATION DE COLUMNS',
+
+
+
+
+
+
+
+
+EM VEZ DE APONTAR A 1 SINGLE COLUMN ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO NOSSO EXEMPLO, NÃO TEMOS ESSE CASO,
+
+
+
+
+MAS PODERÍAMOS O ADICIONAR...
+
+
+
+
+
+
+
+
+
+
+
+-> PARA ADICIONARMOS 1 
+
+
+
+'FOREIGN KEY'
+
+
+
+COMO SENDO A 'COMBINAÇÃO DE 2 OU MAIS FIELDS DE OUTRA TABLE',
+
+
+
+
+DEVEMOS 
+
+
+
+
+
+
+
+ESCREVER
+
+
+
+
+'FOREIGN KEY'
+
+
+AO FINAL 
+
+
+
+DAS NOSSAS DEFINIÇÕES, TIPO ASSIM:
+
+
+
+
+
+
+CREATE TABLE projects_employees (
+
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY ---- EIS O CÓDIGO EM QUESTÃO.
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> COM ISSO,
+
+
+
+ADICIONAMOS 
+
+
+A 'FOREIGN KEY'
+
+
+
+COMO 1 TABLE CONSTRAINT (e não uma 'COLUMN CONSTRAINT')...
+
+
+
+
+
+
+
+------> CERTO...
+
+
+
+
+
+
+aí, se temos 
+
+
+
+1 COLUMN QUE É RELACIONADA 
+
+
+
+A
+ OUTRA 'SINGLE COLUMN'
+
+
+ DE OUTRA TABLE,
+
+
+
+
+
+
+
+
+
+
+ PODEMOS SIMPLESMENTE ESPECIFICAR 
+
+
+
+
+
+
+
+
+
+ o 'local_column_name' (column parte dessa table de agora) ,
+
+
+
+
+
+ PARA DEPOIS 
+
+ ESCREVER 
+
+
+ 'REFERENCES'
+
+ e então 
+
+ 
+
+
+ '<nome_da_outra_table>(nome_da_column_da_outra_table)'.
+
+
+
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE projects_employees (
+
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY employee_id REFERENCES employees (id) 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... 
+
+ASSIM PODERÍAMOS ADICIONAR ESSA FOREIGN KEY POR MEIO DA SINTAXE DE 'TABLE CONSTRAINT'...
+
+
+
+
+
+
+POR FIM, TEMOS AS ACTIONS DE 'ON DELETE'
+
+E 
+
+
+
+'ON UPDATE'...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE projects_employees (
+
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY employee_id REFERENCES employees (id) ON DELETE CASCADE         
+)
+
+
+
+
+
+
+MAS NESSE CASO,
+
+
+
+EM QUE ESTAMOS FALANDO DE SINGLE COLUMNS,
+
+
+
+ESSA SINTAXE É OPCIONAL...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS SE ESTAMOS FALANDO DA 'COMBINATION DE COLUMNS`,
+
+
+
+
+
+
+
+
+DA 'RELATION A UMA COMBINAÇÃO DE 
+
+COLUMNS',
+
+
+COMO 1 COMPOSITE PRIMARY KEY,
+
+
+
+EM OUTRA TABLE (como temos aqui),
+
+
+
+
+
+
+
+
+
+
+AÍ 
+
+
+
+ESSA SINTAXE DE 'FOREIGN KEY'
+
+
+
+
+
+NÃO É OPCIONAL..
+
+
+
+
+
+
+
+
+
+
+
+NO NOSSO CASO,
+
+ESCREVERÍAMOS ASSIM:
+
+
+
+
+
+
+
+
+FOREIGN KEY ()
+
+
+
+
+
+
+
+
+
+DENTRO DO PARÊNTESES,
+
+ESPECIFICAMOS 
+
+A COMBINAÇÃO DE 
+
+
+
+___ COLUMNS__ NESSA TABLE LOCAL... (
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+---> TIPO ASSIM:
+
+
+
+
+
+FOREIGN KEY (employee_id, project_id)
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+ 
+
+ DIZEMOS QUE A COMBINATION DE 'employee_Id'
+
+
+
+ e 'project_id'
+
+
+
+  
+  TEM RELAÇÃO COM OUTRA 'COMBINED COLUMNS',
+
+
+  EM OUTRA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+  -----> OK... DEPOIS DISSO,
+
+  COLOCAMOS A KEY DE 'REFERENCES',
+
+
+
+
+
+PARA AÍ 
+
+APONTAR 
+
+
+
+
+
+
+
+A OUTRA TABLE,
+
+
+
+
+
+E AÍ A __COMBINATION_ DE COLUMNS, NA OUTRA TABLE,
+
+
+
+QUE COMPORÁ 
+
+
+SEUS 'RELATED VALUES',
+
+POR ASSIM DIZER:
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE projects_employees (
+
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id),
+    FOREIGN KEY (employee_id, project_id) REFERENCES employees(id) ON DELETE CASCADE        
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSA É UMA ALTERNATIVA SE VOCÊ 'TEM UMA FOREIGN KEY 
+
+
+QUE __ É _- UM CONJUNTO DE COLUMN VALUES, QUE ESTÁ 
+
+APONTANDO A UMA COMBINATION DE COLUMN VALUES, EM OUTRA TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EM OUTRAS PALAVRAS:
+
+
+
+
+
+
+
+ASSIM COMO UMA 'PRIMARY KEY'
+
+
+PODE SER 'COMPOSITE' (COMPOSTA),
+
+
+UMA FOREIGN KEY TAMBÉM PODE O SER... (pode ser uma combination de columns)..
+
+
+
+
+
+
+
+
+
+
+
+ERA ISSO QUE O PROFESSOR QUERIA NOS MOSTRAR...
+
+
+
+
+
+
+
+
+
+mas o que interessa é que vocÊ SEMPRE DEVE ESCREVER ASSIM, nessa sintaxe:
+
+
+
+
+
+
+
+
+'FOREIGN KEY (xxx)'
+
+
+
+'PRIMARY KEY (xxx)'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> tipicamente, é claro,
+
+
+
+
+
+VOCÊ SÓ USA O 'TABLE CONSTRAINT' APPROACH PARA __ ADICIONAR _ 
+
+1 PRIMARY/FOREIGN KEY 
+
+
+__ 
+
+SE VOCê 
+
+REALMENTE TEM PRIMARY OU FOREIGN KEY QUE 
+
+
+
+REALMENTE SÃO COMPOSTOS POR MÚLTIPLAS COLUMNS, EM VEZ DE COMPOSTOS POR APENAS 1 VALUE, 1 COLUMN..
