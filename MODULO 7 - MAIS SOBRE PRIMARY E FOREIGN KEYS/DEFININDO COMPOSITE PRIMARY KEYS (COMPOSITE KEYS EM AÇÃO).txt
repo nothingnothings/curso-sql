@@ -1,0 +1,478 @@
+CREATE TABLE projects_employees (
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO.
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> APRENDEMOS, NA ÚLTIMA AULA,
+
+SOBRE 'COMPOSITE PRIMARY KEYS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> APRENDEMOS SOBRE 'A RAZÃO DE QUERERMOS OU NÃO AS UTILIZAR'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> EM GERAL,
+
+
+
+A DIFERENÇA ENTRE 'SURROGATE KEYS' E 'REAL KEYS' (
+
+
+    SURROGATE KEYS SÃO 
+
+    KEYS ARTIFICIAIS, 
+
+
+    É O FIELD DE 'id' ARTIFICIAL,
+
+    COLOCADO NA MAIOR PARTE DAS TABLES...
+)
+
+
+
+
+
+
+
+
+
+
+---> AINDA VAMOS USAR SURROGATE KEYS EM 1 MONTE DE CASOS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS PARA GARANTIR QUE CONSIGAMOS ADICIONAR/DEFINIR COMPOSITE KEYS E ASSIM POR DIANTE,
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR PEGA O CÓDIGO 
+
+
+DE 
+'projects_employees',
+
+
+
+E AÍ 
+
+
+
+
+
+
+
+
+
+
+
+QUER 
+
+
+
+
+
+CRIAR 1 COMPOSITE KEY,
+TIPO ASSIM:
+
+
+
+
+
+CREATE TABLE projects_employees (
+
+    --- ID SERIAL PRIMARY KEY -- é a surrogate key, que foi removida...
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO.
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA KEY SERÁ COMPOSTA 
+
+
+
+
+
+
+POR 'employee_id'
+
+e 
+
+'project_id...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE projects_employees (
+    --- ID SERIAL PRIMARY KEY -- é a surrogate key, que foi removida...
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO. -- esse é um excemplo de 'REAL KEY', pq é formada por values 'NÃO ARTIFICIAIS' (ao contrário do field de 'id' como a primary key, que teoricamente é ARTIFICIAL)...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK... MAS É IMPORTANTE RESSALTAR QUE ESSAS 2 COLUMNS NÃO DEIXAM DE SER 
+
+'FOREIGN KEYS' (
+
+
+    PQ ELAS AINDA TEM A CONSTRAINT DE 'REFERENCES'..
+) -> E NÃO HÁ NADA DE ERRADO COM ISSO,
+
+ 
+
+ PQ AINDA PODEMOS USAR 
+
+ ESSAS 2 COLUMNS PARA FORMAR 1 'COMPOSITE KEY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> É POR ISSO QUE 
+
+
+
+ O PROFESSOR 
+
+
+
+
+ DEFINE 'PRIMARY KEY',
+
+ AO FINAL,
+
+
+
+
+
+
+
+ PARA _ DEIXAR BEM CLARO QUE VOCÊ 
+
+ VAI 
+
+
+
+ ADICIONAR A PRIMARY KEY DESSA TBLE...
+
+
+
+
+
+
+
+
+
+
+
+
+ SE VOCÊ QUER ADICIONAR 1 SINGLE COLUMN COMO 'PRIMARY KEY',
+
+
+
+ você escreve assim:
+
+
+
+
+
+
+
+ CREATE TABLE projects_employees (
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY employee_id
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... SE FAZEMOS ASSIM, ISSO 
+
+SERIA O 
+
+EQUIVALENTE A ESCREVER ALGO ASSIM:
+
+
+
+
+
+'employee_id INT REFERENCES employees ON DELETE CASCADE PRIMARY KEY'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS VOCê TAMBÉM PODE ADICIONAR 1 COMPOSITE PRIMARY KEY,
+
+
+TUDO POR MEIO DE "()"
+
+
+e então 
+
+
+da enumeração 
+
+
+
+
+das columns que 
+formarão 
+
+o 
+
+
+VALUE 
+
+
+QUE 
+
+SERÁ 
+
+
+
+
+O IDENTIFICADOR DE CADA RECORD ... .---------> OK.. AINDA TEMOS APENAS 
+
+
+ 1 ÚNICA 'PRIMARY KEY'
+
+ POR TABLE,
+
+
+ MAS AGORA 
+
+ ESSA PRIMARY KEY 
+
+ É FORMADA PELOS VALUES 
+
+
+
+ DE ESSAS COLUMNS ENUMERADAS --> E OS EFEITOS 
+
+
+ DA 
+
+
+ 'PRIMARY KEY',
+
+
+ DE 
+
+
+ 'NOT NULL' 
+
+
+
+ E 
+ 'UNIQUE',
+
+
+ AINDA SERÃO 'ENFORCED'
+
+
+ PARA 
+
+
+ ESSAS COLUMNS DE 
+
+ 'employee_id'
+
+
+
+ e 
+
+ 'project_id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> MAS O QUE DEVE SER 'UNIQUE',
+
+ NO CASO 
+
+
+ DESSES RECORDS,
+
+
+ são as __ COMBINAÇÕES ENTRE 'employee_Id'
+
+
+
+ e 
+
+ 'project_id'...
+
+
+
+
+ (
+    APENAS PODEREMOS TER 1 ÚNICO RECORD DE 
+
+    'employee_id = 2 
+    project_id = 3',
+
+
+    por exemplo....
+ )
