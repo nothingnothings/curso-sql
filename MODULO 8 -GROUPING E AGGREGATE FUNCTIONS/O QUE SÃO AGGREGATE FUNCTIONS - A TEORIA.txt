@@ -1,0 +1,609 @@
+
+
+
+
+
+
+
+
+
+
+
+ESTE MÓDULO É SOBRE AGGREGATE FUNCTIONS E MAIs...
+
+
+
+
+
+
+
+mas aggregate functions serão COISAS QUE NOS SEGUIRÃO POR ESTE MÓDULO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRIMEIRAMENTE, DEVEMOS APRENDER O QUE ESSA KEYWORD DE 'AGGREGATE FUNCTION' IS ALL ABOUT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+'''' AGGREGATE FUNCTION''''
+
+
+
+
+
+
+
+
+
+
+
+-> AQUI TEMOS 2 PALAVRAS/KEYWORDS...
+
+
+
+
+
+
+
+
+
+
+
+1) AGGREGATE ----> ESSE TERMO É __ ALL ABOUT_ UMA OPERAÇÃO MATEMÁTICA,
+
+
+
+UMA OPERAÇÃO 
+
+MATEMÁTICA QUE __ RETORNA 1 'SINGLE' OU 'AGGREGATED' RESULT...
+
+
+
+
+
+
+
+MATHEMATICAL OPERATION RETURNING A SINGLE (aggregated) RESULT...
+
+
+
+
+
+
+
+
+
+---> É TUDO SOBRE 'AGGREGATION' --> ISSO QUER DIZER QUE 
+
+QEUREMOS 'REDUZIR'
+
+DIFERENTES INPUTS/VALUES 
+
+
+QUE RETRIEVAMOS,
+
+A __ 1 ÚNICO VALUE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK,
+
+MAS E QUANTO À SEGUNDA PARTE, A 'FUNCTION'? 
+
+
+
+
+
+
+
+
+
+
+
+2) FUNCTION ----> FUNCTION É ALGO QUE VOCÊ ENCONTRA NÃO SÓ NO SQL,
+
+MAS TAMBÉM 
+
+
+EM PROGRAMMING LANGUAGES --> FUNCTIONS 
+
+SÃO 
+
+SEMPRE 
+
+
+SOBRE 
+
+
+O 
+
+'DEFINE DE UMA OPERATION '----------> E NÓS PODEMOS 
+
+
+CRIAR FUNCTIONS,
+ 
+
+ POR NOSSAS PRÓPRIAS MÃOS,
+
+
+
+ OU ENTÃO 
+
+
+
+ A PRÓPRIA PROGRAMMING LANGUAGE/TECHNOLOGY 
+
+
+ JÁ VEM 
+
+ COM FUNCTIONS PRÉ-DEFINIDAS,
+
+
+
+ QUE PODEMOS 
+
+ EXECUTAR 
+
+
+ SEMPRE QUE NECESSÁRIO..
+
+
+
+
+
+
+
+
+
+
+ NO CASO  
+
+ DO SQL,
+
+
+ COM AS AGGREGATE FUNCTIONS,
+
+
+
+ ACTUALLY TEMOS 'BUILT-IN' FUNCTIONS,
+
+ QUE 
+
+ NOS 
+
+ DEIXAM 
+
+ RODAR 
+
+ 'AGGREGATION CALCULATIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> PRIMEIRO EXEMPLO CONCRETO:
+
+
+
+
+
+
+
+
+ 1) A FUNCTION DE 'SUM' ... -------> 
+
+
+
+
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+ SELECT SUM(salary) FROM employees;
+
+
+
+
+
+
+
+
+
+ 'SUM()' ---> É UMA PREDEFINED OPERATION, UMA __FUNCTION__, QUE PODE SER EXECUTADA 'ON DEMAND'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> 'SUM()'
+
+
+
+
+
+ REPRESENTA UMA DESSAS AGGREGATE FUNCTIONS....
+
+
+
+
+
+
+ OBS: EXISTEM OUTRAS AGGREGATE FUNCTIONS ALÉM DE 'SUM()",
+
+
+
+
+
+ MAS AQUI 
+
+
+ JÁ VISUALIZAMOS 
+
+
+ ESSA 
+
+
+
+ FUNCTION DE 'SUM()",
+
+
+
+ QUE NO CASO 
+
+
+ VAI CALCULAR 
+
+
+ A __ SOMA__ DOS __ SALARIES _ 
+
+
+
+ DE RECORDS EM 1 TABLE ... (
+
+
+
+TODOS OS RECORDS DESSA TABLE, SE N COLOCARMOS FILTRO COM 'WHERE'...
+
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O SALARY, AQUI,
+
+ SERIA MÚLTIPLOS VALUES,
+
+
+ MAS 
+
+  
+
+
+
+
+COM A AGGREGATE FUNCTION DE 'SUM',
+
+
+
+PODEMOS 
+
+
+CALCULAR 
+
+
+A __ SOMA__ DOS SALARIES,
+
+
+E AÍ 
+
+RETRIEVAR 
+
+1 ÚNICO VALUE COMO RESULT...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> TEMOS OUTRAS AGGREGATE FUNCTIONS DISPONÍVEIS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AS CORE AGGREGATE FUNCTIONS SÃO:
+
+
+
+
+
+
+
+1) COUNT() 
+
+
+
+
+(SIMPLESMENTE __ CONTAMOS OS RECORDS EM 1 COLUMN INDIVIDUAL, e aí retrievamos O NÚMERO DE RECORDS, COMO 1 ÚNICO RESULT... )
+
+
+
+2) TEMOS O 'SUM()',
+
+
+
+QUE 
+
+É __ A SOMA __ DE VALUES_ _EM 1 COLUMN ESPECÍFICA....
+
+
+
+
+
+
+
+
+3) TEMOS 'MAX' E 'MIN' --> 
+
+
+
+MAX() E MIN()...
+
+
+
+
+
+
+
+
+
+-----> FALANDO DESSE EXEMPLO DE 'SALÁRIO',
+
+
+
+
+
+'MAX()" ----> RETRIEVAMOS O ___ SALÁRIO MÁXIMO PAGO AOS NOSSOS EMPLOYEES,
+
+E O 
+
+'MIN()'
+
+O CONTRÁRIO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4) --> AVERAGE() ou 'AVG()" --------> CALCULA O AVERAGE VALUE __ DE SUA COLUMN,
+
+COM BASE NOS INPUTS EM 1 GIVEN COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> MAS HÁ ALGUMAS COISAS QUE DEVEMOS CONSIDERAR, AQUI ---> 
+
+
+
+
+
+NO CASO,
+
+A EXISTÊNCIA DE 'NULL' VALUES QUANDO CALCULAMOS 1 'AVERAGE' PARA 1 COLUMN --> MAS VAMOS EXPLORAR ISSO 
+
+
+NA PARTE PRÁTICA DESTE MÓDULO...
+
+
+
+
+
+
+
+
+
+
+
+
+ALÉM DESSAS AGGREGATE FUNCTIONS 'CORE',
+
+
+VOCÊ PODE ENCONTRAR MAIS SOBRE ESSAS AGGREGATE FUNCTIONS LÁ NOS OFFICIAL DOCS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA DOCUMENTAÇÃO DO POSTGRESQL,
+
+
+
+ENXERGAMOS VÁRIAS 
+
+
+
+AGGREGATE FUNCTIONS, COMO 'bool_and'
+
+e 
+
+'bool_or'...
+
+
+
+
+
+
+
+
+MAS AGORA VAMOS FOCAR __ NAS AGGREGATE FUNCTIONS MENCIONADAS ANTERIORMENTE...
+
+
+
+
+
+
+
+
+
+
+-- VAMOS FOCAR NOS COMANDOS CORE MENCIONADOS PELO PROFESSOR...
+
+
+
+
+
+
+
+
+
+--> PODEMOS VER A PARTE PRÁTICA,
+
+E VER 
+
+COMO
+
+ESSAS AGGREGATE FUNCTIONS 
+
+
+
+SE PARECEM, NA PRÁTICA...
