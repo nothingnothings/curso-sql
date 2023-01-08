@@ -1,0 +1,1239 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRIMARY KEYS COMPOSTAS ('composite primary keys') -----> 
+
+
+
+
+
+
+
+
+A PERGUNTA É:
+
+
+
+
+
+'PQ ANTES O PROFESSOR QUERIA NOS DIZER QUE PRIMARY KEYS NÃO 
+
+PRECISAM 
+
+
+SER AUTO-INCREMENTING INTEGERS?'
+
+
+
+
+
+
+
+AS RAZÕES:
+
+
+
+
+
+
+
+
+A) PQ É ALGO QUE VOCê DEVE SABER...
+
+
+
+
+
+
+
+
+
+
+B) PQ O PROFESSOR QUER NOS INTRODUZIR AO CONCEITO DE 'COMPOSITE PRIMARY KEYS'...
+
+
+
+
+
+
+
+
+
+
+MAS O QUE SÃO 'COMPOSITE PRIMARY KEYS'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> bem, o professor havia nos explicado que 
+
+
+
+
+''VOCÊ SÓ PODE TER 1 PRIMARY KEY POR TABLE''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO, HÁ 1 DETALHE:
+
+
+
+
+ESSA 'PRIMARY KEY'
+
+
+DE SUA TABLE __ PODE __ aCTUALLY__ 
+
+
+
+
+COMPREENDER/ENVOLVER  __MÚLTIPLAS COLUMNS DE 
+
+
+SUA TABLE... (
+
+
+ISSO QUER DIZER QUE SEU __ VALUE, O VALUE DE CADA 'KEY',
+
+
+PODE SER DERIVADO 
+
+
+DE UM AMÁLGAMA DE VALUES,
+
+DE MÚLTIPLOS COLUMNS DE 1 MESMA TABLE....
+
+)
+
+
+
+
+
+
+
+
+
+
+--> AINDA TEMOS 1 ÚNICA PRIMARY KEY,
+
+MAS 
+
+
+
+1 PRIMARY KEY QUE COMPREENDE 
+MÚLTIPLAS COLUMNS....
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOSSO EXEMPLO É ESTE,
+
+DA TABLE 
+
+'employees_projects' (MANY-TO-MANY RELATIONS, TABLES DE employees e projects, e essa table intermediária)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+id   employee_id    project_id 
+
+1       3              2 
+
+2       1               1
+
+3       1               2   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... 
+
+
+
+
+
+
+AQUI TEMOS 1 TABLE EM QUE 
+
+
+ARMAZENAMOS 'EMPLOYEE PROJECT MAPPINGS' (armazenamos 'qual employee pertence a quais projects').- ---> 
+
+
+
+
+
+
+
+É PARA ISSO QUE SERVE ESSA 'LINKING TABLE'...
+
+
+
+
+
+
+
+
+
+
+-----> BEM, NAQUELE EXEMPLO,
+
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE projects_employees (
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES (employees) ON DELETE CASCADE,
+    project_id INT REFERENCES projects ON DELETE CASCADE 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... NESSA TABLE TEMOS NOSSO 'TYPICAL AUTO-INCREMENTING INTEGER',
+
+QUE ATUA 
+
+COMO NOSSA PRIMARY KEY....
+
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO, 
+
+ESSA COLUMN DE 'id',
+
+
+
+QUE ADICIONAMOS 
+
+
+E  
+
+
+
+QUE USAMOS COMO NOSSA 'PRIMARY KEY'
+
+
+É 
+
+
+
+AQUILO QUE CHAMAMOS 
+
+
+
+DE 
+
+UMA 
+
+
+'SURROGATE KEY' ( é uma key SUBSTITUTA) --> OK...
+
+
+
+
+
+
+
+
+
+MAS O QUE É UMA 'SURROGATE KEY'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É SIMPLESMENTE UMA 
+
+KEY QUE É __ UNIQUE, SIM,
+
+
+MAS _ QUE __ NÃO É '''O UNIQUE IDENTIFICATION CRITERIA DE _ VERDADE''',
+
+
+
+isso 
+
+
+se você está PENSANDO NA 'DATA QUE ESTÁ SENDO ARMAZENADA'....
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE ELA É '''TECNICAMENTE''''
+
+
+O UNIQUE IDENTIFICATION CRITERIA (
+    pq é unique e tudo mais 
+),
+
+
+
+
+
+MAS SE VOCÊ PENSAR SOBRE O 'employee_id' 
+
+e 
+
+'project_id' 
+
+
+
+
+MAPPINGS,
+
+
+
+__ ACTUALLY_ __ CADA _ COMBINATION _ 
+
+
+
+
+DE 'PROJECT + EMPLOYEE'
+
+AQUI 
+
+
+DEVE SER UNIQUE ----->  ISSO 
+
+
+
+PQ 
+
+
+SE 
+
+O EMPLOYEE DE ID '3'
+
+
+É ASSIGNADO AO PROJECT DE ID '2',
+
+
+
+É 
+
+
+A COMBINAÇÃO 
+
+
+ENTRE ESSES 2 VALUES QUE 
+
+VAI 
+
+
+
+'''CREATE A TRULY UNIQUE VALUE ''' -------> ISSO PQ 
+
+
+
+
+
+
+
+''CADA EMPLOYEE SÓ PODE SER MAPPEADO A 1 PROJECT ESPECÍFICO ___ 1 ÚNICA VEZ'''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É JUSTAMENTE POR ISSO QUE PODEMOS 
+
+
+'NOS LIVRAR'
+
+DESSA SURROGATE KEY DE 'id',
+
+
+
+
+
+
+
+
+E, EM VEZ DISSO,
+
+
+USAR 
+
+
+A COMBINAÇÃO 
+
+
+'employee_id + project_id',
+
+
+
+
+
+
+
+COMBINAÇÃO DE VALUES, DE 2 COLUMNS,
+
+
+PARA 
+
+OBTER 
+
+1 VALUE,
+
+
+VALUE QUE DEVERÁ SER 
+
+
+
+USADO COMO PRIMARY KEY -----------> PQ ESSA É A ACTUAL 'REAL KEY',
+
+
+
+
+QUE REALMENTE VAI IDENTIFICAR NOSSOS DIFERENTES ROWS,
+
+AS ENTRIES NESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> E É CLARO QUE 
+
+
+ISSO ESTÁ RELACIONADO COM O EXEMPLO DE 'intranet_accounts'
+
+
+que o professor nos deu na última aula..
+
+
+
+
+
+
+
+ESTAMOS FALANDO DISSO:
+
+
+
+
+
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    password VARCHAR(200) NOT NULL
+);
+CREATE TABLE projects_employees(
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES employees ON DELETE CASCADE,
+    project_id INT REFERENCES projects ON DELETE CASCADE
+);
+
+
+
+
+
+
+
+
+
+
+--> LÁ, PODERÍAMOS 
+
+
+ARGUMENTAR QUE o 
+
+
+'REAL IDENTIFICATION CRITERIA' É O EMAIL... ------> 
+
+
+
+
+
+
+
+
+
+
+
+de novo,
+ O PROFESSOR 
+
+
+ APONTA QUE 
+
+ '''NÃO É ERRADO USAR UMA COLUNA '''''ARTIFICIAL'''' DE id 
+
+ PARA _atuar como UNIQUE IDENTIFICATION CRITERIA'''',
+
+
+
+
+ mas o que interessa é que 
+
+ AQUI 
+
+ O VERDADEIRO CRITÉRIO DE IDENTIFCAÇÃO, FÁTICO,
+
+É 
+
+O EMAIL,
+
+E NÃO ESSA COLUNA ARTIFICIAL... (que pode existir, claro, mas o de verdade é o 'email')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> NOS EMPLOYEES, TAMBÉM PODERÍAMOS DIZER QUE 
+
+É 
+
+O 'email'
+
+que é a primary key,
+
+
+se não usarmos aquele 
+
+
+
+'SURROGATE KEY' (essa column de 'id')..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, O PROFESSOR 
+
+
+
+QUER DIZER QUE PODERÍAMOS 'GET RID OF THE ID COLUMN',
+
+
+PARA ENTÃO
+
+
+USAR A KEY DE 'VERDADE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK.. --> POR FIM, TEREMOS TABLES QUE NEM 
+
+
+
+ESSA DE 'employees_projects',
+
+
+
+
+
+EM QUE 
+
+A KEY DE VERDADE NÃO É UMA 'SINGLE COLUMN',
+
+
+COMO ERA O CASO COM AS 'intranet_accounts'
+
+E 
+
+os 'employees',
+
+
+
+
+
+
+
+E SIM 
+
+
+
+
+
+É FEITA __ DE MÚLTIPLAS COLUMNS (de 'employee_id' + 'project_id')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ESSE CENÁRIO NÃO É TÃO INCOMUM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> E SE VOCê TEM ESSE CENÁRIO, E SE QUER USAR ESSA COMBINAÇÃO 
+
+
+
+DE COLUMNS COMO PRIMARY KEY,
+
+
+
+
+VOCê PODE FAZER ISSO,
+
+
+
+
+PODE 
+
+
+
+
+
+
+DEFINIR AQUILO QUE CHAMAMOS DE 
+
+
+
+
+'''COMPOSITE PRIMARY KEY'''' --> 
+
+
+
+
+
+
+
+O CÓDIGO É ASSIM:
+
+
+
+
+CREATE TABLE projects_employees (
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO.
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIM, VOCÊ CONFIGURA ESSA PRIMARY KEY __ COMO A 'COMBNIAÇÃO DE 2 COLUMNS',
+
+
+EM VEZ DE 1 ÚNICA COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> E AQUI VOCÊ TAMBÉM
+
+
+VE UMA 'DIFERENTE MANEIRA DE ADICIONAR 1 PRIMARY KEY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ ANTERIOMENTE APENAS CONHECÍAMOS 1 MANEIRA DE ADICIONAR 1 PRIMARY KEY,
+
+que era assim:
+
+
+
+
+
+CREATE TABLE employees (
+    ...
+    id SERIAL PRIMARY KEY, 
+    ...
+)
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+ANTES APENAS COLOCÁVAMOS A PRIMARY KEY DEPOIS DO FIELD que queríamos que fosse 
+
+
+a primary key (essa CONSTRAINT ERA ESCRITA DEPOIS DO 'COLUMN' NAME' E DO 'COLUMN DATA TYPE')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA DESCOBRIMOS ESSA SEGUNDA SINTAXE,
+
+
+
+
+EM QUE __ DEFINIMOS __ A 'PRIMARY KEY'
+
+
+
+COMO UMA ___ 'PARTE SEPARADA'
+
+
+
+
+DA DEFINIÇÃO DE OUTRAS COLUMNS,
+
+
+
+AO FINAL... ------> E É AÍ QUE VOCÊ 
+
+
+
+ESCREVE A 'PRIMARY KEY',
+
+ESSA CONSTRAINT AÍ,
+
+PARA CONFIGURAR 
+
+'''QUAIS COLUMNS COMPORÃO A PRIMARY KEY DESSA TABLE''...
+
+
+
+
+
+
+
+
+
+
+--> E É CLARO QUE PODEMOS __ USAR MAIS DE 2 COLUMNS 
+
+
+
+PARA _ NOSSAS PRIMARY KEYS --------> ISSO QUER DIZER QUE VOCÊ 
+
+PODE 
+
+SETTAR
+ 
+ PRIMARY KEYS DESSA FORMA,
+
+
+
+
+
+SE VOCÊ QUER DEFINIR A 'KEY VERDADEIRA' DE 1 TABLE COMO__ A PRIMARY KEY,
+
+
+E
+ 
+
+
+
+ SE ESSA 'REAL KEY'
+
+ É REALMENTE A COMBINAÇÃO ENTRE DIFERENTES VALUES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ NOVAMENTE: ISSO NÃO É ALGO QUE VOCê DEVE FAZER 
+
+
+ TODO TEMPO... ('THERE IS NOTHING WRONG WITH USING SURROGATE KEYS') ------> E VEREMOS O USO DA
+
+
+
+ COLUMN ARTIFICIAL 'id'
+
+
+ EM UM MONTE DE EXEMPLOS POR AÍ... --> PQ 
+
+
+
+
+ É CONVENIENTE,
+
+ E PQ 
+
+
+ TE DÁ UMA 
+
+
+
+
+
+ KEY QUE NUNCA MUDA (o que é uma vantagme) --> É UMA VANTAGEM,
+
+
+ PQ 
+
+
+
+ COISAS COMO 'EMAILS' PODEM MUDAR --> ISSO NÃO É O FIM DO MUNDO,
+
+
+
+ MAS ISSO PODERIA SIGNFICAR QUE 'MÚLTIPLAS RELATIONS TERIAM DE SER UPDATADAS' -----> E AÍ 
+
+
+
+ A AÇÃO DE 'ON UPDATE' PODERIA SE TORNAR IMPORTANTE,  SE VOCê SETTOU RELATIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> É POR ISSO QUE NÃO HÁ NADA DE ERRADO COM O USO DE 1 'SURROGATE KEY'
+
+
+ EM VEZ DE UMA REAL KEY,
+
+
+
+
+ MAS PODERÍAMOS 
+
+
+ TAMBÉM 
+
+ USAR A 'REAL KEY'
+
+
+ E ATÉ 
+
+
+ MESMO 
+
+
+
+ FAZER ISSO 
+
+
+
+
+
+ SE ESSA KEY __ COMPREENDE MÚLTIPLAS COLUMNS (com a ajuda de uma COMPOSITE KEY)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> OK, MAS O PROFESSOR RESSALTA:
+
+
+
+
+
+
+
+
+ A) EM TABLES COMO 'addresses',
+
+ que vimos antes no curso,
+
+ LÁ,
+
+
+
+
+ A REAL KEY 
+
+
+ SERIA 
+ PROVAVELMENTE 
+
+
+
+
+ '''A COMBINAÇÃO DE TODAS AS SUAS COLUMNS ''' -> PQ 1 ADDRESS SÓ É CLARAMENTE IDENTIFICADO 
+
+
+
+
+ SE TEMOS A 'STREET', 'house_number',
+
+ 'STREET ID',
+
+
+
+ 'POSTAL CODE'
+
+
+ E ASSIM POR DIANTE... -------> NESSE CASO ESPECÍFICO,
+
+
+
+ VOCÊ 
+
+ CRIARIA UMA COMPOSITE KEY QUE 
+
+
+
+ COMPREENDERIA 
+
+ '4 OU 5' COLUMNS DE 1 TABLE --------> EMBORA ISSO SEJA POSSÍVEL,
+
+
+
+
+
+
+
+ FAZER ISSO 
+
+
+
+ __SERIA: 
+
+
+ 1) RUIM PARA PERFORMANCE 
+
+
+ 2) INEFICIENTE 
+
+
+
+
+
+
+
+E POR ISSO, EM CASOS COMO ESSES,
+
+
+
+
+
+É MELHOR USAR 1 FIELD EXTRA, DE 'ID',
+
+
+ESSA SURROGATE 
+
+KEY,
+
+EM VEZ DA KEY DE VERDADE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+AINDA ASSIM,
+
+
+COMPOSITE KEYS 
+
+
+
+
+_ PODEM SER ÚTEIS,
+
+
+
+ESPECIALMENTE EM EXEMPLOS COMO O DE 'projects_employees' TABLE... --> ABSOLUTAMENTE 
+
+PODERÍAMOS ARGUMENTAR PELO USO 
+
+DESSA 'REAL KEY',
+
+
+
+
+
+POR MEIO DO SET DESSA PRIMARY KEY AO FINAL DA DEFINIÇÃO, COMO ESCREVEMOS ANTES:
+
+
+
+
+
+CREATE TABLE projects_employees (
+    employee_id INT,
+    project_id INT,
+    PRIMARY KEY (employee_id, project_id) ----- EIS O CÓDIGO EM QUESTÃO.
+)
+
+
+
+
+
+
+
+
+
+NO FINAL, TUDO DEPENDE DO PROJECT EM QUE VOCÊ ESTÁ TRABALHADNO,
+
+
+
+E DOS GOALS DE SUA TEAM...
