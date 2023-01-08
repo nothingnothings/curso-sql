@@ -1,0 +1,925 @@
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+
+
+
+
+RODEI ISTO AQUI:
+
+
+
+
+
+
+
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(250) NOT NULL,
+    deadline DATE
+);
+CREATE TABLE company_buildings (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+CREATE TABLE teams(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300) NOT NULL,
+    building_id INT REFERENCES company_buildings ON DELETE
+    SET NULL
+);
+---- se 1 das buildings for DELETADA da database, esse field, nos records 'teams' relacionados, ficará como NULL...
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    birthdate DATE NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    team_id INT DEFAULT 1 REFERENCES teams ON DELETE
+    SET DEFAULT
+);
+CREATE TABLE intranet_accounts (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(200) REFERENCES employees(email) ON DELETE CASCADE,
+    password VARCHAR(200) NOT NULL
+);
+--- com 'one-to-one' relationships, BASTA DEFINIR A RELATION EM 1 COLUMN, DE 1 DAS TABLES (não é necessário fazer isso nas 2)...
+-- se o EMPLOYEE É DELETADO, o record de 'intranet_account' correspondente também o é...
+-- intermediate table (n:n)
+-- tables intermediárias são GERALMENTE CRIADAS AO FINAL, DEPOIS DO CREATE DAS 2 RELATED TABLES A ELA...
+CREATE TABLE projects_employees(
+    id SERIAL PRIMARY KEY,
+    employee_id INT REFERENCES employees ON DELETE CASCADE,
+    ---- queremos que todos os records correspondentes a esse EMPLOYEE, nessa table de 'projects_employees', também sejam removidos a partir de sua deleção..
+    project_id INT REFERENCES projects ON DELETE CASCADE --- mesma coisa aqui, pq também vmaos querer remover as entries relativas a esse 'project_id', nessa nossa table...
+);
+--- table intermediária de 'projects' e 'employees' ---> INTERMEDIATE TABLES SÃO SEMPRE CRIADAS PARA HANDLAR 'MANY-TO-MANY' RELATIONSHIPS (1 mesmo employee pode participar de múltiplos projects, e cada project pode ter múltiplos employees)....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> TEMOS MAIS 1 ARQUIVO, COM MAIS 'INSERT INTO' STATEMENTS...
+
+
+
+
+
+
+
+
+
+
+
+--> ESTE CÓDIGO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO company_buildings (name)
+VALUES 
+  ('Main Building'), 
+  ('Research Lab'), 
+  ('Darkroom');
+
+INSERT INTO teams (name, building_id)
+VALUES 
+  ('Admin', 1), 
+  ('Data Analysts', 3),
+  ('R&D', 2);
+
+INSERT INTO employees 
+  (first_name, last_name, birthdate, email, team_id)
+VALUES 
+  ('Julie', 'Barnes', '1988-10-01', 'julie@test.com', 3),
+  ('Max', 'Schwarz', '1989-06-10', 'max@test.com', 1),
+  ('Manuel', 'Lorenz', '1987-01-29', 'manu@test.com', 2),
+  ('Michael', 'Smith', '1977-05-12', 'michael@test.com', 2);
+
+INSERT INTO intranet_accounts (email, password)
+VALUES 
+  ('max@test.com', 'abcae1'),
+  ('manu@test.com', 'fdasfdas1'),
+  ('julie@test.com', 'adsfsaf3'),
+  ('michael@test.com', 'adsfsaf3');
+
+INSERT INTO projects (title, deadline)
+VALUES 
+  ('Mastering SQL', '2024-10-01'),
+  ('New Hire Onboarding', '2022-02-28'),
+  ('New Course Evaluation', '2022-01-01');
+
+INSERT INTO projects_employees (employee_id, project_id)
+VALUES 
+  (1, 2),
+  (2, 2),
+  (1, 3),
+  (3, 1),
+  (3, 3),
+  (2, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA PROJECTS TAMBÉM SÃO CRIADOS,
+
+
+
+
+
+
+
+
+
+E O PROFESSOR INSERE EMPLOYEES 'DENTRO' DESSES PROJECTS,
+
+
+
+TUDO POR MEIO DA CRIAÇÃO DE 
+
+
+
+
+RECORDS 
+
+NA TABLE DE 'projects_employees',
+
+
+
+
+
+
+com esta sintaxe:
+
+
+
+
+INSERT INTO projects_employees (employee_id, project_id)
+VALUES 
+  (1, 2),
+  (2, 2),
+  (1, 3),
+  (3, 1),
+  (3, 3),
+  (2, 3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_ COMO ESSA TABLE GOVERNA A 'EXISTÊNCIA DE RELAÇÕES ENTRE 1 GIVEN EMPLOYEE E 1 GIVEN PROJECT',
+
+
+
+
+
+
+
+
+cada record é 1 'conexão' entre os 2,
+
+
+o vínculo entre 1 employee e 1 project... (many-to-many --> CADA PROJECT PODE TER MÚLTIPLOS EMPLOYEES, E CADA EMPLOYEE PODE PARTICIPAR DE MÚLTIPLOS PROJECTS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok... agora podemos começar a queriar por essa data...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ARQUIVO 'query data' --> VAMOS PODER REALMENTE SELECIONAR DATA DA MANEIRA QUE QUISERMOS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS CONSTRUIR QUERIES COM DIFERENTES JOINS (inner join e left join)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AQUI, O PROFESSOR QUER
+
+
+'GET ALL EMPLOYEES',
+
+
+E AÍ 
+
+
+
+__ DESCOBRIR 'EM QUAIS PROJECTS ESTÃO TRABALHANDO'...
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT * FROM employees AS e
+LEFT JOIN projects_employees AS p ON e.id = p.employee_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO REALMENTE RETORNOU TODOS OS employees,
+
+
+
+
+
+
+e aí as relations de cada employee com os 'projects'..
+
+
+
+
+
+
+
+
+
+
+
+POR SER UMA 'MANY-TO-MANY' RELATION,
+
+
+
+
+USAMOS A INTERMEDIATE TABLE,
+
+
+DE 'projects_employees'...
+
+
+
+
+
+
+
+
+
+
+---> INNER JOIN X LEFT JOIN --->
+
+
+
+
+
+
+
+
+
+'LEFT JOIN '--> QUEREMOS PEGAR A DATA DE TODOS OS EMPLOYEES,
+
+
+
+ATÉ MESMO OS EMPLOYEES QUE AINDA NÃO FAZEM PARTE DE 1 PROJECT (esses fields, nesse record composto aí, ficarão NULL)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK...
+
+
+
+
+
+
+COLOCAMOS UMA COMPARAÇÃO ENTRE 'e.id = pe.employee_id'..
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... MAS 
+
+
+O PROFESSOR NOS EXPLICA QUE 
+
+
+'''ESSE AINDA NÃO É O RESULTADO FINAL'''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+isso vai nos dar um resultado,sim, 
+
+
+
+
+MAS  NÃO SERÁ A 'PROJECT DATA'
+
+
+FINAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ ESTAMOS APENAS __ MERGEANDO A 'INTERMEDIATE TABLE'
+
+COM OS EMPLOYEES,
+
+
+A ESSE PONTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> PARA CONSEGUIRMOS FAZER JOIN DA OUTRA TABLE ('projects)",
+
+
+
+PRECISAMOS DE OUTRO JOIN STATEMENT..
+
+
+
+
+
+
+
+
+
+
+
+
+-> PRECISAMOS DE ALGO ASSIM:
+
+
+
+
+
+SELECT * FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SERÁ ALGO ASSIM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. COM ISSO, ADICIONEI 'ADDITIONAL PROJECT DATA'
+
+
+AOS MEUS RECORDS...
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK, O RESULTADO FICOU REALMENTE GIGANTE, FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+{
+  "id": 2,
+  "first_name": "Max",
+  "last_name": "Schwarz",
+  "birthdate": "1989-06-10",
+  "email": "max@test.com",
+  "team_id": 1,
+  "id (1)": 3,
+  "employee_id": 2,
+  "project_id": 3,
+  "title": "New Course Evaluation",
+  "deadline": "2022-01-01"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----->  E VEMOS RECORDS COM USER NAMES REPETIDOS,
+
+PQ É CLARO QUE 
+
+
+
+
+'CADA EMPLOYEE PODE PARTICIPAR DE MÚLTIPLOS PROJECTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR PEGA APENAS ALGUMAS COLUMNS DO EMPLOYEE,
+
+
+
+
+PARA NÃO TER UM RESULTADO TÃO GIGANTE...
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT e.id AS employee_id, first_name, last_name, p.title FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+
+
+
+
+
+
+
+
+(
+
+
+    OK, VAMOS QUERER SÓ ESSAS 4 COLUMNS, E NENHUMA OUTRA DATA...
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- SELECT * FROM employees AS e
+-- LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+-- LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+--- mesma coisa que o query ali de cima, mas com menos data sendo retornada (apenas algumas colummns das tables, e não toda a data de todas as tables queriadas....)
+SELECT e.id AS employee_id, first_name, last_name, p.title FROM employees AS e
+LEFT JOIN projects_employees AS pe ON e.id = pe.employee_id
+LEFT JOIN projects AS p ON p.id = pe.project_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E SE QUEREMOS DESCOBRIR 'A QUAIS PROJECTS 1 EMPLOYEE ESTÁ RELACIONADO',
+
+logicamente precisaremos 
+
+de múltiplos rows para 1 employee,
+
+se ele realmente fizer parte de múltiplos projects...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O SQL NÃO VAI FAZER MERGE DE MÚLTIPLOS PEDAÇOS DE DATA EM 1 SINGLE CELL,
+
+E SIM 
+
+
+
+VAI __ TE DAR _ MÚLTIPLOS ROWS,
+
+PQ ESSA É A IDEIA POR TRÁS DO SQL...
+
+
+
+
+
+
+
+
+
+
+
+--> COMO USAMOS 'LEFT JOIN',
+
+
+
+
+
+FICAMOS COM O ROW DE 'MICHAEL SMITH', QUE TEM TITLE DO PROJECT COMO 'null' (
+
+    pq ele não 
+
+    foi assignado a nenhum project...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+certo... até aí, tudo bem....
+
+
+
+
+
+
+
+
+
+SE SUBSTITUÍSSEMOS 
+
+
+O 'left join' por 
+
+
+
+'inner join',
+
+qualquer um deles,
+ficaríamos sem esse employee de 'Michael Smith',
+
+
+
+PQ AGORA 
+
+APENAS PEGARÍAMOS ROW COM 'ENTIRELY MATCHING DATA',
+
+
+
+
+e aí pegaríamos merged data 
+
+APENAS 
+
+DE RECORDS
+
+
+
+EM QUE PRESENTES 'ACTUAL ACTIVE RELATIONS'... (ou seja, employees que realmente estão em  projects, no presente)...
+
+
+
+
+
+
