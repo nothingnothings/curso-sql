@@ -1,0 +1,1241 @@
+
+
+
+
+
+
+
+ok, ESTUDAMOS UM MONTE 
+
+
+AS 'KEYS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS AGORA O PROFESSOR QUER REVISAR 'DATA-RELATIONSHIPS' EM GERAL...
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA SERMOS MAIS ESPECÍFICOS,
+
+O PROFESSOR QUER VER 
+
+
+'SELF-REFERENTIAL RELATIONSHIPS'... -->  TAMBÉM CHAMADOS DE 'SELF-REFERENCING RELATIONSHIPS'...
+
+
+
+
+
+
+
+ 
+
+ DEVEMOS ESTUDAR ISSO COM UM EXEMPLO CONCRETO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 1) DIGAMOS QUE ___ NOSSOS EMPLOYEES POSSUEM 'SUPERVISORS' --> ISSO SIGNIFICA QUE 
+
+    CADA EMPLOYEE TEM 1 SUPERVISOR,
+
+    SIM,
+
+
+    MAS 
+
+
+
+    __ CADA SUPERVISOR TAMBÉM É UM EMPLOYEE, NO FINAL DAS CONTAS..
+
+
+
+
+
+
+
+                        HAS 
+                    I-------------->
+                    I               V
+                EMPLOYEE      SUPERVISOR 
+                   I                 I 
+                   I                 I 
+                    <---------------
+
+                            IS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK... E UM SUPERVISOR __ PROVAVELMENTE TEM 1 SUPERVISOR __ QUE CUIDA DELE, TAMBÉM....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+
+TEMOS UMA RELATIONSHIP 
+
+
+CHAMADA DE 'SELF-REFERENTIAL',
+
+
+
+
+
+
+
+
+
+PQ __ TEMOS __ 
+
+
+1 TABLE DE 'EMPLOYEES'
+
+
+
+
+EM QUE ___ NOSSOS DIFERENTES EMPLOYEES POSSUEM RELAÇÕES ENTRE SI ------>  ISSO SIGNIFICA QUE 
+
+
+NOSSOS EMPLOYEES TEM 1 AO OUTRO COMO 'SUPERVISORS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE NÃO TEMOS UMA TABLE SEPARADA DE 'SUPERVISORS',
+
+
+E SIM TEMOS SÓ UMA TABLE OVERALL DE 'EMPLOYEES',
+
+
+E ESSES EMPLOYEES
+
+
+
+POSSUEM RELATIONS ENTRE SI...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+EMPLOYEES 
+
+id   f_name    email    supervisor_id 
+1     Julie     j@t.com    NULL 
+2     Chris     c@t.com     1 
+
+3     Max       m@t.com      2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... 
+
+
+
+
+
+
+E AQUI, NESSE EXEMPLO,
+
+JÁ 
+
+
+
+
+VEMOS COMO ISSO PODE SER MODELADO -----> PODEMOS SIMPLESMENTE TER 1 COLUMN DE 'supervisor_id',
+
+
+
+
+QUE 
+
+SERÁ USADA 
+
+
+PARA ESTABELECER ESSA CONEXÃO 
+
+ENTRE 
+
+OS 
+
+
+EMPLOYEES...
+
+
+
+
+
+
+
+----> AÍ VOCÊ USA/USARÁ 
+
+A COLUMN DE 'supervisor_id'
+
+
+
+PARA __ 
+
+APONTAR__ 
+
+
+
+
+à 'PRIMARY KEY VALUE',
+
+
+
+A COLUMN DE 'id',
+
+
+DO 
+
+EMPLOYEE 
+
+
+
+COM QUE __ 
+
+
+
+ESSE OUTRO EMPLOYEE ESTÁ RELACIONADO...
+
+
+
+
+
+
+
+
+
+
+
+_-> E AÍ, NO FINAL DAS contas,
+
+
+É QUASE COMO 
+
+
+1 RELATIONSHIP 
+
+
+ENTRE 2 TABLES -->  E VOCÊ TIPICAMENTE TERÁ 
+
+
+
+ESSAS 'CROSS-TABLE RELATIONS',
+
+
+
+MAS 
+
+
+
+
+TAMBÉM 
+
+SÃO POSSÍVEIS 
+
+ESSAS 'INTERNAL RELATIONS',
+
+
+COMO A MOSTRADA AQUI...
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ ---> OK..
+
+
+
+ CRIAMOS UM NOVO ARQUIVO,
+
+ E LÁ 
+
+
+
+
+ CRIAMOS UMA  NOVA TABLE, DE employees..
+
+
+
+
+
+
+
+
+
+
+ ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+
+
+
+ );
+
+
+
+
+
+
+
+
+
+
+------> O PROFESSOR VAI USAR A COLUMN DE 'ID',
+
+a 'surrogate key',
+
+
+como PRIMARY KEY...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+
+
+
+ );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> CERTO...
+
+
+
+
+
+
+
+
+AÍ DEPOIS DEFINIMOS as columns padrão...
+
+
+
+EX:
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    supervisor_id INT 
+
+
+ );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O 'supervisor_id'
+
+
+REALMENTE SERÁ 
+
+DE TYPE 'integer',
+
+
+e poderá ser NULL...
+
+
+
+
+(
+
+    COMO O PRIMARY KEY FIELD É UM INTEGER/SERIAL,
+
+
+
+    É MELHOR DEIXAR ISSO COMO 'INT'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+DENTRO DESSE FIELD DE 'supervisor_id',
+
+
+COLOCAREMOS O VALUE DO ID 
+
+
+
+__ DO EMPLOYEE QUE 
+
+SERVIRÁ 
+
+DE SUPERVISOR
+PARA 
+
+ESTE RECORD/EMPLOYEe...
+
+
+
+
+
+
+
+
+
+
+
+----> COLOCAMOS A CONSTRAINT DE 'REFERENCES',
+
+PARA DEIXAR ESSA FOREIGN KEY MAIS OFICIAL..
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    supervisor_id INT REFERENCES employees 
+
+
+ );
+
+
+
+
+
+
+
+
+
+
+
+
+------> OK... 
+
+
+OU SEJA,
+
+
+AQUI ESTAMOS __ REFERENCIANDO NOSSA PRÓPRIA TABLE DE 'employees'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    supervisor_id INT REFERENCES employees (id)  -- aqui REFERENCIAMOS NOSSA PRÓPRIA TABLE, PQ É ISSO QUE SÃO 'self-referencing relationships'..
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> COLOCAMOS 'ID',
+
+
+pq 
+
+
+essa é 
+
+
+A COLUMN QUE SEGURA O 'RELATED VALUE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> TAMBÉM PODEMOS DEFINIR O QUE DEVE ACONTECER SE ESSE 'RELATED EMPLOYEE',
+
+ESSE SUPERVISOR,
+
+É DELETADO...
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    supervisor_id INT REFERENCES employees (id) ON DELETE SET NULL  -- aqui REFERENCIAMOS NOSSA PRÓPRIA TABLE, PQ É ISSO QUE SÃO 'self-referencing relationships'..
+);
+
+
+
+
+
+
+
+
+AGORA SE O SUPERVISOR É APAGADO,
+
+
+
+A COLUMN DE 'supervisor_id'
+
+
+dos seus supervisionados FICARÁ COMO 'NULL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    supervisor_id INT REFERENCES employees (id) ON DELETE SET NULL  -- aqui REFERENCIAMOS NOSSA PRÓPRIA TABLE, PQ É ISSO QUE SÃO 'self-referencing relationships'..
+); ---- se o SUPERVISOR É APAGADO, a column de 'supervisor_id' DOS SUPERVISIONADOS FICA COMO 'NULL' (fica vazia)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR DROPPA TODAS AS TABLES E RECRIA ESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+AÍ ELE __ INSERE __ UM POUCO DE DATA DENTRO 
+
+DESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO employees (first_name, last_name, supervisor_id)
+VALUES (
+    'Julie', 'Barnes', NULL
+)
+
+
+
+
+
+
+
+(ESSE EMPLOYEE NÃO TERÁ SUPERVISOR)...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+INSERT INTO employees (first_name, last_name, supervisor_id)
+VALUES (
+    'Julie', 'Barnes', NULL
+),
+('Max', 'Schwarz', 1),
+('Manu', 'Lorenz', 2),
+('John', 'Green', 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+agora podemos ver que nossa relation está existindo,
+
+
+tudo por conta da column de 'supervisor_id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE ESSA RELATION PODE SER USADA 
+
+
+PARA MAIS DO QUE O INSERT DE DATA,
+
+
+
+
+PQ __ PODEMOS __ 
+
+
+
+
+FAZER 'QUERY'
+
+
+DE 
+
+
+SELF-REFERENCING DATA...
+
+
+
+
+
+
+
+
+COMEÇAMOS COM UMA QUERY PADRÃO,
+TIPO 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * 
+FROM employees;
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS PODEMOS __ USAR UM JOIN --> E ESSA É A PARTE BEM INTERESSANTE DE 
+
+'self-referencing' RELATIONSHIPS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR VAI DEMONSTRAR COM UM 'INNER JOIN'...
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT * 
+FROM employees as e1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE COMEÇA DANDO 1 ALIAS DE 'e1'
+
+
+A ESSES 'TODOS EMPLOYEES'...
+
+
+
+
+
+
+
+
+
+JÁ NA SEGUNDA PARTE,
+
+DOS 
+
+
+'employees' DO __ INNER JOIN,
+
+
+O PROFESSOR COLOCA UM ALIAS DE 'e2' (isso é possível, DAR 2 NOMES __ A 1 MESMA TABLE)...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT * 
+FROM employees as e1
+INNER JOIN employees as e2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+
+
+'''PODEMOS FAZER JOIN DE 1 TABLE COM ELA MESMA'''.... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS AÍ VOCÊ VAI QUERER USAR 
+
+DIFERENTES 
+
+
+
+aliases para deixar claro,
+
+
+NA PARTE DE 'ON',
+
+
+
+QUAL 
+
+COLUMN 
+
+DEVE SER USADA PARA CADA PARTE DA RELATION...
+
+
+
+
+
+
+
+
+
+--> QUEREMOS DEIXAR CLARO QUE 
+
+'''QUEREMOS JOINAR ESSA TABLE COM ELA MESMA''',
+
+
+
+PARA QUE 
+
+
+CONSIGAMOS 
+
+ENCONTRAR OS RELATED RECORDS 
+
+PARA OS EMPLOYEES EM QUE _ O 
+
+'e1.supervisor_id = e2.id;'
+
+
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE PODEMOS JOINAR 1 TABLE COM ELA MESMA....
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM employees as e1
+    INNER JOIN employees as e2 ON e1.supervisor_id = e2.id; --- ou seja, 'PODEMOS FAZER JOIN DE 1 TABLE COM ELA MESMA'
+
+
+
+
+
+
+-
+
+
+
+--> o que conseguimos,
+
+no caso,
+
+
+É UM RESULT SET QUE 
+
+SERÁ 
+
+A COMBINATION DA TABLE COM ELA MESMA... 
+
+
+
+
+
+
+(
+
+    NÃO VAMOS PEGAR 'JULIE',
+
+
+    PQ 
+
+    ELA NÃO TINHA NENHUM SUPERVISOR --> aí isso não satisfaz o criterio de 'e1.supervisor_id = e2.id;'
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+-> ISSO PODE PARECER ESTRANHO, DE INÍCIO,
+
+MAS PODEMOS 
+
+
+JOINAR TABLES COM ELAS MESMAS --> PQ A IDEIA POR TRÁS DE 'JOINS'
+
+
+É 
+
+'GET RELATED DATA' --> E ESSA 'RELATED DATA'
+
+
+PODE REALMENTE EXISTIR NA MESMA TABLE EM QUE VOCÊ ESTÁ,
+
+SE VOCÊ 
+
+TIVER UMA 
+
+'SELF-REFERENCING RELATIONSHIP'...
+
+
+
+
+
+
+
+
+
+
+
+--> SÃO RELATIONS MEIO INCOMUNS,
+MAS PODEM 
+
+ACONTECER... (como nesse exemplo de SUPERVISORS E EMPLOYEES)...
