@@ -1,0 +1,815 @@
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR COMEÇA PELO CREATE DE UM NOVO ARQUIVO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ELE QUER COMEÇAR COM O WRITE 
+
+
+
+DO STATEMENT 
+
+QUE 
+
+
+TÍNHAMOS NOS SLIDES-TEORIA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMEÇAMOS ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+WHERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+até aí, tudo certo.. vamos aplicar o filter de 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+-_> esse filter é aplicado diretamente depois do 'FROM'...
+
+
+
+
+
+
+
+
+
+--> O FILTRO DE 'WHERE'
+
+É APLICADO ANTES DE QUALQUER OPERAÇÃO 
+
+
+
+RELATIVA A 'GROUP BY'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS QUERER FILTRAR A DATA DE ACORDO COM NOSSO CRITÉRIO,
+
+
+E APENAS DEPOIS A AGGREGATION FUNCTION (o 'count') 
+
+SERÁ 
+
+
+EXECUTADA..
+
+
+
+
+
+
+
+
+
+
+
+-- VAMOS QUERER QUE 'amount_billed'
+
+
+SEJA 
+
+MAIOR DO QUE 30...
+
+
+
+
+eX:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+WHERE amount_billed > 30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI NOS DAR UM ERRO,
+
+
+TUDO PQ AINDA NÃO ESCREVEMOS 
+
+
+
+o 'booking_date',
+
+
+usado lá na AGGREGATE FUNCTION,
+
+NO STATEMENT DE 'GROUP BY' (somos obrigados a fazer isso)...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+WHERE amount_billed > 30
+GROUP BY booking_date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RODANDO ESSA QUERY,
+
+
+VEMOS ESTE RESULTADO:
+
+
+
+
+
+
+booking_date     COUNT
+
+2021-11-05      4
+2021-11-06      6
+2021-11-07     3
+2021-11-08    1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK...
+
+
+
+
+
+
+
+TIVEMOS 4 ENTRIES QUE ERAM ACIMA DE '30'
+
+
+LÁ 
+
+
+
+
+EM 05 de novembro...
+
+
+
+
+
+
+
+
+
+
+
+-----> E SE TENTAMOS RODAR A CONDITION DE WHERE_ __ DEPOIS __ 
+
+
+
+DE 'GROUP BY',
+
+
+
+RECEBEMOS 1 ERROR ------> 
+
+
+
+
+
+
+
+ISSO __ PQ ___ 
+
+
+
+
+A WHERE KEYWORD 
+
+
+_DEVE OBRIGATORIAMENTE SER POSICIONADA ACIMA DO  'GROUP BY'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+AÍ REVERTEMOS ESSA MUDANÇA,
+
+
+
+E DEIXAMOS ASSIM:
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+WHERE amount_billed > 30
+GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALÉM DO POSITIONING,
+
+
+
+O USO 
+
+
+DE 
+
+
+1 AGGREGATE FUNCTION _ 
+
+
+NO INTERIOR DE 'WHERE'
+
+
+
+É 
+
+__ALGO __ TAMBÉM IMPOSSÍVEL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE __ A 'SUM' DO __ AMOUNT_BILLED 
+
+
+DEVERÁ SER USADA COMO PARTE DO WHERE STATEMENT,
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+WHERE SUM(amount_billed) > 30  --- ISSO TAMBÉM NOS DARÁ 1 ERROR...
+GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS PQ ISSO DÁ ERRO?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É PQ __ AGGREGATED FUNCTIONS PRECISAM DE 'AGGREGATED DATA' 
+
+
+
+
+
+
+EM QUE __ SÃO 'BASED ON'...
+
+
+
+
+
+
+
+
+
+
+
+--> E COMO O 'WHERE' FILTER É UM FILTER __ APLICADO__ SOBRE __ 'UNAGGREGATED DATA' (RAW),
+
+
+
+ISSO NÃO FUNCIONA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE 
+
+
+
+
+
+
+PRIMEIRAMENTE PRECISAMOS 'AGGREGATE DATA',
+
+
+
+PARA AÍ
+
+CONSTRUIR 
+
+
+A 
+
+
+'BASE' 
+
+
+PARA ENTÃO 
+
+SERMOS 
+
+CAPAZES 
+
+
+
+
+
+
+
+DE USAR AGGREGATE FUNCTIONS SOBRE ESSA INFO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----->  É POR ISSO QUE PRECISAMOS DE 'HAVING',
+
+como vimos no slide..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> COPIAMOS ESSE CÓDIGO AÍ,
+
+E AÍ 
+
+VAMOS ESCREVER A VERSÃO DE 'HAVING'...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT booking_date,
+    COUNT(booking_date)
+FROM bookings
+GROUP BY booking_date
+HAVING SUM(amount_billed) > 30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date,
+    COUNT(booking_date)
+FROM bookings
+GROUP BY booking_date
+HAVING SUM(amount_billed) > 30;  ---- VAI FILTRAR POR 'GROUP', E NÃO 'INDIVIDUALMENTE, POR CADA VALUE DE 'amount_billed' em cada record...
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+VOCÊ TAMBÉM PODE TENTAR ADICIONAR O 'HAVING'
+
+ANTES DE GROUP BY --> MAS ISSO NÃO FUNCIONA, PQ 
+
+O HAVING SÓ 
+
+
+É EXECUTADO 
+
+
+__DEPOIS DO GROUPED BY... -----> ISSO PQ A DATA AINDA NÃO TERÁ SIDO 'AGGREGATED',
+
+
+E o 
+
+
+
+
+HAVING SÓ FUNCIONA COM AGGREGATED DATA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> RESUMINDO:
+
+
+
+
+
+
+
+
+1) SE VOCÊ QUER FILTRAR COM BASE NA 'INITIAL DATA STRUCTURE',
+
+
+
+OU SEJA,
+
+A COISA QUE VOCÊ VÊ QUANDO RODA 'SELECT * FROM',
+
+
+
+AÍ 
+
+VOCÊ DEVE USAR 'WHERE' (FILTRA A __ RAW _ DATA)...
+
+
+
+
+
+
+
+
+
+
+
+2) MAS SE VOCÊ QUER FILTRAR COM BASE EM QUALQUER 'AGGREGATED DATA',
+
+
+DATA JÁ GROUPEADA OU AGGREGADA EM 'SINGLE CALENDAR DAYS',
+
+
+
+
+SE ESSE FOR SEU OBJETIVO,
+
+OU SE VOCÊ QUER RODAR __ 
+
+AGGREGATE FUNCTIONS NA SUA FILTER CONDITION,
+
+
+AÍ  VOCÊ É OBRIGADO A USAR 
+
+
+'HAVING'
+
+
+COM 
+
+'GROUP BY',
+
+
+
+
+
+EM QUE 
+
+O 'HAVING' SEMPRE SERÁ POSICIONADO __ DEPOIS _ DA KEYWORD DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... É ASSIM QUE 
+
+
+PODEMOS USAR FILTERS 
+
+
+
+
+COM NOSSAS QUERIES,
+
+
+
+E QUANDO DEVEMOS USAR 'WHERE' OU 'HAVING'...
