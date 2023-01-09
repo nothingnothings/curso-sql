@@ -1,0 +1,835 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DE VOLTA AO PROJETO,
+
+
+
+
+
+O PROFESSOR CRIOU UM NOVO ARQUIVO,
+
+PARA PRATICAR O QUE 
+
+
+APRENDEMOS...
+
+
+
+
+
+
+
+
+
+
+
+-_> ELE VAI ATÉ A TABLE DE 'BOOKINGS',
+
+
+PARA 
+
+TER UMA 
+REFERÊNCIA MELHOR ÀS 
+
+
+COLUMNS CORRESPONDENTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> o professor começa com 1 select...
+
+
+
+
+
+
+
+
+
+
+
+--> o professor vai usar o exemplo do slide,
+
+por isso:
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS QUERER COMEÇAR PELO SELECT DE CADA 1 DOS bookings na table de bookings, representados pela column de 'DATE'..
+
+
+
+
+
+
+
+
+SELECT booking_date FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ALÉM DE 'BOOKING_DATE',
+
+
+
+usamos 
+
+a 
+
+AGGREGATE FUNCTION DE 'SUM()',
+
+
+com 
+
+
+o identifier 
+
+de 
+
+'num_guests'....
+
+
+
+
+
+
+SELECT booking_date FROM bookings, SUM(num_guests) 
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, SUM(num_guests) ---- ISSO VAI RESULTAR EM UM __ ERRO.... (falta de 'group by' )
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> isso nos dá um erro:
+
+
+
+
+
+
+'ESTÁ FALTANDO A KEYWORD DE GROUP BY'..
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO ACONTECEU JUSTAMENTE PQ:
+
+
+
+
+
+
+NA SEGUNDA PARTE,
+
+TEMOS 1 AGGREGATE FUNCTION,
+
+
+MAS NA 
+
+PRIMEIRA PARTE 
+
+
+
+''SELECIONAMOS TODOS OS INPUT VALUES''..
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE TEMOS UMA PARTE MÚLTIPLA, OUTRA PARTE ÚNICA...
+
+
+
+
+
+
+
+
+
+--> E A AGGREGATION ENTRE OS 2,
+
+NATIVAMENTE,
+
+
+COMO AGORA,
+
+NÃO É POSSÍVEL...
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 
+
+ SE TORNA NECESSÁRIA 
+
+
+ A KEYWORD DE 'GROUP BY'..
+
+
+
+
+
+
+
+
+
+ --> COM ISSO,
+
+  
+  DIZEMOS 
+  AO SQL
+   
+
+
+   '''CRIE NOVOS GRUPOS COM _ BASE NO IDENTIFIER _ QUE _ NÃO 
+
+   É UM AGGREGATE FUNCTION NO __ NOSSO SELECT STATEMENT'''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO NOSSO CASO,
+
+
+
+
+
+COLOCAMOS O 
+'booking_date'
+
+
+COMO 
+
+
+COLUMN/IDENTIFIER QUE NÃO É A AGGREGATE FUNCTION....
+
+
+EX:
+
+
+
+
+
+
+
+SELECT booking_date, SUM(num_guests) -- ISSO VAI FUNCIONAR (por conta da keyword 'GROUP BY')...
+FROM bookings
+GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AGORA SOMOS BEM-SUCEDIDOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO ACONTECEU PQ, 
+
+
+AO COLOCARMOS 
+
+'GROUP BY'
+
+NO STATEMENT,
+
+
+
+
+DIZEMOS 
+
+
+
+A ELE QUE 
+
+
+ELE 
+
+'''DEVE PEGAR OS VALUES __ NA COLUMN DE 'BOOKING_DATE'
+
+ E ENTÃO _ 
+
+ OS REAGRUPAR EM __ INDIVIDUAL UNIQUE VALUES''' (por isso não há repetição de dates, nesse exemplo)....
+
+
+
+
+
+
+
+
+
+
+ --> ISSO QUER DIZER QUE 
+ SE TIVERMOS 'BOOKINGS' (record) 
+
+
+ COM 1 MESMA DATE NA  COLUMN DE 'BOOKING DATE',
+
+
+
+ ESSA DATE SERÁ 'GROUPED TOGETHER'
+
+
+
+ em 1 única date...
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ --> E, COM BASE NESSAS UNIQUE ENTRIES,
+
+
+ PODEMOS RODAR AQUELA AGGREGATE FUNCTION, DE 'sum()'
+,
+
+
+
+
+NO NOSSO CASO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BTW, ANTES DE PROSSEGUIRMOS,
+
+
+COMO O PROFESSOR FALOU DE 'DUPLICATAS',
+
+
+
+
+ELE RELEMBRA AQUELA 
+
+
+
+KEYWORD DE 
+
+
+'DISTINCT' ------> 
+
+
+
+
+
+
+
+
+
+ESSA PALAVRA É USADA PARA __ 
+
+
+SE LIVRAR __ 
+
+DE DUPLICATES,
+
+TAMBÉM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ISSO FOI VISTO LÁ NO ARQUIVO DE 'COUNT',
+
+EM QUE 
+
+USAMOS :
+
+
+
+
+
+
+
+
+
+
+
+SELECT COUNT(DISTINCT booking_date) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> USAMOS ISSO PARA NOS LIVRAR DE QUAISQUER DUPLICATES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS PQ NÃO ESTAMOS USANDO 
+
+'DISTINCT'
+
+AQUI PARA FAZER EXATAMENTE ISSO,
+
+PARA 
+
+
+
+
+
+REALIZAR ESSA QUERY?
+
+
+
+
+
+
+
+
+
+
+--> BEM, PODEMOS FAZER EXATAMENTE ISSO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, SUM(num_guests)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+AGORA, EM VEZ DE USAR 'GROUP BY',
+
+
+
+DIGAMOS QUE 
+
+
+
+USAREMOS 
+
+
+'DISTINCT'...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT DISTINCT booking_date, SUM(num_guests)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO NÃO VAI FUNCIONAR --> 
+
+VAMOS GANHAR O MESMO ERROR DE 
+
+ANTES:
+
+''''FALTOU O GROUP BY'''....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO __ PQ __ PRECISAMOS DO 'GROUP BY'
+
+
+
+
+
+
+
+
+
+SE __ TIVERMOS ESSA COMBINAÇÃO DE 'NORMAL IDENTIFIER/RECORDS + AGGREGATE FUNCTION' NO NOSSO SELECT STATEMENT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO ACONTECE/ACONTECEU PQ 
+
+
+
+'DISTINCT'
+
+
+
+APENAS SERVE 
+
+
+PARA 
+
+'REMOVE DUPLICATES AND KEEP ONLY INDIVIDUAL VALUES''
+
+
+
+
+
+__________ NOS CASOS __ EM QUE 
+
+INEXISTENTE QUALQUER 
+
+__AGGREGATE FUNCTION OU CÁLCULO NO NOSSO RESULT (
+
+
+
+
+
+ou seja,
+
+
+é para ser usado quando você 
+
+QUER 
+
+
+
+APENAS __ RETORNAR VALUES DE 1 COLUMN/RECORD _ 
+
+
+DE FORMA ÚNICA, SEM DUPLICATAS,
+E SEM 
+
+
+MANIPULAÇÕES/RELAÇÕES COM AGGREGATE FUNCTIONS...
+     
+)
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+SE SEU GOAL É APENAS REMOVER DUPLICATES DE UMA EXISTING COLUMN....
+
+
+
+
+
+
+
+
+
+
+--> MAS SE VOCÊ  
+
+
+QUER __ 'GROUP INFORMATION'
+
+
+EM 
+
+1 COLUMN ESPECÍFICA,
+
+  
+
+  PARA 
+
+  'INDIVIDUAL ENTRIES',
+
+  PARA 
+
+
+
+
+
+  ENTÃO RODAR UMA AGGREGATE FUNCTION 
+
+  BASEADA NESSES NOVOS GROUPS,
+
+
+  AÍ 
+
+
+  'GROUP BY'
+
+
+  É 
+
+
+
+  A COISA QUE VOCÊ DEVE USAR (e 'DISTINCT' NÃO É UMA OPTION, nesses casos)...
