@@ -1,0 +1,1095 @@
+
+
+
+
+
+
+
+
+
+
+
+-> antes de continuarmos,
+
+
+1 sidenote:
+
+
+
+
+
+
+
+
+
+
+
+
+''TODAS AS FUNCTIONS E QUERIES QUE 
+EXECUTAMOS 
+
+
+
+
+
+ATÉ AGORA FUNCIONAM DA MESMA FORMA NO MYSQL E POSTGRESQL'...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS AGORA VEREMOS MAIS AGGREGATE FUNCTIONS,
+
+
+POR ISSO 
+
+
+O PROFESSOR 
+
+
+ESCREVE 
+
+
+
+
+
+
+
+'max and min aggregate functions'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSAS FUNCTIONS PODEM SER ÚTEIS 
+
+
+
+
+EM ALGUNS CASOS --> 
+
+
+
+
+
+
+
+
+
+VAMOS QUERER, NESSE CASO,
+
+
+
+DESCOBRIR 
+
+'''QUAL É A MAXIMUM SEAT CAPACITY
+
+DE NOSSA _ MAIOR TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+VAMOS QUERER A TABLE DE 'TABLES'...
+
+
+
+
+
+
+
+
+
+
+
+
+vamos começar com o 'SELECT', é claro...
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT MAX(num_seats) FROM tables;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO NOS RETORNA '8',
+
+QUE SERÁ 
+
+
+REALMENTE O NÚMERO MÁXIMO DE SEATS
+
+DESSA COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE QUEREMOS O 'MIN',
+
+
+
+
+É SÓ ESCREVER 'MIN' EM VEZ DE MAX,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT MIN(num_seats)
+FROM tables;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO RETORNOU '2'...
+
+
+
+
+
+
+
+
+
+
+--> OK.. ESSES SÃO OS MÁXIMOS E MÍNIMOS VALUES 
+
+
+PARA 
+
+
+ESSA COLUMN,
+
+
+
+
+
+NOS NOSSOS RECORDS DESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+BTW,
+
+SE VOCÊ 
+
+ADICIONAR O SELECTOR DE '*' (all),
+
+
+
+
+O 
+
+QUE VOCÊ ACHA  QUE ACONTECERÁ?
+
+
+
+
+
+
+
+
+
+
+
+
+TENTAMOS RODAR ISTO:
+
+
+
+
+
+SELECT MAX(*) FROM tables;
+
+
+
+
+
+
+
+
+
+--> E ISSO NOS DÁ UM ERROR:
+
+
+function max() does not exist
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. ISSO NÃO FUNCIONA,
+
+
+PQ __ COMO 
+
+
+
+ESTAMOS 'CHECANDO A TABLE TODA POR ESSE REQUIREMENT',
+
+
+
+
+
+
+
+E COMO _ NÓS TEMOS _DIFERENTE DATA NESSA TABLE (decimals, varchar, etc),
+
+
+
+
+
+
+O SQL __ NÃO ENCONTRA ''' 1 SINGLE VALID VALUE SOLUTION''',
+
+
+
+e é por isso 
+
+
+que 
+
+
+ele dá throw de um error (precisamos de uma REFERÊNCIA EXPRESSA A ALGUMA COLUNA)...
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+-- ESTA SINTAXE NÃO FUNCIONA (não podemos selecionar TODAS AS COLUMSN DE NOSSA TABLE PARA PROCURAR 1 VALUE 'MÁXIMO', PQ NÃO ESTARÍAMOS ESPECIFICANDO 'DE QUAL MAXIMUM ESTAMOS FALANDO')
+-- SELECT MAX(*) FROM tables;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+
+
+
+
+
+
+
+EM VEZ DE TER ESSA LÓGICA Q N FUNCIONA,
+
+
+
+PODEMOS 
+TER 
+
+
+
+'2 AGGREGATE FUNCTIONS EM 1 MESMA QUERY' --> isso também é possível...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS, POR EXEMPLO,
+
+
+
+
+PROCURAR PELO 'VALOR MÁXIMO DE 'amount_billed'',
+
+
+
+
+
+
+
+
+__ TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT MAX(amount_billed) FROM tables;
+
+
+
+
+
+
+
+
+
+
+
+
+-----> MAS PODEMOS __ ADICIONAR MAIS COISAS A ESSA AGGREGATE FUNCTIONS,
+
+
+
+BASTA COLOCAR UMA VÍRGULA DEPOIS DO 'SELECT(ARGUMENTO)',
+
+
+
+
+
+
+
+
+E AÍ ESPECIFICAR 'O MIN OU MAX AMOUNT DE OUTRA COISA',
+
+
+tipo assim:
+
+
+
+
+
+
+SELECT MAX(amount_billed), MAX(amount_tipped) FROM tables;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT MAX(amount_billed), MAX(amount_tipped) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> E ISSO, É CLARO,
+NOS RETORNOU 
+
+
+2 RESULTS 
+
+
+
+
+
+
+
+
+
+
+242.60 e 20.00...
+
+
+
+
+
+
+
+(
+
+    1 PARA CADA COISA QUE PEDIMOS, NESSA QUERY...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AINDA, PARA DEIXAR MAIS CLARA A LEITURA DESSES RESULTADOS,
+
+PODEMOS 
+
+
+DEFINIR OS 'ALIASES'
+
+
+DAS COLUMNS NO NOSSO RESULT SET,
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT MAX(amount_billed) AS max_amount_billed, MAX(amount_tipped) AS max_amount_tipped FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO, NO CASO,
+
+RETORNOU 
+
+
+
+
+
+'max_amount_billed'      'max_amount_tipped'
+    242.60                      20.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> 
+
+
+
+
+
+ISSO FUNCIONA, É CLARO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR FALA DO USO DE ALIASES A ESSAS  AGGREGATE FUNCTIONS,
+
+EXATAMENTE COMO EU FIZ...
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT MAX(amount_billed) AS max_billed, MAX(amount_tipped) AS max_tipped FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSAS FORAM AS FUNCTIONS DE 'MAX()' E 'MIN()'..
+
+
+
+
+
+
+
+
+
+
+
+
+ANTES DE PROSSEGUIRMOS 
+
+À PRÓXIMA FUNCTION,
+
+
+ 
+ O PROFESSOR QUER ENFATIZAR QUE 
+
+
+
+
+
+
+
+
+
+
+
+ __________ APESAR __ DE TERMOS UTILIZADO ESSAS FUNCTIONS PARA 
+
+
+
+
+ `DECIMAL NUMBERS`,
+
+
+ PARA O 'AMOUNT_BILLED'
+
+ E 
+
+ 'AMOUNT_TIPPED',
+
+
+
+
+
+
+
+
+
+ E TAMBÉM PARA INTEGERS,
+
+
+
+
+ __ NÓS __ PODEMOS _ TAMBÉM USAR 'MAX OU MIN'
+
+
+
+
+ EM RELAÇÃO 
+
+
+ A 'TEXT/STRINGS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> 
+
+
+
+
+
+
+
+
+
+
+ PARA ISSO,
+
+
+
+
+ O PROFESSOR 
+
+ COMEÇA ESCREVENDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE QUER SABER QUAL 
+
+
+É O VALUE MÁXIMO NA COLUMN DE 'category', em 'tables' ... --> 
+
+
+
+
+
+OK, MAS ISSO É UM VARCHAR... --> COMO PODERÍAMOS 
+
+
+APLICAR 'MIN()'
+
+OU 
+
+'MAX()'
+
+
+A UM TEXT?
+
+
+
+
+
+
+
+
+
+
+BEM, 
+
+O 
+
+'MIN',
+
+EM RELAÇÃO
+
+
+A TEXT,
+
+
+VAI 
+
+
+TE DAR __ O 'PRIMEIRO ITEM',
+
+
+
+DE 1 ORDEM ALFABÉTICA..
+
+
+
+
+
+
+
+--> JÁ 'MAX' VAI TE DAR __ O ÚLTIMO ITEM,
+
+
+
+DE UMA PERSPECTIVA DE ORDEM ALFABÉTICA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS QUE O RESULTADO SERÁ:
+
+
+
+
+
+
+
+
+
+min   max 
+
+large  small
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EXATAMENTE COMO O PROFESSOR HAVIA EXPLICADO...
+]
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ PERCEBE QUE 
+
+
+
+
+
+A PRIMEIRA ENTRY,
+
+ALFABETICAMENTE,
+
+É 
+
+'large',
+
+
+e 
+
+a small vem depois ('MAX')...
+
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSE USE-CASE NÃO É MT TÍPICO,
+
+
+mas é bom o conhecer...
+
+
+
+
+
+
+BTW, 
+ISSO 
+
+FUNCIONA PARA MAIS DO QUE 
+
+STRINGS,
+
+
+PQ 
+
+FUNCIONA TAMBÉM PARA DATES...
+
+
+
+
+BASTA ESCREVER ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT MIN(booking_date), max(booking_date) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI NOS RETORNAR:
+
+
+
+
+
+
+
+
+MIN (booking_date)  MAX (booking_date) 
+
+2021-11-04             2021-11-08
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
