@@ -1,0 +1,936 @@
+
+
+
+CÓDIGO DA ÚLTIMA AULA:
+
+
+
+
+
+
+
+
+SELECT booking_date, SUM(num_guests) -- ISSO VAI FUNCIONAR (por conta da keyword 'GROUP BY')...
+FROM bookings
+GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+GROUP BY,
+
+É CLARO,
+
+
+NÃO 
+
+É LIMITADO 
+
+
+
+
+A APENAS 1 'INDIVIDUAL TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+-----> CONFORME ESTUDAMOS ANTERIORMENTE,
+
+
+
+COM AGGREGATE FUNCTIONS,
+
+
+
+
+PODEMOS 
+
+
+
+USAR 
+
+
+
+
+
+'GROUP BY'
+
+
+E 
+
+'AGGREGATE FUNCTIONS'
+
+
+
+
+
+
+
+CONJUNTAMENTE COM 'JOINS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+DIGAMOS QUE 
+
+''NÃO QUEREMOS TER A SUM DE GUESTS 
+
+
+PARA __ CADA INDIVIDUAL DAY''',
+
+
+
+E SIM 
+
+
+
+
+
+
+''''O NÚMERO/sum   DE GUESTS__ QUE __ PAGOU  COM CASH OU CREDIT CARD'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+O PROFESSOR COMEÇA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT name 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VAMOS QUERER DIVIDIR NOSSO 'RESULT SET'
+
+
+EM 
+
+2 RECORDS,
+
+
+
+
+
+
+
+1 COM 'CASH' E OUTRO COM 'CREDIT CARD',
+
+E AÍ,
+ 
+
+
+ NA OUTRA 
+
+ COLUMN,
+
+
+
+
+
+ QUEREMOS TER O 'NÚMERO DE GUESTS' QUE 
+
+ PAGOU COM CADA 1 DELES...
+ 
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+SELECT name 
+FROM payment_methods AS p
+LEFT JOIN bookings AS b ON p.id = b.payment_id
+GROUP BY name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONSEGUI..
+
+
+
+
+
+
+
+FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT name, SUM(b.num_guests) AS guests
+FROM payment_methods AS p
+    LEFT JOIN bookings AS b ON p.id = b.payment_id
+GROUP BY name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E O RESULTADO,
+NA TABLE,
+
+FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+name            guests
+
+Credit Card     24
+Cash            52
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ok... sucesso...
+
+
+
+
+
+
+
+--> eu usei 'LEFT JOIN',
+
+
+mas o professor usou 'INNER JOIN'...
+
+
+
+(mas acho que não faz diferença, nesse exemplo)...
+
+
+
+
+
+
+
+
+
+
+
+--> FOI ESSENCIAL ADICIONAR O 'GROUP BY name'...
+
+
+
+
+
+
+(
+    agrupamos 
+
+
+    os RESULTS DA AGGREGATE FUNCTION 
+
+
+
+    CONSIDERANDO o value dessa column de 'name'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK..
+
+
+
+
+devemos 
+
+
+
+
+
+DEIXAR 
+
+
+MAIS AVANÇADO 
+
+ESSE EXEMPLO...
+
+
+
+
+
+
+
+
+VAMOS ADICIONAR 1 SEGUNDO 'IDENTIFIER'
+
+
+
+
+A ESSE SELECT STATEMENT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+
+
+
+
+AGORA DIGAMOS QUE QUEREMOS SABERr:
+
+
+
+
+
+
+
+
+1) QUANTOS GUESTS TIVEMOS 
+
+
+2) QUAIS PAYMENT METHODS ESSES GUESTS USARAM,
+
+
+3) E EM QUE 'DATES' ESSES ESTIVERAM 
+
+
+NO NOSSO RESTAURANTE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA ISSO, ACHO QUE PRECISAREI DE 1 SEGUNDO 'GROUP BY' STATEMENT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MEXI 1 POUCO NA QUERY (parte de select e parte do group by),
+
+
+
+
+
+
+
+
+
+
+
+E FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT name, SUM(b.num_guests) AS guests, booking_date
+FROM payment_methods AS p
+    LEFT JOIN bookings AS b ON p.id = b.payment_id
+GROUP BY name, b.booking_date; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO ME RETORNOU UM RESULT SET 
+
+UM POUCO DIFERENTE,
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+name      guests      booking_date 
+
+CCard       3           2021-11-04
+Cash       22           2021-11-05
+CCard       4           2021-11-05
+Cash       19           2021-11-06
+CCard       11           2021-11-06
+Cash       11           2021-11-07
+CCard       4            2021-11-07
+CCard       2            2021-11-08
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, SIGNIFICA QUE ISSO FUNCIONOU, DE CERTA FORMA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+como tivemos 2 critérios de 'group by',
+
+
+
+
+
+
+E COMO AGORA TIVEMOS 'MÚLTIPLAS ENTRIES' 
+
+
+
+
+
+
+
+
+PARA OS 'PAYMENT NAMES' E 'BOOKING DATE',
+
+
+
+
+
+
+
+
+é simples a explicação:
+
+
+
+
+
+O GROUP BY TENTA CRIAR 'UNIQUE GROUPS'
+
+
+PARA 
+
+
+
+CADA 
+
+INDIVIDUAL COLUMN,
+
+
+
+
+
+MAS __ COMO 
+
+
+
+TEMOS, PARA 
+
+'4 DIFERENTES DIAS',
+
+
+
+
+
+
+'2 DIFERENTES MÉTODOS DE PAGAMENTO' (CCARD e cash),
+
+
+
+
+É 
+
+LÓGICO 
+
+
+QUE 
+
+
+
+DEVEMOS TER 
+
+
+
+DUPLICATE VALUES PARA OS BOOKING DATES (
+
+
+
+    caso contrário,
+
+
+    nossa data ficaria INCOMPLETA,
+
+    consideraríamos apenas 'cash' ou 'credit card', etc etc...
+)
+
+
+
+
+
+
+
+
+
+
+
+É POR ISSO QUE PODEMOS ADICIONAR 'MÚLTIPLOS IDENTIFIERS  (como 'p.name' e 'b.booking_date', nesse exemplo)
+NO
+
+STATEMENT DE GROUP BY',
+
+
+
+
+MAS ISSO 
+
+
+VAI__ , É CLARO,
+
+
+AUMENTAR O SEU 'ROW COUNT',
+
+QUANDO 
+
+COMPARADO A 1 SINGLE IDENTIFIER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AINDA ASSIM, SEMPRE QUE VOCÊ TIVER 1 IDENTIFIER NO SEU 'SELECT STATEMENT',
+
+
+
+
+VOCÊ 
+
+
+DEVE 
+
+ADICIONAR 
+
+
+
+
+
+__ ESSE IDENTIFIER à KEYWORD DE 'GROUP BY' também..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO PODE SER VISTO ATÉ MESMO NO NOSSO CÓDIGO-EXEMPLO:
+
+
+
+
+
+
+
+SELECT name, SUM(b.num_guests) AS guests, booking_date  --- 'name' e 'booking_date' aparecem aqui e LÁ EM BAIXo...
+FROM payment_methods AS p
+    LEFT JOIN bookings AS b ON p.id = b.payment_id
+GROUP BY name, b.booking_date;  --- 'name' e 'booking_date' são repetidos aqui
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo...
+
+
+
+
+
+
+
+
+E É CLARO QUE PODEMOS, BTW,
+
+
+
+ADICIONAR 
+
+MÚLTIPLAS AGGREGATE FUNCTIONS,
+
+
+SE DESEJARMOS... ---->
+
+
+
+
+
+
+
+
+
+
+
+
+
+exemplo:
+
+poderíamos colocar também o 'average amount tipped',
+
+
+
+
+
+PARA CADA ENTRY NA NOSSA TABLE... (em cada 'group')..
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+SELECT name, SUM(b.num_guests) AS guests, booking_date, ROUND(AVG(amount_tipped), 2) AS amount_tipped
+FROM payment_methods AS p
+    LEFT JOIN bookings AS b ON p.id = b.payment_id
+GROUP BY name, b.booking_date; --exemplo mais complexo...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ok...
+
+
+
+
+
+
+
+
+
+ESSAS FORAM AS AGGREGATE FUNCTIONS,
+
+
+E A KEYWORD DE 'GROUP BY',
+
+USADA NO CONTEXTO DE 'JOINS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O QUE ESTÁ FALTANDO AGORA, NO ENTANTO,
+
+SÃO FILTERS...
