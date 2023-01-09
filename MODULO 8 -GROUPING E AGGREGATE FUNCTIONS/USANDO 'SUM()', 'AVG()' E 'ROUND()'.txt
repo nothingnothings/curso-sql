@@ -1,0 +1,1017 @@
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+
+
+
+
+AGORA DEVEMOS VER AS PRÓXIMAS FUNCTIONS....
+
+
+
+
+
+
+
+
+
+VEREMOS AS 2 ÚLTIMAS AGGREGATE FUNCTIONS QUE O PROFESSOR QUER NOS MOSTRAR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR CRIA 1 NOVO ARQUIVO,
+ 
+
+ DE NOME 
+
+
+
+ 'sum() and avg()' ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA EXAMINAR ESSAS FUNCTIONS,
+
+
+
+
+
+
+
+
+ VISLUMBRAMOS 
+
+
+ NOSSAS TABLES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ SUM() --> CALCULA A SOMA __ DOS 'INDIVIDUAL INPUT VALUES'
+
+ DE 
+
+ 1 COLUMN...
+
+
+
+
+
+
+ AVG() --> FAZ A MESMA COISA, MAS AÍ 
+
+ TRAÇA UMA MÉDIA 
+
+ ENTRE 
+
+ TODOS OS VALUES 
+
+
+
+INPUTTADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS COMEÇAR COM 'SUM()'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+UMA COISA BOA DE SE CALCULAR SERIA 'NOSSA TOTAL REVENUE'...
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+
+
+
+QUEREMOS O 'TOTAL REVENUE' DE NOSSO 
+
+
+'amount_billed'
+
+
+ou 'amount_tipped
+'
+
+
+
+
+
+
+
+--> TAMBÉM APRENDEREMOS 
+
+A 
+
+
+'''SOMAR OS VALUES __ DE 2 DIFERENTES COLUNAS,
+
+AS SUMS 
+
+DE 2 DIFERENTES COLUMNS''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS VEREMOS ESSA COISA DE 'SOMAR VALUES DE 2 DIFERENTES COLUMNS'
+
+NO PRÓXIMO MÓDULO...
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+
+
+
+AGORA,
+
+
+
+
+
+
+
+
+
+VAMOS __ USAR APENAS A FUNCTION DE 'SUM()....'
+
+
+
+
+
+
+
+
+
+COMO ARGUMENTO,
+
+O PROFESSOR VAI USAR 'amount_billed'..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT SUM(amount_billed) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> CERTo....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> RODAMOS ESSE COMANDO,
+
+E AÍ 
+
+
+ENCONTRAMOS QUE O 
+
+TOTAL REVENUE FOI DE 
+
+
+'1493.30'...
+
+
+
+
+
+
+
+
+
+
+----> OK..
+
+
+
+
+
+ESSE FOI O SUM...
+
+
+
+É BEM STRAIGHTFORWARD...
+
+
+
+
+
+
+
+--> AÍ TEMOS O 'AVERAGE', a function de 'average'..
+
+
+
+
+
+
+
+
+
+
+----> DE NOVO ,
+
+USAMOS 'SELECT'
+
+
+
+
+e depois 
+
+'AVG'.
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT AVG() FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS CALCULAR O AVERAGE AMOUNT DE 'GUESTS',
+
+POR EXEMPLO...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT AVG(num_guests) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+RECEBEMOS 
+
+'3.8000' ---> 
+
+
+
+
+
+
+
+
+
+SERIA PREFERÍVEL 
+
+LIMITAR O NÚMERO DE DÍGITOS 
+
+
+A APENAS 2.. ('3.8') ---> PODEMOS 
+
+
+
+CONSERTAR 
+
+ISSO 
+
+COM OUTRA 
+FUNCTION,
+
+
+
+
+
+
+
+
+
+UMA FUNCTION _QUE 
+
+NÃO 
+
+
+É UMA 'AGGREGATE FUNCTION',
+
+
+
+
+MAS 
+
+
+
+UMA FUNCTION QUE 
+
+
+
+PODE NOS AJUDAR A _ ARREDONDAR 
+
+
+
+RESULTADOS RETRIEVADOS POR NÓS (acho que é 'ROUND')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> PARA DEIXAR ESSE VALUE MAIS BONITO,
+
+O PROFESSOR USA A FUNCTION DE 'ROUND'...
+
+
+
+
+
+
+
+
+
+--> 'ROUND',
+COMO TODAS AS FUNCTIONS,
+
+
+
+
+REQUER QUE VOCÊ PASSE PARÂMETROS...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT ROUND() AVG(num_guests) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+-----> precisamos PASSAR PARÂMETROS 
+
+
+A ESSA FUNCtion..
+
+
+
+
+
+
+
+
+
+
+O PARÂMETRO NÃO SERÁ 1 COLUMN,
+
+MAS SIM 
+
+NOSSA PRÓPRIA 'AGGREGATE FUNCTION',
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+SELECT AVG(num_guests) FROM bookings; ---- retorna '3.8000000' 
+
+
+
+
+
+SELECT ROUND(AVG(num_guests)) FROM bookings; ----retorna '4' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo...
+
+
+
+
+
+
+
+ISSO VAI RETORNAR O NÚMERO INTEIRO,
+'4',
+
+
+
+O QUE PODE SER O QUE VOCÊ QUER, DEPENDENDO...
+
+
+
+
+
+
+
+
+
+
+
+MAS SE VOCÊ QUER MANTER ALGUMAS CASAS DECIMAIS,
+
+VOCÊ 
+
+DEVE PASSAR 1 SEGUNDO PARÂMETRO A ESSA FUNCTION DE 'ROUND()',
+
+
+
+QUE 
+
+SERÁ 
+
+
+
+
+'o número de CASAS DECIMAIS DEPOIS DO DELIMITADOR'... -> 
+
+
+
+
+
+colocamos ', 2'..
+
+
+
+COM ISSO,
+
+FICAREMOS COM '3.80'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+SELECT ROUND(AVG(num_guests)) FROM bookings; ----retorna '4' 
+
+SELECT ROUND(AVG(num_guests), 1) FROM bookings; ----retorna '3.8' 
+
+
+SELECT ROUND(AVG(num_guests), 2) FROM bookings; ----retorna '3.80' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK... 
+
+
+
+E ISSO FUNCIONA EXATAMENTE DA MESMA FORMA,
+
+
+
+TANTO NO MYSQL COMO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS É CLARO QUE 
+
+
+EXISTEM OUTRAS MANEIRAS DE USAR ESSA FUNCTION DE 'AVERAGE'
+
+
+NO NOSSO PROJECT...
+
+
+
+
+
+
+
+
+
+
+---> 
+
+
+
+
+
+
+
+SE VOCÊ QUER EXPLORAR COMO O 'ROUNDING'
+
+
+
+ACTUALLY FUNCIONA COM A 
+
+
+AVERAGE FUNCTION,
+
+
+PODERÍAMOS 
+
+
+
+
+
+
+
+
+TROCAR ___ NOSSO 'num_guests'
+
+
+
+ALI _ 
+
+
+COM O 
+
+'amount_tipped'...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT ROUND(AVG(amount_tipped), 2) FROM bookings; ----
+
+
+
+
+
+
+
+
+ISSO NOS RETORNA '7.01'...
+
+
+
+
+
+
+
+
+
+
+
+
+E SE DEIXAMOS 
+
+
+', 4',
+
+
+
+RECEBEMOS:
+
+
+
+
+
+
+
+SELECT ROUND(AVG(amount_tipped), 4) FROM bookings; ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+7.0059 -----> OS VALUES SÃO REALMENTE ARREDONDADOS,
+
+
+
+E NÃO 'CORTADOS'...
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ERA ISSO QUE TÍNHAMOS QUE SABER SOBRE 'AVG', 'ROUND'
+
+
+
+E 
+
+'SUM'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ALGO IMPORTANTE SOBRE 'AVG()'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> O AVG IGNORA 'NULL VALUES'
+
+QUANDO 
+
+
+REALIZA O CÁLCULO --> 
+
+
+
+
+ISSO QUER DIZER QUE 
+
+QUANDO RODAMOS 1 'AVERAGE'
+
+
+
+
+DE 
+
+
+'amount_tipped',
+
+
+RODAMOS 
+
+ESSE AVERAGE  CONSIDERANDO APENAS OS RECORDS EM bookings
+
+
+com o VALUE DA COLUMN DE 'amount_tipped'
+
+
+COMO _ NÃO SENDO __ NULL...
+
+
+
+
+
+(
+
+
+    OU SEJA,
+
+
+    17 DAS 20 ENTRIES,
+
+    E NÃO TODAS AS ENTRIES...
+)
+
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE 
+
+ELE PEGA O TOTAL VALUE 
+
+
+DOS NEGÓCIOS,
+
+
+E AÍ 
+
+DIVIDE POR 17 (e não por 20)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA DIVISÃO POR '17' E NÃO POR '20'
+
+
+PODERIA SER FEITA 
+
+TAMBÉM POR MEIO DE UM 'CONDITIONAL STATEMENT',
+
+
+MAS ISSO 
+
+É ALGO QUE EXPLORAREMOS NO PRÓXIMO MÓDULO...
+
+
+
+
+
+
+
+
+ACABAMOS COM SUM, AVERAGE 
+
+
+E 
+
+
+
+AGGREGATE FUNCTIONS BÁSICAS( MIN E MAX)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA PRÓXIMA AULA,
+
+VEREMOS 
+
+
+ESSAS AGGREGATE FUNCTIONS EM CONJUNTO 
+
+
+
+
+COM FILTERS 
+
+
+E 
+JOINS
+
+
+
+COM OUTRAS TABLES...
