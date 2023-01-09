@@ -1,0 +1,1721 @@
+ 
+
+
+
+
+
+
+
+
+
+ USAMOS 'GROUP BY'
+
+
+
+
+ EM CONJUNTO COM 'AGGREGATE FUNCTIONS'
+
+
+
+ E TAMBÉM COM 'JOINS'...
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS O QUE ESTÁ FALTANDO, AGORA,
+
+ SÃO 
+
+ 'FILTERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> EXPLORAREMOS A TEORIA DE FILTERS AGORA (HAVING VS WHERE),
+
+
+
+ PARA DEPOIS 
+
+
+
+ VISUALIZAR ISSO NO NOSSO PROJETO...
+
+
+
+
+
+
+
+
+
+
+
+
+ -> COMEÇAMOS COM A KEYWORD DE 'WHERE'..
+
+
+
+
+
+
+
+
+
+
+ --> PODEMOS USAR O 'WHERE' PARA FILTRAR,
+
+ NAS NOSSAS QUERIES,
+
+ POR 
+
+
+
+ CONDIÇÕES ESPECÍFICAS...
+
+
+
+
+
+
+
+
+
+
+
+ -----> COMEÇAMOS COM 'WHERE' primeiro...
+
+
+
+
+
+
+
+
+
+
+ -> PENSAMOS NA QUERY ASSIM:
+
+
+
+
+
+
+
+
+ WHERE ------>
+
+
+
+
+
+
+
+
+
+
+
+ SELECT booking_date, COUNT (booking_date),
+ FROM bookings 
+ WHERE amount_billed > 30
+ GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> ISSO QUER DIZER QUE ESSE SELECT STATEMENT ESTÁ COM 2 IDENTIFIERS (booking_date, ou seja, TODOS OS INDIVIDUAL BOOKINGS NA TABLE DE BOOKINGS, e aí o COUNT, que é o segundo identifier, que é uma AGGREGATE FUNCTION --> são contados os números de bookings)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -_> AO FINAL DO STATEMENT,
+
+ TEMOS O 
+
+
+ 'group by',,
+
+
+
+
+ que agrupa por 'booking_date' --> 
+
+
+ aprendemos 
+
+ que 
+
+
+ ISSO 
+
+
+ É NECESSÁRIO PQ 
+
+
+
+ TEMOS 1 COMBINATION, AQUI,
+
+
+
+
+ DE 
+
+ 1 AGGREGATE FUNCTION COM 1 'NON AGGREGATED IDENTIFIER',
+
+ ambos 
+
+
+ no select statement...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ------> NO MEIO DESSES 2 KEYWORDS ('FROM E GROUP'),
+
+
+
+
+ TEMOS A KEYWORD DE 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... ISSO QUER DIZER QUE
+
+
+
+ __APLICAMOS 1 FILTER A 1 FIELD 
+
+
+
+
+ QUE ''ATUALMENTE NÃO FAZ PARTE DO SELECT STATEMENT''' -->   E, COMO ISSO AÍ __ NÃO FAZ PARTE DO SELECT STATEMENT,
+
+
+
+
+ __ 
+
+ NÃO É OBRIGATÓRIA SUA PRESENÇA 
+
+
+ NO __ STATEMENT 'DE GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> e aqui,
+
+
+ nessa 'WHERE CONDITION',
+
+
+
+
+ DIZEMOS 
+
+ QUE 
+
+ APENAS 
+
+
+ QUEREMOS 
+
+ CONSIDERAR 
+
+
+
+
+ RECORDS/INPUT VALUES 
+
+ EM QUE 
+
+
+ O 'AMOUNT_BILLED'
+
+
+ É 
+
+
+ __ MAIOR __ DO QUE __30...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ VOCÊ DEVE REPARAR QUE:
+
+
+
+
+
+
+ 1) ESSE FILTER __ NÃO ___ CONTÉM UMA AGGREGATE FUNCTION.... É APENAS UMA NORMAL FILTER CONDITION, BASEADA NAS 'INDIVIDUAL ENTRIES' QUE TEMOS NA COLUMN DE 'AMOUNT_BILLED'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... O QUE ISSO QUER DIZER,
+
+
+
+ DE UMA PERSPECTIVA SQL,
+
+ É QUE 
+
+ TEMOS 
+
+
+ '1  FILTER __ BASEADO __ EM SINGLE BOOKINS/ON A SINGLE BOOKIng',
+
+  
+
+  QUE 
+
+
+  É 
+
+  __ LIDO _ E AVALIADO/CONSIDERADO ________ ANTES__ __ 
+
+
+
+
+
+
+
+
+
+  DO 'GROUP BY'
+
+
+  SER APLICADO...
+
+
+
+
+
+  (
+
+
+    OU SEJA,
+
+
+    ESSE FILTRO DE 'WHERE' 
+
+    É APLICADO 
+
+    ANTES DE QUALQUERR 
+
+
+    AGGREGATION SER EXECUTADA...
+  )
+
+
+
+
+
+
+
+
+
+
+  --> ISSO QUER DIZER QUE 
+
+
+
+
+
+  O __ SQL __ 
+  APLICA _ ESSE FILTER NA NOSSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+  ISSO QUER DIZER QUE __ APENAS __ AS COLUMNS DE 'booking_date'
+
+
+
+
+  COM _ _VALUE DE 'amount_billed'
+
+
+
+  SUPERIOR __ A '30'
+
+
+  VÃO APARECER NO RESULT SET...
+
+
+
+
+
+
+
+  EX:
+
+
+
+
+
+
+
+
+
+
+  
+SELECT booking_date, COUNT(booking_date)  ---- ////4
+FROM bookings  ----- ///////1
+WHERE amount_billed > 30  ----  //////2
+GROUP BY booking_date;  ---- ////3
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> COMO VIMOS AO LONGO DO MÓDULO,
+
+
+
+PODEMOS 
+
+
+
+
+
+TER MÚLTIPLAS ENTRIES PARA O MESMO 'CALENDAR DAY',
+
+
+
+
+
+
+
+PQ __ NO MESMO DIA PODEMOS TER MÚLTIPLOS BOOKINGS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A OUTRA COLUMN CONSIDERADA É O 'AMOUNT_BILLED' ------> NÃO VEREMOS ESSA 
+
+
+COLUMN NO RESULT DA QUERY,
+
+MAS É 
+
+UMA COLUMN CHECADA INTERNAMENTE PELO 
+
+
+SQL,
+
+PARA CERTIFICAR QUE NOSSA CONDITION FOI 'MET'.....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WHERE --> FILTRO EXECUTADO/APLICADO __ ANTES __ DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> O 'GROUP BY'
+
+
+NÃO ENTRA EM AÇÃO IMEDIATAMENTE,  E SIM APENAS DEPOIS...
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+
+
+ISSO QUER DIZER QUE 
+O 
+
+SQL 
+
+VAI 
+
+ESCANEAR 
+
+
+CADA 'amount_billed'
+
+
+
+E ENTÃO 
+
+
+RETORNAR TRUE OU FALSE..
+
+
+
+
+
+
+
+
+
+
+--> 
+
+O RESULTADO DA QUERY INICIAL SERÁ ESTE:
+
+
+
+
+
+
+
+
+
+booking_date        COUNT(booking_date)
+
+...                   ...
+2021-11-07             3 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CONTAMOS A 'QUANTIDADE DE BOOKINGS
+
+
+EM CADA DIA QUE NOSSA CONDITION FOI MET'...
+
+
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE,
+
+
+PARA 
+
+'4 DE NOVEMBRO'
+
+
+NAÕ 
+
+TIVEMOS 
+
+NENHUMA ENTRY NO NOSSO RESULT,
+
+
+PQ 
+
+O 
+
+'AMOUNT_BILLED'
+
+
+FOI INFERIOR A 30... ------> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS PARA '7 DE NOVEMBRO',
+
+
+
+
+TIVEMOS UM COUNT DE '3'
+
+
+
+
+ENTRIES, 
+
+
+
+
+
+
+o que quer dizer que ESSES 3 BOOKINGS TIVERAM UM 'AMOUNT_BILLED'
+
+
+MAIOR DO QUE '30' (satisfizeram nosso FILTER CRITERIA)...
+
+
+
+
+
+
+
+
+
+---> ISSO QUER DIZER QUE 
+
+
+WHERE FUNCIONA ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+''''O WHERE FILTRA A DATA __ ANTES__ DA AGGREGATION, 
+
+
+INICIADA__ PELA _ KEYWORD DE GROUP BY (e 'sum()', 'max()', 'min()" e 'avg()'), ACONTECER''''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> E, ALÉM DISSO,
+
+O 
+
+'WHERE'
+NÃO 
+
+
+CONTÉM
+
+
+AGGREGATE FUNCTION ALGUMA...
+
+
+
+
+
+
+
+
+
+
+
+
+---> ALÉM DE 'WHERE',
+
+
+TEMOS 
+
+
+
+'HAVING'...
+
+
+
+
+
+
+
+
+---> E O HAVING É DISTINTO...  
+
+
+
+
+
+
+
+
+
+
+O HAVING É PARECIDO COM WHERE,
+
+MAS CUMPRE UM PROPÓSITO DIFERENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  É USADO EM USE-CASES DIFERENTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS USAR 'HAVING' EM UM EXEMPLO COMO ESTE:
+
+
+
+
+
+
+
+
+
+
+HAVING ------>  
+
+
+
+
+
+
+
+
+
+
+
+O EXEMPLO É INICIALMENTE O MESMO, TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+GROUP BY booking_date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+MAS EM VEZ DE COLOCARMOS O WHERE ANTERIORMENTE À 'GROUP BY',
+
+
+colocamos o 'HAVING' logo após ele..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+GROUP BY booking_date
+HAVING 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E O CÓDIGO COMPLETO É ASSIM:
+
+
+
+
+
+
+
+
+SELECT booking_date, COUNT(booking_date)
+FROM bookings
+GROUP BY booking_date
+HAVING SUM(amount_billed) > 30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------> COM O 'HAVING', TAMBÉM TEMOS 1 FILTER,
+
+
+
+MAS 
+
+1
+ 
+
+ FILTER 
+
+
+ 'BASEADO EM UMA AGGREGATE FUNCTION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> aqui, a aggregate function é 
+
+a 
+
+'SUM DA __ COLUMN __ DE AMOUNT_BILLED''...
+
+
+
+
+
+
+
+
+
+
+
+
+SUM(amount_billed) --------> 
+
+
+
+
+
+
+
+
+A SOMA DESSA COLUMN DEVERÁ SER 'MAIOR DO QUE 30'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AO CONTRÁRIO DO CASO DE 'WHERE',
+
+
+QUE 
+
+
+__ ERA POSICIONADO ENTRE 'FROM' E 'GROUP BY',
+
+
+
+
+
+
+
+
+O 
+
+
+'HAVING'
+
+
+
+É POSICIONADO ___ APÓS __O  GROUP BY ------> 
+
+
+
+
+
+
+
+
+
+
+ISSO SIGNIFICA QUE 
+
+
+O 
+
+HAVING 
+
+
+É ESCRITO 'APÓS A ACTUAL AGGREGATION' -----> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS VOCÊ NÃO DEVE SE CONFUNDIR COM A AGGREGATION 
+
+RODADA PELO 'GROUP BY' E A AGGREGATION FUNCTION  RODADA 
+
+
+
+PELO 'HAVING' statement,...
+
+
+
+
+
+
+
+
+
+
+
+
+--> DE UMA PERSPECTIVA SQL,
+
+
+
+
+
+
+
+PROCESSAMENTO SQL,
+
+
+
+ISSO SE PARECE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+A) TEMOS 1 FILTER 'BASEADO EM CADA__ CALENDAR DAY'... (e não em cada BOOKING)..
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE ESSE FILTER É APLICADO__ SOBRE CADA GROUP,
+
+
+
+e não 
+
+sobre a 'TABLE INTEIRA'...
+
+
+
+
+
+
+
+
+
+
+-> ISSO QUER DIZER QUE 
+
+
+
+PRIMEIRAMENTE AGRUPAMOS A DATA,
+
+PARA SÓ 
+
+
+ENTÃO
+
+CHECARMOS 
+
+
+
+POR ESSA FILTER CONDITION DE 'HAVING SUM(amount_billed) > 30'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ISSO QUER DIZER QUE FICAMOS COM 2 COLUMNS, AQUI:
+
+
+
+
+
+
+
+
+
+
+1) booking_date ---> é a DATE DO CORRESPONDING BOOKING...
+
+
+
+
+
+
+2) NA OUTRA COLUMN, TEMOS 'amount_billed'...
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+booking_date    amount_billed 
+2021-11-04          32.80 
+2021-11-07          293.90 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS O 'AMOUNT BILLED',
+
+AQUI,
+
+
+
+NÃO VAI CONSISTIR DE UM 'INDIVIDUAL VALUE',
+
+
+PARA 
+
+CADA 1 DOS BOOKINGS... NÃO, EM VEZ DISSO,
+
+
+
+VAI __ CONSIDERAR O 'AGGREGATE VALUE',
+
+
+o sum do 'amount_billed'
+
+
+PARA CADA 
+
+
+'GROUPED VALUE'
+
+
+
+
+
+
+
+NA COLUMN DE 'booking_date'... -----> ISSO SIGNIFICA QUE VAI RODAR ESSE CHECK CONSIDERANDO O 'amount_billed'
+
+
+
+EM CADA __ BOOKING DATE (cada dia do calendário).... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... É POR ISSO QUE, COMO O FILTRO __ É ___ 
+
+
+
+
+
+RODADO __ DEPOIS __ DO STATEMENT DE 'GROUP BY',
+
+
+O 
+
+RESULTADO
+
+É 
+
+
+
+COMPLETAMENTE DIFERENTE ------> 
+
+
+
+
+
+
+
+
+
+O RESULTADO DE NOSSA QUERY SERÁ ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+booking_date        COUNT(booking_date)
+2021-11-04              2
+2021-11-07              4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NOSSO COUNT DE '2',
+
+POR EXEMPLO,
+
+
+
+
+NÓS MOSTRA QUE 'AS 2 ENTRIES QUE TIVEMOS EM  4 DE NOVEMBRO FORAM __ CONTADAS__ APENAS__ PQ A SUM _ DESSAS ENTRIES, A SUM DO _AMOUNT_BILLED_ EXCEDEU 30'...
+
+
+
+
+
+
+
+
+
+
+
+--> E ASSIM QUE ESSA CONDITION (amount_billed > 30) FOI CUMPRIDA,
+
+
+TODOS OS VALUES QUE PODIAM SER ATRIBUÍDOS 
+
+
+A ESSA CALENDAR DATE __ 
+
+
+SERÃO 
+
+
+CONSIDERADAS NA FUNCTION DE 'CALL'...
+
+
+
+
+
+
+
+
+
+
+
+
+-------> SE EXAMINAMOS A PARTE DE 'COUNT = 4', nauqele último record,
+
+compreendemos:
+
+
+
+
+
+AQUI TEMOS 4 NESSE COUNT __ PQ __ OS 4, JUNTOS, CONSEGUIRAM ALCANÇAR A CONDIÇÃO 'amount_billed > 30'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> JÁ NA VERSÃO ANTERIOR, DE ''WHERE'',
+
+apenas 3 conseguiram ser retornados no count.... --> isso pq _LÁ ESTÁVAMOS CONSIDERANDO OS VALUES de 'amount_billed'
+
+__INDIVIDUAIS, DE CADA BOOKING,
+
+
+
+E APENAS 
+
+
+3 VALUES 
+
+
+DE amount_billed de bookings, nesse dia,
+ficaram acima de 30...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+ESSA É A GRANDE DIFERENÇA ENTRE 'WHERE' E 'HAVING'...
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+1) WHERE- ->   É APLICADO _ ANTES__ DA KEYWORD DE 'GROUP BY',
+
+ANTES DE QUALQUER AGGREGATION ...
+
+
+
+
+
+
+
+2)  JÁ 'HAVING'
+
+É 1 FILTER QUE 
+
+VOCÊ PODE USAR __ DEPOIS __ QUE VOCê 
+
+AGREGOU VALUES COM 
+
+
+   A KEYWORD DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA TERMOS UM OVERVIEW MELHOR DISSO,
+
+
+
+PODEMOS 
+
+
+
+RESUMIR ISSO NO SLIDE:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS DIZER:
+
+
+
+
+
+
+
+
+
+
+
+WHERE ---> O FILTRO DELE __ É __ APLICADO_ DIRETAMENTE SOBRE A 'RAW DATA' (UNAGGREGATED DATA), SOBRE A DATA _ INICIAL __ QUE TEMOS NA NOSSA TABLE..
+
+
+
+
+
+
+
+HAVING --> O FILTER_ É __ APLICADO __ EM CIMA DE 'AGGREGATED DATA', DATA JÁ MANIPULADA E ENCAIXADA EM GROUPS POR MEIO DA KEYWORD DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ALÉM DA 'POSIÇÃO' EM QUE O FILTRO É APLICADO,
+
+
+
+TAMBÉM TEMOS UMA DIFERENÇA NA PERGUNTA:
+
+
+
+
+
+
+
+
+
+
+''''É POSSÍVEL USAR AGGREGATE FUNCTIONS NA FILTER CONDITION''''????
+
+
+
+
+
+
+WHERE -> NÃO.... --> NÃO É POSSÍVEL USAR AGGREGATE FUNCTIONS NESSE FILTER...
+
+
+
+
+
+
+
+HAVING --> É UM CLARO 'SIM'... -----> 
+
+
+
+
+
+
+
+
+
+
+
+
+PARA SERMOS MAIS PRECISOS:
+
+
+
+
+
+
+
+
+SEMPRE QUE VOCÊ PRECISAR DE UMA 'AGGREGATE FUNCTION' 
+
+
+NO SEU FILTER,
+
+
+
+
+
+
+
+VOCÊ _ DEVE_ USAR 'HAVING'..
+
+
+
+
+
+
+
+
+
+
+
+
+SE VOCÊ NÃO PRECISA 
+
+DE 1 AGGREGATE FUNCTION 
+
+
+NO SEU FILTER CONDITION,
+
+
+VOCÊ 
+
+PODERIA USAR 'HAVING',
+
+
+MAS 
+
+__DEVE USAR _ WHERE...
+
+
+
+
+
+
+
+
+
+
+
+OK, ESSA FOI A INTRODUÇÃO À KEYWORD DE 'where' E A ESSA FILTERING LOGIC 
+
+
+QUE 
+
+ELA TEM,
+
+
+quando comparada com    'where'.
+
+
+
+
+
+
+
+-> PARA ENTENDERMOS ISSO, DEVEMOS PRATICAR ISSO NO NOSSO PROJETO...
