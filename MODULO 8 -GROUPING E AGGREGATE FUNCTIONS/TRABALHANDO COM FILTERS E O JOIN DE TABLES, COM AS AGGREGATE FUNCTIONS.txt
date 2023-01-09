@@ -1,0 +1,1519 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA DEVEMOS VER 'FILTERS'
+
+E 'JOINS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+CRIAMOS UM NOVO ARQUIVO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O ARQUIVO SERÁ DE 'AGGREGATE FUNCTIONS WITH FILTER AND JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... O PRIMEIRO CÁLCULO 
+
+QUE o 
+
+
+PROFESSOR QUER 
+
+REALIZAR 
+
+
+
+SERÁ 
+
+BASEADO 
+
+
+NAQUELE PRIMEIRO CÁLCULO QUE RODAMOS ANTES:
+
+
+
+
+
+
+
+
+
+
+
+AQUELE DE
+
+
+
+'''
+
+SELECT ROUND AVG (AVG(amount_tipped), 4) FROM bookings;
+
+
+''''
+
+
+
+
+
+
+
+
+LÁ, NÓS HAVÍAMOS CALCULADO O AVERAGE DO 'AMOUNT_TIPPED',
+
+
+
+
+
+
+
+
+
+
+
+E AGORA 
+
+GOSTARÍAMOS
+
+DE ADICIONAR 1 FILTER A ESSA QUERY (where)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PQ AGORA,
+
+EM VEZ DE 
+
+PROCURAR PELO 'AMOUNT TIPPED'
+PARA 
+
+TODOS OS BOOKINGS,
+
+
+O PROFESSOR VAI QUERER 
+
+
+
+
+
+
+
+
+
+
+__ 
+
+
+TER O 'AVG AMOUNT TIPPED'
+
+
+
+
+
+APENAS DOS BOOKINGS QUE 
+
+
+ESTIVEREM 
+
+
+
+'ABOVE'
+
+
+UMA CERTA QUANTIA PAGA -- E TAMBÉM PARA 'TABLES'
+
+
+EM QUE 
+
+
+
+__ APENAS 1 CERTA QUANTIDADE 
+
+DE PESSOAS 
+
+
+ESTEVE 
+SENTADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BASICAMENTE,
+
+
+
+O PROFESSOR QUER 
+
+SABER 
+
+
+
+''O QUE AS BIGGER BILLED TABLES,
+
+COM MAIS GUESTS,
+
+DERAM COMO __ AVERAGE TIP'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+PODEMOS IR AO NOSSO NOVO ARQUIVO 
+
+E FAZER 
+
+O 
+
+___SELECT_ -DO AVERAGE,
+
+PARA COMEÇAR:
+
+
+
+
+
+
+
+
+
+
+
+
+----
+
+
+
+
+
+
+SELECT AVG(amount_tipped) FROM bookings 
+
+
+
+
+
+
+-------
+
+
+
+
+
+
+NOVAMENTE, O PROFESSOR ADICIONARÁ A FUNCTION DE 'ROUND'..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+SELECT ROUND(AVG(amount_tipped), 2) FROM bookings 
+
+
+
+
+
+
+
+
+
+
+
+
+
+assim ficamos com apenas 2 casas decimais nesse resultado...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+O PROFESSOR GOSTARIA 
+
+DE ADICIONAR 1 FILTER.. --> VAMOS COLOCAR O WHERE...
+
+
+
+
+
+
+
+EXC:
+
+
+
+
+
+
+
+
+
+SELECT ROUND(AVG(amount_tipped), 2) FROM bookings AS b
+WHERE b.amount_billed > <quantia>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO WHERE,
+
+
+VAMOS COLOCAR NOSSAS RESTRICTIONS --> 
+
+
+
+
+
+
+O 'amount_billed'
+
+DEVERÁ SER MAIOR DO QUE '20'.... 
+
+
+
+
+
+
+
+EX:
+
+
+
+SELECT ROUND(AVG(amount_tipped), 2) FROM bookings AS b
+WHERE b.amount_billed > 20;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS COM ESSE 
+
+FILTRO ÚNICO, POR ENQUANTO...
+
+
+
+
+
+
+
+
+
+
+--> VAMOS ADICIONAR 1 SEGUNDO FILTER DAQUI A POUCO...
+
+
+
+
+
+
+
+
+
+
+
+--> O RESULTADO DISSO É 
+
+
+'7.79' --> ESSE É O AVERAGE 
+
+
+DOS TIPS 
+
+PARA 
+
+
+
+
+
+
+
+OS BOOKINGS EM QUE A BILL FOI SUPERIOR 
+
+A 
+
+'20'...
+
+
+
+
+
+
+
+
+
+
+---> OK....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PODEMOS ADICIONAR MÚLTIPLAS FILTER CONDITIONS --> 
+
+
+
+
+
+
+
+COM O FILTRO DE 'WHERE' E A KEYWORD DE 'AND',
+
+
+PODEMOS 
+
+ADICIONAR FILTROS COMPOSTOS (&&)...
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT ROUND(AVG(amount_tipped), 2) FROM bookings AS b
+WHERE b.amount_billed > 20 AND num_guests > 2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... COM ISSO,
+
+EXCLUÍMOS 
+AS TABLES 
+
+MENORES,
+
+
+E CONSIDERAMOS APENAS TABLES GRANDES NOS NOSSOS CÁLCULOS --> 
+
+
+
+AÍ GANHAMOS UM 
+
+VALUE 
+
+
+
+DE AVERAGE DE 
+
+'9.18' -----> 
+
+
+
+
+ISSO QUER DIZER QUE 
+
+
+''QUÃO MAIOR FOR A TABLE, MAIOR SERÁ O TIP',
+
+
+
+no caso de nosso exemplo....
+
+
+
+
+
+
+
+
+
+
+
+------> OK...
+
+
+
+
+
+
+É ASSIM QUE OS FILTERS GERALMENTE FUNCIONAM --> 
+
+
+
+E PODEMOS 
+
+
+APLICAR FILTERS COMO SEMPRE....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK...
+
+
+
+
+
+
+
+
+O PROFESSOR COMENTA ISSO PARA FORA...
+
+
+
+
+
+
+
+
+AGORA O PROFESSOR QUER MOSTRAR O FUNCIONAMENTO DE 'JOINS'
+
+
+COM AGGREGATE FUNCTIONS --> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR ACASO JOINS FUNCIONAM COM AGGREGATE FUNCTIONS?
+
+
+
+
+
+
+
+
+
+--> ---> 1 JOIN QUE 
+
+
+O PROFESSOR QUER 
+
+
+É 
+
+
+'''1 COMPARISON 
+
+ENTRE O MAXIMUM  NUMBER DE GUESTS 
+DE 
+1 SINGLE 
+
+booking,
+
+
+POR MEIO DE MAX(),
+
+
+
+E O MAXIMUM NUMBER DE SEATS DISPONÍVEIS 
+
+EM 1 TABLE...'''
+
+
+
+
+
+
+
+
+
+
+ISSO, EM OUTRAS PALAVRAS,
+
+
+
+QUER DIZER:
+
+
+
+
+
+
+'''POR ACASO 
+
+
+USAMOS NOSSA CAPACIDADE AO MÁXIMO, PELO MENOS PARA 1 SINGLE ENTRY'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> bem, para isso,
+precisamos de uma query composta..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+--> ---> 1 JOIN QUE 
+
+
+O PROFESSOR QUER 
+
+
+É 
+
+
+'''1 COMPARISON 
+
+ENTRE O MAXIMUM  NUMBER DE GUESTS 
+DE 
+1 SINGLE 
+
+booking,
+
+
+POR MEIO DE MAX(),
+
+
+
+E O MAXIMUM NUMBER DE SEATS DISPONÍVEIS,
+
+EM 1 TABLE...'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT MAX(num_seats) FROM tables as t
+INNER JOIN bookings as b ON b.num_guests < t.num_seats;
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+SELECT MAX(num_seats) -- vai nos retornar o número máximo de seats de 1 given 'table' que conseguiu ser ocupada por 1 booking..
+FROM tables as t
+    INNER JOIN bookings as b ON b.num_guests < t.num_seats;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ok... mas pelo visto eu fiz errado...
+
+
+
+
+
+
+o correto seria selecionar o 'num_guests'
+
+DE INÍCIO...
+
+
+
+
+
+
+
+
+
+
+SELECT MAX(num_guests), 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+depois adicionamos uma SEGUNDA 'MAX()'
+
+function,
+
+
+
+PARA SE REFERIR AO NÚMERO DE SEATS 
+
+
+DA OUTRA TABLE...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) FROM bookings AS b
+INNER JOIN tables AS t;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+COM ISSO,
+
+FICAREMOS 
+
+COM O MAX NUMBER DE 'GUESTS'
+E O MAX NUMBER DE 'SEATS' POSSIVEIS...
+
+
+
+
+
+
+
+
+
+AGORA SÓ FALTA 
+
+
+A CONDICIONAL DE 'ON',
+
+
+
+
+
+
+
+
+COM A CONDIÇÃo....
+
+
+
+
+
+
+
+
+
+
+
+GANHAMOS OS RESULTS DE 
+
+
+'7' E '8'...
+
+
+
+
+
+
+--> MAS ISSO ESTÁ ERRADO... --> PQ VAMOS QUERER JOINAR POR MEIO 
+
+DA RELATION,
+
+
+POR MEIO DO FIELD DE 'table_id'
+
+e 'id'...
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) FROM bookings AS b
+INNER JOIN tables AS t ON b.table_id = t.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS ISSO TAMBÉM RETORNOU '7 E 8'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> mas também tiramos 1 info imporatnte dessa QUERY:
+
+
+
+
+
+
+''''VIMOS QUE TEMOS 7 GUESTS COMO 1 MÁXIMO,
+
+MAS NOSSA CAPACIDADE MÁXIMA É 8 GUESTS''' --> ISSO QUER DIZER QUE 
+
+NUNCA TIVEMOS 
+
+
+
+
+
+
+
+MAIS DO QUE 7 GUESTS 
+
+
+NA NOSSA DATABASE,
+
+
+DURANTE SEU USO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+
+
+FILTERING 
+
+E JOINING 
+
+
+TAMBÉM 
+
+
+FUNCIONAM 
+
+
+
+COM __ 'AGGREGATE FUNCTIONS'... 
+
+
+
+
+
+
+
+
+
+
+MAS O QUE ACONTECERIA 
+
+SE _ ADICIONÁSSEMOS MÚLTIPLOS JOINS E 1 FILTER,
+
+EM CIMA DISSO TUDO?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+-- SELECT ROUND(AVG(amount_tipped), 2)  --- uso de FILTER COM AGGREGATE FUNCTIONS (funciona)
+-- FROM bookings AS b
+-- WHERE b.amount_billed > 20
+--     AND num_guests > 2;
+
+
+--- USO DE 'JOINS' com aggregate functions (funciona)
+-- SELECT MAX(b.num_guests), MAX(t.num_seats) FROM bookings AS b
+-- INNER JOIN tables AS t ON b.table_id = t.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS ISSO AGORA:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VAMOS USAR A QUERY DE ANTES,
+
+
+MAS VAMOS 
+
+
+COLOCAR UMA OUTRA FILTER CONDITION...
+
+
+
+
+
+
+
+COMEÇAMOS ASSIM:
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) FROM bookings AS b
+INNER JOIN tables AS t ON b.table_id = t.id;
+
+
+
+
+
+
+
+
+
+
+
+--> ANTES,
+
+
+
+QUERÍAMOS VER 'COMO 
+
+A OVERALL CAPACITY 
+
+ERA/FOI UTILIZADA'...
+
+
+
+
+
+
+
+
+
+
+AGORA, O PROFESSOR QUER 
+
+RESTRINGIR 
+
+
+
+NOSSA QUERY A __ TABLES MENORES,
+
+
+TABLES 
+
+
+COM CAPACIDADE MÁXIMA (num_seats)
+
+
+
+IGUAL OU INFERIOR A 4...
+
+
+
+
+
+
+
+
+
+
+
+
+TAMBÉM QUEREMOS RESTRINGIR O PAYMENT METHOD 
+DESSAS 
+
+TABLES A 'CASH ONLY'...
+
+
+(
+
+    ou seja,
+
+    será um WHERE COMPOSTO...
+)
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) 
+FROM bookings AS b
+INNER JOIN tables AS t ON b.table_id = t.id
+WHERE t.num_seats <= 4 AND b.payment_id = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS VER COMO A CAPACITY 
+
+FOI USADA 
+
+EM TABLES MENORES,
+
+COM 
+
+PESSOAS QUE PAGARAM COM 'CASH-ONLY'...
+
+
+
+
+
+
+
+
+
+--> OK..
+
+ISSO 
+
+RETORNOU 
+
+
+'2' E '3' (
+
+
+    a maior table utilizada foi 1 de 2 lugares,
+
+    e 
+
+    TÍNHAMOS UMA DE '3'
+
+    QUE NÃO FOI USADA..
+)
+
+
+
+
+
+
+
+
+
+
+
+CERTO... MAS O PROFESSOR NÃO FEZ ASSIM...
+
+
+
+
+
+
+
+
+
+
+ELE __ FEZ POR MEIO DE OUTRO 'INNER JOIN',
+
+esse filtro 
+
+buscando por 'TABLES QUE USARAM CASH'..
+
+
+
+
+A VERSÃO DO PROFESSOR FICOU ASSIM:
+
+
+
+
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) 
+FROM bookings AS b
+INNER JOIN tables AS t ON b.table_id = t.id
+INNER JOIN payment_methods AS p ON b.payment_id = p.id
+WHERE t.num_seats <= 4 AND p.name = 'Cash';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... É QUASE A MESMA COISA QUE EU ESCREVI...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT MAX(b.num_guests), MAX(t.num_seats) 
+FROM bookings AS b
+INNER JOIN tables AS t ON b.table_id = t.id
+INNER JOIN payment_methods AS p ON b.payment_id = p.id
+WHERE t.num_seats <= 4 AND p.name = 'Cash';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS A VERSÃO DO PROFESSOR RETORNOU ALGO DIFERENTE,
+
+
+'2' E '2'...
+
+
+
+
+
+
+
+
+
+
+
+
+NA VERDADE,
+
+
+AS 2 QUERIES RETONARAM A MESMA COISA (eu havia usado '<=4' em vez de '< 5')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FUNCIONOU.... 
+
+PARA 
+
+
+AS SMALLER TABLES,
+
+
+CONSEGUIMOS USAR A CAPACIDADE MÁXIMA DE NOSSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+com isso,
+
+ACABAMOS COM A PARTE DOS 'BASICS'
+
+DESSE MÓDULO,
+
+
+
+
+
+
+PQ 
+
+APRENDEMOS A USAR AGGREGATE FUNCTIONS COM FILTERS E JOINS...
+
+
+
+
+
+
+
+
+
+
+
+
+VEREMOS COISAS MAIS AVANÇADAS NAS PRÓXIMAS AULAS...
