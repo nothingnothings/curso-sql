@@ -1,0 +1,1291 @@
+
+
+
+
+
+
+
+
+
+COM A PRIMEIRA TEORIA FORA DO CAMINHO,
+
+
+
+
+
+PODEMOS VER A PARTE PRÁTICA 
+
+DAS AGGREGATE FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONFORME EXPLICADO,
+
+USAREMOS 1 PROJECT COMPLETAMENTE 
+
+
+INÉDITO...
+
+
+
+
+
+
+
+
+
+--> VAMOS 
+
+
+CRIAR A DATABASE AGORA, JUNTO COM AS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AÍ 
+
+
+
+
+
+TEMOS 5 ARQUIVOS 
+
+
+
+
+QUE FAZEM COISAS 
+
+
+
+
+NA NOSSA DATABASE...
+
+
+
+
+
+
+
+
+-----> O PRIMEIRO É 'CREATE DATABASE'...
+
+
+
+
+O SEGUNDO É 
+
+
+'create payment-visitors-tables'...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+CREATE TABLE payment_methods (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(300)
+);
+CREATE TABLE tables (
+    SERIAL PRIMARY KEY,
+    num_seats INT,
+    category VARCHAR(300)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok... NA TERCEIRA FILE,
+
+
+
+FAZEMOS INSERT DE DATA 
+
+NESSAS TABLES...
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO payment_methods(name)
+VALUES ('Cash'),
+    ('Credit Card');
+INSERT INTO tables (num_seats, category)
+VALUES (2, 'small'),
+    (2, 'small'),
+    (4, 'medium'),
+    (6, 'large'),
+    (8, 'large');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS TEMOS O 'CREATE BOOKINGS TABLE'... 
+
+
+
+
+
+
+
+
+
+
+
+
+--> CRIEI TODAS AS TABLES NECESSÁRIAS,
+
+
+E FIZ O INSERT DE TODA DATA NECESSÁRIA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK...
+
+
+
+
+
+
+
+ENTRAMOS NA DATABASE DE 'restaurants'...
+
+
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+DEVEMOS TER 3 TABLES DIFERENTES:
+
+
+
+
+
+
+
+1) BOOKINGS 
+
+
+2) PAYMENT_METHODS
+
+
+3) TABLES...
+
+
+
+
+
+
+
+
+
+
+NA TABLE DE 'BOOKINGS',
+
+
+VEMOS QUE 
+
+TEMOS AS COLUMNS:
+
+
+
+
+
+
+
+1) DE ID 
+
+
+
+
+
+2) BOOKING DATE 
+
+
+3) NUM_GUEST 
+
+
+
+4) AMOUNT_BILLED 
+
+
+
+
+5) AMOUNT_TIPPED 
+
+
+6) PAYMENT_ID 
+
+
+
+7) TABLE_ID..
+
+
+
+
+
+
+OS 'payment_id' 
+
+
+e 
+
+'table_id'
+
+
+
+SÃO 
+
+REFERENCES às TABLES DE 'payment_methods' e 'tables'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ok... 
+
+
+
+
+
+
+
+
+
+
+
+----> MAS AGORA O PROFESSOR VAI CRIAR 1 NOVO ARQUIVO ,
+
+DE NOME 
+
+
+'count.sql'...
+ 
+
+ 
+ VAMOS EXPLORAR ESSA AGGREGATE FUNCTION, NESSE ARQUIVO...
+
+
+
+
+
+ EU TENTEI ESCREVER ASSIM, MAS GANHEI UM OUTPUT ESTRANHO:
+
+
+
+
+
+
+
+
+
+
+ SELECT * FROM bookings
+COUNT(id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO.. VOU QUERER CONTAR O _ QUE_, EXATAMENTE?
+
+
+
+
+
+
+
+
+
+PARA CRIAR NOSSA PRIMEIRA AGGREGATE FUNCTION,
+
+
+DEVEMOS COMEÇAR PELA KEYWORD DE 'SELECT'... --> PQ TIPICAMENTE,
+
+QUANDO 
+
+
+APLICAMOS 
+
+'AGGREGATE FUNCTIONS',
+
+QUEREMOS 
+
+
+RODAR CALCULATIONS 
+
+COM BASE __ 
+
+
+EM _ DATA_ JÁ EXISTENTE NA NOSSA DATABASE ---> É POR ISSO QUE 
+
+
+'SELECT' É PERFEITO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+--> MAS O PROFESSOR COLOCOU 
+
+
+
+'SELECT COUNT',
+
+
+e não 
+
+'SELECT X FROM <table_name>
+COUNT()'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> ISSO QUER DIZER QUE A SINTAXE CORRETA É ASSIM:
+
+
+
+
+
+
+SELECT COUNT(id) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ISSO ME RETORNOU 1 
+
+
+ÚNICA COLUMN, de 'count',
+
+
+
+COM UM NÚMERO DE '''20''''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> a FUNCTION DE 'COUNT()',
+
+SOZINHA,
+
+JÁ DEVE SABER O QUE FAZER -----> 
+
+
+
+
+
+
+
+ELA VAI CONTAR 'TODAS AS ENTRIES QUE ENCONTROU',
+
+E AÍ 
+
+
+
+
+
+__RETORNA__ 1 SINGLE VALUE QUE OS REPRESENTA -----> 
+
+
+
+
+
+
+'''ALL THE ENTRIES QUE ENCONTRA'''' --> isso já nos mostra 
+
+
+a RAZÃO 
+
+
+DE PRECISARMOS DE UM ARGUMENTO,
+
+
+DE ALGUM 
+
+
+VALUE DENTRO DO '()'...
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+-----> ISSO __ PQ _dEVEMOS DIZER 
+
+A NOSSA FUNÇÃO 
+
+
+
+'''SOBRE O QUE _ A COUNT _ CALCULATION _ DEVE SE BASEAR'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PARA ISSO,
+
+PODEMOS __ NOS REFERIR:
+
+
+
+
+
+
+
+1) à TABLE INTEIRA
+
+
+
+
+
+
+
+
+2) A COLUMNS INDIVIDUAIS NESSA TABLE... (como 'id')..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA RODARMOS O COUNT NA TABLE INTEIRA,
+
+
+DEVEMOS USAR O OPERADOR DE ESTRELA (ALL),
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT COUNT(*) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI REALMENTE CONSIDERAR SUA TABLE INTEIRA,
+E NÃO 
+
+'APENAS 1 ÚNICA COLUMN'...
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE ASTERISCO,
+USADO NA FUNCTION DE 'COUNT()",
+
+
+
+SIMPLESMENTE SIGNIFICA QUE 
+
+'CALCULAREMOS 
+OS ROWS 
+
+
+NA NOSSA TABLE,
+
+COM BASE NA TABLE INTEIRA'...
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+--> É CLARO QUE TAMBÉM PRECISAMOS DA KEYWORD DE 'FROM',
+
+
+PARA AÍ COMUNICAR QUE 
+
+QUEREMOS 
+
+
+
+BASEAR 
+
+
+
+ESSE CÁLCULO 
+
+
+
+NA TABLE DE 'bookings'...
+
+
+
+
+
+
+
+
+
+
+--> CONSEGUIMOS DE VOLTA 1 VALUE DE 20,
+
+
+O QUE 
+
+QUER DIZER QUE TEMOS 20 
+
+
+RECORDS DE 'BOOKINGS' NESSA TABLE...
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+O __ SQL __ FOI POR DENTRO DE TODOS INDIVIDUAL ENTRIES QUE 
+
+ENCONTROU NA NOSSA TABLE,
+
+
+
+
+PARA NOSSOS INDIVIDUAL ROWS,
+
+
+E AÍ 
+
+
+VOLTOU COM 1 ÚNICO VALUE (o '20')...
+
+
+
+
+
+
+
+
+
+
+--> OK... ESSE É O COUNT COM '*'
+
+
+COMO UM ARGUMENTO...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+--- FORMA CORRETA:
+
+-- rodamos o CÁLCULO DA FUNCTION __ NA TABLE INTEIRA:
+
+SELECT COUNT(*) FROM bookings;
+
+
+--- OUTRA FORMA CORRETA:
+
+-- rodamos o CÁLCULO DA FUNCTION __ EM 1 COLUMN DA TABLE (vai CONSIDERAR/CALCULAR todos os records em que essa column NÃO ESTIVER COMO 'NULL')
+
+
+ SELECT COUNT(id) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+ O PROFESSOR USOU OUTRO IDENTIFIER,
+
+ NO CASO,
+
+ QUE FOI O DE 
+
+ 'booking_date'..
+
+
+
+
+
+
+
+
+ ----> Ex:
+
+
+
+
+
+
+
+  SELECT COUNT(booking_date) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+  E ISSO TAMBÉM NOS RETORNOU 20.. (pq todos os values dessa column estavam preenchidos)..
+
+
+
+
+
+
+
+
+
+
+
+
+  CERTO,
+
+
+
+  MAS E SE __ QUISERMOS VER 'QUANTAS PESSOAS ACTUALLY _DERAM 1 TIP'?
+
+
+
+
+
+
+
+
+
+
+
+
+  --> ISSO PQ, PARA A BOOKING DATE,
+
+
+
+  AS 20 ENTRIES NÃO SÃO UMA GRANDE SURPRESA,
+
+
+
+
+
+
+  MAS_ _ 1 TIP É ALGO OPCIONAL (pode estar como null essa column, em 1 given record)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+--- FORMA CORRETA:
+
+-- rodamos o CÁLCULO DA FUNCTION __ NA TABLE INTEIRA:
+
+SELECT COUNT(*) FROM bookings;
+
+
+--- OUTRA FORMA CORRETA:
+
+-- rodamos o CÁLCULO DA FUNCTION __ EM 1 COLUMN DA TABLE (vai CONSIDERAR/CALCULAR todos os records em que essa column NÃO ESTIVER COMO 'NULL')
+
+
+ SELECT COUNT(id) FROM bookings;
+
+
+
+
+
+
+----- rodamos o CÁLCULO DA FUNCTION __ EM 1 COLUMN DA TABLE (vai CONSIDERAR/CALCULAR todos os records em que essa column NÃO ESTIVER COMO 'NULL')
+
+
+SELECT COUNT(amount_tipped) FROM bookings; --RETORNA '17', pq nem todas as pessoas DERAM TIP...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo... foi o que imaginei,
+
+algumas pessoas não haviam tippado,
+
+por isso 
+
+ficamos com '17' em vez de '20'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, DESCOBRIMOS QUANTOS BOOKINGS TIVEMOS,
+E QUANTAS
+PESSOAS 
+
+DERAM TIP....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NÓS TAMBÉM 
+
+TALVEZ 
+
+
+
+
+
+
+DESEJEMOS 
+
+
+'DESCOBRIR QUANTOS CALENDAR DAYS
+
+ACTUALLY TEMOS _ NA NOSSA TABLE DE BOOKINGS' --> PQ SABEMOS QUE 
+
+
+TEMOS 
+
+20 
+
+BOOKINGS,
+
+
+
+MAS __ __ 
+
+
+
+
+
+
+__ 'EM QUANTOS DIAS ESSES BOOKINGS TOOK PLACE'?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+TAMBÉM PODEMOS USAR A FUNCTION DE 'COUNT/AGGREGATE' ->
+
+
+
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+
+
+
+
+
+COLOCA A QUERY MAIS UMA VEZ,
+
+
+
+MAS AGORA 
+
+
+ASSIM:
+
+
+
+
+
+
+
+
+VAMOS MUDAR O ARGUMENTO,
+VAMOS COLOCAR UMA COMPARAÇÃO, 
+
+
+PROVAVELMENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT COUNT(booking_date) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... NA FRENTE DA 'ACTUAL COLUMN REFERENCE',
+
+
+O PROFESSOR ADICIONA 
+
+
+A KEYWORD DE 'DISTINCT' --> ISSO FORÇA 
+
+
+O 
+
+
+COUNT __  A 'CONSIDERAR APENAS UNIQUE VALUES' 
+
+
+
+
+__ NA OPERAÇÃO DE 'COUNT' --> 
+
+
+
+
+
+
+
+ISSO SIGNIFICA QUE 
+
+
+SE TEMOS '2 BOOKINGS ON THE SAME DAte',
+
+
+
+ISSO 
+
+SERÁ CONTADO 
+
+
+
+APENAS 1 VEZ (1 INDIVIDUAL DAY)... -----> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, FICAMOS COM UM VALUE RETORNADO DE '5',
+
+
+
+O QUE QUER DIZER QUE 
+
+
+NOSSAS 20 BOOKINGS 
+
+
+
+ACONTECERAM AO LONGO DE 5 DIAS... ( 
+
+    não sabemos 'QUANTOS BOOKINGS ACONTECERAM EM 1 ÚNICO DIA',
+
+
+    mas isso é algo que podemos DESCOBRIR MAIS TARDE...
+)
+
+
+
+
+
+
+
+
+
+OK... ESSES FORAM NOSSAS PRIMEIROS PASSOS 
+
+
+NO MUNDO DAS 'AGGREGATE FUNCTIONS'... 
+
+
+
+
+
+
+
+(
+
+    COM A FUNCTION DE 'COUNT'...
+)
+
+
+
+
+
+
+
+
+
+MAS É CLARO QUE TEMOS MAIS FUNCTIONS QUE PODEM SER EXPLORADAS...
