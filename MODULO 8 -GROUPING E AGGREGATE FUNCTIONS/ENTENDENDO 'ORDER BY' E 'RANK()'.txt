@@ -1,0 +1,927 @@
+
+
+ESTA É A ÚLTIMA AULA DO MÓDULO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS COPIAR A QUERY DA ÚLTIMA AULA:
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) 
+OVER(PARTITION BY booking_date)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> A WINDOW FUNCTION É 'OVER()' (junto de 'sum(amount_tipped)' ) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+MAS AGORA PODEMOS 
+
+
+
+
+
+COMPLEMENTAR ESSA WINDOW FUNCTION...
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS COLOCAR MAIS ARGUMENTOS DENTRO DA WINDOW FUNCTION..
+
+
+
+
+
+
+
+
+
+
+
+-----> PODEMOS ACTUALLY DEFINIR A 'ORDEM DOS RESULTS 
+
+
+
+NESSA COLUMN QUE SERÁ GERADA PELA WINDOW FUNCTION'...
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS DEFINIR A 'ORDEM' 
+
+QUE 
+
+
+
+NOSSOS VALUES DEVERÃO SEGUIR,
+NESSA 
+
+COLUMN...
+
+
+
+
+
+
+
+
+
+
+-----> PARA ISSO,
+
+
+
+COLOCAMOS 
+
+'ORDER BY'
+
+
+
+DEPOIS DE 'booking_date',
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) 
+OVER(PARTITION BY booking_date ORDER BY)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  OK... AGORA ESPECIFICAMOS 
+
+
+
+
+
+
+
+A COLUMN __ E OS 'CORRESPONDING VALUES'
+
+
+EM QUE 
+
+
+A ORDER
+
+DEVE 
+
+
+SE BASEAR... ----> 
+
+
+
+
+
+
+
+
+
+O PROFESSOR COLOCA 'amount_billed',
+
+
+
+
+PQ ELE VAI QUERER SORTAR 
+
+
+PELO 
+
+
+'amount_billed' --------> e podemos colocar as tags de 'ASC' OU 'DESC',
+
+
+PARA 
+
+
+
+DIZER SE QUEREMOS QUE 
+
+FIQUE EM ORDEM 
+
+ASCENDENTE OU DESCENDENTE...
+
+
+
+
+
+ 
+
+
+
+
+ EX:
+
+
+
+
+
+ 
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) 
+OVER(PARTITION BY booking_date ORDER BY amount_billed ASC )
+FROM bookings;
+
+
+
+
+
+
+
+
+
+OU
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) 
+OVER(PARTITION BY booking_date ORDER BY amount_billed DESC )
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA RODAMOS ESSA QUERY,
+
+
+E VISLUMBRAMOS O RESULTADO...
+
+
+
+
+
+
+
+
+
+-> TEMOS AS 3 COLUMNS DE ANTES,
+
+
+
+MAS AGORA 
+
+
+
+
+
+
+
+
+
+SE CHECARMOS A 
+
+
+
+
+COLUMN DE 'SUM(amount_tipped)',
+
+
+
+
+
+
+
+
+
+
+
+OS values ficaram posicionados diferenetmente...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO ACONTECEU PQ AGORA O CÁLCULO DE 'SUM()"
+
+
+
+
+
+
+
+
+
+FOI APLICADO DE FORMA DISTINTA..
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+
+
+quando adicionamos 'order by',
+
+
+
+
+
+
+
+
+
+temos 1 impacto 
+
+
+
+
+NA MANEIRA PELA QUAL 
+
+NOSSA AGGREGATE FUNCTION 
+
+
+É 
+
+
+EXECUTADA (
+
+
+
+
+    é executada por ETAPAS...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK,
+
+
+
+ASSIM TEMOS 3 DIFERNETES MANEIRAS DE USAR WINDOW FUNCTIONS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+1A MANEIRA) 
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER()
+FROM bookings;
+
+
+
+
+
+
+(ESSA MANEIRA ADICIONA 1 NOVA COLUMN, QUE SEMPRE TERÁ O MESMO VALUE, QUE É A SUM DE TODOS OS TIPS)....
+
+
+
+
+
+
+
+
+
+2A MANEIRA)  --> 
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER(PARTITION BY booking_date)
+FROM bookings;
+
+
+
+
+
+
+
+
+MOSTROU QUE PODEMOS APLICAR A MESMA LÓGICA,
+
+MAS COM A KEYWORD DE 'PARTITION BY',
+
+
+PARA CRIAR GRUPOS SEPARADOS DE DATA,
+
+
+
+COM SUMS DIFERENTES/SEPARADAS POR 'booking_date'...
+
+
+
+
+
+
+
+
+
+
+
+
+3A MANEIRA) ---> 
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER(PARTITION BY booking_date ORDER BY amount_billed)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+COM ESSA MANEIRA,
+
+
+
+MOSTRAMOS QUE PODEMOS 'DEFINIR 1 ORDEM ESPECÍFICA DENTRO DE 1 PARTITIION,
+
+
+E AÍ 
+
+TER 
+
+1 IMPACTO 
+
+
+NA MANEIRA PELA QUAL NOSSA CALCULATION É EXECUTADA'''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> btw,
+
+
+
+
+
+
+
+O PROFESSOR TAMBÉM MENCIONOU QUE WINDOW FUNCTIONS 
+
+PODEM 
+
+SER USADAS 
+
+
+
+
+COM COISAS DISTINTAS DE 'AGGREGATE FUNCTIONS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER NOS MOSTRAR 1 EXEMPLO DE 
+
+
+USO DE 'WINDOW FUNCTION'
+
+
+SEM 
+
+
+'AGGREGATE FUNCTION'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> para isso,
+
+
+O PROFESSOR DECIDE USAR A FUNCTION DE 'RANK()'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> RANK() --> COMO O NOME SUGERE,
+
+
+VAI RANKEAR 
+
+
+
+
+
+INDIVIDUAL VALUES,
+
+
+
+
+DE DENTRO DE NOSSAS PARTITIONS (de '1 to x'),
+
+
+
+
+
+
+
+
+E NO NOSSO CASO 
+
+
+
+
+
+
+
+TROCAMOS O ORDER BY,
+
+
+DE 'amount_billed'
+
+para 'amount_tipped'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, RANK()
+OVER(PARTITION BY booking_date
+ ORDER BY amount_tipped)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> com essa calculation,
+
+seremos capazes 
+
+
+de mostrar o 'amount_tipped'
+
+
+PARA CADA INDIVIDUAL BOOKING,
+
+
+E AÍ,
+
+DENTRO DO 'BOOKING' DE CADA 
+
+
+INDIVIDUAL CALENDAR DATE,
+
+
+
+
+SEREMOS CAPAZES DE __ RANKEAR_ 
+
+
+OS 
+
+BOOKINGS...( rank 1, 2, 3, 4, 5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA QUE O CÓDIGO FAÇA SENTIDO,
+
+PRECISAMOS COLOCAR 'DESC' E  ESCREVER ASSIM:
+
+
+
+
+
+SELECT booking_date, amount_tipped, RANK()
+OVER(PARTITION BY booking_date
+ ORDER BY amount_tipped DESC)
+FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA OS HIGHEST TIPS GANHARÃO O MAIOR RANK... ('1')...
+
+
+
+
+
+
+E ESSE RANK É SEMPRE APLICADO CONSIDERANDO AS DIFERENTES 'PARTITIONS'
+
+
+
+
+QUE CRIAMOS COM 'PARTITION BY'..
+
+
+
+
+
+
+
+
+
+
+'OVER()' --> é a actual 
+
+
+WINDOW FUNCTION...
+
+
+
+
+
+
+
+
+
+--> E A WINDOW FUNCTION PODE TER OS ARGUMENTOS 
+
+DE 
+
+'PARTITION BY'
+
+
+
+E 
+
+
+
+'ORDER BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E SEMPRE PODEMOS USAR ESSAS FUNCTIONS EM CONJUNTO COM AGGREGATE FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+-> OU ENTÃO AS UTILIZAR COM OUTROS FUNCTION TYPES..
+
+
+
+
+
+
+
+
+
+
+--> TEMOS OS OFFICIAL DOCS, COM OUTROS FUNCTION TYPES 
+
+QUE PODEMOS USAR COM 
+
+WINDOW FUNCTIONS...
+
+
+
+
+
+--> PODEMOS VER OUTRAS FUNCTIONS.
+
+
+
+
+
+
+
+todas as aggregate functions que aprendemos durante este módulo podem ser usadas com as window functions...
+
+
+
+
+
+
+
+acabamos com este módulo,
+
+em que 
+
+
+
+ESTUDAMOS AGGREGATE FUNCTIONS,
+
+NESTED SUBQUERIES 
+
+
+
+E 
+
+WINDOW FUNCTIONS..
