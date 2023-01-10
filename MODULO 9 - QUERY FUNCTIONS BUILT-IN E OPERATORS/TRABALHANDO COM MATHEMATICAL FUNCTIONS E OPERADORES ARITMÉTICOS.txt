@@ -1,0 +1,1347 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR CRIA NOVA DATABASE,
+
+
+NOVA TABLE,
+
+
+E ADICIONA 
+
+
+
+
+DATA A ESSA TABLE...
+
+
+
+
+
+
+
+
+
+OS CÓDIGOS:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE memberships (
+    id SERIAL PRIMARY KEY,
+    membership_start DATE,
+    membership_end DATE,
+    last_checkin TIMESTAMP,
+    last_checkout TIMESTAMP,
+    consumption NUMERIC(5, 2),
+    first_name VARCHAR(200),
+    last_name VARCHAR(200),
+    price NUMERIC(5, 2),
+    billing_frequency INT,
+    gender VARCHAR(200)
+)
+
+
+
+
+
+CREATE TABLE memberships (
+    id SERIAL PRIMARY KEY,
+    membership_start DATE,
+    membership_end DATE,
+    last_checkin TIMESTAMP,
+    last_checkout TIMESTAMP,
+    consumption NUMERIC(5, 2),
+    first_name VARCHAR(200),
+    last_name VARCHAR(200),
+    price NUMERIC(5, 2),
+    billing_frequency INT,
+    gender VARCHAR(200)
+)
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+E AGORA ADICIONAMOS DATA A NOSSA TABLE:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO memberships (
+        membership_start,
+        membership_end,
+        last_checkin,
+        last_checkout,
+        consumption,
+        first_name,
+        last_name,
+        price,
+        billing_frequency,
+        gender
+    )
+VALUES (
+        '2021-10-01',
+        NULL,
+        '2021-10-01 05:17:36',
+        '2021-10-01 06:20:45',
+        26.49,
+        'Max',
+        'Schwarz',
+        19.99,
+        12,
+        'male'
+    ),
+(
+        '2020-05-10',
+        '2022-05-09',
+        '2021-11-03 10:01:56',
+        '2021-11-03 14:30:00',
+        100.26,
+        'Manu',
+        'Lorenz',
+        199.99,
+        1,
+        'male'
+    ),
+(
+        '2021-02-18',
+        '2022-02-17',
+        '2021-10-29 15:26:05',
+        '2021-10-29 17:01:33',
+        5.10,
+        'Julie',
+        'Barnes',
+        199.99,
+        1,
+        'female'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    OK....
+
+
+
+
+
+
+
+
+
+
+
+    ESTAMOS `READY TO GO`...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK,
+
+
+
+
+
+
+
+ISSO NOS LEVA à PRIMEIRA PERGUNTA:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''O QUE SÃO MATH FUNCTIONS E MATH OPERATORS'''?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS NOS REFERIR AOS DOCS DO MYSQL 
+
+
+E 
+
+
+
+
+POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+
+--> TEMOS MT FUNCTIONS E OPERATORS 
+
+
+DISPONÍVEIS ....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR VAI MOSTRAR COMO OPERATORS E FUNCTIONS 
+GERALMENTE 
+FUNCIONAM,
+
+
+COM EXEMPLOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+
+
+
+--> PARA COMEÇAR COM OPERATORS,
+
+
+
+
+NOS DOCS DO MYSQL,
+
+
+
+
+
+
+TEMOS OS ARITHMETIC OPERATORS:
+
+
+
+
+
+
+
+
+
+
+1) *
+
+
+2) + 
+
+
+3) - 
+
+4) / 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OPERAÇÕES BÁSICAS....
+
+
+
+
+
+
+
+
+
+
+
+
+ADIÇÃO, SUBTRAÇÃO,
+
+MULTIPLICAÇÃO,
+
+DIVISÃO...
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+ESSES SÃO OS MATH OPERATORS...
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER APLICAR 1 OPERATOR NO NOSSO PROJECT...
+
+
+
+
+
+
+
+
+--> ELE QUER MOSTRAR 1 PRATICAL USE-CASE 
+
+
+DE 
+
+1 OPERATOR DESSES COM NOSSA DATA...
+
+
+
+
+
+
+
+
+
+
+--> LÁ NAS SQL TOOLS,
+
+
+O PROFESSOR 
+
+
+
+
+
+
+
+
+
+
+DÁ UMA OLHADA NA DATA QUE ATUALMENTE TEMOS:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 1,
+    "membership_start": "2021-10-01",
+    "membership_end": null,
+    "last_checkin": "2021-10-01 05:17:36",
+    "last_checkout": "2021-10-01 06:20:45",
+    "consumption": "26.49",
+    "first_name": "Max",
+    "last_name": "Schwarz",
+    "price": "19.99",
+    "billing_frequency": 12,
+    "gender": "male"
+  },
+  {
+    "id": 2,
+    "membership_start": "2020-05-10",
+    "membership_end": "2022-05-09",
+    "last_checkin": "2021-11-03 10:01:56",
+    "last_checkout": "2021-11-03 14:30:00",
+    "consumption": "100.26",
+    "first_name": "Manu",
+    "last_name": "Lorenz",
+    "price": "199.99",
+    "billing_frequency": 1,
+    "gender": "male"
+  },
+  {
+    "id": 3,
+    "membership_start": "2021-02-18",
+    "membership_end": "2022-02-17",
+    "last_checkin": "2021-10-29 15:26:05",
+    "last_checkout": "2021-10-29 17:01:33",
+    "consumption": "5.10",
+    "first_name": "Julie",
+    "last_name": "Barnes",
+    "price": "199.99",
+    "billing_frequency": 1,
+    "gender": "female"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+3 DIFERENTES ROWS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> membership_start e end ----> são de type DATE...
+
+
+
+AÍ TEMOS 'last_checkin'
+
+
+e 'last_checkout' --> ESSES SÃO TIMESTAMPS...
+
+
+
+
+
+
+
+--> AÍ TEMOS A 'CONSUMPTION' (a quantidade de dinheiro que nossos clientes gastaram)...
+
+
+
+
+
+
+
+
+--> TEMOS  O PRICE DA MEMBERHSIP (19.99 para a monthly)...
+
+
+
+
+
+
+
+
+
+
+
+
+AÍ TEMOS 199 PARA A YEARLY,
+
+
+
+e aí 
+
+a frequency... (12 para a monthly, 1 para a yearlY)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+
+
+MAS AGORA DEVEMOS 
+PENSAR NO NÚMERO 
+
+
+
+QUE NOS INTERESSA,
+
+
+QUE 
+
+PODE 
+
+
+
+SER CALCULADO COM BASE EM 1 OPERATOR...
+
+
+
+
+
+
+
+
+
+
+--> se olhamos para nossas tables,
+
+
+
+
+
+se assumimos 
+
+que 
+esses 
+
+payments 
+
+
+
+
+são 
+
+ENTREGUES 
+
+
+
+
+NOS PRÓXIMOS 
+
+12 MESES (
+
+    o que não é verdade,
+
+    pq 
+
+
+    as memberships 
+
+    de alguns dos membros já aacabou....
+)
+
+
+
+
+
+
+
+
+
+
+OK, MAS DIGAMOS QUE 
+
+
+QUEREMOS 
+
+
+OBTER A 'POTENTIAL REVENUE'
+
+
+DOS PRÓXIMOS 12 MESES,
+
+COM BASE NESSES 
+
+3 MEMBROS..
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+TEREMOS  
+DE 
+
+
+
+MULTIPLICAR OS VALUES QUE 
+
+TEMOS 
+
+NA 
+
+COLUMN 
+
+DE 
+
+'price'
+
+
+COM __  O VALUE QUE TEMOS 
+
+
+NA 
+
+
+
+'billing_frequency'
+
+column...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+VAMOS PRECISAR USAR 1 OPERATOR,
+
+O OPERATOR DE 'MULTIPLY,'
+
+
+QUE É UM MATH OPERATOR...
+
+
+
+
+
+
+
+
+ACHO QUE VAI FICAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT SUM(price * billing_frequency) from memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+RODEI ISSO AÍ,
+
+E GANHEI
+
+
+
+'639.86'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> nesse módulo,
+
+trabalharemos principalmente com 'SELECT' e 'INSERT'..
+
+
+
+
+
+
+
+
+
+
+
+----> eu usei 'price * billing_frequency',
+
+
+
+
+
+E AÍ 
+
+
+
+
+USEI 'SUM'
+
+PARA __ PEGAR _ 
+
+
+
+A SOMA DE TODOS OS VALUES 
+
+
+DESSA COLUMN..
+
+
+
+
+
+ESSA AGGREGATE FUNCTION É MT ÚTIL PARA FINS COMO ESSES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> podemos combinar isso com 
+
+uma aggregate function,
+
+para pegar a total revenue como 1 single value...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> exatamente como fiz, na verdade...
+
+
+
+
+
+
+
+
+
+
+--> temos várias functions no postgresql 
+
+
+tbm..
+
+
+
+
+
+
+--> 
+
+
+
+
+O professor vai mostrar algumas dessas functions agora,
+
+
+
+no project example,
+
+para 
+
+
+
+
+
+visualizarmos...
+
+
+
+
+
+
+
+
+
+
+
+
+---> PARA AS FUNCTIONS,
+
+
+o professor 
+
+
+agora quer mostrar 
+
+
+a column de 'consumption'...
+
+
+
+
+
+
+
+
+
+-> ELE ESCREVE ASSIM:
+
+
+
+
+
+
+
+SELECT consumption
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+--> isso vai selecionar todas as consumptions dos 
+
+members..
+
+
+
+
+
+
+
+
+
+
+
+---> AS MATH FUNCTIONS QUE 
+
+O PROFESSOR MOSTRARÁ 
+
+
+
+TEM A VER COM 
+
+
+A MANEIRA 
+
+
+PELA QUAL 
+
+OS DECIMAL NUMBERS SÃO DISPLAYADOS 
+
+
+
+
+
+
+
+
+
+
+
+
+OS DIFERENTES FUNCTION TYPES SÃO:
+
+
+
+
+
+
+
+1) CEIL() 
+
+
+2) FLOOR() 
+
+
+
+3) ROUND()
+
+
+4) TRUNC()  (ou TRUNCATE() )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TODAS ESSAS SÃO FUNCTIONS RELATIVAS 
+
+
+
+A MANEIRA PELA QUAL 
+
+ESSA INFO É DISPLAYADAA (os results)..
+
+
+
+
+
+
+
+
+
+--> E, CONFORME APRENDEMOS NO ÚLTIMO MÓDULO,
+
+
+RODAMOS __ 
+
+
+FUNCTIONS __ 
+
+
+
+
+TIPICAMENTE 
+
+
+COM 
+
+
+
+
+'nome_da_function()'..
+
+
+
+
+
+
+
+--> AÍ, DENTRO DA FUNCTION,
+
+COLOCAMOS ARGUMENTOS...
+
+
+
+
+
+
+
+
+--> COLOCAREMOS 
+
+A
+ 'consumption',
+
+ essa column,
+
+
+ DENTRO 
+
+
+
+ DA FUNCTION...
+
+
+
+
+
+ ex:
+
+
+
+
+
+
+ SELECT CEIL(consumption)
+ FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> COM ISSO,
+
+
+ PERCEBEMOS QUE AS CASAS DECIMAIS TERÃO SUMIDO (
+
+
+    pq arredondamos para o 'teto'...
+
+
+
+
+
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+ O CEIL ARREDONDA PARA O PRÓXIMO INTEGER...
+
+
+
+
+
+
+
+
+
+
+ --> SE USAMOS 'FLOOR'
+
+ em vez de 'CEIL',
+
+
+
+
+ AÍ GANHAMOS A MESMA LÓGICA DO CEIL,
+
+ mas vamos para baixo...
+
+
+
+
+
+
+
+
+
+
+
+ SE USAMOS 'ROUND' EM VEZ DE 'CEIL' OU 'FLOOR',
+
+
+
+
+
+ ISSO VAI TRAZER O MESMO RESULT DE 'FLOOR',
+
+
+
+
+
+
+
+
+ pq vai arredondar para o polo mais próximo...
+
+
+
+
+
+
+
+
+
+ --> MAS SE VOCÊ 
+ COLOCAR 
+
+
+
+ ', 2',
+
+
+
+ VOCê 
+
+
+
+
+
+
+
+ 
+ FICARÁ COM COISAS COMO 
+
+ '26.49'...
+
+
+
+
+
+
+
+
+
+ --> ARREDONDA COM BASE NAS 'CASAS DECIMAIS'..
+
+
+
+
+
+
+
+
+
+
+
+ --> TAMBÉM TEMOS 'TRUNC' 
+ E 
+
+ 'TRUNCATE()'...
+
+
+
+
+
+
+
+
+
+ --> O 'TRUNC()'
+
+
+
+ EXISTE NO POSTGRESQL...
+
+
+
+
+
+
+
+ --> O QUE O 'TRUNC()'
+
+
+ FAZ É _ CORTAR __ DECIMAL PLACES_.... (em vez de realmente arredondar, como o 'round')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK...
+
+
+
+
+
+
+
+
+
+ TRUNC VS ROUND 
+
+
+
+
+
+
+
+
+ --> TRUNC É BRUTO, 'CORTA' AS CASAS DECIMAIS..
+
+
+
+
+
+ --> JÁ 'ROUND' __ ARREDONDA __ AS CASAS DECIMAIS ATÉ AQUELE NÚMERO QUE VOCÊ DIGITOU (aquele número de casas decimais)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E O __TRUNCATE__ EXIGE_ 1 SEGUNDO ARGUMENTO...
+
+ CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
