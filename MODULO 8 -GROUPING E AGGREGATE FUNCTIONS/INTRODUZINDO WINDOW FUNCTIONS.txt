@@ -1,0 +1,1636 @@
+
+
+
+
+
+
+
+
+ESTA É A ÚLTIMA AULA DESTE MÓDULO....
+
+
+
+
+
+
+
+
+
+
+
+É O ÚLTIMO CONCEITO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> WINDOW FUNCTIONS --> SÃO UM POUCO COMO 'AGGREGATE FUNCTIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> APRENDEMOS QUE 'AGG FUNCTIONS' NOS DEIXAM REDUZIR MÚLTIPLOS INPUT VALUES A 1 ÚNICO VALUE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> EX: CALCULANDO A 'SUM' DE VALUES --> ISSO NOS DÁ 1 VALUE INDIVIDUAL, AO FINAL, OU UM CONJUNTO DE VALUES, SE TIVERMOS UM 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> falamos mt sobre essas 'aggregate functions'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ COM 'WINDOW FUNCTIONS',
+
+
+VOCê 
+
+
+
+PODE __ APLICAR 'AGGREGATE FUNCTIONS' (e outros function types)
+
+
+
+
+
+COM _ AS MESMAS CAPABILITIES (com 'CALCULATING AVERAGES', SUMS E COISA DO GÊNERO),
+
+
+
+
+
+MAS A
+
+
+DIFERENÇA COM ELAS É QUE 
+
+
+
+'''OS RESULTS 
+
+
+
+
+__ SERÃO __ ADICIONADOS __ EM 1 NOVA COLUMN''',
+
+
+
+
+SEM 
+
+
+__ ACTUALLY__ REDUZIR __ 
+
+
+
+
+OS 'ACTUAL INPUT VALUES'
+
+
+DA UNDERLYING TABLE EM 1 SINGLE ROW/VALUE...
+
+
+
+
+
+
+
+
+
+
+
+---> E ISSO, DE NOVO,
+
+
+
+PARECE 1 POUCO COMPLEXO,
+
+
+
+
+
+POR ISSO DEVEMOOS 
+
+
+
+
+VER ISSO NA PRÁTICA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA COMEÇARMOS, O PROFESSOR CRIOU UM ARQUIVO DE 'WINDOW FUNCTIONS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ELE COMEÇA ASSIM:
+
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA INFO SERÁ RETRIEVADA DA TABLE DE 'bookings'...
+
+
+
+
+
+
+
+
+
+-> FICAMOS COM 1 OVERVIEW DE TODOS OS BOOKINGS,
+
+E O AMOUNT TIPPED 
+
+DE CADA BOOKING...
+
+
+
+
+
+
+
+
+
+OK, MAS E SE ADICIONÁSSEMOS 
+
+OUTRA
+
+
+
+
+COLUMN A ESSA QUERY?
+
+
+
+
+
+
+
+
+
+
+
+
+--> E SE QUISÉSSEMOS ADICIONAR 1 COLUMN COM A 'SUM DO AMOUNT TIPPED' 
+
+
+
+
+
+__ AO LONGO _ DE TODAS _AS DIFERENTES ROWS?
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> PARA ENTÃO, TALVEZ,
+
+
+'CALCULATE THE SHARE OF THE AMOUNT TIPPED  
+
+DE 1 BOOKING EM SI',
+
+
+OU ENTÃO 
+
+
+O 
+
+
+'TOTAL AMOUNT TIPPED',
+
+
+
+DA 
+
+
+TABLE INTEIRA...
+
+
+
+
+
+
+
+
+
+
+--> APRENDEREMOS A RODAR CALCULATIONS COMO ESSAS 
+
+NO PRÓXIMO MÓDULO,
+
+
+
+
+
+
+
+mas podemos começar 
+
+
+
+a construir a base agora,
+
+
+
+adicionando essa nova column...
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+
+O QUE VOCê PODERIA FAZER, É CLARO,
+
+
+
+
+
+
+É CRIAR UMA NOVA AGGREGATE FUNCTION....
+
+
+
+
+
+
+
+
+
+
+
+
+----->
+
+
+
+
+
+FAZEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT SUM() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> SELECT SUM(amount_tipped) FROM bookings;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI TE DAR A 'SUM' 
+
+
+DO 'amount_tipped'
+
+
+AO LONGO DE TODAS ESSAS ROWS...
+
+
+
+
+
+
+
+
+-> MAS AGORA ESSE VALUE DEVE SER ADICIONADO COMO 1 COLUMN SEPARADA 
+
+
+
+
+
+DO NOSSO RESULT SET...
+
+
+
+
+
+
+
+
+
+
+
+---> DEVE SER 1 COLUMN EXTRA PARA CADA INDIVIDUAL RESULT QUE TEMOS NA TABLE QUE 
+
+RECÉM CRIAMOS COM 
+
+
+A QUERY 
+
+DE 
+
+
+'SELECT booking_date, amount_tipped
+FROM bookings;'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OBVIAMENTE, ISSO NÃO PODE SER FEITO COM A SINTAXE DE AGGREGATE FUNCTION QUE 
+
+USAMOS ATÉ AGORA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS ISSO PODE SER OBTIDO ATRAVÉS DE UMA 'WINDOW FUNCTION'..
+
+
+
+
+
+
+
+
+
+
+--> 1 WINDOW FUNCTION É CRIADA NO 'IDENTIFIER',
+
+NO SELECT STATEMENT,
+
+
+
+
+
+
+POR MEIO DO USO DE 1 AGGREGATE FUNCTION..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> não somos limitados a aggregate functions (outros function types são suportados),
+
+
+
+
+MAS VAMOS COMEÇAR COM AGGREGATE FUNCTIONS...
+
+
+
+
+
+
+
+
+
+----> PARA ISSO,
+
+O PROFESSOR 
+
+
+
+INCLUI O 'SUM()'
+
+
+LÁ NAS COLUMNS...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped)
+FROM bookings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO.... MAS AGORA,
+
+EM VEZ DE COLOCARMOS A PARTE DE 'GROUP BY' LÁ AO FINAL,
+
+
+
+QUE ERA ALGO __ OBRIGATÓRIO,
+
+
+
+AGORA 
+
+O PROFESSOR 
+
+
+COLOCA A KEYWORD DE 'OVER'
+
+
+
+LOGO DEPOIS DE 'SUM()'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER()
+FROM bookings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ESSA KEYWORD DE 'OVER()',
+
+
+
+COM OS PARÊNTESES,
+
+
+É CHAMADA
+ 
+
+
+
+
+ DE 
+
+
+ 'WINDOW FUNCTION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ISSO QUER DIZER QUE SEMPRE QUE VOCÊ USA 'OVER()'
+
+
+
+
+lá no select,
+
+
+
+VOCê 
+
+
+
+
+
+
+
+
+
+PASSA A USAR 1 'WINDOW FUNCTION'....
+
+
+
+
+
+
+
+
+
+
+
+------> MAS É IMPORTANTE RESSALTAR QUE 
+'OVER()'
+
+
+NÃO É A WINDOW FUNCTION INTEIRA..
+
+
+
+
+
+
+
+
+
+
+
+A WINDOW FUNCTION INTEIRA 
+
+É 
+
+
+
+'SUM(amount_tipped) OVER()'...
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ ------> AQUELES OUTROS IDENTIFIERS,
+
+
+'booking_date' e 'amount_tipped',
+
+
+
+
+
+
+
+NÃO __ SÃO RELACIONADOS A WINDOW FUNCTION...
+
+
+
+
+
+
+
+
+
+
+
+MAS A 'SUM' 
+
+
+DO 'AMOUNT TIPPED'
+
+
+
+
+
+
+_ É, SIM, 
+
+PARTE DA WINDOW FUNCTION...
+
+
+
+
+
+
+
+
+
+
+
+-------> SE NÃO TIVÉSSEMOS ESSE 'OVER' 
+
+AO LADO DA AGGREGATE FUNCTION (que cria a window function),
+
+
+
+TERÍAMOS 
+
+
+SINTAXE INVÁLIDA (pq faltaria o 'GROUP BY')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+
+
+
+
+
+
+
+
+
+COM ESSA WINDOW FUNCTION AO FINAL,
+
+
+
+
+
+
+
+FICAMOS COM 1 COLUNA INÉDITA, EXTRA,
+
+
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+booking_date        amount_tipped         SUM(amount_tipped)
+
+data               6.60                   119.10
+
+data                1.10                    119.10
+
+data                5.50                    119.10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A PARTE DE 'SUM(amount_tipped)'
+
+
+
+
+
+
+
+AGORA VAI 
+
+CONTER A SOMA DE TODA A TABLE,
+
+EM TODAS AS SUAS ROWS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER 
+
+
+
+
+
+
+
+QUE __ FOMOS CAPAZES DE RODAR 1 AGGREGATE  FUNCTION,
+
+
+
+
+
+
+NO CASO 'SUM()',
+
+
+
+
+
+
+sem AGREGAR QUAISQUER VALUES NA NOSSA TABLE (
+
+
+    ou seja,
+
+
+    abrimos uma EXCEÇÃO AO USO DESSE TIPO DE FUNÇÃO, A ESSE 'AGGREGATE'...
+)
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+--> NA VERDADE, O QUE ACONTECEU É QUE 
+
+
+
+
+__ A AGGREGATION __ FOI REALIZADA __ INTERNAMENTE... (por trás das cenas)...
+
+
+
+
+
+
+
+
+
+
+
+---->  AÍ O VALUE FOI ADICIONADO 
+
+A CADA 
+
+
+
+INDIVIDUAL ENTRY NA NOSSA TABLE..
+
+
+
+
+
+
+
+
+
+
+-> esse foi o primeiro passo no sentido das 
+
+
+
+WINDOW FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, PODEMOS USAR AGGREGATE FUNCTIONS 
+
+
+
+DE UMA FORMA DIFERENTE,
+
+
+
+
+
+
+
+
+PODEMOS USAR AS CAPACIDADES DA AGGREGATE FUNCTION,
+
+
+MAS 
+SEM
+A 
+
+AGGREGATION DA TABLE INTEIRA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> MAS TIPICAMENTE NÃO VEREMOS WINDOW FUNCTIONS 
+
+
+
+APENAS ASSIM..
+
+
+
+
+
+
+
+
+
+
+
+
+---->  HÁ MAIS MANEIRAS DE TRABALHAR COM WINDOW FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+
+
+
+
+COPIA TUDO,
+
+
+MAS 
+
+
+AGORA 
+
+
+
+
+
+
+VAI QUERER ADICIONAR 1 POUCO DE INFO 
+
+
+
+
+
+AOS ARGUMENTOS DE 'OVER()'..
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+ELE COLOCA A ESCRITA DE 
+
+
+'PARTITION BY'...
+
+
+
+
+
+
+
+
+
+--> DEPOIS DE 'PARTITION BY',
+
+
+
+
+
+
+
+O PROFESSOR COLOCA 1 VALUE QUE SERÁ '1 COLUMN NA NOSSA TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE VAI COLOCAR 
+
+A COLUMN DE 'booking_date'..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER(PARTITION BY booking_date)
+FROM bookings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS O QUE ISSO FARÁ?
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, QUANDO USAMOS AGGREGATE FUNCTIONS,
+
+
+TAMBÉM USAMOS A KEYWORD DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+--> FIZEMOS ISSO PARA QUE 
+
+
+''SE TIVÉSSEMOS VALUES DUPLICADOS NA NOSSA TABLE,
+
+
+
+ESSES VALUES FOSSEM AGRUPADOS EM UNIQUE, INDIVIDUAL VALUES''...
+
+
+
+
+
+
+
+
+
+E, COM BASE NESSES 'INDIVIDUAL VALUES',
+
+
+
+
+
+
+
+RODÁVAMOS NOSSA 'AGGREGATE FUNCTIONS' (
+
+
+
+
+    por exemplo,
+
+
+    para calcular 
+
+    '1 value ESPECÍFICO/ÚNICO PARA 1 GIVEN DATE'''..
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+JÁ O 'PARTITION BY'
+
+
+CRIA 
+
+
+
+
+PARTIÇÕES/GRUPOS __ PARA __ WINDOW __ FUNCTIONS....
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO, NOVAMENTE,
+
+
+
+ACONTECE __POR TRÁS DAS CENAS (
+
+
+
+
+    O QUE SIGNIFICA QUE 
+
+    NÃO ACTUALLY REDUZIMOS 
+
+
+    QUAISQUER INPUT FIELDS OU INPUT VALUES...
+
+)....
+
+
+
+
+
+
+
+
+
+--> mas o que acontece é que 
+
+DIZEMOS AO SQL 
+
+
+
+QUE 
+
+
+'QUEREMOS CALCULAR A __ SUM _ DO amount_tipped
+
+
+__ PARTICIONADA __ PELO __ BOOKING_DATE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+QUEREMOS 
+
+CHECAR SE TEMOS QUAISQUER 
+
+'EQUAL VALUES'
+
+
+
+NA COLUMN DE 
+
+
+'booking_date',
+
+
+
+
+
+E TODOS 
+
+OS 
+
+
+
+
+'EQUAL VALUES'
+
+
+
+
+
+
+SERÃO A _ 'SUM DO __ amount_tipped'...
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+PARA 2 'EQUAL DATES',
+
+
+
+A 
+
+
+
+
+'TOTAL SUM'
+
+
+
+
+
+
+DELAS __ SERÁ CALCULADA _ REALMENTE_ A PARTIR __ 
+
+
+
+DESSAS DATES... (das 2 dates)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RODAMOS A QUERY,
+
+
+
+
+ESTA QUERY:
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date, amount_tipped, SUM(amount_tipped) OVER(PARTITION BY booking_date)
+FROM bookings;
+
+
+
+
+
+
+
+E GANHAMOS ISTO:
+
+
+
+
+
+
+
+
+
+
+booking_date   amount_tipped            sum 
+
+
+
+
+dia1               10               30
+
+
+dia1                20              30
+
+
+
+dia2            20              60
+
+
+
+dia2            20              60
+
+
+dia2            20              60
+
+
+
+dia3            5               10
+
+
+dia3            3               10
+
+dia3            2               10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... 
+
+
+
+ISSO QUER DIZER QUE 
+
+
+
+
+
+AS SUMS DE CADA 'EQUAL VALUE' 
+
+
+de date 
+
+
+SÃO REUNIDAS E 
+
+
+COLOCADAS NESSA COLUMN EXTRA,
+
+PARA 
+
+
+
+TODOS OS RECORDS DE NOSSA TABLE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE PODEMOS 'GROUP VALUES'
+
+
+OU 
+
+
+REALIZAR CALCULATIONS 
+
+
+PARA ESPECÍFICAS PARTITIONS/GROUPS 
+
+DE VALUES __ 
+
+
+
+SEM ACTUALLY__ 
+
+
+REDUZIR AS ENTRIES NA NOSSA TABLE...
+
+
+
+
+
+
+
+
+
+
+MAS HÁ MAIS O QUE EXPLORAR SOBRE 
+
+ESSAS WINDOW FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O GROUPING ACONTECE APENAS 'INTERNAMENTE' (
+
+    não agregamos ou groupamos a 
+
+    data na nossa table... --> a WINDOW FUNCTION APENAS APLICA ESSE CÁLCULO POR TRÁS DAS CENAS, PARA APLICAR A 'SUM' A ESSES VALUES EQUAL, aí....
+)
