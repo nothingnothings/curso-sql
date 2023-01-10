@@ -1,0 +1,383 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> NESSE MÓDULO,
+
+
+
+
+TEREMOS 1 NOVO MODULE PROJECT..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSE PROJECT É UM POUCO DIFERENTE
+
+DOS 
+
+PROJECTS ANTERIORES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROJECT É SOBRE UM 'GYM'...
+
+
+
+
+
+
+
+
+
+SOMOS DONOS DE UM GYM,
+
+
+E QUEREMOS 
+
+MANAGEAR 
+
+
+
+
+OS 
+
+
+
+MEMBERSHIPS 
+
+
+
+DO GYM (
+
+
+    pq 
+
+    todo mundo que frequenta o gym 
+
+    precisa 
+
+    ter 
+
+    1 membership..
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TEREMOS:
+
+
+
+
+
+
+1) TABLE DE 'memberships'..
+
+
+terá:
+
+
+
+a) id 
+
+
+b) membership start 
+
+
+c) membership end  (É USADA NO CASO DE 1 CUSTOMER QUERENDO CANCELAR A MEMBERSHIP --> CASO CONTRÁRIO, ESSE FIELD FICA COMO 'NULL')...
+
+ 
+
+
+d) 'Last Checkin' --> MOSTRA A 'ÚLTIMA HORA EM QUE O MEMBER CHEGOU NO GYM'...
+
+
+
+
+
+
+e) 'Last Checkout' --> É A ÚLTIMA HORA EM QUE _ ELE SAIU DO GYM...
+
+
+
+
+
+
+
+f) consumption --> É A ACTUAL REVENUE FEITA COM ESSE CUSTOMER,
+
+
+ADICIONALMENTE AO 'ACTUAL MEMBERSHIP PAYMENT'... (
+
+
+    ou seja,
+
+    se ele come algo ou toma algo no nosso gym...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AINDA TEREMOS MAIS COLUMNS, RELATIVAS AOS 'MEMBERS':
+
+
+
+
+
+
+TEREMOS:
+
+
+
+G) ID 
+
+
+H) FIRST NAME 
+
+
+I ) LAST NAME
+
+
+
+J) GENDER 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> como você já pode ver,
+
+
+da maneira 
+
+que 
+
+organizamos 
+
+
+as diferentes columns,
+
+
+
+ 
+
+
+
+
+
+ PODERÍAMOS TER DISTRIBUÍDO VÁRIOS DESSES FIELDS 
+
+
+
+ EM TABLES DIFERENTES --> MAS NESSE MODULE 
+
+
+
+
+
+ VAMOS 
+
+
+
+
+
+
+ NÃO APLICAR O CONCEITO DE NORMALIZATION (não vamos trabalhar com primary keys, foreign keys e etc)...
+
+
+
+
+
+
+
+
+
+ FAREMOS ISSO POR 'SIMPLIFICATION PURPOSES',
+
+
+
+ PQ 
+
+
+ FACILITA 
+
+ A 
+
+ ABSORÇÃO
+
+ DOS CONCEITOS APRESENTADOS NESSE MÓDULO,
+
+ SEM BLOATAR TUDO 
+
+ COM 
+
+ JOINS E ETC...
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO PQ,
+
+
+ ADICIONALMENTE 
+
+
+ A ESSA TABLE DE 'memberships',
+
+  
+
+  PODERÍAMOS TER 
+
+  1 TABLE DE 
+  'MEMBERSHIP TYPES'...
+
+
+
+
+
+
+
+
+
+
+
+  -----> ela teria:
+
+
+
+
+
+
+  K) Price 
+
+
+  L) BILLING FREQUENCY ->   
+
+
+
+
+
+FREQUENCIA --> 
+
+UMA 'MONTHLY MEMBERSHIP'
+
+
+VAI 
+
+TER 
+
+1 
+BILLING FREQUENCY MAIS FREQUENTE,
+
+QUANDO COMPARADA A 1 'ANNUAL MEMBERSHIP'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> CERTO..
+
+
+
+
+
+
+
+
+O PROFESSOR VAI CRIAR ESSE PROJETO COM ESSES MOLDES...
+
+
+
+
+
+
+VAMOS COMEÇAR COM O PRIMEIRO FUNCTION TYPE,
+
+QUE SERÁ 
+
+'MATHEMATICAL FUNCTIONS'...
