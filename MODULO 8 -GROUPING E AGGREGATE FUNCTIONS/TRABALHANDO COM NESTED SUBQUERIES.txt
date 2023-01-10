@@ -1,0 +1,1765 @@
+
+
+
+
+
+
+
+
+
+
+
+-->  VIMOS MT COISA SOBRE FILTERS...
+
+
+
+
+
+
+
+DEVEMOS VER OUTRAS COISAS...
+
+
+
+
+
+
+
+
+O TÓPICO DE AGORA É 
+
+
+
+
+
+
+
+
+
+'''NESTED SUBQUERIES'''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> COMO O NOME SUGERE,
+
+
+ISSO 
+
+
+
+
+
+IMPLICA 
+
+QUE 
+
+
+
+__TEMOS __DIVERSAS QUERIES NESTEADAS 1 DENTRO DA OUTRA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ANTES DE VERMOS MAIS TEORIA 
+
+E 
+
+PENSAR 
+
+
+SOBRE 
+
+
+'EM QUE CASOS 
+
+
+
+ISSO PODE FAZER SENTIDO'',,,
+
+
+
+
+
+
+
+
+DEVEMOS MERGULHAR 
+
+EM UMA 
+
+
+QUESTÃO 
+PRÁTICA 
+
+E 
+
+RESOLVER 
+
+ESSA QUESTÃO 
+
+DIRETAMENTE 
+
+
+NO NOSSO PROJECT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PQ A QUESTÃO QUE DEVEMOS PONDERAR É:
+
+
+
+
+
+
+
+''''COMO PODEMOS CALCULAR O ________MINIMAL __ TOTAL __ "amount_billed" 
+
+EM 1 
+
+SINGLE CALENDAR DAY?''''
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER, EM OUTRAS PALAVRAS,
+
+
+
+QUE:
+
+
+1) TEMOS 5 DIFERENTES CALENDAR DAYS..
+
+
+
+
+
+
+
+
+2) PRECISAMOS A 'SUM' DO 'amount_billed'
+
+
+PARA CADA 1 DESSES DIAS...
+
+
+
+
+3) AÍ, A PARTIR DISSO,
+
+O 
+
+
+PROFESSOR QUER PEGAR DE 
+VOLTA 
+
+
+
+'1 SINGLE AGGREGATED VALUE',
+
+
+
+
+e esse 
+
+deve ser o 'MINIMUM  TOTAL AMOUNT_BILLED'  EM 1 DESSES 
+
+
+
+5 CALENDAR DAYS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS VOLTAR AO PROJETO E DAR UMA OLHADA NISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. AGORA VAMOS RESOLVER ESSE PROBLEMA,
+
+
+ETAPA-POR-ETAPA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMO O PROFESSOR DISSE,
+
+
+PARA 
+
+
+'RETORNAR _ O MINIMUM AMOUNT_BILLED DE 1 INDIVIDUAL CALENDAR DAY,
+ 
+
+
+ __PRECISAMOS _ COMEÇAR COM _ O CÁLCULO _ DA 
+
+ 'SUM' 
+
+ DO __ AMOUNT_BILLED_ _PARA 
+
+
+ TODOS NOSSOS 
+
+
+ 5 CALENDAR DAYS'...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA ISSO,
+
+ PRECISAMOS DE UMA AGGREGATE FUNCTION..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> É POR ISSO QUE PRIMEIRAMENTE VAMOS ESCOLHER O 'BOOKING_DATE',
+
+
+
+ e depois 
+
+ a 'SUM'
+
+
+ do 'amount_billed'... 
+
+
+
+
+
+
+
+
+
+
+
+
+ Ex:
+
+
+
+
+
+
+
+
+
+
+
+
+ SELECT booking_date, SUM(amount_billed)
+ FROM bookings
+ GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -> ACHO QUE VOU ORGANIZAR ASSIM,
+
+ TALVEZ...
+
+
+
+
+
+
+
+
+ --> ESSA INFO VAI SER RETIRADA DA TABLE DE BOOKINGS,
+
+
+ E AÍ 
+
+ VAMOS AGRUPAR NOSSOS RESULTS CONSIDERANDO A COLUMN DE 'BOOKING_DATE'...
+
+
+
+
+
+
+
+
+
+
+
+ -> ISSO VAI NOS DAR A CLÁSSICA TABLE DE 
+
+
+
+
+
+
+
+
+ '
+booking_date        SUM(amount_billed)
+ 2021-11-04        32.80 
+ 2021-11-05         428.90
+ 2021-11-06         699.10
+ 2021-11-07         293.90
+ 2021-11-08          38.60
+
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS NOSSO OBJETIVO É RETORNAR 1 'SINGLE AGGREGATED VALUE',
+ QUE 
+
+ SERÁ 
+
+
+ O MENOR _ VALUE __ 
+
+ DESSES 
+
+
+
+ 6 DIAS,
+
+ QUE É '32.80'...
+
+
+
+
+
+
+
+ -> QUEREMOS RETORNAR '32.80'
+
+
+ COMO 'SINGLE QUERY RESULT'...
+
+
+
+
+
+
+
+
+
+
+ --> O PROBLEMA DISSO É QUE 'PRECISAMOS DESSA TABLE QUE 
+
+ CRIAMOS COM ESSA QUERY DE 
+
+ SELECT-FROM-GROUP',
+
+
+
+
+
+
+
+ MAS O PROBLEMA É JUSTAMENTE QUE 
+
+ ESSA TABLE ___ NÃO _ EXISTE_ NA NOSSA DATABASE... NÃO 
+
+
+
+ É UMA TABLE ARMAZENADA NA NOSSA DATABASE,
+
+
+
+ E SIM 
+ UMA TABLE 
+
+ QUE 
+
+
+ __CRIAMOS POR MEIO DESSA QUERY INTEIRA...
+
+
+
+
+
+
+
+
+
+ --> ISSO QUER DIZER QUE, PARA CONSEGUIRMOS ESSE 'MIN()'
+
+
+
+ DESSA COLUMN DE 'SUM()',
+
+
+
+
+ em cima dessa 'TABLE FALSA/TEMPORÁRIA' inteira,
+
+
+
+
+ PRECISAMOS 
+
+
+ ATRIBUIR 
+
+
+ UM ALIAS A ESSA QUERY, PROVAVELMENTE... (
+
+
+
+    AÍ VAMOS USAR O 'RESULT' 
+
+    DESSA TABLE 
+
+
+    PARA __ RODAR 
+
+
+
+    1 QUERY __ SOBRE __ESSE RESULTADO...
+ )
+
+
+
+
+
+
+
+
+
+
+
+
+
+ É POR ISSO QUE DIZEMOS QUE ESSA QUERY DE AGORA É UMA 'NESTED SUBQUERY'
+
+
+
+ DESSA 
+
+ SEGUNDA QUERY QUE VAMOS ESCREVER...
+
+
+
+
+
+
+
+
+
+ --> '1 query que constrói seu result a partir DO RESULT DE OUTRA QUERY'...
+
+
+
+
+
+
+
+
+
+ PARA ISSO,
+
+
+ VAMOS ADICIONAR OUTRO 
+
+ SELECT 
+
+ STATEMENT,
+
+ EM CIMA 
+
+
+ DESSE NOSSO QUERY... 
+
+
+
+
+
+
+
+
+
+ -----> ESSA QUERY DE AGORA SE TORNARÁ UMA 'SUBQUERy'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ O PROFESSOR INDENTA UM POUCO AS LINHAS, PARA DEIXAR MAIS FÁCIL A COMPREENSÃO...
+
+
+
+
+
+
+
+
+
+
+
+ --> NA OUTER QUERY,
+
+ O PROFESSOOR 
+
+
+
+ ESCREVE 'SELECT MIN()'... 
+
+
+
+
+
+
+
+
+
+ --> SELECT MIN()...
+
+
+
+
+
+
+
+
+ ELE VAI SELECIONAR O 'MINIMUM'
+
+
+ DAS DIFERENTES 'SUMS'
+
+
+ QUE TEMOS PARA O 'AMOUNT_BILLED'...
+
+
+
+
+ ex:
+
+
+
+
+
+
+
+
+ 
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN()
+
+
+
+
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed)
+    FROM bookings
+    GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+ISSO PQ 'SUM(amount_billed)'
+
+
+
+BASICAMENTE NOS DÁ O RESULTADO DA PRIMEIRA QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA USARMOS ESSE 'RESULT'
+
+
+NA NOSSA NOVA QUERY,
+
+DEVEMOS USAR 1 ALIAS COM ESSE 'SUM()'..
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+ 
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN(daily_sum)
+
+
+
+
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS AINDA PRECISAMOS CONECTAR ESSA 'OUTER QUERY'
+
+COM ESSA NOSSA 
+
+
+'NESTED SUBQUERY'...
+
+
+
+
+
+
+
+
+
+
+
+FAZEMOS ISSO POR MEIO DA KEYWORD DE 'FROM', TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN(daily_sum)
+    FROM
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+O CÓDIGO HAVIA FICADO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN(daily_sum) --- a keyword de 'FROM' é que CONECTA A 'OUTER QUERY' COM A NESTED SUBQUERY...
+
+        FROM 
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mas eu __ AINDA RECEBI 1 ERRO...
+
+
+
+
+
+
+
+
+
+
+
+RECEBI 1 ERRO PQ 
+
+
+
+__ É OBRIGATÓRIA A ESCRITA DE '()'
+
+
+
+EM VOLTA DA NESTED SUBQUERY...
+
+
+
+
+
+
+
+
+
+
+--> DEVE FICAR TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN(daily_sum) --- a keyword de 'FROM' é que CONECTA A 'OUTER QUERY' COM A NESTED SUBQUERY...
+
+        FROM 
+        (
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... MAS AINDA _ RECEBEMOS 1 ERROR --> 
+
+
+
+
+
+
+
+
+O ERROR FOI DE 
+
+
+
+'subquery in FROM must have an alias'...
+
+
+
+
+
+
+
+
+
+
+
+--> 'TODA DERIVED TABLE DEVE TER SEU PRÓPRIO ALIAS'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ESSE ERRO FAZ MT SENTIDO --> PQ, COMO APRENDEMOSO,
+
+
+
+A 
+
+
+
+TABLE QUE CRIAMOS AGORA __ NÃO EXISTE__ NO NOSSO DATABASE, CONCRETAMENTE...
+
+
+
+
+
+
+
+
+----> MAS SE QUEREMOS INTERAGIR  COM ESSA TABLE ,COM NOSSA DATA,
+
+
+
+
+PRECISAMOS DE UM TABLE PARA ELA,
+
+PARA CONSEGUIRMOS 
+
+NOS REFERIR 
+
+
+À ELA..
+
+
+
+
+
+
+
+
+
+
+
+
+---> É POR ISSO QUE COLOCAMOS , DEPOIS DO PARÊNTESES,
+
+1 'AS'
+
+e aí 
+
+
+COLOCAMOS 
+ALGO COMO 'daily_table'...
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+-- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+SELECT MIN(daily_table.daily_sum) --- a keyword de 'FROM' é que CONECTA A 'OUTER QUERY' COM A NESTED SUBQUERY...
+
+        FROM 
+        (
+    --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date
+    ) AS daily_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSE É O CÓDIGO COMPLETO,
+
+PQ AGORA REALMENTE 
+
+CONSEUGIMOS 
+
+FAZER O RETURN DE '32.80'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MIN 
+
+32.80...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA O MINIMUM VALUE PARA NOSSO 'DAILY_AMOUNT BILLED '
+
+
+
+
+FOI RETORNADO...
+
+
+
+
+
+
+
+
+E ESSE FOI O EXEMPLO DE 'NESTED SUBQUERY'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VOCê  RODA PRIMEIRO SUA SUBQUERY,
+
+
+
+
+
+
+
+
+
+COMO ESTA AQUI:
+
+
+
+
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date
+
+
+
+
+
+
+
+
+
+
+    COM BASE NESSES RESULTS,
+
+
+
+
+    USAMOS O RESULT, ESSA TABLE,
+
+
+    PARA ADICIONAR 1 CÁLCULO DIFERENTE 
+
+
+
+
+    EM CIMA 
+
+    DELA...
+
+
+
+
+
+    (
+
+
+        É POR ISSO QUE DIZEMOS 
+
+
+        1 SUBQUERY 
+
+        É 
+
+        'OUTRA TABLE'
+
+        QUE USAMOS NA NOSSA ACTUAL QUERY..
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    OK...
+
+
+
+
+
+
+
+
+    MAS AQUI AINDA __ PODEMOS _ ADICIONAR 
+
+    OUTRA 'SUBQUERY'.. ------> 
+
+
+
+
+
+    ISSO 
+
+
+    PQ, DIZ O PROFESSOR,
+
+
+
+
+
+
+    SABEMOS A 'MIN' DAILY SUm,
+
+
+
+    MAS NÃO TEMOS A INFO DE 'EM QUE DIA ESSE MIN AMOUNT FOI ADQUIRIDO'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> PARA ISSO,
+
+
+
+
+    PODEMOS rodar mais coisas,
+
+
+
+
+
+    PODEMOS RODAR MAIS 1 SELECT STATEMENT,
+
+
+    EM CIMA 
+
+
+
+    DE 
+
+
+
+    TODAS NOSSAS QUERIES DE AGORA...
+
+
+
+
+
+
+
+
+
+
+
+    TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT MIN(daily_table.daily_sum)
+
+        FROM 
+        (
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date
+    ) AS daily_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E COMO AGORA QUEREMOS 'SELECT AN INDIVIDUAL CALENDAR DATE',
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS COMEÇAR ASSIM:
+
+
+
+
+
+SELECT booking_date, daily_min
+FROM 
+SELECT MIN(daily_table.daily_sum) AS daily_min
+
+        FROM 
+        (
+    SELECT booking_date, SUM(amount_billed) AS daily_sum
+    FROM bookings
+    GROUP BY booking_date
+    ) AS daily_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TENTEI ESCREVER ASSIM, MAS RECEBI 1 ERROR:
+
+
+
+
+
+
+
+
+
+
+-- ainda podemos escrever OUTER OUTER QUERIES (nestear o quanto quisermos)...
+SELECT daily_table.booking_date,
+    min_daily_sum
+FROM (
+        -- esta é a OUTER QUERY... É EXECUTADA EM CIMA DO RESULTADO DA 'nested subquery'...
+        SELECT MIN(daily_table.daily_sum) AS min_daily_sum --- a keyword de 'FROM' é que CONECTA A 'OUTER QUERY' COM A NESTED SUBQUERY...
+        FROM (
+                --esta é a NESTED SUBQUERY (a query EXTERIOR vai ser rodada SOBRE O RESULTADO DESTA QUERY)..
+                SELECT booking_date,
+                    SUM(amount_billed) AS daily_sum
+                FROM bookings
+                GROUP BY booking_date
+            ) AS daily_table
+) AS min_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O CÓDIGO DO PROFESSOR FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date
+FROM bookings
+GROUP BY booking_date
+     
+        SELECT MIN(daily_sum)
+        FROM (
+            SELECT booking_date, SUM(amount_billed) AS daily_sum
+            FROM bookings 
+            GROUP BY booking_date
+        ) AS daily_table;
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    MAS ELE AINDA NÃO ACABOU..
+
+
+
+
+
+
+
+
+
+----> O PROFESSOR DIZ QUE TEREMOS DE USAR 1 'HAVING' EM VEZ DE 'WHERE',
+
+
+LÁ 
+
+
+
+NA PARTE DA PRIMEIRA QUERY (outer outer query)..
+
+
+
+
+
+
+
+----> O FILTER DEVE 
+
+
+
+SE BASEAR NESSE 'GROUPING'
+
+A 
+
+1 SINGLE CALENDAR DAY...
+
+
+
+
+
+
+
+
+
+
+
+
+-- é por isso que colocamos 'having'...
+
+
+
+
+
+
+
+
+--> VAMOS FAZER FILTER POR 'AMOUNT_BILLED',
+
+
+
+
+
+
+MAIS PRECISAMENTE PELA 'SUM' DO AMOUNT BILLED ----> 
+
+
+
+
+
+
+E ESSA SUM _ DEVERÁ __ SER IGUAL ___ AO RESULTADO __ 
+
+
+
+DE NOSSAS 2 SUBQUERIES..
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+SELECT booking_date
+FROM bookings
+GROUP BY booking_date
+HAVING SUM(amount_billed) = 
+     
+        SELECT MIN(daily_sum)
+        FROM (
+            SELECT booking_date, SUM(amount_billed) AS daily_sum
+            FROM bookings 
+            GROUP BY booking_date
+        ) AS daily_table;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DAQUELA 'COMPARISON' 
+
+FEITA COM 'HAVING SUM(amount_billed) = xxx',
+
+
+
+
+
+VAMOS COLOCAR NOSSA SUBQUERY QUE 'RETORNA O MENOR VALUE DE AMOUNT_BILLED EM 1 DIA',
+
+
+
+
+
+
+
+VAMOS FAZER COPIA E COLA DE TODO NOSSO CÓDIGo..
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+SELECT booking_date
+FROM bookings
+GROUP BY booking_date
+HAVING SUM(amount_billed) = (
+
+
+        SELECT MIN(daily_sum)
+        FROM (
+            SELECT booking_date, SUM(amount_billed) AS daily_sum
+            FROM bookings 
+            GROUP BY booking_date
+        ) AS daily_table
+
+);
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMO RESULTADO DISSO,
+
+TEMOS O DIA:
+
+
+
+
+
+
+
+
+booking_date 
+
+
+
+2021-11-04
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+O DIA EM QUE MENOS RENDEMOS COM 'amount_billed'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, ESSE É O CONCEITO DE SUBQUERIES,
+
+E PQ ELE PODE SER SUPER ÚTIL...
+
+
+
+
+
+
+SEMPRE QUE VOCÊ TEM 1 QUERY QUE REQUER INFO QUE 
+VOCÊ RETRIEVA DE OUTRA, EARLIER QUERY,
+
+AÍ 
+VOCÊ 
+USA 
+
+1 DESSAS 'NESTED SUBQUERIES' --> E, COMO VOCÊ VIU,
+
+
+SUBQUERIES COMO ESSAS PODEM SER 'TABLES INTEIRAS'
+
+
+
+OU ENTÃO 
+
+
+PODEM CONSISTIR DE 'INDIVIDUAL SINGLE VALUES' (
+
+
+    COMOO AUQELE 'SELECT MIN()',
+
+    QUE 
+
+    WRAPPOU TUDO 
+
+    E PEGOU O 'MINIMUM VALUE',
+
+
+    QUE 
+
+    FOI UTILIZADO COMO 
+
+    1 FILTERING CONDITION NAQUELE FILTER DE 'HAVING'...
+
+)
+
+
+
+
+
+
+
+E TAMBÉM PODEMOS USAR SUBQUERIES COM WHERE,
+
+ÀS VEZES,
+
+QUANDO APLICÁVEL...
