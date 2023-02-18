@@ -1,0 +1,665 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SÃO OUTRAS FUNCTIONS IMPORTANTES,
+
+
+RELACIONADAS 
+
+
+COM DATES/TIMES 
+
+
+
+(mais precisamente, 'timestamps', que são 1 COMBINAÇÃO DESSAS 2 COISAS)..
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+
+
+OK..
+
+
+
+
+
+
+PROFESSOR CRIA UM NOVO ARQUIV,
+
+
+
+
+E AÍ 
+
+RODA 
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+ELE FAZ ISSO PARA NOS MOSTRAR QUE 
+
+TEMOS 
+
+2 
+
+DIFERENTES DATA TYPES 
+
+QUANDO TRABALHAMOS COM DATES..
+
+
+
+
+
+
+
+
+
+1) DATE ----> ESSES SÃO DATES.. -> YEAR, MONTH E DAY --> É 
+
+O 
+
+
+DATE FORMAT PADRONIZADO..
+
+
+
+
+
+
+
+
+
+
+
+2) TIMESTAMPS --> É UMA COMBINAÇÃO 
+
+DO 'DATE'
+
+E 
+
+
+
+DO 
+
+'CURRENT TIME'...
+
+
+
+
+
+
+
+
+
+--> DATES --> 2021-06-05...
+
+
+
+
+
+
+
+
+
+--> TIMESTAMPS :   2021-06-05  11:52:25
+
+
+
+
+
+
+
+
+
+
+
+--> APESAR DE SEREM SIMILARES,
+
+
+SÃO BEM DISTINTOS,
+
+E É 
+
+BOM MANTER ISSO EM MENTE, QUANDO 
+
+
+
+TRABALHAMOS COM ESSES DATA TYPES..
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AÍ O PROFESSOR NOS MOSTRA OS DOCS DO MYSQL.
+
+
+
+
+
+
+
+
+
+
+
+
+AÍ ELE NOS MOSTRA A FUNCTION DE 
+
+
+'
+EXTRACT()'... -> 
+
+
+
+
+
+
+
+
+
+
+
+ELE NOS MOSTRA A MESMA FUNCTION LÁ NOS 
+
+
+DOCS 
+
+
+DO
+
+
+
+
+'POSTGRESQL'... 
+
+
+
+
+
+
+
+
+
+
+
+--> TEMOS DIFERENTES ÁREAS DE APLICAÇÃO (
+
+     
+     PARA RETRIEVAR DATA DE 1 TIMESTAMP/DATE 
+)
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO TAMBÉM FUNCIONA 
+
+
+EM POSTGRESQL --->
+
+
+
+
+
+
+
+
+A COISA ESTÁ ESCRITA ASSIM:
+
+
+
+
+
+
+
+extract (field from interval) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, COM ESSA FUNCTION, APENAS TEMOS QUE 
+
+SABER QUE 
+
+PODEMOS 
+
+EXTRAIR 
+
+
+
+INFO COM 
+
+
+
+
+'''O ANO ESPECÍFICO,
+
+O MONTH,
+
+
+
+OU _ O DIa__'''
+
+
+
+
+
+TUDO ISSO DE 1 DATE OU TIMESTAMP..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS TESTAR ISSO 
+
+
+
+
+
+
+
+
+
+
+
+com 1 query tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT EXTRACT() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- >BEM, E AGORA VAMOS QUERER EXTRAIR ALGUMA COISA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> BEM, DIGAMOS QUE 
+
+
+TEMOS 1 TIMESTAMP (
+
+
+
+     como 
+
+
+
+
+     o field de 'last_checkin'...
+
+
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+SELECT EXTRACT(last_checkin)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... ESSE NEGÓCIO VAI ME RETRIEVAR 'DATE AND TIME'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE AGORA O PROFESSOR QUER SABER 'O MÊS EM QUE 
+
+ESSE 
+
+LAST CHECKIN ACONTECEU'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PARA ISSO,
+
+
+
+O PROFESSOR  ESCREVE 
+
+
+
+
+
+
+
+
+
+
+
+SELECT EXTRACT(MONTH FROM last_checkin) FROM memberships;
+
+
+
+
+
+
+
+
+
+--> PQ ISSO VAI __ REALMENTE _ EXTRAIR
+
+
+
+'DATE-RELATED INFORMATION', NESSE CASO,
+
+
+
+DE 
+
+
+
+NOSSO TIMESTAMP...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+--  COM A KEYWORD/FUNCTION DE 'EXTRACT()', podemos EXTRAIR INFO ESPECÍFICA DE TIMESTAMPS/DATES...
+
+SELECT EXTRACT(MONTH FROM last_checkin) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... CONFORME IMAGINAMOS,
+
+
+
+ISSO 
+
+
+
+
+
+
+FUNCIONA, E AÍ 
+
+FICAMOS 
+
+COM 1 RESULT SET 
+
+
+
+
+
+COM 
+
+
+
+OS MESES DE TODOS OS MEMBERSHIPS..
+
+
+
+
+
+
+
+
+
+PODEMOS FAZER A MESMA COISA COM 'DAY', E COM 'YEAR':
+
+
+
+
+
+SELECT EXTRACT(DAY FROM last_checkin)
+FROM memberships;
+
+
+
+SELECT EXTRACT(YEAR FROM last_checkin)
+FROM memberships;
+
+
+
+
+
+
+--> ESSA QUERY FUNCIONA TANTO NO MYSQL COMO 'POSTGRESQL'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> COMO ESTAMOS TRABALHNDO COM TIMESTAMPS,
+
+
+PODERÍAMS 
+
+
+
+
+
+
+
+USAR TAMBÉM OUTRAS UNIDADES (COMO, POR EXEMPLO, SABER O _MINUTO_ ESPECÍFICo EM QUE 
+
+CERTO MEMBER ESTEVE NO GYM),
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT EXTRACT(MINUTE FROM last_checkin)
+FROM memberships;
+
+
+
+
+
+MAS ESSE NÃO É O FOCO DESTE EXERCÍCIO...
