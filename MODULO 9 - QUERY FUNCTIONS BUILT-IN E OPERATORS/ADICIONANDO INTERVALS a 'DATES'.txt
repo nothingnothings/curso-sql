@@ -1,0 +1,1066 @@
+
+
+
+
+
+
+
+
+O PROFESSOR CRIOU 1 NOVO ARQUIVO, 'changing dates',
+
+
+E AGORA 
+
+
+VOLTOU AO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E AGORA ELE QUER DAR OUTRA EXAMINADA EM 'INTERVALS'...
+
+
+
+
+
+
+
+
+
+
+--> NÓS ESTUDAMOS O DATA TYPE DE 'INTERVAL', que realmente existe (é tipo um objeto, com dias, horas, minutos, segundos)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS TAMBÉM PODEMOS USAR ___ A KEYWORD DE 'INTERVAL',
+
+
+QUE É USADA 
+
+
+PARA ADICIONAR INTERVALS/DIAS ESPECÍFICOS 
+
+
+A 
+
+
+DATAS JÁ EXISTENTES...
+
+
+
+
+
+
+
+
+
+-_> O PROFESSOR QUER MOSTRAR O FUNCIONAMENTO DISSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE 
+
+
+
+
+SELECIONAMOS O 
+
+
+
+
+
+
+
+
+
+
+
+membership_start,
+
+e aí 
+
+
+ADICIONAMOS '7'..
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+SELECT membership_start + 7, membership_start
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+--> VEREMOS, NESSE CASO AÍ,
+
+
+QUE NOS POSTGRESQL,
+
+QUANDO USAMOS 
+
+1 OPERATOR COMO '+',
+
+
+NÓS 
+
+
+USAMOS 
+NOSSA
+ 
+
+
+
+ DATE __ E ENTÃO ADICIONAMOS __ 
+
+
+ VALORES DE DATE A ELA... (dias extras)...
+
+
+
+
+
+EX:
+
+
+2021-10-01 fica 2021-10-08
+
+
+
+
+
+
+
+
+
+ OK, ESSE É O POSTGRESQL...
+
+
+
+
+
+
+
+OK... mas no mysql,
+
+AS COISAS SÃO 1 POUCO DIFERENTES....
+
+
+
+
+
+
+
+
+
+
+
+-> QUANDO RODAMOS A QUERY + UMA VEZ,
+
+
+TAMBÉM VAMOS GANHAR 'UPDATED DAYS',
+
+
+
+EXATAMENTE COMO ANTES,
+
+
+
+
+
+
+MAS O PROBLEMA AGORA É QUE 
+
+
+
+
+__ NOSSO DATA TYPE TERÁ MUDADO...
+
+
+
+
+
+
+
+
+
+ANTES 
+
+O VALUE ERA ASSIM:
+
+
+
+
+2021-10-01      
+
+
+
+E AGORA FICOU ASSIM:
+
+
+
+20211008
+
+
+
+
+
+
+
+
+
+
+
+---> OK... ISSO SIGNIFICA QUE 
+
+
+NOSOS DATA TYPE MUDOU...
+
+
+
+
+
+
+
+
+
+
+--> A NOSSA UPDATED INFO,
+
+DEPOIS DE RODAR A QUERY,
+
+
+SE TORNOU 1 STRING... --> E ISSO É UM PROBLEMA,
+
+
+PQ 
+
+QUANDO VOCÊ ALTERA O VALUE DE 1 QUERY,
+
+VOCê 
+
+TIPICAMENTE 
+
+VAI QUERER 
+
+
+
+MANTER O 'ORIGINAL DATA TYPE'... --> É POR ISSO QUE 
+
+
+
+O USO DO OPERATOR DE '+' 
+
+
+
+NO MYSQL 
+
+
+
+
+É UMA PORCARIA (deve ser usado apenas no POSTGRESQL)...
+
+
+
+
+
+
+
+
+
+
+
+
+-----> O MESMO SE APLICA PARA O '-'...
+
+
+
+
+
+--> OU SEJA,
+
+NO MYSQL VOCê DEVE EVITAR O USO DE 
+
+'-' E '+'
+
+
+
+COM DATAS E TEMPOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK,
+
+
+
+MAS A QUESTÃO É QUE 
+
+
+NO MYSQL __ TEMOS 
+
+
+1 MANEIRA DIFERENTE 
+
+
+PARA 
+
+ADICIONAR 
+
+
+
+DATAS 
+
+A 
+
+1 
+
+EXISTING DATE...
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIR FAZER ISSO, DEPENDEMOS DA KEYWORD DE 'INTERVAL'...
+
+
+
+
+
+
+
+
+
+
+ISSO PQ,
+EM 'MY SQL',
+
+
+PODEMOS 
+
+
+
+
+USAR OUTRA FUNCTION 
+
+
+
+
+
+
+
+
+__ PARA __ MUDAR OS 'DAYS'
+
+EM 
+
+1 
+
+
+
+EXISTING DATE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+USAMOS 
+
+
+A FUNCTION DE 'DATE_ADD()' E A DE 'DATE_SUB()' (para subtrair dayS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> FICA TIPO ASSIM:
+
+
+
+
+
+SELECT DATE_ADD()
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- SINTAXE MYSQL (sem uso de '+' e '-')...
+
+-- COMO PRIMEIRO PARÂMETRO, ESCOLHEMOS O FIELD A QUE DEVEMOS ADICIONAR 1 INTERVAL/dias...
+SELECT DATE_ADD(membership_start);
+
+
+
+
+
+
+
+
+
+
+
+--> ok..
+
+
+
+
+
+
+
+MAS COMO SEGUNDO PARÂMETRO,
+
+
+
+DEVEMOS DEFINIR 1 'INTERVAL'...
+
+
+
+
+
+
+
+----> MAS NÃO VAMOS DEFINIR O DATA TYPE DE 'INTERVAL' (o object, {}),
+
+
+
+
+
+E SIM _ DEVEMOS __ ADICIONAR _ 1 'INTERVAL'
+
+
+
+
+A _1 DATE JÁ EXISTENTE...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+-- COMO PRIMEIRO PARÂMETRO, ESCOLHEMOS O FIELD A QUE DEVEMOS ADICIONAR 1 INTERVAL/dias...
+-- COMO SEGUNDO PARÂMETRO, DEFINIMOS 1 'INTERVAL', que deverá ser adicionado nessa column aí...
+SELECT DATE_ADD(membership_start);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+SELECT DATE_ADD(membership_start, INTERVAL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, SE VOCê RECORDAR  O FORMATO 
+
+
+
+DO DATA TYPE DE 'interval' ( '{"days": 5, "hours": 12, "minutes": xx}'),
+
+
+
+
+
+
+
+
+DEVEMOS SEGUIR ESSA CONVENÇÃO TAMBÉM 
+
+
+
+QUANDO 
+
+ADICIONAMOS 1 INTERVAL ASSIM...
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+O PROFESSOR VAI ESCREVER 
+
+'INTERVAL 7 DAY',
+
+PARA ADICIONAR 7 DIAS A 
+
+ESSA DATE DE 'membership_start'..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+-- SINTAXE MYSQL (sem uso de '+' e '-')...
+
+-- COMO PRIMEIRO PARÂMETRO, ESCOLHEMOS O FIELD A QUE DEVEMOS ADICIONAR 1 INTERVAL/dias...
+-- COMO SEGUNDO PARÂMETRO, DEFINIMOS 1 'INTERVAL', que deverá ser adicionado nessa column aí...
+-- colocamos, como PARAM, ESSA QUANTIDADE DE 7 DIAS... (mesma coisa que a query de cima, do postgresql)...
+SELECT DATE_ADD(membership_start 7 DAY);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK...
+
+
+
+
+
+
+
+AÍ RODAMOS ISSO COM O MYSQL,
+
+E FICAMOS COM O MESMO OUTPUT DO POSTGRESQL,
+
+
+
+
+O QUE QUER DIZER QUE FOI 1 SUCESSO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE 
+
+
+PODEMOS ADICIONAR COISAS DIFERENTES DE DIAS,
+
+COMO 'MONTHS' E YEARS...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT DATE_ADD(membership_start 7 DAY);
+
+-- SELECT DATE_SUB(column_name, amount_of_days YEAR/MONTH/DAY/HOUR/MINUTE/SECOND);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+
+ISSO QUER DIZER QUE, COM ESSA SINTAXE,
+PODEMOS 
+ADICIONAR 
+
+COISAS COMO MESES E ANOS 
+
+
+A
+ NOSSA DATA, NO MYSQL...
+
+
+
+
+
+
+
+
+
+
+ -----> MAS E SE QUISÉSSEMOS 
+
+
+ ADICIONAR 
+
+ MESES/ANOS 
+
+ LÁ 
+
+
+ NO POSTGRESQL?
+
+
+
+
+
+
+
+
+
+
+
+
+ ---> BEM,
+
+
+ SE QUISERMOS FAZER ISSO,
+
+
+
+
+ __ PODEMOS __ USAR A MESMA LÓGICA DE 'INTERVAL'
+
+
+
+
+
+ LÁ NO POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+
+ -> FARÍAMOS TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+ SELECT membership_start + INTERVAL '7 MONTHS';
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> 
+
+
+ -- PARA FAZER O ADD DE MESES/ANOS A DATAS, NO POSTGRES, FAZEMOS ASSIM:
+
+
+-- A QUANTIDADE DE dias/meses/anos DEVE SER ESCRITA COMO STRING (bem estranho)..
+ SELECT membership_start + INTERVAL '7 MONTHS';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O ESTRANHO É QUE A QUANTIDADE DE MESES/ANOS REALMENTE DEVE SER ESCRITA 
+
+
+ NO FORMATO STRING...
+
+
+
+
+
+
+
+
+
+
+
+ ---> CERTo...
+
+
+
+
+
+
+
+
+ COM ISSO NO LUGAR,
+
+
+ RODAMOS ESSA QUERY 
+
+
+
+
+
+
+
+ E ENTÃO PERCEBEMOS QUE 
+
+
+ 7 DIAS FORAM ADICIONADOS A NOSSA 'EXISTING DATE'..
+
+
+
+
+
+
+
+
+
+
+ ----> OK... MAS O PROBLEMA, COM O POSTGRESQL,
+
+
+
+ É QUE 
+
+ O RESULTADO DISSO FICOU COMO 
+
+
+
+
+
+ 1 'TIMESTAMP', E NÃO COMO 1 DATE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ MAS HÁ 1 MANEIRA DE CONSERTAR ISSO, NO POSTGRESQL,
+
+
+
+ QUE É JUSTAMENTE O USO 
+
+
+
+
+ DA LÓGICA DE 'sufixo',
+
+ UQE É TIPO ASSIm:
+
+
+
+
+
+
+
+  SELECT (membership_start + INTERVAL '7 MONTHS')::TIMESTAMP::DATE FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  COM ISSO, COMUNICAMOS AO POSTGRESQL QUE TEMOS 
+
+
+  1 DATA TYPE DE 'TIMESTAMP',
+  e que 
+
+  então queremo que ele seja convertido em 1 data type de 'DATE'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+  OK... 
+
+
+  COM ISSO, FICAMOS COM O RESULTADO 
+
+  IGUAL AO DO MYSQL (retorna 1 date, e não 1 timestamp)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  OK... COM ISSO,
+
+  CONCLUÍMOS ESSA PARTE 
+
+
+
+  DE 'MATH, STRING E TIME FUNCTIONS'...
+
+
+
+
+
+
+
+
+
+  HÁ BEM MAIS A SER EXPLORADO SOBRE INTERVALS...
+
+
+
+
+
+
+
+  MAS, COM ISSO,
+
+
+  TEMOS O CONCEITO BÁSICO,
+
+
+  AS QUERY FUNCTIONS BÁSICAS FORA DO CAMINHO.
+
+
+
+
+
+
+
+
+  AGORA DEVEMOS EXPLORAR UNS CONCEITOS MAIS AVANÇADOS...
