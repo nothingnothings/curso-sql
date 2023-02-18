@@ -33,3 +33,14 @@ FROM memberships;
 
 --  COM ISSO, PODEMOS OBTER O PREÇO, como _ STRING (formato string); TUDO POR MEIO DA CONCATENAÇÃO DE 1 STRING (o '$ ') e 1 NUMBER... O RESULTADO, É CLARO, SÃO STRINGS como ' $ 19.99'..
 SELECT CONCAT ('$ ', price) FROM memberships;
+
+
+
+
+
+
+-- EXEMPLO DE _ STRING FUNCTIONS _ COM FILTERS_....( WHERE)...
+
+
+-- SELECT * FROM memberships 
+-- WHERE LENGTH (last_name) < 4;

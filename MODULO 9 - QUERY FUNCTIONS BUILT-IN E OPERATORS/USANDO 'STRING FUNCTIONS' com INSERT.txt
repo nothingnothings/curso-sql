@@ -68,3 +68,1145 @@ MAS AGORA VEREMOS
 
 
 O USO DE STRING FUNCTIONS COM A KEYWORD DE 'INSERT INTO'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> O PROFESSOR 
+
+
+
+
+
+INSERIU UM MONTE DE NOVA DATA 
+
+
+A NOSSA TABELA DE 'memberships'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O CÓDIGO DE INSERT ESTÁ ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO memberships (
+        membership_start,
+        membership_end,
+        last_checkin,
+        last_checkout,
+        consumption,
+        first_name,
+        last_name,
+        price,
+        billing_frequency,
+        gender
+    )
+VALUES (
+        '2021-10-18',
+        '2021-11-18',
+        '2021-11-01 08:56:01',
+        '2021-11-01 09:20:12',
+        NULL,
+        'John',
+        'Doe',
+        19.99,
+        12,
+        'DivErs'
+    );
+
+
+
+
+
+
+
+
+
+
+
+    A DATA ESTÁ GERALMENTE CORRETA,
+
+
+
+
+
+
+MAS A MANEIRA 
+
+
+
+
+PELA QUAL 'DivErs'
+
+
+FOI 
+
+ESCRITA 
+ESTÁ 
+
+
+ERRADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE CHECARMOS RAPIDAMENTE NOSSA DATABASE 
+
+DE 'GYM' 
+
+
+E 
+A 
+
+
+TABLE DE 'memberships' ,
+
+
+
+
+
+
+
+
+
+VEREMOS QUE 
+
+
+
+
+
+
+
+NA TABLE 
+
+
+
+
+de 
+
+'gender'
+
+
+
+
+NÃO 
+
+
+
+
+
+TEMOS 
+
+QUAISQUER 
+
+
+
+
+'capital letters'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA,
+
+
+
+
+_ ESSE NEGÓCIO NÃO ESTÁ COM A MESMA ESTRUTURA DE NOSSA DATABSe ('female' e 'male')..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CORRIGIR ISSO AÍ,
+
+
+PODEMOS USAR A STRING FUNCTION de 
+
+
+
+
+'LOWER()',
+
+
+
+
+
+
+envelopando 'DivErs',
+
+
+que 
+
+fará 
+
+com que 
+
+
+
+
+ESSE VALUE DA STRING fique como lowercase...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> TIPO ASSIM:
+
+
+
+
+
+
+
+INSERT INTO memberships (
+        membership_start,
+        membership_end,
+        last_checkin,
+        last_checkout,
+        consumption,
+        first_name,
+        last_name,
+        price,
+        billing_frequency,
+        gender
+    )
+VALUES (
+        '2021-10-18',
+        '2021-11-18',
+        '2021-11-01 08:56:01',
+        '2021-11-01 09:20:12',
+        NULL,
+        'John',
+        'Doe',
+        19.99,
+        12,
+        LOWER('DivErs')
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O OUTRO CASE É 'UPPER', QUE FAZ O QUE DIZ NA CAIXA:
+
+
+
+
+
+
+
+
+
+
+--- O SEGUNDO CASE É 'UPPER', que transforma os caracteres de seu value EM __ UPPERCASE_...
+
+-- INSERT INTO memberships (
+--         membership_start,
+--         membership_end,
+--         last_checkin,
+--         last_checkout,
+--         consumption,
+--         first_name,
+--         last_name,
+--         price,
+--         billing_frequency,
+--         gender
+--     )
+-- VALUES (
+--         '2021-10-18',
+--         '2021-11-18',
+--         '2021-11-01 08:56:01',
+--         '2021-11-01 09:20:12',
+--         NULL,
+--         'John',
+--         'Doe',
+--         19.99,
+--         12,
+--         UPPER('DivErs')
+--     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.. RODAMOS ESSA QUERY,
+
+E AÍ 
+
+TESTAMOS 
+
+
+
+
+
+SE A DATA REALMENTE FOI INSERIDA COMO 'lower case'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, DEU CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ISSO SIGNIFICA QUE 
+
+
+
+TEMOS ESSA OPÇAÕ,
+
+
+
+DE 
+
+
+'CONVERTER VALUES ANTES DE OS INSERIR' ( 
+
+    é diferente de 'CONCAT', que 
+
+    é uma 
+
+    função usada para JUNTAR 
+
+    VALUES _QUANDO VOCÊ OS RETRIEVA,
+
+    NO SEU RESULT SET...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 
+ALÉM 
+
+
+
+
+
+DESSAS OPÇÕES AÍ,
+
+
+DE 'CONVERTER VALUES' 
+
+
+E 
+'COMBINE VALUES',
+
+
+
+
+
+
+
+
+
+
+
+
+TAMBÉM TEMOS 
+
+
+
+A OPÇAÕ DE 'FILTER FOR SPECIFIC VALUES',
+
+
+
+
+
+POR MEIO DO USO DE STRING FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok, como assim?
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE SELECIONAMOS TODAS AS COLUMNS DA TABLE DE 
+'memberships',
+
+mas que 
+
+
+APENAS QUEREMOS TER ENTRIES EM QUE 
+
+
+O 
+
+
+'last_name'
+
+
+
+
+SATISFAZ
+
+
+CERTOS CRITÉRIOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- OK... --> NA TABLE, 
+
+
+
+
+1 das entries tem o last name de 'Doe'...
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE QUEREMOS PEGAR APENAS 
+
+
+
+as memberships em que 
+
+A LENGTH __ do 
+
+
+
+'last_name'
+
+
+SEJA MENOR DO QUE 
+
+4...
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+DEVEMOS RODAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM memberships 
+WHERE LENGTH (last_name) < 4;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 4 CARACTERES, É CLARo...
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+
+
+
+
+
+
+ATÉ AGORA,
+
+VIMOS:
+
+
+
+
+
+
+
+
+
+1) CONCAT() (usado para manipular os RESULT SETS)
+
+
+
+
+
+2) UPPER() --> usado para MANIPULAR A DATA QUE É INSERIDA NAS COLUMNS DE SUA TABLE (data normalization)...
+
+
+
+3) LOWER() --> MESMA COISA...
+
+
+
+4) LENGTH() --> USADO __ PARA _
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok...
+
+
+
+
+
+
+
+-->  MAS AGORA TEMOS UMA FUNCTION FINAL,
+
+
+
+
+
+
+
+QUE É USADA PARA FAZER OUTRA OPERAÇÃO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- PARA ISSO,
+
+DEVEMOS 
+
+ADICIONAR MAIS 
+
+
+ALGUNS 
+
+
+
+MEMBERS .. -> 
+
+
+
+
+
+
+ VAMOS ADICIONAR 1 MEMBER QUE 
+
+
+ TERÁ O FIELD DE 'gender'
+
+ preenchido 
+
+ por espaços irregulares...
+
+
+
+
+
+ ex:
+
+
+
+
+
+  INSERT INTO memberships (
+    membership_start,
+    membership_end,
+    last_checkin,
+    last_checkout,
+    consumption,
+    first_name,
+    last_name,
+    price,
+    billing_frequency,
+    gender
+)
+VALUES (
+    '2021-05-02',
+    NULL,
+    '2021-06-05 11:52:25',
+    '2021-06-05 11:58:08',
+    NULL,
+    'Monti',
+    'Durns',
+    199.99,
+    1,
+    TRIM(TRAILING ' ' FROM 'male  ')
+); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A FUNÇÃO UTILIZADA, AQUI, SERÁ 
+
+
+
+'TRIM()'...
+
+
+
+
+
+
+
+
+
+
+
+--->  E PODEMOS USAR 'TRIM()'
+
+
+
+
+PARA TIRAR 
+
+
+
+OUTROS CARACTERES INDESEJADOS,
+
+
+COMO 
+
+
+
+' xxxxx' 
+
+
+
+
+
+ou  '         '
+
+
+
+
+
+
+
+
+----> VOCÊ PODE USAR ISSO PARA CORRIGIR DATA RETRIEVADA 
+
+INCORRETAMENTE DE OUTROS SOURCES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O 'TRIM()'
+
+EXISTE TANTO PARA O MYSQL COMO O POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+----> É 1 STRING FUNCTION, QUE É APLICADA AQUI...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVEMOS TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+TRIM( 'male         ')
+
+
+
+
+
+-->  certo...
+
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO,
+
+
+DENTRO DE 'TRIM()',
+
+
+DEVEMOS INSERIR 3 TIPOS DE INFORMATION:
+
+
+
+
+
+
+
+
+
+
+
+1o parâmetro --> 'EM QUE LUGAR ESTÃO POSICIONADOS OS CARACTERES IRREGULARES'...
+
+
+
+(NA FRENTE DO INPUT, ATRÁS DO INPUT, OU  NOS 2 LADOS (begin e end))
+
+
+
+
+
+--> PODEMOS DEFINIR ISSO COM:
+
+
+
+A) 'LEADING' ( beginning)  --> TIRA OS NEGÓCIOS IRREGULARES DO COMEÇO..
+
+
+
+
+B) 'TRAILING' -> REMOVE OS NEGÓCIOS IRREGULARES NO _ FINAL__ DO VALUE..
+
+
+
+
+
+C) 'BOTH' --> REMOVE OS NEGÓCIOS IRREGULARES EM AMBOS OS LADOS...
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+-- 3 TIPOS DE TRIM, POSSÍVEIS (NOS 2 LADOS, ANTES OU DEPOIS)... 
+
+-- TRIM(BOTH ' ' FROM  '   male   ' ))
+
+
+-- TRIM(LEADING ' ' FROM  '   male' ))
+
+
+
+-- TRIM(TRAILING ' ' FROM 'male    ' ))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NÓS CONSEGUIMOS NOS REFERIR A ESSE INPUT __ 
+
+
+
+POR MEIO __ DA KEYWORD DE 'FROM'...
+
+
+
+
+
+
+
+
+
+
+--> E A SINTAXE É EXATAMENTE A MESMA PARA O MYSQL...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+  INSERT INTO memberships (
+    membership_start,
+    membership_end,
+    last_checkin,
+    last_checkout,
+    consumption,
+    first_name,
+    last_name,
+    price,
+    billing_frequency,
+    gender
+)
+VALUES (
+    '2021-05-02',
+    NULL,
+    '2021-06-05 11:52:25',
+    '2021-06-05 11:58:08',
+    NULL,
+    'Monti',
+    'Durns',
+    199.99,
+    1,
+    TRIM(TRAILING ' ' FROM 'male  ')
+); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK, MAS SE RODAMOS 
+
+
+ESSA QUERY 
+
+
+
+
+
+
+E FAZEMOS O INSERT NA NOSSA TABLE,
+
+
+
+
+
+
+COMO 
+
+SABEREMOS 
+SE 
+
+
+
+
+A data inserida na column realmente foi inserida sem 
+
+os extra white spaces?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, PARA ISSO O PROFESSOR RODA 1 QUERY COM A FUNCTION 
+
+
+DE 
+
+
+STRING DE 'LENGTH',
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+SELECT LENGTH(gender) FROM memberships;
+
+
+
+
+
+
+
+
+
+--> ISSO RETORNA OS VALUES DE TODOS ESSES ROWS COMO 4 ('male')' 
+
+
+e 6 ('female')...
+
+
