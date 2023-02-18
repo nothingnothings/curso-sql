@@ -1,0 +1,1307 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA DEVEMOS CONTINUAR..
+
+
+
+
+
+
+
+
+
+DEIXAMOS O TÓPICO DE 'TRABALHAR COM EXISTING DATES AND TIMES' 
+
+
+
+
+PARA ADENTRAR O TÓPICO 
+
+
+
+
+DE 
+
+
+
+
+
+
+
+
+
+
+''' CÁLCULO ENTRE 
+
+
+DIFERENÇAS 
+
+ENTRE __ 2 PONTOS NO TEMPO''...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR 
+
+
+CRIA 1 NOVO ARQUIVO,
+
+E AÍ 
+
+
+COMEÇA 
+
+
+
+COM O POSTGRESQL..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR QUER COMEÇAR 
+
+
+
+
+
+
+
+
+COM O CÁLCULO 
+
+
+DA 'DIFERENÇA ENTRE_ _ O LAST_CHECKOUT
+
+
+E __ O LAST_ CHECKIN'...
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+PODEMOS 
+
+
+CALCULAR 
+
+
+
+''QUAL FOI O TEMPO MAIS LONGO DE __ STAY__ 
+
+
+DE NOSSOS GYM MEMBERS'''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR 
+
+
+
+
+RODA 
+
+
+
+
+
+
+
+
+
+SELECT last_checkout - last_checkin FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+--> AÍ, COM ISSO,
+
+
+
+
+
+
+
+
+O PROFESSOR 
+
+
+
+
+
+CONSEGUE 
+
+
+UM RESULTADO COMO ESTE:
+
+
+
+
+
+
+
+
+{"hours": 1, "minutes": 3, "seconds": 9}
+
+
+
+
+
+
+
+
+
+
+O RESULTADO FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+-- {
+--   "?column?": {
+--     "hours": 1,
+--     "minutes": 3,
+--     "seconds": 9
+--   }
+-- }
+
+
+
+
+
+
+
+
+
+
+
+
+---> ESSA 'COISA' AÍ,
+
+
+ESSE TIPO DE RESULT,
+
+É 
+
+
+1 DATA TYPE PRÓPRIO,
+
+
+CHAMADO 
+
+DE 
+
+'INTERVAL'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'INTERVAL' -> mostram o tempo transcorrido 
+
+ENTRE 2 PONTOS NO TEMPO.. ----->
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO,
+
+CONFORME O PROFESSOR HAVIA MENCIONADO,
+
+
+ESSE AÍ 
+
+É UM 
+
+
+
+
+'DATA TYPE DE INTERVALO __ ESPECÍFICO'...
+
+
+
+
+
+-> ISSO PQ VEREMOS QUE,
+
+AO COMPARAR 
+
+2 DIFERENTES COLUMNS,
+
+
+
+
+TAMBÉM GANHAMOS A DIFERENCE ENTRE 2 PONTOS NO TEMPO (em dias, por exemplo),
+
+
+
+MAS _ AÍ __ ESSAS DIFERENÇAS/RESULTADOS DA DIFERENÇA 
+
+
+
+
+PODEM 
+
+
+
+SER 'INTEGER DATA TYPES',
+
+
+
+
+
+
+QUE É BEM DIFERENTE 
+
+DESSE 
+
+
+
+
+'INTERVAL DATA TYPE',
+
+
+
+
+
+
+
+que tem realmente este formato de 
+
+'{"hours": 1, "minutes": 3, "seconds": 9}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+NÃO USAREMOS 
+
+
+COM MT FREQUÊNCIA ESSE DATA TYPE NESSA LIÇÃO DE AGORA,
+
+
+
+
+
+MAS O PROFESSOR QUERIA NOS MOSTRAR ESSE DATA TYPE AÍ,
+
+
+PARA 
+QUE 
+
+
+SAIBAMOS QUE 
+
+ESSE É UM DATA TYPE AUTÔNOMO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR MENCIONA ISSO PQ,
+
+SE ELE __ TENTA 
+
+RODAR ESSA MESMA QUERY NO MYSQL,
+
+
+
+ELE __ 
+
+
+
+GANHA 1 RESULTADO __ COMPLETAMENTE 
+
+DIFERENTE,
+
+
+
+1 RESULTADO 
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+last_checkout - last_checkin:
+
+
+10309
+42844
+17528
+6411
+583
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSES INTEGERS REALMENTE NÃO NOS AJUDAM...
+
+
+
+
+
+
+
+
+
+PODERÍAMOS CONVERTER ISSO 
+
+
+
+EM HORAS OU MINUTES,
+
+
+
+
+
+
+MAS AINDA ASSIM É UM OUTPUT 
+
+
+MEIO INÚTIL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIR O INTERVAL,
+
+NO MYSQL,
+
+ 
+ DEVE-SE USAR UMA FUNCTION, OUTRA FUNCTION...
+
+
+
+
+
+
+
+
+
+
+
+
+
+E, DEPENDENDO 
+
+
+
+SE TRABALHAMOS COM 1 'DATE' OU 'TIMESTAMP',
+
+
+
+
+
+
+A FUNCTION QUE DEVE SER USADA É OU 
+
+
+
+
+
+
+
+
+
+
+
+
+'SELECT DATEDIFF' 
+
+
+
+
+
+
+
+
+
+
+ou 
+
+
+'SELECT TIMESTAMPDIFF'...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT TIMESTAMPDIFF() FROM memberships;
+
+
+
+
+
+
+
+SELECT DATEDIFF() FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... COMEÇAMOS COM 'TIMESTAMPDIFF'..
+
+
+
+
+
+
+ESSA FUNCTION RECEBE 3 PARAMS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+1o param ---> COMO  A DIFERENÇA ENTRE OS 2 PONTOS NO TEMPO DEVEM SER __ MEDIDAS...
+
+
+
+(HOUR, TIME, DAY OU MINUTE)...
+
+
+2o param --> DEVEMOS TER A 'STARTING DATE' (no caso, 'last_checkin')... 
+
+
+3o param -> devemos ter a 'END DATE' -> no caso, usaremos 'last_checkout'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ESSA FUNCTION, E COM O RUN 
+DA QUERY,
+
+
+
+VEREMOS ISTO:
+
+
+
+
+SELECT TIMESTAMPDIFF(MINUTE, last_checkin, last_checkout) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+--> TEREMOS ESTE RESULTADO:
+
+
+
+
+
+63
+268
+95
+24
+5 
+
+
+
+
+
+
+--> TODOS ESSES SÃO OS MINUTOS DOS CARAS QUE ESTIVERAM NA ACADEMIA...
+
+
+
+
+
+
+--> CERTO... 
+
+
+
+
+MAS VOCÊ DEVE TER EM MENTE QUE 
+
+ESSA FUNÇÃO É UM POUCO DIFERENTE 
+
+
+DO SUBTRACT de 'last_checkout - last_checkin'
+
+VISTO LÁ 
+
+
+NO POSTGRESQL... --> pq lá 
+
+
+
+RETORNAMOS 1 'INTERVAL' (data type),
+
+
+
+
+
+E AQUI, COM O MYSQL E ESSE 'TIMESTAMPDIFF',
+
+
+RETORNAMOS 
+
+
+
+INTEGERS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... MAS ESSA LÓGICA NOS AJUDA A EXAMINAR 
+
+MELHOR 
+
+
+
+ESSES CÁLCULOS...
+
+
+
+
+
+
+O PROFESSOR COMENTA ISSO PARA FORA,
+
+E AÍ 
+
+
+
+
+
+DIZ QUE 
+
+DEVEMOS 
+
+
+
+CALCULAR 
+
+
+
+
+
+
+
+'''A MEMBERSHIP DURATION DE __ NOSSOS MEMBROS''..
+
+
+
+
+
+
+
+
+'membership duration '--> NESSE CASO,
+
+
+
+É A DIFERENÇA ENTRE O 'MEMBERSHIP END' E O 'MEMBERSHIP START'...
+
+
+
+
+
+
+
+
+
+MAS TENHA EM MENTE QUE O MEMBERSHIP END_ NÃO É _ UMA 'FIXED DATE' (
+
+PQ SE O MEMBRO AINDA NÃO CANCELOU A 
+
+ASSINATURA, 
+
+NÃO TEREMOS 1 RESULTADO SENSATO...
+
+)
+
+
+
+
+
+
+
+
+
+
+MAS SE O USER TEM 1 CANCELLATION DATE 
+
+
+NO SEU ROW,
+
+
+
+ESSE CÁLCULO VAI NOS 
+
+
+DAR 
+
+
+
+O TEMPO DE DURAÇÃO DISSO AÍ...
+
+
+
+
+
+
+
+
+
+
+
+COMEÇAMOS PELO POSTGRES,
+
+PQ É MAIS FÁCIL:
+
+
+
+
+
+
+
+
+
+SELECT membership_end - membership_start 
+FROM memberships; 
+
+
+
+
+
+
+
+
+
+
+----> ISSO RETORNA 
+
+
+
+
+NULL
+
+729
+364
+31
+NULL
+
+
+
+
+
+
+
+
+
+
+NULL --> significa que NÃO TEMOS 1 'END DATE' PARA AQUELE contato...
+
+
+
+
+
+
+
+
+
+
+-> ok, mas todos esses números são a duration dos caras,
+
+em dias...
+
+
+
+
+
+
+
+
+
+
+-> MAS ISSO AÍ, TUDO ISSO AÍ,
+SÃO 
+
+
+_INTEGERS... ------> APENAS É POSSÍVEL 
+
+CONSEGUIR 1 'INTERVAL' DATA TYPE (tipo aquele object)
+
+
+SE TRABALHAMOS COM __ TIMESTAMPS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+
+
+MAS ISSO AÍ __ NÃO 
+
+
+FUNCIONA NO MYSQL...
+
+
+
+
+
+
+
+--> É POR ISSO QUE NO MYSQL _ TEMOS QUE, NOVAMENTE,
+
+
+SEGUIR 1 APPROACH DIFERENTE...
+
+
+
+
+
+
+
+
+
+--> BEM, QUANDO TRABALHAMOS COM 2 DATES DIFERENTES,
+
+
+E QUEREMOS 
+
+
+
+__SABER _ A DIFERENÇA, EM INTEGERS,
+
+ENTRE OS 2,
+
+
+
+
+
+
+devemos usar o 'DATEDIFF()', no MYSQL...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+-- NOS DÁ A MEMBERSHIP DURATION, EM DIAS (no MYSQL)...
+SELECT DATEDIFF(membership_end - membership_start)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ESSA FUNCTION É UM POUCO DIFERENTE DE 'TIMESTAMPDIFF'...
+
+
+
+
+
+
+
+
+
+-> COM 'TIMESTAMPDIFF',
+
+TÍNHAMOS 3 ARGUMENTS (
+
+
+    que eram 
+
+    'MINUTE/DATE/YEAR/HOUR',
+
+    aí o START POINT 
+
+    E END POINT...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ COM 'DATEDIFF',
+
+
+COLOCAMOS 
+
+
+
+
+
+
+
+
+DATEDIFF(end_point, start_point)
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- NOS DÁ A MEMBERSHIP DURATION, EM DIAS (no MYSQL)...
+SELECT DATEDIFF(membership_end - membership_start)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... MAS PODERÍAMOS TAMBÉM USAR 
+
+ARGUMENTOS DIFERENTES, AQUI...
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE 
+
+QUEREMOS 
+
+
+'CALCULAR A MEMBERSHIP DURATION _ aTÉ HOJE, 
+NESSA FUNCTIOn',
+
+
+
+
+
+
+isso também seria possível..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CONSEGUIR FAZER ISSO, NO 'MYSQL',
+
+DEVEMOS USAR A FUNCTION DE 'NOW()',
+
+
+
+
+QUE NOS __ 
+
+
+DÁ O 'CURRENT TIME'
+
+
+
+,
+
+
+current point in time...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+-- COM ISSO, PEGAMOS TODOS OS DIAS DESDE A CRIAÇÃO DESSE MEMBRO ATÉ O MOMENTO DE AGORA (representado por 'now')...
+SELECT DATEDIFF(NOW(), membership_start)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. MAS ESSE 'NOW()"
+
+TAMBÉM 
+
+FUNCIONA NO POSTGRESQL?
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, O PROFESSOR COLOCA ESTE CÓDIGO:
+
+
+
+
+
+
+SELECT NOW() - membership_start 
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+-- 'NOW()' TAMBÉM FUNCIONA __ COM ___ O POSTGRESQL... 
+SELECT NOW() - membership_start 
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO VAI NOS RETORNAR __ _DATA NO FORMATO 
+
+
+'INTERVAL',
+
+tipo 
+
+
+
+
+
+{"days": 35, "hours": 20, "minutes": 13, "seconds": 45}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OU SEJA, O POSTGRESQL PREFERE ESSE DATA TYPE DO 
+
+
+
+INTERVAL,
+
+
+
+e o mysql PREFERE INTEGERS...
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSAS FORAM AS PRIMEIRAS ETAPAS PARA CALCULAR AS DIFERENÇAS ENTRE PONTOS NO TEMPO,
+
+
+NO MYSQL E POSTGRESQL..
