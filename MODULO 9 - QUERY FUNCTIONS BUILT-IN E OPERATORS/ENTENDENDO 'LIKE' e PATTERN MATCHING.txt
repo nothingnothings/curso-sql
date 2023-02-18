@@ -1,0 +1,1308 @@
+
+
+
+
+
+
+
+
+
+
+
+
+DEVEMOS CONTINUAR, E APRENDER UM NOVO CONCEITO...
+
+
+
+
+
+
+
+
+
+É O CONCEITO DE 'LIKE'...
+
+
+
+
+
+
+
+
+
+
+
+-> PARA ISSO,
+
+PROFESSOR CRIOU O ARQUIVO 
+
+
+
+LIKE AND PATTERN MATCHING...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS ESTUDAR A KEYWORD DE 'LIKE',
+
+
+E SUA 
+RELAÇÃO 
+
+COM O 'PATTERN MATCHING'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMEÇEMOS PELO 'LIKE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LIKE --> É UMA KEYWORD...
+
+
+
+
+
+
+
+__ E ESSA KEYWORD PODE SER USADA EM 1 SELECT STATEMNET,
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT first_name LIKE ...;
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+o 'first_name'
+
+SERÁ UMA STRING..
+
+
+
+
+
+
+
+
+E O ''LIKE'
+
+
+
+
+SEMPRE ENTRA EM AÇÃO QUANDO VOCÊ QUER ENCONTRAR 
+
+ALGUMA INFO NA SUA TABLE,
+
+
+NA SUA COLUMN,
+
+EM QUE 
+
+
+
+__ VOCÊ N TEM 
+
+
+100% 
+
+DE CERTEZA 
+
+SOBRE 
+
+
+
+'WHAT THE ACTUAL VALUE LOOKS LIKE'...
+
+
+
+
+
+
+
+
+
+
+
+--> CONFORME MENCIONADO,
+
+ 
+ O 'LIKE' 
+
+ É USADO 
+
+ EM CONJUNTO COM STRINGS,
+
+
+
+ E, PORTANTO,
+
+
+ SE VOCÊ 
+
+ ESTÁ PROCURANDO POR 1 'FIRST_NAME'
+
+
+ QUE 
+
+ VOCê 
+
+
+ NÃO RECORDA TOTALMENTE,
+
+
+
+ VOCê 
+
+ PODE ESCREVER ALGO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+ SELECT first_name LIKE 'Max'
+ FROM memberships;
+
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+ --  'LIKE' É USADO PARA _ PROCURAR POR PALAVRAS __ SIMILARES__ A string que você colocou (não é algo exato, como o visto com  WHERE)...
+SELECT first_name LIKE 'Max'
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+--  'LIKE' É USADO PARA _ PROCURAR POR PALAVRAS __ SIMILARES__ A string que você colocou (não é algo exato, como o visto com  WHERE)...
+-- E O LIKE _ RETORNA 'TRUE' E 'FALSE' VALUES (tenta matchear o pattern com cada value nessa column)...
+SELECT first_name LIKE 'Max'
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK..
+
+
+
+
+
+
+
+O LIKE SEMPRE VAI RETORNAR TRUE OU FALSE,
+
+A DEPENDER SE ENCONTROU O QUE VOCÊ ESTAVA PROCURANDO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR COLOCA O 'first_name' também,
+
+
+para que 
+
+
+
+
+O NEGÓCIO FIQUE MAIS CLARO:
+
+
+
+
+
+
+[
+  {
+    "?column?": true,
+    "first_name": "Max"
+  },
+  {
+    "?column?": false,
+    "first_name": "Manu"
+  },
+  {
+    "?column?": false,
+    "first_name": "Julie"
+  },
+  {
+    "?column?": false,
+    "first_name": "John"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+MAS AQUI É LÓGICO QUE VAMOS ENCONTRAR 'MAX' como true,
+
+
+
+pq é exatamente isso, no caso...
+
+
+
+
+
+
+
+
+--> OK.. --> MAS SE FIZÉSSEMOS A MESMA COISA COM 
+
+
+
+'Ma',
+
+
+
+
+
+__PEGARÍAMOS APENAS 2 RESULTS (como 'Max' e 'Manu')...
+
+
+
+
+
+
+
+
+
+CERTO, MAS SE RODAMOS ISSO,
+
+GANHAMOS 'FALSE' 5 VEZES..
+
+
+
+
+
+
+
+
+
+--> Ex:
+
+
+
+
+
+[
+  {
+    "?column?": false,
+    "first_name": "Max"
+  },
+  {
+    "?column?": false,
+    "first_name": "Manu"
+  },
+  {
+    "?column?": false,
+    "first_name": "Julie"
+  },
+  {
+    "?column?": false,
+    "first_name": "John"
+  }
+]
+
+
+
+
+
+
+
+
+
+--> MAS PQ ISSO ACONTECE?
+
+
+
+
+
+É PQ , SE USAMOS O 'LIKE',
+
+
+VAMOS 
+
+
+FICAR PROCURANDO 
+POR __ EXATAMENTE _ESSES CARACTERES..
+
+
+
+
+
+
+
+
+
+
+--> E, SE SUBSTITUÍRMOS 
+
+
+
+'LIKE' por '=' (equal operator),
+
+
+
+
+
+
+
+
+O RESULTADO TAMBÉM SERÁ O MESMO...
+
+
+
+
+
+
+
+
+
+
+É POR ISSO QUE 
+
+O 
+
+
+
+LIKE É USADO __ COM PATTERN MATCHING..
+
+
+
+
+
+
+
+
+--  não vai encontrar 'Max' e 'Manu', pq A CORRESPONDÊNCIA TEM QUE SER TOTAL... (não pode ser apenas 'vagamente parecido', tem que ser EXATAMENTE 'Ma')...
+SELECT first_name LIKE 'Ma', first_name
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> É POR ISSO QUE __ o 'LIKE'
+
+É USADO 
+
+COM PATTERN MATCHING --> EM VEZ 
+
+
+DE ADICIONARMOS 
+
+
+
+2 CARACTERES ESPECÍFICOS, AQUI,
+
+
+
+
+DEVEMOS 
+ADICIONAR 
+
+1 PATTERN ESPECÍFICO,
+
+
+
+
+QUE 
+
+deverá 
+SER 
+
+CUMPRIDO __ POR __ _PARTES__ DO VALUE _ NA COLUMN CORRESPONDENTE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> PARA PADRÕES COMO ESSES,
+
+TEMOS DIFERENTES OPÇÕES...
+
+
+
+
+
+
+
+
+
+--> AS 2 OPÇÕES PRINCIPAIS SÃO 
+
+
+
+'Ma%'
+
+
+e 
+
+'Ma_'..
+
+
+
+
+
+
+
+
+
+
+E DEVEMOS ENTENDER COMO ISSO FUNCIONA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMO FUNCIONA?
+
+
+
+
+
+
+
+
+
+
+
+
+BEM,
+
+
+
+
+
+NO CASO DO PROFESSOR,
+
+ELE _ sABE _ QUE __ 
+
+OS 
+
+2 CARACTERES DAS COISAS PELAS QUAIS ESTÁ PROCURANDO 
+
+
+
+SÃO 'Ma' .
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE ELE QUER RETRIEVAR 'Max' e 'Manu' (diferentes números de caracteres),
+
+
+A QUESTÃO É QUE NÃO TEREMOS CERTEZA 
+
+
+SOBRE O NÚMERO DE CARACTERES QUE 
+
+SE SEGUE,
+
+NEM 
+
+
+TEREMOS CERTEZA 
+
+
+SOBRE A APARÊNCIA DESSES VALUES..
+
+
+
+
+
+
+
+
+--> É EXATAMENTE POR ISSO QUE USAMOS '%'...
+
+
+
+
+
+
+
+
+
+
+--> COM O SINAL DE PORCENTAGEM,
+
+
+ISSO SIMPLESMENTE SIGNIFICA QUE 
+
+
+
+
+__ QUEREMOS 'SELECIONAR _ OS __ VALUES, NA COLUMN,
+QUE 
+
+SÃO IGUAIS A "Ma%"',
+
+
+
+
+MAS QUE,
+
+DEPOIS 
+
+
+DESSE VALUE/PADRÃO,  
+
+NÃO TEREI CERTEZA 
+
+
+
+DA ESTRUTURA GERAL DO VALUE, NEM DO NÚMERO DE CARACTERES...
+
+
+
+
+
+
+
+
+
+
+
+--> e, se RODAMOS A QUERY ASSIM,
+VAMOS GANHAR TRUE 2 VEZES...
+
+
+
+
+
+--> ISSO PQ O MAX E O MANU, AMBOS,
+
+CUMPRIRAM O PATTERN/CRITERIO DEFINIDO ALI...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+--  COM '%', ADMITIMOS QUE 'APENAS ENCONTRAR ESSE PATTERN JÁ BASTA', que o número de caracteres depois disso não importa, que SE ESSE NEGÓCIO ESTIVER PRESENTE NO VALUE, VAMOS QUERER 'TRUE'...
+SELECT first_name LIKE 'Ma%', first_name
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- NÓS TAMBÉM _ PODERÍAMOS 
+DEIXAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT first_name LIKE '%a%', first_name
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+-> com isso,
+
+
+
+
+
+FICAMOS COM ISTO:
+
+
+
+
+
+
+
+-- com esse exemplo, dizemos 'ESSE FIRST_NAME APENAS PRECISA TER A', nada mais além disso importa... --> e isso vai retornar true para o 'Max' e o 'Manu', pq contém 'A'...
+-- SELECT first_name LIKE '%a%', first_name
+-- FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> O '%' depois do value da string significa 'não sei o que vai acontecer 
+
+depois de você encontrar o 'u',
+PQ APENAS ISSO INTERESSA...
+
+
+
+
+
+
+
+
+
+
+--->    OK, MAS PARA QUE 
+
+
+
+
+
+SERVE O '_'? 
+
+(UNDERSCORE)
+
+
+
+
+
+
+
+
+
+
+--> SERVE PARA SERMOS MAIS EXPLÍCITOS  
+
+
+
+
+
+
+
+SOBRE O QUE ESTAMOS PROCURANDO...
+
+
+
+
+
+
+
+
+
+
+
+
+-> tipo assim:
+
+
+
+
+
+ SELECT first_name LIKE '_o%', first_name
+ FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NESSA ESCRITA,
+
+DIZEMOS:
+
+
+
+'ESSE "o" 
+
+DEVE __ APARECER NO SEGUNDO LOCAL/slot'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE NÃO ESTAMOS LIMITADOS 
+
+AO USO DA KEYWORD DE `LIKE`
+
+
+
+
+APENAS  COM _ 
+ESSES STATEMENTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO _ PQ _ TAMBÉM PODEMOS __ RODAR _ 
+
+
+ESSAS QUERIES _ 
+
+
+
+
+
+EM 1 FILTRO COMUM,
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT first_name 
+FROM memberships
+WHERE first_name LIKE 'J____';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, SE RODAMOS ESSA QUERY, GANHAMOS DE VOLTA APENAS 
+
+'Julie' (pq ela é 'J' + 4 caracteres, que foi aquilo que escrevemos)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS USAR __ 'LIKE'
+
+COM _ 
+
+
+O WHERE,
+
+PQ 
+
+O 
+
+'LIKE'
+
+
+VAI __ RETORNAR _ VAI TRUE/FALSE...
+
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+
+
+PQ TIPICAMENTE VOCÊ NÃO VAI QUERER FICAR APENAS COM TRUE/FALSE,
+
+
+E SIM 
+
+VAI QUERER 
+
+
+
+
+_ USAR _ ESSE RESULT, O PROCESSAR COM 'WHERE' e etc...
+
+
+
+
+
+
+
+
+
+
+
+
+NO CASO,
+
+
+
+PARA PROCESSAR AQUELE 'QUEREMOS QUE APENAS SEJAM RETORNADOS OS STRING VALUES QUE TENHAM "Ma" no seu interior',
+
+
+o código ficaria assim:
+
+
+
+
+
+
+SELECT first_name LIKE 'Ma%'
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE MUDARMOS ESSE CÓDIGO PARA 'ma',
+
+
+
+ELE NÃO VAI ENCONTRAR COISA ALGUMA,
+
+
+
+
+JUSTAMENTE PQ 
+
+
+
+O 'LIKE' é case-sensitive'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ QUISER QUE __ O NEGÓCIO NÃO SEJA CASE-SENSITIVE,
+
+VOCê 
+
+DEVE USAR 
+
+'ILIKE' em vez de 'LIKE'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+--> SE VOCÊ QUER QUE SUA QUERY __ COM 'LIKE' NÃO SEJA __ CASE-SENSITIVE, DEVE-SE USAR 'ILIKE' EM VEZ DE 'LIKE'...
+
+
+-- ex:
+
+
+-- ISSO VAI RETORNAR 'Max' e 'Manu', pq eles satisfazem isso, desconsiderando o fato de que são 'Max' e 'Manu', e não 'max' e 'manu'...
+ SELECT first_name ILIKE 'ma%', first_name
+ FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ------> ENTRETANTO, NO MYSQL ISSO NÃO FUNCIONA, O 'ILIKE',
+
+ GANHAMOS 1 ERROR....
+
+
+
+
+
+
+
+
+
+
+
+
+ -----> PQ ISSO?
+
+
+
+
+
+ É PQ O 'LIKE'
+
+
+
+ NO MYSQL NÃO É CASE-SENSITIVE..
+
+
+
+
+
+
+
+
+
+
+ ALÉM DISSO,
+
+
+
+ NO 'MYSQL'
+
+
+ RECEBEMOS '0' E '1' 
+ PARA 
+
+
+
+ CADA RESULT RETORNADO,
+ E NÃO 
+
+ 'TRUE/FALSE' (apesar da ideia geral ser a mesma)....
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... ESSA FOI A KEYWORD DE 'LIKE' E O PATTERN-MATCHING..
