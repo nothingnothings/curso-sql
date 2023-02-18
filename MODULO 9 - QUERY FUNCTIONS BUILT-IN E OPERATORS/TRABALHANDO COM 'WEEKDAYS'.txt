@@ -1,0 +1,1086 @@
+
+
+
+
+
+
+
+
+
+
+
+
+ALÉM DO EXTRACT DE INFO COMO ESSA DE NOSSA DATA,
+
+
+
+
+POR MEIO DE FUNCTIONS COMO 'EXTRACT()" (
+
+
+SELECT EXTRACT(MONTH FROM last_checkin) FROM memberships;
+
+
+
+
+
+), 
+
+
+
+
+
+
+
+
+
+
+VC TALVEZ 
+
+ESTEJA 
+
+INTERESSADO 
+
+
+
+NA ACTUAL 'WEEK DAY'
+
+
+
+
+
+
+
+
+DAQUELE DIA ALI...
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ TALVEZ QUEIRA SABER 
+
+'''QUAL FOI A ÚLTIMA VEZ,
+
+EM QUAL WEEK DAY,
+
+
+
+O USER FEZ CHECKIN'''...
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS CONSEGUIR ESSA INFO MAIS FACILMENTE NO POSTGRESQL (
+    no MYSQL,
+
+    TEMOS QUE SEGUIR UM APPROACH 1 POUCO DIFERENTE...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRESQL,
+
+PARA CONSEGUIR O DIA DA SEMANA,
+
+
+USAMOS 
+
+A KEYWORD DE 'DOW'..
+
+
+
+
+
+
+
+
+
+--> essa keyword É ESCRITA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+-- OBS: 'DOW' funciona APENAS com postgresql
+SELECT EXTRACT(DOW FROM last_checkin) FROM memberships; -- 'DOW' --> é 'DAY OF WEEK' -> é usado para EXTRAIR 'QUAL É O DIA DA SEMANA' em relação àqueles dias do query...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK.... 
+E ISSO RETORNA NÚMEROS PARA CADA 
+
+
+
+
+DIA DA SEMANA...
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+5 
+
+3 
+
+5
+
+1
+
+
+6
+
+
+
+
+
+
+
+
+
+
+------> SUNDAY -> É 0...
+
+
+
+MONDAY --> É 1 ...
+
+
+
+
+SATURDAY --> É 6...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SE VOCÊ QUER QUE SUNDAY N SEJA '0',
+
+
+E SIM SEJA 
+
+'7' (por alguma razão),
+
+
+
+
+
+
+
+
+
+
+
+--- OBS: ISODOW também só funciona com postgres. A diferença é que 'SUN' é O NÚMERO 7, e não o número 0....
+SELECT EXTRACT (ISODOW FROM last_checkin) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------> OK...
+
+
+
+
+
+
+
+
+MAIS TARDE NESSE MÓDULO,
+
+APRENDEREMOS 
+
+
+COMO PODEMOS 
+
+TROCAR 
+
+ESSES NÚMEROS 
+
+
+
+
+
+
+
+PELOS 'ACTUAL WEEKDAY NAMES'...
+
+
+
+
+
+
+
+-----> ISSO PQ __ TER O NOME DO DIA DA SEMANA 
+
+É 1 POUCO MAIS INTUITIVO
+
+ 
+
+
+DO QUE 1 NÚMERO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR HAVIA MENCIONADO QUE 
+
+ISSO 
+
+
+
+SÓ FUNCIONA COM O POSTGRESQL..
+
+
+
+
+
+
+
+---> SE TROCARMOS PARA O MYSQL E TENTARMOS RODAR ESSA QUERY,
+
+
+
+RECEBEREMOS 1 ERRO...
+
+
+
+
+
+
+
+
+
+
+
+---> ISSO QUER DIZER QUE O 'SELECT EXTRACT()'
+
+
+
+FUNCIONA PARA 
+
+
+
+DIAS, MESES E ANOS,
+
+MAS N FUNCIONA 
+
+
+
+
+
+
+
+PARA __ DIAS __ DA SEMANA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA FAZER ISSO FUNCIONAR NO MYSQL,
+
+
+
+
+PRECISAMOS 
+
+
+
+
+DA 
+
+FUNCTION DE 'WEEKDAY()'...
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT WEEKDAY(last_checkin) FROM memberships;
+
+
+
+
+
+
+---------------------------
+
+
+
+
+
+
+
+
+
+
+NOVAMENTE, RECEBEMOS NÚMEROS 
+
+
+
+PARA OS DIAS DA SEMANA..
+
+
+
+
+
+
+
+--> O COUNT DA WEEKDAY FUNCTION 
+
+
+
+
+
+NO MYSQL 
+
+
+COMEÇA COM '0' PARA O MONDAY,
+
+E 
+
+'6' PARA SUNDAY...
+
+
+
+
+
+
+
+
+
+--  SINTAXE DE 'DIA DA SEMANA' QUE FUNCIONA COM O MYSQL:
+
+-- 0,1,2,3,4,5,6 (MON, TUE, WED, THUR, FRI, SAT, SUN ) (6 para o domingo)
+SELECT WEEKDAY(last_checkin) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> E SE VOCÊ QUER ALINHAR ESSA LÓGICA COM 
+
+
+O 'ISODOW',
+
+
+
+
+VOCê 
+
+
+
+DEVE 
+
+
+
+
+
+
+USAR O OPERADOR DE '+ 1' 
+
+
+
+DO LADO DE 'SELECT  WEEKDAY()',
+
+
+
+
+
+
+
+
+
+
+
+
+PQ __ aí todos os números da semana serão incrementados por 1...
+
+
+
+
+
+EX:
+
+
+
+
+
+--  SINTAXE DE 'DIA DA SEMANA' QUE FUNCIONA COM O MYSQL:
+
+-- 0,1,2,3,4,5,6 (MON, TUE, WED, THUR, FRI, SAT, SUN ) (6 para o domingo)
+SELECT WEEKDAY(last_checkin) FROM memberships;
+
+
+
+
+
+-- COM '+1', deixamos o comportamento desse statement, no mysql, igual ao comportamento de 'ISODOW' do POSTGRESQl...
+SELECT WEEKDAY(last_checkin) + 1 FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... ISSO ALINHA O POSTGRESQL E O MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+--> ALÉM DO EXTRACT DE INFO DE TIMESTAMPS,
+
+
+
+TALVEZ 
+
+
+EXISTA 
+
+
+
+1 SITUAÇÃO 
+
+
+
+
+
+
+
+
+EM QUE __ QUEREMOS ___ 
+
+
+
+
+SEPARAR_  
+
+
+
+
+A 'TIMESTAMP INFO'
+
+
+
+
+
+EM 'ACTUAL DATE' 
+
+
+E 
+
+'ACTUAL TIME'...
+
+
+
+
+
+
+
+
+
+TIMESTAMP = ACTUAL DATE + ACTUAL TIME...
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO É POSSÍVEL, SIM,
+
+
+TUDO POR MEIO 
+
+
+
+DA FUNCTION DE DATE/TIME DE 'CONVERT'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A FÓRMULA DE 'CONVERT()"
+
+
+
+SÓ FUNCIONA 
+
+
+
+COM O MYSQL...
+
+
+
+
+
+
+
+
+
+
+--> DPS, VEREMOS COMO REALIZAR A MESMA OPERAÇÃO COM O 
+POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+O CONVERT SEMPRE PRECISA DE 2 PARÂMETROS...
+
+
+
+
+
+
+
+1o argumento --> IDENTIFIER (a reference a nossa column)...
+
+
+
+
+
+
+2o argumento --> É __ 'O QUE DEVE SER O OUTPUT' (
+
+    se deve ser a 'DATE', 
+
+    ou ENTÃO APENAS O 'TIME'....
+)
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT CONVERT(last_checkin, DATE), CONVERT(last_checkin, TIME)
+FROM memberships;
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- com isso, convertemos esse TIMESTAMP (last_checkin) NESSES 2 INPUTS SEPARADOS (ficam 2 columns separadas, 1 para o time, outro para o date, lá no result set)....
+SELECT CONVERT(last_checkin, DATE), CONVERT(last_checkin, TIME)
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO FUNCIONA PARA O MYSQL,
+
+SIM,
+
+
+
+MAS NO POSTGRESQL ISSO NÃO É ASSIM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> ISSO QUER DIZER QUE 
+
+
+
+
+
+
+O __ POSTGRESQL 
+
+NÃO CONHECE AS KEYWORDS DE 'DATE' E 'TIME'...
+
+
+
+
+
+
+
+PARA RODAR ISSO NO POSTGRESQL,
+
+TEMOS UMA SOLUÇÃO SIMPLES:
+
+
+
+
+
+
+
+PODEMOS SIMPLESMENTE 
+
+
+
+
+FAZER 'SELECT'
+
+
+
+DA COLUMN
+ 
+
+
+ A QUE QUEREMOS FAZER 
+
+
+
+
+EXTRACT __ O 'TIME' E A 'DATE'
+
+
+DO TIMESTAMP... ------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+SELECT last_checkin 
+
+
+
+
+
+
+
+
+
+
+
+-> CERTO...
+
+depois disso,
+
+simplesmente adicionamos 
+
+
+
+
+DOIS ':' ,
+
+
+
+
+
+DOIS 2 PONTOS,
+
+
+
+
+
+QUE 
+
+
+
+é um SUFIXO...
+
+
+
+
+
+
+,
+
+
+
+
+
+
+E DEPOIS __ COLOCAMOS A KEYWORD DE 'TIMESTAMP'...
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT last_checkin::TIMESTAMP::
+
+
+
+
+
+
+
+
+
+
+----> CERTO... DEPOIS, AO FINAL,
+
+ESCREVEMOS 'O QUE DEVEMOS RETRIEVAR DESSE TIMESTAMP'...
+
+
+
+
+
+
+
+
+BEM, ISSO, NO NOSSO CASO,
+
+
+
+
+
+
+
+
+É A 'DATE'...
+
+
+
+
+
+
+
+MAS TAMBÉM QUEREMOS RETRIEVAR 
+
+
+
+O TIME DESSE TIMESTAMP....
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT last_checkin::TIMESTAMP::DATE, last_checkin::TIMESTAMP::TIME
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+-- OBS: 'CONVERT()' apenas funciona com o MYSQL...
+SELECT CONVERT() -- É USADA PARA __ cONVERTER__ TIMESTAMP EM DATE + TIME...
+
+
+
+
+
+
+-- com isso, convertemos esse TIMESTAMP (last_checkin) NESSES 2 INPUTS SEPARADOS (ficam 2 columns separadas, 1 para o time, outro para o date, lá no result set)....
+SELECT CONVERT(last_checkin, DATE), CONVERT(last_checkin, TIME)
+FROM memberships;
+
+
+
+
+--- A MESMA SINTAXE, MAS COM O POSTGRESQL (retrieva o TIME e a DATE, a partir do timestamp)...
+SELECT last_checkin::TIMESTAMP::DATE, last_checkin::TIMESTAMP::TIME
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+FICAMOS COM O DATE E A TIME EM UM FORMATO 
+
+
+
+EQUIVALENTE AO DO MYSQL...
+
+
+
+
+
+
+
+
+
+
+--> na próxima lição, o professor quer se aprofundar na questão de 'INTERVAL', 
+
+
+
+a keyword de 'INTERVAL'...
