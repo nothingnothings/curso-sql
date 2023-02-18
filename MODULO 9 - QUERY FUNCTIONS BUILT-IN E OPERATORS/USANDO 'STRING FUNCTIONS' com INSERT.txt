@@ -1,0 +1,70 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESTUDAMOS 'CONCAT()'
+
+NA ÚLTIMA LIÇÃO,
+
+
+
+E ELA USAVA A KEYWORD DE 'SELECT',
+
+
+
+como depreendemos deste código aqui:
+
+
+
+
+
+
+--  COM ISSO, PODEMOS OBTER O PREÇO, como _ STRING (formato string); TUDO POR MEIO DA CONCATENAÇÃO DE 1 STRING (o '$ ') e 1 NUMBER... O RESULTADO, É CLARO, SÃO STRINGS como ' $ 19.99'..
+SELECT CONCAT ('$ ', price) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+MAS AGORA VEREMOS 
+
+
+
+
+
+
+
+
+O USO DE STRING FUNCTIONS COM A KEYWORD DE 'INSERT INTO'...

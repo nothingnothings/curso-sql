@@ -1,0 +1,1151 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+STRING FUNCTIONS --> STRING FUNCTIONS SÃO FUNCTIONS RELACIONADAS COM 
+
+'TEXT'
+
+
+COMO INPUT VALUES (
+
+
+
+OU SEJA,
+
+
+
+__ CASOS EM QUE VOCÊ QUER COMBINAR 2 DIFERENTES 'TEXT INPUTS',
+
+DE 
+
+2 
+DIFERENTES ROWS,
+
+
+EM 1 __ INPUT SINGULAR,
+
+
+
+AÍ 
+
+VOCê 
+
+TERIA/TERÁ 
+
+
+
+DE COMBINAR 
+
+
+
+ESSES 2 VALUES...
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+E TUDO ISSO PODE SER FEITO COM 1 STRING FUNCTION...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASSIM COMO COM 'MATHEMATICAL FUNCTIONS',
+
+
+
+VOCÊ 
+
+PODE 
+
+
+ENCONTRAR MAIS INFO SOBRE ISSO NOS DOCS DO MYSQL/POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+--> AQUI, NO CASO,
+
+
+
+VEREMOS 
+
+
+COMO 
+
+
+
+ESSAS FUNCTIONS PODEM SER APLICADAS EM GERAL,
+
+NOS NOSSOS PROEJTOS...
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR VOLTA AO NOSSO PROJETO, E ADICIONA UM NOVO ARQUIVO DE QUERY..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'string-functions'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+
+
+DENTRO DA NOSSA DATABASE,
+
+AGORA 
+
+
+QUEREMOS 
+
+COMBINAR 2 DIFERENTES STRINGS,
+
+2 
+
+
+
+TEXT INPUTS DIFERENJTES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ, NA NOSSA TABLE,
+
+TEMOS 
+
+1 COLUMN PARA O 'FIRST_NAME',
+
+E OUTRA 
+
+PARA O 'LAST_NAME'...
+
+
+
+
+
+
+
+
+--> ISSO É TOTALMENTE CORRETO 
+
+
+
+QUANDO CRIAMOS ESSA TABLE,
+
+
+
+
+
+
+
+MAS AGORA QUEREMOS TER ESSES 2 INPUTS COMBINADOS,
+
+
+PARA TER 
+
+
+1
+ SINGLE 
+
+ OUTPUT,
+
+
+ EM 
+
+
+ 1 
+
+
+ COLUMN --> PARA ISSO,
+
+
+
+
+
+ 1 STRING FUNCTION É EXATAMENTE  AQUILO QUE 
+
+
+ É NECESSÁRIO..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PARA APLICAR 1 FUNCTION  DESSAS,
+
+
+
+
+
+vocÊ 
+
+
+
+
+
+
+
+
+
+
+DEVE COMEÇAR COM 'concat'..
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+concat()
+
+
+
+
+
+
+
+
+
+
+
+---> O CONCAT 
+
+
+
+'CONCATENATES THE TEXT REPRESENTATION OF ALL THE ARGUMENTS'.. (NULL ARGUMENTS SÃO IGNORADOS)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> ISSO BASICAMENTE COMBINA OS 
+
+
+INPUTS EM 1 
+
+
+ÚNICO STRING/TEXT OUTPUT..
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE AGORA PODEMOS ADICIONAR 
+
+
+
+
+
+
+
+' SELECT CONCAT()'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRIMEIRO ESCREVEMOS 
+
+
+
+'first_name',
+
+
+e depois escrevemos 'last_naem'..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+SELECT CONCAT(first_name, last_name);
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> isso vai juntar os values das 2 strings...
+
+
+
+
+
+
+--> EX:
+
+
+
+
+
+
+
+
+SELECT CONCAT(first_name, last_name) 
+FROM memberships;  -- 'CONCAT' junta 2 values de strings em apenas 1 value, que é outputtado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR MEIO DO JOIN 
+
+DESSAS 2 COLUMNS,
+
+
+
+QUASE _ GANHAMOS O RESULT DESEJADO POR NÓS...
+
+
+
+
+
+
+
+
+ISSO PQ OS RESULTS FICAM ASSIM:
+
+
+
+
+
+'MaxSchwarz'
+
+
+
+'ManuLorenz' 
+
+
+'JulieBarnes'..
+
+
+
+
+
+
+
+----> PARA QUE 
+
+
+
+
+
+
+
+
+
+FIQUEMOS COM 1 ESPAÇO ENTRE O VALUE DESSA STRING,
+
+
+PROVAVELMENTE PRECISAMOS COLOCAR ALGUM PARÂMETRO NESSE 
+
+
+'CONCAT',
+
+provavelmente 
+
+
+uma OUTRA VÍRGULA, e aí " " (empty space)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... MAS COMO O PROFESSOR ESCREVE ISSO?
+
+
+
+
+
+
+
+
+
+
+
+
+DE FATO... ----> 
+
+
+
+
+
+PARA COLOCAR __ 1 ESPAÇO ENTRE 
+
+
+
+
+OS VALUES DAS 2 COLUMNS,
+
+VOCÊ 
+
+
+
+
+
+
+DEVE COLOCAR 
+
+ASSIM:
+
+
+
+
+
+SELECT CONCAT(first_name, ' ', last_name) 
+FROM memberships;  -- 'CONCAT' junta 2 values de strings em apenas 1 value, que é outputtado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, AGORA FICAREMOS COM 
+
+
+
+'Max Schwarz'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT CONCAT(first_name, ' ', last_name) -- vai juntar os values das 2 columns e COLOCAR 1 ESPAÇO ENTRE OS 2 'NAMES'..
+FROM memberships; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ESSE CÓDIGO FUNCIONA TANTO NO MYSQL COMO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS HÁ UMA DIFERENÇA 
+
+ENTRE 
+
+
+
+
+
+O MYSQL E POSTGRESQL 
+
+
+
+
+
+
+
+
+
+
+
+----> NO 'MYSQL',
+
+
+
+
+APENAS ESSA FUNÇÃO DE 'CONCAT' EXISTE 
+
+PARA 
+
+
+__cOMBINAR STRINGS..
+
+
+
+
+
+
+
+
+
+
+JÁ EM POSTGRESQL,
+
+
+
+TEMOS 
+
+1 
+
+OPERATOR ESPECÍFICO 
+
+
+
+PARA 
+
+
+ISSO...
+
+
+
+
+
+
+
+
+----> MAS QUAL É O OPERATOR QUE FAZ ISSO?
+
+
+
+
+
+
+
+É O PIPE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---->  || 
+
+
+
+
+
+ex:
+
+
+
+
+
+SELECT first_name || last_name
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+RECEBEMOS 
+
+O 
+
+
+MESMO RESULTADO DE ANTES (sem o ESPAÇO ENTRE OS 2, É CLARO)...
+
+
+
+
+
+
+
+
+
+MAS ESSE OPERATOR FUNCIONA APENAS COM O POSTGRESQL;
+
+
+
+NÃO FUNCIONA COM O MYSQL (com o mysql, apenas existe a opção de 'CONCAT()')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> 
+
+
+
+
+PODEMOS RODAR ESSA QUERY, NO POSTGRESQL,
+
+ASSIM:
+
+
+
+
+
+SELECT first_name || ' ' || last_name 
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- SELECT CONCAT(first_name, last_name) 
+-- FROM memberships;  -- 'CONCAT' junta 2 values de strings em apenas 1 value, que é outputtado
+
+
+
+-- OS VALUES FICAM 'MaxSchwarz', 'ManuLorenz' --> para DIVIDIR ESSAS STRINGS COM 1 ESPAÇO, coloque um ', ,'  ENTRE OS 2 COLUMNS...
+
+
+
+
+
+
+-- SINTAXE MYSQL
+SELECT CONCAT(first_name, ' ', last_name) -- vai juntar os values das 2 columns e COLOCAR 1 ESPAÇO ENTRE OS 2 'NAMES'..
+FROM memberships; 
+
+
+
+-- SINTAXE POSTGRESQL  (mesma coisa que o código de cima)
+
+SELECT first_name || ' ' || last_name 
+FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+MAS HÁ MAIS COISAS QUE PODEMOS FAZER COM 
+
+
+O COMBINE DE STRINGS E NOSSA 
+
+
+
+'TEXT DATA'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE VOLTARMOS AOS DOCS,
+
+
+
+PODEMOS VER QUE 
+
+O 
+
+COMBINE 
+
+
+
+DE 'STRINGS' E 'NUMBERS'
+
+
+
+com 'CONCAT()'
+
+
+também 
+
+é possível,
+
+
+
+
+
+
+
+mas que o resultado dessa operação 
+
+
+SEMPRE SERÁ UMA __ _STRING__....
+
+
+
+
+
+
+
+
+
+
+
+
+----> PROFESSOR 
+
+
+
+roda 
+
+
+
+
+
+
+
+
+
+SELECT CONCAT(),
+
+
+
+
+
+
+
+
+
+
+
+
+E AÍ 
+
+
+
+O PROFESSOR 
+
+
+
+
+
+COLOCA 
+
+
+
+O 
+
+SÍMBOLO DE '$'...
+
+
+
+
+
+
+
+
+-----> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT CONCAT ('$ ', price) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COM ISSO, O PROFESSOR VAI CONCATENAR 
+
+
+
+
+A STRING DE '$ ' 
+
+
+
+COM O VALUE DAS COLUMN DE 'price',
+
+
+
+
+
+
+que são inicialmente numbers,
+
+mas que viram strings 
+
+com 
+
+
+esse código de 'CONCAT'..
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+--  COM ISSO, PODEMOS OBTER O PREÇO, como _ STRING (formato string); TUDO POR MEIO DA CONCATENAÇÃO DE 1 STRING (o '$ ') e 1 NUMBER... O RESULTADO, É CLARO, SÃO STRINGS como ' $ 19.99'..
+SELECT CONCAT ('$ ', price) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK...
+
+
+
+
+
+
+COM ISSO, ADICIONAMOS O '$' 
+
+
+e 
+
+1 
+
+espaço 
+
+
+
+NO INÍCIO 
+
+
+
+
+DOS VALUES DESSA COLUMN..
+
+
+
+
+
+
+ 
+
+
+
+
+
+ -> CERTo...
+
+
+
+
+
+
+ --> MAS CHEGA DE 'CONCAT' (apesar de isso também funcionar em 'MYSQL'),
+
+
+
+
+
+
+
+
+ PQ _ TEMOS _ MAIS STRING FUNCTIONS..
