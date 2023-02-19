@@ -1,0 +1,715 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+ESTUDAMOS 
+
+
+1 POUCO DE TRANSACTIONS....
+
+
+
+
+
+
+
+
+
+
+--> VIMOS 
+
+
+
+PROBLEMAS 
+COM NOSSA TABLE DE 
+
+'CUSTOMERS',
+
+
+
+PQ ESTÁVAMO/ESTAMOS TENTANDO 
+
+
+
+
+
+ADICIONAR 
+
+
+ENTRIES SEM VALUES NA COLUMN DE 'customer_id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SUPONHA-SE QUE AGORA REPETIMOS O MESMO ERRO,
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM 
+
+
+
+2 OPERAÇÕES:
+
+
+
+
+
+
+
+1A OPERAÇÃO --> INSERT NA TABLE DE CUSTOMERS, BEM-SUCEDIDA..
+
+
+
+
+
+2A OPERAÇÕA --> PROBLEMA NA TABLE DE ORDERS, FRACASSO...
+
+
+
+
+
+
+
+
+
+--> nesse caso/nesses casos,
+vocÊ 
+
+
+sempre 
+
+
+
+
+pode,
+
+
+EM MEIO à TRANSACTION (ou seja, depois de rodar 'START TRANSACTION'/'BEGIN' e rodar essas queries),
+
+
+
+RODAR 
+
+
+
+'ROLLBACK'
+
+PARA 
+
+REVERTER SUA DATABASE AO ESTADO ANTERIOR A ESSAS OPERAÇÕES/QUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... MAS TAMBÉM HÁ OUTRO RECURSO COM TRANSACTIONS,
+
+
+
+
+QUE 
+
+
+É _ O DE 'SAVEPOINTS'...
+
+
+
+
+
+
+
+
+--> VOCÊ SETTA CERTOS SAVEPOINTS,
+
+
+
+
+
+SAVEPOINTS A QUE VOCê PODE 'REVERT TO'..
+
+
+
+
+
+
+
+
+
+
+
+NO NOSSO CASO,
+isso significa QUE 
+
+
+
+NÃO PRECISAMOS/NÃO PRECISAREMOS 
+
+
+
+
+
+
+
+REVERTER 'TUDO' (reverter para um STATE ANTES DO _ INSERT DOS CUSTOMERS, POR EXEMPLO) O TEMPO TODO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SAVE POINTS QUAISQUER 
+
+PODEM 
+
+
+
+FACILMENTE 
+
+SEREM ADICIONADOS 
+
+DEPOIS 
+
+
+DO 
+
+CORRESPONDING COMMAND A QUE VOCÊ VAI QUERER 
+'JUMP BACK TO'...
+
+
+
+
+
+
+
+
+
+-----> 
+
+
+
+
+
+
+
+
+O CÓDIGO VAI FICANDO ASSIM:
+
+
+
+
+
+
+INSERT INTO customers (first_name, last_name, email) -- SABEMOS que esse comando está regular/funcionando, POR ISSO SETTAMOS __ 1 SAVEPOINT_ LOGO _ DEPOIS DELE, PARA QUE SEJA __ POSSÍVEL FAZER 'JUMP TO' A ELE E NÃO SER NECESSÁRIO O RE-EXECUTAR, CASO ALGUMA QUERY MAIS PARA FRENTE DÊ PROBLEMA (como 'orders', no nosso caso)...
+VALUES (
+        'Billy',
+        'Jones',
+        'maria@test.com'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SABEMOS QUE ESSA INSERTION VAI FUNCIONAR,
+
+
+
+
+POR ISSO__ COLOCAMOS 1 'SAVEPOINT'
+
+
+
+
+
+LOGO ABAIXO DELE...
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+INSERT INTO customers (first_name, last_name, email) -- SABEMOS que esse comando está regular/funcionando, POR ISSO SETTAMOS __ 1 SAVEPOINT_ LOGO _ DEPOIS DELE, PARA QUE SEJA __ POSSÍVEL FAZER 'JUMP TO' A ELE E NÃO SER NECESSÁRIO O RE-EXECUTAR, CASO ALGUMA QUERY MAIS PARA FRENTE DÊ PROBLEMA (como 'orders', no nosso caso)...
+VALUES (
+        'Billy',
+        'Jones',
+        'maria@test.com'
+    );
+SAVEPOINT customers_save;
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO customers (first_name, last_name, email) -- SABEMOS que esse comando está regular/funcionando, POR ISSO SETTAMOS __ 1 SAVEPOINT_ LOGO _ DEPOIS DELE, PARA QUE SEJA __ POSSÍVEL FAZER 'JUMP TO' A ELE E NÃO SER NECESSÁRIO O RE-EXECUTAR, CASO ALGUMA QUERY MAIS PARA FRENTE DÊ PROBLEMA (como 'orders', no nosso caso)...
+VALUES (
+        'Billy',
+        'Jones',
+        'maria@test.com'
+    );
+SAVEPOINT customers_save;  ----É ASSIM QUE DEFINIMOS 1 SAVEPOINT... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ESSA CHANGE FEITA,
+
+
+
+SE AGORA 
+
+
+
+
+
+COMEÇARMOS NOSSA TRANSACTION MAIS UMA VEZ,
+
+
+
+
+
+E RODARMOS O COMANDO DE 'INSERT' ,
+
+
+
+
+VERMOS 
+
+
+
+
+
+_ QUE __ ELE TERÁ ADICIONADO O CUSTOMER À TABLE....
+
+
+
+
+
+
+
+
+
+--> SE ENTÃO 
+TENTAMOS 
+
+RODAR 
+
+
+A QUERY DA TABLE DE 'ORDERS',
+
+
+
+GANHAMOS AQUELE MESMO ERROR (de field value inválido no 'customer_id')....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SE ISSO ACONTECER,
+
+
+
+PODEMOS __ USAR O COMANDO DE 'ROLLBACK',
+
+SIM,
+
+
+
+MAS _ AGORA__ COM 
+
+
+
+
+1 REFERÊNCIA (keyword de 'TO')
+
+
+
+
+
+
+ao _ SAVEPOINT QUE DEFINIMOS __ LOGO DEPOIS DAQUELA QUERY DE 'INSERT INTO' de 'CUSTOMERS' (Que foi/é bem-sucedida)..
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+ROLLBACK TO customers_save;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> CERTO...
+
+
+
+
+
+
+
+
+SE RODAMOS ISSO,
+
+
+
+SEREMOS CAPAZES DE 'JUMP BACK' 
+
+
+
+ÀQUELE SAVEPOINT ESPECÍFICO (em que 
+
+AINDA TÍNHAMOS 
+
+
+
+A NOVA ENTRY/PESSOA NA 
+TABLE DE CUSTOMERS
+
+),
+
+
+
+O QUE 
+
+NOS DÁ 
+
+A VANTAGEM 
+
+
+DE QUE 
+
+AGORA 
+
+PODEMOS 
+CHANGE/ADD 
+
+
+AQUELE FIELD QUE ESTAVA FALTANDO 
+
+
+
+
+NO INSERT DE 'ORDER'... 
+
+
+
+
+
+
+
+
+
+
+
+-----> ENTÃO, ASSIM QUE 
+
+
+CONSERTARMOS A QUERY DO INSERT DE 'ORDER',
+
+PODEMOS 
+
+RODAR 
+
+'COMMIT'
+
+PARA 
+
+
+COMMITARMOS ESSA CORREÇÃO,
+
+
+
+que então vai se sobrepor ao execute __ INVÁLIDO__ DESSE INSERT DE 'ORDER',
+que havíamos 
+
+feito antes...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DIFERENTEMENTE 
+
+
+DO USO DE 'ROLLBACK/COMMIT',
+
+
+
+O USO DE 
+
+
+'ROLLBACK TO' a 1 savepoint 
+
+
+
+
+___ NÃO FAZ TERMINATE DA TRANSACTION...
+
+
+
+
+
+
+
+
+
+
+EX: ROLLBACK TO customers_save; -- vai reverter a ESSE SAVEPOINT QUE DEFINIMOS EM ALGUM LUGAR DAS NOSSAS EXECUÇÕES DE CÓDIGO (E NÃO VAI TERMINAR A TRANSACTION, O QUE É ÓTIMO, ao contrário dos comandos de 'ROLLBACK' e 'COMMIT')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+ISSO SIGNIFICA QUE 
+PODEMOS 
+
+PULAR 
+
+PARA 
+
+1 
+
+SAVEPOINT 
+
+ANTERIOR,
+
+E AÍ 
+
+PODEMOS 
+
+SEGUIR 
+
+A PARTIR 
+
+DESSE 
+
+SAVEPOINT,
+SEM PROBLEMAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+feitas as changes aceitáveis,
+
+
+vamos lá e rodamos 'COMMIT'...
+
+
+
+
+
+
+--> AÍ AS CHANGES SÃO REALMENTE APLICADAS,
+
+
+O QUE É ÓTIMO... (e saímos de nossa transaction)...
+
+
+
+
+
+
+
+
+
+OK... ESSAS SÃO AS TRANSACTIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+START TRANSACTION VS BEGIN..
+
+
+
+
+
+
+
+
+
+--> VEREMOS A VERSÃO POSTGRESQL 
+
+
+DAS TRANSACTIONS NA PRÓXIMA AULA...
