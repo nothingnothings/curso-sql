@@ -1,0 +1,356 @@
+.
+
+
+
+
+
+
+
+
+
+
+
+O QUE SÃO TRANSACTIONS? 
+
+
+
+
+
+
+
+
+
+
+
+
+------> PARA ISSO,
+
+PODEMOS 
+
+PENSAR 
+
+NO 
+
+SEGUINTE EXEMPLO:
+
+
+
+
+
+
+
+
+
+
+
+
+TEMOS 3 DIFERENTES STATEMENTS... 1 ATRÁS DO OUTRO...
+
+
+
+
+
+
+
+
+
+
+PORÉM, CADA 
+
+
+1 DESSES STATEMENTS POSSUEM QUERIES DEDICADAS (
+    insert queries, update queries ou delete queries...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, NÓS QUEREMOS __ UPDATAR__ NOSSA DATABASE___ APENAS__ 
+
+
+SE 
+
+ESSAS 3 QUERIES PUDEREM 
+
+SER 
+
+RODADAS COM SUCESSO... 
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER :
+
+
+
+
+
+
+
+
+STATEMENT 1  SUCESSO 
+
+
+
+STATEMENT 2 FRACASSO 
+
+
+
+STATEMENT 3 SUCESSO....
+
+
+
+
+
+
+
+
+
+--------> OU 
+
+
+STATEMENT 1  SUCESSO 
+
+
+
+STATEMENT 2 FRACASSO 
+
+
+
+STATEMENT 3 FRACASSO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE 
+
+
+_ QUANDO ESTÁVAMOS RODANDO 
+
+
+O STATEMENT 2 OU 3,
+
+
+CAIU A INTERNET,
+
+
+OU 
+
+AÍ 
+TIVEMOS 
+
+OUTRO 
+
+
+
+PROBLEMA INTERNO 
+
+
+
+COM O CÓDIGO EM SI... ---------> DIGAMOS QUE 
+
+
+TIVEMOS 1 PROBLEMA,
+
+
+AÍ 
+
+
+TUDO VAI TER IDO PELOS ARES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A IDEIA, AQUI, É QEU 
+
+
+TODOS 
+
+OS 
+
+STATEMENTS SERÃO EXECUTADOS BACK-TO-BACK,
+
+E TODOS 
+
+
+DEVERÃO TER SUCESSO,
+
+
+__ SENÃO NADA VAI ACONTECER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM TRANSACTIONS, PODEMOS CONSEGUIR EXATAMENTE ISSO:
+
+
+
+ELAS NOS DÃO 
+
+
+CONTROLE COMPLETO SOBRE 
+
+
+MÚLTIPLOS STATEMENTS,
+
+
+QUE 
+
+
+
+SE TORNAM PARTE DE 1 'DEDICATED OPERATION'...
+
+
+
+
+
+
+
+
+
+
+
+E, COM TRANSACTIONS, ISSO FUNCIONA DE MODO QUE 
+
+PODEMOS 
+
+
+
+
+
+
+BUNDLAR _ MÚLTIPLAS OPERATIONS/STATEMENTS 
+
+
+EM AQUILO QUE PODEMOS CHAMAR DE 
+
+
+
+'Transaction Block'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> E, TEMOS CONTROLE SOBRE TODOS OS STATEMENTS QUE FAZEM PARTE DE 
+
+1 TRANSACTION BLOCK....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E PODEMOS DECIDIR O QUE FAZER COM CADA 1 DESSES STATEMENTS (o que acontece com cada 1 deles)...
+
+
+
+
+
+
+
+PODEMOS FAZER:
+
+
+
+
+1) UNDO CHANGES (no caso de 'PERDEMOS CONEXÃO À INTERNET', ) -> com isso, REVERTEMOS AS CHANGES FEITAS NO PRIMEIRO STATEMENT DE TODOS...
+
+
+
+
+
+2) COMMIT CHANGES --> OU, PODEMOS TAMBÉM __ DECIDIR ''SE CHANGES FEITAS EM MÚLTIPLOS STATEMENTS DEVEM SER APLICADOS A DATABASE OU NÃO''...
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... ESSA É A LÓGICA DE TRANSACTION EM 1 EXEMPLO BEM SIMPLES...
+
+
+
+
+
+
+
+
+
+PARA ENTENDER MELHOR ESSE CONCEITO,
+
+DVEMOS VOLTAR AO CÓDIGO E VER NA PRÁTICA...
