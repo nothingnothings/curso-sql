@@ -1,0 +1,207 @@
+
+
+
+
+
+
+
+
+--> ok... agora trabalharemos com transactions...
+
+
+
+
+
+
+
+
+----> é difícil simular a perda de conexão a uma database,
+
+
+
+
+
+
+POR ISSO VAMOS USAR 1 EXEMPLO SIMPLES...
+
+
+
+
+
+
+
+
+
+
+
+--> O CÓDIGO É ESTE:
+
+
+
+
+
+
+INSERT INTO customers (
+    first_name,
+    last_name,
+    email
+) VALUES (
+    'Maria',
+    'Jones',
+    'maria@test.com'
+);
+
+
+
+
+
+INSERT INTO orders (
+    amount_billed,
+    customer_id
+)
+
+VALUES (103.12);
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO customers (first_name, last_name, email)
+VALUES (
+        'Maria',
+        'Jones',
+        'maria@test.com'
+    );
+INSERT INTO orders (amount_billed, customer_id)
+VALUES (103.12);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A IDEIA, COM TRANSACTIONS,
+
+
+É QUE 
+
+
+
+ESSES 2 ROWS 
+
+
+DEVERÃO 
+
+SER INSERIDOS __ APENAS __ 
+
+
+SE AS 2 OPERATIONS RODAREM SEM PROBLEMAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... --> É POR ISSO QUE A SEGUNDA QUERY ESTÁ IRREGULAR (
+
+    ficamos com o insert  APENAS DO amount_billed,
+
+
+    MAS FICAMOS COM 1 VALUE DE 'null'
+
+    NO CUSTOMER_ID,
+
+    O QUE 
+    É IMPOSSÍVEL (
+
+        nossa table de orders está com uma constraint de 'not null'...
+    )
+)
+
+
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS, NO CASO,
+
+
+
+QUE __ 
+
+A EXISTÊNCIA DE 1 TRANSACTION __ IMPEÇA 
+
+O CHANGE 
+
+
+
+DA 
+DATABASE...
+
+
+
+
+
+
+
+
+
+--> A CORE IDEA É A MESMA NO POSTGRES E NO MYSQL...
+
+
+
+
+
+
+
+
+
+
+--> MAS DEPOIS TEREMOS 1 AULA ESPECIAL PARA MOSTRAR AS DIFERENÇAS EM RELAÇÃO AO POSTGRESQL..
+
+
+
+
+
+
+
+

@@ -354,3 +354,20 @@ OK.... ESSA É A LÓGICA DE TRANSACTION EM 1 EXEMPLO BEM SIMPLES...
 PARA ENTENDER MELHOR ESSE CONCEITO,
 
 DVEMOS VOLTAR AO CÓDIGO E VER NA PRÁTICA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS USAR O PROJETO DO ÚLTIMO MÓDULO (gym -> memberships, orders e customers).
+
+
+
+
