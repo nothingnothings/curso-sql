@@ -1,0 +1,543 @@
+
+
+tentei 1 monte,
+
+
+
+
+e só consegui 
+
+
+vendo a descrição do vídeo...
+
+
+
+
+ficou tipo assim:
+
+
+
+
+
+
+
+
+
+
+SELECT week_day,
+    CASE
+        WHEN week_day = 0 THEN 'Sunday'
+        WHEN week_day = 1 THEN 'Monday'
+        WHEN week_day = 2 THEN 'Tuesday'
+        WHEN week_day = 3 THEN 'Wednesday'
+        WHEN week_day = 4 THEN 'Thursday'
+        WHEN week_day = 5 THEN 'Friday'
+        WHEN week_day = 6 THEN 'Saturday'
+        ELSE 'CRAP'
+    END
+FROM (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS week_day
+        FROM memberships
+    )
+
+    AS week_numbers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> PARA COMEÇAR,
+
+
+
+
+
+
+O PROFESSOR ESCREVE A OUTER QUERY...
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR QUER 
+
+
+
+SELECIONAR O 
+
+'WEEKDAY NUMBER'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BASICAMENTE,
+
+ELE QUER 
+
+
+
+__ PEGAR O RESULT _ QUE 
+
+VAMOS CONSEGUIR DE NOSSA SUBQUERY...
+
+
+
+
+
+
+
+
+
+NOSSA SUBQUERY É ESTA:
+
+
+
+
+
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            )
+        FROM memberships
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+MAS AÍ O PROFESSOR VAI QUERER USAR 1 ALIAS PARA _ ESSE NEGÓCIO/RESULT SET AÍ...
+
+
+
+
+
+vai usar 'weekday_number'...
+
+
+
+
+
+ex:
+
+
+
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS weekday_number
+        FROM memberships
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, NA OUTER QUERY, VAMOS QUERER SELECIONAR ESSE WEEKDAY NUMBER...
+
+
+
+ex:
+
+
+
+
+
+
+    ---OUTER--
+    SELECT weekday_number
+
+
+
+
+        ---INNER---
+    (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS weekday_number
+        FROM memberships
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+DEPOIS DE 'weekday_number',
+
+
+ADICIONAMOS UMA VÍRGULA,
+
+E ENTÃO NOSSA CONDITIONAL EXPRESSION...
+
+
+
+ex:
+
+
+
+
+    ---OUTER--
+    SELECT weekday_number,
+        CASE WHEN weekday_number = 0 THEN 'Sunday'
+        WHEN weekday_number = 1 THEN 'Monday'
+        WHEN weekday_number = 2 THEN 'Tuesday'
+        WHEN weekday_number = 3 THEN 'Wednesday'
+        WHEN weekday_number = 4 THEN 'Thursday'
+        WHEN weekday_number = 5 THEN 'Friday'
+        WHEN weekday_number = 6 THEN 'Saturday'
+        ELSE 'Dummy'
+    END
+        FROM
+    (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS weekday_number
+        FROM memberships
+    )
+
+
+
+
+
+
+
+
+
+
+
+--> PARA IMPLEMENTAR A SUBQUERY,
+
+PRECISAMOS DO FROM STATEMENT...
+
+
+
+
+--> POR ISSO QUE ESCREVI ALI...
+
+
+
+
+ex:
+
+
+
+
+
+    SELECT weekday_number,
+        CASE WHEN weekday_number = 0 THEN 'Sunday'
+        WHEN weekday_number = 1 THEN 'Monday'
+        WHEN weekday_number = 2 THEN 'Tuesday'
+        WHEN weekday_number = 3 THEN 'Wednesday'
+        WHEN weekday_number = 4 THEN 'Thursday'
+        WHEN weekday_number = 5 THEN 'Friday'
+        WHEN weekday_number = 6 THEN 'Saturday'
+        ELSE 'Dummy'
+    END
+        FROM
+    (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS weekday_number
+        FROM memberships
+    )
+
+
+
+
+
+OK, COM ISSO 
+
+SOMOS CAPAZES 
+
+DE RETRIEVAR 
+
+
+A TABLE 
+
+
+
+COM OS CORRESPONDING   
+
+
+WEEK_DAY NUMBERS... ->  E AÍ BASEAMOS NOSSO SELECT STATEMENT 
+
+NESSES RESULTS...
+
+
+
+
+
+
+
+--> A ÚNICA COISA QUE FALTOU, E QUE HAVIA FALTADO ANTES,
+
+É QUE 
+
+
+__ QUANDO USAMOS SUBQUERIES,
+
+
+SOMOS FORÇADOS A ADICIONAR 1 
+
+_ALIA__ TAMBÉM
+ PARA 
+
+
+ A 'UNDERLYING TABLE'... ---------->  ISSO _ PQ __ CADA__ TABLE QUE QUEREMOS 
+
+
+ USAR 
+
+ NA NOSSA DATABASE,
+
+ SEJA 
+
+ ELA __ 
+
+
+
+ _ ARMAZENADA NA __ DATABASE, __ OU ARMAZENADA NA __ MEMÓRIA__ (como nossa SUBQUERY, que existe só na memória  ),
+
+
+
+
+
+PRECISA __ SER IDENTIFICADA --> TODAS AS TABLES, NA MEMÓRIA OU NA DATABASE,
+
+
+PRECISAM 
+
+
+SER IDENTIFICADAS,
+
+POR ISSO 
+
+
+
+
+
+O PROFESSOR COLOCA UM 
+
+
+ALIAS qualquer de 
+
+
+'weekday_test'
+
+
+
+
+
+LÁ EMBAIXO,
+
+
+com 'AS weekday_test'..
+
+
+
+
+ex:
+
+
+
+
+    SELECT weekday_number,
+        CASE WHEN weekday_number = 0 THEN 'Sunday'
+        WHEN weekday_number = 1 THEN 'Monday'
+        WHEN weekday_number = 2 THEN 'Tuesday'
+        WHEN weekday_number = 3 THEN 'Wednesday'
+        WHEN weekday_number = 4 THEN 'Thursday'
+        WHEN weekday_number = 5 THEN 'Friday'
+        WHEN weekday_number = 6 THEN 'Saturday'
+        ELSE 'Dummy'
+    END
+        FROM
+    (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS weekday_number
+        FROM memberships
+    ) AS weekday_test;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+-- objetivo: converter os números dos dias da semana em actual dias da semana...
+SELECT week_day,
+    CASE
+        WHEN week_day = 0 THEN 'Sunday'
+        WHEN week_day = 1 THEN 'Monday'
+        WHEN week_day = 2 THEN 'Tuesday'
+        WHEN week_day = 3 THEN 'Wednesday'
+        WHEN week_day = 4 THEN 'Thursday'
+        WHEN week_day = 5 THEN 'Friday'
+        WHEN week_day = 6 THEN 'Saturday'
+        ELSE 'CRAP'
+    END
+FROM (
+        SELECT EXTRACT(
+                DOW
+                FROM last_checkin
+            ) AS week_day
+        FROM memberships
+    ) AS week_numbers_test; --- ESTE ÚLTIMO ALIAS É ABSOLUTAMENTE NECESSÁRIO, POIS TODAS AS TABLES, SEJAM ELAS ARMAZENADAS NA MEMÓRIA OU NA DATABASE, PRECISAM SER IDENTIFCADAS (é obrigatório)...
+        -- e esse ALIAS aqui, de 'week_numbers_test' SE REFERE A NOSSA SUBQUERY do 'DOW'...
+
+
+-- SELECT EXTRACT(DOW FROM last_checkin) FROM memberships;  --- retorna 5 3 5 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bem, e, de fato,
+
+se olharmos nosso resultado,
+
+
+veremos que toda a data terá sido convertida 
+
+
+
+com sucesso,
+
+a conditional expression funcionou...
+
+
+
+
+
+
+
+É ASSIM QUE APLICAMOS 
+
+
+
+
+
+CONDITIONAL EXPRESSIONS,
+
+
+
+TIME FUNCTIONS,
+
+
+E SUBQUERIES 
+
+
+NOS SEUS PROJETOS...
+
+
+
