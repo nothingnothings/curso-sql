@@ -1,0 +1,499 @@
+
+
+
+
+
+
+
+
+ESTUDAMOS COM PROFUNDIDADE  AS TRANSACTIONS 
+
+NO MYSQL.. 
+
+
+
+
+
+
+
+
+
+
+
+NO MYSQL, USAMOS 'START TRANSACTION'...
+
+
+
+
+
+
+
+
+o 'START TRANSACTION'
+
+
+TAMBÉM PODE SER USADO 
+
+NO POSTGRESQL,
+
+
+
+
+MAS TIPICAMENTE USAMOS 'BEGIN'...
+
+
+
+
+
+
+
+
+
+
+
+MAS ALÉM DESSAS DIFERENÇAS,
+
+
+
+
+
+PARA TANTO POSTGRESQL E MYSQL,
+
+
+
+AS TRANSACTIONS FUNCIONAM DE UMA MANEIRA COMPARÁVEL...
+
+
+
+
+
+
+
+O QUE NÃO É COMPARÁVEL,
+
+
+
+
+ENTRETANTO,
+
+
+
+É A MANEIRA 
+
+
+
+PELA QUAL 
+
+
+O 
+
+
+
+VSCODE (nosso ambiente)
+
+
+TRABALHA 
+
+
+COM 
+
+
+
+TRANSACTIONS 
+ENTRE 
+
+
+
+O 
+
+POSTGRESQL
+
+
+E O MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... CRIEI 1 PASTA SEPARADA PARA A VERSÃO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+--> COMEÇAMOS 
+
+
+PELO ARQUIVO QUE INICIA A TRANSACTIOn...
+
+
+
+
+
+--> ELE VAI FICAR 
+
+
+'BEGIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+ISSO FEITO,
+
+
+
+
+
+CRIAMOS 
+
+
+
+OS ARQUIVOS REPRESENTATIVOS DAS DIFERENTES 
+
+
+OPERAÇÕES...
+
+
+
+
+
+
+--> TEMOS 1 ARQUIVO TAMBÉM PARA O ROLLBACK, E OUTRO PARA O COMMIT...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... POR DEFAULT,
+
+SE RODAMOS 
+
+
+
+AQUELA QUERY INTEIRA LÁ,
+
+
+
+COM 
+
+
+
+
+
+
+2 RUNS DE 'INSERT INTO',
+
+
+
+
+
+
+
+
+
+
+VAMOS GANHAR 1 ERROR, EXATAMENTE COMO ANTES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ENTRETANTO, AQUI TEMOS A DIFERENÇA ___ CORE____...
+
+
+
+
+
+
+
+
+
+
+1) ANTES, NO MYSQL, SE TÍNHAMOS 1 ERROR DURANTE 
+O EXECUTE DE MÚLTIPLOS STATEMENTS,
+
+OS STATEMENTS QUE 'DAVAM CERTO' 
+
+ERAM EXECUTADOS,
+
+E OS 
+
+
+QUE DAVAM ERRADO _ ERAM IGNORADOS (não faziam nada no banco)...
+
+
+
+
+ESSE É O COMPORTAMENTO DEFAULT 
+
+DO 
+
+MYSQL...
+
+
+
+
+
+
+
+
+
+
+2) ENTRETANTO,
+
+
+
+
+
+COM O POSTGRESQL,
+
+
+____ LÁ NO VSCODE (apenas no vscode),
+
+
+O POSTGRESQL 
+
+
+
+TEM UMA 
+
+
+'
+TRANSACTION LOGIC'
+ 
+ IMPLÍCITA (
+
+
+OU SEJA,
+
+ISSO SIGNIFICA QUE 
+
+APENAS 
+
+
+SE 
+
+
+TODOS 
+
+OS 
+
+
+STATEMENTS 
+
+FOREM VÁLIDOS
+
+SERÃO 
+
+AS CHAGENS APLICADAS NA DATABASE...
+
+
+
+ )
+
+
+
+
+
+
+
+
+
+ OK... ISSO É MEIO JOGO SUJO,
+
+
+ E É UM COMPORTAMENTO DO SQL TOOLS/VS CODE...
+
+
+
+
+
+
+
+
+
+
+ -------> ainda assim,
+
+
+
+
+
+
+ AINDA PODEMOS __ 
+
+ CONTROLAR __ 
+
+TRANSACTIONS, NO POSTGRESQL,
+
+
+POR 
+
+
+
+CONTA PRÓPRIA...
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+DEVEMOS 
+
+VOLTAR 
+
+
+
+
+NO arquivo que tem 'BEGIN',
+
+
+E AÍ 
+
+
+
+
+
+
+RODÁ-LO...
+
+
+
+
+
+
+
+
+
+--> AÍ FAZEMOS A MESMA COISA COM 
+
+
+O 
+
+
+
+insert de orders e customers..
+
+
+
+
+
+
+
+
+
+--> AS ORDERS DÃO ERRO --> AÍ, EXATAMENTE COMO NO MYSQL,
+
+PODEMOS 
+
+FAZER 
+
+REVERT 
+DESSA 
+
+
+OPERATION/TRANSACTION,
+
+
+
+POR MEIO DE 
+
+'ROLLBACK'...
+
+
+
+
+
+
+
+
+
+
+
+------> TAMBÉM PODEMOS FAZER COMMIT EXATAMENTE COMO ANTES,
+COMO PARTE DE NOSSA TRANSACTION...
+
+
+
+
+
+
+
+
+
+
+--> SAVEPOINTS TAMBÉM FUNCIONAM DA MESMA FORMA...
+
+
+
+
+
+
+
+
+
+
+A ÚNICA DIFERENÇA, REALMENTE, É O 'BEGIN'
+
+
+
+E O COMPORTAMENTO DO VS CODE... (nas SQL TOOLS)...
+
+
+
+
+
+
+
+AGORA DEVEMOS VER O PRÓXIMO MÓDULO...
