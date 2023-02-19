@@ -205,3 +205,1093 @@ DATABASE...
 
 
 
+
+
+--> OK...
+
+
+
+
+
+DEVEMOS COMEÇAR...
+
+
+
+
+
+
+
+
+
+
+SE RODAMOS ESSAS 
+
+
+
+2 QUERIES,
+
+FICAMOS 
+
+COM 
+
+1 ERROR...
+
+
+
+
+
+
+
+
+
+
+
+--> O ERROR É JUSTAMENTE NA SEGUNDA QUERY... MAS A PRIMEIRA QUERY __ ACABA SENDO EXECUTADA AINDA ASSIM...
+
+
+
+
+
+
+
+
+(MARIA FOI ADICIONADA, MAS A SEGUNDA QUERY NÃO FOI BEM-SUCEDIDA, O QUE QUER DIZER QUE NÃO FOI EXECUTADA)...
+
+
+
+
+
+ 
+
+ EX:
+
+
+
+
+
+
+ 
+--  COMPORTAMENTO DEFAULT (sem transactions) --> A PRIMEIRA QUERY É EXECUTADA E ADICIONA 'MARIE' NA TABLE DE CUSTOMERS; JÁ A SEGUNDA QUERY, QUE ESTÁ IRREGULAR, NÃO É EXECUTADA (não faz nada)..
+INSERT INTO customers (first_name, last_name, email)
+VALUES (
+        'Maria',
+        'Jones',
+        'maria@test.com'
+    );
+INSERT INTO orders (amount_billed, customer_id)
+VALUES (103.12);
+
+
+
+
+-- COMPORTAMENTO COM TRANSACTION --> TODAS AS QUERIES SÃO EXECUTADAS __ APENAS__ SE TODAS AS QUERIES 'DÃO CERTo' (não estão irregulares/com problemas/não caiu a conexão)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+ATÉ AÍ, TUDO BEM...
+
+
+
+
+
+
+
+
+
+
+--> QUEREMOS COLOCAR 1 TRANSACTION 
+
+NO NOSSO CÓDIGO..
+
+
+
+
+
+
+
+
+
+QUEREMOS QUE SE A PRIMEIRA QUERY OU A SEGUNDA FALHAR,
+
+NADA 
+
+ACONTEÇA 
+
+
+
+NA NOSSA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+OK... SE QUALQUER 1 DOS STATEMENTS FALHAR,
+
+
+
+QUEREMOS QUE A OPERAÇÃO INTEIRA SEJA CANCELADA...
+
+
+
+
+
+
+
+
+--> OK.... 1 TRANSACTION É SEMPRE ALGO QUE 
+
+VOCê 
+COMEÇA 
+
+PARA SUA 
+
+'CURRENT SESSION'...
+
+
+
+
+
+
+
+
+
+-> OU SEJA,
+
+PODEMOS 
+
+COMEÇAR 1 TRANSACTION 
+
+
+NESSA FILE DE '.sql',
+
+
+
+
+
+qualquer file de '.sql',
+
+
+
+MAS 
+
+O QUE 
+
+
+
+INTERESSA 
+
+
+É QUE 
+
+
+
+SEMPRE QUE VOCê SE 'CONECTA' A UMA DATABASE (com username e senha),
+
+
+
+
+SUA 
+
+TRANSACTION CONTINUA ROLANDO...
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA COMEÇAR 1 TRANSACTION,
+USAMOS 
+
+
+A KEYWORD DE 
+
+
+
+
+
+
+
+'START TRANSACTION' 
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+-- PARA COMEÇAR 1 TRANSACTION (que continua/continuará ROLANDo enquanto você mantiver sua CONEXÃO/SESSÃO COM A DATABASE ABERTA...),
+-- SÃO UTILIZADAS AS EXPRESSÕES:
+
+
+
+
+START TRANSACTION -- EXPRESSÃO DO MYSQL 
+BEGIN -- EXPRESSÃO DO POSTGRES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... SE USAMOS O 'MYSQL',
+
+USAMOS 
+
+
+'START TRANSACTION',
+
+
+
+
+
+
+
+
+E SE USAMOS 
+
+
+O 
+
+
+POSTGRES,
+
+
+
+USAMOS 
+
+
+'BEGIN'...
+
+
+
+
+
+
+
+
+
+
+
+CERTO... ASSIM QUE ESSE COMANDO FOR EXECUTADO,
+
+isso 
+
+
+
+
+
+__ VAI __ 
+
+
+TRANSFORMAR NOSSA 'CURRENT SESSION' 
+
+
+EM 1 TRANSACTION... ---------> 
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE 
+
+TODAS AS QUERIES QUE SÃO/SERÃO EXECUTADAS COMO PARTE 
+
+
+
+DA TRANSACTION 
+VÃO 
+
+NOS DAR 
+
+
+
+BEM MAIS CONTROLE SOBRE 'AQUILO QUE SERÁ ADICIONADO à DATABASE/DEIXARÁ DE SER ADICIONADO À DATABASE'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA SERMOS AINDA MAIS CLAROS SOBRE ESSA LÓGICA DE TRANSACTION,
+
+
+
+O PROFESSOR CRIA UM NOVO ARQUIVO DE TRANSACTION,
+
+
+
+DE NOME 'START TRANSACTION'...
+
+
+
+
+
+
+
+
+
+
+COMEÇAMOS ESCREVENDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+START TRANSACTION
+
+
+
+INSERT INTO customers (first_name, last_name, email)
+VALUES (
+        'Maria',
+        'Jones',
+        'maria@test.com'
+    );
+INSERT INTO orders (amount_billed, customer_id)
+VALUES (103.12);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------> CERTo... MAS O QUE O PROFESSOR FAZ, NO CASO,
+
+É 
+
+
+
+
+COLOCAR OS 2 INSERT STATEMENTS EM ARQUIVOS '.sql' SEPARADOS...
+
+
+
+
+
+
+
+
+-----> FAREMOS ISSO PARA QUE 
+
+SEJA POSSÍVEL
+
+DETERMINAR SE 1 CERTA QUERY PODE SER 
+
+EXECUTADA COM SUCESSO (para que então possamos CONTINUAR COM A PRÓXIMA QUERY)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE ELE COLOCA 1 FILE APENAS PARA A TRANSACTION,
+
+
+
+
+OUTRA APENAS PARA O 'INSERT CUSTOMERS',
+
+
+E OUTRA 
+
+PARA 
+o 
+'
+INSERT ORDERS'..
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+outsourced_customer_insert_statement
+
+outsourced_order_insert_statement
+
+start_transaction_example_with_insert
+
+
+
+
+
+
+
+
+
+CERTO....
+
+
+
+
+
+
+
+
+
+
+
+
+E OS CÓDIGOS FICAM ASSIM:
+
+
+
+
+
+
+START TRANSACTION
+
+
+
+
+
+
+
+
+
+
+
+
+FILE 2:
+
+
+INSERT INTO orders (amount_billed, customer_id)
+VALUES (103.12);
+
+
+
+
+
+
+
+
+FILE 3:
+
+
+
+INSERT INTO customers (first_name, last_name, email)
+VALUES (
+        'Maria',
+        'Jones',
+        'maria@test.com'
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... COMEÇAMOS 
+
+
+
+
+
+
+
+
+COM O EXECUTE DESSA QUERY DE 'START TRANSACTION'...
+
+
+
+
+
+
+
+
+
+
+SE RODAMOS ISSO AÍ, 'NADA ACONTECE',
+
+
+
+
+
+A ÚNICA COISA QUE ACONTECE É 
+
+
+A TRANSFORMAÇÃO DE NOSSA 'SESSION'
+
+EM 1 'TRANSACTION'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO É BEM ÚTIL... -> PQ SE VAMOS,
+
+
+DEPOIS DISSO,
+
+ATÉ 
+
+
+
+O ARQUIVO DE 'outsourced_customer_insert_statement'
+
+
+
+E ENTÃO RODAMOS 
+
+O 
+
+
+CÓDIGO DE INSERT,
+
+
+
+
+NÃO VEREMOS NENHUM ERROR,
+
+
+
+
+
+
+E VEREMOS QUE 
+
+MARIA __ TERÁ SIDO ADICIONADA NA TABle (O QUE É MEIO CURIOSO)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+
+SE COMEÇARMOS 
+
+
+1 NOVA 
+
+SESSION (
+
+abrir 1 outra instance 
+
+do VISUAL STUDIO CODE,
+COM NEW WINDOW,
+
+
+E AÍ 
+
+
+NOS CONECTARMOS 
+
+
+A MESMA DATABASE...
+
+)
+
+
+
+
+
+
+
+
+
+SE FIZERMOS CONNECT 
+
+
+
+NESSA DATABASE COM OUTRA INSTÂNCIA E SELECIONARMOS 
+
+TODO O CONTEÚDO 
+
+DESSA TABLE DE 
+
+CUSTOMERS,
+
+
+
+VEREMOS QUE 
+
+
+
+
+A _ MARIA_ __ NÃO TERÁ 
+
+
+
+SIDO 
+
+ADICIONADA DE VERDADE... -> E É _  EXATAMENTE ASSIM QUE AS TRANSACTIONS FUNCIONAM:
+
+
+
+
+
+
+
+
+ACABAMOS ARMAZENANDO ESSES 'RESULTS' (os efeitos das queries)
+
+
+
+APENAS __ INTERNAMENTE, NA MEMÓRIA,
+
+
+
+MAS __ 
+
+
+__ NÓS NÃO 
+
+FAZEMOS O WRITE IMEDIATO NA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE,
+ 
+
+ COM _ A TRANSACTION,
+
+ TEMOS 
+
+
+ CONTROLE 
+
+ COMPLETO 
+
+
+
+ SOBRE_ AQUILO __ QUE 
+ 
+
+
+ ACABA ADICIONADO 
+
+
+ à DATABASE... --> E, AÍ,
+
+
+
+ APENAS SE TODAS NOSSAS QUERIES/STATEMENTS
+
+ SÃO 
+
+ EXECUTADOS COM SUCESSO 
+
+
+
+VAMOS QUERER 
+
+QUE 
+
+ESSAS 
+CHANGES SEJAM 'COMMITED' 
+
+
+
+E ESCRITAS NA DATABASE... --> ISSO SIGNIFICA, PARA NÓS,
+
+
+
+
+QUE 
+
+
+
+SE RODARMOS 
+
+
+
+O 
+
+
+STATEMENT DE 'INSERT ORDERS' (irregular)
+
+QUE 
+
+TÍNHAMOS ANTES,
+
+
+
+
+__ RECEBEREMOS 1 ERROR....--------> 
+
+
+
+
+
+
+A PARTIR DESSE ERROR,
+
+
+NENHUMA INFO SERÁ ADICIONADA NA TABLE DE 'ORDERS'..
+
+
+
+
+
+
+
+
+ENTRETANTO, NA 'MEMÓRIA' DA NOSSA CURRENT SESSION,
+
+
+
+A MARIA CONTINUA EXISTINDO 
+
+NA TABLE DE 'CUSTOMERS'...
+
+
+
+
+
+
+
+
+
+
+--> A PARTE LEGAL AQUI, AGORA,
+
+É QUE 
+
+
+
+
+SE __ NÓS ADICIONARMOS 1 NOVA FILE,
+
+
+
+
+
+FILE 
+
+
+
+DE NOME 
+
+
+
+
+'rollback' (O PROFESSOR LOGO EXPLICARÁ O QUE É O ROLLBACK),
+
+
+
+
+
+
+
+
+
+NÓS PODEREMOS FAZER O 'REVERT'
+
+
+DESSAS CHANGES,
+
+
+
+
+ESPECIFICAMENTE 
+TODAS AS CHANGES 
+
+QUE 
+
+FIZEMOS 
+
+DESDE QUE 
+
+STARTAMOS  A TRANSACTION.....
+
+
+
+
+
+
+
+
+
+
+RESUMINDO, NÓS:
+
+
+
+
+
+
+
+
+1) COMEÇAMOS A TRANSACTION 
+
+
+
+2) FIZEMOS O PRIMEIRO INSERT, TEVE SUCESSO...
+
+
+
+
+
+
+3) TENTAMOS O SEGUNDO INSERT, FRACASSOU...
+
+
+
+
+
+4).... com o rollback,
+
+PODEMOS __ VOLTAR 
+
+
+AO 
+
+'PREVIOUS STATE'
+
+QUE TÍNHAMOS QUANDO STARTAMOS A TRANSACTION... -->  ISSO SIGNIFICA QUE 
+
+
+
+
+A NOVA ENTRY DE 'MARIA' SERÁ APAGADA,
+
+
+E AS CHANGES (A CHANGE) NÃO 
+
+SERÁ 
+
+APLICADA 
+à DATABASE...
+
+
+
+
+
+
+
+
+--> BASTA ESCREVER:
+
+
+
+'ROLLBACK;'...
+
+
+
+
+
+
+
+
+
+--  se 1 TRANSACTION ESTIVER RODANDO, isso vai fazer com que O STATE DA DATABASE SEJA REVERTIDO àQUELE ANTERIOR às MUDANÇAS efetuadas durante a transaction...
+ROLLBACK;
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... SE SELECIONARMOS A TABLE DE 'CUSTOMERRS',
+
+
+
+
+VEREMOS QUE 
+
+
+AS CHANGES TERÃO SIDO 'ROLLBACK'...
+
+
+
+
+
+--> OK... ESSA É A CORE IDEA POR TRÁS DE UMA TRANSACTION,
+
+
+
+VOCÊ 
+
+
+'TRANSFORMA 1 SESSION INTEIRA EM 1 TRANSACTION'...
+
+
+
+
+
+
+'TRANSFORMA 1 SESSION INTEIRA EM 1 TRANSACTION'... --> E TODOS OS COMANDOS ESCRITOS 
+
+DURANTE ESSA TRANSACTION FAZEM PARTE DELA --> e APENAS 
+
+
+
+VOCÊ/A APPLICATION 
+
+
+decide se 
+
+ESSAS CHANGES DEVEM SER COMMITADAS (Adicionadas à database) 
+
+
+
+OU REVERTIDAS, COM 'ROLLBACK' (revert these changes)...
+
+
+
+
+
+
+
+
+
+
+OK, MAS COMO PODEMOS COMMITAR ESSAS CHANGES A NOSSA DATABASE?
