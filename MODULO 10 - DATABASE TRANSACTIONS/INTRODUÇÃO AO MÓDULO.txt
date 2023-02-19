@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+
+
+
+
+
+----> nesse módulo,
+
+EXPLORAREMOS 1 TÓPICO TOTALMENTE NOVO,
+
+
+
+
+
+'''TRANSACTIONS'''',
+
+
+
+QUE NOS AJUDAM 
+
+A BUNDLAR MÚLTIPLAS 'STEPS' ( ou statements)
+
+
+
+EM 
+
+
+1 
+
+
+
+ÚNICA OPERATION...
+
+
+
+
+
+
+
+
+-> MAS PQ ISSO É ÚTIL?
+
+
+
+
+
+
+
+
+
+
+APRENDEREMOS:
+
+
+
+
+1) O QUE SÃO TRANSACTIONS,
+
+
+E EM QUE CASOS __ ELAS PODEM SER BEM ÚTEIS AOS NOSSOS PROJETOS...
+
+
+
+
+
+
+
+
+
+2) VEREMOS O CONCEITO POR TRÁS DE 'STARTING TRANSACTIONS', E TAMBÉM 
+
+
+ENTENDEREMOS O CONCEITO DE 'ROLLBACK'...
+
+
+
+
+
+
+3) ENTENDEREMOS TAMBÉM 
+
+
+AS KEYWORDS DE ____'COMMIT'____ E ____'SAVEPOINT'___,
+
+
+QUE TAMBÉM FAZEM PARTE DE TRANSACTIONS...
