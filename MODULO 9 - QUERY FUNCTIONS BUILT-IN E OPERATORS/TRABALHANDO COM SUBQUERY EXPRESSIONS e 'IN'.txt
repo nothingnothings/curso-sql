@@ -1,0 +1,1184 @@
+
+
+
+
+
+
+
+
+
+
+DEVEMOS CONTINUAR COM OUTRO OPERATOR, DIFERENTE DE 'EXISTS'...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+ADICIONAREMOS UMA 
+
+
+
+
+OUTRA ENTRY  
+
+
+
+
+
+
+NA NOSSA TABLE DE __ CUSTOMERS...
+
+
+
+
+
+
+
+
+
+--> A ENTRY É ESTA:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO customers (
+    first_name,
+    last_name,
+    email
+) VALUES (
+    'Ken',
+    'Brooks',
+    'ken@test.com'
+);
+
+
+
+
+
+
+
+
+
+
+
+
+a diferença 
+
+
+desse customer para os outros é que 
+
+
+ELE 
+
+__ NÃO FEZ NENHUMA 'ORDER'...
+.
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+ADICIONEI ESSE CUSTOMER...
+
+
+
+
+
+
+
+
+
+
+
+OK.. AGORA TEMOS ESSE CUSTOMER EXTRA, COM ID DE 4...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTo...
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA TEMOS AS TABLES 
+
+
+
+
+DE 'CUSTOMERS'
+
+
+E 
+
+DE 
+
+'ORDERS'...
+
+
+
+
+
+
+
+
+DIGAMOS QUE QUEREMOS RETRIEVAR 
+
+
+1 LISTA 
+
+
+__ 
+
+
+DE __ EMAILS_ DE CUSTOMERS __ QUE 
+
+
+
+FIZERAM 1 ORDER...
+
+
+
+
+
+
+
+
+
+
+--> HÁ VÁRIAS MANEIRAS DE CONSEGUIR ISSO, É CLARO,
+
+
+
+MAS 1 MANEIRA COMUM É USAR 
+
+'WHERE order_id != null'...
+
+
+(EU ACHO)...
+
+
+
+
+
+
+
+ERRADO... A INFO DE 'order_id' não existe dentro 
+
+da table de USERS,
+
+por isso serei obrigado a usar algo como UM LEFT JOIN/INNER JOIN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM... ESTE CÓDIGO DEU CERTo:
+
+
+
+
+SELECT first_name FROM customers as c
+INNER JOIN orders AS o ON o.customer_id = c.id;
+
+
+
+
+E RETORNOU ISTO:
+
+
+
+
+
+
+Max 
+Max
+Julie 
+Manu 
+
+
+
+
+
+
+(SEM NENHUM KEN)....
+
+
+
+
+
+
+
+
+--> OK, EU USEI O 'INNER JOIN'
+
+JUSTAMENTE PQ 
+__ ELE _ EXCLUI __ 
+
+
+
+
+TODOS OS ROWS DE 'customer'
+que _ NÃO 
+
+
+FIZERAM NENHUMA ORDER (ou seja, que não satisfizeram aquela condição do 'ON')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS AGORA O PROFESSOR QUER NOS MOSTRAR OUTRA MANEIRA DE FAZER ISSO,
+
+
+UMA MANEIRA ENVOLVENDO O OPERATOR DE 'IN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... O OPERADOR DE 'IN'...
+
+
+
+
+
+
+
+
+
+
+--> PARA COMEÇAR,
+
+
+DIGAMOS QUE 
+
+SELECIONAMOS 
+
+
+
+
+O 'email'
+
+
+DE TODOS OS CUSTOMERS DA TABLE
+
+
+
+
+DE 'customers'...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, MAS SABEMOS QUE 
+
+TEMOS 4 
+
+
+PESSOAS EXISTENTES AGORA, MAS QUE O KEN NÃO TEM NENHUMA ORDER... 
+
+
+
+
+
+
+
+
+--> QUEREMOS LISTAR APENAS CUSTOMER EMAILS QUE FIZERAM ORDERS,
+
+POR ISSO 
+
+
+ESSA QUERY N SERVE...
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE 
+
+
+
+
+DEVEMOS REFINAR ESSA QUERY...
+
+
+
+
+
+
+
+----> CERTO...
+
+
+A PRÓXIMA COISA LÓGICA 
+
+
+A 
+
+SE FAZER É 
+
+UM JOIN...
+
+
+
+
+
+
+
+
+
+
+
+--> É EXATAMENTE O QUE O PROFESSOR FEZ,
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT email FROM customers AS c 
+INNER JOIN orders as o ON c.id = o.customer_id;
+
+
+
+
+
+
+
+
+
+--> OK, ISSO RETRIEVOU MEU RESULTADO DE ANTES,
+
+
+
+QUE ERA 4 EMAILS (2x max, julie e manu)...
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo...
+
+
+
+
+
+
+
+
+JOINS SÃO NICE, SIM,
+
+MAS N SÃO A SOLUÇÃO
+
+
+PERFEITA... (eu poderia ter usado 'UNIQUE', para ficar com apenas 1 cópia de cada email,
+
+mas ainda assim o professor diz que essa não é a soluçaõ perfeita)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA CONSEGUIR 1  RESULTADO MELHORL,
+
+
+
+TODOS 
+
+OS INDIVIDUAL EMAIL ADDRESSES SEM DUPLICATAS,
+
+PODEMOS 
+
+USAR 
+
+O 
+
+OPERATOR DE 'IN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  MAS ANTES DE COMEÇARMOS A USAR ESSA QUERY,
+
+QUE 
+
+GERALMENTE 
+
+É USADA COM 
+
+1 'SUBQUERY' (que é o título dessa lição),
+
+
+O PROFESSOR QUER 
+
+
+MOSTRAR 
+
+
+A CORE LOGIC
+
+
+
+
+
+_ DESSE OPERATOR DE 'IN'
+
+em 1 exemplo simples... 
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE VOCÊ QUER LISTAR APENAS 
+
+
+
+OS IDs 
+
+DOS CUSTOMERS 
+
+
+
+
+CUJOS first_name são 'MAX' ou 'MANU'...
+
+
+
+
+
+
+
+
+
+PARA ISSO, VOCÊ APLICARIA 1 FILTER COMUM,
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT id 
+ 
+FROM customers 
+WHERE first_name = 'Max' OR first_name = 'Manu';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VOCÊ PODE FAZER ISSO,
+
+SIM,
+
+NADA DE ERRADO QUANTO A ISSO...
+
+
+
+
+
+
+
+GANHAMOS OS IDS DE '1'
+
+e 
+'2'...
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo... 
+
+
+
+
+
+MAS, ALTERNATIVAMENTE,
+
+PODERÍAMOS USAR 
+
+
+
+
+O OPERATOR DE 'IN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O OPERATOR DE 'IN'
+
+
+
+NÃO PRECISA OBRIGATORIAMENTE FAZER PARTE DE 1 'SUBQUERY',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E _, NESSE CASO,
+
+
+
+__ SUBSTITUI/SUBSTITUÍRIA 
+
+ESSA 
+
+
+LONGA LÓGICA 
+
+
+
+DE 
+
+
+
+'WHERE first_name = 'Max' OR first_name = 'Manu';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA VAMOS SUBSTITUIR ESSA CLAUSE DE WHERE,
+
+
+
+
+
+por 
+
+
+
+
+
+
+algo tipo assim:
+
+
+
+
+
+
+
+
+WHERE 
+first_name IN()
+
+
+
+
+
+
+
+
+
+
+
+-_> DENTRO DESSE (),
+
+COLOCAMOS 
+
+
+1 LISTA DE VALUES QUE 
+
+
+
+
+
+ESSA COLUMN DEVE INCLUIR,
+E QUE QUEREMOS 
+
+
+
+RETRIEVAR,
+
+
+
+
+NO RESULTADO DAQUELA QUERY...
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O PROFESSOR COLOCA 'Max' 
+
+e 'Manu'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+SELECT id FROM customers WHERE first_name IN('Max', 'Manu');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> POR MEIO DO RUN DISSO,
+
+GANHAMOS EXATAMENTE O MESMO RESULT DE ANTES...
+
+
+
+
+
+
+
+
+
+BTW, ALÉM DE 
+
+
+'IN',
+
+TEMOS 
+
+
+'NOT IN()'... --> ISSO,
+
+
+COMO O NOME NOS INFORMA,
+
+
+RETRIEVA 
+
+TODOS OS VALUES QUE 
+
+
+
+
+
+NÃO POSSUEM OS VALUES DE 'MAX' E 'MANU'... (julie e ken, nesse caso)...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+--- COM O OPERATOR DE 'NOT' NO INÍCIO, conseguimos TODOS OS USERS QUE NÃO POSSUEM ESSE VALUE DE 'Max' ou 'Manu' (ou seja, KEN e JULIA)...
+-- SELECT id FROM customers WHERE first_name NOT IN('Max', 'Manu');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... É ISSO QUE O 'IN' E 'NOT IN'
+
+
+GERALMENTE FAZEM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS VOCê TAMBÉM PODE USAR 
+
+
+
+
+
+ESSE 'IN'
+
+
+
+COMO PARTE DE SUBQUERIES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DEVEMOS VOLTAR AO OBJETIVO INICIAL,
+
+'CONSEGUIR 
+
+OS EMAILS _ DOS USERS_ QUE _ REALIZARAM ALGUMA ORDER'...
+
+
+
+
+
+
+
+
+
+
+
+PARA ISSO, O PROFESSOR ESCREVE ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+SELECT email 
+FROM customers
+WHERE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS NESSE FILTRO,
+
+AGORA FILTRAREMOS PELO 'ID'... --> ISSO PQ 
+
+
+__APENAS _ 
+
+
+
+
+QUANDO O 'id' DOS CUSTOMERS ESTÁ _ DENTRO ('IN()') DE ALGUMA COISA,
+
+
+
+será esse row retrievado...
+
+
+
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT email
+FROM customers 
+WHERE id IN(
+
+)
+
+
+
+
+
+
+
+
+AGORA, DENTRO DE 'IN()',
+COLOCAMOS 
+
+NOSSA SUB QUERY...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ok... agora vamos rodar 1 subquery para _ 
+
+
+'PEGAR TODOS OS CUSTOMER IDS',
+
+
+
+
+
+PQ 
+
+
+VAMOS QUERER PEGAR __ APENAS __ OS 
+
+
+
+EMAILS __ DOS 
+
+
+CUSTOMERS _ QUE 
+
+
+POSSUEM O 'CORRESPONDENTE ID'
+
+
+QUE 
+
+
+retrievamos da subquery...
+
+
+
+
+
+
+
+
+
+
+
+ACHO QUE VAI FICANDO ASSIM:
+
+
+
+
+
+
+SELECT email
+FROM customers 
+WHERE id IN(
+
+    SELECT customer_id FROM 
+    orders
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK, AÍ FICAMOS COM 1 UNIQUE LIST 
+
+DOS CUSTOMERS QUE FIZERAM 1 ORDER...
+
+
+
+
+
+
+
+PODEMOS VER OS OFFICIAL DOCS PARA APRENDER MAIS SOBRE 
+
+
+
+SUBQUERY EXPRESSIONS...
+
+
+
+
+
+
+TEMOS OUTROS OPERATORS,
+
+COMO 
+
+
+
+'ANY/SOME'
+
+
+
+E 
+
+'ALL'...
+
+
+
+
+
+
+
+
+
+MAS IN E EXISTS SÃO OS MAIS IMPORTANTES...
+
+
+
+
+
+
+
+
+
+
+---> ACABAMOS COM AS SUB-QUERY EXPRESSIONS... devemos ver o próximo tópico...
