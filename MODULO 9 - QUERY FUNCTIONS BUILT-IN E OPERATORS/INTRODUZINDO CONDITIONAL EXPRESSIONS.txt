@@ -1,0 +1,1075 @@
+
+
+
+
+
+
+
+
+--> FINALMENTE ESTAMOS CHEGANDO AO FINAL DESSE MÓDULO...
+
+
+
+
+
+
+
+
+MAS O PROFESSOR QUER NOS MOSTRAR OUTRO CONCEITO IMPORTANTE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SÃO AS 'CONDITIONAL EXPRESSIONS'...
+
+
+
+
+
+
+
+
+
+
+
+ELAS SÃO USADAS __ SEMPRE QUE __ 
+
+
+
+
+O 'OUTPUT'
+
+
+QEU VOCÊ 
+
+
+
+GANHA DA SUA QUERY_ É BASEADO EM CERTA CONDIÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+
+
+
+''SE ALGO É O CASO, ISSO DEVE SE PARECER COM X OU Y'...
+
+
+
+
+
+
+
+
+
+
+
+----> ESSA EXPLICAÇÃO É BEM RUIM,
+
+POR ISSO DEVEMOS VER 1 EXEMPLO PRÁTICO...
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS ATÉ O SQL TOOLS...
+
+
+
+
+
+
+
+
+
+
+
+--> TEMOS A TABLE DE 'orders'..
+
+
+
+
+
+
+
+
+DENTRO DESSA TABLE,
+
+
+TEMOS 
+4 DIFERENTES 
+ORDERS...
+
+
+
+
+
+
+
+
+
+OK... AGORA PODEMOS DIZER QUE 
+
+
+
+
+1 'ORDER'
+
+
+
+
+
+COM VALUE ACIMA DE '30' 
+
+
+
+
+
+É UM 'GOOD DAY' (amount_billed)...
+
+
+
+
+
+
+
+
+
+--> 1 order acima de 15 ou 10 é 
+
+
+UM NORMAL DAY...
+
+
+
+
+
+
+
+
+
+
+TODAS AS OUTRAS ORDERS SÃO BAD...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS 
+
+
+
+CONSEGUIR ISSO COM 1 CONDITIONAL EXPRESSION,
+
+
+
+PQ O OUTPUT OBTIDO POR NÓS 
+
+DEPENDERÁ 
+
+
+
+
+__ DE 1 CERTA CONDITION...
+
+
+
+
+
+
+
+
+--> para aplicar 
+
+1 condition dessas,
+
+
+PRIMERIAMENTE 
+
+
+
+
+DEVEMOS 
+
+
+ESCOLHER 1 COLUMN (no nosso caso,
+o 'amount_billed')...
+
+
+
+
+
+
+
+
+
+Ex:
+
+
+
+
+
+
+
+
+
+
+
+SELECT amount_billed,
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS NÃO VAMOS ADICIONAR O 'FROM',
+
+
+E SIM 
+
+VAMOS 
+
+ADIICONAR ESSA VÍRGULA..
+
+
+
+
+
+
+
+DEPOIS DA VÍRGULA,
+
+VAMOS COLOCAR OS DIFERENTES 
+
+
+'CASES'
+
+QUE 
+
+
+GOSTARÍAMOS DE TER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ _ O OUTPUT _ QUE 
+
+GANHAMOS 
+
+
+DEPENDERÁ 
+
+DE 1 CERTA CONDITION, DEFINIDA POR NÓS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA DEFINIR 1 CONDITIONAL EXPRESSION,
+
+DEVEMOS USAR A KEYWORD DE 'CASE'...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT amount_billed,
+    CASE WHEN 
+
+
+
+
+
+
+
+
+
+
+
+
+    QUANDO O AMOUNT BILLED FOR MAIOR DO QUE 30,
+
+
+
+
+    VAMOS QEURER ('THEN')
+
+
+
+    1 OUTPUT ESPECÍFICO... (uma string, de 'Good Day', por exemplo)...
+
+
+
+
+
+
+
+
+
+
+
+    PARA ADICIONAR MAIS CASES,
+
+
+    NÃO COLOCAMOS MAIS 'case',
+
+    E SIM 
+
+    COLOCAMOS MAIS 'WHEN'... (e sem vírgulas),
+
+    TIPO ASSIM:
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+--- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+    CASE WHEN amount_billed > 30 THEN 'A Nice Day'
+     WHEN amount_billed > 15 THEN 'Normal Day',
+     ELSE 'Bad Day'
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     --> OK...
+
+
+
+
+
+     MAS QUANDO TERMINAMOS 1 CONDITIONAL EXPRESSION,
+
+     DEVEMOS USAR 'END'..
+
+
+
+
+
+
+     ex:
+
+
+
+
+
+     --- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+    CASE WHEN amount_billed > 30 THEN 'A Nice Day'
+     WHEN amount_billed > 15 THEN 'Normal Day',
+     ELSE 'Bad Day'
+    END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    DEPOIS DE 'END',
+
+    COLOCAMOS 
+
+    'FROM table_name'...
+
+
+
+
+
+    ex:
+
+
+
+
+
+
+
+
+
+--- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+    CASE WHEN amount_billed > 30 THEN 'A Nice Day'
+     WHEN amount_billed > 15 THEN 'Normal Day',
+     ELSE 'Bad Day'
+    END
+FROM orders;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo...
+
+
+
+
+
+
+
+
+AGORA RODAMOS ESSA QUERY,
+
+
+
+E AÍ 
+
+
+
+
+
+
+
+GANHAMOS 
+
+
+
+
+1 RESULT TIPO 
+
+
+
+
+
+
+
+amount_billed      CASE WHEN 
+
+48.99              GOOD DAY 
+27.45              NORMAL DAY 
+19.49              NORMAL DAY 
+8.49               BAD DAY
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> certo...
+
+
+
+
+
+
+MAS SE MUDAMOS A ORDER DAS CONDITIONS,
+
+PARA FICAR ASSIM:
+
+
+
+
+
+
+
+
+--- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+     CASE WHEN amount_billed > 15 THEN 'Normal Day',
+    WHEN amount_billed > 30 THEN 'A Nice Day'
+
+     ELSE 'Bad Day'
+    END
+FROM orders;
+
+
+
+
+
+
+
+
+SE RODÁSSEMOS 
+
+
+ISSO,
+
+
+FICARÍAMOS 
+
+COM APENAS 
+
+
+
+'NORMAL DAY'
+
+
+
+
+
+
+NOS OUTROS CASES,
+
+
+
+
+
+E COM NENHUM 'NICE/GOOD DAY'...
+
+
+
+
+
+
+
+
+
+
+
+-> bem, mas o que houve de errado, aqui?
+
+
+
+
+
+
+
+
+
+O PROBLEMA É QUE O PRIMEIRO CASE, '> 15',
+
+
+
+JÁ É SATISFEITO
+
+
+
+INICIALMENTE,
+
+
+O QUE 
+
+
+
+___ FAZ COM QUE _ o 
+
+
+RESTO 
+
+
+
+
+DAS CONDITIONS SEJA _ 
+
+IGNORADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PARA RESOLVER ISSO, 2 OPÇÕES:
+
+
+
+
+
+
+1) CUIDAR COM A ORDEM DAS SUAS CONDITIONAL EXPRESSIONS...
+
+
+
+
+
+
+2) o approach melhor: ser mais EXPLÍCITO QUANTO  
+
+AOS OPERATORS USADOS AQUI... (usar '>' e '<')...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+--- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+     CASE WHEN amount_billed > 15 AND amount_billed <= 30 THEN 'Normal Day',
+    WHEN amount_billed > 30 THEN 'A Nice Day'
+
+     ELSE 'Bad Day'
+    END
+FROM orders;
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+--- SELECIONA-SE A COLUNA com os values a serem examinados/considerados nas expressions condicionais
+SELECT amount_billed,
+     CASE WHEN amount_billed > 15 AND amount_billed <= 30 THEN 'Normal Day',
+     WHEN amount_billed > 30 THEN 'Good Day',
+     ELSE 'Bad Day'
+    END
+FROM orders;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSA É A CORE LOGIC POR 
+
+TRÁS 
+
+DESSAS CONDITIONAL EXPRESSIONS..
+
+
+
+
+
+
+
+
+
+
+
+MAS O INTERESSANTE É QUE PODEMOS 
+
+USAR 
+
+
+
+ESSAS CONDITIONAL EXPRESSIONS COMO PARTE 
+
+DE 
+
+
+_SUBQUERIES...
+
+
+
+
+
+
+
+
+
+PARA ISSO,
+
+
+DEVEMOS 
+
+PENSAR/LEMBRAR 
+
+
+DE 
+
+1 EXEMPLO QUE TIVEMOS MAIS CEDO NESSE MÓDULO,
+
+
+
+lá com 
+
+
+
+
+as 'DATE/TIME FUNCTIONS' --> LÁ, NAQUELA OPORTUNIDADE,
+
+
+
+
+
+
+
+
+
+TRABALHAMOS COM 
+
+'SELECT WEEKDAY(last_checkin)',
+
+
+
+
+
+
+PARA MOSTRAR 
+
+
+TODOS 
+
+
+
+OS 
+
+WEEKDAYS 
+
+
+
+
+que tínhamos nesse 'last_checkin' 
+
+
+
+COLUMN..
+
+
+
+
+
+
+
+
+
+BEM,
+
+
+
+COM 
+
+
+
+
+A AJUDA DAS 'CONDITIONAL EXPRESSIONS',
+
+É 
+
+POSSÍVEL 
+
+SUBSTITUIR DIRETAMENTE OS __ NÚMEROS REPRESENTATIVOS DE 
+
+
+DIAS DA SEMANA __ POR 
+
+ACTUAL 
+
+
+
+_ STRINGS DIZENDO 'Segunda',
+
+'Terça',
+
+'Quarta',
+
+etc...
+
+
+
+
+
+
+
+
+DEVEMOS 
+
+
+ESCOLHER 
+
+
+
+A SINTAXE CORRETA,
+
+
+A 
+
+
+
+SINTAXE DE 'WEEKDAY/DOW' 
+
+
+,
+
+a depender 
+
+de qual 
+
+
+
+SISTEMA DE BANCO DE DADOS ESTAMOS USANDO (mysql ou postgresql)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR USARÁ O MYSQL,
+
+mas eu usarei O POSTGRESQL...
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT EXTRACT(ISODOW FROM last_checkin) FROM memberships;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E ESSE É O NOSSO DESAFIO:
+
+
+
+
+
+
+USE ESSA QUERY DE DIAS DA SEMANA COMO SUBQUERY,
+
+
+PARA 
+
+RETRIEVAR _ DIFERENTES NÚMEROS PARA _ OS WEEKDAYS,
+
+E AÍ 
+
+IMPLEMENTE 
+
+ESSE 
+
+SUBQUERY RESULT __ COMO __ BASE__ PARA SUA OUTER QUERY,
+
+QUE 
+
+ENTÃO VAI USAR 
+
+1 CONDITIONAL EXPRESSION 
+
+
+
+PARA __ TRANSFORMAR OS NUMBERS EM DATES..
+
+
+
+
+
+
+
+
+
+
+DICA: SEU _ SELECT STATEMENT DEVERÁ 
+
+
+CONTER 
+
+A 
+
+
+CONDITIONAL EXPRESSION,
+
+
+
+
+E NO __ FROM _ STATEMENT 
+
+VOCÊ 
+
+
+
+
+__DEVERÁ _ IMPLEMENTAR_ A SUBQUERY dos dias da semana...
+
+
+
+
+
+ESSE É O NOSSO DESAFIO... NA PRÓXIMA LIÇÃO,
+
+SOLUCIONAREMO-NO JUNTOS...
