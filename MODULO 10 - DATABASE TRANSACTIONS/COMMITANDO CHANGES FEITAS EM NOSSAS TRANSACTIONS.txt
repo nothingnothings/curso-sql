@@ -1,0 +1,961 @@
+ 
+
+
+
+
+
+
+
+
+ OK... COMEÇAMOS A TRANSACTION,
+
+
+
+
+ FIZEMOS 2 OPERATIONS (2 insert statements),
+
+
+
+ E O SEGUNDO INSERT STATEMENT DEU ERRO... ---> DEPOIS QUE ELE DEU ERRO,
+
+
+ RODAMOS 'ROLLBACK'
+
+
+
+ PARA FAZER ROLLBACK AO STATE __ ANTERIOR __ AO EXECUTE DA TRANSACTION..
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> OK...
+
+
+
+
+
+
+ AGORA DIGAMOS QUE _ O ERRO DA QUERY ANTERIOR É CORRIGIDO POR NÓS,
+
+
+
+
+
+ E TUDO FICA LEGAL...
+
+
+
+
+
+
+
+
+
+
+ --> SE ISSO ACONTECER,
+
+ VAMOS QUERER __ ADICIONAR __ 
+
+
+ A INFO/CHANGES 
+
+
+ A NOSSA DATABASE..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ A QUERY, CORRIGIDA, FICA ASSIM:
+
+
+
+
+
+
+ 
+INSERT INTO orders (
+    amount_billed,
+    customer_id
+) VALUES (
+    103.12,
+    6
+);
+
+
+
+
+
+
+
+
+
+
+
+
+------> CERTo...
+
+
+
+
+
+
+AGORA QUE 
+
+SABEMOS QUE 
+
+OS 
+
+2 STATEMENTS VAO RODAR COM SUCESSO,
+
+
+
+
+
+
+
+
+VAMOS TER QUE RODAR A TRANSACTION DE NOVO, COM 'START TRANSACTION'/'BEGIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS PQ PRECISAMOS RODAR A TRANSACTION MAIS UMA VEZ?
+
+É PQ 
+
+
+A WORD DE 'ROLLBACK' OU 'COMMIT'
+
+
+TERMINAM 
+
+
+
+
+A TRANSACTION...
+
+
+
+
+
+
+
+ 
+ START TRANSACTION  --- PARA _ TERMINAR UMA TRANSACTION, DEVEMOS RODAR OU 'ROLLBACK' (reverter changes) ou 'COMMIT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ok...
+
+
+
+
+
+ COMEÇAMOS 1 NOVA TRANSACTION, SIM...
+
+
+
+
+
+
+
+
+ AGORA O PROFESSOR RODA O COMANDO DE 'INSERT'
+
+ NA TABLE 
+
+
+
+
+ DE 
+
+
+ CUSTOMERS,
+
+
+ E DEPOIS EM ORDERS...
+
+
+
+
+
+
+
+
+
+
+
+ OS 2 COMANDOS FUNCIONAM...
+
+
+
+
+
+
+
+
+
+
+ --> CHECAMOS AS TABLES,
+
+ AS 2 COISAS FORAM ADICIONADAS 
+
+
+
+ NAS TABLES...
+
+
+
+
+
+
+
+ O PROFESSOR COMETEU 1 ERRO,
+
+ POR ISSO 
+
+ ELE RODA 1 ROLLBACK...
+
+
+
+
+
+
+
+
+ --> AÍ ELE COLOCA O ID CORRETO NO CUSTOMER...
+
+
+
+
+
+ AÍ ELE 
+
+
+ COMEÇA 
+
+
+
+
+ 1 NOVA TRANSACTION,
+
+ com 
+
+
+ 'START TRANSACTION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+AÍ ELE RODA AS 2 QUERIES, OBTÉM SUCCESS NAS DUAS...
+
+
+
+
+
+
+
+
+
+
+MAS SE ELE __ ABRE 1 NOVA JANELA (outra session conectada na nossa database),
+
+
+
+
+
+
+ELE NÃO VE AS MUDANÇAS... --> ISSO ACONTECE/ESTÁ ASSIMM 
+
+
+
+JUSTAMENTE PQ 
+
+O 
+PROFESSOR 
+
+
+AINDA NÃO FEZ COMMIT DAS CHANGES REALIZADAS NESSA 
+
+TRANSACTION...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+COMMIT; -- ISSO APLICA TODAS AS MUDANÇAS REALIZADAS, DURANTE A TRANSACTION, A DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+
+AO RODAR ISSO,
+
+
+
+
+
+CONSEGUIMOS 
+
+2 COISAS:
+
+
+
+
+
+
+
+1) ASSIM, COMO COM 'ROLLBACK',
+
+
+O 'COMMIT' TERMINA 
+
+A NOSSA TRANSACTION (e aí a SESSION VOLTA A SER 1 SESSION NORMAL)...
+
+
+
+2) AS COISAS REALIZADAS 
+
+DURANTE 
+
+
+
+A TRANSACTION PASSAM A SER MUDANÇAS EFETIVAS,
+
+E DEIXAM DE SER 
+
+'IN-MEMORY ONLY'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... O BILLY FOI ADICIONADO COMO 1 NOVO CUSTOMER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... MAS HÁ MAIS 1 COISA SOBRE COMMITS QUE VOCÊ DEVE SABER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR HAVIA MENCIONADO QUE PODEMOS _ TERMINAR 
+
+
+TRANSACTIONS COM A KEYWORD DE 'ROLLBACK'...
+
+
+
+
+
+
+
+
+
+--> E TAMBÉM DISSE QUE PODEMOS TERMINAR TRANSACTIONS COM A KEYWORD DE 'COMMIT' (que também aplica essas changes na database)....
+
+
+
+
+
+
+
+
+
+
+MAS SE VOCê 
+
+
+ADICIONA 
+
+
+MAIS 
+
+
+1 CUSTOMER,
+
+POR MEIO DE OUTRA QUERY,
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+INSERT INTO customers (
+    first_name,
+    last_name,
+    email
+) VALUES (
+    'Steve',
+    'Black',
+    'steve@test.com'
+);
+
+
+
+
+
+
+DEPOIS, TENTAMOS ADICIONAR 1 NOVA ORDER,
+
+E 
+
+ASSUME-SE QUE O ERRO DE 'MISSING ID'
+
+
+SE REPETIU MAIS UMA VEZ...
+
+
+
+
+INSERT INTO orders (
+    amount_billed,
+    customer_id
+) VALUES (
+    10.00
+)
+
+
+
+
+
+
+
+
+CERTO... AÍ VOCê INICIA OUTRA TRANSACTION,
+
+E TENTA 
+
+ADICIONAR 
+
+ESSE NOVO 
+
+
+CUSTOMER... --> 
+
+
+
+
+
+-----> bem, 
+
+
+A QUERY É BEM-SUCEDIDA,
+
+
+E O 
+
+CUSTOMER 
+
+
+ACABA INSERIDO ..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS AÍ,
+
+AO INSERIR 
+
+A ORDER,
+
+GANHAMOS O MESMO ERROR DE NOVO..
+
+
+
+
+
+
+
+
+--> COM ISSO,
+
+O ADD DESSE 'STEVE'
+
+
+
+ESTÁ APENAS 
+
+
+
+
+
+NA __ MEMÓRIA DA DATABASE, E NÃO EXISTE EFETIVAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> OK.. MAS DIGAMOS QUE 
+
+__ VOCê 
+
+NÃO 
+
+
+
+APLICA _ O COMANDO DE 'ROLLBACK' IMEDIATAMENTE,
+
+
+
+
+
+
+E SIM __ FICA __ 
+
+
+
+NA 'ACTIVE SESSION'
+
+
+
+E AÍ 
+
+
+
+
+
+PENSA 'OOPS, QUERO CORRIGIR ALGUMA COISA'... ->  AÍ VOCê VAI LÁ 
+
+
+
+
+E COLOCA 
+
+
+
+1 user_id 
+
+
+NAQUELE 
+
+
+
+
+CAMPO QUE ESTAVA IRREGULAR/FALTANDO...
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+INSERT INTO orders (
+    amount_billed,
+    customer_id
+) VALUES (
+    10.00,
+    6 ////CUSTOMER_ID...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS A QUESTÃO É QUE VOCÊ 
+
+
+NÃO TERMINOU A TRANSACTION ANTERIOR... ->  ELA CONTINUA ROLANDO...
+
+
+
+
+
+
+
+
+
+
+
+AGORA DIGAMOS QUE 
+
+VOCê 
+QUER 
+
+VER 
+
+
+SE 
+
+
+ISSO FUNCIONA EM _ OUTRA TRANSACTION -> TUDO SEM __ FECHAR__ A TRANSACTION _ 
+
+ANTERIOr...
+
+
+
+
+
+
+
+
+
+
+
+-> PARA ISSO, VOCê RODA 'START TRANSACTION/BEGIN'
+
+MAIS UMA VEZ...
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+SE ISSO ACONTECER,
+
+
+
+
+
+VOCê 
+
+VERÁ QUE 
+NA SUA 
+
+
+DATABASE 
+
+
+O _ sTEVE_ 
+
+ESTARÁ __ 
+
+
+
+EXISTINDO 
+
+
+NA DATABASE, JÁ ESTARÁ EXISTINDO...
+
+
+
+
+
+
+
+
+
+
+MAS PQ ISSO?
+
+
+
+É PQ 
+
+
+CERTOS STATEMENTS,
+
+
+STATEMENTS ESPECÍFICOS,
+
+
+
+SÃO TRATADOS COMO 'COMMIT'
+
+
+PELO MYSQL/POSTGRESQL..
+
+
+
+
+
+
+
+
+--> E SE DERMOS 1 OLHADA 
+
+
+NESSES DIFERENTES STATEMENTS QUE CAUSAM 1 COMMIT IMPLÍCITO,
+
+
+
+
+
+
+VEREMOS QUE VÁRIOS STATEMENTS 'IMPORTANTES', como 'CREATE TABLE', 'CREATE FUNCTION',
+'CREATE DATABASE ,
+
+
+et cetc,
+
+
+
+TODOS ELES 
+
+
+
+
+CAUSAM COMMITS IMPLÍCITOS... 
+
+
+
+
+
+
+
+
+MAS, O MAIS IMPORTANTE,
+
+É QUE 
+
+
+
+
+O CALL DE 'START TRANSACTION'
+
+
+
+
+_ mais __De  1 única VEZ 
+
+
+
+
+FAZ COM QUE 
+
+ A TRANSACTION _ ANTERIOR  TENHA 'COMMIT' RODADA SOBRE SI...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE VOCê SEMPRE DEVE MANTER APENAS 1 ÚNICA TRANSACTION...
+
+
+
+
+
+
+
+
+
+VOCê DEVE OU:
+
+
+1) FAZER ROLLBACK DA CURRENT TRANSACTION, PARA ACABAR COM ELA...
+
+
+
+
+
+
+2) OU , ENTÃO, COMMIT A TRANSACTION ATUAL, PARA _ ADICIONAR _ 
+
+AS CHANGES NA SUA DATABASE,
+
+_ PARA ENTÃO 
+
+PROSSEGUIR COM UMA NOVA TRANSACTION... (se você quiser)...
+
+
+
+
+
+
+
+
+
+
+ISSO É A PARTE IMPORTANTE DE TRANSACTIONS.
+..
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O QUE ACONTECE COM 1 TRANSACTION,
+
+SE A CONNECTION DO USER CAI DURANTE ELA?
+
+"
+I believe there are specific databases that will rollback if a connection with a transaction is closed.
+There are others that will do a commit.
+I doubt either will switch to the alternative since that means their existing customers might break.
+"
+
+
+depende do sistema, portanto...
+
+
+
+
+
+HÁ APENAS 1 OUTRO CONCEITO QUE O PROFESSOR QUER 
+
+NOS APRESENTAR...

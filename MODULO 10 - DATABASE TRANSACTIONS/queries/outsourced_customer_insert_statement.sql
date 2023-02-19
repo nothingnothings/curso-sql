@@ -1,6 +1,6 @@
 INSERT INTO customers (first_name, last_name, email)
 VALUES (
-        'Maria',
+        'Billy',
         'Jones',
         'maria@test.com'
     );
