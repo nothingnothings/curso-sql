@@ -1,0 +1,801 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AGORA DEVEMOS VER OUTRO TÓPICO, NOVO...
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA FALAREMOS SOBRE 'SUBQUERY EXPRESSIONS'...
+
+
+
+
+
+
+
+
+
+
+--> PARA APRENDER MAIS SOBRE ISSO,
+
+
+
+
+TEMOS 2 NOVAS TABLES,
+
+QUE 
+ADICIONAREMOS A NOSSA DATABASE..
+
+
+
+
+
+
+
+
+
+
+-> SERÃO TABLES DE 'CUSTOMERS'
+
+
+E 
+
+
+'ORDERS'...
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE TEMOS 1 ONLINE SHOP PARA NOSSO GYM,
+
+EM QUE 
+
+
+PESSOAS PODEM COMPRAR 
+
+PRODUTOS 
+
+
+
+_ RELACIONADOS A WORKOUTS E ETC,
+
+
+E
+ _ ESSA INFO _ DEVERÁ _ SER 
+
+ TBM PARTE _ DESSA DATABASE..
+
+
+
+
+
+
+
+
+
+
+ --> ESSA ESTRUTURA N É TÍPICA,
+
+
+
+
+
+ PQ O 'MEMBERSHIPS'
+
+ É 
+
+ DESCONECTADO DESSAS OUTRAS 2 TABLES,
+
+ MAS VAMOS SEGUIR COM ESSE APPROACH, AINDA ASSIM...
+
+
+
+
+
+
+
+
+
+
+ok... adicionei essas tables,
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+CREATE TABLE customers(
+    -- for mysql use this code
+    -- id INT PRIMARY KEY AUTO_INCREMENT,
+    -- for postgresql use this code
+    -- id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(200),
+    last_name VARCHAR(200),
+    email VARCHAR(200)
+);
+CREATE TABLE orders(
+    -- for mysql use this code
+    -- id INT PRIMARY KEY AUTO_INCREMENT,
+    -- for postgresql use this code
+    -- id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
+    amount_billed NUMERIC(5, 2),
+    customer_id INT REFERENCES customers
+);
+
+
+
+
+
+
+
+
+
+
+
+-------------
+
+
+
+
+
+
+
+
+
+--> aí adicionamos os customers, tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO customers(
+    first_name,
+    last_name,
+    email
+)
+VALUES(
+    'Max',
+    'Schwarz',
+    'max@test.com'
+),(
+    'Manu',
+    'Lorenz',
+    'manu@test.com'
+),(
+    'Julia',
+    'Meyers',
+    'juli@test.com'
+);
+
+INSERT INTO orders(
+   amount_billed,
+   customer_id 
+)
+VALUES(
+    48.99,
+    1
+), (
+    27.45,
+    2
+), (
+    19.49,
+    1
+), (
+    8.49,
+    3
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK..
+
+
+
+
+
+
+lá em 'orders',
+
+
+temos 
+
+
+
+O CUSTO DE CADA ORDER,
+
+
+
+
+
+o id de cada order,
+
+
+e 
+
+
+um vínculo a cada customer, por meio do 'customer_id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AS 2 TABLES ESTÃO LIGADAS POR 1 RELATIONSHIP DE 'ONE-TO-ONE'..
+
+
+
+
+
+
+
+
+
+
+MAS ESSE NÃO É O CORE TOPIC DESSA LIÇAÕ...
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS AGORA DEVEMOS 
+
+VER SUBQUERY EXPRESSIONS, ETAPA-POR-ETAPA,
+
+COM BASE 
+
+NESSAS TABLES..
+
+
+
+
+
+
+
+
+
+
+
+-> VAMOS 
+
+
+COMEÇAR 
+
+
+
+
+
+COM O __ FILTERING_DE DATA, DE NOVO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> pq percebemos que 
+
+
+na table de customers temos 
+
+'first_name',
+
+'last_name'
+
+e 
+
+'email'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E __ SE EU QUISER ENCONTRAR o
+
+
+
+`FIRST_NAME`
+
+
+
+
+
+E 'LAST_NAME'
+
+
+
+de 1 customer COM 1 
+
+
+
+EMAIL ESPECÍFICO QUE EU CONHEÇO,
+EU PODERIA 
+
+
+
+RODAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT first_name, last_name 
+FROM customers WHERE email = 'max@test.com';
+
+
+
+
+
+
+
+
+-->OK, COM ISSO PEGAREMOS APENAS O RECORD DO MAX,
+
+E AÍ TEREMOS O 'FIRST NAME'
+
+E 
+'LAST NAME'
+
+DELE...
+
+
+
+
+
+
+
+
+
+
+--> ISSO É ALGO QUE JÁ SABEMOS..
+
+
+
+
+
+
+ENTRETANTO,
+ESPECIALMENTE QUANDO USAMOS DATABASES NO NOSSO APP,
+
+
+
+VOCÊ 
+
+
+
+
+
+__ PODE QUERER ASSEGURAR QUE 1 USER _ NÃO CONSIGA__ CRIAR 
+
+1 NOVO EMAIL _ 
+
+
+SE 
+
+
+
+ESSE VALUE DE ESSE EMAIL FOR IGUAL AO VALUE DE 1 EMAIL 
+
+
+
+QUE JÁ 
+
+
+EXISTE NA SUA DATABASE... (talvez com 'IF EXISTS'?)
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK...
+
+
+
+
+
+E, PARA OBTER ESSA INFO,
+
+
+__ NÃO É NECESSÁRIO RETRIEVAR O 'FIRST NAME E LAST NAME'... --> 
+
+
+
+
+
+em vez disso,
+
+O QUE 
+VOCê 
+
+
+__REALMENTE 
+
+PRECISA__ É UM SIMPLES 'TRUE OR FALSE CHECK',
+
+
+ALGO QUE 
+
+
+
+RETORNE 1 BOOLEAN (true/false)
+
+A DEPENDER 
+
+DA EXISTÊNCIA (ou não) 
+
+de 
+
+1 
+record 
+
+
+com esse value específico( email, no nosso caso)
+
+
+
+
+nessa table... ->
+
+
+
+
+
+
+PARA ISSO,
+
+TEMOS A GAMBIARRA DO 
+
+'IF EXISTS'...
+
+
+
+
+
+
+
+
+
+----> ISSO É UM NOVO OPERATOR,
+
+
+
+QUE PODE SER USADO COMO PARTE 
+
+
+DAQUILO QUE CHAMAMOS DE 'SUBQUERY EXPRESSION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR DIZ QUE VAI USAR ESSE OPERADOR __ DE UMA MANEIRA _ 1 
+
+POUCO INORTODOXA...
+
+
+
+
+
+
+
+
+
+--> ELE VAI 
+
+ESCREVER, EM VEZ DE ALGO COMO 'SELECT column_name ...;',
+
+
+
+
+
+
+ELE 
+
+
+VAI ESCREVER 
+
+
+
+
+
+
+'
+
+
+SELECT EXISTS()
+
+
+'
+
+
+
+
+
+
+
+
+
+
+
+--> AÍ ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+SELECT EXISTS (
+    SELECT first_name, last_name 
+    FROM customers 
+    WHERE email = 'max@test.com';
+)
+
+
+
+
+
+
+
+
+
+
+--> MAS SE RODAMOS ISSO AÍ,
+
+GANHAMOS 1 RESULT DIFERENTE.. -> GANHAMOS 
+
+
+
+
+'1'... -------> 
+
+
+
+
+
+
+
+
+
+GANHAMOS '1' JUSTAMENTE PQ _ ESTAMOS USANDO O MYSQL... 
+
+
+
+
+
+
+
+
+----> NO MYSQL, '1' SIGNIFICA TRUE...
+
+
+
+
+
+
+
+
+
+-----> JÁ NO POSTGRESQL, RECEBERÍAMOS 'true'...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+--  O __ 'EXISTS' CHECA SE 1 CERTEIRO VALUE __ EXISTE_ NA SUA TABLE, EM 1 DETERMINADA COLUMN... -> E, ENTÃO, RETORNA 'TRUE'/'FALSE' a depender da existência desse negócio (no MYSQL, ele retorna '1' ou '0')...
+SELECT EXISTS(
+        SELECT first_name,
+            last_name
+        FROM customers
+        WHERE email = 'manu@test.com';
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+E É CLARO QUE 
+
+ISSO É MT ÚTIL SE VOCê QUER GARANTIR 
+QUE CUSTOMERS 
+
+NÃO 
+CONSIGAM CRIAR CONTAS COM EMAILS JÁ 
+
+
+
+UTILIZADOS...
+
+
+
+
+
+
+
+
+
+
+
+ADICIONALMENTE,
+
+
+
+
+
+__ CABE RESSALTAR QUE 'EXISTS'
+
+É MAIS EFICIENTE DO QUE USAR 1 FILTER...
+
+
+
+
+
+
+
+
+
+--  OBS: USAR 'EXISTS' É MAIS _ EFETIVO _ DO QUE
+ USAR UM FILTER COM 'WHERE'-->  ISSO __ PQ _1 FILTER TIPICAMENTE
+ 
+RODA A QUERY __ SOBRE __ tODA A TABLE, TODAS AS ROWS DA TABLE, 
+ENQUANTO QUE, NO CASO DE 'EXISTS', ELE __ PARA__ NA HORA QUE _1 
+ CERTA ENTRY _ FOR ENCONTRADA (pq se for encontrado apenas 1 VALUE 
+ DAQUELE NEGÓCIO, já vai ficar como 'true')...
+
+
+
+
+
+
+
+
+
+
+-> OK, QUER DIZER QUE 
+
+EXISTS É UM MÉTODO MT EFICIENTE PARA CONSTATAR SE CERTOS 
+
+VALUES JÁ FORAM USADOS NA NOSSA TABLE...
