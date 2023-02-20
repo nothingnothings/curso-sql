@@ -1,0 +1,1261 @@
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... ATÉ AGORA,
+
+
+
+ESTUDAMOS OS 'SINGLE-COLUMN INDEXES'...
+
+
+
+
+
+
+
+ENTRETANTO,
+
+É POSSÍVEL TAMBÉM TER INDEXES QUE 
+
+
+COMPREENDEM MÚLTIPLAS COLUMNS (também chamados de 'composite indexes')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+O PROFESSOR ADICIONA 1 NOVO ARQUIVO,
+
+
+
+
+
+'query-more-data'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NESSE FILE,
+
+VAMOS 
+
+
+ADICIONAR 
+
+
+
+
+SELECT STATEMENTS 
+
+
+
+QUE 
+
+
+
+__ TERÃO CLAUSE DE 'WHERE',
+
+
+
+MAS 1 CLAUSE 
+
+
+DE 
+WHERE __ QUE _ 
+BUSCA POR MÚLTIPLOS FIELDS..
+
+
+
+
+
+
+
+
+
+--> TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT * FROM addresses 
+WHERE "street" = 'Teststreet' AND "City" = 'Munich';
+
+
+
+
+
+
+
+
+
+BEM...
+
+
+
+
+
+TODOS OS ADDRESSES 
+
+
+
+
+
+DE NOSSA TABLE SEMPRE TEM 
+
+ESSA COMBINAÇÃO...
+
+
+
+
+
+
+--> MAS PODERÍAMOS 
+
+TER 
+
+
+
+'SAME STREET NAME IN __ DIFFERENT CITIES' --> isso é bem possível...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE NÃO É NADA SURREAL 
+
+
+__ TER __ 
+
+
+1 WHERE CONDITION EM QUE 
+
+PROCURAMOS 
+
+
+POR 
+
+
+
+
+1 STREET +  CITY....
+
+
+
+
+
+
+
+
+
+
+
+
+A QUERY COMPOSTA FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM addresses 
+WHERE "street" = 'Teststreet' AND "City" = 'Munich';
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ CERTO.... ESSE É UM COMANDO COMUM,
+
+ SIM,
+
+
+
+ E PODEMOS O EXECUTAR....
+
+
+
+
+
+
+
+
+
+
+
+ ----> RECEBEMOS 3 ROWS QUE SATISFAZEM ESSA CONDIÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+ ------> OK... MAS EXATAMENTE COMO ANTES,
+
+
+ PODEMOS 
+
+
+ FAZER 'EXPLAIN ANALYZE'
+
+
+ PARA __ 
+
+
+
+ VER __ O QUE __ O MySQL 
+
+
+
+
+
+
+__ FEZ __ PARA RETRIEVAR __ ESSA DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O OUTPUT INTEIRO É:
+
+
+
+
+
+'Table scan on addresses',
+
+
+
+E AÍ 
+
+
+TEMOS 
+
+
+
+INFO SOBRE O COST,
+
+
+
+AS ROWS ESCANEADAS,
+
+ETC ETC..
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM TEMOS ESSE OUTPUT NO POSTGRESQL...
+
+
+
+
+
+
+
+
+
+
+
+--> LÁ ELE TBM 
+
+
+REALIZOU 1 SCAN,
+
+E AÍ 
+
+ENTREGOU ESSA MESMA INFO..
+
+
+
+
+
+
+
+
+
+
+
+--> MAS A COISA ESPECIAL SOBRE ESSA 
+
+QUERY É QUE TEMOS 2 COLUMNS SENDO USADAS NESSA WHERE CONDITION...
+
+
+
+
+
+
+
+--  SE TEMOS CERTEZA DE QUE ESSA 'QUERY COMPOSTA' (2 conditions no WHERE) vai ser executada com mt frequência, torna-se proveitosa a ideia de criar 1 MULTI-COLUMN INDEX, justamente para __ AJUDAR__ COM ESSA QUERY ESPECÍFICO...
+SELECT *
+FROM addresses
+WHERE "street" = 'Teststreet'
+    AND "City" = 'Munich';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -----> OK... PODERÍAMOS CRIAR 2 INDEXES SEPARADOS,
+
+
+    1 
+
+    PARA STREET,
+
+    E OUTRO PARA A CITY... ->  MAS SE É __ ESPECIALMENTE__ 
+
+
+    PROVÁVEL QUE 
+
+
+    ESSES 2 FIELDS SERÃO BUSCADOS EM CONJUNTO,
+
+
+
+    1 
+
+    COMPOSITE INDEX 
+
+
+    FARÁ MAIS SENTIDO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -----> PARA ISSO, O PROFESSOR CRIA 1 NOVO ARQUIVO,
+
+    'create composite index'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> OK... A FÓRMULA É EXATAMENTE A MESMA DE ANTES...
+
+
+
+
+
+
+
+
+
+
+    MAS AGORA COLOCAMOS MÚLTIPLOS COLUMN NAMES DENTRO DO PARÊNTESES...
+
+    TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+    CREATE INDEX multiaddress ON addresses (street, city);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    EX:
+
+
+
+
+
+
+
+
+    --  CRIAMOS ESSE TIPO DE INDEX (multi-coluna) se TEMOS CERTEZA DE QUE ESSA QUERY 'COMPOSTA' (mais de 1 condition na clause de WHERE) vai ser executada COM MT FREQUÊNCIA... 
+CREATE INDEX multiaddress ON addresses (street, city);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... MAS OUTRO DETALHE:
+
+
+
+
+
+
+
+A__ ORDEM__ DE SUAS COLUMNS,
+
+
+
+NESSE COMPOSITE INDEX,
+
+
+
+
+
+ELA IMPORTA... --------> 
+
+
+
+A ORDEM VAI IMPORTAR, MAS PQ?
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS CRIAR ESSE INDEX COM 2 COLUMNS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DE CRIAR ESSE MULTI-COLUMN
+
+
+
+INDEX,
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODEMOS RODAR AQUELA MESMA QUERY DE 
+
+
+
+SELECT *
+FROM addresses
+WHERE "street" = 'Teststreet'
+    AND "City" = 'Munich';
+
+
+
+
+,
+
+
+
+
+
+
+
+
+
+
+E AÍ 
+USAMOS 
+
+'EXPLAIN ANALYZE' --> ISSO NOS DÁ A INFO DE 
+
+
+
+
+
+
+
+
+'INDEX LOOKUP' ----> ISSO NOS MOSTRA QUE 
+
+
+O 
+
+INDEX DE 
+
+
+'multiaddress'
+
+
+
+ESTÁ SENDO USADO...
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O POSTGRESQL NÃO USA O INDEX DIRETAMENTE (
+
+    usou 'SeqScan',
+
+    pq foi considerado mais proveitoso pelo POSTGRESQl,
+
+    talvez por existirem poucas entries na database.... 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS HÁ 
+
+ALGUNS DETALHES QUE VOCê DEVE SABER SOBRE COMPOSITE INDEXES --> 
+
+
+
+
+
+
+
+
+
+
+
+1a) VOCê TAMBÉM PODE USAR __ AS COLUMNS __ INDIVIDUAIS __ QUE
+
+_ 'MAKE-UP' 
+
+O __ COMPOSITE INDEX... --> OU SEJA,
+
+
+
+QUANDO PROCURAMOS POR APENAS 
+
+'STREET',
+
+
+EXISTINDO APENAS  ESSE COMPOSITE INDEX,
+
+
+
+
+
+
+
+__ PASSARÁ A EXISTIR 1 INDEX DE 'STREET' (individual),
+
+
+QUE 
+
+SERÁ 
+
+
+
+USADO __ POR QUERIES_ _SIMPLES COMO ('WHERE city = 'Munich' ' )....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER, EM OUTRAS PALAVRAS,
+
+
+
+
+
+
+
+QUE AS COLUMNS INDIVIDUAIS QUE COMPÕEM ESSE INDEX COMPOSTO 
+
+TAMBÉM 
+
+PODEM SER USADAS EM QUERIES SIMPles...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ISSO SÓ SE APLICA ATÉ 
+
+CERTO PONTO.... -> PQ __ SE NÓS __ 
+
+
+ESCREVERMOS OUTRA WHERE CONDITION,
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+EXPLAIN ANALYZE 
+SELECT * FROM addresses 
+WHERE city = 'Munich';
+
+
+
+
+
+
+
+
+
+,
+
+
+SE FAZEMOS ISSO E RODAMOS A QUERY,
+
+
+
+PERCEBEMOS QUE 
+
+
+O INDEX NÃO TERÁ SIDO USADO... ---------> (vai realizar 1 scan comum)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> A RAZÃO PARA ISSO,
+
+NO CASO,
+
+
+
+É JUSTAMENTE QUE __ '''' A ORDEM IMPORTA'''' (acho que já estudei isso no NOSQL)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÓS HAVÍAMOS CRIADO 
+
+O COMPOSITE INDEX ASSIM:
+
+
+
+
+
+
+CREATE INDEX multiaddress ON addresses (street, city);
+
+
+
+
+
+
+
+
+
+
+
+
+--> A ORDEM IMPORTA... --> COM 2 COLUMNS A ORDEM JÁ IMPORTA...
+
+
+
+
+
+
+
+
+
+MAS SE VOCê TIVER MAIS DE 2 COLUMNS, A ORDEM IMPORTA MAIS AINDA...
+
+
+
+
+
+
+
+
+
+ISSO ACONTECE
+PQ 
+
+
+1 MULTI-COLUMN 
+
+
+INDEX 
+
+É, DE FATO,
+
+
+
+OPTIMIZADO __ _PARA __ AS COMBINAÇÕES DESSAS COLUMNS SENDO USADAS 
+
+EM 1 QUERY.... ---> ESPECIFICAMENTE,
+
+
+A COMBINAÇÃO 
+
+
+
+
+
+DE CONDITIONS COM A KEYWORD DE 'AND' E A CLAUSE DE 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> É PQ _ VOCê __ PODE ___ USAR __ ___PARTES_ 
+
+
+DO MULTI-COLUMN INDEX,
+
+
+
+DA __ ESQUERDA__ PARA _ a DIREITA (
+
+
+    ISSO QUER DIZER QUE 
+
+    VOCê 
+
+    POODE 
+
+    USAR 
+
+
+
+    APENAS 'STREET'
+
+
+OU 
+
+
+
+'STREET + CITY',
+
+
+
+
+
+mas NÃO PODE USAR 
+
+APENAS 
+
+'CITY'...
+)
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- NA VERDADE, QUANDO ESCREVERMOS 'street, city' (STREET + CITY) como COMPOSITE INDEX,
+-- FICAMOS TAMBÉM COM 1 INDEX DE 'street' (pq ELE É 'APROVEITADO')...
+--  ENTRETANTO, NÃO FICAMOS COM  INDEX DE 'CITY' (não ficamos com esse index individual)...
+
+
+
+
+
+
+-- EX: CRIEI 1 INDEX COMPOSTO DE 'STREET, CITY, COUNTRY, CONTINENT'
+
+-- ISSO QUER DIZER QUE, AO MESMO TEMPO, CRIEI OS INDEXES DE 
+--  A) STREET 
+-- B) STREET + CITY 
+-- C) STREET + CITY + COUNTRY
+
+-- MAS, FORA ESSES INDEXES (""REAPROVEITADOS""), não criei nenhum outro index com isso...
+
+
+
+
+
+
+
+
+
+
+----------------------------------------
+
+
+
+
+
+
+
+
+ok... isso faz total sentido...
+
+
+
+
+
+
+
+
+
+ISSO ACONTECE ASSIM SIMPLESMENTE DEVIDO 
+
+
+à MANEIRA PELA QUAL O INDEX É 
+
+
+CRIADO E ARMAZENADO INTERNAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E É EXATAMENTE ESSE O GOTCHA COM 1 MULTI-COLUMN INDEX:
+
+
+
+
+'''''VC NÃO DEVE CRIAR 1 MULTI-COLUMN INDEX COM 
+TODAS AS COLUMNS DE SUA TABLE,
+
+PQ __ ISSO_ _ NÃO VAI QUERER DIZER QUE VOCê 
+VAI, DO NADA,
+
+CONSEGUIR OPTIMIZATIONS PARA TODAS AS COLUMNs'''.
+.
+
+
+
+
+
+
+
+
+
+
+
+
+EM VEZ DISSO,
+
+O NEGÓCIO É DA ESQUERDA PARA A DIREITA,
+
+E VC DEVE 
+APENAS 
+
+CRIAR 
+
+1 DESSES INDEXES SE VC PLANEJA 
+
+RODAR 
+
+COMBINED STATEMENTS,
+
+EM QUE 
+
+
+VOCÊ 
+
+
+USA MÚLTIPLAS COLUMNS,
+
+EM COMBINAÇÃO COM A KEYWORD DE 'AND'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A KEYWORD DE 'AND' 
+
+
+É IMPORTANTE PQ,
+
+
+SE 
+
+
+USARMOS 'OR',
+
+É COMO 
+
+SE 
+
+
+USÁSSEMOS '2 STANDALONE COLUMNS' ---> PQ ISSO NÃO FAZ A  'COMBINATION' DOS VALUES... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O USO DE 'OR' É COMO 
+
+SE VOCÊ ESTIVESSE 
+
+RODANDO 2 QUERIES DISTINTAS,
+
+
+COM _CADA 1 USANDO 1 COLUMN DIFERENTE...
+
+
+
+
+
+
+
+
+
+OK... É POR ISSO QUE A QUERY DE 'CITY'
+
+
+NÃO É OPTIMIZADA COM 1 INDEX, NESSE NOSSO EXEMPLO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SE RODAMOS NOSSA QUERY COM 'OR',
+
+
+NÃO ATIVAMOS O INDEX COMPOSTO...
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS DA KEYWORD DE 'AND' E A COMBINAÇÃO DOS VALUES NA QUERY,
+
+PARA __ ATIVARMOS O INDEX COMPOSTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ISSO QUER DIZER QUE 
+
+
+MULTI-COLUMN INDEXES SÃO ÚTEIS SE VOCê 
+
+
+TEM 
+
+COMBINAÇÕES 
+
+DE 
+
+COLUMNS QUE IMPORTAM NAS SUAS QUERIES... (e não te ajudam se vocÊ usa 'single columns' nas suas queries, a não ser que você se aproveite da 'ORDEM' dos composite indexes)

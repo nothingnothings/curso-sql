@@ -1,0 +1,46 @@
+--  CRIAMOS ESSE TIPO DE INDEX (multi-coluna) se TEMOS CERTEZA DE QUE ESSA QUERY 'COMPOSTA' (mais de 1 condition na clause de WHERE) vai ser executada COM MT FREQUÊNCIA... 
+CREATE INDEX multiaddress ON addresses (street, city);
+
+
+
+
+
+
+-- NA VERDADE, QUANDO ESCREVERMOS 'street, city' (STREET + CITY) como COMPOSITE INDEX,
+-- FICAMOS TAMBÉM COM 1 INDEX DE 'street' (pq ELE É 'APROVEITADO')...
+--  ENTRETANTO, NÃO FICAMOS COM  INDEX DE 'CITY' (não ficamos com esse index individual)...
+
+
+
+
+
+
+-- EX: CRIEI 1 INDEX COMPOSTO DE 'STREET, CITY, COUNTRY, CONTINENT'
+
+-- ISSO QUER DIZER QUE, AO MESMO TEMPO, CRIEI OS INDEXES DE 
+--  A) STREET 
+-- B) STREET + CITY 
+-- C) STREET + CITY + COUNTRY
+
+-- MAS, FORA ESSES INDEXES (""REAPROVEITADOS""), não criei nenhum outro index com isso...
+
+
+
+
+
+
+
+
+
+
+
+
+-- SE RODAMOS NOSSA QUERY COM 'OR',
+
+
+-- NÃO ATIVAMOS O INDEX COMPOSTO...
+
+
+-- --> PRECISAMOS DA KEYWORD DE 'AND' E A COMBINAÇÃO DOS VALUES NA QUERY,
+
+-- PARA __ ATIVARMOS O INDEX COMPOSTO...
