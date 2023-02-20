@@ -1,0 +1,705 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> CONFORME MENCIONADO ANTERIORMENTE,
+
+
+
+
+TEREMOS 1 EXAMPLE PROJECT NESSA SECTION ---> É UM DUMMY PROJECT 
+
+
+
+
+
+
+EM QUE PODEREMOS CRIAR NOSSA DUMMY DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR PENSOU EM 1 APP FICTÍCIO,
+
+
+EM QUE 
+
+
+USERS 
+
+
+
+
+
+PODEM 
+
+FAZER 'FIND'
+ 
+
+ DE 
+
+ EVENTS,
+
+ E 
+
+ AÍ 
+
+
+
+SE REGISTRAR EM EVENTS....
+
+
+
+
+
+
+
+
+
+E, ENTÃO,
+
+OUTROS USERS _  
+
+
+PODEM _SER CAPAZES DE FAZER 'ORGANIZE' DE EVENTS (com sort)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+NÃO HÁ NENHUM CODE PARA ESSE APP,
+
+
+PQ 
+
+ESSE 
+
+
+CURSO NÃO É SOBRE O PROGRAM 
+
+DESSE APP..
+
+
+
+
+
+
+
+
+
+--> AQUI VAMOS TRABALHAR 
+
+NA 'BEHIND THE SCENES'
+
+
+
+
+
+DATABASE OPERATIONS QUE SERIAM NECESSÁRIAS 
+
+PARA 
+
+TRAZER 
+
+ESSE 
+APP 
+À VIDA...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ESSE APP AÍ,
+PODEMOS 
+
+TER 
+
+1 
+
+STARTING SCREEN COM:
+
+
+1) 1 LISTAS DE EVENTS 
+
+
+
+
+2) FILTERS 
+
+
+
+3) FIND DE EVENTS 
+
+
+
+4) DETAIL PAGE --> EM QUE TEMOS MAIS DATA RELACIONADA AO EVENT (como a DATA E TEMPO DO EVENTO, O NUMERO MAX DE PARTICIPANTES, MINIMUM AGE, O ADDRESS EXATO DO EVENT, 1 DESC TEXT, E AÍ 1 BOTÃO PARA REGISTER...  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESSE É O NOSSO CORE APP, e as features que ele oferece...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PORTANTO,
+
+O QUE 
+
+PRECISAMOS CONSIDERAR,
+
+DE 
+
+
+1 
+
+PERSPECTIVA 
+
+DE 
+
+DATABASE,
+
+
+É QUE 
+
+
+
+NÓS PRECISAMOS 
+
+
+SER CAPAZES DE 
+
+'SEARCH EVENTS' (WHERE)
+
+
+ 
+
+ E 
+
+ SER CAPAZES DE APLICAR VÁRIOS FILTROS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> TAMBÉM PRECISAMOS CONSEGUIR PEGAR 1 'LIST DE EVENTS' ( ou de filtered events)...
+
+
+
+
+
+ 
+ QUER DIZER QUE 
+
+
+
+ VAMOS TER CERTOS EVENTS ATTACHEADOS A NÓS --> 
+
+
+
+
+
+
+
+
+
+
+ AÍ TEREMOS 
+
+ QUE MODELAR A RELATION ENTRE 'EVENT ORGANIZER' 
+
+ E 
+
+ 'EVENT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> TAMBÉM DEVEREMOS SER CAPAZES _ DE 
+
+
+ __ENCONTRAR TODOS OS EVENTS _ 
+
+ RELACIONADOS A ORGANIZER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ORGANIZER --> É 1 USER...
+
+
+
+
+
+
+
+
+
+
+ --> PARA SER 1 ORGANIZER, USER PRECISA CRIAR 1 ACCOUNT
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+PARA 1 DADO EVENTO,
+
+DEVEMOS SER CAPAZES DE RETRIEVAR 
+
+MAIS INFO SOBRE ELE (info total)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM PRECISAMOS DIFERENCIAR ENTRE REGULAR USERS (Que fizeram apenas 'sign up' em 1 event)
+
+
+E ORGANIZERS,
+
+QUE SÃO USERS QUE 
+
+TAMBÉM ORGANIZARAM 1 EVENT (é diferente)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSES SÃO TODOS ASPECTOS QUE DEVEMOS CONSIDERAR 
+
+
+
+QUANDO MERGULHARMOS NO ASSUNTO DE 'CREATE TABLES'
+
+NA NOSSA DATABASE,
+
+
+
+E TAMBÉM 
+
+
+NO INSERT DE DATA,
+
+E 
+
+TAMBÉM 
+
+
+
+NO 
+
+QUERY DE DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA RESUMIR 
+
+
+
+AS CAPACIDADES DO NOSSO APP,
+
+
+
+
+
+
+
+TEMOS:
+
+
+
+
+
+
+
+1) BROWSE LIST DE EVENTS 
+
+
+
+2) VER EVENT DETAILS 
+
+
+
+3) USERS REGISTRANDO PARA EVENTS (entrando em events) 
+
+
+
+
+
+
+4) USERS CRIANDO EVENTS ('organizing events)'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, AÍ, TEMOS 
+
+
+DIFERENTES __ 
+
+
+
+
+PEDAÇOS DE DATA QUE PERTENCEM A 
+
+
+ESSAS DIFERENTES CAPACIDADES....
+
+
+
+
+
+
+
+
+
+EX: 1) BROWSE LIST DE EVENTS 
+
+
+OPÇÕES:
+
+
+A) TODOS OS EVENTS 
+
+
+B) PROCURAR POR NAME 
+
+C) PROCURAR POR EVENTS QUE OCORRERÃO NA 'PRÓXIMA WEEK', 'PRÓXIMO MONTH'... (NOW() + 1, por exemplo)...
+
+
+D) PROCURAR POR TAG 
+
+
+
+E) PROCURAR POR CIDADE 
+
+
+F) PROCURAR POR 'REGISTERED EVENTS' (no usuário COMUM, sem ser organizer)
+
+G) PROCURAR POR 'ORGANIZED EVENTS' (events organizados por 1 user que é ORGANIZER)...
+
+
+
+
+
+
+
+
+
+
+
+
+2) VER EVENT DETAILS:
+
+
+
+1) POR NOME 
+
+2) POR IMAGE 
+
+
+3) POR DATE E TIME 
+
+4) POR LOCATION 
+
+5) POR DESCRIPTION 
+
+6) POR MAX PARTICIPANTS 
+
+7) POR 'MIN AGE' 
+
+8) POR TAGS 
+
+9) POR ORGANIZER...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3) REGISTER FOR EVENTS 
+
+
+ARMAZENAR O FULLNAME, BIRTHDATE E EMAIL DOS NOSSOS USERS...
+
+1) FULL NAME 
+
+2) BIRTHDATE 
+
+3) EMAIL 
+
+
+
+
+
+
+
+
+4) JÁ, PARA ORGANIZAR 1 EVENT,
+
+TALVEZ SEJA NECESSÁRIO:
+
+
+
+A) CREDENTIALS (password e email) --> talvez seja necessário ARMAZENAR o email e 1 password. ..
+
+
+B) BIRTH DATE 
+
+C) FULL NAME.,...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ESSAS SÃO DATA PIECES QUE PROVAVELMENTE EXISTIRÃO NO NOSSO APP...
+
+
+
+
+
+
+
+
+
+
+
+SE VC INVENTAR SEU PRÓPRIO APP,
+PODE ACABAR SURGINDO COM SEUS PRÓPRIOS PEDAÇOS DE DATA...
+
+
+
+
+
+
+
+
+DEVEMOS BRINCAR COM ISSO E SURGIR COM NOSSO PRÓPRIO APP...
+
+
+
+
+
+
+
+
+COMO PRÓXIMA ETAPA,
+
+PRECISAMOS 
+
+PENSAR NAS TABLES A 
+
+SEREM CRIADAS,
+
+E NA SUA ESTRUTURA,
+
+PARA MAIS TARDE 
+
+
+
+INSERIRMOS 
+
+DUMMY 
+
+DATA 
+NELAS,
+
+
+
+
+PARA ENTÃO 
+
+MAIS 
+
+TARDE 
+
+PENSARMOS SOBRE O MANIPULATE DELAS (COM UPDATE, DELETE),
+
+
+e também o query/select 
+
+
+
+
+
+dessas tables --> TAMBEM 
+
+OS TÓPICOS 
+
+
+DE 'MERGE TABLES',
+
+
+
+E TBM 
+
+
+
+FILTERS QUE PODEM SER MAIS COMPLEXOS/COMPOSTOS....
+
+
+
+
+
+
+
+
+
+COMEÇAREMOS A VER ISSO NA PRÓXIMA AULA...

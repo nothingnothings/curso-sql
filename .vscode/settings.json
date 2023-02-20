@@ -22,6 +22,17 @@
             "name": "MyPostGreSQLHomeConnection",
             "database": "indexes",
             "username": "postgres"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "database": "erupe",
+            "username": "postgres",
+            "group": "Servers",
+            "name": "ERUPE"
         }
     ]
 }
