@@ -1,0 +1,60 @@
+
+
+
+
+
+
+
+
+ALÉM DO CREATE DE INDEXES POR MEIO DE 'CREATE INDEX',
+
+
+
+
+
+
+vocÊ TAMBÉM PODE ADICIONAR 1 INDEX A TABLE _ NO MOMENTO DE SUA CRIAÇAÕ,
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE nome_da_table (
+    ...column definitions,
+    INDEX index_name (<column>)
+);
+
+
+
+
+
+
+
+
+
+
+--> MAS ESSE CÓDIGO SÓ´FUNCIONA COM O MYSQL...
+
+
+
+
+
+
+Please note that this is supported when using MySQL but it won't work with Postgresql.
+
+You should always dive into the documentation of the database system you're using,
+ to learn which features / syntax is available!
+
+If you want to get rid of an index, you can also always do that
+ via DROP INDEX <index_name>.
+
