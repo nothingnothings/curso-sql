@@ -28,7 +28,8 @@ VALUES ('Max', 'Schwarz', 'max@test.com', 11000),
     ('Michael', 'Smit', 'michael@test.com', 9000),
     ('Frank', 'Kenneth', 'frank@test.com', 10000);
 INSERT INTO addresses (street, house_number, postal_code, city, user_id)
-VALUES ('Teststreet', '5A', '12345', 'Munich', 2),
+VALUES 
+('Teststreet', '5A', '12345', 'Munich', 2),
     ('Some Place', '1', '12345', 'Munich', 1),
     ('My Street', '101', '98765', 'My City', 3),
     ('Foodstreet', '8', '41811', 'New York', 4),
