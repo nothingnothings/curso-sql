@@ -1,0 +1,972 @@
+
+
+
+
+
+JÁ TEMOS DATA NAS NOSSAS TABLES...
+
+
+
+OK.... DEVEMOS COMEÇAR A CRIAR ALGUNS INDEXES...
+
+
+
+
+
+
+
+
+
+
+
+
+PARA ISSO, O PROFESSOR CRIA 1 NOVO ARQUIVO,
+DE NOME 
+
+
+'query-data' --> 
+
+
+
+
+
+
+ISSO PQ __ O PROFESSOR NÃO VAI QUERER 
+
+CRIAR 
+
+
+
+
+O INDEX 
+DIRETO;
+
+
+
+
+ANTES,
+
+ELE QUER 
+RODAR 
+
+ALGUNS QUERY STATEMENTS COMUNS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM NOSSO SETUP INICIAL,
+
+O PROFESSOR QUER 
+
+ENCONTRAR USERS QUE POSSUAM 
+
+
+UM SALARY MAIOR DO QUE 
+
+'12000'...
+
+
+
+
+
+
+NO CASO,
+
+SERÁ 
+
+
+'Manuel',
+
+'Julie'
+
+e 
+
+'Anna'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> E PODEMOS ENCONTRAR ESSES USERS POR MEIO DO COMANDO DE SELECT....
+
+
+
+
+
+
+
+
+
+
+
+
+-> AÍ PODEMOS USAR, NOVAMENTE, O SELECT...
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM users
+WHERE ;
+
+
+
+
+
+
+
+
+
+
+
+AQUI, O PROFESSOR QUER FILTRAR POR TODAS AS ENTRIES 
+
+
+
+QUE 
+
+
+
+POSSUAM __ 1 VALUE DE SALARY SUPERIOR A 12000...
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT * FROM users
+WHERE salary > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS USAR COMANDOS COMO ESSE COM FREQUÊNCIA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> GANHAMOS OS 3 USERS QUE 
+
+
+POSSUEM 1 SALARY MAIOR DO QUE 12000..
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE O RUN 
+
+
+
+DE 1 COMANDO COMO ESSE NÃO É NADA DE NOVO...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS O QUE É NOVO __ É QUE VOCê PODE 
+
+
+__ MEDIR __ A PERFORMANCE DESSE COMANDO,
+
+E QUE 
+
+PODEMOS 
+
+TER 
+
+
+1 
+
+COMPREENSÕA 
+
+DE 
+
+COMO 
+
+
+A 'SQL ENGINE' (O DATABASE SYSTEM QUE EXECUTA ESSE COMANDO ) TRATA 
+
+E EXECUTA 
+
+ESSE COMANDO,
+POR TRÁS DAS CENAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+A GRANDE MAIORIA 
+
+
+
+
+
+
+DOS RDBMS 
+
+
+
+
+PROPORCIONAM UM COMANDO DE 'EXPLAIN'....
+
+
+
+
+
+
+
+
+
+VOCÊ PODE ADIICONAR 'EXPLAIN'
+
+NA FRENTE DE QUALQUER COMANDO (como na frente de 'SELECT', por exemplo)...
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+EXPLAIN
+SELECT * FROM users
+WHERE salary > 1000;
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+--> QUANDO COLOCAMOS 'EXPLAIN', FAZEMOS COM QUE O COMANDO SUBSEQUENTE NÃO SEJA EXECUTADO, E SIM QUE _ SEJA FORNECIDA UMA 'EXPLICAÇÃO' DE __ COMO _ _ESSA COISA _ SERÁ EXECUTADA, POR TRÁS DAS CENAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK... SE RODAMOS ISSO CONTRA O POSTGRES,
+
+GANHAMOS 1 OUTPUT COMO ESTE:
+
+
+
+
+Seq Scan on users(cost=0.00..10.62 rows=17 width=1556)
+Filter: (salary > 12000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OU SEJA,
+
+ELE PLANEJA FAZER UM 'SEQUENTIAL SCAN'
+
+
+NA TABLE DE USERS -> ISSO SIGNIFICA QUE 
+
+ELE 
+
+VAI 
+
+
+
+IR POR __ TODOS OS ROWS 
+
+DA TABLE DE USERS,
+
+
+
+PARA __ ENCONTRAR __ OS ROWS QUE 
+
+SATISFAÇAM 
+
+
+
+NOSSO 
+
+CRITÉRIO (salary > 12000),
+
+
+
+
+
+O NOSSO FILTER...
+
+
+
+
+
+
+
+
+
+
+
+ELE TAMBÉM NOS MOSTRA QUAL SERÁ O 'COST' DESSA OPERAÇÃO:
+
+
+
+
+'0.00..10.62'...
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO É BASICAMENTE A 'EXPECTED PERFORMANCE HIT'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> E ESSE OUTPUT DE 
+
+
+'0.00 .. 10.62'
+
+
+é uma _ RANGE, E NÃO 1 VALUE DEFINIDO...
+
+
+
+
+
+
+
+
+ESSE É O OUTPUT DO 
+
+
+
+
+NEGÓCIO:
+
+
+
+
+
+
+
+
+
+
+--> QUANDO COLOCAMOS 'EXPLAIN', FAZEMOS COM QUE O COMANDO SUBSEQUENTE NÃO SEJA EXECUTADO, E SIM QUE _ SEJA FORNECIDA UMA 'EXPLICAÇÃO' DE __ COMO _ _ESSA COISA _ SERÁ EXECUTADA, POR TRÁS DAS CENAS...
+
+
+
+---- EX:
+
+
+-- Seq Scan on users(cost=0.00..10.62 rows=17 width=1556)
+-- Filter: (salary > 12000)
+
+
+
+-- ESSA INFO NOS COMUNICA:
+
+--A) QUAL FOI O FILTER APLICADO (salary maior do que 12 mil)
+
+
+-- B) O QUE O RDBMS  VAI FAZER (vai fazer 1 sequential scan na TABLE INTEIRA)..
+
+
+-- C) QUAL SERÁ O CUSTO DESSA OPERAÇÃO (é uma range... de 0 a 10.62, nesse caso)... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSE É O OUTPUT DO POSTGRES,
+
+O OUTPUT DO MYSQL É 
+DIFERENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ELE TAMBÉM NOS INFORMA QUANTAS ROWS SERÃO EXAMINADAS/ELE PLANEJA ANALISAR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... ALÉM DE 'EXPLAIN',
+
+
+
+TEMOS 
+
+
+'EXPLAIN ANALYZE',
+QUE 
+
+
+É USADO __ 
+
+
+PARA TE __ DAR MAIS DO QUE O PLANO,
+
+PQ _
+
+VAI ACTUALLY
+ 
+
+
+
+
+
+
+
+ TE DAR 'O PLAN/INFO DA EXECUÇÃO DA QUERY'
+
+
+
+
+
+ E __ AINDA __ 
+
+ VAI _ 
+
+
+
+
+
+ RODAR A QUERY... (fAZ AS 2 COISAS)....
+
+
+
+
+
+
+
+
+
+ FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+ 
+
+EXPLAIN ANALYZE
+SELECT * FROM users
+WHERE salary > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+EXPLAIN ANALYZE
+SELECT * FROM users
+WHERE salary > 1000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O OUTPUT DO 'EXPLAIN ANALYZE' É:
+
+
+
+
+
+[
+  {
+    "QUERY PLAN": "Seq Scan on users 
+     (cost=0.00..10.63 rows=17 width=1556) (actual time=0.009..0.010 rows=6 loops=1)"
+  },
+  {
+    "QUERY PLAN": "  Filter: (salary > 1000)"
+  },
+  {
+    "QUERY PLAN": "Planning Time: 1.228 ms"
+  },
+  {
+    "QUERY PLAN": "Execution Time: 0.020 ms"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+A VANTAGEM DESSE COMANDO É QUE ELE TAMBÉM 
+
+
+
+TE DÁ 
+
+O 
+
+
+ACTUAL
+__ TEMPO _ QUE FOI GASTO COM O 'PLANNING',
+
+
+
+
+
+E O __ TEMPO _ QUE FOI GASTO NA 'EXECUTION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+'PLANNING' --> É A FASE EM QUE A SQL ENGINE DETERMINA _ 
+QUAL É O MELHOR APPROACH 
+
+
+
+
+PARA __ CONSEGUIR _O RESULT (se ele deve usar 1 index ou não, por exemplo)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TAMBÉM 
+
+
+
+
+
+É IMPORTANTE A INFO 
+
+'Rows Removed by Filter',
+
+
+
+
+
+
+de '3'...
+
+
+
+
+
+
+
+QUE SÃO ESSENCIALMENTE OS ROWS QUE _ NÃO FIZERAM PARTE___ DO FINAL RESULT SET...
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+[
+  {
+    "QUERY PLAN": "Seq Scan on users  (cost=0.00..10.63 rows=17 width=1556) (actual time=0.006..0.007 rows=3 loops=1)"
+  },
+  {
+    "QUERY PLAN": "  Filter: (salary > 12000)"
+  },
+  {
+    "QUERY PLAN": "  Rows Removed by Filter: 3"
+  },
+  {
+    "QUERY PLAN": "Planning Time: 0.940 ms"
+  },
+  {
+    "QUERY PLAN": "Execution Time: 0.016 ms"
+  }
+]
+
+
+
+
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM...
+
+
+
+
+
+
+
+MAS O OUTPUT DO MYSQL É DIFERENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> SE RODAMOS O EXPLAIN 
+
+COM O MYSQL,
+
+
+
+GANHAMOS 1 OUTPUT 
+
+QUE SERÁ BASICAMENTE __ OUTRA TABLE.. --> 
+
+
+
+
+
+
+
+É OUTRA TABLE,
+
+
+EM QUE 
+
+
+NOS É DITA 'SOBRE QUAL TABLE SERÁ REALIZADA A ACTION',
+
+
+
+QUANTOS ROWS SERÃO PARSEADOS,
+
+
+
+
+
+
+
+
+
+TAMBÉM NOS DÁ INFORMAÇÃO 
+
+
+
+
+
+SOBRE 
+
+
+
+
+
+INDEXES EM POTENCIAL QUE __ FORAM/PODEM TER SIDO CONSIDERADOS,
+
+
+
+
+NA COLUMN DE 'possible_keys'...
+
+
+
+
+
+
+
+
+
+
+
+MAS VEREMOS ISSO MAIS TARDE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÓS TAMBÉM PODEMOS RODAR O 'EXPLAIN ANALYZE'
+
+COM O MYSQL....
+
+
+
+
+
+
+
+
+
+
+--> SE FAZEMOS ISSO, GANHAMOS 1 OUTPUT LIGEIRAMENTE DIFERENTE ------> 
+
+
+
+
+
+
+
+1 OUTPUT QUE É PARECIDO COM O QUE VIMOS COM O 'POSTGREQQL'..
+
+
+
+
+
+
+
+
+
+-> TUDO É MEIO PARECIDO...
