@@ -1,0 +1,1396 @@
+
+
+
+
+
+
+
+
+
+OK... 
+
+
+'EXPLAIN ANALYZE',
+
+PORTANTO,
+
+PODE 
+
+SER ÚTIL PARA 
+
+
+COMPREENDER 
+
+QUANTO 
+
+
+IMPACTO DE PERFORMANCE 
+
+
+1 CERTA QUERY PODE TER.... --> ALÉM DISSO,
+
+
+PODE 
+
+
+
+
+__ TE AJUDAR A ANALISAR SUA 'INDEX USAGE',
+
+E SE 
+
+
+SEUS __ INDEXES/SUAS IDEIAS DE INDEX 
+
+
+
+__ VALEM A PENA,
+
+
+
+SE 
+
+DEVEM REALMENTE SER IMPLEMENTADAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, PARA CRIAR 
+
+
+
+
+
+1 INDEX,
+
+
+
+
+
+
+
+
+
+COMO FAZEMOS?
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CRIAMOS UM NOVO ARQUIVO,
+
+
+'create-index'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DALI,
+ PODEMOS CRIAR 1 INDEX COM O SIMPLES COMANDO DE 'CREATE INDEX'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... E, ALÉM DE PODER CRIAR 1 INDEX _ _DEPOIS DE 1 TABLE 
+
+SER CRIADA,
+
+
+
+VOCÊ 
+
+
+PODE 
+
+
+
+
+TAMBÉM __ 
+
+
+
+
+CRIAR 1 INDEX __ NO MESMO MOMENTO EM QUE _ A TABLE É CRIADA..
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- PODEMOS CRIAR UM INDEX:   1) NO MOMENTO EM QUE 1 TABLE É CRIADA;  2) DEPOIS QUE 1 TABLE FOI CRIADA...
+
+
+
+
+
+
+
+
+-- aqui vamos CRIAR 1 INDEX DEPOIS DE NOSSA TABLE JÁ ESTAR CRIADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ADICIONALMENTE,
+
+
+SE VOCê 
+
+DESEJA 
+
+
+__REMOVER 1 INDEX,
+
+
+ISSO TAMBÉM É POSSÍVEL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR VAI NOS MOSTRAR O PASSO-A-PASSO 
+
+
+PARA 
+
+REMOVER 1 INDEX NA PRÓXIMA AULA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS FREQUENTEMENTE 
+
+
+
+VOCÊ VAI CRIAR OS INDEX DEPOIS DE A TABLE SER CRIADA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O FORMATO DO NEGÓCIO É TIPO 
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE INDEX index_name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PQ SEUS INDEX DEVEM TER 1 NOME...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE INDEX salary_index
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E, AQUI,
+
+
+COMO VAMOS 
+
+RODAR 1 MONTE DE QUERIES 
+
+
+
+
+DE 'SELECT'
+
+
+
+QUE _ USAM _ 
+
+
+
+
+
+A COLUMN DE 'SALARY'
+
+
+
+
+NA CLAUSE DE 'WHERE' ( com coisas como 'WHERE salary > 1000)',
+
+
+
+
+
+
+
+
+
+
+COLOCAMOS UM NOME DE 
+
+'salary_index'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> VAMOS CRIAR 1 INDEX PARA ESSA COLUMN DE SALARY -> PQ 
+
+
+OS INDEX NOS AJUDAM 
+
+
+ 
+
+A 'SPEED UP' 
+
+STATEMENTS QUE USAM __ 'WHERE'  __ SE __ ADICIONAMOS ELES 
+
+PARA 
+
+AS 
+
+COLUMNS 
+
+
+
+QUE SÃO USADAS NESSAS CLAUSES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE NÃO DEVEMOS NOS EMPOLGAR:
+
+
+NÃO DEVEMOS ADICIONAR 1 INDEX PARA CADA COLUMN,
+
+
+
+PQ ISSO PODE DEIXAR AS OPERATIONS DE 'UPDATE'/'DELETE'/'INSERT'
+
+
+
+DE __ NOSSA _ DATABASE_ 
+
+
+
+BEM MAIS PESADAS... (pq o index/list de 'salary', separado, TERÁ DE SER ATUALIZADO SEMPRE QUE UPDATARMOS/INSERIRMOS/DELETARMOS COISAS NA TABLE originária, de 'users' )
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO.... CRIAMOS UM INDEX DESSES, AÍ,
+
+
+
+
+
+
+
+
+
+
+TIPO 
+
+
+
+
+CREATE INDEX salaryidx 
+
+
+OU 
+
+
+
+
+
+CREATE INDEX salary_index ....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------> CERTO...
+
+
+
+
+
+
+
+DEPOIS DO NOME DO INDEX,
+
+VOCÊ USA A CLAUSE DE 'ON'...
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+CREATE INDEX salaryidx 
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- ESCREVA 'CREATE INDEX' e então o NOME QUE VOCÊ QUER DAR PARA ESSE INDEX... ('salary_index', ou 'salaryidx', nesse nosso caso)...
+
+CREATE INDEX salary_index
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- PARA CRIAR 1 INDEX, PRECISAMOS DA KEYWORD DE 'ON'...
+CREATE INDEX salaryidx ON 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...VAMOS USAR A CLAUSE DE 'ON'...
+
+
+
+
+
+
+
+
+ANTERIORMENTE,
+
+
+VIMOS 
+
+ESSA CLAUSE SENDO USADA COM 
+
+
+
+OS STATEMENTS DE 'JOIN'..
+
+
+
+
+
+
+
+
+
+ENTRETANTO,
+
+AQUI 
+
+ELE 
+
+
+FARÁ ALGO COMPLETAMENTE DIFERENTE...
+
+
+
+
+
+
+
+
+
+
+
+--> AQUI, NÃO VAMOS O UTILIZAR 
+
+
+
+PARA _ DIZER A ALGUM JOIN STATEMENT ''QUAIS COLUMNS DEVERÃO TER EQUAL VALUES'',
+
+
+
+E SIM 
+
+
+
+
+VAMOS EMPREGÁ-LO 
+
+
+PARA 
+
+DIZER 
+
+
+
+
+'''EM QUE COLUMN, EM QUE TABLE ,
+
+ESSE INDEX DEVERÁ SER CRIADO''...
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE INDEX salaryidx ON 
+
+
+
+
+
+
+
+
+
+
+
+E AQUI QUEREMOS CRIAR 1 INDEX PARA A COLUMN DE SALARY 
+
+
+
+NA TABLE DE USERS,
+
+
+POR ISSO 
+
+PRIMEIRAMENTE 
+
+VAMOS 
+
+
+ESPECIFICAR 
+
+
+
+A TABLE NAME...
+ ('users')...
+
+
+
+
+
+
+
+
+
+
+
+
+ DEPOIS DISSO, DENTRO DE PARÊNTESES,
+ COLOCAMOS 
+
+
+ O NOME DA COLUMN...
+
+
+
+
+ EX:
+
+
+
+
+
+ 
+-- especificamos o NOME DA TABLE em que deverá ser posicionado o INDEX, e depois a COLUMN dentro da table....
+CREATE INDEX salaryidx ON users (salary);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+é claro que poderíamos especificar múltiplas columns, aqui (
+
+    CRIAR 1 COMPOSITE INDEX/MULTI-COLUMN INDEX
+),
+
+
+
+MAS FAREMOS ISSO MAIS TARDE...
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+
+-- especificamos o NOME DA TABLE em que deverá ser posicionado o INDEX, e depois a COLUMN dentro da table....
+
+-- se queremos 1 MULTI-COLUMN INDEX (composite index), ESCREVEMOS MÚLTIPLAS COLUMNS DENTRO DO '()'...
+CREATE INDEX salaryidx ON users (salary);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok...
+
+
+
+
+
+
+
+
+PODEMOS EXECUTAR ESSE NEGÓCIO...
+
+
+
+
+
+
+
+
+
+
+ELE É EXECUTADO, E DÁ CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA ESSE INDEX TERÁ SIDO CRIADO...
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... E ESSE INDEX REALMENTE VAI CONSEGUIR 'SPEED UP'
+
+
+
+AS QUERIES QUE 
+
+
+USAREM 
+
+
+'salary'
+
+
+
+
+
+COM A CLAUSE DE 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> CERTO...
+
+
+
+
+
+
+
+PARA TESTAR ISSO,
+
+O PROFESSOR 
+
+
+
+
+RODA 
+
+
+AQUELE MESMO 
+
+STATEMENT 
+
+DE 
+
+
+
+''
+
+
+
+EXPLAIN ANALYZE
+SELECT * FROM users
+WHERE salary > 12000;
+
+
+
+
+
+'',
+
+
+PARA 
+
+
+
+
+CONSEGUIR VER O CUSTO DE PERFORMANCE...
+
+
+
+
+
+
+O OUTPUT SERÁ ESTE:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "QUERY PLAN": "Seq Scan on users  (cost=0.00..1.07 rows=2 width=1556) (actual time=0.007..0.007 rows=3 loops=1)"
+  },
+  {
+    "QUERY PLAN": "  Filter: (salary > 12000)"
+  },
+  {
+    "QUERY PLAN": "  Rows Removed by Filter: 3"
+  },
+  {
+    "QUERY PLAN": "Planning Time: 1.325 ms"
+  },
+  {
+    "QUERY PLAN": "Execution Time: 0.017 ms"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O QUE INTERESSA É ISTO:
+
+
+(cost=0.00..1.07 rows=2 width=1556)
+
+
+
+
+
+
+
+
+
+--> COMO VOCÊ PODE VER,
+
+O 
+
+COST 
+
+
+DIMINUIU.. --> ANTES ERA '10',
+
+agora é '1'...
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+
+
+PODEMOS 
+
+
+
+PERCEBER QUE 
+
+
+
+ELE __ ACTUALLY _ AINDA ESTÁ FAZENDO 1 'SEQUENTIAL SCAN'... --> 
+
+
+
+
+
+
+
+
+
+OU SEJA,
+
+
+
+
+PARECE QUE ELE AINDA NÃO ESTÁ USANDO O INDEX,
+PQ 
+
+
+QUANDO ELE DIZ 'SEQUENTIAL SCAN',
+
+SIGNIFICA QUE 
+
+ELE 
+
+ESTÁ ESCANEANDO 
+
+TODOS OS ROWS NA NOSSA TABLE (com todas as columns),
+
+
+sem considerar o index...
+
+
+
+
+
+ex:
+
+
+
+
+
+
+"Seq Scan on users 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... E ESSE PODE SER/É O CASO _ JUSTAMENTE 
+
+PQ 
+
+
+TEMOS TÃO POUCA DATA 
+
+
+
+NA NOSSA DATABASE 
+
+
+QUE 
+
+
+
+
+
+
+
+__ FAZER O 'GO THROUGH' PARA DENTRO 
+
+
+
+DA EXTRA INDEX TABLE (criada a partir da table de 'users', a partir da column de 'salary')
+
+
+
+
+
+E _ENTÃO REALIZAR O 'LINK' 
+
+DA DATA 
+
+
+
+QUE __ ENCAIXA NA WHERE CONDITION NA TABLE DE 'index' 
+
+
+
+__ COM A ACTUAL __ dATA 
+
+
+DA TABLE DE USERS 
+
+
+
+
+É ALGO QUE 
+
+ 
+
+ LEVARIA SIMPLESMENTE 
+
+ MAIS 
+
+ TEMPO 
+ DO QUE 
+
+
+ 'SIMPLY GO THROUGH 
+
+ THE USER TABLE'... ->      E ISSO É ALGO ÓTIMO,
+
+ PQ 
+
+
+
+ QUER DIZER QUE 
+
+
+ A 
+
+ DATABASE ENGINE 
+ NÃO VAI 
+ USAR 
+
+ CEGAMENTE 
+
+
+
+
+1 INDEX ('só pq está disponivel'),
+
+
+
+
+SIGNIFICA QUE 
+
+
+
+
+ELE VAI CONSIDERAR 
+
+TODAS AS OPTIONS PARA REALIZAR 1 QUERY,
+
+
+
+
+
+E __ AÍ __ VAI 
+
+
+ESCOLHER A OPTION MAIS RÁPIDA (
+
+    ainda que essa option 
+    NÃO USE ESSE INDEX...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS SE TIVERMOS MAIS DATA NA NOSSA TABLE DE USERS,
+
+É BEM PROVÁVEL QUE 
+
+
+ESSE 
+INDEX 
+
+DA COLUMN 
+
+
+de 
+
+
+'salary'
+
+SERÁ 
+
+UTILIZADO --> PQ, NESSES CASOS,
+
+
+
+SERIA MAIS DEMORADO 
+
+
+
+IR POR TODOS OS ROWS EM VEZ DE USAR ESSE INDEX E REALIZAR A CONEXÃO 
+
+ENTRE 
+
+'INDEX LIST <-> ORIGINAL USER TABLE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ENTRETANTO,
+
+PODEMOS 
+
+VER QUE ISSO ESTÁ SENDO USADO __NO CASO 
+
+
+
+DO __ MYSQL.. --> O PROFESSOR RODA O 'EXPLAIN ANALYZE'
+
+
+LÁ 
+
+
+
+
+NO 
+
+
+
+
+
+MYSQL --> 
+
+
+
+
+
+
+
+
+
+
+E O OUTPUT FOI DE 
+
+
+'Index range scan on users using salaryidx' --> QUER DIZER QUE 
+
+
+
+
+
+
+
+__ ESSA DATABASE ENGINE ESTÁ 
+
+USANDO __ ESSE INDEX __ QUE RECÉM CRIAMOS 
+
+PARA 
+
+FETCHEAR 
+
+A DATA,
+
+PARA 
+
+RETRIEVAR OS ROWS QUE SATISFAZEM NOSSA CONDITION --> ISSO NOS MOSTRA QUE 
+
+
+
+
+O INDEX 'IS DOING ITS WORK',
+
+
+e que 
+
+ESTÁ SENDO UTILIZADO... -----------> 
+
+
+
+
+
+
+
+
+
+DE NOVO,
+
+
+
+O USO DE 1 INDEX POR 1 DATABASE 
+
+
+
+__SEMPRE _ DEPENDE _ DA QUANTIDADE _ DE DATA QUE 
+
+
+ESTÁ ARMAZENADA NO INTERIOR DELA..
+
+
+
+
+
+
+
+
+
+
+--> BEM.... E SE __ VOCÊ QUER SE LIVRAR DE 1 INDEX,
+
+
+
+VOCÊÊ PODE FAZER 
+
+ISSO COM 
+
+
+'DROP INDEX index_name;'
+
+
+
+OK.. VIMOS COMO CRIAR 1 SINGLE COLUMN INDEX...
+
+
+
+
+
+
+
+
+
+AGORA DEVEMOS, BREVEMENTE, VER 1 VARIANTE DESSE 'SINGLE-COLUMN INDEX',
+
+PARA ENTÃO ESTUDARMOS MULTI-COLUMN INDEXES...
