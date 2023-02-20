@@ -1,0 +1,637 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 1 EXEMPLO DE COMANDO SQL:
+
+
+
+
+
+
+
+
+
+
+SELECT name, salary FROM employees WHERE salary > 8000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO VAI NOS DAR TODOS OS ROWS 
+
+
+DA TABLE DE 'employees' em que o salary é maior do que 8000,
+
+mas apenas as columns de 'name' e 'salary'...  
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PONTO E VÍRGULA --> 
+
+
+
+SE VC EXECUTA MÚLTIPLOS COMANDOS DE 1 VEZ SÓ,
+
+
+
+
+
+É MELHOR COLOCAR O ';'
+
+entre 
+
+
+
+os comandos, para evitar erros.. ( é mandatório)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+
+
+
+
+O PROFESSOR FALA __ DAS __ PALAVRAS__ 
+
+
+
+QUE __ 
+
+COLOCAMOS ANTES Do ';'
+
+
+
+
+
+
+
+
+
+
+
+-> NÓS CHAMAMOS AS 'PALAVRAS'
+
+
+
+DO SQL 
+
+
+
+__ DE 
+
+'TOKENS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AS DIFERENTES TOKENS (como 'SELECT', 'name', 'salary')
+
+
+FORMAM 
+
+O OVERALL COMMAND,
+
+
+MAS _ NEM 
+
+
+
+TODAS AS WORDS __ 
+
+
+
+TEM O MESMO SENTIDO.... -> ALGUMAS SÃO KEYWORDS,
+
+
+E 
+
+FAZEM PARTE DA LINGUAGEM 
+
+SQL...
+
+
+
+
+
+
+
+
+
+
+
+
+--> VC DEVE TER EM MENTE QUE 
+O 
+
+
+SQL 
+
+
+É 
+STANDARDIZED (apesar de diferentes rdbms apresentarem suas próprias variações...),
+
+
+
+
+
+
+
+
+
+
+E HÁ CERTAS KEYWORDS QUE SÃO 'LOCKED IN'.. -> CERTAS KEYWORDS QUE 
+
+
+FAZEM 
+
+COISAS ESPECÍFICAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT -> ISSO QUER DIZER QUE 
+
+VOCê 
+
+QUER PEGAR DATA DE 1 
+
+DATABASE TABLE...
+
+
+
+
+
+
+
+
+
+
+FROM --> DIZ 'DE QUAL TABLE' VOCê QUER PEGAR A DATA...
+
+
+
+
+
+
+
+
+
+
+'WHERE '--> É O FILTRO, QUAL FILTRO QUE VOCÊ VAI USAR (e filtros são opcionais, apesar de frequentemente usados)...
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS HÁ CERTOS _ 
+
+
+
+
+TOKENS QUE NÃO SÃO KEYWORDS,
+
+
+COMO POR EXEMPLO OS 'IDENTIFIERS' (
+
+
+    que são 
+
+    'name', --> COLUMN
+
+    'salary' ---> COLUMN
+
+    e 
+
+    'employees' --> É A TABLE
+)
+
+
+
+
+
+
+
+
+
+
+
+ESSAS COISAS IDENTIFICAM AS COLUMNS E TABLES DE ONDE QUEREMOS 
+
+PEGAR A DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS TAMBÉM TEMOS '>'...
+
+
+
+
+
+
+
+
+
+
+'>' --> ISSO SÃO __ OPERATORS...
+
+
+
+
+
+
+
+
+
+
+POR FIM,
+
+
+TEMOS 1 TERMO QUE É 'CLAUSES' -->  NESSE COMANDO SQL 
+
+AQUI,
+
+
+
+
+
+
+
+QUE É 
+
+
+COMPOSTO 
+
+
+
+
+DE 'TOKENS', 'IDENTIFIERS' 
+
+
+E KEYWORDS,
+
+
+
+TEMOS DIFERENTES CLAUSES ... .-> POR EXEMPLO,
+
+
+
+A KEYWORD DE 'SELECT',
+
+
+
+
+COMBINADA COM OS IDENTIFIERS QUE 
+
+PERTENCEM A ELE,
+
+
+
+
+FORMA O 'SELECT CLAUSE' ------>
+
+
+
+
+
+
+
+
+
+
+
+
+
+JÁ O 'FROM',
+
+
+
+combinado com o IDENTIFIER QUE __ IDENTIFICA A TABLE,
+
+
+
+FORMA A CLAUSE DE 'FROM'....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E O 'WHERE',
+
+
+COMBINADO COM AS TOKENS QUE FORMAM A CONDITION,
+
+
+FORMA __ A 'WHERE CLAUSE'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE, QUANDO VOCÊ ESCUTA A EXPRESSÃO 
+
+
+
+
+'FROM CLAUSE',
+
+
+
+
+ISSO QUER DIZER 
+
+
+' FROM employees', nesse exemplo aí...
+
+
+
+
+
+
+
+
+
+
+(
+
+
+    É O FROM USADO COM 1 TABLE IDENTIFIER APONTANDO A 1 TABLE ESPECÍFICA...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUANTO MAIS VOCÊ TRABALHAR COM O SQL,
+
+MAIS VOCÊ 
+
+VAI 
+
+
+
+FICAR FAMILIARIZADO COM ISSO...
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+MAS AINDA NÃO TERMINAMOS --> PQ TEMOS O SINAL DE '>' 
+
+
+
+
+
+
+
+8000 --> É UM VALUE, OU 'EXPRESSION'...
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ NÃO VAMOS APONTAR A 1 TABLE/COLUMN,
+
+E SIM 
+
+VAMOS 
+
+
+
+REFERIR ESSE VALUE ESPECÍFICO, COMO PARTE DA 
+
+
+CONDITION DO WHERE....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ TBM PODE USAR VALUES E EXPRESSIONS EM OUTRAS PARTES 
+
+
+DAS QUERIES,
+
+
+
+
+
+
+MAS _ VOCê TIPICAMENTE USA ESSES VALUES QUANDO VOCÊ FILTRA POR CERTOS RECORDS,
+QUE 
+
+DEVEM 
+
+SATISFAZER CERTA CONDIÇÃO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+OPERATOR --> '>' --> SÃO USADOS PARA DEFINIR O  QUE __ NOSSA CONDITION É...
+
+
+
+
+
+
+
+
+
+
+(
+    POR EXEMPLO, QUE ESTAMOS PROCURANDO POR 
+
+    SALÁRIOS MAIORES DO QUE 8000...
+)
+
+
+
+
+
+
+
+TAMBÉM TEMOS OUTROS OPERATORS ( =, equality, !=, inequality),
+
+
+MAS OS VEREMOS AO LONGO DO CURSo...
+
+
+
+
+
+
+
+
+
+
+
+É ASSIM QUE O SQL FUNCIONA,..
+
+
+
+
+
+MAS AGORA DEVEMOS SETTAR 1 EXAMPLE DATABASE MANAGEMENT SYSTEM...
+
+(para podermos rodar nossos  sql commands)...
