@@ -1,0 +1,155 @@
+
+
+
+
+
+
+
+
+SE VC QUER SEGUIR COM ESSE CURSO E COM OS COMANDOS MOSTRADOS NOS PRÓXIMOS MINUTOS,
+
+
+VC 
+
+DEVE 
+
+
+TER 
+
+
+1 
+
+DATABASE 
+
+A 
+QUE 
+
+RODAR 
+
+SEUS 
+
+
+COMANDOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> AQUI ESTÁ O SETUP QUE USAREMOS NOS PRÓXIMOS MINUTOS- -> USAMOS POSTGRES E MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PRECISAMOS DE 1 'CLIENT SOFTWARE',
+
+que vai disparar os comandos contra o RDBMS...
+
+
+
+
+
+
+
+
+
+
+
+
+O MYSQL E POSTGRES 
+
+
+
+JA TRAZEM ALGUMAS FERRAMENTAS, MAS SÃO HORRÍVEIS...
+
+
+
+
+
+
+
+
+
+
+
+
+MYSQL WORKBENCH 
+
+
+
+
+THIRD-PARTY TOOLS 
+
+
+
+
+
+
+
+
+
+
+mysql command line tool 
+
+
+
+
+PSQL COMMAND LINE TOOL. ..
+
+
+
+
+
+
+
+
+
+VSCODE EXTENSION...
+
+
+
+
+
+
+
+
+
+E A RAZÃO PARA USAR ESSA EXTENSION NO VISUAL STUDIO CODE 
+
+
+
+É QUE 
+
+
+
+_ ELA SIMPLESMENTE 
+
+DEIXA O RECORD DO COURSE BEM MAIS FÁCIL...
+
+
+
+
+
+
+OK, INSTALAMOS OS NEGÓCIOS TODOS...
