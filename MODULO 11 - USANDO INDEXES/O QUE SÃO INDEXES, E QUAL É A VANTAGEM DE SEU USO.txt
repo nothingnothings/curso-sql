@@ -1,0 +1,1176 @@
+
+
+
+
+
+
+
+
+
+
+
+O QUE SÃO INDEXES?
+
+
+
+
+
+
+
+
+
+
+
+
+
+INDEX --> É UMA FEATURE PROVIDENCIADA POR 1 DATABASE MANAGEMENT SYSTEM (ou qualquer ferramenta que usa SQL )
+
+
+
+QUE __ É USADA __ 
+
+
+
+PARA __ ENHANCE THE PERFORMANCE OF YOUR QUERIES....
+
+
+
+
+
+
+
+
+
+
+
+
+DEIXA SUAS QUERIES MAIS VELOZES... --> ISSO É BOM DE SE TER,
+
+
+MAS O QUE 
+
+
+SIGNIFICA ISSO, NA REALIDADE?
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS COMO ISSO FUNCIONA, NA VIDA REAL?
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, VEJAMOS 1 EXEMPLO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE TEMOS 1 TABLE DE 'USERS',
+
+
+COM 
+
+
+1 POUCO 
+
+DE USER DATA...
+
+
+
+
+
+
+
+
+
+
+--> TEMOS ESTA DATA AQUI;
+
+
+
+
+
+
+users 
+
+id   first_name    salary 
+1     Max          11000
+2     Manuel       15700
+3     Julie         9500
+4     Anna          9500
+5     Michaela      12000
+
+
+
+
+
+
+
+
+
+
+
+OK... AÍ DIGAMOS QUE 
+TEMOS 
+
+
+1 
+
+SQL STATEMNET 
+
+
+
+EM QUE 
+
+
+
+_ QUEREMOS __ 
+
+
+PEGAR __ TODOS OS USERS,
+
+
+E TODA A DATA PARA ESSES USERS,
+
+EM QUE 
+
+
+O 
+
+
+SALARY É MAIOR DO QUE 
+
+
+11000..
+
+
+
+
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT * FROM users WHERE salary > 11000;
+
+
+
+
+
+
+
+
+
+
+
+
+NESSE EXEMPLO,
+
+
+FICARÍAMOS COM MANUEL,
+
+
+ANNA 
+
+E 
+MICHAELA..
+
+
+
+
+
+
+
+
+
+(PQ EXCEDEM 11000)...
+
+
+
+
+
+
+
+
+
+---> OK... MAS 
+
+
+
+A CONDITION DE 'WHERE' 
+
+
+
+
+
+
+É A PARTE IMPORTANTE,
+
+AQUI...
+
+
+
+
+
+
+
+
+--> INDEXES TE AJUDAM 
+
+
+
+
+
+COM __ A CLÁUSULA DE 'WHERE'... --> PARA SERMOS MAIS PRECISOS,
+
+
+
+
+
+ESSA CLÁUSULA AÍ,
+
+
+PQ _ __
+
+
+ELAS FAZEM 'SPEED UP'
+
+DA QUERY 
+QUE 
+
+
+
+USAR 
+
+1 CLÁUSULA 
+DESSAS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUERIES GERAIS,
+
+
+QUERIES SEM 'WHERE CLAUSE,'
+
+
+
+
+COMO 
+
+
+
+'PEGAR TODO O CONTENT DA TABLE',
+
+
+
+
+ESSAS QUERIES ___ NÃO PODEM SER 'SPED UP' 
+
+POR MEIO DE INDEXES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS PARA ENTENDER O 
+
+
+
+QUE 
+
+1 INDEX FAZ PARA NÓS,
+
+
+
+
+
+
+
+
+__ DEVEMOS PRIMEIRAMENTE VER COMO 1 QUERY QUALQUER PODE SER EVALUATED,
+
+
+
+
+
+1 QUERY SEM INDEX...
+
+
+
+
+
+
+
+
+
+
+
+DEVEMOS AVALIAR COMO É RODADA ESSA QUERY,
+
+
+SEM 
+
+TER 
+
+NENHUM INDEX PARA NOS AJUDAR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ESSE É O COMPORTAMENTO DEFAULT, NA VERDADE...
+
+
+
+
+
+
+
+
+
+--> NESSE CASO,
+
+SEM 1 INDEX,
+
+
+
+
+O DATABASE MANAGEMENT SYSTEM 
+
+
+PEGARIA/PEGA 
+
+
+
+
+SUA CONDITION (no where)
+
+
+E AÍ 
+
+
+
+
+IRIA _ POR TODOS OS ROWS DE SUA TABLE,
+
+E AÍ 
+
+CHECAR 
+
+O 
+
+SALARY DE CADA ROW,
+
+
+PARA 
+
+
+DETERMINAR 
+
+
+
+QUAIS ROWS 
+
+
+__ SATISFAZEM 
+
+
+ESSE CRITÉRIO (
+    onde a cláusula de WHERE renderia 'TRUE'
+),
+
+
+
+
+
+E, PORTANTO,
+
+
+QUAIS ROWS DEVEM SER 'INCLUDED' -------> E ISSO, CONFORME MENCIONADO,
+
+
+
+
+É FEITO PARA _ _CADA __ ROW DE NOSSA TABLE,
+
+
+ATÉ 
+
+
+
+
+SER ALCANÇADO O FINAL DA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROBLEMA DESSE APPROACH É QUE 
+
+
+O 
+
+
+
+DBMS 
+
+TEM QUE 
+
+
+IR 
+
+POR __ TODOS __ OS ROWS 
+
+DE SUA 
+
+TABLE 
+
+PARA 
+
+
+DESCOBRIR 
+
+QUAIS 
+
+USERS/ROWS EM GERAL
+
+
+
+SATISFAZEM 
+
+
+
+
+ESSA CONDITION 
+
+
+
+
+
+DE 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+
+
+O PROBLEMA ÓBVIO DISSO É QUE SE VOCÊÊ TIVER 
+
+1 TABLE ENORME,
+
+COM 
+
+
+1 
+MONTE DE ROWS,
+
+
+
+
+
+
+
+1 MONTE DE ENTRIES,
+
+
+
+FAZER O SCAN 
+
+DE TODOS ESSES ROWS,
+
+PARA 
+
+CADA QUERY,
+
+É SUPER 
+
+LENTO 
+
+
+E INEFICIENTE...
+
+
+
+
+
+
+
+SELECT * FROM users WHERE salary > 11000;
+
+
+É AÍ QUE 
+
+INDEXES NOS AJUDAM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COM ESSA FEATURE,
+
+VOCÊ,
+
+
+COMO ADMINISTRADOR DESSA DATABASE,
+
+OU 
+
+
+
+DEVELOPER QUE 
+
+
+TRABALHA COM ESSA DATABASE,
+
+
+
+
+VOCÊ 
+
+PODE 
+
+
+
+ADICIONAR 1 INDEX 
+
+EM QUALQUER 
+
+
+
+
+
+
+
+
+__ COLUMN__ DE 
+
+SUA TABLE... --> ISSO QUER DIZER QUE 
+
+
+
+VOCe^
+
+PODERIA 
+
+DIZER QUE 
+
+
+
+'''1 INDEX PARA A COLUMN DE SALARY DEVERÁ SER CRIADA''',
+
+
+
+
+TALVEZ PQ 
+
+VOCÊ VAI JUSTAMENTE RODAR 1 MONTE DE QUERIES 
+
+
+
+COMO 
+
+
+
+
+'''' 
+SELECT * FROM users WHERE salary > 11000;
+
+
+'''',
+
+
+
+
+
+
+
+
+e que você 
+
+quer, por isso mesmo,
+
+
+
+
+ACELERAR ESSAS QUERIES...
+
+
+
+
+
+
+
+
+OK.... MAS O QUE ESSA COISA DE 'INDEX'
+
+FAZ É 
+
+
+
+PEGAr__ 
+
+TODOS 
+
+
+
+OS VALUES 
+
+
+
+
+
+DA COLUNA DE SALARY 
+
+
+
+PARA ENTÃO OS COLOCAR 
+
+
+
+
+
+
+
+___ DENTRO ___ DENTRO _ DE 1 'SEPARATE INDEX TABLE'...
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+
+A TABLE ORIGINAL AINDA PERSISTE,
+
+MAS 
+
+AÍ 
+
+
+FICAMOS 
+
+
+
+COM 
+
+
+
+
+'UMA EXTRA INDEX LIST',
+
+
+
+
+
+
+UMA LISTA EXTRA BEM PEQUENA,
+
+COM APENAS 1
+
+
+
+
+COLUMN,
+
+
+
+
+
+
+
+
+COM OS 'INDEXED VALUES' (
+
+
+    com isso,
+
+    FICAMOS COM MESMO COLUMNS A SEREM VERIFICADAAS...
+)
+
+
+
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+    salary 
+   11000
+   15700
+    9500
+    9500
+    12000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> ficamos com uma table/lista separada,
+
+
+em que 
+todos esses salaries 
+
+
+são 
+
+listados...
+
+
+
+
+
+
+
+
+-> E O QUE É FEITO, ALÉM DISSO,
+
+É 
+O 
+
+KEEP TRACK, POR CONTA DO 'RDBMS',
+
+
+DE QUAIS 
+
+
+INDEX 
+
+
+VALUE __ PERTENCE A CADA ROW 
+
+NA TABLE ORIGINAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA INDEX LIST É ENTÃO SORTADA.. (sort)...,
+
+
+
+e pode/poderá 
+
+então 
+
+
+SER OPTIMIZADA COM 
+
+
+APPROACHES ADICIONAIS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE 
+
+
+É UMA LISTA ALTAMENTE OPTIMIZADA, 
+
+E QUE  (e essa é a parte importante)
+
+
+É TIPICAMENTE __ SORTADA... -------> E, AÍ ,
+
+
+SEMPRE QUE 
+
+RODAMOS 
+
+
+1 QUERY 
+
+
+
+COMO 
+
+
+ESSA DE 
+
+
+
+
+
+'WHERE salary > 1000;',
+
+
+
+
+
+
+
+
+O QUE _O RDBMS 
+
+
+VAI FAZER 
+
+
+
+É IGNORAR 
+
+
+A TABLE DE USERS INICIALMENTE,
+
+PARA 
+
+
+PROCURAR 
+
+
+POR INDEXES... --> SE ELE DESCOBRIR QUE 
+
+EXISTE 
+
+
+1 INDEX PARA ESSA COLUMN DE 'SALARIES',
+
+
+
+
+ 
+
+
+
+
+ ELE VAI QUERER O UTILIZAR...
+
+
+
+
+
+
+
+
+
+ --> E, COMO ESSE INDEX É SORTADO,
+
+
+
+
+ E _ COMO _ O SQL _ ENTENDE_  O DBMS 
+
+
+ __ ENTENDE 
+
+ QUE __ ESTAMOS PROCURANDO POR SALÁRIOS SUPERIORES A '11000',
+
+
+ ELE 
+
+ VAI 
+
+
+ PROCURAR APENAS 
+
+ POR 
+
+
+
+ ESSA 'LISTA MAGRA'...
+
+
+
+
+
+
+
+
+
+
+
+ A VANTAGEM DESSA 'LISTA MAGRA',
+
+
+ ALÉM DE SER MENOR,
+
+
+ É QUE ELA É 
+
+ 'ORDENADA'...
+
+
+
+
+
+
+
+
+
+
+
+ É ORDENADA DO 'MAIOR PARA O MENOR'...
+
+
+
+
+
+
+
+
+
+ --> 9500 
+    11000
+    12000
+    15700
+    18000
+
+
+
+
+---> ISSO É MT BOM,
+
+
+
+PQ 
+
+
+ELE 
+
+VAI 
+
+CONSIDERAR APENAS OS VALUES QUE VIRÃO DEPOIS DE '11000',
+
+
+e ignorar todo o resto (o início da table)...
+
+
+
+
+
+
+
+
+
+
+
+É JUSTAMENTE POR ISSO QUE 
+
+O INDEX É RODADO DE 1 MANEIRA MAIS RÁPIDA (
+
+    pq o RDBMS 
+
+    DEIXA DE 
+
+    TER 
+
+    DE 
+    ESCANEAR 
+
+    A TABLE INTEIRA,
+
+    TODAS AS COLUMNS DE TODOS OS ROWS...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS SE INDEXES SÃO TÃO ÚTEIS,
+
+PQ 
+DIABOS 
+
+
+RDBMSs 
+
+
+JÁ NÃO CRIAM ELES PARA TODAS AS COLUMNS?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ACHO QUE É PQ __ ELES PESAM...
+
+
+
+
+
+
+
+
+
+
+--> POR DEFAULT,
+
+VOCê N GANHA MTOS INDEXES- --> VOCÊ GANHA 1 INDEX PARA A PRIMARY KEY,
+
+
+
+MAS SÓ ISSO... (voce n tem 1 para o salary out-of-the-box, por exemplo...)
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR LOGO NOS ENSINARÁ A CRIAR 
+
+INDEXES MANUALMENNTE,
+
+MAS ANTES DISSO ELE QUER QUE ENTENDAMOS 
+
+A RAZAO DE NÃO CONSEGUIRMOS 
+
+
+INDEXES IMEDIATAEMNTE, PARA TODAS AS COLUMNS... 
