@@ -1,0 +1,370 @@
+
+
+
+
+
+
+BEM ...
+
+
+
+
+
+
+
+NA ÚLTIMA AULA,
+
+CRIAMOS ESSE INDEX AQUI:
+
+
+
+
+
+
+CREATE INDEX salaryidx ON users (salary);
+
+
+
+
+
+
+
+
+
+
+
+
+NO ENTANTO,
+
+EXISTIRÃO 
+
+CASOS EM QUE ___ 
+
+
+
+
+
+
+VOCê VAI QUERER CRIAR 
+
+
+
+
+INDEXES QUE __ ENFORÇAM 'UNIQUE VALUES'
+
+
+EM 1 
+
+
+COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... NO NOSSO EXEMPLO, DIGAMOS QUE 
+
+
+
+
+
+DESEJAMOS QUE 
+
+
+NÃO EXISTAM 
+
+
+
+VALUES DUPLICADOS NA COLUMN DE 'email'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> PARA ISSO, PODEMOS FAZER ALGO QUE JÁ FIZEMOS ANTERIORMENTE NO CURSO,
+
+QUE É 
+
+DEFINIR 1 COLUMN COMO 'UNIQUE':
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(300) NOT NULL,
+    last_name VARCHAR(300) NOT NULL,
+    email VARCHAR(300) UNIQUE NOT NULL, ----- TIPO ASSIM...
+    salary INT CHECK (salary > 0)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO É ABSOLUTELY FINE,
+
+
+
+
+
+
+
+
+MAS AQUI DEVEMOS SABER ALGO QUE _ O PROFESSOR 
+
+NÃO HAVIA MENCIONADO ANTERIORMENTE:
+
+
+
+
+
+
+
+
+
+QUANDO DEFINIMOS 1 COLUMN COMO 'UNIQUE',
+
+
+
+EM NOSSAS TABLES,
+
+
+
+1 'UNIQUE INDEX'
+
+
+
+
+É CRIADO PARA ESSA COLUMN --> OU SEJA,
+
+
+
+1 INDEX É CRIADO 
+
+QUANDO 
+
+
+
+
+DEFINIMOS UMA CONSTRAINT DE 'UNIQUE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... ISSO É ALGO QUE DEVEMOS TER EM MENTE...
+
+
+
+
+
+
+
+
+
+
+
+ALTERNATIVAMENTE,
+
+
+VOCÊ PODE CRIAR ESSA CONSTRAINT E SEU INDEX (UNIQUE INDEX) 
+
+
+__ APÓS __ A TABLE _ TER SIDO CRIADAA...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+BASTA 
+
+
+
+
+
+IR _ ATÉ __ 
+
+
+
+
+
+
+
+O COMANDO DE 'CREATE INDEX', QUE É ESTE:
+
+
+
+
+
+
+
+
+
+
+
+'''''
+CREATE INDEX salaryidx ON users (salary);
+
+
+''''
+
+
+
+
+
+E, ENTÃO,
+ACRESCENTAR 
+
+
+'UNIQUE'
+
+na frente da keyword 'INDEX',
+
+tip oassim:
+
+
+
+
+
+
+
+
+'''''
+CREATE UNIQUE INDEX salaryidx ON users (salary);
+
+
+''''
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+-- OU, ENTÃO, SE A TABLE JÁ FOI CRIADA, DEFINIR ___ O __  UNIQUE INDEX, NA COLUMN, TIPO ASSIM:
+
+
+
+CREATE UNIQUE INDEX salaryidx ON users (email);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI CRIAR 1 INDEX, EXATAMENTE COMO ANTES,
+
+MAS AÍ 
+
+
+VAI 
+
+CRIAR 1 ___ UNIQUE__ INDEX,
+
+
+1 
+
+INDEX QUE 
+
+VAI REPELIR VALORES REPETIDOSS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> É CLARO QUE UNIQUE INDEXES NÃO SÃO USADOS SEMPRE... SEUS 
+
+INDEXES NEM SEMPRE DEVERÃO SER 'UNIQUE',
+
+
+
+
+
+
+
+MAS AINDA ASSIM VOCê 
+
+
+DEVE __ UTILIZAR ESSE INDEX, 
+
+
+NOS CASOS APROPRIADOS (em que vocÊ não quer ter values duplicados, em 1 certa column)...
