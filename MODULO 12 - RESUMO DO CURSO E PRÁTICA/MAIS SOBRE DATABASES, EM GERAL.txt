@@ -1,0 +1,59 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA QUE SABEMOS O QUE É O SQL,
+
+E QUE TIPICAMENTE 
+
+
+
+
+
+O UTILIZAMOS QUANDO TRABALHAMOS COM 
+
+'RDBMS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->  O SQL TAMBÉM PODE SER USADO COM OUTRO SOFTWARE,
+
+
+OUTRAS TOOLS,
+
+COMO 
+'DATA SCIENCE FRAMEWORKS' (que também usam o sql como QUERY LANGUAGE, por trás das cenas)...
+
+
+
+
+
+
+
+
+
+
+
+--> JÁ ESTUDAMOS ESSA AULA...
