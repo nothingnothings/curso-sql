@@ -1,0 +1,887 @@
+
+
+
+
+
+
+
+
+
+PROVAVELMENTE O PROFESSOR NOS ENSINARÁ 
+
+SOBRE:
+
+
+
+
+
+
+1) DEFAULT INDEXES --> como o ID de cada column..
+
+
+
+
+
+
+
+
+2) SIMPLE INDEXES --> indexes que são compostos por apenas 1 column 
+
+
+
+
+3) INDEXES COMPOSTOS -> indexes compostos por 2 ou mais columns...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA QUE SABEMOS 
+
+O QUE SÃO 
+
+
+
+__ 
+
+
+INDEXES,
+
+
+E QUE 
+
+NÃO DEVEMOS 
+
+
+
+
+
+USÁ-LOS EM EXCESSO,
+
+
+
+
+
+
+
+
+
+O PROFESSOR QUER FALAR SOBRE OS DIFERENTES TIPOS DE INDEXES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... AQUI PODEMOS, NO CASO,
+
+
+
+
+
+
+
+
+
+DIFERENCIAR OS TIPOS DE INDEX POR:
+
+
+
+
+
+
+
+
+
+1) TIPOS DE IMPLEMENTAÇÃO TÉCNICA 
+(OU SEJA, A DEPENDER DE COMO O INDEX FUNCIONA INTERNAMENTE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2)  TIPOS DE INDEX DE ACORDO COM '''A MANEIRA PELA QUAL PODEMOS OS CONFIGURAR, COMO DESENVOLVEDORES''' (
+    de acordo com a funcionalidade/código que os setta....
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1) TIPOS DE IMPLEMENTAÇÃO TÉCNICA 
+(OU SEJA, A DEPENDER DE COMO O INDEX FUNCIONA INTERNAMENTE)
+ 
+
+
+
+
+
+
+
+
+ FALANDO DA DIFERENCIAÇÃO 
+
+
+ADVINDA DO 'TIPO DE IMPLEMENTAÇÃO TÉCNICA',
+
+
+O PROFESSOR N QUER FALAR MT SOBRE ISSO..
+
+
+
+
+
+
+
+
+
+
+
+HÁ DIFERENTES ALGORITMOS E IMPLEMENTAÇÕES TÉCNICSA 
+
+PARA FAZER OS INDEXES 
+FUNCIONAREM -> mas, no final das contas,
+
+
+isso sempre vai depender do RDBMS QUE VOCÊ ESTÁ USANDO...
+
+
+
+(
+
+
+    EACH SYSTEM SUPPORTS DIFFERENT ALGORITHMS 
+    AND SUPPORTS DIFFERENT COMPARISON OPERATIONS...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+-----> A DEPENDER DO SEU RDBMS,
+
+
+
+_ AS TECHNICAL IMPLEMENTATIONS QUE SÃO USADAS POR DEFAULT 
+
+E AQUELAS QUE 
+
+PODEM 
+
+SER CONFIGURADAS 
+MANUALMENTE 
+
+
+
+VARIAM...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NO POSTGRESQL TEMOS OS DOCS,
+
+E AÍ 
+TEMOS 
+
+OS DIFERENTES 
+
+INDEX TYPES:
+
+
+
+
+
+
+1) B-TREE 
+
+
+2) HASH 
+
+
+3) GIST 
+
+
+4) SP-GIST 
+
+
+
+5) GIN 
+
+6) BRIN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> SÃO ESSES OS TIPOS SUPORTADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+--> <  <= = >= > 
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+
+
+
+
+O DEFAULT, INDEX TYPE DEFAULT,
+
+
+
+É O 'B-TREE'...
+
+
+
+
+
+
+
+
+
+
+
+
+A NÃO SER QUE VOCÊ REALMENTE SAIBA O QUE VOCê ESTÁ FAZENDO,
+
+
+VOCÊ NÃO PRECISA 
+MUDAR 
+
+
+
+ESSE TIPO DE INDEX...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS VOCê PODE __ MUDAR __ O TIPO _ DE INDEX 
+
+
+
+QUE VOCÊ QUER USAR,
+
+
+
+TUDO POR MEIO DA CLAUSE DE 'USING' 
+
+quando 
+
+criamos 
+
+
+
+1 index... -->
+
+
+
+
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+CREATE INDEX name ON table USING HASH (column);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mas veremos esse comando de 'create index'
+
+MAIS TARDE...
+
+
+
+
+
+
+
+
+--> MAS, DE NOVO,
+
+O DEFAULT GERALMENTE É BOM;
+
+
+
+O PROFESSOR APENAS QUERIA APONTAR QUE 
+
+
+EXISTEM DIFERENTES IMPLEMENTAÇÕES TÉCNIICAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS A PARTE MAIS INTERESSANTE É '2)',
+
+
+
+
+
+
+__ QUE __ 
+
+
+
+
+É 
+
+'OS DIFERENTES TIPOS DE INDEX QUE PODEMOS SETTAR,
+
+COMO DESENVOLVEDORES,
+
+
+
+QUE ENTÃO LEVARÃO A DIFERENTES FUNCIONALIDADES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É EXATAMENTE AQUILO QUE EU HAVIA COMENTADO...
+
+
+
+
+
+
+
+
+PODEMOS COMEÇAR COM A CRIAÇÃO DE 1 'SINGLE COLUMN INDEX':
+
+
+
+
+
+
+1) SINGLE COLUMN INDEX, STANDARD:
+
+
+
+ESSE É O TIPO DE INDEX QUE 
+O PROFESSOR 
+
+
+MOSTROU NO SLIDE,
+
+COM 
+
+
+A COLUMN DE 'SALARY' 
+
+E o 
+
+INDEX CRIADO PARA ELA... ->  SE FIZÉSSEMOS/FIZERMOS ISSO,
+
+
+
+
+
+
+
+
+
+OS VALUES ARMAZENADOS NESSA COLUMN SERIAM INDEXADOS,
+
+E AÍ 
+
+
+
+TODAS AS QUERIES FUTURAS 
+
+
+DE 
+
+'SELECT'
+
+
+
+COM 
+
+
+CLAUSE DE 'WHERE'
+
+
+ENVOLVENDO 
+
+
+ESSA COLUMN 
+
+
+
+
+SERIAM CAPAZES DE TIRAR VANTAGEM DESSE INDEX...
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSE É O TIPO DE INDEX MAIS COMUM, QUE VOCÊ USARÁ  COM BASTANTE FREQUÊNCIA...
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+TEMOS 
+O 
+
+
+'UNIQUE INDEX'...
+
+
+
+
+
+
+
+
+2) UNIQUE INDEX ---> 
+
+
+
+
+TEM O MESMO COMPORTAMENTO, EM GERAL,
+
+DO SINGLE INDEX... A DIFERENÇA É QUE 
+
+ELE 
+
+
+TBM TRAZ UM COMPORTAMENTO DE __ PROTEÇÃO,
+
+POIS 
+
+
+
+__ EVITA__ QUE 
+
+VALUES 
+
+ACABEM SENDO INSERIDOS MAIS DO QUE 1 ÚNICA VEZ....
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE, 
+
+
+COM O UNIQUE INDEX,
+
+GANHAMOS 
+
+A OPTIMIZATION 
+
+
+
+
+NAS WHERE CLAUSES __ AO MESMO TEMPO 
+
+
+
+QUE __ NOS _ PROTEGEMOS CONTRA DUPLICATE VALUES...
+
+
+
+
+
+
+
+
+
+
+
+
+3) MULTI-COLUMN INDEX --> TAMBÉM É CHAMADO DE 'COMPOSITE INDEX'...
+
+
+
+
+
+
+
+
+--> ESSES INDEXES FAZEM 'GROUP' DE MÚLTIPLAS 
+
+COLUMNS TOGETHER -->  ESSE TIPO DE INDEX É ÚTIL
+
+
+SE VOCÊ 
+
+TEM 
+
+WHERE 
+
+CLAUSES 
+
+EM QUE 
+
+
+
+
+
+VOCê __ USA __ MÚLTIPLAS CONDITIONS COMBINADAS (
+
+
+
+    tipo 
+
+    'WHERE salary > 1000 AND name = 'Max';' 
+)
+
+
+
+
+
+
+
+
+
+
+O BOM É QUE VEREMOS EXEMPLOS PARA ESSES TIPOS DE INDEXES NAS PRÓXIMAS AULAS... 
+
+
+
+
+
+
+
+
+
+
+
+
+OUTRO TIPO DE INDEX INTERESSANTE É O 'PARTIAL INDEX'...
+
+
+
+
+
+
+
+
+
+4) PARTIAL INDEX --> É USADO PARA __ INDEXAR__ APENAS __ PARTE__ DE 1 TABLE... (ok, mas isso é mt abstrato)...
+
+
+
+
+
+
+
+
+
+
+
+COM ELE, VOCÊ _ _ESPECIFICA 1 COLUMN,
+
+
+MAS 
+
+VOCe^
+
+NÃO VAI QUERER CRIAR 
+
+
+1 INDEX PARA _ __tODOS OS ROWS 
+
+NESSA TABLE/COLUMN,
+
+E SIM 
+
+
+APENAS PARA __ ALGUNS __ DOS ROWS... (veremos isso também)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK, MAS CABE RESSALTAR QUE OS 'PARTIAL INDEX'
+
+NÃO EXISTEM NO MYSQL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E ISSO É, EM GERAL,
+
+IMPORTANTE- ->  OS INDEXES VISTOS AQUI,
+
+
+
+
+
+EXCETO O PARTIAL INDEX,
+
+
+SÃO 
+
+BEM COMUNS,
+
+E PODEM SER VISTOS __ 
+
+
+
+NA GRANDE MAIORIA DOS SQL ENVIRONMENTS --> AINDA ASSIM,
+VOCÊ 
+
+DEVE CHECAR OS DOCS DA DATABASE QUE VOCê ESTÁ USANDO,
+
+PARA VER 
+
+SE REALMENTE HÁ SUPORTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... COM ISSO,
+
+TEMOS 
+DIFERENTES TIPOS DE INDEXES,
+
+
+QUE SÕA USADOS PARA DIFERENTES PROPÓSITOS,
+
+
+
+E PARA _ DIFERENTES TIPOS DE VALUES _ ARMAZENADOS 
+
+NAS COLUMNS DE NOSSAS TABLES..
+
+
+
+
+
+
+
+
+
+
+OK... ESSA FOI A TEORIA. . --> NA PRÓXIMA AULA,
+
+
+
+
+VEREMOS COMO PODEMOS 
+
+
+CRIAR DIFERENTES TIPOS DE INDEXES COM CÓDIGO (SQL COMMANDS),
+
+
+
+E TAMBÉM VEREMOS O EFEITO DESSES INDEXES,
+
+NA PRÁTICA...
