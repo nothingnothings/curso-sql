@@ -1,0 +1,162 @@
+
+
+
+
+
+
+
+
+
+
+
+
+ESTE CURSO TINHA MT CONTEÚDO...
+
+
+
+
+
+
+
+
+
+
+
+--> É 1 CURSO LONGO,
+
+
+PQ 
+
+
+
+
+
+VEMOS TODOS OS CONCEITOS 
+
+SQL...
+
+
+
+
+
+
+
+
+
+
+AGORA TEREMOS ESSA COURSE SECTION 
+
+
+
+EM QUE 
+
+
+RESUMIREMOS O QUE APRENDEMOS,
+
+
+
+PARA PRATICAR 
+
+O QUE 
+
+
+
+
+
+APRENDEMOS ANTERIORMENTE...
+
+
+
+
+
+
+
+
+
+
+----> QUERO RECAPITULAR O QUE APRENDI...
+
+
+
+
+
+
+
+--> VEREMOS 1 EXEMPLO COMPLETO DE 1 PROJECT,
+
+
+
+QUE 
+
+VAMOS 
+
+
+USAR __ PARA __ APRENDER SOBRE TODAS ESSAS KEY FEATURES DO SQL,
+
+e para as praticar...
+
+
+
+
+
+
+
+
+
+
+
+
+VAMOS TAMBÉM 
+
+VER COMO PODEMOS CRIAR TABLES,
+
+ESTRUTURAR DATA PARA TABLES,
+
+
+
+
+
+SPLITTAR DATA AO LONGO DE MÚLTIPLAS TABLES,
+
+
+E 
+AÍ 
+
+
+VER COMO PODEMOS INSERIR 
+
+E MANIPULAR DATA,
+
+
+COMO QUERY, 
+
+FILTER,
+
+UPDATE 
+
+E 
+DELETE DATA...
+
+
+
+
+
+
+
+DEVEMOS 
+
+
+
+
+
+COMEÇAR 
+
+POR MEIO 
+
+
+
+
+
+DO REPRISE:
+
+'O QUE É SQL'...
