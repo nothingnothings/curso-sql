@@ -1,0 +1,361 @@
+
+
+
+
+
+
+
+
+
+
+
+-> OK... JÁ EXECUTAMOS AQUELE COMANDO DE QUERY,
+MÚLTIPLAS VEZES:
+
+
+
+
+
+
+
+
+SELECT * FROM events;
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA FILTRAR NOSSA DATA,
+
+
+
+
+USAMOS 'WHERE'...
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE QUEREMOS PEGAR EVENTS __ QUE 
+
+
+ACONTECEM _ DEPOIS __ DE 
+
+'JUNE',
+
+DEPOIS
+
+
+DO ANO DE 
+
+2022..
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT * FROM 
+events WHERE date_and_time >= '2022-06-01 00:00:00';
+
+
+
+
+
+
+
+
+
+
+
+YYYY-MM-DD
+
+
+OK... 
+
+
+
+
+
+
+
+
+
+
+
+RODO ISSO, E FUNCIONA...
+
+
+
+
+
+
+
+GANHO DE VOLTA O EVENT,
+
+EVENT QUE ACONTECE DEPOIS DE JUNE...
+
+
+
+
+
+
+
+
+
+
+É ASSIM QUE PODEMOS FILTRAR POR DATES...
+
+
+
+
+
+
+
+
+--> CERTO..
+
+
+
+
+
+
+
+
+
+
+
+MAS PODEMOS TAMBÉM COMBINAR CONDITIONS --> TALVEZ PROCURAR POR TODOS 
+
+
+EVENTS QUE ACONTECAM DEPOIS DE JUNE,
+
+
+E 
+
+
+QUE TENHAM MIN_AGE 
+
+
+MENOR DO QUE 20..
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT * FROM 
+events WHERE date_and_time >= '2022-06-01 00:00:00' AND min_age = 20;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> NÃO GANHAREMOS NENHUM RESULT,
+
+
+PQ 
+
+
+NÃO TEREMOS 
+
+NENHUM EVENT 
+QUE 
+
+SATISFAÇA 
+AMBAS AS CONDITIONS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> O OR É O CONTRÁRIO, RODA 
+
+
+'2 QUERIES'
+
+PELO PREÇO DE 1 (se apenas 1 das conditions for true, será retornado 1 result)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... MAS O QUE VOCÊ PODE FAZER, 
+
+EM COMBINAÇÃO 
+
+
+
+
+
+COM O WHERE/SEM O WHERE,
+
+
+
+
+
+É 
+
+CONSEGUIR 
+UMA 
+
+ORDER ESPECÍFICA NO 
+
+
+SEU 
+
+
+
+RESULT SET...
+
+
+
+
+
+
+
+
+--> BASTA COLOCAR 'ORDER BY'...
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+SELECT * FROM events 
+WHERE date_and_time >= '2022-06-01 00:00:00' AND min_age = 20
+ORDER BY id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ESSA CLAUSE TE DEIXA ORDENAR POR 1 COLUMN,
+OU POR MÚLTIPLAS COLUMNS...
+
+
+
+
+
+
+
+
+
+
+_->_ SE RODAMOS ISSO,
+
+
+TEREMOS A ORDER... --> 
+
+
+
+
+
+
+POR DEFAULT,
+
+
+
+O ORDER BY FUNCIONA 
+
+
+DE FORMA ASCENDENTE...
+
+
+
+
+
+
+
+SE QUEREMOS 
+
+
+
+
+A ORDEM DESCENDENTE,
+
+
+ESCREVEMOS 'DESC'...
