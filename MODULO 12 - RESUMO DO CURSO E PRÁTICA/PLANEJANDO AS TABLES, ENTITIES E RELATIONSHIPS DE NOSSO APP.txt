@@ -1,0 +1,1230 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, QUAIS TABLES E ENTITIES SERÃO NECESSÁRIAS?
+
+
+
+
+
+
+
+
+
+
+1) EVENTS...
+
+COLUMNS SERÃO:
+
+a) ID --> TER 1  UNIQUE IDENTIFIER EM TABLES, PARA QUE CADA ROW EM 1 TABLE TENHA 1 UNIQUE IDENTIIFER, É UMA ÓTIMA IDEIA, PQ AJUDA COM O QUERYING...
+
+
+AJUDA COM O QUERYING --> buscar por 'specific event' (event details) 
+
+
+
+ALÉM DISSO,
+
+UNIQUE IDENTIFIERS COMO 'IDs'
+
+NOS DEIXAM 
+
+TAMBÉM
+FACILMENTE 
+
+LINKAR 
+
+RECORDS 
+
+DE 
+
+DIFERENTES TABLES... (com foreign id keys)...
+
+
+
+
+
+
+
+b) DEPOIS DISSO,
+
+
+TEREMOS 1 COLUMN DE 'NAME'...
+
+
+
+
+
+C) DEPOIS DISSO,
+
+O DATE E TIME EM QUE O EVENT OCORRERÁ 
+
+
+
+
+
+D) A IMAGE QUE FOI UPLOADADA (O LINK ATÉ A IMAGE),
+
+
+para 1 event específico...
+
+
+
+
+
+
+
+E) DEPOIS, A DESCRIPTIOn...
+
+
+
+
+
+F) DEPOIS, O NÚMERO MÁXIMO DE PARTICIPANTS...
+
+
+
+
+
+
+G) POR FIM,
+ 
+
+ A 'MINIMUM AGE'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CERTO... MAS 1 COISA QUE NÃO FARÁ PARTE DA TABLE DE EVENTS É 'ADDRESSES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> ISSO PQ TIPICAMENTE ARMAZENAREMOS COISAS COMO 'ADDRESSES'
+
+ EM 1 TABLE SEPARADA,
+
+ COMO 
+
+ 'locations'...
+
+
+
+
+
+
+
+
+
+
+
+ TABLE DE LOCATIONS:
+
+
+AS COLUMNS SERÃO:
+
+
+
+ A)
+
+
+
+
+ MAS ANTES DE MAIS NADA,
+
+
+
+ PRECISAMOS 
+
+ QUE 
+
+
+ OS ADDRESSES SEJAM RELACIONADOS AOS EVENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+ ----> BEM,
+
+
+
+ E QUANDO O ASSUNTO É SQL,
+
+
+
+ HÁ RELATIONS...
+
+
+ 3 TIPOS DE RELATIONS...
+
+
+
+
+
+
+
+
+
+ ONE-TO-MANY RELATION -----------> ISSO ACONTECE QUANDO 1 RECORD DE 1 TABLE 
+
+
+ É RELACIONADA A MÚLTIPLOS RECORDS DE OUTRA TABLE... -----> MAS ESSES OUTROS RECORDS, NESSA OUTRA TABLE,
+
+
+ FICARÃO RELACIONADAS A APENAS 1 
+
+RECORD NA TABLE A, NO MÁXIMO...
+
+
+
+
+
+
+
+
+
+
+
+EXEMPLO: '1 ORGANIZER PODE ORGANIZAR MÚLTIPLOS EVENTS,
+
+MAS __ CADA __ EVENT_ SÓ PODE SER ORGANIZADO POR 1 ORGANIZER''' (esse é o one-to-many, e é BEM COMUM)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS OUTRO TIPO DE RELATIONSHIP 
+COMUM 
+
+É 
+O 
+
+'MANY-TO-MANY' --> 1 mesmo 
+
+RECORD NA TABLE A 
+
+
+PODE 
+
+
+
+SER RELACIONADO A MÚLTIPLOS RECORDS NA TABLE B,
+
+
+
+mas 
+
+
+O CONTRÁRIO TAMBÉM SE APLICA... --> EXEMPLO DISSO  É 
+
+
+
+'''1 EVENT PODE TER VÁRIOS PARTICIPANTS,
+
+
+MAS CADA PARTICIPANT PODE PARTICIPAR DE 
+
+__OUTROS EVENTS, nada impede isso'''..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... POR FIM, TEMOS 
+
+1 RELATION QUE É 
+
+1 POUCO 
+
+MAIS RARA,
+
+MAS QUE AINDA EXISTE... É A RELATION DE 'ONE-TO-ONE'...
+
+
+
+
+
+
+
+NESSE TIPO DE RELATION,
+
+
+1 
+
+RECORD 
+
+NA TABLE A __ VAI __ TER _ EXATAMENTE 
+
+
+1 RELATED RECORD NA TABLE B,
+
+E VICE-VERSA (aqui usamos 'UNIQUE')...
+
+
+
+
+
+
+
+
+--> o exemplo disso É '1 ORGANIZER, QUE NO FINAL DAS CONTAS
+
+É UM REGULAR USER',
+
+
+
+
+
+E __ 1 USER,
+
+
+QUE 
+
+PODE 
+
+SER 
+
+
+
+APENAS 1 ORGANIZER -> PQ ISSO É ONE AND THE SAME PERSON,
+
+
+MAS 
+
+
+
+
+ARMAZENAMOS 
+
+ESSA DATA EM TABLES DIFERENTES PARA TER 1 SEPARAÇÃO ENTRE 'REGULAR USERS'
+
+
+E USERS QUE 
+
+SÃO ORGANIZERS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK, MAS VOLTANDO A NOSSA TABELA ATUAL,
+
+
+
+É SEGURO DIZER QUE 
+
+
+
+
+ENTRE LOCATIONS E EVENTS 
+
+
+
+__ TEREMOS 1 RELATIONSHIP DE 'ONE-TO-MANY'... --> PQ 
+
+1 EVENT 
+
+TEM 
+
+EXATAMENTE 1 ÚNICA LOCATION,
+
+
+MAS 
+
+1 
+
+MESMA LOCATION PODE SER USADA PARA MÚLTIPLOS EVENTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUe,
+
+
+na table de 'LOCATIONS',
+
+
+
+DEVEMOS COLOCAR:
+
+
+
+
+
+
+A) 1 UNIQUE ID -> ISSO VAI NOS AJUDAR COM O SET DA RELATIONSHIP, DEPOIS (colocar 'location_id' no event)..
+
+
+
+B) TITLE 
+
+
+
+C) STREET 
+
+
+
+D) HOUSE NUMBER 
+
+
+E) POSTAL CODE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODERÍAMOS COLOCAR A CITY ALI DENTRO, SIM,
+
+MAS 
+
+TBM 
+
+
+
+
+SERIA BOM ARMAZENAR A CITY EM 1 OUTRA TABLE..
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+A) 1 UNIQUE ID -> ISSO VAI NOS AJUDAR COM O SET DA RELATIONSHIP, DEPOIS (colocar 'location_id' no event)..
+
+
+
+B) TITLE 
+
+
+
+C) STREET 
+
+
+
+D) HOUSE NUMBER 
+
+
+E) POSTAL CODE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TABLE DE 'CITIES':
+
+
+
+
+
+
+RAZÕES PARA CRIAR 1 TABLE DIFERENTE PARA 'CITIES":
+
+
+
+1) SÃO REALMENTE 1 DATA ENTITY DISTINTA DE 'locations'..
+
+
+
+
+
+
+
+
+2) TALVEZ SEJA BOM PADRONIZAR 
+
+
+NOSSAS CITIES (fazer com que seja sempre 'Munich', e nunca 'MUC', por exemplo)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A RELATIONSHIP ENTRE 'locations' e 'cities'
+SERÁ
+ 
+
+ 'ONE-TO-MANY',
+
+ JUSTAMENTE PQ 
+
+ 1 MESMA CITY 
+ PODE 
+
+
+
+'TER'
+
+
+MÚLTIPLAS LOCATIONS ATRIBUÍDAS A SI... (e 1 location só pode fazer parte de 1 ÚNICA CITY)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+certo...
+
+
+
+
+
+
+
+
+E CADA CITY PODE TER A COLUMN DE :
+
+
+
+
+
+1) NAME 
+
+
+
+2) ID ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+SERÁ UMA TABLE SIMPLES,
+
+COM APENAS 
+
+'CITY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS, SIM,
+
+ADICIONAR 1 TABLE EXTRA DE 'STREET',
+
+
+MAS 
+
+
+NÃO FAREMOS ISSO PQ 
+
+
+DEIXARIA AS COISAS MEIO COMPLEXAS DEMAIS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE NÃO PRECISAMOS OUTSOURCEAR TODA SANTA COLUMN 
+
+A 
+
+1 
+
+
+TABLE SEPARADA --> VOCê DEVE PENSAR NA JUSTA-MEDIDA,
+SEMPRE... (entre poucas tables e muitas tables)...
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+
+TEMOS A TABLE DE 'tags':
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODERÍAMOS ADICIONAR 1 COLUMN DE 'TAG'
+
+
+
+LÁ NA COLUMN DE 'EVENTS',
+
+
+
+
+
+MAS O PROBLEMA 
+É QUE 
+
+
+
+
+1 MESMO EVENT PODE TER MÚLTIPLAS TAGS, FREQUENTEMENTE...
+
+
+
+
+
+
+
+
+
+
+--> E SERIA BOM STANDARDIZAR ESSAS TAGS E,
+ COM ISSO,
+
+
+ EVITAR _ COMPOUND VALUES 
+
+
+
+
+ NAS NOSSAS COLUNAS...
+
+
+
+
+
+
+
+
+
+
+
+ --> OK... SE TIVERMOS 
+
+
+ 1 COLUMN DE 'TAGS' 
+
+
+ NA TABLE DE 
+
+ 'EVENTS',
+
+
+
+
+ E 
+
+ SE 
+
+ 1 
+
+ EVENT TIVER MÚLTIPLAS TAGS,
+
+ ISSO FARIA 
+
+
+ COM QUE 
+
+
+
+ FICASSE MÚLTIPLOS VALUES DE 'TAGS' 
+
+ EM 1 MESMA COLUMN, EM 1 ROW... ->  É POR ISSO QUE 
+
+
+
+
+
+
+
+
+
+ É BOM 
+
+
+
+ ADICIONAR UMA 
+
+ TABLE DE 
+
+ 'TAGS',
+
+
+ QUE 
+
+ SERÁ MANY  TO MANY --> 
+
+
+
+
+
+
+
+
+
+ MANY TO MANY PQ 
+
+
+
+ 1 
+ EVENT PODERÁ TER 
+
+ MÚLTIPLAS 
+
+ TAGS,
+
+
+ E 
+
+ 1
+  
+  MESMA 
+
+  TAG 
+
+  PODE 
+
+
+
+SER ASSIGNADA A MÚLTIPLOS EVENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... -> ESSA TABLE DE TAGS 
+
+
+
+__ TERÁ APENAS UMA COLUMN DE 'NAME'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+ATÉ AGORA, TEMOS:
+
+
+
+
+1) EVENTS 
+
+2) LOCATIONS 
+
+3) CITIES 
+
+
+4) TAGS 
+
+
+5) TABLE INTERMEDIÁRIA ENTRE TAGS E EVENTS  (many-to-many)...
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO, TEREMOS 'USERS',
+PQ 
+
+USERS PODERÃO FAZER 'SIGN UP' A EVENTS...
+
+
+
+
+
+
+
+
+
+--> PORTANTO, TEREMOS 1 RELATION ENTRE 
+
+EVENTS E USERS --> 
+
+
+
+
+
+
+
+
+PQ 1 EVENT PODE TER MÚLTIPLOS 'USERS'/PARTICIPANTS,
+
+
+E 
+
+1 
+
+USER PODE 
+
+
+FAZER SIGN UP A MÚLTIPLOS EVENTS... (many-to-many)....
+
+
+
+
+
+
+
+
+
+
+PARA ISSO, NOSSAS TABLES VÃO FICANDO ASSIM:
+
+
+
+
+
+
+1) EVENTS 
+
+2) LOCATIONS 
+
+3) CITIES 
+
+
+4) TAGS 
+
+
+5) TABLE INTERMEDIÁRIA ENTRE TAGS E EVENTS  (many-to-many)...
+
+
+
+6) USERS 
+
+
+7) TABLE INTERMEDIÁRIA ENTRE USERS E EVENTS 
+
+
+
+
+
+
+
+
+
+
+
+
+---> NA TABLE DE USERS,
+
+TEREMOS ESTAS COLUMNS:
+
+
+A) ID 
+
+B) FIRST_ NAME __
+
+C) LAST NAME 
+
+D) BIRTHDATE 
+
+
+E) EMAIL.
+
+
+
+
+
+
+
+
+
+É CLARO QUE ALGUNS USERS SERÃO _ ORGANIZERS..
+
+
+
+
+
+
+
+
+
+E PARA REFLETIRMOS ESSE FATO NA NOSSA DATABASE,
+
+
+
+PODEMOS 
+
+ADICIONAR 1 TABLE EXTRA,
+
+
+DE 
+
+'ORGANIZERS',
+
+QUE 
+
+
+
+SERÁ CONECTADA à TABLE DE 'users'
+
+
+
+
+POR MEIO DE UMA ONE-TO-ONE RELATION (pq _é realmente esse tipo de relation, 1 para cada 1)
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ISSO QUER DIZER QUE  
+
+
+
+
+TEREMOS APENAS UMA DATA EXTRA NA TABLE DE 'ORGANIZERS',
+
+
+DATA QUE 
+
+NÃO ESTARÁ 
+
+PRESENTE ORIGINALMENTE NA TABLE DE 'users'... -> 
+
+
+ESSA 
+
+DATA 
+
+SERÁ O 'PASSWORD',
+ 
+
+
+
+
+SERÁ APENAS O PASSWORD...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO JÁ BASTARÁ PARA PRATICARMOS BASTANTE COM O SQL...
+
+
+
+
+
+
+
+
+
+
+POR FIM, 
+
+CABE RESSALTAR QUE 
+
+ORGANIZERS SE RELACIONAM 
+
+
+
+
+
+COM _ EVENTS TAMBÉM,
+
+
+POR MEIO 
+
+DE 
+
+
+1 
+
+'ONE-TO-MANY'
+
+RELATIONSHIP --> PQ 
+
+
+
+1 EVENT SÓ PODE TER 1 ORGANIZER,
+
+MAS 
+
+
+
+
+1 ORGANIZER PODE ORGANIZAR MÚLTIPLOS EVENTS...
+
+
+
+
+
+
+
+
+
+
+
+ESSAS SÃO AS TABLES QUE VAMOS DEFINIR...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA IMPLEMENTAR TUDO ISSO,
+
+
+
+
+
+VAMOS TER DE:
+
+
+
+
+
+1) CREATE THE TABLES
+
+
+2) CREATE THE COLUMNS 
+
+
+3) PICK APPROPRIATE DATA TYPES FOR THE COLUMNS 
+
+
+4) INSERT SOME DUMMY DATA 
+
+
+5) PLAY AROUND WITH THAT DATA 
+
+
+6) RUN SOME QUERIES, TO LEARN HOW TO USE SQL...
