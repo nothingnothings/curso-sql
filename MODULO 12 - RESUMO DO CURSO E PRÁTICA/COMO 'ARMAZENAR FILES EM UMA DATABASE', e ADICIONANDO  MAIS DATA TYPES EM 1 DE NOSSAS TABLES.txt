@@ -1,0 +1,530 @@
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... QUANDO O ASSUNTO É ARMAZENAR FILES 
+
+
+EM 
+
+DATABASES,
+
+
+
+
+
+A REGRA SIMPLES É QUE 
+
+
+VOCê 
+
+'NÃO VAI ARMAZENAR FILES EM DATABASES'..
+
+
+
+
+
+
+
+POR EXEMPLO,
+
+QUANDO 
+
+
+VOCE 
+TEM 
+
+1 
+
+APP 
+
+
+
+
+
+
+
+
+
+,
+
+
+UM WEBAPP QUE 
+
+RODA 
+
+
+EM 1 SERVER,
+
+E QUE 
+
+ENTÃO 
+
+SE COMUNICA 
+
+
+
+COM SEU DATABASE SERVER (1 app SOCIAL NETWORK...) ------> E AÍ,
+
+VOCÊ 
+
+TEM 
+
+A DATABASE QUE PERTENCE A ELE....
+
+
+
+
+
+
+
+
+
+
+-> AÍ VOCÊ 
+
+
+
+TEM A TABLE DE 'USERS',
+
+
+
+
+
+A TABLE DE 'POSTS',
+
+
+E OUTRAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+USERS DE SEU SITE __ PODEM ACABAR UPLOADANDO PROFILE IMAGES,
+
+OU ENTÃO 
+
+
+IMAGES QUE PERTENCEM A POSTS,... --> OK, MAS 
+
+COMO 
+
+PODEMOS 
+ARMAZENAR 
+
+ESSAS IMAGES?
+
+
+
+
+
+
+
+
+
+A REGRA COMUM:
+
+
+'''VC NÃO VAI ARMAZENAR AS FILES NA DATABASE''...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO PQ __ 
+DATABASES 
+
+
+
+
+
+SÃO SISTEMAS,
+
+
+FERRAMENTAS,
+
+
+PARA 
+
+
+ARMAZENAR DATA BEM SIMPLES,
+COMO 
+
+'TEXT',
+
+'NUMBERS',
+
+
+ETC ETC...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, E FILES_ _ NÃO 
+
+
+
+__ SE ENCAIXAM EM 1 DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ __ AS FILES NÃO PODEM SER QUERIADAS,
+
+
+TOMAM 1 MONTE DE ESPAÇO,
+
+
+
+E 
+
+
+PODEM 
+
+
+DEIXAR SUA DATABASE MAIS LENTA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE VOCÊ NÃO SALVA SUAS 
+FILES 
+
+
+EM 1 DATABSE,
+
+
+E SIM 
+
+EM 
+
+1 
+FILE SYSTEM,
+
+
+EM 
+
+1 
+'HARD DRIVE' (
+
+    que pode FAZER PARTE DAQUELE WEB SERVEr...s
+)
+
+
+
+
+
+
+
+
+
+
+
+
+------> E, ENTÃO, VOCÊ 
+
+APENAS 
+
+ARMAZENA 
+
+
+1 PATH A ESSE FILE, NO FORMATO TEXT,
+
+
+NA DATABASE...
+
+
+
+
+
+
+
+
+
+
+
+--> E ESSA É A ÚNICA COISA QUE VOCê ARMAZENA DA IMAGE, NA DATABASE,
+
+O 
+
+
+__CAMINHO__ A ESSE ARQUIVO....
+
+
+
+
+
+
+
+
+
+
+
+
+É POR ISSO QUE O QUE ARMAZENAMOS, PARA A IMAGE,
+
+É UM 'VARCHAR()'.... -------> PQ VAMOS ARMAZENAR APENAS O PATH AO ARQUIVO...
+
+
+
+
+
+
+
+----> VAMOS COLOCAR A LENGTH DE CARACTERES QUE ESPERARÍAMOS...
+
+
+
+
+ex:
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0),
+    min_age INT CHECK (min_age > 0)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> NA 'description',
+
+COLOCAMOS 
+
+
+
+1
+ 
+
+
+DATA TYPE MAIS 'EXTENSO',
+QUE É 
+
+
+O 
+
+'TEXT' --> é USADO _PARA__ CASOS EM QUE VC
+TEM 
+
+
+TEXTO LONGO,
+
+
+EM QUE 
+
+VC 
+
+NÃO CONSEGUE PREVER A LENGTH...
+
+
+
+
+
+
+
+
+
+
+
+
+'PARA OPTIMIZAR DATABASE PERFORMANCE E STORAGE SPACE,
+
+VOCÊ DEVE USAR VARCHAR QUANDO POSSÍVEL,
+E USAR TEXT _ APENAS _ PARA LONG TEXT' (ou texto cuja length você não pode prever)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... MAS QUANDO O ASSUNTO É O 'MAX NUMBER OF PARTICIPANTS',
+
+
+
+
+
+
+__ ISSO __ DEVERÁ SER UM INTEGER... -> DEVERÁ SER UM INTEGER DIFERENTE DE 0..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É POR ISSO QUE COLOQUEI A CONSTRAINT DE 
+
+
+
+'CHECK (max_participants > 0)'
+
+
+
+
+
+
+
+
+
+TALVEZ SEJA NECESSÁRIA A CONSTRAINT DE 'NOT NULL', 
+
+também...
+
+
+
+
+TIPO ASSIM:
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0)
+);
+
+
+
+
+
+
+
+
+MESMA COISA PARA O 'MIN_age':
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AINDA ASSIM,
+
+
+AINDA NÃO TERMINAMOS COM A CONFIG DESSA TABLE 
+
+DE 'events'...

@@ -73,7 +73,7 @@ CREATE TABLE events (
     date_and_time TIMESTAMP NOT NULL,
     image_url VARCHAR(500) UNIQUE NOT NULL,
     description TEXT NOT NULL,
-    max_participants INT CHECK (max_participants > 0),
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
     min_age INT CHECK (min_age > 0)
 );
 
