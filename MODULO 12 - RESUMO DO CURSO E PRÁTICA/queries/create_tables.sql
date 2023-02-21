@@ -56,8 +56,30 @@ CREATE TABLE users (
 CREATE TABLE organizers (
     id SERIAL PRIMARY KEY,
     password VARCHAR(255) NOT NULL,
-    user_id INT REFERENCES users(id)
+    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE --- é unique pq é JUSTAMENTE 1 'ONE-TO-ONE' relation
 );
+
+
+-- CREATE TABLE organizers (]
+--     password VARCHAR(255) NOT NULL,
+-- PODERÍAMOS SETTAR ASSIM, SIM (uma primary key de 1 table pode SER, AO MESMO TEMPO, FOREIGN KEY DE OUTRA TABLE... nada impede)...
+--     user_id SERIAL PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE
+-- );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,7 +97,8 @@ CREATE TABLE events (
     description TEXT NOT NULL,
     max_participants INT CHECK (max_participants > 0) NOT NULL,
     min_age INT CHECK (min_age > 0) NOT NULL,
-    location_id INT REFERENCES locations(id) ON DELETE CASCADE -- caso deletada a location desse negócio, o event relacionado é apagado tbm
+    location_id INT REFERENCES locations(id) ON DELETE CASCADE, -- caso deletada a location desse negócio, o event relacionado é apagado tbm
+    organizer_id INT REFERENCES organizers(id) ON DELETE CASCADE
 );
 
 
