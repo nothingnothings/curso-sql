@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+
+
+
+--> OK... É HORA DE FINALMENTE SUJAR NOSSAS MÃOS...
+
+
+
+
+
+
+
+O PROFESSOR 
+
+VAI NAS 
+
+SQL TOOLS DO VSCODE...
+
+
+
+
+
+
+
+
+
+--> ESTAMOS COM O SERVER POSTGRESQL RODANDO...
+
+
+
+
+
+
+
+
+--> DEPOIS DISSO,
+
+PODEMOS ADICIONAR UMA NOVA CONNECTION A UMA DATABASE...
+
+
+
+
+
+
+
+
+--> E ASSIM QUE VOCê FIZER ISSO,
+
+
+PODEMOS COMEÇAR A RODAR ALGUNS COMANDOS...
+
+
+
+
+
+
+
+
+--> O PRIMEIRO COMANDO É UM PARA ___ CREATE A NEW DATABASE..
+
+
+
+
+
+
+
+
+
+--> PQ VOCÊ PODE RODAR COMANDOS SQL PARA 
+
+
+__cRIAR _ DATABASES 
+
+
+
+NELE...
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+
+CRIAR UMA DATABASE É BEM SIMPLES,
+
+BASTA RODAR ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE DATABASE database_name;
+
+
+
+
+
+
+
+
+
+-> CERTO...
+
+
+
+
+
+
+
+
+
+CREATE DATABASE ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> ISSO FAZ O QUE O NOME SUGERE,
+
+CRIA UMA NOVA DATABASE..
+
+
+
+
+
+
+
+
+--> AÍ PRECISAMOS DO NOME DA DATABASE...
+
+
+
+
+
+
+
+
+-> É O IDENTIFIER DA DATABASE...
+
+
+
+
+
+
+
+
+--> O PROFESSOR COLOCA 'MY_events..
+
+
+
+
+
+ex:
+
+
+
+
+
+
+CREATE DATABASE my_events;
+
+
+
+
+
+
+
+
+
+
+
+
+NUNCA USE WHITE SPACE NOS SEUS NAMES 
+
+
+
+
+
+DO SQL...
+
+
+
+
+
+
+
+
+
+--> É ASSIM QUE VOCÊ NOMEIA SUAS DATABASES/COLUMNS/TABLES...
+
+
+
+
+
+
+
+
+
+
+
+-> RODAMOS ISSO CONTRA A ACTIVE CONNECTION...
+
+
+
+
+
+
+
+
+
+
+--> DEU TUDO CERTO....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA A DATABASE FOI CRIADA...
+
+
+
+
+
+
+
+
+
+
+BEM, AS CONEXÕES QUE TEMOS AQUI ESTÃO CONECTADAS A UMA DATABASE ERRADA.. -> 
+
+
+É POR ISSO QUE PRECISAMOS SWAPPAR,
+
+NOS SQL TOOLS,
+
+
+PARA 
+
+
+A DATABASE DE 
+
+
+
+
+'my_events'...
+
+
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+SALVAMOS TUDO ISSO...
+
+
+
+
+
+CONECTAMO-NOS 
+
+MAIS UMA VEZ...
+
+
+
+
+
+
+
+--> certo... o próximo passo é a criação das tables... --> 
+
+
+
+veremos os diferentes tipos de value que poderíamos armazenar.. também como podemos settar RELATIONS entre as tables...
