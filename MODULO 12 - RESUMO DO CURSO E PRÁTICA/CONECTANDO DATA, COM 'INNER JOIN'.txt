@@ -1,0 +1,508 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, CONSEGUIMOS,
+
+
+
+DEFINIMOS TODAS AS TABLES E AS RELATIONS ENTRE ELAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... 1 SITUAÇÃO TÍPICA É 
+
+'QUERY RELATED DATA''...
+
+
+ 
+
+
+
+
+
+
+
+
+ DIGAMOS QUE QUEREMOS PEGAR TODOS OS EVENTS,
+
+
+
+
+
+
+
+
+ TODA A EVENT DATA,
+
+
+ MAS 
+
+
+
+
+
+
+ 1 RESULT SET EM QUE 
+
+
+ __ O 'ID DA LOCATION'
+
+ É 
+
+
+ SUBSTITUÍDA PELA ACTUAL LOCATION DATA --> ISSO PQ PODEMOS TER 1 APP 
+
+
+ QUE 
+
+ PRECISA 
+ RETRIEVAR 
+
+
+
+
+
+ 'EVENTS'  + OS ADDRESSES DOS EVENTS.. -> 
+
+
+
+ E VOCÊ 
+
+ TIPICAMENTE 
+
+ FARIA
+  
+  ISSO 
+
+
+
+  COM 1 ÚNICA QUERY,
+
+
+
+
+  E AÍ 
+
+
+  VOCÊ 
+
+  GOSTARIA
+
+
+  DE 
+
+  TODA A ADDRESS DATA (e não só o id)...
+
+
+
+
+
+
+
+
+=--> ESSA É UMA FEATURE IMPORTANTE DA LINGUAGEM SQL...
+
+  --> PARA ISSO, DEVEMOS USAR O LEFT JOIN E INNER JOIN...
+
+
+
+
+
+
+
+
+
+
+
+
+  --> VAMOS USAR 'LEFT JOIN',
+
+  PARA PEGAR TODOS OS EVENTS..
+
+
+
+
+
+
+
+
+
+
+  (contrariamente a 'INNER JOIN')...
+
+
+
+
+
+
+
+
+
+
+  -> VAMOS RODAR TIPO ASSIM, NO INÍCIO:
+
+
+
+
+
+
+
+  SELECT * FROM events;
+
+
+
+
+
+
+
+
+
+
+
+
+  OK..
+
+
+
+
+
+
+  MAS AGORA QUEREMOS MERGEAR DATA AO LONGO DE TABLES...
+
+
+
+
+
+
+
+
+
+--> vamos começar pelo inner join...
+
+
+
+
+
+
+
+
+  SELECT * FROM events 
+  INNER JOIN 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  É CLARO QUE ISSO NÃO VAI MUDAR A DATA ORIGINAL, A DATA ORIGINAL N VAI SER MERGEADA EM 1 NOVA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --> COM INNER JOIN,
+
+
+  PODEMOS COMBINAR DATA DE DIFERENTES TABLES (related data, apenas related data)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ex:
+
+
+
+
+  SELECT * FROM events AS e
+  INNER JOIN locations AS l ON l.id = e.location_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  --------> ok...
+
+
+
+
+
+
+
+  ISSO VAI TRAZER DE VOLTA TODOS 
+
+
+  OS EVENTS QUE POSSUEM ESSE FIELD DE 'location_id' 
+
+  PREENCHIDo....
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O RESULT SET FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 1,
+    "name": "New in town",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1,
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2
+  },
+  {
+    "id": 3,
+    "name": "New in town 2 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg2",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1,
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2
+  },
+  {
+    "id": 4,
+    "name": "New in town 3 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg22",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1,
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTo...
+
+
+
+
+
+
+
+
+
+SIGNIFICA QUE NOSSOS 3 EVENTS ESTÃO 'RELATED' 
+
+AO MESMO ENDEREÇO, NESSE CASO.. (mesma 'location')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A PARTE DO ALIAS É OPCIONAL, MAS É ÚTIL/POPULAR...
+
+
+
+
+
+
+
+
+
+
+
+
+COM ISSO, ESTAMOS FAZENDO JOIN DA DATA...
+
+
+
+
+
+
+
+
+
+É ASSIM QUE FAZEMOS MERGE DESSA DATA...
+
+
+
+
+
+
+TIPICAMENTE,
+
+QUANDO 
+
+FAZEMOS MERGE,
+
+
+
+RECEBEMOS 
+
+
+
+MTAS E MTAS COLUMNS... -_> POR ISSO TVZ SEJA MELHOR NÃO USAR 'estrela',
+
+E SIM 
+
+
+
+
+
+
+COLOCAR APENAS AS COLUMNS DESEJADAS POR NÓS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VOCÊ TAMBÉM PODE ASSIGNAR ALIASES A COLUMNS...
+
+
+
+(e isso apenas é aplicado ao result set, e não à table em si)...
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ OK... É ASSIM QUE USAMOS ALIASES,
+
+
+
+
+ E É ASSIM QUE USAMOS 
+
+ INNER JOIN PARA MERGEAR RELATED DATA....
