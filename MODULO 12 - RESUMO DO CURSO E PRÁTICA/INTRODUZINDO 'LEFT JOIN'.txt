@@ -1,0 +1,291 @@
+
+
+
+
+
+
+
+A DIFERENÇA DE 'LEFT JOIN' 
+
+
+
+
+para INNER JOIN é que 
+
+
+ELE SEMPRE 
+
+VAI 
+
+
+
+PEGAR TODOS OS RESULTS DE 1 TABLE,
+
+
+INDEPENDENTEMENTE 
+
+
+
+de satisfazer ou não a condição descrita em 'ON'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> PROFESSOR AINDA ADICIONA 1 SELECT STATEMENT, PQ É UMA REGULAR QUERY,
+
+MAS AGORA VAMOS JOINAR MÚLTIPLAS TABLES COM 
+
+ESSE JOIN ESPECIAL...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM locations;
+
+
+
+
+
+
+
+
+
+
+
+
+-> SE RODAMOS ISSO SEM O JOIN, GANHAMOS 1 LIST DE TODAS AS LOCATIONS,
+
+SEM NENHUMA DATA EXTRA...
+
+
+
+
+
+
+
+
+
+--> MAS AGORA QUEREMOS MERGEAR ESSA 
+
+TABLE 
+
+
+COM 
+
+
+
+A TABLE DE 'EVENTS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> É + OU - O QUE FIZEMOS ANTES,
+
+MAS 
+
+
+
+
+
+AGORA COMEÇANDO 
+
+
+
+
+
+
+
+
+
+COM A TABLE DE 'locations'....
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO VAI NOS AJUDAR A ENTENDER A DIFERENÇA ENTRE OS 2 TIPOS DE JOIN...
+
+
+
+
+
+
+
+
+
+
+
+
+-> ESCREVEMOS 
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM locations AS l
+INNER JOIN events AS e ON e.location_id = l.id;
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+ISSO VAI RETRIEVAR 
+
+
+
+
+
+TODAS AS LOCATIONS 
+
+QUE 
+
+TIVEREM 1 VALUE 
+
+
+
+
+
+
+DEFINIDO LÁ DENTRO DE ALGUM 'event',
+
+no field de 'event_id'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> PEGAMOS DE VOLTA 1 ROW PQ _ TEMOS EXATAMENTE 1 EVENT QUE 
+
+TEM 1 RELATED LOCATION,
+
+
+
+MAS O FATO 
+É QUE 
+TEMOS 
+
+
+
+MAIS __ LOCATIONS,
+
+
+
+
+LOCATIONS QUE 
+
+
+
+
+NÃO 
+
+
+
+POSSUEM 1 'RELATED EVENT'...
+
+
+
+
+
+
+
+
+
+
+
+--> MAS SE TROCAMOS 'INNER' COM 'LEFT',
+
+
+
+
+
+
+
+VAMOS RETRIEVAR TODAS AS LOCATIONS,
+
+
+ATÉ MESMO AQUELAS 
+
+QUE NÃO POSSUEM RELAÇÃO COM EVENTS...
+
+
+
+
+
+
+
+
+ex:
+
+
+
