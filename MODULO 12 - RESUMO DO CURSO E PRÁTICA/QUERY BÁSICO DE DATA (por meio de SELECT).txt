@@ -1,0 +1,233 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+EU RODEI ESTA QUERY AQUI, E INSERI ESTES DADOS:
+
+
+
+
+
+
+
+
+
+
+INSERT INTO events (
+        name,
+        date_and_time,
+        image_url,
+        description,
+        max_participants,
+        min_age
+    )
+VALUES (
+        'Great Party',
+        '2022-10-29 16:30:00',
+        'www.google.com',
+        'Some party in a random place',
+        10,
+        16
+    ),
+    (
+        'Party 2',
+        '2021-10-29 16:30:00',
+        'www.yahoo.com',
+        'Who Knows',
+        12,
+        20
+    ),
+    (
+        'Party 3',
+        '2023-10-29 22:30:00',
+        'www.bing.com',
+        'Other party in a random place',
+        10,
+        16
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA QUE ESSA DATA FOI INSERIDA,
+
+
+
+
+
+VAMOS QUERER 
+
+
+
+FAZER GET DESSA DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BASTA RODAR 
+
+
+
+
+
+SELECT * FROM events;
+
+
+
+
+
+
+
+
+
+
+NOSSA DATA FICA ASSIM:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 3,
+    "name": "Great Party",
+    "date_and_time": "2022-10-29 16:30:00",
+    "image_url": "www.google.com",
+    "description": "Some party in a random place",
+    "max_participants": 10,
+    "min_age": 16
+  },
+  {
+    "id": 4,
+    "name": "Party 2",
+    "date_and_time": "2021-10-29 16:30:00",
+    "image_url": "www.yahoo.com",
+    "description": "Who Knows",
+    "max_participants": 12,
+    "min_age": 20
+  },
+  {
+    "id": 5,
+    "name": "Party 3",
+    "date_and_time": "2023-10-29 22:30:00",
+    "image_url": "www.bing.com",
+    "description": "Other party in a random place",
+    "max_participants": 10,
+    "min_age": 16
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO.... PEGAMOS TODAS AS COLUMNS, ASSIM...
+
+
+
+
+
+
+
+
+
+
+PRECISAMOS COLOCAR O 'FROM' PARA ESPECIFICAR DE QUAL TABLE QUEREMOS PEGAR 
+
+
+OS ROWS..
+
+
+
+
+
+
+
+
+
+--> ESSE É O RESULT SET...
+
+
+
+
+
+
+
+
+-----> O RESULT SET __ NEM __ SEMPRE __ É TODA A DATA__ DE 1 TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS PODEMOS TAMBÉM FILTER DATA E ASSIM POR DIANTE...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ANTES DISSO,
+
+DEVEMOS VOLTAR AO TÓPICO DE 'MANIPULATE DATA'...
+
+
+
+VAMOS UPDATAR E DELETAR DATA, ANTES DE VER O FILTERING...
