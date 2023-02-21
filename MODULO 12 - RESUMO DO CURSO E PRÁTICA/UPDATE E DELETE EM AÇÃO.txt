@@ -1,0 +1,321 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEVEMOS ASSUMIR QUE NOSSA INSERTED DATA ESTÁ ERRADA...
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+--> O QUE PODEMOS FAZER, PARA CONSERTAR ISSO?
+
+
+
+
+
+
+
+
+
+
+
+1a MANEIRA --> É DELETAR_   O PRIMEIRO EVENT, E AÍ REINSERIR ELE ....
+
+
+
+
+
+
+--> O PROBLEMA, NO CASO,
+É QUE 
+
+
+VC 
+
+VAI ___ _DELETAR__ ESSE EVENT _ E O REINSERIR; O NOVO EVENT VAI RECEBER 1 NOVO ID,
+
+E SE 
+
+VC 
+
+TIVER OUTRO CÓDIGO QUE 
+
+
+
+DEPENDE 
+
+
+
+DO ID DO PRIMEIRO EVENT,
+
+ESSE CÓDIGO TALVEZ 
+
+FETCHEIE 
+
+O 
+
+
+
+EVENT ERRADO,
+
+OU ENTÃO 
+
+'NO EVENT AT ALL',
+
+
+no caso....
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE UMA MANEIRA MELHOR SERIAA _ 
+
+
+
+A 
+
+SEGUNDA MANEIRA...
+
+
+
+
+
+
+
+
+
+
+2a maneira --> UPDATE DESSE EVENT...
+
+
+
+
+
+
+
+
+
+
+
+--> PARA UPDATAR ESSE EVENT,
+
+TEMOS 
+
+
+OUTRO 
+
+
+
+COMANDO A SER EXECUTADO...
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+-- UPDATE events
+-- SET min_age =  999
+-- WHERE id = xxxx;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> É CLARO QUE PODEMOS UPDATAR MÚLTIPLAS COLUMNS COM ESSE MESMO COMANDO...
+
+
+
+
+
+
+
+mas não faremos isso, aqui...
+
+
+
+
+
+
+
+
+E PODEMOS UPDATAR MÚLTIPLAS ROWS 
+
+EM 1 TABLE,
+
+
+DE UMA VEZ SÓ... (mas é bem mais comum usar a clause de 'WHERE', para filtrar quais coisas você quer updatar)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+o WHERE é mt importante...
+
+
+
+
+
+
+
+
+PODEMOS USAR OUTROS OPERADORES COM O WHERE, como '<' e '>' e '>=' e '<='
+
+
+
+
+
+
+
+
+
+TAMBÉM PODEMOS USAR 'IS' E 'IS NOT'...
+
+
+
+
+
+
+
+
+
+
+OK... MAS COMO PODEMOS DELETE?
+
+
+
+
+
+
+
+
+
+
+
+
+DELETE FROM table_name
+WHERE xxxx 
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+DELETE FROM events
+WHERE id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+OK.... --> SE TIVERMOS 1 CONDITION 
+
+
+QUE É SATISFEITA POR MÚLTIPLOS ROWS,
+
+
+
+
+MÚLTIPLOS ROWS SERÃO DELETADOS....
+
+
+
+
+
+
+
+
+
+
+ok.. agora voltaremos ao querying, e estudaremos isso mais um pco....
