@@ -1,0 +1,332 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK... MAS HÁ ALGO MAIS 
+QUE 
+O 
+PROFESSOR QUER FAZER,
+
+
+A RESPEITO 
+
+DAS RELATIONS...
+
+
+
+
+
+
+
+
+-> ELE QUER SETTAR 1 LÓGICA EXTRA, QUE DEVERÁ SER EXECUTADA 
+
+SE 
+
+RELATED ROWS FOREM DELETADOS...
+
+
+
+
+
+
+
+
+
+
+--> POR ISSO, O PROFESSOR QUER DIZER QUE 
+
+1 
+LOCATION,
+
+POR EXEMPLO,
+
+
+
+
+
+
+SE ELA É DELETADA E 1 EVENT DEPENDER DESSA LOCATION,
+
+
+
+ALGUMA COISA DEVE ACONTECER A ESSE EVENT (
+
+
+
+    PQ ELA PERDEU ESSE 'RELATED ROW'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA CONFIGURAR ISSO, ESCREVEMOS 
+
+'ON DELETE'
+
+DO LADO DO REFERENCS...
+
+
+
+
+
+
+--> AÍ VOCÊ ESPECIFICA O QUE DEVE ACONTECER 
+
+
+SE 
+
+
+O RELATED ROW FOR DELETADO...
+
+
+
+
+
+
+
+
+TIPO :
+
+
+
+
+
+
+
+
+
+location_id INT REFERENCES locations ON DELETE RESTRICT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> TEMOS 'RESTRICT' --> BLOQUEIA _ O DELETE DA RELATED ROW ---->  SE TENTAMOS 
+
+DELETAR 
+
+
+
+ 1 RELATED ROW,
+
+
+
+ A OPERATION É ACTUALLY BLOQUEADA (Se existirem ROWS DEPENDENDO DESSA DELETED ROW DA OUTRA TABLE)..
+
+
+
+
+
+
+
+
+
+
+ --> MAS TAMBÉM PODEMOS TER 'CASCADE',
+
+
+
+ QUE É USADO PARA QUE 
+
+
+ O 'RELATED EVENT',
+
+
+
+
+ RELACIONADO à LOCATION QUE FOR DELETADA,
+
+
+
+ TAMBÉM SEJA __ DELETADO COM ELA...
+
+
+
+
+
+
+
+
+
+
+
+ --> OUTRA OPÇÃO É 'SET NULL',
+
+
+ QUE 
+
+
+
+ FAZ COM QUE A COLUMN SEJA SETTADA COMO NULL,
+
+ CASO 
+
+ A RELATED ROW 
+
+
+
+ SEJA DELETADA... 
+
+
+
+
+
+
+
+
+
+
+
+
+ --> O PROFESSOR VAI DEFINIR 'ON CASCADE',
+
+ PARA QUE 
+ OS EVENTS SEJAM REALMENTE DELETADOS JUNTO 
+
+ DAS LOCATIONS DELETADAS....
+
+
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL,
+    location_id INT REFERENCES locations(id) ON DELETE CASCADE -- caso deletada a location desse negócio, o event relacionado é apagado tbm
+);
+
+
+
+
+
+
+
+ MAS VC PODERIA TAMBÉM
+
+
+
+
+
+
+ SETTAR DIFERENTES IMPLEMENTAÇÕES, AQUI...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> TAMBÉM TEMOS 'ON UPDATE',
+
+
+
+ MAS É RARAMENTE USADO...
+
+
+
+
+
+
+
+
+
+
+ -----> COLOCAMOS 'ON DELETE RESTRICT' 
+
+ lá no city, para que 
+
+ não seja possível 
+
+
+ deletar 1 city que esteja relacionada a 1 location...
+
+
+ EX:
+
+
+
+
+ CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number VARCHAR(10) NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id) ON DELETE RESTRICT
+);
+
+
+
+
+
+
+
+
+
+O PROFESSOR QUER 
+
+
+QUE 
+
+
+
+
+
+
+TREINEMOS COM O SET DAS TABLES, por conta própria.....
+
+
+
+
+
+
+MAIS TARDE, INSERIREMOS DUMMY DATA...

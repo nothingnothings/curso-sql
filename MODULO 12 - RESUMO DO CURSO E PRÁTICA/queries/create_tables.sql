@@ -40,7 +40,7 @@ CREATE TABLE locations (
         street VARCHAR(255) NOT NULL,
         house_number VARCHAR(10) NOT NULL,
         postal_code INT NOT NULL,
-        city_id INT REFERENCES cities(id)
+        city_id INT REFERENCES cities(id) ON DELETE RESTRICT
 );
 
 
@@ -75,7 +75,7 @@ CREATE TABLE events (
     description TEXT NOT NULL,
     max_participants INT CHECK (max_participants > 0) NOT NULL,
     min_age INT CHECK (min_age > 0) NOT NULL,
-    location_id INT REFERENCES locations(id)
+    location_id INT REFERENCES locations(id) ON DELETE CASCADE -- caso deletada a location desse negócio, o event relacionado é apagado tbm
 );
 
 
