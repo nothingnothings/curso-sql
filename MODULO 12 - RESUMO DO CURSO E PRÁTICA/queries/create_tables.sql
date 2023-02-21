@@ -66,23 +66,6 @@ CREATE TABLE organizers (
 --     user_id SERIAL PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE
 -- );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE TABLE tags (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) UNIQUE NOT NULL
@@ -103,14 +86,19 @@ CREATE TABLE events (
 
 
 CREATE TABLE events_users (
-        id SERIAL PRIMARY KEY,
-        event_id INT REFERENCES events,
-        user_id INT REFERENCES users
+        -- id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events ON DELETE CASCADE,
+        user_id INT REFERENCES users ON DELETE CASCADE,
+         PRIMARY KEY(event_id, user_id),
+          CHECK(event_id < user_id)
+         
 );
 
 
 CREATE TABLE tags_events (
-     id SERIAL PRIMARY KEY,
-     tag_id INT REFERENCES tags,
-     event_id INT REFERENCES events
+    --  id SERIAL PRIMARY KEY, -- podemos definir uma KEY 'FALSA'/ARTIFICIAL/SURROGATE, sim, MAS  TVZ SEJA MELHOR DEFINIR A 'COMBINAÇÃO ENTRE user_id e event_Id' COMO A PRIMARY KEY DESSA TABLE... --> pq realmente será UNIQUE, cada 1 dessas combinações...
+     tag_id INT REFERENCES tags ON DELETE CASCADE ,
+     event_id INT REFERENCES events ON DELETE CASCADE,
+    PRIMARY KEY(tag_id, event_id), -- é assim que definimos UMA COMPOSITE PRIMARY KEY...
+     CHECK(tag_id < event_id) -- ISSO VAI GARANTIR QUE NÃO EXISTAM '2 ENTRIES' com a mesma 'connection'/ligação entre 'event_id' e 'user_id', coisas como '4 - 1 ' e '1 - 4'...
 );

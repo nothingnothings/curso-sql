@@ -5,4 +5,943 @@
 
 
 
---> 
+--> BEM...
+
+
+
+
+
+
+
+
+NO NOSSO EXEMPLO,
+
+TEMOS 
+
+2 
+
+
+MANY-TO-MANY RELATIONSHIPS...
+
+
+
+
+
+
+
+
+SÃO AS DE 'EVENTS-USERS' 
+
+
+
+
+
+E 
+
+
+'EVENTS-TAGS'...
+
+
+
+
+
+
+
+
+
+
+
+
+MAS HÁ 1 PROBLEMA QUE TEREMOS COM ESSAS MANY-TO-MANY RELATIONS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QUANDO TRABALHAMOS COM ESSE TIPO DE RELATIONS,
+
+
+PRECISAMOS DE INTERMEDIATE TABLES,
+
+
+
+CHAMADAS DE 'LINKING TABLES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO 
+
+
+
+PQ TEMOS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+events 
+
+
+id     name
+
+1     Learn SQL 
+
+
+2      New In Town
+ 
+
+3      Dev MEET UP 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+users
+
+
+id     name
+
+1     max
+
+
+2      Julie
+ 
+
+3      Manuel 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> 1 EVENT PODE TER MÚLTIPLOS PARTICIPANTS,
+
+MAS N QUEREMOS 
+
+ARMAZENAR TODOS ESSES PARTICIPANTS DENTRO 
+
+
+DE 1 COLUMN DE algum 'event'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE QUEREMOS 1 LINKING TABLE,
+
+
+1 
+
+TABLE EXTRA QUE EXISTE PARA 
+
+
+
+TER AS CONNECTIONS ENTRE USERS E EVENTS...
+
+
+
+
+
+
+
+
+
+
+ESSA TABLE PODERIA SER CHAMADA DE 'EVENTS_USERS'...
+
+
+
+
+
+
+
+
+
+
+-----> E, AÍ, PODEMOS ARMAZENAR RELATIONS,
+
+
+EM QUE 
+TEMOS 
+
+'1 ROW POR RELATION ENTRE AS 2 TABLES'...
+
+
+
+
+
+
+
+
+
+
+ESSA É A IDEIA,
+
+E É ASSIM QUE 
+
+
+
+DEFINIREMOS 
+
+
+
+
+MANY-TO-MANY RELATIONS...
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER CRIAR UMA TABLE DE TAGS...
+
+
+
+
+
+
+
+
+JÁ CRIEI ISSO...
+
+
+
+
+
+
+FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER QUE SEJA A PRIMARY KEY,
+
+MAS NÃO ACHO QUE ESSA SEJA 1 BOA IDEIA...
+
+
+
+
+
+
+
+
+MAS AGORA PRECISAMOS DAS 'LINKING TABLES'...
+
+
+
+
+
+
+
+
+VAMOS COMEÇAR COM A TABLE DE 'EVENTS-USERS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+FAREMOS ISSO PARA QUE 
+
+NOSSOS USERS CONSIGAM SER REGISTRADOS AOS NOSSOS EVENTS...
+
+
+
+
+
+
+
+
+FICOU TIPO ASSIM:
+
+
+
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> COMO É UMA LINKING TABLE,
+GERALMENTE INCLUÍMOS OS 
+
+NOMES DAS 2 RELATED ENTITIES, AS ENTITIES QUE SERÃO CONECTADAS....
+
+
+
+
+
+
+
+
+
+
+
+--> DENTRO DESSA TABLE,
+QUEREMOS TER:
+
+
+
+
+
+
+
+1) column de 'event_id'
+
+
+
+2) column de 'user_id'..
+
+
+
+
+
+
+
+
+--> TEREMOS 1 ROW POR 'CONNECTION', NESSE CASO...
+
+
+
+
+
+
+
+--> poderíamos ter 1 column de 'registration_date' (para armazenar a date em que foi criada cada connection)...
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+FIZ EXATAMENTE O QUE O PROFESSOR FEZ...
+
+
+
+
+
+
+
+
+
+MAS TAMBÉM DEVEMOS 
+
+
+
+ESCREVER ' O QUE DEVE ACONTECER SE 
+
+O USER FOR DELETADO',
+
+por 
+
+isso escrevemos 
+
+
+'ON DELETE CASCADE',
+
+para que 
+
+
+
+
+ESSA 'CONNECTION' SEJA APAGADA, TAMBÉM,
+
+SE 
+
+O USER OU O EVENT FOREM APAGADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events ON DELETE CASCADE,
+        user_id INT REFERENCES users ON DELETE CASCADE
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags ON DELETE CASCADE ,
+     event_id INT REFERENCES events ON DELETE CASCADE
+);
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE HÁ KMAIS COISAS QUE PODEMOS 
+
+
+FAZER COM 
+
+
+LINKING TABLES... --> COISAS COMO 
+
+
+
+
+''GARANTIR QUE NÃO EXISTAM DUPLICATE ROWS PARA O MESMO TIPO DE RELATION''',
+
+
+
+
+
+
+
+
+
+MAS _ ISSO __ É ALGO QUE VIMOS AO LONGO DO NOSSO CURSO,
+
+
+
+
+
+
+
+
+
+
+
+
+É JUSTAMENTE 
+
+
+
+
+
+o código de 
+
+
+
+"""""
+
+
+
+
+
+CREATE TABLE users_friends(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users ON DELETE CASCADE, -- se esse user/friend (1 dos polos da relação) for apagado, VAMOS QUERER DELETAR ESSE RECORD DA 'FRIENDSHIP' ENTRE OS 2...
+    friend_id INT REFERENCES users ON DELETE CASCADE,
+    CHECK(user_id < friend_id)  ---- exemplo de TABLE-WIDE CONSTRAINT... ESSA É UMA CONSTRAINT PARA __ EVITAR_ QUE 'EXISTAM 2 RECORDS PARA 1 MESMA FRIENDSHIP/CONNECTION entre users' 
+); 
+
+
+
+
+
+
+""""""
+
+
+
+
+
+
+
+
+
+É ESSE CÓDIGO DE 'CHECK (user_id < friend_id)' ,
+
+
+
+
+
+
+
+
+
+PQ ELE VAI ASSEGURAR QUE 
+
+
+
+
+
+NÃO EXISTAM COISAS COMO '4 - 1' e ' 1 - 4'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-_> OK... ISSO VAI NOS PERMITIR ARMAZENAR 
+
+MANY-TO-MANY RELATIONSHIPS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+EU ADICIONEI 1 PRIMARY KEY A ISSO...
+
+
+
+
+
+
+
+
+--> MAS TAMBÉM É POSSÍVEL/MELHOR 
+
+DIZER QUE 
+
+
+
+
+A PRIMARY KEY _ __
+
+
+DESSA TABLE SERÁ A COMBINAÇÃO DE VALUES ENTRE 'event_id'
+
+
+e 
+
+'user_id'...
+
+
+
+
+
+
+
+
+
+
+--> ESSE TIPO DE PRIMARY KEY É CHAMADO DE 'COMPOSITE PRIMARY KEY'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARA DEFINIRMOS UMA COMPOSITE PRIMARY KEY,
+
+
+O CÓDIGO É ESTE:
+
+
+
+
+
+
+
+
+
+CREATE TABLE tags_events (
+    --  id SERIAL PRIMARY KEY, -- podemos definir uma KEY 'FALSA'/ARTIFICIAL/SURROGATE, sim, MAS  TVZ SEJA MELHOR DEFINIR A 'COMBINAÇÃO ENTRE user_id e event_Id' COMO A PRIMARY KEY DESSA TABLE... --> pq realmente será UNIQUE, cada 1 dessas combinações...
+     
+
+     tag_id INT REFERENCES tags ON DELETE CASCADE ,
+     event_id INT REFERENCES events ON DELETE CASCADE,
+    PRIMARY KEY(tag_id, event_id), -- é assim que definimos UMA COMPOSITE PRIMARY KEY...
+     CHECK(tag_id < event_id) -- ISSO VAI GARANTIR QUE NÃO EXISTAM '2 ENTRIES' com a mesma 'connection'/ligação entre 'event_id' e 'user_id', coisas como '4 - 1 ' e '1 - 4'...
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> ISSO QUER DIZER QUE AINDA TEMOS UMA PRIMARY KEY,
+
+
+
+ PRIMARY KEY(tag_id, event_id),
+
+
+
+
+
+
+
+
+
+ MAS __ ELA __ sERÁ UMA COMBINATION 
+
+
+ DOS VALUES DE 2 COLUMNS...
+
+
+
+
+
+
+
+
+ EX:
+
+
+
+
+
+
+
+
+
+
+ CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events ON DELETE CASCADE,
+        user_id INT REFERENCES users ON DELETE CASCADE,
+         PRIMARY KEY(event_id, user_id),
+          CHECK(event_id < user_id)
+         
+);
+
+
+CREATE TABLE tags_events (
+    --  id SERIAL PRIMARY KEY, -- podemos definir uma KEY 'FALSA'/ARTIFICIAL/SURROGATE, sim, MAS  TVZ SEJA MELHOR DEFINIR A 'COMBINAÇÃO ENTRE user_id e event_Id' COMO A PRIMARY KEY DESSA TABLE... --> pq realmente será UNIQUE, cada 1 dessas combinações...
+     
+
+     tag_id INT REFERENCES tags ON DELETE CASCADE ,
+     event_id INT REFERENCES events ON DELETE CASCADE,
+    PRIMARY KEY(tag_id, event_id), -- é assim que definimos UMA COMPOSITE PRIMARY KEY...
+     CHECK(tag_id < event_id) -- ISSO VAI GARANTIR QUE NÃO EXISTAM '2 ENTRIES' com a mesma 'connection'/ligação entre 'event_id' e 'user_id', coisas como '4 - 1 ' e '1 - 4'...
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... 
+
+
+
+
+
+
+
+
+MAS É ASSIM QUE SEREMOS CAPAZES DE ARMAZENAR 
+
+
+RELATIONSHIPS 'many-to-many'...
+
+
+
+
+
+
+
+
+
+
+OK..
+
+
+
+
+
+
+
+AGORA VAMOS CRIAR NOSSA TABLE DE 'events_tags',
+
+
+
+
+
+
+
+EXATAMENTE COMO FIZEMOS COM 'EVENTS_USERS'..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PRONTO...
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+
+
+
+
+
+
+COM ISSO,
+
+DEVEMOS TER TODOS OS 
+
+TABLE CREATION COMMANDS DE QUE PRECISAMOS...
+
+
+
+
+
+
+
+
+
+
+
+JÁ OS EXECUTEI,
+
+E AGORA DEVO INSERIR UM POUCO DE DUMMY DATA...
+
+
+
+
+
+
+
+
+--> DEVEMOS DROPPAR NOSSAS TABLES...
+
+
+
+
+
+
+
+--> PARA DROPPAR AS TABLES,
+DROPPE-AS NA ORDEM CORRETA...
