@@ -1,0 +1,424 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK.... APRENDEMOS SOBRE 'INNER JOIN'...
+
+
+
+
+
+
+
+
+
+CONFORME MENCIONADO,
+
+
+
+PODEMOS 
+
+TER MÚLTIPLOS JOINS EM 1 MESMA QUERY...
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+
+
+
+O PROFESSOR VAI ESCREVER 1 NOVA QUERY,
+
+EM QUE 
+
+
+
+
+TEREMOS O JOIN DE MÚLTIPLAS TABLES...
+
+
+
+
+
+
+
+
+
+
+
+--> PODERÍAMOS JOINAR  
+
+
+A TABLE DE 'CITIES',
+
+MAS ISSO N FARIA MT SENTIDO...
+
+
+
+
+
+
+
+
+
+
+PODE FAZER SENTIDO 
+
+
+FAZER _ JOIN _ DE TODOS __ 
+
+OS __ 'REGISTERED USERS'...
+
+
+
+
+
+
+
+
+
+
+
+-_> PODEMOS FAZER ISSO FACILMENTE, COM OUTRO INNER JOIN....
+
+
+
+
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM events AS e
+    INNER JOIN locations AS l ON l.id = e.location_id
+    INNER JOIN users
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- VC PODE JOINAR QUAISQUER 
+
+
+
+
+
+TABLES QUE VOCE QUISER....
+
+
+
+
+
+
+--> OK... MAS ANTES DE JOINAR 'USERS' COM NOSSO RESULT SET,
+
+
+DEVEMOS NOS LEMBRAR QUE 
+EXISTE
+
+
+
+
+
+
+
+
+
+A LINKING TABLE DE 'events users' --> ISSO QUER DIZER QUE,
+
+
+
+SE 
+
+
+QUEREMOS __ 
+
+
+
+
+
+
+
+
+
+
+
+
+JUNTAR _ 'USER DATA' COM 'EVENT DATA' (ver quais users estão com QUAIS EVENTS),
+
+
+
+
+SERÁ NECESSÁRIO ACTUALLY 
+
+
+
+'IR POR DENTRO DAQUELA LINKING TABLE' (pq não podemos JOINAR DIRETAMENTE A TABLE DE USERS, PQ NÃO HÁ  RELATION DIRETA; NÃO HÁ 1 COLUMN ESPECÍFICA EM 'USERS' QUE POSSA 
+
+SER USADA PARA 
+
+
+
+ESTABELECER 1 RELATION ENTRE 
+USERS E EVENTS)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----> É POR ISSO QUE DEVEMOS JOINAR ESSA TABLE DE 'events_users'
+
+
+
+ANTES DE JOINAR 'USERS'..
+
+
+
+
+ex:
+
+
+
+
+
+
+
+SELECT *
+FROM events AS e
+    INNER JOIN locations AS l ON l.id = e.location_id
+    INNER JOIN events_users AS eu ON eu.event_id = e.id -- precisamos fazer join com a INTERMEDIATE TABLE de 'users' e 'events' antes de realizarmos o join de 'users' (para ver quais users estão assignados a quais events)...
+    INNER JOIN users AS u ON u.id = eu.user_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    CERTO....
+
+
+
+
+
+
+FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 1,
+    "name": "New in town",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1,
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "event_id": 1,
+    "user_id": 3,
+    "first_name": "Julie",
+    "last_name": "Barnes",
+    "birth_date": "1986-02-13",
+    "email": "julie@test.com"
+  },
+  {
+    "id": 1,
+    "name": "New in town",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1,
+    "id (1)": 4,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "event_id": 1,
+    "user_id": 4,
+    "first_name": "Michael",
+    "last_name": "Smith",
+    "birth_date": "1982-11-11",
+    "email": "michael@test.com"
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ok.... agora FICAMOS COM 1 RESULT 
+
+
+
+SET 
+
+
+
+__ DE MÚLTIPLOS ROWS.. ---> TEMOS MÚLTIPLOS ROWS,
+
+
+MESMO SENDO O EXATO MESMO EVENT.... -------> TEMOS MÚLTIPLOS ROWS PQ __ TEMOS MÚLTIPLOS 
+
+
+
+USERS 
+
+
+ASSIGNADOS A ESSE EVENT.... (
+
+
+    'Michael' e 'Julie'...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO SIGNIFICA QUE VAMOS GANHAR 1 ROW POR RELATION...
+
+
+
+
+
+
+
+
+
+
+
+--> BEM, E SE VC TIVER 1 APP QUE PRECISA DE 'TODAS AS COMBINATIONS USER-EVENT',
+
+
+
+
+AGORA ELA TERIA TODAS AS COMBINATIONS MSM...
+
+
+
+
+
+
+
+
+--> E É ASSIM QUE 
+
+
+PODEMOS CONSEGUIR 1 RESULT SET --> ISSO É MAIS COMPLEXO,
+
+
+PQ 
+
+
+AGORA 
+
+
+
+PODEMOS JOINAR DATA DE TABLES COMPLETAMENTE DISTINTAS....
