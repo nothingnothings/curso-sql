@@ -19,9 +19,10 @@
             "port": 5432,
             "askForPassword": true,
             "driver": "PostgreSQL",
-            "name": "MyPostGreSQLHomeConnection",
-            "database": "indexes",
-            "username": "postgres"
+            "database": "erupe",
+            "username": "postgres",
+            "group": "Servers",
+            "name": "ERUPE"
         },
         {
             "previewLimit": 50,
@@ -29,10 +30,9 @@
             "port": 5432,
             "askForPassword": true,
             "driver": "PostgreSQL",
-            "database": "erupe",
-            "username": "postgres",
-            "group": "Servers",
-            "name": "ERUPE"
+            "name": "MyPostGreSQLHomeConnection",
+            "database": "my_events",
+            "username": "postgres"
         }
     ]
 }

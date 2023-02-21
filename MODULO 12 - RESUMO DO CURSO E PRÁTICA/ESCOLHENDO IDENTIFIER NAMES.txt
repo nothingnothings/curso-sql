@@ -1,0 +1,613 @@
+
+
+
+
+
+
+
+
+
+O PROFESSOR CRIA UM NOVO ARQUIVO, DE NOME 'CREATE TABLES'...
+
+
+
+
+
+
+
+
+
+é aí que entramos em ação,
+
+pq 
+
+
+queremos 
+
+
+
+CRIAR 1 MONTE DE TABLES,
+ 
+
+ POR CONTA PRÓPRIA...
+
+
+
+
+
+
+
+
+
+
+
+
+ --> AS TABLES NECESSÁRIAS SÃO ESTAS:
+
+
+
+
+
+
+
+
+ 
+1) EVENTS 
+
+2) LOCATIONS 
+
+3) CITIES 
+
+
+4) TAGS 
+
+
+5) TABLE INTERMEDIÁRIA ENTRE TAGS E EVENTS  (many-to-many)...
+
+
+
+6) USERS 
+
+
+7) TABLE INTERMEDIÁRIA ENTRE USERS E EVENTS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... COMEÇEMOS PELAS TABLES MAIS SIMPLES...
+
+
+
+
+
+
+a mais simples 
+
+
+é 
+
+'locations' e 'addresses'...
+
+
+
+
+
+
+
+
+
+
+
+a ordem de criação de tables IMPORTA...
+
+
+
+
+
+
+
+
+
+
+
+VAI FICANDO ASSIM:
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE,
+        street VARCHAR(255),
+        house_number INT,
+        postal_code INT,
+        city_id INT 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+AGORA FALTA SÓ 
+
+
+5 TABLES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O CÓDIGO FOI FICANDO ASSIM:
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL ,
+        postal_code INT NOT NULL,
+        city_id INT NOT NULL
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE AINDA FALTAM ALGUMAS TABLES... (E ALGUMAS COLUMNS, DAS RELATIONS)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+COLOQUEI ALGUMAS DAS FOREIGN KEYS:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL ,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+CRIEI AS TABLES INTERMEDIÁRIAS,
+
+
+TAMBÉM...:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL ,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events(id),
+        users_id INT REFERENCES users(id)
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags(id),
+     event_id INT REFERENCES events(id)
+);
+
+
+
+
+
+
+
+
+
+ACHO QUE É ISSO, POR ENQUANTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR COMEÇA CRIANDO A TABLE DE 'EVENTS'...
+
+
+
+
+
+
+
+OPS... ESQUECI DE CRIAR A TABLE DE 'EVENTS'...
+
+
+
+
+
+
+
+
+
+
+FICOU TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0),
+    min_age INT CHECK (min_age > 0)
+);
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags,
+     event_id INT REFERENCES events
+);
+
+
+
+
+
+
+
+
+
+
+
+ok... ISSO CRIOU TODAS AS TABLES, SEM PROBLEMAS....
+
+
+
+
+
+
+
+
+
+
+
+
+CONTINUANDO A AULA DO PROFESSOR...
+
+
+
+
+
+
+
+
+
+
+se o nome de alguma de suas tables é igual a uma keyword,
+
+vocÊ deve 
+
+
+usar 
+
+"nome_da_table"...
+
+
+
+
+
+
+
+JÁ NO MYSQL,
+USAMOS 
+
+
+`` (backticks),
+
+
+
+
+
+
+
+
+
+
+que é a coisa que identifica seu termo como 
+
+
+
+UMA 'TOKEN', E NAÕ COMO 1 KEYWORD...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... É IMPORTANTE SABER ISSO AÍ...
+
+
+
+
+
+
+
+
+-> O SQL NÃO É CASE-SENSITIVE,
+
+
+
+
+por isso não interessa se você escreve 'CREATE' ou 'create'...
