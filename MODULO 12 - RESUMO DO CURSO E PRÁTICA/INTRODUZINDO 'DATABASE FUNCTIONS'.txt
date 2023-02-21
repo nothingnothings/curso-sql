@@ -1,0 +1,331 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... CONFORME MENCIONADO ANTERIORMENTE,
+
+
+
+
+
+O 'NOT NULL' É UMA COISA, SIM,
+
+
+MAS __ PARA O NAME,
+ 
+ POR EXEMPLO,
+
+
+
+
+ PODERÍAMOS AINDA INSERIR ALGO COMO 
+
+
+
+ uma STRING VAZIA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> É POR ISSO QUE, ALÉM DE TER AQUELE CLÁSSICO 'NOT NULL',
+
+
+
+
+talvez seja legal 
+
+
+COLOCAR 
+
+
+1 'CHECK' adicional,
+
+BUSCANDO 
+
+__ PELA _ _ LENGTH __ DO 
+
+
+VALUE INSERIDO...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL, --- NESTA COLUMN, NO CASO...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+ name VARCHAR(255) UNIQUE NOT NULL, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> PODEMOS ESCREVER ASSIM:
+
+
+
+  name VARCHAR(255) UNIQUE NOT NULL CHECK (...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  OK, MAS QUE LÓGICA DEVEMOS COLOCAR DENTRO DESSE NEGÓCIO?
+
+
+
+
+
+
+
+
+
+  PROVAVELMENTE 
+
+
+
+
+  UMA FUNCTION DO SQL,
+
+  COMO 'LENGTH(name)',
+
+
+
+
+  E DEPOIS ESCREVER ALGO COMO 
+
+
+
+
+  'LENGTH(name) > 5'...
+
+
+
+
+
+
+
+
+
+
+
+
+  EX:
+
+
+
+
+
+
+
+
+  CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5), --- NESTA COLUMN, NO CASO...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> VAMOS CHAMAR 1 FUNCTION, SIM...
+
+
+
+
+
+
+
+
+
+
+
+PQ O SQL TEM UM MONTE DE 
+
+BUILT-IN FUNCTIONS....
+
+
+
+
+
+
+
+
+
+--> MAS TUDO DEPENDE DO 
+
+DATABASE MANAGEMENT SYSTEM QUE VOCê ESTÁ USANDO... (
+
+
+    algumas functions são suportadas,
+
+    outras não...
+)
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O  'LENGTH()'
+
+
+REALMENTE NOS DÁ 
+
+A LENGTH 
+
+
+
+DESSE VALUE QUE FOR INSERIDO NESSA COLUMN...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... TUDO CERTO...
+
+
+
+
+
+
+COBRIMOS MAIS FUNCTIONS 
+
+NO CURSO...
