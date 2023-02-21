@@ -38,7 +38,7 @@ CREATE TABLE locations (
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) UNIQUE NOT NULL,
         street VARCHAR(255) NOT NULL,
-        house_number INT NOT NULL,
+        house_number VARCHAR(10) NOT NULL,
         postal_code INT NOT NULL,
         city_id INT REFERENCES cities(id)
 );
@@ -74,7 +74,8 @@ CREATE TABLE events (
     image_url VARCHAR(500) UNIQUE NOT NULL,
     description TEXT NOT NULL,
     max_participants INT CHECK (max_participants > 0) NOT NULL,
-    min_age INT CHECK (min_age > 0) NOT NULL
+    min_age INT CHECK (min_age > 0) NOT NULL,
+    location_id INT REFERENCES locations(id)
 );
 
 

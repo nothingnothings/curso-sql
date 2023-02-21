@@ -1,0 +1,587 @@
+
+EU JÁ HAVIA FEITO O ADD DESSAS TABLES, FICOU ASSIM:
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags,
+     event_id INT REFERENCES events
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... ATÉ AGORA,
+
+
+CRIAMOS A TABLE DE EVENTS...
+
+
+
+
+
+
+
+
+
+VIMOS COMO PODEMOS QUERY DATA,
+
+
+FILTRAR DATA,
+
+
+
+COMO _ ORDENAR DATA...
+
+
+
+
+
+
+
+
+ESSAS SÃO TODAS OPERATIONS SQL 
+
+FUNDAMENTAIS...
+
+
+
+
+
+
+
+
+
+--> MAS, É CLARO,
+
+SE VOLTARMOS 
+
+
+À BIG 
+PICTURE,
+
+AO NOSSO 
+
+
+
+TARGET APP,
+
+
+
+
+AINDA NÃO ACABAMOS...
+
+
+
+
+
+
+
+
+
+TEMOS ESSA TABLE DE EVENTS, SIM,
+
+
+
+MAS 
+
+
+
+
+
+AINDA NÃO HÁ 
+
+
+RELATIONS CRUCIAIS 
+
+
+
+NA NOSSA DATABASE..
+
+
+
+
+
+
+
+
+
+
+
+O PROFESSOR VAI ADICIONAR 
+
+1 TABLE DE LOCATIONS E DE CITIES...
+
+
+
+
+
+
+
+
+
+
+DEPOIS DISSO,
+
+
+VAMOS FAZER ESSAS RELATIONS SEREM 1 POUCO MAIS OFICIAIS,
+
+E TAMBÉM 
+
+
+VEREMOS COMO PODEMOS 
+
+'QUERY' ESSAS RELATIONS,
+
+
+
+POR MEIO DE JOINS (FAZER MERGE DESSAS INFOS QUE ESTÃO DISTRIBUÍDAS 
+
+EM MÚLTIPLAS TABLES)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> TABLE DE CITIES E LOCATIONS... FICARAM ASSIM:
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM.... PARECE QUE 
+
+EU ESQUECI 
+
+
+DE COLOCAR 1 ID de 'location_id'
+
+
+
+LÁ 
+
+
+
+NA TABLE DE EVENTS..
+
+
+
+
+
+
+
+
+
+
+FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL,
+    location_id INT REFERENCES locations(id)
+);
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags,
+     event_id INT REFERENCES events
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK... 
+
+
+
+
+
+
+
+
+
+ENTRETANTO,
+
+
+EM 'locations',
+
+
+O PROFESSOR 
+
+DECIDE COLOCAR 'house_number'
+
+COMO 
+
+
+VARCHAR,
+
+
+PQ 
+
+
+ALGUNS PAÍSES TEM HOUSE NUMBER COMO '10A'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number VARCHAR(10) NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO..
+
+
+
+
+
+
+
+
+POR FIM, QUEREMOS ARMAZENAR O 'CITY NAME'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PROFESSOR QUER TER 1 TABLE SEPARADA DE 'CITIES',
+PQ 
+
+
+
+ISSO NOS DEIXA STANDARDIZE 
+
+
+NOSSAS SUPPORTED CITIES --> VAI NOS DEIXAR 
+
+
+
+
+
+
+
+
+
+GARANTIR QUE CADA CITY SERÁ 
+
+
+ARMAZENADA APENAS 1 ÚNICA VEZ...
+
+
+
+
+
+
+
+
+A RELATION SERÁ 
+
+MANTIDA POR MEIO DE 'city_id'...
+
+
+
+
+
+
+
+
+
+
+
+--> A SEGUNDA TABLE SERÁ 'CITIES'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PRIMARY KEY--> poderíamos definir a 'name' 
+
+
+
+COMO 
+
+
+
+
+1 PRIMARY KEY...
+
+
+
+
+
+
+
+--> mas isso é meio idiota,
+por isso 
+
+coloco 
+
+
+
+
+o ID das cities como primary key...
+
+
+
+
+
+
+OK.. COMO PRÓXIMA ETAPA,
+QUEREMOS 
+
+
+SETTAR ESSAS RELATIONS,
+ 
+
+
+ E TORNÁ-LAS MAIS 'OFICIAIS' (com ids e tal)....
