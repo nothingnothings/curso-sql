@@ -1,0 +1,423 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+QUANDO CRIAMOS 1 TABLE,
+
+
+
+TAMBÉM DEVEMOS DEFINIR A ESTRUTURA 
+
+
+
+
+DA DATA QUE DEVE SER ARMAZENADA NA TABLE,
+
+
+PQ 
+
+
+ESSE 
+
+
+
+
+
+
+É TAMBÉM 1 ASPECTO CENTRAL
+
+
+DO SQL 
+
+E DE 
+
+RELATIONAL DATABASE MANAGEMENT SYSTEMS --> DATA É ORGANIZADA CLARAMENTE,
+
+
+
+E 
+
+
+
+
+
+
+
+VOCê 
+
+NÃO PODE 
+
+INSERIR 
+
+QUALQUER TIPO DE DATA DENTRO DE 1 TABLE --> EM VEZ DISSO,
+
+VOCÊê 
+
+
+DEFINE
+ 
+
+ A ESTRUTURA 
+
+ DE 
+ 1 
+
+
+ TABLE 
+
+ APENAS 
+
+ 1 ÚNICA 
+
+ VEZ,
+
+
+
+
+
+
+ e aí 
+
+
+ TODA A DATA QUE É INSERIDA DEVE ADERIR A ESSA ESTRUTURA..
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA FAZER ISSO,
+
+
+
+
+
+
+
+
+
+
+
+
+ESCREVEMOS '()" e então colocamos todas as columns 
+
+
+
+que deverão compor essa table..
+
+
+
+
+
+
+tipo assim:
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE events (
+
+);
+
+
+
+
+
+
+
+
+
+--> PODEMOS ESCREVER ISSO EM MÚLTIPLAS LINHAS...
+
+
+
+
+
+
+
+
+É O ';'
+
+
+QUE TERMINA 
+
+1 COMANDO,
+E NÃO O LINE-BREAK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... AGORA VAMOS QUERER ESCREVER AS COLUMNS QUE VÃO COMPOR A TABLE...
+
+
+
+
+
+
+
+
+
+
+
+COMEÇAMOS PELA COLUMN DE 'ID'...
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+CREATE TABLE events (
+
+
+id SERIAL PRIMARY KEY
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SE QUISERMOS DEFINIR 
+
+
+ESSA COLUMN NO FORMATO MYSQL,
+
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+id INT PRIMARY KEY INCREMENT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> OK...
+
+
+
+
+
+
+
+MAS QUAL SERÁ A SEGUNDA COLUMN?
+
+
+
+SERÁ DE NAME...
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE events (
+
+
+id SERIAL PRIMARY KEY,
+
+name 
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... DEPOIS DISSO,
+
+
+
+
+
+
+
+
+VAMOS QUERER ARMAZENAR 
+
+
+A 
+
+DATE 
+
+PARA O DIA QUE 
+
+
+
+
+ESTÁ PLANEJADO PARA ESSE EVENT...
+
+
+
+
+
+
+
+--> COLOQUEI TIPO ASSIM:
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTIFIQUE-SE DE QUE VOCê NÃO TEM NENHUM TRAILING COMMA...
+
+
+
+
+
+
+
+
+
+--> NO CÓDIGO DO PROFESSOR, AINDA NÃO 
+
+FORAM COLOCADOS OS DATA TYPES DAS COLUMNS....
+
+
+
+ex:
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0),
+    min_age INT CHECK (min_age > 0)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+----> NO MEU, EU COLOQUEI OS DATA TYPES QUE DEVEM SER COLOCADOS...
