@@ -46,8 +46,8 @@ CREATE TABLE locations (
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     birth_date DATE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL
 );
@@ -74,7 +74,7 @@ CREATE TABLE events (
     image_url VARCHAR(500) UNIQUE NOT NULL,
     description TEXT NOT NULL,
     max_participants INT CHECK (max_participants > 0) NOT NULL,
-    min_age INT CHECK (min_age > 0)
+    min_age INT CHECK (min_age > 0) NOT NULL
 );
 
 

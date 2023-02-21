@@ -1,0 +1,431 @@
+ 
+
+
+
+
+
+
+
+
+ --> OK... TER OS COLUMN NAMES E OS DATA TYPES É ALGO SUPER IMPORTANTE,
+ SIM,
+
+
+ MAS NÃO É TUDOl...
+
+
+
+
+
+
+
+
+
+
+ É BEM COMUM TER DE ADICIONAR 'CONSTRAINTS' A NOSSAS TABLES,
+
+
+
+ TIPO ASSIM:
+
+
+
+
+
+ 
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CONSTRAINTS NOS PERMITEM CONTROLAR 
+
+'QUAIS VALUES 
+
+PODEM SER ARMAZENADOS 
+
+EM 1 DADA COLUMN'..
+
+
+
+
+
+
+
+
+
+
+
+--> OS DATA TYPES NOS FORNECEM 1 POUCO DE CONTROLE,
+
+
+MAS N O SUFICIENTE..
+
+
+
+
+
+
+
+
+
+-> POR EXEMPLO, A RESPEITO DA 'MIN_AGE'...
+
+
+
+
+
+
+
+
+
+
+
+--> SABEMOS QUE A AGE DEVE SER ARMAZENADA,
+
+
+MAS 
+
+AGORA 
+
+É POSSÍVEL 
+
+
+DEFINIR 
+
+1 
+
+
+VALUE MENOR DO QUE '1'... (0 ou menor)...
+
+
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE PRECISAMOS 
+
+ADICIONAR 1 CONSTRAINT DE 'CHECK'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+min_age INT check (min_age > 0);
+
+
+
+
+
+
+
+
+
+--> CERTO...
+
+
+
+
+
+
+O CHECK NOS PERMITE DEFINIR 1 SIMPLES CHECK, 
+
+QUE 
+
+DEVE SER EXECUTADO PARA TODA E QUALQUER DATA QUE 
+
+
+
+
+TENTAMOS INSERIR NESSA COLUMN...
+
+
+
+
+
+
+
+DENTRO DOS PARÊNTESES,
+
+TEMOS NOSSA LÓGICA DE CHECK...
+
+
+
+
+
+
+----> QUEREMOS QUE O VALUE SEJA MAIOR DO QUE 0...
+
+
+
+
+
+
+
+
+
+
+A MESMA COISA PARA O 'max_participants'....
+
+
+
+
+
+
+
+
+
+
+
+
+-> CERTo..
+
+
+
+
+
+
+
+
+
+
+MAS TAMBÉM É BOM COLOCAR 1 'NOT NULL'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> ESSA CONSTRAINT DE 'NOT NULL' É BEM BOA...
+
+
+
+
+
+
+
+
+
+-> QUEREMOS QUE O NAME NÃO SEJA NULO,
+
+
+
+NEM 
+
+
+
+O DATE PLANNED...
+
+
+
+
+
+
+
+
+--> NOT NULL --> SIMPLESMENTE GARANTE QUE 
+
+SEMPRE QUE 
+
+
+1 
+NOVO 
+
+ROW 
+
+
+
+FOR INSERIDO,
+
+
+ESSA COLUMN DEVERÁ SER PREENCHIDA...
+
+
+
+
+
+
+
+O 'CHECK' NÃO É A MESMA COISA QUE 'NOT NULL'...
+
+
+
+
+
+
+
+
+
+NULL ----> REPRESENTA A ABSENCE OF DATA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+VAI FICANDO ASSIM:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE locations (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        house_number INT NOT NULL,
+        postal_code INT NOT NULL,
+        city_id INT REFERENCES cities(id)
+);
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    birth_date DATE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE organizers (
+    id SERIAL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    user_id INT REFERENCES users(id)
+);
+
+
+
+CREATE TABLE tags (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL,
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+CREATE TABLE events_users (
+        id SERIAL PRIMARY KEY,
+        event_id INT REFERENCES events,
+        user_id INT REFERENCES users
+);
+
+
+CREATE TABLE tags_events (
+     id SERIAL PRIMARY KEY,
+     tag_id INT REFERENCES tags,
+     event_id INT REFERENCES events
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'CHECK', SOZINHO, NÃO FAZ A TRICK DE 'NOT NULL' (as 2 coisas não são a mesma coisa)...
+
+
+
+
+
+
+
+
+
+É ISSO QUE DEVEMOS SABER SOBRE 'NOT NULL'...
