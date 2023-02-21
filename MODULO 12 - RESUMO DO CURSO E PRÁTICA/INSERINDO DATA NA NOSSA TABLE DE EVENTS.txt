@@ -1,0 +1,588 @@
+
+
+
+
+
+
+
+
+
+
+
+
+-----> OK... AGORA QUE CRIAMOS A TABLE DE EVENTS,
+DEVEMOS 
+
+COMEÇAR 
+
+O INSERT DE DATA NELA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CRIAMOS 1 NOVO ARQUIVO SQL..
+
+
+
+
+
+
+
+
+
+
+
+
+-> O GOAL 
+
+É 
+
+
+INSERIR 
+
+
+DATA NA TABLE DE 'EVENTS',
+
+
+
+
+
+PARA DEPOIS 
+
+
+TAMBÉM 
+
+RODARMOS COISAS COMO 'UPDATE' E 'DELETE'
+
+NESSES ROWS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS AI SURGE A PERGUNTA:
+
+
+
+'COMO PODEMOS INSERIR DATA EM 1 TABLE?''
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS Q 1 ORGANIZER CRIOU 1 NOVO EVENT...
+
+
+
+
+
+
+
+
+
+
+
+--> O APP SE COMUNICOU 
+
+COM A DATABASE,
+
+
+E AÍ 
+
+1 
+
+
+NOVO 
+EVENT 
+
+FOI INSERIDO NA TABLE DE EVENTS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> O COMANDO SERÁ 'INSERT INTO'...
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO events (
+
+
+) VALUES (
+
+)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NO PRIMEIRO PARÊNTESES,
+
+
+
+DEFINIMOS 
+
+
+
+
+EM QUAIS COLUMNS VAMOS INSERIR VALUES...
+
+
+
+
+
+
+
+
+
+
+
+
+--> EX:
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO events (
+    name,
+    image,
+    description,
+    max_participants,
+    min_age
+
+) VALUES (
+
+)
+)
+
+
+
+
+
+
+
+
+
+
+A COLUMN DE 'image' é opcional (se não tiver a constraint de 'not null'),
+
+
+
+
+
+
+
+
+
+
+E A COLUMN DE 'id' É DESNECESSÁRIA.... (não precisamos inserir value nela)...
+
+
+
+
+
+
+
+
+
+INSERT INTO events (
+    name,
+    image,
+    description,
+    max_participants,
+    min_age
+
+) VALUES (
+    'Party',
+    'www.google.com',
+    'Some party in a random place',
+    10,
+    16
+)
+)
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+
+
+
+
+-> COM ISSO, FAZEMOS O INSERT DESSES VALUES 
+
+
+NESSE 
+
+NEGÓCIo...
+
+
+
+
+
+
+
+
+E É CLARO QUE PODEMOS INSERIR MÚLTIPLOS VALUES,
+
+
+
+
+basta enumerar com '()':
+
+
+
+
+
+
+
+
+
+
+INSERT INTO events (
+    name,
+    image,
+    description,
+    max_participants,
+    min_age
+
+) VALUES (
+    'Party',
+    'www.google.com',
+    'Some party in a random place',
+    10,
+    16
+),
+
+(
+    'Party 2',
+    'www.yahoo.com',
+    'Who Knows',
+    12,
+    20
+),
+
+
+(
+    'Party 3 ',
+    'www.bing.com',
+    'Some party in a random place',
+    10,
+    16
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK, MAS FALTOU 
+
+  'date_planned'...
+
+
+
+
+
+
+
+
+  --> 
+
+
+
+
+
+
+
+
+
+
+  
+INSERT INTO events (
+    name,
+    image,
+    description,
+    max_participants,
+    min_age
+
+) VALUES (
+    'Party',
+    'www.google.com',
+    'Some party in a random place',
+    10,
+    16
+),
+
+(
+    'Party 2',
+    'www.yahoo.com',
+    'Who Knows',
+    12,
+    20
+),
+
+
+(
+    'Party 3 ',
+    'www.bing.com',
+    'Some party in a random place',
+    10,
+    16
+)
+
+
+
+
+
+
+
+
+
+OK..
+
+
+
+
+
+
+
+MAS COMO 
+
+
+
+
+
+
+
+PODEMOS COLOCAR 1 TIMESTAMP ALI?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+bem, podemos inserir TEXT 
+
+
+DENTRO DO NEGÓCIO... -> 
+
+
+
+SE 
+ESSE 
+
+TEXT TIVER 1 CERTO FORMATO,
+ELE 
+
+SERÁ
+ TRATADO 
+
+
+
+ COMO 1 TIMESTAMP PELO DATABASE MANAGEMENT SYSTEM --> E O FORMATO É 
+
+ ESTE AQUI:
+
+
+
+
+
+
+
+
+
+ 1) PRIMEIRO, O ANO, DEPOIS O MÊS, DEPOIS O DIA...
+
+
+
+
+
+
+
+
+ 2) DEPOIS DISSO, ESPECIFICAMOS O TEMPO, EM 1 FORMATO DE 24 HORAS...
+
+
+
+
+
+
+
+
+ tipo assim:
+
+
+
+
+
+
+
+
+ '2022-10-29 16:30:00';
+
+
+
+
+ EX:
+
+
+
+
+
+ 
+
+  
+INSERT INTO events (
+    name,
+    date_planned,
+    image,
+    description,
+    max_participants,
+    min_age
+
+) VALUES (
+    'Party',
+     '2022-10-29 16:30:00',
+    'www.google.com',
+    'Some party in a random place',
+    10,
+    16
+),
+
+(
+    'Party 2',
+     '2021-10-29 16:30:00',
+    'www.yahoo.com',
+    'Who Knows',
+    12,
+    20
+),
+
+
+(
+    'Party 3 ',
+     '2023-10-29 22:30:00',
+    'www.bing.com',
+    'Some party in a random place',
+    10,
+    16
+)
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+
+
+
+ATÉ AÍ, TUDO BEM...
+
+
+
+
