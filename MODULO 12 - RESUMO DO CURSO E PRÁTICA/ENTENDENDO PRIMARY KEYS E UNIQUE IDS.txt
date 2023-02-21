@@ -1,0 +1,589 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK... MAS AINDA NÃO ACABAMOS COM A TABLE DE 'EVENTS'...
+
+
+
+
+
+
+
+
+ATÉ AGORA, A MINHA ESTÁ ASSIM:
+
+
+
+
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS PARA PROSSEGUIRMOS,
+
+
+DEVEMOS 
+
+
+
+VER AQUELA 
+
+COLUMN DE 'ID'
+
+MAIS UMA VEZ...
+
+
+
+
+
+
+
+
+
+
+
+--> ESSA COLUMN DEVERÁ SEGURAR INTEGER VALUES QUE NÃO 
+
+
+
+PODERÃO SER 'NULL'...
+
+
+
+
+
+
+
+
+
+
+
+MAS O PROFESSOR HAVIA DITO ALGO IMPORTANTE, ANTES:
+
+
+
+
+'''O ID AQUI DEVE SER __ UNIQUE'' --> 
+
+CADA 
+
+ROW 
+
+DESSA TABLE 
+
+DEVE SER UNIQUELY IDENTIFIABLE,
+
+
+
+TUDO POR MEIO 
+
+
+DO EXAME DESSE ID AÍ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ATÉ AGORA,
+
+NÃO TEMOS NADA NA NOSSA TABLE QUE 
+
+ASSEGURE QUE 
+
+
+
+O VALUE DESSA COLUMN SEJA REALMENTE __ UNIQUE_...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> DIGAMOS QUE 
+
+TEMOS 
+2 EVENTS 
+
+INSERIDOS,
+
+
+COM 
+
+
+ID DE '1' --> isso é mt ruim, é uma confusão..
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA GARANTIR QUE 
+
+
+
+ESSE ID 
+
+SEJA UNIQUE,
+
+PODEMOS COLOCAR A CONSTRAINT DE 'UNIQUE'...
+
+
+
+
+
+--> ISSO GARANTE QUE 
+
+
+NÃO SERÁ POSSÍVEL 
+TER 
+
+
+
+
+2 ROWS COM MESMO ID...
+
+
+
+
+
+
+
+
+
+-->  E COMO ESSA É UMA COMBINAÇÃO SUPER COMUM (de 'UNIQUE + NOT NULL'),
+
+
+
+
+
+
+HÁ UMA ALTERNATIVA AO WRITE DISSO ---> é 
+
+
+
+A KEYWORD DE 
+
+
+'PRIMARY KEY' --> MAS ISSO É MAIS DO QUE 
+
+
+
+1 FUSÃO 
+
+
+__ DE 'UNIQUE + NOT NULL',
+
+
+
+PQ 
+
+
+
+
+_ TODA TABLE PODE TER APENAS 1 ÚNICA PRIMARY KEY column...
+
+
+
+
+
+
+
+
+
+-> ISSO PQ ESSA COLUMN VAI SE TORNAR 
+
+
+
+IMPORTANTE MAIS TARDE,
+
+
+QUANDO 
+
+
+
+
+FALARMOS SOBRE RELATIONS ENTRE DATABASE TABLES...
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO QUER DIZER QUE PRIMARY KEY É OUTRA KEYWORD ESPECIAL 
+
+QUE 
+
+PODEMOS 
+USAR 
+PARA 
+MARCAR
+ 
+ ESSA COLUMN 
+
+
+ COMO A COLUMN DE PRIMARY KEY -------> CERTO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ESSE É UM GRANDE PASSO PARA NÓS...
+
+
+
+
+
+
+
+
+
+ --> VOCê PODE TRANSFORMAR QUALQUER COLUMN EM COLUMN DE PRIMARY KEY,
+ APESAR DA COLUMN DE 'ID'
+
+ SER BEM COMUM...
+
+
+
+
+
+
+
+
+
+
+
+
+ OK... MAS ISSO AINDA NOS DEIXA COM 1 GRANDE PROBLEMA... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ --> 1 GRANDE PROBLEMA PQ AINDA TERÍAMOS DE INSERIR UNIQUE IDS 
+
+ MANUALMENTE,
+
+ PARA 
+
+ CADA 
+
+ EVENT QUE 
+
+ FOR INSERIDO ... -> 
+
+
+
+
+
+ ISSO É BEM RUIM...
+
+
+
+
+
+
+
+
+
+ --> PARA RESOLVER ISSO,
+ 
+
+ TIPICAMENTE 
+ QUEREMOS 
+
+ FAZER 'AUTO-GENERATE' DE 1 ID --> 
+
+
+
+
+
+
+ FAZEMOS ISSO POR MEIO DE 'SERIALIZE' no POSTGRES,
+
+ e 
+
+
+ 'AUTO_INCREMENT'
+
+
+ NO MYSQL...
+
+
+
+
+
+
+
+
+
+
+ -> FICA ASSIM,
+ NO POSTGRESQL:
+
+
+
+
+
+
+ 
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL CHECK(LENGTH(name) > 5),  -- usamos essa BUILT-IN function para _ ESCREVER ESSE CHECK AÍ, QUE VAI ASSEGURAR QUE DEVEMOS TER STRINGS COM LENGTH MAIOR DO QUE 5...
+    date_and_time TIMESTAMP NOT NULL,
+    image_url VARCHAR(500) UNIQUE NOT NULL,
+    description TEXT NOT NULL,
+    max_participants INT CHECK (max_participants > 0) NOT NULL,
+    min_age INT CHECK (min_age > 0) NOT NULL
+);
+
+
+
+
+
+
+
+
+
+
+
+-> SERIAL --> É UM DATA TYPE QUE TAMBÉM CRIA 1 'INT' 
+
+
+POR TRÁS DAS CENAS,
+
+MAS 
+
+
+É UM 
+INT 
+
+QUE 
+
+FAZ AUTO_INCREMENT
+
+
+
+AUTOMATICAMENTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+também existe 'SERIAL PRIMARY KEY'
+lá 
+
+
+no MYSQL,
+
+mas 
+o 
+
+'SERIAL' de lá é um 'BIGINT',
+
+e não 
+
+
+1 'INT'... (não é a mesma coisa)...
+
+
+
+
+
+
+
+
+
+
+
+
+OK..
+
+DEFINIMOS TODAS AS COLUMNS INICIAIS 
+
+
+DESSA TABLE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ANTES DE MERGULHARMOS 
+
+
+
+NAS RELATIONS,
+
+O PROFESSOR 
+
+QUER 
+
+TRABALHAR COM ESSA TABLE DE 'events'
+
+
+como ela está agora,
+
+
+
+
+
+
+
+VER __ ALGUNS __ COMANDOS SQL E QUERIES 
+
+
+QUE 
+
+PODEMOS 
+
+
+RODAR 
+
+PARA 
+
+'INSERT' E 'FETCH' 
+
+DATA ,
+
+ANTES DE ESTUDARMOS 
+
+
+DEFINIÇÕES DE TABLE MAIS COMPLEXAS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CONECTE-SE A ALGUMA DAS DATABASES 
+
+E RODE 
+
+ESSE COMANDO 
+
+DE 
+
+CRIAR TABLE...
+
+
+
+
+
+
+
+
+--> vamos inserir 1 POUCO DE DUMMY DATA E ENTÃO MANIPULAR ESSA TABLE...
