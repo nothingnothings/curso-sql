@@ -1,0 +1,587 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... QUANDO O ASSUNTO É 'DATA TYPES',
+
+O 
+SQL 
+
+TEM 1 MONTE DE 
+SUPPORTED 
+
+DATA TYPES,
+
+
+
+APESAR DOS NOMES EXATOS E 
+
+
+O NÚMERO DE 
+
+
+SUPPORTED DATA TYPES
+
+
+DEPENDER DO 'RELATIONAL DATABASE MANAGEMENT SYSTEM'
+
+
+
+
+OU SOFTWARE QUE 
+
+VOCÊ ESTÁ USANDO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+POR EXEMPLO, O POSTGRESQL E O MYSQL NÃO POSSUEM O MESMO NÚMERO DE SUPPORTED VALUE TYPES..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHAR(X) --> 
+
+
+E VARCHAR(X) --> SÃO SUPORTADOS 
+
+
+
+EM TODOS DATABASE ENVIRONMENTS...
+
+
+
+
+
+
+
+
+
+
+
+
+MESMA COISA PARA 'DATE' E 'TIMESTAMP'...
+
+
+
+
+
+
+
+
+TAMBÉM VEMOS 'BOOLEAN' COM BASTANTE FREQUÊNCIA...
+
+
+
+
+
+
+
+
+
+
+
+
+NÃO VAMOS USAR TODOS OS DATA TYPES NO NOSSO EXEMPLO,
+
+
+
+
+
+mas vamos usar bastantes deles...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> SEMPRE É UMA BOA IDEIA  
+
+
+VER A DOCUMENTAÇÃO DE CADA 
+
+DATABASE SYSTEM, PARA VER QUAL DATA TYPES SÃO SUPORTADOS....
+
+
+
+
+
+
+
+
+
+
+--> LISTA BEM LONGA,
+
+PQ 
+
+
+HÁ VÁRIOS DATA  TYPES NICHO,
+
+
+QUE VC NUNCA USARÁ...
+
+
+
+
+
+
+
+
+
+--> TEMOS NUMERIC TYPES -> A DIFERENÇA ENTRE ESSES TYPES 
+É 
+
+A 
+
+'RANGE DE NÚMEROS QUE PODEM SER ARMAZENADOS'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA NÚMEROS COM CASAS DECIMAIS, HÁ DIFERENÇAS QUANTO À PRECISÃO... -> 
+
+
+
+
+
+
+
+JÁ VIMOS ISSO NO CURSO...
+
+
+
+
+
+
+
+
+
+
+
+VEREMOS ALGUNS DESSES NUMBER TYPES EM ALGUNS MINUTOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS É BOM 
+
+
+
+
+VER OS DOCS,
+
+PARA TER 1 IDEIA DE TODOS OS TYPES 
+
+
+SUPORTADOS 
+
+
+NO SQL ENVIRONMENT DE SUA 
+
+
+
+ESCOLHA..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_> OK...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+O 'id',
+
+que tipo de data type 
+
+ele deverá ter?
+
+
+
+
+
+
+
+
+
+
+- >BEM,
+
+O PROFESSOR DIZ QUE ELE DEVE SER 'AUTO-INCREMENTING',
+
+
+
+
+PQ 
+
+
+
+
+É MAIS CONVENIENTE...
+
+
+
+
+
+
+
+
+
+
+--> 
+
+
+
+
+INCREMENTING INTEGERS --> INTEGERS SÃO 
+
+
+NUMBERS SEM DECIMAL PLACES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK..
+
+
+
+
+
+
+
+
+
+
+
+
+o professor escreveu assim:
+
+
+
+
+
+
+
+
+id INT ...
+
+
+
+
+
+
+
+
+
+
+
+
+--> MAS É CLARO QUE QUEREMOS QUE ISSO SEJA UMA 'PRIMARY KEY' (só podemos ter 1 PRIMARY KEY POR TABLE, MAS PODEMOS TER MÚLTIPLAS FOREIGN KEYS EM 1 MESMA TABLE)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BIGINT --> É UM DATA TYPE QUE SIMPLESMENTE SUPORTA 
+
+
+
+
+NÚMEROS MAIORES INTEGRAIS.... (millions de ids, 
+
+
+
+ai é melhor usar o BIGINT em vez de INT)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEPOIS,
+
+
+VAMOS PARA O 'name'...
+
+
+
+
+
+
+
+
+
+--> PODE SER OU 'VARCHAR(255)'
+
+
+OU 
+
+
+
+'TEXT'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> ISSO PQ TIPICAMENTE 
+USAMOS 'TEXT'
+
+
+
+PARA TEXTOS MAIS LONGOS...
+
+
+
+
+
+
+
+
+
+
+
+--> USAMOS O 'VARCHAR()' --> character varying -> é o data type que você usa se 
+
+vc 
+
+tem 
+
+1 
+
+quantidade limitada
+
+de caracteres que 
+
+será 
+
+
+
+
+armazenada...
+
+
+
+
+
+
+
+
+
+
+
+
+--> NA GRANDE MAIORIA DOS CASOS, 
+
+1 BYTE REPRESENTA 1 CARACTER,
+
+APESAR DE ISSO NEM SEMPRE SER O CASO...
+
+
+
+
+
+
+
+
+
+
+
+-> MAS, EM GERAL,
+1 CARACTER EQUIVALE A 1 BYTE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO... 300 ESPAÇOS --> É UM DATA TYPE BOM PARA ESSE 'name' AÍ...
+
+
+
+
+
+
+
+
+
+
+
+
+--> DATE_PLANNED -> podemos usar o data type de 'DATE',
+
+
+
+MAS O PROFESSOR QUER 'DATE + TEMPO EM 1 DIA',
+
+
+POR ISSO 
+
+USAMOS 
+
+
+O 
+
+
+
+DATA TYPE DE 'TIMESTAMP' (que armazena o DATE e O TEMPO DO DIA)...
+
+
+
+
+
+
+
+
+
+
+
+
+--> A PRÓXIMA PARTE É A 'IMAGE'... -> 
+
+
+MAS AÍ SURGE A PERGUNTA
+
+
+'''COMO ARMAZENAMOS 1 FILE EM 1 DATABASE?'''
+
+
+a resposta é:
+
+não armazeanmos, geralmente...
