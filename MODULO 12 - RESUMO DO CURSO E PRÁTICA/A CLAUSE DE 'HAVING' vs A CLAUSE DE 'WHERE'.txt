@@ -1,0 +1,317 @@
+
+
+
+
+
+
+
+
+
+CERTO... VIMOS QUE 'GROUP BY' É SUPER IMPORTANTE QUANDO TRABALHAMOS COM AGGREGATE FUNCTIONS...
+
+
+
+
+
+
+
+
+
+
+
+OUTRA CLAUSE IMPORTANTE QUE PODEMOS USAR COM AGGREGATE FUNCTIONS É A 
+
+
+
+
+CLAUSE DE 'HAVING'...
+
+
+
+
+
+
+
+
+
+
+------> 
+
+
+
+
+VAMOS 
+
+
+
+
+
+RODAR A QUERY TIPO ASSIM:
+
+
+
+
+
+
+
+SELECT c.name, COUNT() FROM cities 
+LEFT JOIN locations as l ON l.city_id = c.id
+GROUP BY c.name; 
+
+
+
+
+
+
+
+
+
+
+
+
+-> OK...
+
+
+MAS DIGAMOS QUE QUEREMOS MAIS DO QUE ESSA LIST AÍ... QUEREMOS UMA LIST 
+
+
+
+EM QUE 
+
+APENAS 
+
+sejam
+
+INCLUÍDAS 
+
+
+
+CITIES COM 
+
+
+1 NUMBER 
+
+
+DE 
+
+LOCATIONS 
+
+MAIOR DO QUE 1 (não tenho nenhuma com 0, mas mesmo assim)...
+
+
+
+
+
+
+
+ 
+
+
+
+
+-> BEM... UMA ALTERNATIVA SERIA 
+
+
+
+RODAR UM 'WHERE COUNT(loc.id) > 1;'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> MAS SE TENTARMOS FAZER ISSO,
+
+RECEBEMOS 1 ERROR --> PQ 
+
+
+
+NÃO PODEMOS 
+
+RODAR 
+
+
+
+AGGREGATE FUNCTIONS NA CLAUSE DE WHERE...
+
+
+
+
+
+
+
+
+
+--> É PQ O 'WHERE' É USADO 
+
+
+
+PARA _ FILTRAR __ 
+
+
+ROWS _ 
+
+
+
+
+__LÁ NA PARTE DO 'RAW RESULT SET',
+
+ANTES DE QUAISQUER 
+
+
+
+
+AGGREGATIONS SEREM RODADAS...
+
+
+
+
+
+
+
+
+----> OU SEJA,
+
+O WHERE DEVE SER RODADO __ANTES__ DO GROUP BY,
+
+TIPO ASSIM>:
+
+
+
+
+
+
+
+
+
+SELECT c.name, COUNT() FROM cities 
+LEFT JOIN locations as l ON l.city_id = c.id
+WHERE loc.city_id = 1
+GROUP BY c.name; 
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+SELECT c.name,
+    COUNT()
+FROM cities
+    LEFT JOIN locations as l ON l.city_id = c.id
+WHERE loc.city_id = 1 -- O WHERE É SEMPRE EXECUTADO _ ANTES__ DAS COISAS/RESULT SET USADO NA AGGREGATION...
+GROUP BY c.name;
+
+
+
+
+
+
+
+
+
+
+
+
+MAS SE A AGGREGATION EM SI É __ PARTE__ DA CONDITION QUE 
+
+VC QUER 
+
+TER,
+
+
+
+VOCE PRECISA 
+
+
+
+
+DA CLAUSE DE 'HAVING'... -----> VC PODE USAR SUA AGGREGATE FUNCTION DE 'COUNT()'
+
+COM O 'HAVING', AO CONTRÁRIO DAQUILO VISTO COM 'WHERE'...
+
+
+
+
+
+
+
+
+
+-> FICA TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT c.name,
+    COUNT()
+FROM cities
+    LEFT JOIN locations as l ON l.city_id = c.id 
+GROUP BY c.name
+HAVING COUNT (loc.id) > 1; -- isso é válido (pq não é 'WHERE')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AGORA SÓ MUNICH E BERLIN FARÃO PARTE DO RESULT SET..
+
+
+
+
+
+
+
+
+O 'HAVING'
+
+
+É IMPORTANTE 
+
+
+NAS AGGREGATE FUNCTIONS --> É USADO _ PARA _ FILTRAR __ OS RESULT 
+SETS 
+
+
+DAS AGGREGATIONS _ DEPOIS __ DE ELAS TEREM ACONTECIDO... 
+
+(
+    pq o WHERE é rodado _ ANTES_ da aggregation..
+)
