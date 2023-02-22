@@ -1,0 +1,390 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK...
+ 
+
+ COM O OPERATOR IMPORTANTE DE 'LIKE' FORA DO CAMINHO,
+
+
+ DEVEMOS 
+
+
+
+
+
+
+ESTUDAR AS AGGREGATE FUNCTIONS MAIS UMA VEZ...
+
+
+
+
+
+
+
+AGGREGATE FUNCTIONS SÃO FUNCTIONS QUE SÃO 
+
+'BUILT IN' 
+
+
+
+
+NOS DATABASE MANAGEMENT SYSTEMS E QUE PODEMOS USAR NAS NOSSAS QUERIES/SELECT STATEMENTS 
+
+
+
+
+PARA _ CONDENSAR __ 
+
+
+
+MÚLTIPLOS ROWS EM APENAS 1 NUMBER... (como 'COUNT()')...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO SE TORNA MAIS COMPREENSÍVEL COM 1 EXEMPLO...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE 
+
+QUEREMOS SABER QUANTAS 
+
+
+LOCATIONS TEMOS NO TOTAL...
+
+
+
+
+
+
+
+
+
+
+
+o código fica tipo assim:
+
+
+
+
+
+
+
+
+SELECT COUNT(*) FROM locations;
+
+
+
+
+
+
+
+
+
+
+
+E ISSO NOS RETORNA '7', em vez de 7 rows...
+
+
+
+
+
+
+
+
+SIGNIFICA QUE 
+
+ISSO 
+
+
+
+CONDENSA TODOS NOSSOS RESULTADOS EM APENAS 1... (comprime tudo, tipo isso)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A AGGREGATION FUNCTION É RODADA DEPOIS DA KEYWORD DEW 
+
+'SELECT'...
+
+
+
+
+
+
+
+
+
+
+
+COUNT() --_> ela existe em todos os database systems..
+
+
+
+
+
+
+--> DENTRO DE 'COUNT()',
+
+
+VOCÊ 
+
+PASSA 
+
+
+
+OS DIFERENTES FUNCTION ARGUMENTS...
+
+
+
+
+
+
+
+----> QUERMOS COLOCAR O NUMBER DA COLUMN PELA QUAL 
+QUEREMOS CONTAR OS 
+
+
+VALUES..
+
+
+
+
+
+
+
+
+
+-> MAS CABE RESSALTAR QUE 
+
+O COUNT VAI IGNORAR 'NULL VALUES'... --> POR ISSO,
+
+SE 
+
+VC 
+
+PASSAR 
+1 
+
+COLUMN QUE TEM ALGUNS 
+
+
+
+NULL VALUES,
+
+ELES SERÃO IGNORADOS 
+NO RESULT...
+
+
+
+
+
+
+
+
+
+
+-> colocamos 'id,'
+
+
+pq 
+o 
+
+ID SEMPRE ESTARÁ SETTADO --> e isso nos dará todos os rows de nossa table...
+
+
+
+
+
+
+
+
+
+
+------> O PROFESSOR ESCREVEU O 'COUNT()"
+
+como uppercase,
+
+mas isso é opcional --> mas isso deixa claro que esses são reserved names,
+
+disponibilizados pelo sql 
+
+e o database system...
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO... até aí, tudo bem...
+
+
+
+
+
+
+
+
+DEPOIS DO COUNT,
+
+TEMOS OUTRAS AGGREGATE FUNCTIONS,
+
+como 'MIN()'
+
+e 
+
+'MAX()',
+
+USADOS PARA CONSEGUIR 
+
+OS MAIORES E MENORES 
+
+VALUES EM 1 GIVEN COLUMN... 
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+SELECT COUNT(*)
+FROM locations;
+
+
+-- DEPOIS DO COUNT,
+-- TEMOS OUTRAS AGGREGATE FUNCTIONS,
+-- como 'MIN()' e 'MAX()',
+-- USADOS PARA CONSEGUIR OS MAIORES E MENORES
+-- VALUES EM 1 GIVEN COLUMN...
+
+
+--TAMBÉM 'SUM()', que soma todos os values da column (que n sejam null)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> PODERÍAMOS RODAR 'SUM()',
+
+sim...
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMO SEMPRE, DEVEMOS CHECAR OS OFFICIAL DOCS 
+
+DO DATABASE SYSTEM/SQL ENVIRONMENT COM O QUAL VOCê ESTÁ TRABALHANDO (
+    pode 
+
+    descobrir sobre como 
+    ele suporta 
+    aggregate functions em geral,
+
+    e quais 
+
+    aggregate functions são suportadas...
+
+
+)
+
+
+
+
+
+
+
+
+
+
+--> MAX, MIN, SUM, COUNT E 'AVG()'
+
+são suportados por todos database systems...
