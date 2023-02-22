@@ -1,0 +1,593 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A UTILIZAÇÃO DE AGGREGATE FUNCTIONS COMO FIZEMOS AQUI,
+
+
+PARA 
+
+
+
+CONTAR TODAS AS LOCATIONS (
+
+
+    com 
+
+    'SELECT COUNT(id) FROM locations;'
+)
+
+
+É 
+
+ALGO ÚTIL,
+
+
+MAS 
+
+É 
+
+CLARO QUE 
+
+
+
+
+
+
+
+
+
+
+PODEMOS 
+
+
+
+FAZER COISAS MAIS PODEROSAS COM ELAS...
+
+
+
+
+
+
+
+
+
+
+--> PODEMOS FAZER ISSO,
+
+POR EXEMPLO,
+
+COM 
+
+
+
+A 
+
+FUNCTION DE 'GROUP BY'...
+
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE QUEREMOS PEGAR 1 LISTA DE CADA CITY,
+
+
+MAS AÍ 
+
+PARA 
+
+
+CADA CITY QUEREMOS 
+
+SABER 
+
+'QUANTAS LOCATIONS EXISTEM PARA CADA CITY'... 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BEM, PODEMOS FAZER ISSO, SIM...
+
+
+
+
+
+
+
+
+BASTA USAR A AGGREGATE FUNCTION DE 'COUNT()'
+
+
+JUNTO COM 'GROUP BY()'..
+
+
+
+
+
+
+
+
+ex:
+
+
+
+
+
+
+
+
+
+
+SELECT COUNT(*) FROM cities AS c
+LEFT JOIN locations AS l ON l.
+GROUP BY()
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONSEGUI...
+
+
+
+
+
+
+
+
+FICOU ASSIM:
+
+
+
+
+
+
+SELECT COUNT(*), c.name
+FROM cities AS c
+    LEFT JOIN locations AS l ON l.city_id = c.id
+GROUP BY(c.id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TIVE DE USAR 1 LEFT JOIN,
+
+
+
+
+
+
+
+
+
+MAS O QUE INTERESSA É QUE O RESULTADO FICOU ASSIM:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "count": "2",
+    "name": "Cologne"
+  },
+  {
+    "count": "1",
+    "name": "Hamburg"
+  },
+  {
+    "count": "1",
+    "name": "Frankfurt"
+  },
+  {
+    "count": "3",
+    "name": "Berlin"
+  },
+  {
+    "count": "2",
+    "name": "Munich"
+  }
+]
+
+
+
+
+
+
+
+
+
+-> e parece que foi exatamente isso que o professor fez... ele também 
+
+
+
+RODOU 1 LEFT JOIN,
+
+PARA QUE 
+
+TODAS AS CITIES FICASSEM INCLUÍDAS NO RESULT SET (até aquelas que não tinham locations/se n tinham locations related)...
+
+
+
+
+
+
+
+
+
+O INTERESSANTE É QUE 
+
+
+
+O 'GROUP BY'
+
+
+
+
+
+É RODADO NO INÍCIO... (ele agrupa tudo no início, e depois roda o 'COUNT()')...
+
+
+
+
+
+
+
+SE  N USAMOS 'GROUP BY',
+
+
+
+
+
+
+
+RECEBEMOS 1 ERROR --> RECEBEMOS 1 ERROR 
+
+
+
+
+
+
+PQ __ ESTAMOS MISTURANDO TIPOS DE RESULTS (
+
+    'count()', que é SINGLE VALUE (tenta converter todas as rows em 1 único value),
+
+    com 
+
+
+    'name', que é MULTI-VALUE... --> tenta refletir TODAS AS ROWS 
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+DEU CERTO....
+
+
+
+
+
+
+
+
+É ASSIM QUE PODEMOS AGREGAR 4 GROUPS...
+
+
+
+
+
+
+
+
+
+
+--> SE VC PENSAR SOBRE ISSO,
+
+
+
+
+ESSA CLAUSE DE 'GROUP BY'
+
+FAZ MT SENTIDO (
+
+
+
+    pq, com aggregate functions,
+
+
+    você condensa múltiplos rows em 1 único value....
+)
+
+
+
+
+
+
+
+
+
+
+
+É ASSIM QUE FAZEMOS ISSO...
+
+
+
+
+
+
+
+
+COMO ÚLTIMO DETALHE,
+
+
+O PROFESSOR QUER NOS INFORMAR QUE PODEMOS 
+'GROUP BY'
+
+
+
+POR MÚLTIPLAS CONDITIONS...
+
+
+
+
+
+
+
+
+
+
+SE AGRUPARMOS POR 2 COISAS, 
+
+POR 'STREET' TAMBÉM,
+
+
+
+
+VAMOS FICAR COM 
+
+
+
+
+
+RESULTS SETS MAIS GRANULARES, TIPO ASSIM:
+
+
+
+
+
+SELECT COUNT(*), c.name
+FROM cities AS c
+    LEFT JOIN locations AS l ON l.city_id = c.id
+GROUP BY(c.id, l.street);
+
+
+
+
+
+
+
+
+
+
+FICARIA TIPO ASSIM:
+
+
+
+
+
+[
+  {
+    "count": "2",
+    "name": "Berlin"
+  },
+  {
+    "count": "1",
+    "name": "Munich"
+  },
+  {
+    "count": "1",
+    "name": "Frankfurt"
+  },
+  {
+    "count": "1",
+    "name": "Cologne"
+  },
+  {
+    "count": "1",
+    "name": "Munich"
+  },
+  {
+    "count": "1",
+    "name": "Cologne"
+  },
+  {
+    "count": "1",
+    "name": "Hamburg"
+  },
+  {
+    "count": "1",
+    "name": "Berlin"
+  }
+]
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+[
+  {
+    "count": "2",
+    "name": "Berlin"
+  },
+  {
+    "count": "1",
+    "name": "Berlin"
+  },
+  {
+    "count": "1",
+    "name": "Cologne"
+  },
+  {
+    "count": "1",
+    "name": "Cologne"
+  },
+  {
+    "count": "1",
+    "name": "Frankfurt"
+  },
+  {
+    "count": "1",
+    "name": "Hamburg"
+  },
+  {
+    "count": "1",
+    "name": "Munich"
+  },
+  {
+    "count": "1",
+    "name": "Munich"
+  }
+]
+
+
+
+
+
+
+E ASSIM:
+
+
+
+
+
+[
+  {
+    "count": "2",
+    "name": "Berlin",
+    "street": "Beerstreet"
+  },
+  {
+    "count": "1",
+    "name": "Berlin",
+    "street": "Gardenstreet"
+  },
+  {
+    "count": "1",
+    "name": "Cologne",
+    "street": "Some Street"
+  },
+  {
+    "count": "1",
+    "name": "Cologne",
+    "street": "Carnevalstreet"
+  },
+  {
+    "count": "1",
+    "name": "Frankfurt",
+    "street": null
+  },
+  {
+    "count": "1",
+    "name": "Hamburg",
+    "street": null
+  },
+  {
+    "count": "1",
+    "name": "Munich",
+    "street": "Veggiestreet"
+  },
+  {
+    "count": "1",
+    "name": "Munich",
+    "street": "Park Plaza"
+  }
+]
+
+
+
+
+
+
+CERTO... 
+
+PODEMOS AGRUPAR POR SUBGROUPS, PORTANTO...
