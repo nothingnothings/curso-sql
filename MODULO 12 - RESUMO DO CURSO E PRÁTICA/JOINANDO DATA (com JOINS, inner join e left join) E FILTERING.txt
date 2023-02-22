@@ -1,0 +1,307 @@
+
+
+
+
+
+
+
+
+
+
+
+
+----> OK... ANTES DE SAIRMOS DO MUNDO DE JOINS (inner e left),
+
+
+
+
+
+
+
+O PROFESSOR QUER NOS MOSTRAR OUTRO ASPECTO DAS QUERIES,
+
+
+QUE TAMBÉM 
+
+É IMPORTANTE QUANDO TRABALHAMOS COM JOINS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-> AINDA PODEMOS FILTER E ORDER 
+
+
+OS RESULT SETS 
+
+
+DE 
+
+NOSSOS JOINS....
+
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+SELECT *
+FROM cities AS c
+    LEFT JOIN locations as l ON l.city_id = c.id
+    LEFT JOIN events AS e ON e.location_id = l.id
+    WHERE ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    --> PODEMOS COLOCAR 1 FILTER PARA PROCURAR POR APENAS A CITY DE MUNICH..
+
+
+    TIPO ASSIM:
+
+
+
+
+
+    
+SELECT *
+FROM cities AS c
+    LEFT JOIN locations as l ON l.city_id = c.id
+    LEFT JOIN events AS e ON e.location_id = l.id
+    WHERE c.name = 'Munich';
+
+
+
+
+
+
+
+
+
+
+
+
+MAS ISSO JÁ NOS MOSTRA 
+
+ALGO MT IMPORTANTE 
+
+SOBRE O SQL --> 
+
+
+
+É IMPORTANTE 
+
+NO SQL, EM GERAL --> É A ORDEM 
+
+PELA QUAL AS QUERIES SÃO EXECUTADAS..
+
+
+
+
+
+
+
+
+
+
+
+
+--> O FILTER, AQUI, APENAS É EXECUTADO DEPOIS DE EXECUTARMOS AS STEPS 
+
+
+
+ANTERIORES A ELE..
+
+
+
+
+
+
+
+
+
+--> O JOIN JÁ FOI FEITO ANTES 
+
+
+DO FILTER SER 'KICKED IN'...
+
+
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+SELECT *
+FROM cities AS c
+    LEFT JOIN locations as l ON l.city_id = c.id
+    LEFT JOIN events AS e ON e.location_id = l.id
+WHERE c.name = 'Munich';  -- ESSE FILTER É APLICADO __ SOBRE _ O RESULT SET ANTERIOR, AQUELE RESULT SET EXTRAÍDO DAQUELES 2 STATEMENTS DE 'LEFT JOIN'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E É CLARO QUE PODEMOS USAR QUAISQUER RELATED FIELDS USADOS 
+
+
+NESSES JOINS,
+NESSA 
+
+NOSSA FILTER CLAUSE...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> E O FILTER REALMENTE FUNCIONARÁ...
+
+
+
+
+
+
+
+
+
+
+
+--> VOCÊ N DEVE CONFUNDIR INNER JOINS COM 
+
+
+
+__ O FILTERING MECHANISM PARA _ JOINED DATA... (
+    pq você ainda vai filtrar  com data...
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+É CLARO QUE O 
+
+
+'INNER JOIN'
+
+FAZ KINDOF 
+
+1 FILTER,
+
+
+
+MAS N É A MESMA COISA,
+
+
+PQ 
+
+
+
+APENAS O WHERE PODE SER USADO 'APÓS O RESULT SET' (o inner join não pode)...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CERTO...
+
+
+
+
+
+
+
+É BEM IMPORTANTE ISSO,
+
+
+VOCÊ DEVE TER EM MENTE QUE PODE ADICIONAR 'WHERE' E 'ORDER BY'
+
+
+
+
+
+MESMO 
+
+USANDO 
+JOINS --> PQ ISSO AINDA É UMA REGULAR QUERY,
+
+
+COM A ÚNICA DIFERENÇA 
+
+QUE 
+VC ESTÁ MERGEANDO MÚLTIPLAS TABLES EM 1 ÚNICO RESULT SET... 
+
+
+
