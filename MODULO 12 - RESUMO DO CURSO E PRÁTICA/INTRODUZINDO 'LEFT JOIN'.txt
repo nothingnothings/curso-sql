@@ -283,9 +283,1155 @@ QUE NÃO POSSUEM RELAÇÃO COM EVENTS...
 
 
 
+a query fica TIPO ASSIM:
+
+
+
+
+
+
+SELECT *
+FROM locations AS l
+    LEFT JOIN events AS e ON l.id = e.location_id
+
+
+
+
+e o resultado FICA ASSIM:
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "id (1)": 1,
+    "name": "New in town",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "id (1)": 3,
+    "name": "New in town 2 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg2",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "id (1)": 4,
+    "name": "New in town 3 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg22",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 2,
+    "title": "EXAMPLE 2",
+    "street": "Beerstreet",
+    "house_number": "10",
+    "postal_code": 81035,
+    "city_id": 2,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 5,
+    "title": "EXAMPLE 2412",
+    "street": "Park Plaza",
+    "house_number": "1",
+    "postal_code": 11011,
+    "city_id": 1,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 6,
+    "title": "Partyhouse",
+    "street": "Carnevalstreet",
+    "house_number": "3",
+    "postal_code": 12345,
+    "city_id": 3,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 4,
+    "title": "The Green One",
+    "street": "Veggiestreet",
+    "house_number": "12",
+    "postal_code": 12141,
+    "city_id": 1,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 1,
+    "title": "Beerhall",
+    "street": "Beerstreet",
+    "house_number": "5A",
+    "postal_code": 80135,
+    "city_id": 2,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 7,
+    "title": "EXAMPLE 211",
+    "street": "Some Street",
+    "house_number": "18",
+    "postal_code": 72657,
+    "city_id": 3,
+    "id (1)": null,
+    "name": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---> AS LOCATIONS QUE NÃO TEM NEHUMA 'RELATION' FICAM COM 
+
+
+OS FIELDS RELACIONADOS A 'EVENT'
+
+COMO 'NULL'...
+
+
+
+
+
+
+
+
+--> ESSE É O COMPORTAMENTO CORRETO, É CLARO...
+
+
+
+
+
+
+FICAMOS COM TODOS OS ROWS 
+
+
+
+DE 'locations',
+
+
+
+
+
+
+e se TEMOS LOCATIONS QUE NÃO POSSUEM UM 'MATCHING EVENT',
+
+AINDA 
+
+VAMOS 
+
+PEGAR 
+
+ESSES ROWS,
+
+MAS 
+
+
+
+
+AS COLUMNS PERTINENTES AO 'event'
+
+
+
+
+ficarão null,
+
+se não existir esse 'match'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AMBOS OS JOINS PODEM 
+
+
+SER A FERRAMENTA CORRETA,
+ A DEPENDER DO SEU OBJETIVo...
+
+
+
+
+
+
+
+
+
+ --> SE VC ESTÁ PROCURANDO POR TODAS AS LOCATIONS QUE 
+
+
+ TEM 1 EVENT ANEXADO A SI,
+
+
+
+ O 'INNER JOIN'
+
+ É 
+  A CLAUSE CORRETA...
+
+
+
+
+
+
+
+
+
+
+
+
+
+  JÁ SE VC QUER PEGAR 
+
+  TODOS OS ROWS 
+
+  DE 
+
+
+
+
+  'LOCATION',
+
+  AÍ 
+
+
+
+  'LEFT JOIN'
+
+
+  É O 
+
+  STATEMENT A SER EXECUTADO...
+
+
+
+
+
+
+
+
+
+  --> É CLARO QUE 
+
+
+
+
+
+PODEMOS TER MÚLTIPLOS 'LEFT JOINS'
+
+
+
+
+EM 1 MESMO STATEMENT,
+
+E PODEMOS 
+
+MISTURAR 
+
+INNER E LEFT JOIN 
+
+
+
+EM 1 MESMO EXEMPLO, SE QUISERMOS..
+
+
+
+
+
+
+
+
+
+PROFESSOR QUER DEMONSTRAR ISSO POR MEIO DE 1 EXEMPLO..
+
+
+
+
+
+
+
+
+
+
+DIGAMOS QUE QUEREMOS 1 LIST DE TODAS AS CITIES...--> depois,
+
+
+QUEERMOS 
+
+
+ENCONTRAR TODAS AS LOCATIONS QUE 
+
+PERTENCEM A ESSAS CITIES...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> ALGUMAS DAS CITIES QUE INSERIMOS 
+
+
+
+
+NA TABLE NÃO 
+
+
+
+
+__ FORAM USADAS COM NENHUMA 'LOCATION'...
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> se selecionarmos todas as cities,
+
+com 
+
+
+'SELECT * FROM cities;',
+
+
+
+
+
+
+PEGAMOS TODAS AS CITIES, ATÉ  AQUELAS SEM RELATIONS..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS QUEREMOS JUNTAR TUDO ISSO COM 'LOCATIONS.'..
+
+
+
+
+
+
+
+
+--> SE QUISERMOS JUNTAR TODAS AS CITIES,
+
+PODEMOS USAR 
+
+
+UM 'LEFT JOIN'..
+
+
+
+
+
+
+TIPO ASSIM:
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM cities AS c 
+LEFT JOIN locations AS l ON l.city_id = c.id;
+
+
+
+
+
+
+
+
+
+
+
+SE RODARMOS ISSO, GANHAREMOS TODAS AS CITIES,
+
+
+
+MESMO AQUELAS QUE NÃO TEM NENHUM 'LOCATION DATA'
+
+anexado...
+
+
+
+
 
 
 ex:
 
 
 
+
+
+
+
+[
+  {
+    "id": 1,
+    "name": "Munich",
+    "id (1)": 5,
+    "title": "EXAMPLE 2412",
+    "street": "Park Plaza",
+    "house_number": "1",
+    "postal_code": 11011,
+    "city_id": 1
+  },
+  {
+    "id": 1,
+    "name": "Munich",
+    "id (1)": 4,
+    "title": "The Green One",
+    "street": "Veggiestreet",
+    "house_number": "12",
+    "postal_code": 12141,
+    "city_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 2,
+    "title": "EXAMPLE 2",
+    "street": "Beerstreet",
+    "house_number": "10",
+    "postal_code": 81035,
+    "city_id": 2
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 1,
+    "title": "Beerhall",
+    "street": "Beerstreet",
+    "house_number": "5A",
+    "postal_code": 80135,
+    "city_id": 2
+  },
+  {
+    "id": 3,
+    "name": "Cologne",
+    "id (1)": 7,
+    "title": "EXAMPLE 211",
+    "street": "Some Street",
+    "house_number": "18",
+    "postal_code": 72657,
+    "city_id": 3
+  },
+  {
+    "id": 3,
+    "name": "Cologne",
+    "id (1)": 6,
+    "title": "Partyhouse",
+    "street": "Carnevalstreet",
+    "house_number": "3",
+    "postal_code": 12345,
+    "city_id": 3
+  },
+  {
+    "id": 4,
+    "name": "Frankfurt",
+    "id (1)": null,
+    "title": null,
+    "street": null,
+    "house_number": null,
+    "postal_code": null,
+    "city_id": null
+  },
+  {
+    "id": 5,
+    "name": "Hamburg",
+    "id (1)": null,
+    "title": null,
+    "street": null,
+    "house_number": null,
+    "postal_code": null,
+    "city_id": null
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+já os results 
+
+
+
+
+duplicados de 'Cologne', por exemplo,
+
+
+
+
+
+SIGNIFICAM QUE TEMOS 
+
+
+
+
+MÚLTIPLAS LOCATIONS PARA ESSA CITY...
+
+
+
+
+
+
+
+
+--> MAS SE RODAMOS 'inner join',
+
+
+FRANKFURT É EXCLUÍDA,
+
+
+
+PQ 
+
+
+
+não TEMOS NENHUMA DATA VINCULADA A ELA (nenhuma location)..
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS DEVEMOS VOLTAR AO LEFT JOIN... -> VIMOS QUE 
+
+
+
+PODEMOS USAR MÚLTIPLOS INNER JOINS....
+
+
+
+
+
+
+
+
+
+
+AGORA DIGAMOS QUE 
+
+
+QUEREMOS 
+
+
+
+
+FAZER JOIN DE: 
+
+
+
+
+1) locations 
+
+
+
+2) events 
+
+
+
+
+
+
+
+
+
+
+TUDO ISSO 
+
+
+
+JUNTADO COM NOSSAS 'CITIES'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> FAZEMOS TIPO ASSIM:
+
+
+
+
+
+
+SELECT * FROM cities AS c 
+LEFT JOIN locations as l ON l.city_id = c.id
+LEFT JOIN events AS e ON e.location_id = l.id;
+
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+
+
+[
+  {
+    "id": 1,
+    "name": "Munich",
+    "id (1)": null,
+    "title": "The Green One",
+    "street": "Veggiestreet",
+    "house_number": "12",
+    "postal_code": 12141,
+    "city_id": 1,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 1,
+    "name": "Munich",
+    "id (1)": null,
+    "title": "EXAMPLE 2412",
+    "street": "Park Plaza",
+    "house_number": "1",
+    "postal_code": 11011,
+    "city_id": 1,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": null,
+    "title": "Beerhall",
+    "street": "Beerstreet",
+    "house_number": "5A",
+    "postal_code": 80135,
+    "city_id": 2,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": null,
+    "title": "EXAMPLE 2",
+    "street": "Beerstreet",
+    "house_number": "10",
+    "postal_code": 81035,
+    "city_id": 2,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 4,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "name (1)": "New in town 3 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg22",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 3,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "name (1)": "New in town 2 ",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg2",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Berlin",
+    "id (1)": 1,
+    "title": "EXAMPLE 32",
+    "street": "Gardenstreet",
+    "house_number": "101",
+    "postal_code": 80031,
+    "city_id": 2,
+    "name (1)": "New in town",
+    "date_and_time": "2022-02-01 17:30:00",
+    "image_url": "path/to/image.jpg",
+    "description": "You are new in town? Join us and meet like-minded new people!",
+    "max_participants": 20,
+    "min_age": 16,
+    "location_id": 3,
+    "organizer_id": 1
+  },
+  {
+    "id": 3,
+    "name": "Cologne",
+    "id (1)": null,
+    "title": "EXAMPLE 211",
+    "street": "Some Street",
+    "house_number": "18",
+    "postal_code": 72657,
+    "city_id": 3,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 3,
+    "name": "Cologne",
+    "id (1)": null,
+    "title": "Partyhouse",
+    "street": "Carnevalstreet",
+    "house_number": "3",
+    "postal_code": 12345,
+    "city_id": 3,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 4,
+    "name": "Frankfurt",
+    "id (1)": null,
+    "title": null,
+    "street": null,
+    "house_number": null,
+    "postal_code": null,
+    "city_id": null,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  },
+  {
+    "id": 5,
+    "name": "Hamburg",
+    "id (1)": null,
+    "title": null,
+    "street": null,
+    "house_number": null,
+    "postal_code": null,
+    "city_id": null,
+    "name (1)": null,
+    "date_and_time": null,
+    "image_url": null,
+    "description": null,
+    "max_participants": null,
+    "min_age": null,
+    "location_id": null,
+    "organizer_id": null
+  }
+]
+
+
+
+
+
+
+
+
+
+
+
+TEMOS 
+
+A LIST QUE AINDA RETORNA 'FRANKFURT',
+
+
+
+
+
+MAS SE SCROLLARMOS PARA DIREITA 
+
+VEREMOS 
+QUE 
+
+
+NÃO HÁ NENHUMA EVENT DATA PARA ESSA CITY...
+
+
+
+
+
+
+
+
+
+
+
+--> CERTO, MAS APENAS 1 ROW TERÁ 1 EVENT,
+
+QUE 
+
+SERÁ 
+
+
+'MUNICH', PARA 1 LOCATION ESPECÍFICA --> PQ _ REALMENTE SÓ TEMOS 1 EVENT,
+
+QUE 
+
+ACONTECE NESSA LOCATION ESPECÍFICA...
+
+
+
+
+
+
+
+
+
+
+
+ESSE É O RESULTADO QUE 
+
+OBTEMOS AQUI,
+
+QUANDO 
+
+
+USAMOS 'LEFT JOIN' 
+
+2x...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MAS SE USARMOS 'INNER JOIN' no final, para fazer 'join' com events,
+
+
+
+ganhamos 
+
+
+1 RESULTADO DIFERENTE: GANHAREMOS APENAS 1 ROW ,
+
+PQ _ SÓ EXISTE 1 EVENT, DE FATO....
+
+
+
+
+
+
+
+
+
+
+
+O QUE É IMPORTANTE É que 
+
+
+
+O 'INNER JOIN', se colocado ao final, será a 'QUERY QUE VAI IMPORTAR',
+
+
+
+
+PQ OS JOIN STATEMENTS SEMPRE FAZEM 'JOIN'
+
+
+
+
+DA PARTE TODA QUE VEIO ANTES,
+
+
+com a coisa que ele está joinando agora (
+
+
+
+
+
+    tipo assim:
+
+
+
+
+
+
+SELECT *
+FROM cities AS c
+    LEFT JOIN locations as l ON l.city_id = c.id
+
+
+
+    ///isso joina COM TUDO QUE VEIO ANTES DISSO....
+    INNER JOIN events AS e ON e.location_id = l.id;
+    
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> OK...
+
+
+
+
+
+
+
+É ASSIM QUE 1 LEFT JOIN FUNCIONA,
+
+E
+
+
+
+ESSA É SUA DIFERENÇA EM RELAÇAÕ AO 'INNER JOIN'...
+
+
+
+
+
+
+
+
+--> às VEZES VOCE VAI QEURER PEGAR TUDO,
+
+E às VEZES VOCÊ VAI QUERER PEGAR 'APENAS AQUELES QUE REALMENTE POSSUEM VALID RELATIONS'...
