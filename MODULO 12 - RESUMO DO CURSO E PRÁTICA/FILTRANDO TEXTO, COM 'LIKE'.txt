@@ -1,0 +1,611 @@
+
+
+
+
+
+
+
+
+
+
+
+--> OK... ACABAMOS COM O TÓPICO DAS RELATIONS, E DO MERGE DE RELATED DATA...
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA APRENDEMOS,
+
+EM PROFUNDIDADE,
+
+OS WORKINGS DOS INNER JOIN E LEFT JOIN..
+
+
+
+
+
+
+
+
+
+
+
+
+
+--> AGORA VOLTAMOS AO MUNDO DAS QUERIES COMMON,
+
+
+E DO MUNDO 
+
+
+
+DO FILTERING...
+
+
+
+
+
+
+
+
+
+--> AGORA TEREMOS O MUNDO 
+
+
+
+
+DAS 'AGGREGATE FUNCTIONS' (grouping)...
+
+
+
+
+
+
+
+
+
+--> CRIAMOS UM NOVO ARQUIVO,
+'MORE QUERIES'...
+
+
+
+
+
+
+
+
+
+
+
+
+-> O PROFESSOR QUER COMEÇAR SELECIONANDO ALGO...
+
+
+
+
+
+
+
+
+
+
+QUER SELECIONAR CERTOS USERS... MAS NÃO TODOS..
+
+
+
+
+
+
+
+
+-> ELE QUER filtrar 
+
+
+A QUANTIDADE 
+
+DE 
+
+USERS,
+
+
+COM A AJUDA DA CLAUSE DE 'WHERE'...
+
+
+
+
+
+
+
+
+
+--> ELE QUER FILTRAR OS USERS POR 'NAME'...
+
+
+
+
+
+
+--> DIGAMOS QUE QUEREMOS ENCONTRAR TODOS OS USERS 
+
+QUE 
+
+
+
+TENHAM 1 NOME QUE COMECE COM 'Ma'..
+
+
+
+
+
+
+
+
+
+
+--> O PROFESSOR QUER NOS MOSTRAR COMO PODERÍAMOS FAZER ISSO... (com 'LIKE')...
+
+
+
+
+
+
+
+
+
+-> PARA FAZER ISSO,
+
+ESCREVEMOS ASSIM:
+
+
+
+
+
+
+
+
+
+SELECT * FROM users 
+WHERE first_name = 'Max';
+
+
+
+
+
+
+
+
+
+
+
+ESSE É O OPERATOR DE EQUALITY...
+
+
+
+
+
+
+
+MAS N QUEREMOS FAZER ISSO..
+
+
+
+
+
+
+QUEREMOS ENCONTRAR POR 'LIKE',
+
+
+
+
+
+ENCONTRAR TODOS OS USERS QUE COMEÇAM COM 'MA'....
+
+
+
+
+
+
+
+
+
+
+
+->  VOCÊ PODERIA PROCURAR POR 
+
+
+'> Ma',
+
+
+
+MAS ISSO TE DARIA RESULTADOS 
+
+ESTRANHOS (
+
+    pq 
+
+    se você usar COMPARISON OPERATORS COM TEXT,
+
+    O SQL 
+
+    NÃO VAI PROCURAR POR NOMES QUE COMEÇAM COM 'MA',
+
+    E SIM VAI 
+
+
+    __ , EM VEZ DISSO, COMPARAR TODOS OS VALUES NO 'first_name'
+
+
+    
+
+    E VER 
+
+    SE 
+
+    ELES 
+
+    SÃO MAIORES DO QUE 'Ma' --> E 'MICHAEL'
+
+    SERIA 
+
+    MAIOR 
+
+    DO QUE 
+
+
+    'Ma',
+
+
+
+    PQ 'M' é igual, SIM,
+
+
+    mas 
+
+
+    'I' vem __ DEPOIS _ DE 
+
+
+
+    'a' no alfabeto,
+    o que 
+
+    quer dizer que 
+
+    TECNICAMENTE ELE É MAIOR DO QUE 'MA'...
+
+
+
+
+)
+
+
+
+
+
+
+
+
+
+
+
+---> é ASSIM QUE STRING VALUES FUNCIONAM QUANDO USAMOS COMPARISON OPERATORS COM ELES...
+
+
+
+
+
+--> OK, MAS COMO PODEMOS PROCURAR POR 'Ma' 
+
+MESMO?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------> BEM, PARA ISSO,
+TEMOS 1 OPERATOR ESPECIAL,
+
+O OPERATOR DE 'LIKE'...
+
+
+
+
+
+
+
+
+ESSE NEGÓCIO PODE SER USADO COMO 1 OPERATOR NA SUA CLAUSE DE WHERE,
+
+
+
+E AÍ 
+
+
+
+ELE 
+
+VAI ENCONTRAR 
+
+
+
+
+VALUES NA COLUMN QUE SÃO 'LIKE THIS'...
+
+
+
+
+
+ex:
+
+
+
+
+
+
+SELECT * FROM USERS
+WHERE first_name LIKE 'Ma'; -- VAI ENCONTRAR USERS QUE TENHAM 'Ma' no início do value dessa column....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+OK... MAS SE TENTAMOS RODAR ASSIM,
+
+
+NÃO GANHAMOS QUAISQUER RESULTADOS...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ISSO ACONTECEU PQ AQUI PRECISAMOS DE UMA 'REGULAR EXPRESSION'...
+
+
+
+
+
+
+
+
+
+-> PARA DIZER 'QUEREMOS QUE ESSE NEGÓCIO COMECE COM Ma'...
+
+
+
+
+
+
+
+
+
+
+
+
+--> PARA ISSO,
+
+ESCREVEMOS 
+
+'Ma%'
+
+
+
+
+
+
+
+
+
+
+
+--> o símbolo '%',
+
+NO CONTEXTO DAS REGULAR EXPRESSIONS,
+QUER DIZER 
+
+'QUALQUER CARACTER 
+
+
+SUBSEQUENTE'...
+
+
+
+
+
+
+EX:
+
+
+
+
+
+
+
+
+
+SELECT *
+FROM USERS
+WHERE first_name LIKE 'Ma%';
+
+
+
+
+
+
+
+
+
+
+ISSO QUER DIZER QUE ISSO VAI DIZER 
+
+
+
+'NOS DÊ QUAISQUER 
+
+
+VALUES QUE COMECEM COM Ma,
+
+mas que tenham QUAISQUER CARACTERES DEPOIS DISSO'...
+
+
+
+
+
+
+
+
+
+
+
+
+----> COM ISSO, NÃO GANHAMOS 
+
+MAIS O 'MICHAEL'...
+
+
+
+
+
+
+
+
+--> É POR ISSO QUE O OPERATOR DE 'LIKE'
+
+
+pode ser mt útil...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PODERÍAMOS/PODEMOS USAR 
+
+
+
+'Ma_',
+
+
+
+
+
+
+
+QUE FARÁ COM QUE APENAS 'Max' SEJA ENCONTRADO (
+    pq o 
+
+    'underscore'
+
+    SIGNIFICA 
+
+    '''NÚMERO DE CARACTERES QUAISQUER DEPOIS DAQUELE VALUE ALI'''.
+)
+
+
+
+
+
+
+
+
+
+
+
+ISSO SIGNIFICA QUE SE EU ESCREVESSE 
+
+
+
+'A_t_ur'
+
+
+
+
+
+E ENTÃO EU TIVESSE 1 NAME DE 'Arthur'
+
+NO BANCO DE DADOS,
+
+O ROW COM ESSE VALUE SERIA RETORNADO, PQ 
+
+
+O 'Arthur' ENCAIXA NESSE 'A_t_ur'
+
+
+
+
+
+
+
+
+
+
+
+OK.. POR ISSO VC TEM QUE SABER ESSAS COISAS,
+
+O OPERATOR DE 
+
+'LIKE'
+
+
+E 
+
+
+O SEU USO COM 
+
+'%' e '-' (e regular expressions, em geral)...
+
+
+
+
